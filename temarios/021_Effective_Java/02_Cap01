@@ -1,0 +1,799 @@
+# Capítulo 2. Creación y destrucción de objetos
+ESTE capítulo se refiere a la creación y destrucción de objetos: cuándo y cómo crearlos, cuándo y cómo evitar crearlos, cómo garantizar que se destruyan de manera oportuna y cómo gestionar cualquier acción de limpieza que deba preceder a su destrucción .
+
+Elemento 1: considere métodos de fábrica estáticos en lugar de constructores
+La forma tradicional en que una clase permite que un cliente obtenga una instancia es proporcionar un constructor público. Hay otra técnica que debería ser parte del conjunto de herramientas de cada programador. Una clase puede proporcionar un método de fábrica estático público , que es simplemente un método estático que devuelve una instancia de la clase. Aquí hay un ejemplo simple de Boolean(la clase primitiva en caja para boolean). Este método traduce un booleanvalor primitivo en una Booleanreferencia de objeto:
+
+Haga clic aquí para ver la imagen del código
+
+valor booleano estático público (booleano b) {
+    devolver b? Booleano.VERDADERO: Booleano.FALSO;
+}
+Tenga en cuenta que un método de fábrica estático no es lo mismo que el patrón del método de fábrica de Design Patterns [ Gamma95 ]. El método de fábrica estático descrito en este artículo no tiene un equivalente directo en Design Patterns .
+
+Una clase puede proporcionar a sus clientes métodos de fábrica estáticos en lugar de, o además de, constructores públicos. Proporcionar un método de fábrica estático en lugar de un constructor público tiene ventajas y desventajas.
+
+Una ventaja de los métodos de fábrica estáticos es que, a diferencia de los constructores, tienen nombres. Si los parámetros de un constructor no describen, por sí mismos, el objeto que se devuelve, una fábrica estática con un nombre bien elegido es más fácil de usar y el código de cliente resultante es más fácil de leer. por ejemplo, elconstructor BigInteger(int, int, Random), que devuelve un BigIntegervalor probablemente primo, se habría expresado mejor como un método de fábrica estático llamado BigInteger.probablePrime. (Este método se agregó en Java 4).
+
+Una clase solo puede tener un único constructor con una firma dada. Se sabe que los programadores eluden esta restricción al proporcionar dos constructores cuyas listas de parámetros difieren solo en el orden de sus tipos de parámetros. Esta es una muy mala idea. El usuario de dicha API nunca podrá recordar qué constructor es cuál y terminará llamando al incorrecto por error. Las personas que lean el código que usa estos constructores no sabrán lo que hace el código sin consultar la documentación de la clase.
+
+Debido a que tienen nombres, los métodos de fábrica estáticos no comparten la restricción discutida en el párrafo anterior. En los casos en que una clase parezca requerir múltiples constructores con la misma firma, reemplace los constructores con métodos de fábrica estáticos y nombres elegidos cuidadosamente para resaltar sus diferencias.
+
+Una segunda ventaja de los métodos de fábrica estáticos es que, a diferencia de los constructores, no es necesario que creen un nuevo objeto cada vez que se invocan. Esto permite que las clases inmutables ( elemento 17 ) usen instancias preconstruidas o almacenen en caché las instancias a medida que se construyen y las dispensen repetidamente para evitar la creación de objetos duplicados innecesarios. El Boolean.valueOf(boolean)método ilustra esta técnica: nunca crea un objeto. Esta técnica es similar al patrón Flyweight [ Gamma95 ]. Puede mejorar mucho el rendimiento si se solicitan objetos equivalentes con frecuencia, especialmente si son costosos de crear.
+
+La capacidad de los métodos de fábrica estáticos para devolver el mismo objeto de invocaciones repetidas permite que las clases mantengan un control estricto sobre qué instancias existen en cualquier momento. Se dice que las clases que hacen esto están controladas por instancias. Hay varias razones para escribir clases controladas por instancias. El control de instancias permite que una clase garantice que es un elemento único ( elemento 3 ) o no instanciable ( elemento 4 ). Además, permite una clase de valor inmutable ( Ítem 17 ) para garantizar que no existen dos instancias iguales: a.equals(b)si y solo si a == b. Esta es la base del patrón Flyweight [ Gamma95 ]. Los tipos de enumeración ( elemento 34 ) proporcionan esta garantía.
+
+Una tercera ventaja de los métodos de fábrica estáticos es que, a diferencia de los constructores, pueden devolver un objeto de cualquier subtipo de su tipo de retorno. Esto le brinda una gran flexibilidad para elegir la clase del objeto devuelto.
+
+Una aplicación de esta flexibilidad es que una API puede devolver objetos sin hacer públicas sus clases. Ocultar las clases de implementación de esta manera conduce a una API muy compacta. Esta técnica se presta a marcos basados ​​en interfaces ( elemento 20 ), donde las interfaces proporcionan tipos de retorno naturales para métodos de fábrica estáticos.
+
+Antes de Java 8, las interfaces no podían tener métodos estáticos. Por convención, los métodos de fábrica estáticos para una interfaz named Typese colocaron en una clase complementaria no instanciable ( Ítem 4 ) named Types. Por ejemplo, Java Collections Framework tiene cuarenta y cinco implementaciones de utilidades de sus interfaces, proporcionando colecciones no modificables, colecciones sincronizadas y similares. Casi todas estas implementaciones se exportan a través de métodos de fábrica estáticos en una clase no instanciable ( java.util.Collections). Las clases de los objetos devueltos no son públicas.
+
+La API de Collections Framework es mucho más pequeña de lo que habría sido si hubiera exportado cuarenta y cinco clases públicas separadas, una para cada implementación de conveniencia. No es solo la mayor parte de la API lo que se reduce, sino el peso conceptual: el número y la dificultad de los conceptos que los programadores deben dominar para usar la API. El programador sabe que el objeto devuelto tiene exactamente la API especificada por su interfaz, por lo que no es necesario leer documentación de clase adicional para la clase de implementación. Además, el uso de un método de fábrica estático de este tipo requiere que el cliente se refiera al objeto devuelto por interfaz en lugar de por clase de implementación, lo que generalmente es una buena práctica ( Artículo 64 ).
+
+A partir de Java 8, se eliminó la restricción de que las interfaces no pueden contener métodos estáticos, por lo que normalmente hay pocas razones para proporcionar una clase complementaria no instanciable para una interfaz. Muchos miembros estáticos públicos que se habrían sentido como en casa en una clase de este tipo deberían colocarse en la interfaz misma. Tenga en cuenta, sin embargo, que aún puede ser necesario colocar la mayor parte del código de implementación detrás de estos métodos estáticos en una clase privada de paquete separada. Esto se debe a que Java 8 requiere que todos los miembros estáticos de una interfaz sean públicos. Java 9 permite métodos estáticos privados, pero aún se requiere que los campos estáticos y las clases de miembros estáticos sean públicos.
+
+Una cuarta ventaja de las fábricas estáticas es que la clase del objeto devuelto puede variar de una llamada a otra en función de los parámetros de entrada. Se permite cualquier subtipo del tipo de retorno declarado. La clase del objeto devuelto también puede variar de una versión a otra.
+
+La EnumSetclase ( Ítem 36 ) no tiene constructores públicos, solo fábricas estáticas. En la implementación de OpenJDK, devuelven una instancia de una de dos subclases, según el tamaño del tipo de enumeración subyacente: si tiene sesenta y cuatro elementos o menos, como la mayoría de los tipos de enumeración, las fábricas estáticas devuelven una instancia, que RegularEnumSetes respaldado por un solo long; si el tipo de enumeración tiene sesenta y cinco o más elementos, las fábricas devuelven una JumboEnumSetinstancia, respaldada por una longmatriz.
+
+La existencia de estas dos clases de implementación es invisible para los clientes. Si RegularEnumSetdejara de ofrecer ventajas de rendimiento para los tipos de enumeración pequeños, podría eliminarse de una versión futura sin efectos negativos. Del mismo modo, una versión futura podría agregar una tercera o cuarta implementación de EnumSetsi resultara beneficiosa.para el rendimiento Los clientes no conocen ni se preocupan por la clase del objeto que reciben de fábrica; solo les importa que sea una subclase de EnumSet.
+
+Una quinta ventaja de las fábricas estáticas es que la clase del objeto devuelto no necesita existir cuando se escribe la clase que contiene el método. Estos métodos flexibles de fábrica estática forman la base de los marcos de los proveedores de servicios , como la API de conectividad de base de datos de Java (JDBC). Un marco de proveedor de servicios es un sistema en el que los proveedores implementan un servicio y el sistema pone las implementaciones a disposición de los clientes, desvinculando a los clientes de las implementaciones.
+
+Hay tres componentes esenciales en un marco de proveedor de servicios: una interfaz de servicio , que representa una implementación; una API de registro de proveedores , que los proveedores utilizan para registrar implementaciones; y una API de acceso al servicio , que los clientes utilizan para obtener instancias del servicio. La API de acceso al servicio puede permitir a los clientes especificar criterios para elegir una implementación. En ausencia de tales criterios, la API devuelve una instancia de una implementación predeterminada o permite que el cliente recorra todas las implementaciones disponibles. La API de acceso al servicio es la fábrica estática flexible que forma la base del marco del proveedor de servicios.
+
+Un cuarto componente opcional de un marco de proveedor de servicios es una interfaz de proveedor de servicios , que describe un objeto de fábrica que produce instancias de la interfaz de servicio. En ausencia de una interfaz de proveedor de servicios, las implementaciones deben instanciarse de manera reflexiva ( Ítem 65 ). En el caso de JDBC, Connectiondesempeña el papel de interfaz de servicio, DriverManager.registerDriveres la API de registro del proveedor, DriverManager.getConnectiones la API de acceso al servicio y Driveres la interfaz del proveedor de servicios.
+
+Hay muchas variantes del patrón del marco del proveedor de servicios. Por ejemplo, la API de acceso al servicio puede devolver a los clientes una interfaz de servicio más completa que la proporcionada por los proveedores. Este es el patrón Bridge [ Gamma95 ]. Los marcos de inyección de dependencia ( elemento 5 ) pueden verse como poderosos proveedores de servicios. Desde Java 6, la plataforma incluye un marco de proveedor de servicios de propósito general, java.util.ServiceLoaderpor lo que no necesita, y generalmente no debe, escribir el suyo propio ( Artículo 59 ). JDBC no usa ServiceLoader, ya que el primero es anterior al segundo.
+
+La principal limitación de proporcionar solo métodos de fábrica estáticos es que las clases sin constructores públicos o protegidos no se pueden dividir en subclases. Por ejemplo, es imposible subclasificar cualquiera de las clases de implementación de conveniencia en el marco de colecciones. Podría decirse que esto puede ser una bendición disfrazada porque alienta a los programadores a usar la composición en lugar de la herencia ( Ítem 18 ), y es necesario para los tipos inmutables ( Ítem 17 ).
+
+Una segunda deficiencia de los métodos de fábrica estáticos es que son difíciles de encontrar para los programadores. No se destacan en la documentación de la API en la formaque hacen los constructores, por lo que puede ser difícil descubrir cómo instanciar una clase que proporcione métodos de fábrica estáticos en lugar de constructores. La herramienta Javadoc algún día puede llamar la atención sobre los métodos de fábrica estáticos. Mientras tanto, puede reducir este problema llamando la atención sobre las fábricas estáticas en la documentación de clase o interfaz y adhiriéndose a las convenciones de nomenclatura comunes. Estos son algunos nombres comunes para los métodos de fábrica estáticos. Esta lista está lejos de ser exhaustiva:
+
+• from—Un método de conversión de tipo que toma un solo parámetro y devuelve una instancia correspondiente de este tipo, por ejemplo:
+
+Fecha d = Fecha.desde(instante);
+
+• of—Un método de agregación que toma múltiples parámetros y devuelve una instancia de este tipo que los incorpora, por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+Set<Rank> faceCards = EnumSet.of(JACK, QUEEN, KING);
+• valueOf—Una alternativa más detallada a fromy of, por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+BigInteger primo = BigInteger.valueOf(Integer.MAX_VALUE);
+• instanceo getInstance—Devuelve una instancia descrita por sus parámetros (si los hay) pero no se puede decir que tenga el mismo valor, por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+StackWalker luke = StackWalker.getInstance(opciones);
+• createo newInstance—Como instanceo getInstance, excepto que el método garantiza que cada llamada devuelva una nueva instancia, por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+Objeto newArray = Array.newInstance(classObject, arrayLen);
+• getTipo : como getInstance, pero se usa si el método de fábrica está en una clase diferente. Tipo es el tipo de objeto devuelto por el método de fábrica, por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+FileStore fs = Archivos.getFileStore(ruta);
+• newTipo : como newInstance, pero se usa si el método de fábrica está en una clase diferente. Tipo es el tipo de objeto devuelto por el método de fábrica, por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+BufferedReader br = Archivos.nuevoBufferedReader(ruta);
+• type : una alternativa concisa a getType y newType , por ejemplo:
+
+Haga clic aquí para ver la imagen del código
+
+List<Queja> letanía = Collections.list(legacyLitany);
+En resumen, los métodos de fábrica estáticos y los constructores públicos tienen sus usos, y vale la pena comprender sus méritos relativos. A menudo, las fábricas estáticas son preferibles, así que evite el reflejo de proporcionar constructores públicos sin considerar primero las fábricas estáticas.
+
+Ítem ​​2: Considere un constructor cuando se enfrenta a muchos parámetros de constructor
+Las fábricas estáticas y los constructores comparten una limitación: no se adaptan bien a un gran número de parámetros opcionales. Considere el caso de una clase que representa la etiqueta de información nutricional que aparece en los alimentos envasados. Estas etiquetas tienen algunos campos obligatorios (tamaño de la porción, porciones por envase y calorías por porción) y más de veinte campos opcionales (grasas totales, grasas saturadas, grasas trans, colesterol, sodio, etc.). La mayoría de los productos tienen valores distintos de cero solo para algunos de estos campos opcionales.
+
+¿Qué tipo de constructores o fábricas estáticas debería escribir para tal clase? Tradicionalmente, los programadores han usado el patrón de constructor telescópico , en el que proporcionas un constructor con solo los parámetros requeridos, otro con un único parámetro opcional, un tercero con dos parámetros opcionales, y así sucesivamente, culminando en un constructor con todos los parámetros opcionales. Así es como se ve en la práctica. En aras de la brevedad, solo se muestran cuatro campos opcionales:
+
+Haga clic aquí para ver la imagen del código
+
+// Patrón de constructor telescópico: ¡no se escala bien!
+información nutricional de la clase pública {
+    tamaño de servicio int final privado; // (mL) requerido
+    raciones internas finales privadas; // (por contenedor) requerido
+    calorías int finales privadas; // (por porción) opcional
+    grasa int final privada; // (g/porción) opcional
+    sodio int final privado; // (mg/porción) opcional
+    carbohidrato int final privado; // (g/porción) opcional
+
+    Información nutricional pública (tamaño de la porción int, porciones int) {
+        this(servingSize, porciones, 0);
+    }
+
+    Información nutricional pública (tamaño de la porción int, porciones int,
+            calorías int) {
+        this(servingSize, porciones, calorías, 0);
+    }
+
+    Información nutricional pública (tamaño de la porción int, porciones int,
+            int calorías, int grasa) {
+        this(servingSize, porciones, calorías, grasa, 0);
+    }
+
+    Información nutricional pública (tamaño de la porción int, porciones int,
+            int calorías, int grasa, int sodio) {
+        this (tamaño de la porción, porciones, calorías, grasa, sodio, 0);
+    }
+
+
+    Información nutricional pública (tamaño de la porción int, porciones int,
+           int calorías, int grasa, int sodio, int carbohidrato) {
+        this.servingSize = porciónSize;
+        this.servings = porciones;
+        esto.calorias = calorias;
+        esto.grasa = grasa;
+        este.sodio = sodio;
+        este carbohidrato = carbohidrato;
+    }
+}
+Cuando desea crear una instancia, utiliza el constructor con la lista de parámetros más corta que contiene todos los parámetros que desea establecer:
+
+Haga clic aquí para ver la imagen del código
+
+Información Nutricional cocaCola =
+    información nutricional nueva (240, 8, 100, 0, 35, 27);
+Por lo general, esta invocación del constructor requerirá muchos parámetros que no desea establecer, pero de todos modos está obligado a pasarles un valor. En este caso, pasamos un valor de 0for fat. Con "solo" seis parámetros, esto puede no parecer tan malo, pero rápidamente se sale de control a medida que aumenta la cantidad de parámetros.
+
+En resumen, el patrón constructor telescópico funciona, pero es difícil escribir código de cliente cuando hay muchos parámetros, y aún más difícil leerlo. El lector se pregunta qué significan todos esos valores y debe contar cuidadosamente los parámetros para averiguarlo. Las secuencias largas de parámetros escritos de forma idéntica pueden causar errores sutiles. Si el cliente invierte accidentalmente dos de estos parámetros, el compilador no se quejará, pero el programa se comportará mal durante el tiempo de ejecución ( Ítem 51 ).
+
+Una segunda alternativa cuando se enfrenta a muchos parámetros opcionales en un constructor es el patrón JavaBeans , en el que llama a un constructor sin parámetros para crear el objeto y luego llama a métodos setter para establecer cada parámetro requerido y cada parámetro opcional de interés:
+
+Haga clic aquí para ver la imagen del código
+
+// Patrón JavaBeans: permite la incoherencia, obliga a la mutabilidad
+información nutricional de la clase pública {
+    // Parámetros inicializados a valores predeterminados (si los hay)
+    tamaño de servicio privado int = -1; // Requerido; sin valor predeterminado
+    porciones int privadas = -1; // Requerido; sin valor predeterminado
+    calorías internas privadas = 0;
+    gordo int privado = 0;
+    privado int sodio = 0;
+    carbohidrato int privado = 0;
+
+    información nutricional pública() { }
+
+    // Setters
+    setServingSize public void(int val) { tamañoServicio = val; }
+    public void setServings(int val) { porciones = val; }
+    public void setCalories(int val) { calorias = val; }
+    public void setFat(int val) { fat = val; }
+    public void setSodio(int val) { sodio = val; }
+    public void setCarbohidrato(int val) { carbohidrato = val; }
+}
+Este patrón no tiene ninguna de las desventajas del patrón constructor telescópico. Es fácil, aunque un poco prolijo, crear instancias y fácil de leer el código resultante:
+
+Haga clic aquí para ver la imagen del código
+
+NutritionFacts cocaCola = new NutritionFacts();
+cocaCola.setServingSize(240);
+cocaCola.setPorciones(8);
+cocaCola.setCalories(100);
+cocaCola.setSodio(35);
+cocaCola.setCarbohidrato(27);
+Desafortunadamente, el patrón JavaBeans tiene sus propias desventajas. Debido a que la construcción se divide en múltiples llamadas, un JavaBean puede estar en un estado inconsistente a la mitad de su construcción. La clase no tiene la opción de hacer cumplir la coherencia simplemente comprobando la validez de los parámetros del constructor. Intentar usar un objeto cuando está en un estado inconsistente puede causar fallas que están muy alejadas del código que contiene el error y, por lo tanto, son difíciles de depurar. Una desventaja relacionada es que el patrón JavaBeans excluye la posibilidad de hacer que una clase sea inmutable ( elemento 17 ) y requiere un esfuerzo adicional por parte del programador para garantizar la seguridad de los subprocesos.
+
+Es posible reducir estas desventajas "congelando" manualmente el objeto cuando se completa su construcción y no permitiendo que se use hasta que esté congelado, pero esta variante es difícil de manejar y rara vez se usa en la práctica. Además, puede causar errores en tiempo de ejecución porque el compilador no puede garantizar que el programador llame al método de congelación en un objeto antes de usarlo.
+
+Afortunadamente, existe una tercera alternativa que combina la seguridad del patrón constructor telescópico con la legibilidad del patrón JavaBeans. Es una forma del patrón Builder [ Gamma95 ]. En lugar de crear el objeto deseado directamente, el cliente llama a un constructor (o fábrica estática) con todos los parámetros necesarios y obtiene un objeto constructor . Luego, el cliente llama a métodos tipo setter en el objeto constructor para establecer cada parámetro opcional de interés. Finalmente, el cliente llama a un buildmétodo sin parámetros para generar el objeto, que normalmente es inmutable. El constructor suele ser una clase miembro estática ( elemento 24 ) de la clase que crea. Así es como se ve en la práctica:
+
+Haga clic aquí para ver la imagen del código
+
+// patrón constructor
+información nutricional de la clase pública {
+    tamaño de servicio int final privado;
+    raciones internas finales privadas;
+    calorías int finales privadas;
+    grasa int final privada;
+    sodio int final privado;
+    carbohidrato int final privado;
+
+    Generador de clase estática pública {
+        // Parámetros requeridos
+        tamaño de servicio int final privado;
+        raciones internas finales privadas;
+
+        // Parámetros opcionales: inicializados a valores predeterminados
+        calorías internas privadas = 0;
+        gordo int privado = 0;
+        privado int sodio = 0;
+        carbohidrato int privado = 0;
+
+        Constructor público (tamaño de la porción int, porciones int) {
+            this.servingSize = porciónSize;
+            this.servings = porciones;
+        }
+
+        Calorías del generador público (int val)
+            { calorías = valor; devolver esto; }
+        Grasa constructor pública (int val)
+            { grasa = valor; devolver esto; }
+        Public Builder sodio (int val)
+            { sodio = val; devolver esto; }
+        carbohidrato constructor público (int val)
+            { carbohidrato = val; devolver esto; }
+
+        información nutricional pública build() {
+            devolver nuevos datos nutricionales (esto);
+        }
+    }
+
+    Datos nutricionales privados (constructor constructor) {
+        tamañoServicio = constructor.TamañoServicio;
+        raciones = constructor.raciones;
+        calorias = constructor.calorias;
+        grasa = constructor.grasa;
+        sodio = constructor.sodio;
+        carbohidrato = constructor.carbohidrato;
+    }
+}
+La NutritionFactsclase es inmutable y todos los valores predeterminados de los parámetros están en un solo lugar. Los métodos de establecimiento del constructor devuelven el propio constructor para que las invocaciones se puedan encadenar, lo que da como resultado una API fluida . Así es como se ve el código del cliente:
+
+Haga clic aquí para ver la imagen del código
+
+NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
+        .calorías(100).sodio(35).carbohidratos(27).build();
+Este código de cliente es fácil de escribir y, lo que es más importante, fácil de leer. El patrón Builder simula parámetros opcionales con nombre que se encuentran en Python y Scala.
+
+Se omitieron las comprobaciones de validez por brevedad. Para detectar parámetros no válidos lo antes posible, compruebe la validez de los parámetros en el constructor y los métodos del constructor. Comprueba invariantes que involucran múltiples parámetros en el constructor invocado por el buildmétodo. Para garantizar estas invariantes contra ataques, realice las comprobaciones en los campos de objetos después de copiar los parámetros del constructor ( Ítem 50 ). Si una comprobación falla, lanza un IllegalArgumentException( Ítem 72 ) cuyo mensaje de detalle indica qué parámetros no son válidos ( Ítem 75 ).
+
+El patrón Builder se adapta bien a las jerarquías de clases. Utilice una jerarquía paralela de constructores, cada uno anidado en la clase correspondiente. Las clases abstractas tienen constructores abstractos; las clases concretas tienen constructores concretos. Por ejemplo, considere una clase abstracta en la raíz de una jerarquía que representa varios tipos de pizza:
+
+Haga clic aquí para ver la imagen del código
+
+// Patrón constructor para jerarquías de clases
+Pizza de clase pública abstracta {
+   public enum Cobertura { JAMÓN, CHAMPIÑONES, CEBOLLA, PIMIENTA, SALCHICHA }
+   coberturas finales del Set<Topping>;
+
+   clase estática abstracta Builder<T extiende Builder<T>> {
+      EnumSet<Topping> toppings = EnumSet.noneOf(Topping.class);
+      public T addTopping(Topping topping) {
+         toppings.add(Objects.requireNonNull(topping));
+         devolver uno mismo();
+      }
+
+      construcción de pizza abstracta ();
+
+      // Las subclases deben anular este método para devolver "este" 
+      T abstracto protegido self();
+   }
+   Pizza(Constructor<?> constructor) {
+      coberturas = constructor.coberturas.clone(); // Ver artículo 50
+   }
+}
+Tenga en cuenta que Pizza.Builderes un tipo genérico con un parámetro de tipo recursivo ( Ítem 30 ). Esto, junto con el selfmétodo abstracto, permite que el encadenamiento de métodos funcione correctamente en subclases, sin necesidad de conversiones. Esta solución para el hecho de que Java carece de un tipo propio se conoce como el idioma de tipo propio simulado .
+
+Aquí hay dos subclases concretas de Pizza, una de las cuales representa una pizza estándar al estilo de Nueva York y la otra un calzone. El primero tiene un parámetro de tamaño requerido, mientras que el segundo te permite especificar si la salsa debe estar adentro o afuera:
+
+Haga clic aquí para ver la imagen del código
+
+clase pública NyPizza extiende Pizza {
+    public enum Tamaño {PEQUEÑO, MEDIANO, GRANDE}
+    tamaño final privado tamaño;
+
+    Clase estática pública Builder extiende Pizza.Builder<Builder> {
+        tamaño final privado tamaño;
+
+        Constructor público (tamaño de tamaño) {
+            this.size = Objects.requireNonNull(tamaño);
+        }
+
+        @Anular compilación pública de NyPizza () {
+            devuelve nueva NyPizza(esto);
+        }
+
+        @Override protected Builder self() { devuelve esto; }
+    }
+
+    NyPizza privado (constructor constructor) {
+        súper (constructor);
+        tamaño = constructor.tamaño;
+    }
+}
+
+public class calzone extiende pizza {
+    salsa booleana final privada dentro;
+
+    Clase estática pública Builder extiende Pizza.Builder<Builder> {
+        salsa booleana privadaInside = false; // Por defecto
+
+        public Builder sauceDentro() {
+            salsaDentro = true;
+            devolver esto;
+        }
+
+        @Anular compilación pública de Calzone () {
+            volver nuevo Calzone(esto);
+        }
+
+        @Override protected Builder self() { devuelve esto; }
+    }
+
+    calzone privado (constructor constructor) {
+        súper (constructor);
+        salsaDentro = constructor.salsaDentro;
+    }
+}
+Tenga en cuenta que el buildmétodo en el generador de cada subclase se declara para devolver la subclase correcta: el buildmétodo de NyPizza.Builderdevoluciones NyPizza, mientras que el de Calzone.Builderdevoluciones Calzone. Esta técnica, en la que se declara un método de subclase para devolver un subtipo del tipo de retorno declarado en la superclase, se conoce como tipificación de retorno covariante . Permite a los clientes utilizar estos constructores sin necesidad de fundición.
+
+El código de cliente para estos “constructores jerárquicos” es esencialmente idéntico al código del NutritionFactsconstructor simple. El ejemplo de código de cliente que se muestra a continuación asume importaciones estáticas en constantes de enumeración por motivos de brevedad:
+
+Haga clic aquí para ver la imagen del código
+
+Pizza NyPizza = nueva NyPizza.Builder (PEQUEÑA)
+        .addTopping(SALCHICHA).addTopping(CEBOLLA).build();
+Calzone calzone = nuevo Calzone.Builder()
+        .addTopping(JAMÓN).salsaDentro().build();
+Una ventaja menor de los constructores sobre los constructores es que los constructores pueden tener múltiples parámetros varargs porque cada parámetro se especifica en su propio método. Como alternativa, los constructores pueden agregar los parámetros pasados ​​en varias llamadas a un método en un solo campo, como se demostró en el addToppingmétodo anterior.
+
+El patrón Builder es bastante flexible. Un solo constructor se puede usar repetidamente para construir múltiples objetos. Los parámetros del constructor se pueden ajustar entre invocaciones del buildmétodo para variar los objetos que se crean. Un constructor puede completar algunos campos automáticamente al crear un objeto, como un número de serie que aumenta cada vez que se crea un objeto.
+
+El patrón Builder también tiene desventajas. Para crear un objeto, primero debe crear su constructor. Si bien es poco probable que el costo de crear este constructor se note en la práctica, podría ser un problema en situaciones críticas para el rendimiento. Además, el patrón de constructor es más detallado que el patrón de constructor telescópico, por lo que debe usarse solo si hay suficientes parámetros para que valga la pena, digamos cuatro o más. Pero tenga en cuenta que es posible que desee agregar más parámetros en el futuro. Pero si comienza con constructores o fábricas estáticas y cambia a un constructor cuando la clase evoluciona hasta el punto en que la cantidad de parámetros se sale de control, los constructores obsoletos o las fábricas estáticas sobresaldrán como un pulgar dolorido. Por lo tanto, a menudo es mejor comenzar con un constructor en primer lugar.
+
+En resumen, el patrón Builder es una buena opción cuando se diseñan clases cuyos constructores o fábricas estáticas tendrían más de un puñado de parámetros , especialmente si muchos de los parámetros son opcionales o de tipo idéntico. El código del cliente es mucho más fácil de leer y escribir con constructores que con constructores telescópicos, y los constructores son mucho más seguros que JavaBeans.
+
+Elemento 3: hacer cumplir la propiedad singleton con un constructor privado o un tipo de enumeración
+Un singleton es simplemente una clase que se instancia exactamente una vez [ Gamma95 ]. Los singletons suelen representar un objeto sin estado, como una función ( Ítem 24 ) o un componente del sistema que es intrínsecamente único. Hacer que una clase sea un singleton puede dificultar la prueba de sus clientes porque es imposible sustituir un singleton por una implementación simulada a menos que implemente una interfaz que sirva como su tipo.
+
+Hay dos formas comunes de implementar singletons. Ambos se basan en mantener el constructor privado y exportar un miembro estático público para brindar acceso a la única instancia. En un enfoque, el miembro es un campo final:
+
+Haga clic aquí para ver la imagen del código
+
+// Singleton con campo final público
+clase pública Elvis {
+    public static final Elvis INSTANCE = new Elvis();
+    privado Elvis() { ... }
+
+    public void dejarElEdificio() { ... }
+}
+El constructor privado se llama solo una vez, para inicializar el campo final estático público Elvis.INSTANCE. La falta de un constructor público o protegido garantizaElvis un universo "monoelvístico": existirá exactamente una instancia una vez que Elvisse inicialice la clase, ni más ni menos. Nada de lo que haga un cliente puede cambiar esto, con una advertencia: un cliente privilegiado puede invocar reflexivamente al constructor privado ( Ítem 65 ) con la ayuda del AccessibleObject.setAccessiblemétodo. Si necesita defenderse de este ataque, modifique el constructor para que genere una excepción si se le pide que cree una segunda instancia.
+
+En el segundo enfoque para implementar singletons, el miembro público es un método de fábrica estático:
+
+Haga clic aquí para ver la imagen del código
+
+// Singleton con fábrica estática
+clase pública Elvis {
+    privado estático final Elvis INSTANCIA = nuevo Elvis();
+    privado Elvis() { ... }
+    public static Elvis getInstance() { return INSTANCE; }
+
+    public void dejarElEdificio() { ... }
+}
+Todas las llamadas para Elvis.getInstancedevolver la misma referencia de objeto, y Elvisnunca se creará ninguna otra instancia (con la misma advertencia mencionada anteriormente).
+
+La principal ventaja del enfoque de campo público es que la API deja en claro que la clase es única: el campo estático público es final, por lo que siempre contendrá la misma referencia de objeto. La segunda ventaja es que es más simple.
+
+Una ventaja del enfoque de fábrica estática es que le brinda la flexibilidad de cambiar de opinión acerca de si la clase es un singleton sin cambiar su API. El método de fábrica devuelve la única instancia, pero podría modificarse para devolver, por ejemplo, una instancia separada para cada subproceso que lo invoque. Una segunda ventaja es que puede escribir una fábrica de singleton genérica si su aplicación lo requiere ( Ítem 30 ). Una ventaja final de usar una fábrica estática es que se puede usar una referencia de método como proveedor, por ejemplo, Elvis::getInstanceun archivo Supplier<Elvis>. A menos que una de estas ventajas sea relevante, es preferible el enfoque de campo público.
+
+Para hacer serializable una clase singleton que usa cualquiera de estos enfoques ( Capítulo 12 ), no es suficiente simplemente agregar implements Serializablea su declaración. Para mantener la garantía singleton, declare todos los campos de instancia transienty proporcione un readResolvemétodo ( Ítem 89 ). De lo contrario, cada vez que se deserialice una instancia serializada, se creará una nueva instancia, lo que conducirá, en el caso de nuestro ejemplo, a Elvisavistamientos espurios. Para evitar que esto suceda, agregue este readResolvemétodo a la Elvisclase:
+
+Haga clic aquí para ver la imagen del código
+
+// método readResolve para preservar la propiedad singleton
+objeto privado readResolve() {
+     // Devuelve el verdadero Elvis y deja que el recolector de basura
+     // cuidar del imitador de Elvis.
+    devolver INSTANCIA;
+}
+Una tercera forma de implementar un singleton es declarar una enumeración de un solo elemento:
+
+Haga clic aquí para ver la imagen del código
+
+// Enum singleton - el enfoque preferido
+enumeración pública Elvis {
+    INSTANCIA;
+
+    public void dejarElEdificio() { ... }
+}
+Este enfoque es similar al enfoque de campo público, pero es más conciso, proporciona la maquinaria de serialización de forma gratuita y proporciona una garantía inquebrantable contra la instanciación múltiple, incluso frente a ataques sofisticados de serialización o reflexión. Este enfoque puede parecer un poco antinatural, pero un tipo de enumeración de un solo elemento suele ser la mejor manera de implementar un singleton . Tenga en cuenta que no puede usar este enfoque si su singleton debe extender una superclase que no sea Enum(aunque puede declarar una enumeración para implementar interfaces).
+
+Ítem ​​4: Hacer cumplir la no instanciabilidad con un constructor privado
+Ocasionalmente querrá escribir una clase que sea solo una agrupación de métodos estáticos y campos estáticos. Tales clases han adquirido mala reputación porque algunas personas abusan de ellas para evitar pensar en términos de objetos, pero tienen usos válidos. Se pueden usar para agrupar métodos relacionados en valores primitivos o matrices, a la manera de java.lang.Matho java.util.Arrays. También se pueden usar para agrupar métodos estáticos, incluidas fábricas ( Ítem 1 ), para objetos que implementan alguna interfaz, a la manera de java.util.Collections. (A partir de Java 8, también puede colocar dichos métodos en la interfaz, suponiendo que sea suyo para modificarlos). Por último, dichas clases se pueden usar para agrupar métodos en una clase final, ya que no puede colocarlos en una subclase.
+
+Tales clases de utilidad no fueron diseñadas para ser instanciadas: una instancia no tendría sentido. Sin embargo, en ausencia de constructores explícitos, el compilador proporciona un constructor predeterminado público y sin parámetros . Para un usuario, este constructor es indistinguible de cualquier otro. No es raro ver clases instanciables involuntariamente en las API publicadas.
+
+Intentar hacer cumplir la no instanciabilidad haciendo que una clase sea abstracta no funciona. La clase puede subclasificarse y la subclase instanciarse. Además, engaña al usuario haciéndole pensar que la clase fue diseñada para herencia ( Ítem 19 ). Hay, sin embargo, un modismo simple para asegurar la no instanciabilidad. Un constructor predeterminado se genera solo si una clase no contiene constructores explícitos, por lo que una clase puede hacerse no instanciable al incluir un constructor privado :
+
+Haga clic aquí para ver la imagen del código
+
+// clase de utilidad no instanciable
+clase pública clase de utilidad {
+    // Suprimir el constructor por defecto para no instanciar
+    clase de utilidad privada () {
+        lanzar un nuevo error de aserción ();
+    }
+    ... // Resto omitido
+}
+Debido a que el constructor explícito es privado, no se puede acceder a él fuera de la clase. no AssertionErrores estrictamente necesario, pero proporciona un seguro en caso de que el constructor se invoque accidentalmente desde dentro de la clase. Garantiza que la clase nunca será instanciada bajo ninguna circunstancia. Esta expresión es levemente contraria a la intuición porque el constructor se proporciona expresamente para que no se pueda invocar. Por lo tanto, es aconsejable incluir un comentario, como se mostró anteriormente.
+
+Como efecto secundario, esta expresión también evita que la clase se subclasifique. Todos los constructores deben invocar un constructor de superclase, explícita o implícitamente, y una subclase no tendría un constructor de superclase accesible para invocar.
+
+Elemento 5: Preferir la inyección de dependencia a los recursos de cableado
+Muchas clases dependen de uno o más recursos subyacentes. Por ejemplo, un corrector ortográfico depende de un diccionario. No es raro ver tales clases implementadas como clases de utilidad estática ( Ítem 4 ):
+
+Haga clic aquí para ver la imagen del código
+
+// Uso inapropiado de la utilidad estática: ¡inflexible e incomprobable!
+Corrector ortográfico de clase pública {
+    Diccionario de léxico final estático privado = ...;
+
+    corrector ortográfico privado () {} // no instanciable
+
+    public static boolean isValid(String word) { ... }
+    public static List<String> sugerencias (String typo) { ... }
+}
+Del mismo modo, no es raro verlos implementados como singletons ( Ítem 3 ):
+
+Haga clic aquí para ver la imagen del código
+
+// Uso inapropiado de singleton - ¡inflexible y no verificable!
+Corrector ortográfico de clase pública {
+    diccionario de léxico final privado = ...;
+
+    corrector ortográfico privado (...) {}
+    INSTANCIA del corrector ortográfico estático público = nuevo corrector ortográfico (...);
+
+    public boolean isValid (cadena de palabras) { ... }
+    public List<String> sugerencias (String typo) { ... }
+}
+Ninguno de estos enfoques es satisfactorio, porque asumen que solo vale la pena usar un diccionario. En la práctica, cada idioma tiene su propio diccionario y se utilizan diccionarios especiales para vocabularios especiales. Además, puede ser conveniente utilizar un diccionario especial para las pruebas. Es una ilusión suponer que un solo diccionario será suficiente para todos los tiempos.
+
+Podría intentar SpellCheckeradmitir varios diccionarios haciendo que el dictionarycampo no sea definitivo y agregando un método para cambiar el diccionario en un corrector ortográfico existente, pero esto sería incómodo, propenso a errores e inviable en una configuración simultánea. Las clases de utilidad estática y los singletons son inapropiados para las clases cuyo comportamiento está parametrizado por un recurso subyacente.
+
+Lo que se requiere es la capacidad de admitir múltiples instancias de la clase (en nuestro ejemplo, SpellChecker), cada una de las cuales usa el recurso deseado por el cliente (en nuestro ejemplo, el diccionario). Un patrón simple que satisface este requisito es pasar el recurso al constructor al crear una nueva instancia . Esta es una forma de inyección de dependencia : el diccionario es una dependencia del corrector ortográfico y se inyecta en el corrector ortográfico cuando se crea.
+
+Haga clic aquí para ver la imagen del código
+
+// La inyección de dependencia proporciona flexibilidad y capacidad de prueba
+Corrector ortográfico de clase pública {
+    diccionario de léxico final privado;
+
+    corrector ortográfico público (diccionario de léxico) {
+        this.dictionary = Objects.requireNonNull(diccionario);
+    }
+
+    public boolean isValid (cadena de palabras) { ... }
+    public List<String> sugerencias (String typo) { ... }
+}
+El patrón de inyección de dependencia es tan simple que muchos programadores lo usan durante años sin saber que tiene un nombre. Si bien nuestro ejemplo del corrector ortográfico tenía solo un recurso (el diccionario), la inyección de dependencia funciona con una cantidad arbitraria de recursos y gráficos de dependencia arbitrarios. Conserva la inmutabilidad ( elemento 17 ), por lo que varios clientes pueden compartir objetos dependientes (suponiendo que los clientes deseen los mismos recursos subyacentes). La inyección de dependencia es igualmente aplicable a constructores, fábricas estáticas ( elemento 1 ) y constructores ( elemento 2 ).
+
+Una variante útil del patrón es pasar una fábrica de recursos al constructor. Una fábrica es un objeto que se puede llamar repetidamente para crear instancias de un tipo. Estas fábricas incorporan el patrón Factory Method [ Gamma95 ]. La Supplier<T>interfaz, introducida en Java 8, es perfecta para representar fábricas. Los métodos que aceptan una Supplier<T>entrada normalmente deben restringir el parámetro de tipo de la fábrica utilizando un tipo de comodín delimitado ( elemento 31 ) para permitir que el cliente pase una fábrica que crea cualquier subtipo de un tipo específico. Por ejemplo, aquí hay un método que hace un mosaico utilizando una fábrica provista por el cliente para producir cada mosaico:
+
+Haga clic aquí para ver la imagen del código
+
+Creación de mosaicos (proveedor<? extiende mosaico> fábrica de mosaicos) { ... }
+Aunque la inserción de dependencias mejora en gran medida la flexibilidad y la capacidad de prueba, puede abarrotar proyectos grandes, que normalmente contienen miles de dependencias. Este desorden puede eliminarse por completo mediante el uso de un marco de inyección de dependencia , como Dagger [ Dagger ], Guice [ Guice ] o Spring [ Spring ]. El uso de estos marcos está más allá del alcance de este libro, pero tenga en cuenta que las API diseñadas para la inyección manual de dependencias se adaptan trivialmente para que las usen estos marcos.
+
+En resumen, no use una clase de utilidad estática o singleton para implementar una clase que dependa de uno o más recursos subyacentes cuyo comportamiento afecte el de la clase, y no haga que la clase cree estos recursos directamente. En su lugar, pase los recursos, o fábricas para crearlos, al constructor (o fábrica estática o constructor). Esta práctica, conocida como inyección de dependencia, mejorará en gran medida la flexibilidad, la reutilización y la capacidad de prueba de una clase.
+
+Ítem ​​6: Evite crear objetos innecesarios
+A menudo es apropiado reutilizar un solo objeto en lugar de crear un nuevo objeto funcionalmente equivalente cada vez que se necesita. La reutilización puede ser más rápida y elegante. Un objeto siempre se puede reutilizar si es inmutable ( Ítem 17 ).
+
+Como un ejemplo extremo de lo que no se debe hacer, considere esta declaración:
+
+Haga clic aquí para ver la imagen del código
+
+Cadena s = nueva Cadena ("bikini");  // ¡NO HAGAS ESTO!
+La declaración crea una nueva Stringinstancia cada vez que se ejecuta, y ninguna de esas creaciones de objetos es necesaria. El argumento del Stringconstructor ( "bikini") es en sí mismo una Stringinstancia, funcionalmente idéntica a todos los objetos creados por el constructor. Si este uso se produce en un bucle o en un método invocado con frecuencia, Stringse pueden crear millones de instancias innecesariamente.
+
+La versión mejorada es simplemente la siguiente:
+
+Cadena s = "bikini";
+Esta versión utiliza una única Stringinstancia, en lugar de crear una nueva cada vez que se ejecuta. Además, se garantiza que el objeto será reutilizado por cualquier otro código que se ejecute en la misma máquina virtual que contenga el mismo literal de cadena [JLS, 3.10.5].
+
+A menudo, puede evitar la creación de objetos innecesarios mediante el uso de métodos de fábrica estáticos ( elemento 1 ) en lugar de constructores en clases inmutables que proporcionan ambos. Por ejemplo, el método de fábrica Boolean.valueOf(String)es preferible al constructor Boolean(String), que quedó en desuso en Java 9. El constructor debe crear un nuevo objeto cada vez que se llama, mientras que el método de fábrica nunca necesita hacerlo y no lo hará en la práctica. Además de reutilizar objetos inmutables, también puede reutilizar objetos mutables si sabe que no se modificarán.
+
+Algunas creaciones de objetos son mucho más caras que otras. Si va a necesitar un "objeto caro" de este tipo repetidamente, puede ser recomendable almacenarlo en caché para su reutilización. Desafortunadamente, no siempre es obvio cuando creas un objeto de este tipo. Suponga que desea escribir un método para determinar si una cadena es un número romano válido. Aquí está la forma más fácil de hacer esto usando una expresión regular:
+
+Haga clic aquí para ver la imagen del código
+
+// ¡El rendimiento se puede mejorar mucho!
+booleano estático isRomanNumeral(String s) {
+    return s.coincidencias("^(?=.)M*(C[MD]|D?C{0,3})"
+            + "(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+}
+El problema con esta implementación es que se basa en el String.matchesmétodo. Si bien String.matches es la forma más sencilla de comprobar si una cadena coincide con una expresión regular, no es adecuada para su uso repetido en situaciones críticas para el rendimiento. El problema es que internamente crea una Patterninstancia para la expresión regular y la usa solo una vez, después de lo cual se vuelve elegible para la recolección de elementos no utilizados. Crear una Patterninstancia es costoso porque requiere compilar la expresión regular en una máquina de estados finitos.
+
+Para mejorar el rendimiento, compile explícitamente la expresión regular en una Patterninstancia (que es inmutable) como parte de la inicialización de la clase, guárdela en caché y reutilice la misma instancia para cada invocación del isRomanNumeralmétodo:
+
+Haga clic aquí para ver la imagen del código
+
+// Reutilización de objetos caros para mejorar el rendimiento
+Números romanos de clase pública {
+    Patrón final estático privado ROMAN = Pattern.compile (
+            "^(?=.)M*(C[MD]|D?C{0,3})"
+            + "(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+
+    booleano estático isRomanNumeral(String s) {
+        return ROMAN.matcher(s).coincidencias();
+    }
+}
+La versión mejorada de isRomanNumeralproporciona ganancias de rendimiento significativas si se invoca con frecuencia. En mi máquina, la versión original tarda 1,1 µs en una cadena de entrada de 8 caracteres, mientras que la versión mejorada tarda 0,17 µs, que es 6,5 veces más rápida. No solo se mejora el rendimiento, sino también la claridad. Crear un campo final estático para la Patterninstancia que de otro modo sería invisible nos permite darle un nombre, que es mucho más legible que la propia expresión regular.
+
+Si la clase que contiene la versión mejorada del isRomanNumeralmétodo se inicializa pero el método nunca se invoca, el campo ROMANse inicializará innecesariamente. Sería posible eliminar la inicialización mediante la inicialización perezosa del campo ( elemento 83 ) la primera vez que isRomanNumeralse invoca el método, pero esto no se recomienda. Como suele ser el caso con la inicialización diferida, complicaría la implementación sin una mejora medible del rendimiento ( Ítem 67 ).
+
+Cuando un objeto es inmutable, es obvio que se puede reutilizar de manera segura, pero hay otras situaciones en las que es mucho menos obvio, incluso contrario a la intuición. Considere el caso de los adaptadores [ Gamma95 ] , también conocidos como vistas . Un adaptador es un objeto que delega en un objeto de respaldo, proporcionando una interfaz alternativa. Debido a que un adaptador no tiene un estado más allá del de su objeto de respaldo, no es necesario crear más de una instancia de un adaptador determinado para un objeto determinado.
+
+Por ejemplo, el keySetmétodo de la Mapinterfaz devuelve una Setvista del Mapobjeto, que consta de todas las claves del mapa. Ingenuamente, parecería que cada llamada a keySettendría que crear una nueva Setinstancia, pero cada llamada a keySetun objeto dado Mappuede devolver la misma Setinstancia. Aunque la Setinstancia devuelta suele ser mutable, todos los objetos devueltos son funcionalmente idénticos: cuando uno de los objetos devueltos cambia, también cambian todos los demás, porque todos están respaldados por la misma instancia Map. Si bien es en gran medida inofensivo crear varias instancias del keySetobjeto de vista, es innecesario y no tiene ningún beneficio.
+
+Otra forma de crear objetos innecesarios es el autoboxing , que permite al programador mezclar tipos primitivos y primitivos en caja, boxing y unboxing automáticamente según sea necesario. Autoboxing difumina pero no borra la distinción entre tipos primitivos y primitivos en caja. Hay distinciones semánticas sutiles y diferencias de rendimiento no tan sutiles ( Ítem 61 ). Considere el siguiente método, que calcula la suma de todos los intvalores positivos. Para hacer esto, el programa tiene que usar longla aritmética porque an intno es lo suficientemente grande para contener la suma de todos los intvalores positivos:
+
+Haga clic aquí para ver la imagen del código
+
+// ¡Horriblemente lento! ¿Puedes ver la creación del objeto?
+suma larga estática privada () {
+    Suma larga = 0L;
+    for (long i = 0; i <= Integer.MAX_VALUE; i++)
+        suma += yo;
+
+    suma devuelta;
+}
+Este programa obtiene la respuesta correcta, pero es mucho más lento de lo que debería ser, debido a un error tipográfico de un carácter. La variable sumse declara como a Longen lugar de a long, lo que significa que el programa construye alrededor de 2 31 instancias innecesarias Long(aproximadamente una por cada vez que se long iagrega a Long sum). Cambiar la declaración de sumde Longa longreduce el tiempo de ejecución de 6,3 segundos a 0,59 segundos en mi máquina. La lección es clara: prefiera las primitivas a las primitivas en caja y tenga cuidado con el encuadre automático involuntario.
+
+Este elemento no debe malinterpretarse para implicar que la creación de objetos es costosa y debe evitarse. Por el contrario, la creación y recuperación de objetos pequeños cuyos constructores hacen poco trabajo explícito es barata, especialmente en las implementaciones modernas de JVM. La creación de objetos adicionales para mejorar la claridad, la simplicidad o la potencia de un programa suele ser algo bueno.
+
+Por el contrario, evitar la creación de objetos manteniendo su propio grupo de objetos es una mala idea, a menos que los objetos del grupo sean extremadamente pesados. El clásicoejemplo de un objeto que justifica un conjunto de objetos es una conexión de base de datos. El costo de establecer la conexión es lo suficientemente alto como para que tenga sentido reutilizar estos objetos. Sin embargo, en términos generales, el mantenimiento de sus propios grupos de objetos desordena el código, aumenta el consumo de memoria y perjudica el rendimiento. Las implementaciones modernas de JVM tienen recolectores de basura altamente optimizados que superan fácilmente a tales grupos de objetos en objetos livianos.
+
+El contrapunto a este ítem es el ítem 50 sobre copia defensiva . El ítem presente dice: “No cree un objeto nuevo cuando deba reutilizar uno existente”, mientras que el ítem 50 dice: “No reutilice un objeto existente cuando deba crear uno nuevo”. Tenga en cuenta que la sanción por reutilizar un objeto cuando se requiere una copia defensiva es mucho mayor que la sanción por crear innecesariamente un objeto duplicado. No hacer copias defensivas donde sea necesario puede generar errores insidiosos y agujeros de seguridad; crear objetos innecesariamente simplemente afecta el estilo y el rendimiento.
+
+Ítem ​​7: Eliminar referencias a objetos obsoletos
+Si cambió de un lenguaje con gestión de memoria manual, como C o C++, a un lenguaje de recolección de basura como Java, su trabajo como programador se hizo mucho más fácil por el hecho de que sus objetos se recuperan automáticamente cuando termina. con ellos. Parece casi mágico cuando lo experimentas por primera vez. Fácilmente puede dar la impresión de que no tiene que pensar en la administración de la memoria, pero esto no es del todo cierto.
+
+Considere la siguiente implementación de pila simple:
+
+Haga clic aquí para ver la imagen del código
+
+// ¿Puedes detectar la "pérdida de memoria"?
+Pila de clase pública {
+    objetos privados[] elementos;
+    tamaño int privado = 0;
+    int final estático privado DEFAULT_INITIAL_CAPACITY = 16;
+
+    Pila pública () {
+        elementos = nuevo Objeto[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    empujar vacío público (Objeto e) {
+        asegurarCapacidad();
+        elementos[tamaño++] = e;
+    }
+
+    Objeto público pop() {
+        si (tamaño == 0)
+            lanza una nueva excepción EmptyStackException();
+        devolver elementos[--tamaño];
+    }
+
+    /**
+     * Asegure espacio para al menos un elemento más, aproximadamente
+     * duplicar la capacidad cada vez que la matriz necesita crecer.
+     */
+    vacío privado asegurarCapacidad() {
+        if (elementos.longitud == tamaño)
+            elementos = Arrays.copyOf(elementos, 2 * tamaño + 1);
+    }
+}
+Obviamente, no hay nada malo con este programa (pero vea el Artículo 29 para una versión genérica). Podría probarlo exhaustivamente, y pasaría todas las pruebas con gran éxito, pero hay un problema al acecho. En términos generales, el programa tiene una "pérdida de memoria", que puede manifestarse silenciosamente como un rendimiento reducido debido aaumento de la actividad del recolector de elementos no utilizados o aumento del consumo de memoria. En casos extremos, tales fugas de memoria pueden causar paginación del disco e incluso fallas en el programa con un correo electrónico OutOfMemoryError, pero tales fallas son relativamente raras.
+
+Entonces, ¿dónde está la pérdida de memoria? Si una pila crece y luego se reduce, los objetos que se sacaron de la pila no se recolectarán como basura, incluso si el programa que usa la pila no tiene más referencias a ellos. Esto se debe a que la pila mantiene referencias obsoletas a estos objetos. Una referencia obsoleta es simplemente una referencia que nunca volverá a ser desreferenciada. En este caso, cualquier referencia fuera de la "parte activa" de la matriz de elementos está obsoleta. La parte activa consta de los elementos cuyo índice es menor que size.
+
+Las fugas de memoria en lenguajes recolectados en basura (más propiamente conocidos como retenciones de objetos no intencionales ) son insidiosas. Si se retiene involuntariamente una referencia a un objeto, no solo se excluye ese objeto de la recolección de elementos no utilizados, sino que también se excluyen los objetos a los que ese objeto hace referencia, y así sucesivamente. Incluso si solo se retienen involuntariamente unas pocas referencias a objetos, se puede evitar que muchos, muchos objetos se recopilen como elementos no utilizados, con efectos potencialmente importantes en el rendimiento.
+
+La solución para este tipo de problema es simple: anule las referencias una vez que se vuelvan obsoletas. En el caso de nuestra Stackclase, la referencia a un elemento se vuelve obsoleta tan pronto como se saca de la pila. La versión corregida del popmétodo se ve así:
+
+Haga clic aquí para ver la imagen del código
+
+Objeto público pop() {
+    si (tamaño == 0)
+        lanza una nueva excepción EmptyStackException();
+    Resultado del objeto = elementos[--tamaño];
+    elementos[tamaño] = nulo; // Eliminar referencia obsoleta
+    resultado devuelto;
+}
+Un beneficio adicional de anular las referencias obsoletas es que si posteriormente se eliminan las referencias por error, el programa fallará inmediatamente con un NullPointerException, en lugar de hacer lo incorrecto en silencio. Siempre es beneficioso detectar errores de programación lo más rápido posible.
+
+Cuando los programadores se ven afectados por este problema por primera vez, pueden compensar en exceso anulando todas las referencias a objetos tan pronto como el programa termine de usarlo. Esto no es ni necesario ni deseable; desordena el programa innecesariamente. Anular las referencias a objetos debería ser la excepción y no la norma. La mejor manera de eliminar una referencia obsoleta es dejar que la variable que contenía la referencia quede fuera del alcance. Esto ocurre naturalmente si define cada variable en el ámbito más estrecho posible ( Ítem 57 ).
+
+Entonces, ¿cuándo debe anular una referencia? ¿ Qué aspecto de la Stackclase la hace susceptible a pérdidas de memoria? En pocas palabras, gestiona su propia memoria . El grupo de almacenamiento consta de los elementos de la elementsmatriz (las celdas de referencia del objeto, no los objetos en sí). Los elementos en la parte activa de la matriz (como se definió anteriormente) se asignan y los del resto de la matriz están libres . El recolector de basura no tiene forma de saber esto; al recolector de basura, todas las referencias a objetos en elelementsarray son igualmente válidos. Solo el programador sabe que la parte inactiva de la matriz no es importante. El programador comunica efectivamente este hecho al recolector de basura al anular manualmente los elementos de la matriz tan pronto como se vuelven parte de la parte inactiva.
+
+En términos generales, cada vez que una clase administra su propia memoria, el programador debe estar atento a las fugas de memoria . Cada vez que se libera un elemento, se deben anular todas las referencias a objetos contenidas en el elemento.
+
+Otra fuente común de fugas de memoria son los cachés. Una vez que coloca una referencia de objeto en un caché, es fácil olvidar que está allí y dejarlo en el caché mucho tiempo después de que se vuelve irrelevante. Hay varias soluciones a este problema. Si tiene la suerte de implementar un caché para el cual una entrada es relevante siempre y cuando haya referencias a su clave fuera del caché, represente el caché como WeakHashMap; las entradas se eliminarán automáticamente después de que se vuelvan obsoletas. Recuerde que WeakHashMapsolo es útil si la vida útil deseada de las entradas de caché está determinada por referencias externas a la clave, no por el valor.
+
+Más comúnmente, la vida útil de una entrada de caché está menos definida, y las entradas se vuelven menos valiosas con el tiempo. En estas circunstancias, la memoria caché debe limpiarse ocasionalmente de las entradas que hayan caído en desuso. Esto se puede hacer mediante un subproceso en segundo plano (quizás un ScheduledThreadPoolExecutor) o como un efecto secundario de agregar nuevas entradas al caché. La LinkedHashMapclase facilita el último enfoque con su removeEldestEntrymétodo. Para cachés más sofisticados, es posible que deba usar java.lang.refdirectamente.
+
+Una tercera fuente común de fugas de memoria son los oyentes y otras devoluciones de llamadas. Si implementa una API en la que los clientes registran devoluciones de llamada pero no las anulan explícitamente, se acumularán a menos que tome alguna medida. Una forma de asegurarse de que las devoluciones de llamada se recopilen rápidamente es almacenar solo referencias débiles a ellas, por ejemplo, almacenándolas solo como claves en un archivo WeakHashMap.
+
+Debido a que las fugas de memoria normalmente no se manifiestan como fallas obvias, pueden permanecer presentes en un sistema durante años. Por lo general, se descubren solo como resultado de una inspección cuidadosa del código o con la ayuda de una herramienta de depuración conocida como perfilador de montón . Por eso, es muy conveniente aprender a anticipar problemas como este antes de que ocurran y evitar que sucedan.
+
+Ítem ​​8: Evite los finalizadores y limpiadores
+Los finalizadores son impredecibles, a menudo peligrosos y generalmente innecesarios. Su uso puede provocar un comportamiento errático, un rendimiento deficiente y problemas de portabilidad. Los finalizadores tienen algunos usos válidos, que veremos más adelante en este artículo, pero como regla general, debe evitarlos. A partir de Java 9, los finalizadores han quedado obsoletos, pero las bibliotecas de Java todavía los utilizan. El reemplazo de Java 9 para los finalizadores son los limpiadores . Los limpiadores son menos peligrosos que los finalizadores, pero siguen siendo impredecibles, lentos y generalmente innecesarios.
+
+Se advierte a los programadores de C++ que no piensen en los finalizadores o limpiadores como el análogo de Java de los destructores de C++. En C++, los destructores son la forma normal de reclamar los recursos asociados con un objeto, una contraparte necesaria de los constructores. En Java, el recolector de elementos no utilizados reclama el almacenamiento asociado con un objeto cuando se vuelve inalcanzable, lo que no requiere un esfuerzo especial por parte del programador. Los destructores de C++ también se utilizan para reclamar otros recursos que no son de memoria. En Java, se usa un bloque try-con-recursos o try- para este propósito ( Ítem 9 ).finally
+
+Una deficiencia de los finalizadores y limpiadores es que no hay garantía de que se ejecuten rápidamente [JLS, 12.6]. Puede transcurrir un tiempo arbitrario entre el momento en que un objeto se vuelve inalcanzable y el momento en que se ejecuta su finalizador o limpiador. Esto significa que nunca debe hacer nada en el tiempo crítico en un finalizador o limpiador. Por ejemplo, es un grave error depender de un finalizador o limpiador para cerrar archivos porque los descriptores de archivos abiertos son un recurso limitado. Si muchos archivos quedan abiertos como resultado de la tardanza del sistema en ejecutar finalizadores o limpiadores, un programa puede fallar porque ya no puede abrir archivos.
+
+La prontitud con la que se ejecutan los finalizadores y limpiadores es principalmente una función del algoritmo de recolección de elementos no utilizados, que varía ampliamente según las implementaciones. El comportamiento de un programa que depende de la prontitud del finalizador o la ejecución más limpia también puede variar. Es muy posible que dicho programa se ejecute perfectamente en la JVM en la que lo prueba y luego falle miserablemente en la preferida por su cliente más importante.
+
+La finalización tardía no es solo un problema teórico. Proporcionar un finalizador para una clase puede retrasar arbitrariamente la recuperación de sus instancias. Un colega depuró una aplicación GUI de ejecución prolongada que misteriosamente estaba muriendo con una extensión OutOfMemoryError. El análisis reveló que, en el momento de su muerte, la aplicación tenía miles de objetos gráficos en la cola del finalizador esperando ser finalizados y reclamados. Lamentablemente, el subproceso del finalizador se ejecutaba con una prioridad más baja que otro subproceso de la aplicación, por lo que los objetos no se finalizaban al ritmo en que se volvían elegibles para la finalización. La especificación del idioma no garantizaen cuanto a qué subproceso ejecutará los finalizadores, por lo que no hay una forma portátil de evitar este tipo de problema que no sea abstenerse de usar finalizadores. Los limpiadores son un poco mejores que los finalizadores en este sentido porque los autores de la clase tienen control sobre sus propios subprocesos de limpieza, pero los limpiadores aún se ejecutan en segundo plano, bajo el control del recolector de basura, por lo que no puede garantizarse una limpieza rápida.
+
+La especificación no solo no ofrece ninguna garantía de que los finalizadores o limpiadores funcionen con prontitud; no proporciona ninguna garantía de que se ejecutarán en absoluto. Es completamente posible, incluso probable, que un programa finalice sin ejecutarlo en algunos objetos que ya no son accesibles. Como consecuencia, nunca debe depender de un finalizador o limpiador para actualizar el estado persistente. Por ejemplo, depender de un finalizador o limpiador para liberar un bloqueo persistente en un recurso compartido, como una base de datos, es una buena manera de detener todo su sistema distribuido.
+
+No te dejes seducir por los métodos System.gcy System.runFinalization. Pueden aumentar las probabilidades de que se ejecuten los finalizadores o limpiadores, pero no lo garantizan. Dos métodos una vez afirmaron hacer esta garantía: System.runFinalizersOnExity su gemelo malvado, Runtime.runFinalizersOnExit. Estos métodos tienen fallas fatales y han quedado en desuso durante décadas [ ThreadStop ].
+
+Otro problema con los finalizadores es que se ignora una excepción no detectada lanzada durante la finalización, y la finalización de ese objeto finaliza [JLS, 12.6]. Las excepciones no detectadas pueden dejar otros objetos en un estado corrupto. Si otro subproceso intenta utilizar un objeto corrupto, puede resultar en un comportamiento no determinista arbitrario. Normalmente, una excepción no detectada terminará el subproceso e imprimirá un seguimiento de la pila, pero no si ocurre en un finalizador, ni siquiera imprimirá una advertencia. Los limpiadores no tienen este problema porque una biblioteca que usa un limpiador tiene control sobre su subproceso.
+
+Hay una severa penalización de rendimiento por usar finalizadores y limpiadores. En mi máquina, el tiempo para crear un AutoCloseableobjeto simple, cerrarlo usandotry-con-recursos, y hacer que el recolector de basura lo reclame es de aproximadamente 12 ns. En su lugar, el uso de un finalizador aumenta el tiempo a 550 ns. En otras palabras, es unas 50 veces más lento crear y destruir objetos con finalizadores. Esto se debe principalmente a que los finalizadores inhiben la recolección eficiente de basura. Los limpiadores son comparables en velocidad a los finalizadores si los usa para limpiar todas las instancias de la clase (alrededor de 500 ns por instancia en mi máquina), pero los limpiadores son mucho más rápidos si los usa solo como una red de seguridad, como se explica a continuación. En estas circunstancias, crear, limpiar y destruir un objeto toma alrededor de 66 ns en mi máquina, lo que significa que pagas un factor de cinco (no cincuenta) por el seguro de una red de seguridad si no la usas .
+
+Los finalizadores tienen un grave problema de seguridad: abren su clase a ataques de finalizadores . La idea detrás de un ataque de finalizador es simple: si una excepción esLanzado desde un constructor o sus equivalentes de serialización, los métodos readObjecty ( Capítulo 12 ), el finalizador de una subclase maliciosa puede ejecutarse en el objeto parcialmente construido que debería haber "muerto en la vid". Este finalizador puede registrar una referencia al objeto en un campo estático, evitando que sea recolectado como basura. Una vez que se ha registrado el objeto con formato incorrecto, es muy sencillo invocar métodos arbitrarios en este objeto que nunca se debería haber permitido que existieran en primer lugar. Lanzar una excepción desde un constructor debería ser suficiente para evitar que un objeto llegue a existir; en presencia de finalizadores, no lo es.readResolveEstos ataques pueden tener consecuencias nefastas. Las clases finales son inmunes a los ataques del finalizador porque nadie puede escribir una subclase maliciosa de una clase final. Para proteger las clases no finales de los ataques del finalizador, escriba un finalize método final que no haga nada.
+
+Entonces, ¿qué debe hacer en lugar de escribir un finalizador o limpiador para una clase cuyos objetos encapsulan recursos que requieren terminación, como archivos o subprocesos? Simplemente haga que su clase implemente AutoCloseabley solicite a sus clientes que invoquen el closemétodo en cada instancia cuando ya no sea necesario, generalmente usando try-with-resources para garantizar la terminación incluso ante excepciones ( Artículo 9 ). Un detalle que vale la pena mencionar es que la instancia debe realizar un seguimiento de si se ha cerrado: el closemétodo debe registrar en un campo que el objeto ya no es válido, y otros métodos deben verificar este campo y lanzar un IllegalStateExceptionsi son llamados después del objeto. ha sido cerrado.
+
+Entonces, ¿para qué sirven, en todo caso, los finalizadores y los limpiadores? Tienen quizás dos usos legítimos. Una es actuar como una red de seguridad en caso de que el propietario de un recurso se olvide de llamar a su closemétodo. Si bien no hay garantía de que el limpiador o el finalizador se ejecuten rápidamente (o en absoluto), es mejor liberar el recurso más tarde que nunca si el cliente no lo hace. Si está considerando escribir un finalizador de red de seguridad de este tipo, piense detenidamente si la protección vale la pena el costo. Algunas clases de la biblioteca de Java, como FileInputStream, FileOutputStreamy ThreadPoolExecutortienen finalizadores que sirven como redes de seguridad.
+
+Un segundo uso legítimo de finalizadores y limpiadores se refiere a objetos con pares nativos . Un par nativo es un objeto nativo (no Java) al que un objeto normal delega a través de métodos nativos. Debido a que un igual nativo no es un objeto normal, el recolector de basura no lo sabe y no puede reclamarlo cuando se reclama su igual Java. Un finalizador o limpiador puede ser un vehículo apropiado para esta tarea, suponiendo que el rendimiento sea aceptable y que el par nativo no tenga recursos críticos. Si el rendimiento es inaceptable o el par nativo tiene recursos que deben recuperarse con prontitud, la clase debe tener un closemétodo, como se describió anteriormente.
+
+Los limpiadores son un poco difíciles de usar. A continuación se muestra una clase simple Roomque demuestra la instalación. Supongamos que las habitaciones deben limpiarse antes de recuperarlas. La Roomclase implementa AutoCloseable; el hecho de que su red de seguridad de limpieza automática utilice un limpiador es simplemente un detalle de implementación. A diferencia de los finalizadores, los limpiadores no contaminan la API pública de una clase:
+
+Haga clic aquí para ver la imagen del código
+
+// Una clase que se puede cerrar automáticamente usando un limpiador como red de seguridad
+sala de clase pública implementa AutoCloseable {
+    Limpiador final estático privado limpiador = Cleaner.create();
+
+    // Recurso que requiere limpieza. No debe referirse a Room!
+    clase estática privada Estado implementa Runnable {
+        int numPilasdebasura; // Número de montones de chatarra en esta habitación
+
+        Estado(int numJunkPiles) {
+            this.numJunkPiles = numJunkPiles;
+        }
+
+        // Invocado por método de cierre o limpiador
+        @Anular ejecución de vacío público () {
+            System.out.println("Cuarto de limpieza");
+            numPilasBasura = 0;
+        }
+    }
+
+    // El estado de esta sala, compartida con nuestro limpiable
+    Estado final privado Estado;
+
+    // Nuestro limpiable. Limpia la habitación cuando es elegible para gc
+    Limpiador final privado. Limpiable limpiable;
+
+    Habitación pública (int numJunkPiles) {
+        estado = nuevo estado (numJunkPiles);
+        limpiable = limpiador.registrar(este, estado);
+    }
+
+    @Override public void close() {
+        limpiable.limpio();
+    }
+}
+La Stateclase anidada estática contiene los recursos que requiere el limpiador para limpiar la habitación. En este caso, es simplemente el numJunkPilescampo, que representa la cantidad de desorden en la habitación. De manera más realista, podría ser una final longque contenga un puntero a un compañero nativo. Stateimplements Runnable, y su runmétodo se llama como máximo una vez, por el Cleanableque obtenemos cuando registramos nuestra Stateinstancia con nuestro limpiador en el Roomconstructor. La llamada al runmétodo se desencadenará por una de dos cosas: por lo general, se desencadena por una llamada aRoomEl closemétodo de llamando Cleanableal método de limpieza. Si el cliente no puede llamar al closemétodo en el momento en que una Roominstancia es elegible para la recolección de elementos no utilizados, el limpiador (con suerte) llamará Stateal runmétodo.
+
+Es fundamental que una Stateinstancia no se refiera a su Roominstancia. Si lo hiciera, crearía una circularidad que evitaría que la Roominstancia sea elegible para la recolección de elementos no utilizados (y que se limpie automáticamente). Por lo tanto, Statedebe ser una clase anidada estática porque las clases anidadas no estáticas contienen referencias a sus instancias adjuntas ( elemento 24 ). De manera similar, no es recomendable usar un lambda porque pueden capturar fácilmente referencias a objetos adjuntos.
+
+Como dijimos anteriormente, Roomel limpiador de se usa solo como una red de seguridad. Si los clientes rodean todas Roomlas instancias en trybloques con recursos, nunca será necesaria la limpieza automática. Este cliente de buen comportamiento demuestra ese comportamiento:
+
+Haga clic aquí para ver la imagen del código
+
+clase pública Adulto {
+    public static void main(String[] args) {
+        probar (Habitación miHabitación = nueva Habitación(7)) {
+            System.out.println("Adios");
+        }
+    }
+}
+Como era de esperar, al ejecutar el Adultprograma se imprime Goodbyeseguido de Cleaning room. Pero ¿qué pasa con este programa de mal comportamiento, que nunca limpia su habitación?
+
+Haga clic aquí para ver la imagen del código
+
+Adolescente de clase pública {
+    public static void main(String[] args) {
+        nueva habitación (99);
+        System.out.println("Paz fuera");
+    }
+}
+Puede esperar que imprima Peace out, seguido de Cleaning room, pero en mi máquina, nunca imprime Cleaning room; simplemente sale. Esta es la imprevisibilidad de la que hablábamos antes. La Cleanerespecificación dice: “El comportamiento de los limpiadores durante System.exitla implementación es específico. No se ofrecen garantías sobre si se invocan o no acciones de limpieza”. Si bien la especificación no lo dice, lo mismo es válido para la salida normal del programa. En mi máquina, agregar la línea System.gc()al Teenagermétodo maines suficiente para que se imprima Cleaning roomantes de salir, pero no hay garantía de que verá el mismo comportamiento en su máquina.
+
+En resumen, no utilice limpiadores ni, en versiones anteriores a Java 9, finalizadores, excepto como red de seguridad o para eliminar recursos nativos no críticos. Incluso entonces, tenga cuidado con la indeterminación y las consecuencias de rendimiento.
+
+Ítem ​​9: Preferir try-con-recursos a try-finally
+Las bibliotecas de Java incluyen muchos recursos que deben cerrarse manualmente invocando un closemétodo. Los ejemplos incluyen InputStream, OutputStreamy java.sql.Connection. Los clientes a menudo pasan por alto el cierre de recursos, con consecuencias de rendimiento predeciblemente nefastas. Si bien muchos de estos recursos usan finalizadores como una red de seguridad, los finalizadores no funcionan muy bien ( Ítem 8 ).
+
+Históricamente, una declaración try- finallyera la mejor manera de garantizar que un recurso se cerraría correctamente, incluso ante una excepción o devolución:
+
+Haga clic aquí para ver la imagen del código
+
+// try-finally - ¡Ya no es la mejor manera de cerrar recursos!
+static String firstLineOfFile(String path) lanza IOException {
+    BufferedReader br = new BufferedReader(nuevo FileReader(ruta));
+    intentar {
+        volver br.readLine();
+    } finalmente {
+        br.cerrar();
+    }
+}
+Puede que esto no se vea mal, pero empeora cuando agrega un segundo recurso:
+
+Haga clic aquí para ver la imagen del código
+
+// ¡try-finally es feo cuando se usa con más de un recurso!
+copia vacía estática (String src, String dst) lanza IOException {
+    InputStream en = nuevo FileInputStream(src);
+    intentar {
+        OutputStream out = nuevo FileOutputStream(dst);
+        intentar {
+            byte[] buf = nuevo byte[BUFFER_SIZE];
+            int n;
+            while ((n = in.read(buf)) >= 0)
+                fuera.escribir(buf, 0, n);
+        } finalmente {
+            fuera.cerrar();
+        }
+    } finalmente {
+        cercar();
+    }
+}
+Puede ser difícil de creer, pero incluso los buenos programadores se equivocan la mayor parte del tiempo. Para empezar, me equivoqué en la página 88 de Java Puzzlers [ Bloch05 ], y nadie se dio cuenta durante años. De hecho, dos tercios de los usos del closemétodo en las bibliotecas de Java fueron incorrectos en 2007.
+
+Incluso el código correcto para cerrar recursos con declaraciones try- finally, como se ilustra en los dos ejemplos de código anteriores, tiene una deficiencia sutil. El código tanto en el trybloque como en el finallybloque es capaz de generar excepciones. Por ejemplo, en el firstLineOfFilemétodo, la llamada a readLinepodría generar una excepción debido a una falla en el dispositivo físico subyacente y la llamada acloseentonces podría fallar por la misma razón. Bajo estas circunstancias, la segunda excepción borra completamente la primera. No hay registro de la primera excepción en el seguimiento de la pila de excepciones, lo que puede complicar enormemente la depuración en sistemas reales; por lo general, es la primera excepción la que desea ver para diagnosticar el problema. Si bien es posible escribir código para suprimir la segunda excepción a favor de la primera, prácticamente nadie lo hizo porque es demasiado detallado.
+
+Todos estos problemas se resolvieron de un solo golpe cuando Java 7 introdujo la trydeclaración -with-resources [JLS, 14.20.3]. Para ser utilizable con esta construcción, un recurso debe implementar la AutoCloseableinterfaz, que consta de un único método voidde retorno close. Muchas clases e interfaces en las bibliotecas de Java y en bibliotecas de terceros ahora implementan o amplían AutoCloseable. Si escribe una clase que representa un recurso que debe cerrarse, su clase AutoCloseabletambién debería implementarse.
+
+Así es como se ve nuestro primer ejemplo usando try-with-resources:
+
+Haga clic aquí para ver la imagen del código
+
+// prueba-con-recursos - ¡la mejor manera de cerrar recursos!
+static String firstLineOfFile(String path) lanza IOException {
+    intente (BufferedReader br = new BufferedReader(
+           nuevo FileReader(ruta))) {
+       volver br.readLine();
+    }
+}
+Y así es como se ve nuestro segundo ejemplo usando try-with-resources:
+
+Haga clic aquí para ver la imagen del código
+
+// prueba-con-recursos en múltiples recursos - corto y agradable
+copia vacía estática (String src, String dst) lanza IOException {
+    prueba (InputStream in = new FileInputStream(src);
+         OutputStream fuera = nuevo FileOutputStream(dst)) {
+        byte[] buf = nuevo byte[BUFFER_SIZE];
+        int n;
+        while ((n = in.read(buf)) >= 0)
+            fuera.escribir(buf, 0, n);
+    }
+}
+Las versiones con recursos no solo son trymás cortas y fáciles de leer que las originales, sino que también proporcionan diagnósticos mucho mejores. Considera elfirstLineOfFile método. Si se lanzan excepciones tanto por la readLinellamada como por (invisible) close, la última excepción se suprime a favor de la primera. De hecho, se pueden suprimir varias excepciones para conservar la excepción que realmente desea ver. Estas excepciones suprimidas no se descartan simplemente; se imprimen en el seguimiento de la pila con una notación que indica que se suprimieron. También puede acceder a ellos mediante programación con el getSuppressedmétodo, que se agregó Throwableen Java 7.
+
+Puede poner cláusulas catch en trydeclaraciones con recursos, tal como puede hacerlo en declaraciones tryregulares finally. Esto le permite manejar excepciones sin manchar su código con otra capa de anidamiento. Como un ejemplo ligeramente artificial, aquí hay una versión de nuestro firstLineOfFilemétodo que no arroja excepciones, pero toma un valor predeterminado para devolver si no puede abrir el archivo o leerlo:
+
+Haga clic aquí para ver la imagen del código
+
+// prueba-con-recursos con una cláusula catch
+static String firstLineOfFile(String path, String defaultVal) {
+    intente (BufferedReader br = new BufferedReader(
+           nuevo FileReader(ruta))) {
+        volver br.readLine();
+    } captura (IOException e) {
+        devuelve el valor predeterminado;
+    }
+}
+La lección es clara: utilice siempre try-with-resources antes que try-finallycuando trabaje con recursos que deben estar cerrados. El código resultante es más corto y claro, y las excepciones que genera son más útiles. La try-instrucción with-resources facilita la escritura de código correcto utilizando recursos que deben estar cerrados, lo que era prácticamente imposible con try- finally.
