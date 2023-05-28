@@ -24,7 +24,7 @@ Concéntrese en el lenguaje y sus más fundamentales libraries: java.lang, java.
 
 ## Contents
 
-Foreword
+[Foreword](https://github.com/adolfodelarosades/Java/blob/master/temarios/021_Effective_Java/00_Foreword.md)
 
 Preface
 
