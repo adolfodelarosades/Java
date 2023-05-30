@@ -7,13 +7,13 @@ La plataforma J2EE ha evolucionado aún más para adaptarse a la creciente popul
 
 Veamos algunas de las razones por las que esto es así. La plataforma J2EE ha agregado sus funciones de servicios web a una plataforma que ya ha estandarizado el desarrollo y la implementación de aplicaciones empresariales portátiles. Con estas nuevas funciones, la plataforma J2EE ofrece a las empresas los siguientes beneficios:
 
-Permite que las aplicaciones empresariales existentes se amplíen como servicios web de manera estándar, fácil, portátil e interoperable
+* Permite que las aplicaciones empresariales existentes se amplíen como servicios web de manera estándar, fácil, portátil e interoperable
 
-Ayuda a extender el alcance de las aplicaciones empresariales existentes y nuevas a un nuevo conjunto de clientes más allá de la ya amplia variedad de clientes admitidos por las plataformas J2EE anteriores.
+* Ayuda a extender el alcance de las aplicaciones empresariales existentes y nuevas a un nuevo conjunto de clientes más allá de la ya amplia variedad de clientes admitidos por las plataformas J2EE anteriores.
 
-Permite el uso de tecnologías robustas y comercialmente probadas (como componentes de beans empresariales, servlets, etc.) como la columna vertebral para desarrollar nuevos servicios.
+* Permite el uso de tecnologías robustas y comercialmente probadas (como componentes de beans empresariales, servlets, etc.) como la columna vertebral para desarrollar nuevos servicios.
 
-Ayuda a que los sistemas de información empresarial (EIS) existentes se integren a los usuarios finales de forma portátil
+* Ayuda a que los sistemas de información empresarial (EIS) existentes se integren a los usuarios finales de forma portátil
 
 Este libro trata sobre el desarrollo de servicios web sólidos y efectivos en la plataforma Java TM 2, Enterprise Edition (J2EE TM ), versión 1.4 o posterior. El libro no solo describe las tecnologías utilizadas para los servicios web, sino que también presenta pautas para usar estas tecnologías para diseñar y desarrollar servicios web. Muchas de estas pautas se han formulado a partir de nuestra propia experiencia en el desarrollo de servicios web y, como tales, las hemos ilustrado con ejemplos reales cuando ha sido posible.
 
