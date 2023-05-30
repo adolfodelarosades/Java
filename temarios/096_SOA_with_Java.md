@@ -62,7 +62,7 @@ Aprenderá a implementar SOA con marcos ligeros, tecnologías de servicios Java 
 
 ## Contents
 
-#### Foreword
+#### [Foreword](https://github.com/adolfodelarosades/Java/blob/master/temarios/096_SOA_with_Java/00_Foreword.md)
 
 #### CHAPTER 1: Introduction
 
