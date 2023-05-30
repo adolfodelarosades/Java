@@ -33,3 +33,55 @@ Los autores primero revisan los elementos esenciales de la plataforma Java EE en
 • Desarrollo, configuración e implementación de sistemas **SOA** con **NetBeans IDE**
 
 • Construcción de sistemas **SOA** con **NetBeans SOA Pack**
+
+## Content
+
+### Part I. Overview
+
+* Chapter 1 Introduction
+
+* Chapter 2 Evolution of IT Architectures
+
+* Chapter 3 Evolution of Service Oriented Architecture
+
+### Part II. Service Oriented Architecture Essentials
+
+* Chapter 4 Message Oriented Services and SOAP
+
+* Chapter 5 Web Services and WSDL
+
+* Chapter 6 Registries and UDDI
+
+* Chapter 7 Orchestration and Choreography
+
+* Chapter 8 Advanced Web Services Infrastructure for Implementing SOA
+
+### Part III. Java Platform, Enterprise Edition and ESB
+
+* Chapter 9 Java Platform, Enterprise Edition Overview
+
+* Chapter 10 Web Technologies in Java EE
+
+* Chapter 11 Enterprise JavaBeans and Persistence
+
+* Chapter 12 Java Web Services Overview
+
+* Chapter 13 Enterprise Service Bus and Java Business Integration
+
+### Part IV. Implementing SOA Using Java EE Platform
+
+* Chapter 14 Service Oriented Architecture and the Web Tier
+
+* Chapter 15 Service Oriented Architecture and the Business Tier
+
+* Chapter 16 Advanced Service Oriented Architecture
+
+### Part V. Case Study
+
+* Chapter 17 Developing Service Oriented Applications—A Case Study
+
+* Chapter 18 Delivering SOA Using NetBeans SOA Pack: Case Study—Solution
+
+#### References
+
+
