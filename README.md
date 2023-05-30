@@ -22,7 +22,7 @@ Serie de varios cursos Java.
 * [090 Understanding Web Services: XML, WSDL, SOAP, and UDDI](https://github.com/adolfodelarosades/Java/blob/master/temarios/090_Understanding_Web_Services.md)
 * [091 Implementing SOA Using Java™ EE](https://github.com/adolfodelarosades/Java/blob/master/temarios/091_Implementing_SOA_Using_Java_EE.md)
 * [092 J2EE™ Web Services](https://github.com/adolfodelarosades/Java/blob/master/temarios/092_J2EE_Web_Services.md)
-
+* [093 Designing Web Services with the J2EE™ 1.4 Platform JAX-RPC, SOAP, and XML Technologies](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services.md)
 * [095 Web Services Testing with soapUI](https://github.com/adolfodelarosades/Java/blob/master/temarios/095_Web_Services_Testing_with_soapUI.md)
 * [096 SOA with Java: Realizing Service-Orientation with Java Technologies](https://github.com/adolfodelarosades/Java/blob/master/temarios/096_SOA_with_Java.md)
 
