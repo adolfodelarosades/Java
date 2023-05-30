@@ -10,7 +10,7 @@ By Richard Monson-Haefel
 * PUBLICATION DATE: **October 2003**
 * PRINT LENGTH: **928 pages**
 
-“ J2EE™ Web Services está escrito siguiendo la tradición de los grandes libros que la gente espera del autor Richard Monson-Haefel. Más que una referencia de servicios web completa y concisa, esta guía esencial es la forma en que los desarrolladores de J2EE dominan rápidamente la arquitectura y el desarrollo de servicios web”.
+“*J2EE™ Web Services* está escrito siguiendo la tradición de los grandes libros que la gente espera del autor Richard Monson-Haefel. Más que una referencia de servicios web completa y concisa, esta guía esencial es la forma en que los desarrolladores de J2EE dominan rápidamente la arquitectura y el desarrollo de servicios web”.
 
          — Floyd Marinescu
              Autor, Director de patrones de diseño de EJB
@@ -38,11 +38,88 @@ By Richard Monson-Haefel
              Directora de investigación, Burton Group
              Autor, Servicios web: una guía para gerentes
 
-“ J2EE™ Web Services es una excelente referencia y tutorial para arquitectos y desarrolladores de servicios web, tanto principiantes como experimentados. Este libro es el primero en cubrir completamente los estándares de servicios web WS-I 1.0 y su integración con los componentes J2EE 1.4. Dedique tiempo a leer este libro y pronto dominará los servicios web J2EE y podrá utilizar con éxito esta tecnología para resolver problemas clave de integración comercial en su empresa”.
+“*J2EE™ Web Services* es una excelente referencia y tutorial para arquitectos y desarrolladores de servicios web, tanto principiantes como experimentados. Este libro es el primero en cubrir completamente los estándares de servicios web WS-I 1.0 y su integración con los componentes J2EE 1.4. Dedique tiempo a leer este libro y pronto dominará los servicios web J2EE y podrá utilizar con éxito esta tecnología para resolver problemas clave de integración comercial en su empresa”.
 
          — Tom Marrs
              Arquitecto sénior de J2EE/XML/servicios web
              Distributed Computing Solutions, Inc.
+             
+Los servicios web están revolucionando la forma en que las empresas realizan negocios, ya que permiten que distintas aplicaciones se comuniquen e intercambien datos comerciales. Ahora, Java 2.
 
-Los servicios web están revolucionando la forma en que las empresas realizan negocios, ya que permiten que distintas aplicaciones se comuniquen e intercambien datos comerciales. Ahora, Java 2,
+## Content
+
+### Preface
+
+1. An Overview of J2EE 1.4 Web Services
+
+## I. XML
+
+2. XML Basics
+
+3. The W3C XML Schema Language
+
+## II. SOAP And WSDL
+
+4. SOAP
+
+5. WSDL
+
+## III. UDDI
+
+6. The UDDI Data Structures
+
+7. The UDDI Inquiry API
+
+8. The UDDI Publishing API
+
+## IV. JAX-RPC
+
+9. JAX-RPC Overview
+
+10. JAX-RPC Service Endpoints
+
+11. JAX-RPC EJB Endpoints
+
+12. JAX-RPC Client APIs
+
+13. SAAJ
+
+14. Message Handlers
+
+15. Mapping Java to WSDL and XML
+
+## V. JAXR
+
+16. Getting Started with JAXR
+
+17. The JAXR Business Objects
+
+18. The JAXR Technical Objects
+
+19. The JAXR Inquiry and Publishing APIs
+
+## VI. JAXP
+
+20. SAX2
+
+21. DOM 2
+
+## VII. Deployment
+
+22. J2EE Deployment
+
+23. Web Service Descriptors
+
+24. JAX-RPC Mapping Files
+
+## Appendices
+
+A. XML DTDs
+B. XML Schema Regular Expressions
+C. Base64 Encoding
+D. SOAP RPC/Encoded
+E. SOAP Messages with Attachments
+F. SAAJ Attachments
+G. JAX-RPC and SwA
+H. Using JAX-RPC DII without a WSDL Document
 
