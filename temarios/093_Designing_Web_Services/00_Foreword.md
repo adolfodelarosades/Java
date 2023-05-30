@@ -19,6 +19,9 @@ Dado que los servicios web son una extensión importante del modelo de computaci
 **Java BluePrints** ofrece pautas que otorgarán a los desarrolladores una nueva dimensión de flexibilidad: la capacidad de desarrollar servicios web sin los muros impuestos por los proveedores de sistemas operativos y servidores de aplicaciones. Una vez más, esta versión de **Java Blueprints** es una fuente esencial de información de arquitectura e implementación para los desarrolladores de **J2EE** que utilizarán la plataforma **J2EE 1.4** como su plataforma de servicios web.
 
 M H, ingeniero distinguido
+
 Arquitecto principal, plataforma J2EE
+
 Sun Microsystems
+
 Enero de 2004
