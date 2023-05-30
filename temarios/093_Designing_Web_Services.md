@@ -38,9 +38,9 @@ La cobertura de temas clave incluye:
 ## Content
 
 
-Foreword
+* Foreword
 
-Preface
+* Preface
 
 1. Introduction
 
@@ -58,4 +58,4 @@ Preface
 
 8. Application Architecture And Design
 
-Glossary
+* Glossary
