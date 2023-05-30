@@ -115,11 +115,18 @@ Los servicios web están revolucionando la forma en que las empresas realizan ne
 ## Appendices
 
 A. XML DTDs
+
 B. XML Schema Regular Expressions
+
 C. Base64 Encoding
+
 D. SOAP RPC/Encoded
+
 E. SOAP Messages with Attachments
+
 F. SAAJ Attachments
+
 G. JAX-RPC and SwA
+
 H. Using JAX-RPC DII without a WSDL Document
 
