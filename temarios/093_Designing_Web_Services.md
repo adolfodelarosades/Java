@@ -38,7 +38,7 @@ La cobertura de temas clave incluye:
 ## Content
 
 
-* Foreword
+* [Foreword](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/00_Foreword.md)
 
 * Preface
 
