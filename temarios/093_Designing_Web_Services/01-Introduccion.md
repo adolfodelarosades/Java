@@ -98,80 +98,83 @@ Un desafío adicional con los Web services es la coordinación de múltiples ser
 
 ### 1.3.2. Seguridad
 
-No debería sorprender a nadie, pero la seguridad es tan importante para los servicios web como lo es para otras aplicaciones empresariales. De hecho, ahora que las aplicaciones en la Web abren los procesos y datos comerciales de una empresa a clientes distribuidos, la seguridad se convierte en un factor aún más importante.
+No debería sorprender a nadie, pero la seguridad es tan importante para los Web services como lo es para otras aplicaciones empresariales. De hecho, ahora que las aplicaciones en la Web abren los procesos y datos comerciales de una empresa a clientes distribuidos, la seguridad se convierte en un factor aún más importante.
 
-La seguridad de los sistemas de información, si bien es de suma importancia para los administradores de TI y los arquitectos de sistemas, también debe manejarse con el equilibrio adecuado. No solo es importante proteger los activos de información para maximizar su valor, sino que se debe tener cuidado de no sobreproteger estos activos hasta el punto de poner en peligro ese mismo valor. Tradicionalmente, los departamentos de TI han mantenido un nivel de control relativamente alto, si no completo, sobre el entorno de servidores y clientes. Cuando los activos de información están expuestos en entornos menos protegidos, como a través de servicios web, se vuelve cada vez más importante mantener una seguridad estricta sobre los activos más sensibles, al tiempo que permite un acceso relativamente más fácil a otros activos.
+La seguridad de los sistemas de información, si bien es de suma importancia para los administradores de TI y los arquitectos de sistemas, también debe manejarse con el equilibrio adecuado. No solo es importante proteger los activos de información para maximizar su valor, sino que se debe tener cuidado de no sobreproteger estos activos hasta el punto de poner en peligro ese mismo valor. Tradicionalmente, los departamentos de TI han mantenido un nivel de control relativamente alto, si no completo, sobre el entorno de servidores y clientes. Cuando los activos de información están expuestos en entornos menos protegidos, como a través de Web services, se vuelve cada vez más importante mantener una seguridad estricta sobre los activos más sensibles, al tiempo que permite un acceso relativamente más fácil a otros activos.
 
 Una de las dificultades en el manejo de sistemas dispares es proporcionar un modelo de seguridad integrado. La seguridad debe ser compatible con los mecanismos existentes. En los casos en que los clientes necesiten acceder a información segura, los mecanismos deben mantener un alto nivel de seguridad (y la confianza del usuario) sin dejar de ser tan discretos y transparentes como sea posible.
 
-Los problemas clave de seguridad para los servicios web se relacionan con la autenticación, la autorización y la garantía de la confidencialidad. Los estándares de servicios web para la seguridad son un área de alta prioridad para la comunidad, pero, como todavía están evolucionando, siguen siendo un trabajo en progreso. El Capítulo 7 examina estos problemas y proporciona algunas soluciones provisionales.
+Los problemas clave de seguridad para los Web services se relacionan con la autenticación, la autorización y la garantía de la confidencialidad. Los estándares de Web services para la seguridad son un área de alta prioridad para la comunidad, pero, como todavía están evolucionando, siguen siendo un trabajo en progreso. El Capítulo 7 examina estos problemas y proporciona algunas soluciones provisionales.
 
-1.3.3. Confiabilidad, disponibilidad y escalabilidad
-Los servicios web suelen tratarse de aplicaciones distribuidas a gran escala. Con este tipo de aplicaciones, la confiabilidad, disponibilidad y escalabilidad de los servicios de la plataforma subyacente y sus tecnologías son consideraciones importantes.
+### 1.3.3. Confiabilidad, disponibilidad y escalabilidad
 
-La confiabilidad es el aspecto de un servicio web que representa qué tan bien mantiene su servicio y la calidad del servicio. A menudo, la confiabilidad se mide por la cantidad de fallas que ocurren en un período de tiempo determinado. Para los servicios web, la confiabilidad puede ser más difícil de lograr debido a la naturaleza poco confiable del transporte subyacente, HTTP; HTTP proporciona solo la entrega de mejor esfuerzo y no garantiza la entrega de paquetes o en orden. Un servicio web se considera más confiable cuanto más fácil y automáticamente pueda manejar los cambios en los patrones de uso y las configuraciones del sistema.
+Los Web services suelen tratarse de aplicaciones distribuidas a gran escala. Con este tipo de aplicaciones, la confiabilidad, disponibilidad y escalabilidad de los servicios de la plataforma subyacente y sus tecnologías son consideraciones importantes.
 
-La disponibilidad se refiere a si el servicio web está presente o listo para su uso inmediato. ¿Un cliente tiene que esperar por el servicio web o la solicitud del cliente se maneja de inmediato? En otras palabras, la disponibilidad representa la probabilidad de que un servicio esté disponible.
+***La confiabilidad es el aspecto de un Web services que representa qué tan bien mantiene su servicio y la calidad del servicio. A menudo, la confiabilidad se mide por la cantidad de fallas que ocurren en un período de tiempo determinado***. Para los Web services, la confiabilidad puede ser más difícil de lograr debido a la naturaleza poco confiable del transporte subyacente, HTTP; HTTP proporciona solo la entrega de mejor esfuerzo y no garantiza la entrega de paquetes o en orden. Un servicio web se considera más confiable cuanto más fácil y automáticamente pueda manejar los cambios en los patrones de uso y las configuraciones del sistema.
 
-Los servicios web que escalan de manera efectiva pueden manejar fácilmente una gran cantidad de interacciones con los clientes. Para dichos servicios web, la plataforma y las tecnologías deben administrar de manera eficiente los recursos y servicios del sistema (como las conexiones y transacciones de la base de datos). La plataforma también debe poder manejar el análisis XML, que se realiza para validar el contenido de un documento. El análisis de XML es un proceso intensivo en computación que afecta significativamente el rendimiento. XML por sí mismo implica un formato muy detallado que aumenta significativamente el tamaño de la carga útil en comparación con un formato binario equivalente.
+La disponibilidad se refiere a si el Web services está presente o listo para su uso inmediato. ¿Un cliente tiene que esperar por el Web services o la solicitud del cliente se maneja de inmediato? En otras palabras, ***la disponibilidad representa la probabilidad de que un servicio esté disponible***.
 
-Para lograr confiabilidad, disponibilidad y escalabilidad, los servicios web no solo deben ser lo suficientemente flexibles para ejecutarse en cualquier configuración de servidor adecuada para los volúmenes de clientes anticipados, sino que también deben poder cambiar configuraciones fácilmente cuando sea necesario. El soporte de una plataforma para entornos de implementación de aplicaciones en clúster contribuye a lograr muchos de estos objetivos. También es útil cuando la plataforma puede manejar tales cambios sin requerir que las aplicaciones sean rediseñadas, recodificadas o implementadas nuevamente.
+Los Web services que escalan de manera efectiva pueden manejar fácilmente una gran cantidad de interacciones con los clientes. Para dichos Web services, la plataforma y las tecnologías deben administrar de manera eficiente los recursos y servicios del sistema (como las conexiones y transacciones de la base de datos). La plataforma también debe poder manejar el análisis **XML**, que se realiza para validar el contenido de un documento. ***El análisis de *XML* es un proceso intensivo en computación que afecta significativamente el rendimiento***. ***XML por sí mismo implica un formato muy detallado que aumenta significativamente el tamaño de la carga útil en comparación con un formato binario equivalente***.
 
-## 1.4. Escenarios típicos de servicios web
-Las aplicaciones empresariales cubren un amplio espectro de escenarios, como interacciones entre socios comerciales, gestión de la cadena de suministro, gestión de inventario e incluso servicios simples (convertidores especializados, calculadoras, etc.). Los servicios web, cuando se usan estratégicamente, pueden aumentar la funcionalidad de una aplicación, pero tenga en cuenta que los servicios web no son una solución adecuada en todos los puntos de una aplicación. Si bien brindan riqueza funcional e interoperabilidad, los servicios web pueden tener el precio de una mayor sobrecarga de rendimiento. Elegir cuándo implementar una solución basada en servicios web se reduce a abordar problemas como:
+***Para lograr confiabilidad, disponibilidad y escalabilidad, los Web services no solo deben ser lo suficientemente flexibles para ejecutarse en cualquier configuración de servidor adecuada para los volúmenes de clientes anticipados, sino que también deben poder cambiar configuraciones fácilmente cuando sea necesario***. El soporte de una plataforma para entornos de implementación de aplicaciones en clúster contribuye a lograr muchos de estos objetivos. También es útil cuando la plataforma puede manejar tales cambios sin requerir que las aplicaciones sean rediseñadas, recodificadas o implementadas nuevamente.
 
-Requisitos de interoperabilidad para la aplicación empresarial en un entorno empresarial heterogéneo
+## 1.4. Escenarios típicos de los Web services
 
-Requisitos de integración para aquellos cuyos entornos contienen varios sistemas de información empresarial (EIS)
+Las aplicaciones empresariales cubren un amplio espectro de escenarios, como interacciones entre socios comerciales, gestión de la cadena de suministro, gestión de inventario e incluso servicios simples (convertidores especializados, calculadoras, etc.). Los Web services, cuando se usan estratégicamente, pueden aumentar la funcionalidad de una aplicación, pero tenga en cuenta que los Web services no son una solución adecuada en todos los puntos de una aplicación. Si bien brindan riqueza funcional e interoperabilidad, los Web services pueden tener el precio de una mayor sobrecarga de rendimiento. Elegir cuándo implementar una solución basada en Web services se reduce a abordar problemas como:
 
-Tipos de clientes que se espera que sean compatibles, como aplicaciones J2EE, dispositivos inalámbricos, PDA, etc.
+* Requisitos de interoperabilidad para la aplicación empresarial en un entorno empresarial heterogéneo
 
-Disponibilidad de herramientas para implementar la solución
+* Requisitos de integración para aquellos cuyos entornos contienen varios sistemas de información empresarial (EIS)
 
-Nivel de sacrificio, en términos de complejidad y rendimiento, que se puede tolerar para lograr las ventajas (interoperabilidad, alcance diverso de clientes, etc.) de los servicios web
+* Tipos de clientes que se espera que sean compatibles, como aplicaciones J2EE, dispositivos inalámbricos, PDA, etc.
 
-Esta sección analiza un escenario empresarial típico e identifica dónde podría ser apropiada una solución de servicios web. De ninguna manera esta sección intenta cubrir todos los escenarios adecuados para los servicios web. Más bien, trata de darle al lector una idea de los escenarios típicos que podrían beneficiarse al elegir los servicios web. En lugar de continuar en abstracto, examinemos una aplicación empresarial de muestra y veamos en qué parte de dicha aplicación es beneficioso usar los servicios web. Es decir, veamos dónde el uso de servicios Web mejora la funcionalidad de la aplicación, su facilidad de uso o su capacidad para llegar a todo tipo de clientes.
+* Disponibilidad de herramientas para implementar la solución
 
-Nuestro escenario de muestra, llamado la aplicación Java TM Adventure Builder Reference (denominada constructor de aventuras), es una empresa ficticia que vende paquetes de aventuras para vacacionistas. Esta empresa está considerando conectarse en línea. Para hacerlo, la empresa necesita crear un sitio web y está considerando que ese sitio aproveche los beneficios de los servicios web. La empresa está especialmente interesada en utilizar los servicios web para integrarse con sus numerosos socios.
+* Nivel de sacrificio, en términos de complejidad y rendimiento, que se puede tolerar para lograr las ventajas (interoperabilidad, alcance diverso de clientes, etc.) de los Web services.
 
-esta empresa
+Esta sección analiza un escenario empresarial típico e identifica dónde podría ser apropiada una solución de Web services. De ninguna manera esta sección intenta cubrir todos los escenarios adecuados para los Web services. Más bien, trata de darle al lector una idea de los escenarios típicos que podrían beneficiarse al elegir los Web services. En lugar de continuar en abstracto, examinemos una aplicación empresarial de muestra y veamos en qué parte de dicha aplicación es beneficioso usar los Web services. Es decir, veamos dónde el uso de Web services mejora la funcionalidad de la aplicación, su facilidad de uso o su capacidad para llegar a todo tipo de clientes.
 
-Pone a disposición de los clientes un catálogo de paquetes de aventura
+Nuestro escenario de muestra, llamado la aplicación **JavaTM Adventure Builder Reference** (denominada constructor de aventuras), es *una empresa ficticia que vende paquetes de aventuras para vacacionistas*. Esta empresa está considerando conectarse en línea. Para hacerlo, la empresa necesita crear un sitio web y está considerando que ese sitio aproveche los beneficios de los Web services. La empresa está especialmente interesada en utilizar los Web services para integrarse con sus numerosos socios.
 
-Permite que el cliente construya su experiencia particular de viaje, eligiendo alojamiento, transporte y programando diversas actividades de aventura, y finalmente reservando el viaje
+Esta empresa
 
-Brinda a los clientes servicios adicionales, como permitirles rastrear el estado de sus pedidos.
+* Pone a disposición de los clientes un catálogo de paquetes de aventura
+
+* Permite que el cliente construya su experiencia particular de viaje, eligiendo alojamiento, transporte y programando diversas actividades de aventura, y finalmente reservando el viaje
+
+* Brinda a los clientes servicios adicionales, como permitirles rastrear el estado de sus pedidos.
 
 Por ejemplo, un cliente puede elegir una aventura en el monte Kilimanjaro. Además de seleccionar el alojamiento, el modo de transporte y las fechas preferidas, el cliente también puede elegir entre una variedad de aventuras, como escalar montañas, caminatas guiadas por los picos volcánicos, un safari, etc. Para lograr esto, la empresa puede tener aplicaciones u operaciones no basadas en la web que hagan lo siguiente:
 
-Interactuar con los clientes que quieren reservar aventuras. Puede haber números de teléfono gratuitos disponibles para los clientes.
+* Interactuar con los clientes que quieren reservar aventuras. Puede haber números de teléfono gratuitos disponibles para los clientes.
 
-Recibir pedidos de clientes y procesar los pedidos. Los pedidos pasan a través de un flujo de trabajo, como un motor de flujo de trabajo, durante sus diversas etapas hasta su finalización.
+* Recibir pedidos de clientes y procesar los pedidos. Los pedidos pasan a través de un flujo de trabajo, como un motor de flujo de trabajo, durante sus diversas etapas hasta su finalización.
 
-Realice un seguimiento de las preferencias de los clientes, además de actualizar a los clientes sobre el estado de un pedido. La gestión de las relaciones con los clientes (CRM) es uno de esos medios para realizar un seguimiento de los clientes.
+* Realice un seguimiento de las preferencias de los clientes, además de actualizar a los clientes sobre el estado de un pedido. La Gestión de las Relaciones con los Clientes - **Customer relations management (CRM)** es uno de esos medios para realizar un seguimiento de los clientes.
 
-Verificar y obtener la aprobación para el pago del cliente.
+* Verificar y obtener la aprobación para el pago del cliente.
 
-Interactuar con socios comerciales (aerolíneas, hoteles, proveedores de aventuras o actividades) para que la empresa pueda proporcionar un paquete completo de aventuras al cliente.
+* Interactuar con socios comerciales (aerolíneas, hoteles, proveedores de aventuras o actividades) para que la empresa pueda proporcionar un paquete completo de aventuras al cliente.
 
-Cuando los desarrolladores de la empresa constructora de aventuras la implementan en línea, implementan módulos individuales para cada función. (Consulte la Figura 1.1 ). Veamos dónde podrían encajar los servicios web y dónde podrían proporcionar a la empresa ventajas en términos de integración e interoperabilidad.
+Cuando los desarrolladores de la empresa constructora de aventuras la implementan en línea, implementan módulos individuales para cada función. (Consulte la Figura 1.1 ). Veamos dónde podrían encajar los  Web services y dónde podrían proporcionar a la empresa ventajas en términos de integración e interoperabilidad.
 
-Antes de continuar, tenga en cuenta que los servicios web básicamente lo ayudan a exponer una interfaz a una aplicación o componente de software que puede usar el cliente de esa aplicación o componente, independientemente de la plataforma del cliente.
+* ***Antes de continuar, tenga en cuenta que los Web services básicamente lo ayudan a exponer una interfaz a una aplicación o componente de software que puede usar el cliente de esa aplicación o componente, independientemente de la plataforma del cliente***.
 
-Figura 1.1. Módulos empresariales de Adventure Builder
+**Figura 1.1. Módulos empresariales de Adventure Builder**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/b8f79002-88a8-44f1-9346-513e5cb8df12)
 
+**Nota**: Este escenario de muestra se usa en el resto de este libro para ilustrar problemas y recomendaciones de diseño específicos.
 
-Nota : este escenario de muestra se usa en el resto de este libro para ilustrar problemas y recomendaciones de diseño específicos.
+### 1.4.1. Interactuar con socios comerciales
 
-1.4.1. Interactuar con socios comerciales
-La empresa constructora de aventuras trabaja con una serie de socios para ayudarlo a proporcionar paquetes completos de aventuras a sus clientes. Estos socios van desde pequeñas empresas, como tiendas tipo "mamá y papá" que pueden organizar una actividad divertida en un lugar, hasta grandes empresas, como las principales aerolíneas y cadenas hoteleras. En efecto, estos socios cumplen con varios componentes de los paquetes de viaje solicitados por los clientes.
+La Adventure Builder Enterprise trabaja con una serie de socios para ayudarlo a proporcionar paquetes completos de aventuras a sus clientes. Estos socios van desde pequeñas empresas, como tiendas tipo "mom and pop" que pueden organizar una actividad divertida en un lugar, hasta grandes empresas, como las principales aerolíneas y cadenas hoteleras. En efecto, estos socios cumplen con varios componentes de los paquetes de viaje solicitados por los clientes.
 
-Además, existe una comunicación bidireccional entre el constructor de aventuras y sus socios. La empresa constructora de aventuras comunica varios pedidos a diferentes socios. Los socios, a su vez, facturan sus costos a la empresa constructora de aventuras. Es esencial que la empresa resuelva el manejo de esta comunicación entre socios cuando se conecta en línea.
+Además, existe una comunicación bidireccional entre Adventure Builder y sus socios. La Adventure Builder Enterprise comunica varios pedidos a diferentes socios. Los socios, a su vez, facturan sus costos a Adventure Builder Enterprise. Es esencial que la empresa resuelva el manejo de esta comunicación entre socios cuando se conecta en línea.
 
-Los servicios web pueden ser una forma ideal de integrar la empresa con múltiples socios por varias razones. Los servicios web son más rentables que el intercambio electrónico de datos (EDI), actualmente la solución más común disponible para la interacción con los socios comerciales. EDI requiere una inversión inicial significativa por parte de todas las partes. Si bien sus grandes socios comerciales pueden tener una infraestructura EDI extensa, la empresa constructora de aventuras no puede esperar que sus muchos socios comerciales pequeños gasten los recursos para implementar dicha infraestructura EDI. La interacción basada en servicios web es una buena solución para las pequeñas empresas que no tienen inversión en una infraestructura EDI y es más rentable para empresas más grandes con infraestructuras EDI existentes.
+Los Web services pueden ser una forma ideal de integrar la empresa con múltiples socios por varias razones. Los Web services son más rentables que el intercambio electrónico de datos (EDI), actualmente la solución más común disponible para la interacción con los socios comerciales. EDI requiere una inversión inicial significativa por parte de todas las partes. Si bien sus grandes socios comerciales pueden tener una infraestructura EDI extensa, la Adventure Builder Enterprise no puede esperar que sus muchos socios comerciales pequeños gasten los recursos para implementar dicha infraestructura EDI. La interacción basada en  Web services es una buena solución para las pequeñas empresas que no tienen inversión en una infraestructura EDI y es más rentable para empresas más grandes con infraestructuras EDI existentes.
 
-Además, los servicios web se pueden utilizar en una variedad de plataformas de hardware y software. Los socios existentes y potenciales no necesitan comprar o arrendar una plataforma de hardware o software en particular. Lo más probable es que los socios puedan usar sus sistemas existentes siempre que estos sistemas admitan servicios web. Dado que muchos de los líderes de la industria cooperan en los estándares y especificaciones de los servicios web, se espera que la mayoría de las plataformas soporten los servicios web.
+Además, los  Web services se pueden utilizar en una variedad de plataformas de hardware y software. Los socios existentes y potenciales no necesitan comprar o arrendar una plataforma de hardware o software en particular. Lo más probable es que los socios puedan usar sus sistemas existentes siempre que estos sistemas admitan servicios web. Dado que muchos de los líderes de la industria cooperan en los estándares y especificaciones de los servicios web, se espera que la mayoría de las plataformas soporten los servicios web.
 
 La interacción basada en servicios web brinda a los socios, especialmente a los socios más grandes con importantes inversiones en infraestructura tecnológica, una ventaja adicional: pueden usar los servicios web para integrar sus sistemas empresariales existentes. Las empresas que han integrado sus sistemas existentes con los servicios web ofrecen una experiencia de interacción mejorada y más automatizada para socios como el constructor de aventuras. El resultado es una mejor experiencia del cliente, ahorro de costos y mayor interoperabilidad.
 
