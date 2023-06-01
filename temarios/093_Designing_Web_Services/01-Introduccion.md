@@ -260,7 +260,8 @@ Componente Enterprise JavaBeans : los componentes Enterprise JavaBeans (EJB) est
 
 El uso de estas tecnologías de componentes para implementar una aplicación o servicio garantiza la estandarización de la aplicación o servicio. Además, dicha estandarización permite la reutilización y portabilidad de la aplicación y el servicio. Debido a que abordan diferentes aspectos de una aplicación o servicio empresarial, el uso de estos componentes ayuda a dividir el desarrollo en diferentes conjuntos de habilidades y hacer un uso eficiente de las diferentes habilidades.
 
-1.5.3.2. Servicios de Plataforma y Contenedores
+#### 1.5.3.2. Servicios de Plataforma y Contenedores
+
 Las tecnologías de los componentes de la plataforma **J2EE** (los componentes de cliente, web y EJB) dependen del soporte del contenedor **J2EE** para funcionar correctamente. El estándar de plataforma **J2EE**, para garantizar que los componentes sean portátiles, requiere un proveedor de plataforma conforme para que ciertos servicios estén disponibles. Las aplicaciones empresariales y los Web services creados con componentes portátiles y servicios estándar tienen asegurada la portabilidad. Entre los servicios requeridos de la plataforma se encuentran:
 
 Servicio de nombres : un servicio de nombres permite el acceso simbólico a los recursos y componentes de EIS dentro de un entorno de nombres. Estos componentes se pueden personalizar cuando se ensamblan o implementan sin necesidad de cambios en el código fuente de búsqueda.
@@ -271,7 +272,8 @@ Servicio de transacciones : un servicio de transacciones libera al desarrollador
 
 Servicio de seguridad : un servicio de seguridad garantiza que solo aquellos autorizados para acceder accedan a los componentes y recursos. Además, un servicio de seguridad proporciona autenticación y confidencialidad, entre otros servicios, para los usuarios.
 
-1.5.3.3. Comunicación
+#### 1.5.3.3. Comunicación
+
 La plataforma **J2EE**, además de especificar tecnologías de componentes y servicios de plataforma, también requiere un conjunto de tecnologías de comunicación estándar. Estas tecnologías de comunicación reúnen los componentes y servicios de la plataforma, lo que convierte a la plataforma **J2EE** en una plataforma estándar integrada para desarrollar Web services y aplicaciones empresariales portátiles e interoperables.
 
 Protocolos de Internet : la plataforma **J2EE** admite protocolos de Internet estándar y comunes como TCP/IP, HTTP, SSL, etc. Estos protocolos de Internet permiten la comunicación entre componentes y entre componentes y sus clientes.
