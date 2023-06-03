@@ -1,96 +1,106 @@
 # Capítulo 1 Presentación de Java Platform, Enterprise Edition
 
-EN ESTE CAPÍTULO
+**EN ESTE CAPÍTULO**
 
-* Cronología de la versión de Java SE y Java EE
-* Presentación de Servlets, Filtros, Listeners y JSP
-* Comprensión de los archivos WAR y EAR y la jerarquía del cargador de clases
+* Cronología de la versión de **Java SE** y **Java EE**
+* Presentación de **Servlets**, **filters**, **listeners** y **JSPs**
+* Comprensión de los archivos **WAR** y **EAR** y la jerarquía del cargador de clases
+
+**DESCARGAS DE CÓDIGO PARA ESTE CAPÍTULO**
+
+No hay descargas de código para este capítulo.
+
+**NUEVAS DEPENDENCIAS DE MAVEN PARA ESTE CAPÍTULO**
+
+No hay dependencias de Maven para este capítulo.
 
 ## CRONOLOGÍA DE LAS PLATAFORMAS DE JAVA
 
-El lenguaje Java y sus plataformas han tenido una larga historia. Desde su invención a mediados de la década de 1990 hasta una sequía evolutiva desde 2007 hasta casi 2012, Java ha pasado por muchos cambios y ha encontrado su parte de controversia. En los primeros días, Java, conocido como Java Development Kit o JDK, era un lenguaje estrechamente acoplado a una plataforma compuesta por un pequeño conjunto de interfaces de programación de aplicaciones (API) esenciales. Sun Microsystems dio a conocer las primeras versiones alfa y beta en 1995, y aunque Java era extremadamente lento y primitivo para los estándares actuales, inició una revolución en el desarrollo de software.
+El lenguaje **Java** y sus plataformas han tenido una larga historia. Desde su ***invención a mediados de la década de 1990*** hasta una ***sequía evolutiva desde 2007 hasta casi 2012***, **Java** ha pasado por muchos cambios y ha encontrado su parte de controversia. En los primeros días, **Java**, conocido como **Java Development Kit** o **JDK**, era un lenguaje estrechamente acoplado a una plataforma compuesta por un pequeño conjunto de interfaces de programación de aplicaciones (**API**) esenciales. ***Sun Microsystems dio a conocer las primeras versiones alfa y beta en 1995***, y aunque **Java** era extremadamente lento y primitivo para los estándares actuales, inició una revolución en el desarrollo de software.
 
 ### AL PRINCIPIO
 
-La historia de Java se resume en la Figura 1-1, una línea de tiempo de las plataformas Java. En el momento de la publicación de este libro, el lenguaje Java y la plataforma Java SE siempre han evolucionado juntos: las nuevas versiones de cada uno siempre se lanzan al mismo tiempo y están estrechamente acopladas entre sí. La plataforma se llamó JDK hasta la versión 1.1 en 1997, pero en la versión 1.2 estaba claro que el JDK y la plataforma no eran sinónimos. A partir de la versión 1.2 a finales de 1998, la pila de tecnología Java se dividió en los siguientes componentes clave:
+La historia de **Java** se resume en la ***Figura 1-1***, una línea de tiempo de **las plataformas Java**. En el momento de la publicación de este libro, el ***lenguaje Java*** y ***la plataforma Java SE*** siempre han evolucionado juntos: las nuevas versiones de cada uno siempre se lanzan al mismo tiempo y están estrechamente acopladas entre sí. La plataforma se llamó **JDK hasta la versión 1.1 en 1997**, pero en ***la versión 1.2 estaba claro que el JDK y la plataforma no eran sinónimos***. A partir de ***la versión 1.2 a finales de 1998***, la pila de tecnología **Java** se dividió en los siguientes componentes clave:
 
 ![01-01](images/01_01.png)
 
+***FIGURA 1-1**: Línea de tiempo que muestra la correlación de la evolución de **Java Platform, Standard Edition** y **Java Platform, Enterprise Edition**. Los eventos en **la parte superior** de la línea de tiempo representan los hitos de **Java SE**, mientras que los eventos en **la parte inferior** representan los hitos de **Java EE***.
+
 * ***Java*** es el lenguaje e incluye una sintaxis estricta y fuertemente tipada con la que ya debería estar muy familiarizado.
 
-* **Java 2 Platform, Standard Edition**, también conocida como J2SE, se refería a la plataforma e incluía las clases en los paquetes `java.lang` y `java.io`, entre otros. Fue el componente básico sobre el que se construyeron las aplicaciones Java.
+* **Java 2 Platform, Standard Edition**, también conocida como J2SE, se refería a la plataforma e incluía las clases en los paquetes **`java.lang`** y **`java.io`**, entre otros. Fue el componente básico sobre el que se construyeron las aplicaciones Java.
 
-* Una ***Java Virtual Machine***, o ***JVM***, es una máquina virtual de software que ejecuta código Java compilado. Debido a que el código Java compilado es simplemente un código de bytes, la JVM es responsable de compilar ese código de bytes en código de máquina antes de ejecutarlo. (Esto a menudo se denomina compilador ***Just In Time o compilador JIT***). La JVM también se encarga de la gestión de la memoria para que el código de la aplicación no tenga que hacerlo.
+* Una ***Java Virtual Machine***, o ***JVM***, *es una máquina virtual de software que ejecuta **código Java compilado***. Debido a que *el código Java compilado es simplemente un código de bytes*, ***la JVM es responsable de compilar ese código de bytes en código de máquina antes de ejecutarlo***. (Esto a menudo se denomina compilador ***Just In Time o compilador JIT***). *La JVM también se encarga de la gestión de la memoria* para que el código de la aplicación no tenga que hacerlo.
 
-* El ***Java Development Kit***, o ***JDK***, fue y sigue siendo la pieza de software que los desarrolladores de Java utilizan para crear aplicaciones Java. Contiene un compilador de lenguaje Java, un generador de documentación, herramientas para trabajar con código nativo y (normalmente) el código fuente de Java para la plataforma para habilitar la depuración de clases de plataforma.
+* El ***Java Development Kit***, o ***JDK***, fue y sigue siendo la pieza de software que los desarrolladores de Java utilizan para crear aplicaciones Java. ***Contiene un compilador de lenguaje Java, un generador de documentación, herramientas para trabajar con código nativo y (normalmente) el código fuente de Java para la plataforma para habilitar la depuración de clases de plataforma***.
 
-* ***Java Runtime Environment***, o ***JRE***, fue y sigue siendo el software que los usuarios finales descargan para ejecutar aplicaciones Java compiladas. Incluye una JVM pero no contiene ninguna de las herramientas de desarrollo incluidas en el JDK. Sin embargo, el JDK contiene un JRE.
+* ***Java Runtime Environment***, o ***JRE***, fue y sigue siendo el ***software*** que los usuarios finales descargan ***para ejecutar aplicaciones Java compiladas***. *Incluye una JVM pero no contiene ninguna de las herramientas de desarrollo incluidas en el JDK. Sin embargo, el JDK contiene un JRE*.
 
-Los cinco de estos componentes han sido históricamente especificaciones, no implementaciones. Cualquier empresa puede crear su propia implementación de esta pila de tecnología Java, y muchas empresas lo han hecho. Aunque Sun ofreció una implementación estándar de Java, J2SE, JVM, JDK y JRE, IBM, Oracle y Apple también crearon implementaciones competitivas que ofrecían diferentes características.
+***Estos cinco componentes históricamente han sido especificaciones, no implementaciones***. Cualquier empresa puede crear su propia implementación de esta pila de tecnología Java, y muchas empresas lo han hecho. Aunque ***Sun ofreció una implementación estándar de Java, J2SE, JVM, JDK y JRE, IBM, Oracle y Apple también crearon implementaciones competidoras que ofrecían diferentes características***.
 
-La implementación de IBM nació por necesidad: Sun no ofrecía binarios capaces de ejecutarse en sistemas operativos de IBM, por lo que IBM creó los suyos propios. La situación fue similar para el sistema operativo Apple Mac OS, por lo que Apple también lanzó su propia implementación. Aunque las implementaciones ofrecidas por estas empresas eran todas gratuitas como en cerveza, no eran gratuitas como en libertad, por lo que no se consideraban software de código abierto. Como tal, la comunidad de código abierto formó rápidamente el proyecto OpenJDK, que proporcionó una implementación de código abierto de la pila de Java.
+***La implementación de IBM nació por necesidad***: Sun no ofrecía binarios capaces de ejecutarse en sistemas operativos de IBM, por lo que IBM creó los suyos propios. ***La situación fue similar para el sistema operativo Apple Mac OS***, por lo que Apple también lanzó su propia implementación. ***Aunque las implementaciones ofrecidas por estas empresas eran todas gratuitas como en cerveza, no eran gratuitas como en libertad***, *por lo que no se consideraban software de código abierto. Como tal, la comunidad de código abierto formó rápidamente **el proyecto OpenJDK**, que proporcionó una implementación de código abierto del Java stack*.
 
-Aún más empresas crearon implementaciones menos populares, algunas de las cuales compilaron su aplicación en código de máquina para una arquitectura de destino para mejorar el rendimiento al evitar la compilación JIT. Para la gran mayoría de usuarios y desarrolladores, la implementación de Sun Java fue suficiente y preferida. Después de la compra de Sun por parte de Oracle, las implementaciones de Sun y Oracle se volvieron una y la misma.
+Aún más empresas crearon implementaciones menos populares, algunas de las cuales compilaron su aplicación en código de máquina para una arquitectura de destino para mejorar el rendimiento al evitar la compilación JIT. ***Para la gran mayoría de usuarios y desarrolladores, la implementación de Sun Java fue suficiente y preferida***. *Después de la compra de Sun por parte de Oracle, las implementaciones de Sun y Oracle se volvieron una y la misma*.
 
-En la Figura 1-1 no se muestra el desarrollo de otros lenguajes capaces de utilizar J2SE y ejecutarse en la JVM. A lo largo de los años, aparecieron docenas de lenguajes que pueden compilarse en código de bytes Java (o código de máquina, en algunos casos) y ejecutarse en la JVM. Los más destacados son Clojure (un dialecto Lisp), Groovy, JRuby (una implementación de Ruby basada en Java), Jython (una implementación de Python basada en Java), Rhino y Scala.
+En la ***Figura 1-1*** no se muestra el desarrollo de *otros lenguajes capaces de utilizar J2SE y ejecutarse en la JVM*. A lo largo de los años, ***aparecieron docenas de lenguajes que pueden compilarse en código de bytes Java*** (o código de máquina, en algunos casos) y ejecutarse en la JVM. Los más destacados son **Clojure** (*un dialecto **Lisp***), **Groovy**, **JRuby** (*una implementación de **Ruby** basada en Java*), **Jython** (*una implementación de **Python** basada en Java*), **Rhino** y **Scala**.
 
 #### EL NACIMIENTO DE ENTERPRISE JAVA
 
-Esta breve lección de historia puede parecer innecesaria; como desarrollador de Java existente, es probable que haya escuchado la mayor parte de esto antes. Sin embargo, es importante incluir el contexto de la historia de Java Platform, Standard Edition, porque está estrechamente entretejido con el nacimiento y la evolución de Java Platform, Enterprise Edition. Sun ya era consciente de la necesidad de herramientas más avanzadas para el desarrollo de aplicaciones, particularmente en el campo de la creciente Internet y la popularidad de las aplicaciones web. En 1998, poco antes del lanzamiento de J2SE 1.2, Sun anunció que estaba trabajando en un producto llamado Java Professional Edition, o JPE. El trabajo ya había comenzado en una tecnología conocida como Servlets, que son aplicaciones en miniatura capaces de responder a las solicitudes HTTP. En 1997, Java Servlets 1.0 se lanzó junto con Java Web Server con poca fanfarria porque carecía de muchas características que la comunidad de Java quería.
+Esta breve lección de historia puede parecer innecesaria; como desarrollador de Java existente, es probable que haya escuchado la mayor parte de esto antes. Sin embargo, es importante incluir el contexto de la historia de **Java Platform, Standard Edition**, porque está estrechamente entretejido con el nacimiento y la evolución de **Java Platform, Enterprise Edition**. Sun ya era consciente de la necesidad de ***herramientas más avanzadas para el desarrollo de aplicaciones, particularmente en el campo de la creciente Internet y la popularidad de las aplicaciones web***. En ***1998***, poco antes del lanzamiento de J2SE 1.2, Sun anunció que estaba trabajando en un producto llamado ***Java Professional Edition, o JPE***. El trabajo ya había comenzado en ***una tecnología conocida como Servlets, que son aplicaciones en miniatura capaces de responder a las solicitudes HTTP***. ***En 1997, Java Servlets 1.0 se lanzó junto con Java Web Server*** con poca fanfarria porque carecía de muchas características que la comunidad de Java quería.
 
-Después de varias iteraciones internas de Servlets y JPE, Sun lanzó Java 2 Platform, Enterprise Edition (o J2EE) ***versión 1.2 el 12 de diciembre de 1999***. El número de versión correspondía con la versión actual de Java y J2SE en ese momento, y la especificación incluía:
+Después de varias iteraciones internas de Servlets y JPE, ***Sun lanzó Java 2 Platform, Enterprise Edition (o J2EE) versión 1.2 el 12 de diciembre de 1999***. El número de versión correspondía con la versión actual de Java y J2SE en ese momento, y ***la especificación incluía***:
 
-* Servlets 2.2
-* API de extensión JDBC 2.0
-* Interfaz de directorio y nombres Java (JNDI) 1.0
-* Páginas de JavaServer (JSP) 1.2
-* Enterprise JavaBeans (EJB) 1.1
-* Servicio de mensajes Java (JMS) 1.0
-* API de transacciones de Java (JTA) 1.0
-* API de JavaMail 1.1
-* JavaBeans Activation Framework (JAF) 1.0.
+* **Servlets 2.2**
+* **JDBC Extension API 2.0**
+* **Java Naming and Directory Interface (JNDI) 1.0**
+* **JavaServer Pages (JSP) 1.2**
+* **Enterprise JavaBeans (EJB) 1.1**
+* **Java Message Service (JMS) 1.0**
+* **Java Transaction API (JTA) 1.0**
+* **JavaMail API 1.1**
+* **JavaBeans Activation Framework (JAF) 1.0.**
 
-Como J2SE, J2EE era una mera especificación. Sun proporcionó una ***implementación de referencia*** de los componentes de la especificación, pero las empresas también fueron libres de crear las suyas propias. Muchas implementaciones evolucionaron y aprenderá sobre algunas de ellas en el siguiente capítulo. Estas implementaciones incluyeron y aún incluyen soluciones comerciales y de código abierto. El J2EE se convirtió rápidamente en un complemento exitoso del J2SE y, a lo largo de los años, algunos componentes se consideraron tan indispensables que han migrado de J2EE a J2SE.
+***Como J2SE, J2EE era una mera especificación***. ***Sun proporcionó una implementación de referencia de los componentes de la especificación***, pero las empresas también fueron libres de crear las suyas propias. Muchas implementaciones evolucionaron y aprenderá sobre algunas de ellas en el siguiente capítulo. Estas implementaciones incluyeron y aún incluyen soluciones comerciales y de código abierto. El ***J2EE se convirtió rápidamente en un complemento exitoso del J2SE y, a lo largo de los años, algunos componentes se consideraron tan indispensables que han migrado de J2EE a J2SE***.
 
 #### JAVA SE Y JAVA EE EVOLUCIONANDO JUNTOS
 
-***J2EE 1.3 lanzado en septiembre de 2001***, un poco más de un año después de Java y J2SE 1.3 y antes de Java/J2SE 1.4. La mayoría de sus componentes recibieron actualizaciones menores y se agregaron nuevas funciones. Lo siguiente se unió a la especificación J2EE y el conjunto de implementaciones se expandió y actualizó:
+***J2EE 1.3 lanzado en septiembre de 2001, un poco más de un año después de Java y J2SE 1.3 y antes de Java/J2SE 1.4***. La mayoría de sus componentes recibieron actualizaciones menores y se agregaron nuevas funciones. Lo siguiente se unió a la especificación J2EE y el conjunto de implementaciones se expandió y actualizó:
 
-* Java API for XML Processing (JAXP) 1.1
-* JavaServer Pages Standard Tag Library (JSTL) 1.0
-* J2EE Connector Architecture 1.0
-* Java Authentication and Authorization Service (JAAS) 1.0
+* **Java API for XML Processing (JAXP) 1.1**
+* **JavaServer Pages Standard Tag Library (JSTL) 1.0**
+* **J2EE Connector Architecture 1.0**
+* **Java Authentication and Authorization Service (JAAS) 1.0**
 
 En este punto, la tecnología estaba madurando considerablemente, pero aún tenía mucho margen de mejora.
 
-***J2EE 1.4*** representó un gran salto en la evolución de Java Platform, Enterprise Edition. ***Lanzado en noviembre de 2003*** (aproximadamente un año antes de Java/J2SE 5.0 y 2 años después de Java/J2SE 1.4), incluía Servlet 2.4 y JSP 2.0. Fue en esta versión que se eliminaron las especificaciones JDBC Extension API, JNDI y JAAS porque se consideraron esenciales para Java y se trasladaron a Java/J2SE 1.4. Esta versión también representó el punto en el que los componentes J2EE se dividieron en varias categorías de nivel superior:
+***J2EE 1.4 representó un gran salto en la evolución de Java Platform, Enterprise Edition. ***Lanzado en noviembre de 2003*** (aproximadamente ***un año antes de Java/J2SE 5.0 y 2 años después de Java/J2SE 1.4***), incluía **Servlet 2.4** y **JSP 2.0**. Fue en esta versión que ***se eliminaron las especificaciones JDBC Extension API, JNDI y JAAS porque se consideraron esenciales para Java y se trasladaron a Java/J2SE 1.4.*** Esta versión también representó el punto en el que los componentes J2EE se dividieron en varias categorías de nivel superior:
 
-* **Web Services Technologies:** incluye JAXP 1.2 y los nuevos servicios web para J2EE 1.1, API de Java para RPC basado en XML (JAX-RPC) 1.1 y API de Java para registros XML (JAXR) 1.0
+* **Web Services Technologies:** incluye **JAXP 1.2** y los nuevos **Web Services for J2EE 1.1**, **Java API for XML-based RPC (JAX-RPC) 1.1** y **Java API for XML Registries (JAXR) 1.0**
 
-* **Web Application Technologies:** Incluyó los componentes Servlet, JSP y JSTL 1.1, así como las nuevas Java Server Faces (JSF) 1.1
+* **Web Application Technologies:** Incluyó **Servlet**, **JSP** y **JSTL 1.1 components**, así como las nuevas **Java Server Faces (JSF) 1.1**
 
-* **Enterprise Application Technologies:** Incluidas EJB 2.1, Connector Architecture 1.5, JMS 1.1, JTA, JavaMail 1.3 y JAF
+* **Enterprise Application Technologies:** Incluidas **EJB 2.1**, **Connector Architecture 1.5**, **JMS 1.1**, **JTA**, **JavaMail 1.3** y **JAF**.
 
-* **Management and Security Technologies:** Contrato de proveedor de servicios de autorización de Java incluido para contenedores (JACC) 1.0, Java Management Extensions (JMX) 1.2, Enterprise Edition Management API 1.0 y Enterprise Edition Deployment API 1.1
+* **Management and Security Technologies:** Incluye **Java Authorization Service Provider Contract for Containers (JACC) 1.0**, **Java Management Extensions (JMX) 1.2**, **Enterprise Edition Management API 1.0** y **Enterprise Edition Deployment API 1.1**
 
 ##### La Era de los Cambios de Nombre
 
-Ingrese a la era de los cambios de nombre, que a menudo son una fuente de confusión para los desarrolladores de Java. Se destacan aquí para que comprenda completamente las convenciones de nomenclatura utilizadas en este libro y cómo se relacionan con las convenciones de nomenclatura anteriores con las que quizás ya esté familiarizado. Java y J2SE 5.0 se lanzaron en septiembre de 2004 e incluían genéricos, anotaciones y enumeraciones, tres de los cambios de sintaxis de lenguaje más radicales en la historia de Java. Este número de versión fue una desviación de los patrones anteriores, hecho más confuso por el hecho de que las API de J2SE y la herramienta de línea de comandos de Java informaron que el número de versión era 1.5. Sun había tomado la decisión de eliminar el 1 del número de versión publicado y, en su lugar, utilizar la versión secundaria. Rápidamente reconoció que el "dot-oh" al final del número de versión era una fuente de confusión y rápidamente comenzó a referirse a él simplemente como la versión 5.
+Ingrese a la era de los cambios de nombre, que a menudo son una fuente de confusión para los desarrolladores de Java. Se destacan aquí para que comprenda completamente las convenciones de nomenclatura utilizadas en este libro y cómo se relacionan con las convenciones de nomenclatura anteriores con las que quizás ya esté familiarizado. ***Java y J2SE 5.0 se lanzaron en septiembre de 2004 e incluían genéricos, anotaciones y enumeraciones, tres de los cambios de sintaxis de lenguaje más radicales en la historia de Java***. *Este número de versión fue una desviación de los patrones anteriores, hecho más confuso por el hecho de que las API de J2SE y la herramienta de línea de comandos de Java informaron que el número de versión era 1.5. Sun había tomado la decisión de eliminar el 1 del número de versión publicado y, en su lugar, utilizar la versión secundaria. Rápidamente reconoció que el "dot-oh" al final del número de versión era una fuente de confusión y rápidamente comenzó a referirse a él simplemente como la versión 5*.
 
-Casi al mismo tiempo, se tomó la decisión de retirar el nombre Java 2 Platform, Standard Edition a favor de Java Platform, Standard Edition y abreviar este nuevo nombre Java SE. Los cambios se hicieron formales con Java SE 6, lanzado en diciembre de 2006, y hasta el día de hoy el nombre y la convención de la versión no han cambiado. Java SE 6 es internamente 1.6, Java SE 7 es internamente 1.7 y Java SE 8 es internamente 1.8.
+***Casi al mismo tiempo, se tomó la decisión de retirar el nombre Java 2 Platform, Standard Edition a favor de Java Platform, Standard Edition y abreviar este nuevo nombre Java SE. Los cambios se hicieron formales con Java SE 6, lanzado en diciembre de 2006, y hasta el día de hoy el nombre y la convención de la versión no han cambiado***. Java SE 6 es internamente 1.6, Java SE 7 es internamente 1.7 y Java SE 8 es internamente 1.8.
 
-Se aplicaron las mismas decisiones de cambio de nombre y número a J2EE, pero debido a que J2EE 1.5 se configuró para su lanzamiento entre J2SE 5.0 y Java SE 6, los cambios se aplicaron en una versión anterior. Java Platform, Enterprise Edition 5 o Java EE 5 se lanzó en mayo de 2006, aproximadamente 18 meses después de J2SE 5.0 y 7 meses antes de Java SE 6. Internamente, Java EE 5 es 1.5, Java EE 6 es 1.6 y Java EE 7 es 1.7. Siempre que vea los términos J2SE o Java SE, son intercambiables y el nombre preferido y aceptado hoy en día es Java EE. Asimismo, J2EE y Java EE son intercambiables, pero hoy en día se prefiere Java EE. El resto de este libro se refiere exclusivamente a ellos como **Java SE** y **Java EE**.
+***Se aplicaron las mismas decisiones de cambio de nombre y número a J2EE, pero debido a que J2EE 1.5 se configuró para su lanzamiento entre J2SE 5.0 y Java SE 6, los cambios se aplicaron en una versión anterior***. *Java Platform, Enterprise Edition 5 o Java EE 5 se lanzó en mayo de 2006, aproximadamente 18 meses después de J2SE 5.0 y 7 meses antes de Java SE 6. Internamente, Java EE 5 es 1.5, Java EE 6 es 1.6 y Java EE 7 es 1.7. Siempre que vea los términos J2SE o Java SE, son intercambiables y el nombre preferido y aceptado hoy en día es Java EE. Asimismo, J2EE y Java EE son intercambiables, pero hoy en día se prefiere Java EE. El resto de este libro se refiere exclusivamente a ellos como **Java SE** y **Java EE***.
 
-Java EE 5 creció e incluyó numerosos cambios y mejoras nuevamente, y hoy sigue siendo una de las versiones de Java EE más ampliamente implementadas. Incluyó los siguientes cambios y adiciones:
+**Java EE 5** creció e incluyó numerosos cambios y mejoras nuevamente, y hoy sigue siendo una de las versiones de Java EE más ampliamente implementadas. ***Incluyó los siguientes cambios y adiciones***:
 
-* JAXP y JMX se trasladaron a J2SE 5.0 y no se incluyeron en Java EE 5.
+* ***JAXP y JMX se trasladaron a J2SE 5.0 y no se incluyeron en Java EE 5***.
 
-* Java API for XML-based Web Services (JAX-WS) 2.0, Java Architecture for XML Binding (JAXB) 2.0, Web Service Metadata for the Java Platform 2.0, SOAP with Attachments API for Java (SAAJ) 1.2, y Streaming API for XML (StAX) 1.0 se agregaron a la tecnología de servicios web.
+* **Java API for XML-based Web Services (JAX-WS) 2.0**, **Java Architecture for XML Binding (JAXB) 2.0**, **Web Service Metadata for the Java Platform 2.0**, **SOAP with Attachments API for Java (SAAJ) 1.2**, y **Streaming API for XML (StAX) 1.0** se agregaron a la tecnología de Web Services.
 
-* Java Persistence API (JPA) 1.0 y Common Annotations API 1.0 se agregaron a la Enterprise Applications Technology.
+* **Java Persistence API (JPA) 1.0** y **Common Annotations API 1.0** se agregaron a la ***Enterprise Applications Technology***.
 
 ##### Las sequías de Java SE y EE
-
+AQUIIIIIII
 El ***lanzamiento de Java SE 6 en diciembre de 2006*** marcó el comienzo de una sequía de versiones de Java SE que duró aproximadamente 5 años. Esta vez fue un período de frustración e incluso enojo para muchos en la comunidad de Java. Sun continuó prometiendo nuevas funciones de lenguaje y API para Java SE 7, pero el calendario continuó deslizándose año tras año sin un final a la vista. Mientras tanto, otras tecnologías, como el lenguaje C # y la plataforma .NET, alcanzaron y superaron a Java en características de lenguaje y API de plataforma, lo que provocó que algunos especularan si Java había llegado al final de su vida útil. Para empeorar las cosas, Java EE entró en su propio período de sequía y en 2009, habían pasado más de 3 años desde que se lanzó Java EE 5. Sin embargo, no todo estaba perdido. ***El desarrollo de Java EE 6 se recuperó a principios de 2009 y se lanzó en diciembre de 2009, 3 años y 7 meses después de Java EE 5, y casi 3 años después de Java SE 6***.
 
 En ese momento, Java Enterprise Edition se volvió enorme:
