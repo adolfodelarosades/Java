@@ -73,7 +73,7 @@ Después de varias iteraciones internas de Servlets y JPE, ***Sun lanzó Java 2 
 
 En este punto, la tecnología estaba madurando considerablemente, pero aún tenía mucho margen de mejora.
 
-***J2EE 1.4 representó un gran salto en la evolución de Java Platform, Enterprise Edition. ***Lanzado en noviembre de 2003*** (aproximadamente ***un año antes de Java/J2SE 5.0 y 2 años después de Java/J2SE 1.4***), incluía **Servlet 2.4** y **JSP 2.0**. Fue en esta versión que ***se eliminaron las especificaciones JDBC Extension API, JNDI y JAAS porque se consideraron esenciales para Java y se trasladaron a Java/J2SE 1.4.*** Esta versión también representó el punto en el que los componentes J2EE se dividieron en varias categorías de nivel superior:
+***J2EE 1.4 representó un gran salto en la evolución de Java Platform, Enterprise Edition. Lanzado en noviembre de 2003*** (aproximadamente ***un año antes de Java/J2SE 5.0 y 2 años después de Java/J2SE 1.4***), incluía **Servlet 2.4** y **JSP 2.0**. Fue en esta versión que ***se eliminaron las especificaciones JDBC Extension API, JNDI y JAAS porque se consideraron esenciales para Java y se trasladaron a Java/J2SE 1.4.*** Esta versión también representó el punto en el que los componentes J2EE se dividieron en varias categorías de nivel superior:
 
 * **Web Services Technologies:** incluye **JAXP 1.2** y los nuevos **Web Services for J2EE 1.1**, **Java API for XML-based RPC (JAX-RPC) 1.1** y **Java API for XML Registries (JAXR) 1.0**
 
