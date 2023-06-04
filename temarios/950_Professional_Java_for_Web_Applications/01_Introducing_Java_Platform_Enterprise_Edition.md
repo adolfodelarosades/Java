@@ -100,58 +100,58 @@ Ingrese a la era de los cambios de nombre, que a menudo son una fuente de confus
 * **Java Persistence API (JPA) 1.0** y **Common Annotations API 1.0** se agregaron a la ***Enterprise Applications Technology***.
 
 ##### Las sequías de Java SE y EE
-AQUIIIIIII
-El ***lanzamiento de Java SE 6 en diciembre de 2006*** marcó el comienzo de una sequía de versiones de Java SE que duró aproximadamente 5 años. Esta vez fue un período de frustración e incluso enojo para muchos en la comunidad de Java. Sun continuó prometiendo nuevas funciones de lenguaje y API para Java SE 7, pero el calendario continuó deslizándose año tras año sin un final a la vista. Mientras tanto, otras tecnologías, como el lenguaje C # y la plataforma .NET, alcanzaron y superaron a Java en características de lenguaje y API de plataforma, lo que provocó que algunos especularan si Java había llegado al final de su vida útil. Para empeorar las cosas, Java EE entró en su propio período de sequía y en 2009, habían pasado más de 3 años desde que se lanzó Java EE 5. Sin embargo, no todo estaba perdido. ***El desarrollo de Java EE 6 se recuperó a principios de 2009 y se lanzó en diciembre de 2009, 3 años y 7 meses después de Java EE 5, y casi 3 años después de Java SE 6***.
 
-En ese momento, Java Enterprise Edition se volvió enorme:
+El ***lanzamiento de Java SE 6 en diciembre de 2006*** marcó el comienzo de ***una sequía de versiones*** de Java SE que ***duró aproximadamente 5 años***. Esta vez fue un período de frustración e incluso enojo para muchos en la comunidad de Java. Sun continuó prometiendo nuevas funciones de lenguaje y API para Java SE 7, pero el calendario continuó deslizándose año tras año sin un final a la vista. Mientras tanto, ***otras tecnologías, como el lenguaje C # y la plataforma .NET, alcanzaron y superaron a Java en características de lenguaje y API de plataforma***, lo que provocó que algunos especularan si Java había llegado al final de su vida útil. Para empeorar las cosas, ***Java EE entró en su propio período de sequía y en 2009, habían pasado más de 3 años desde que se lanzó Java EE 5***. Sin embargo, no todo estaba perdido. ***El desarrollo de Java EE 6 se recuperó a principios de 2009 y se lanzó en diciembre de 2009, 3 años y 7 meses después de Java EE 5, y casi 3 años después de Java SE 6***.
 
-* SAAJ, StAX y JAF se trasladaron a Java SE 6.
+En ese momento, ***Java Enterprise Edition se volvió enorme***:
 
-* Las especificaciones de la Java API for RESTful Web Services (JAX-RS) 1.1 y Java APIs for XML Messaging (JAXM) 1.3 se agregaron a las tecnologías de servicios web.
+* **SAAJ**, **StAX** y **JAF** se trasladaron a Java SE 6.
 
-* El Java Unified Expression Language (JUEL o simplemente EL) 2.0 se agregó a las tecnologías de aplicaciones web.
+* Las especificaciones de la **Java API for RESTful Web Services (JAX-RS) 1.1** y **Java APIs for XML Messaging (JAXM) 1.3** se agregaron a las tecnologías de los Web Services.
 
-* Las tecnologías de gestión y seguridad vieron la incorporación de la interfaz de proveedor de servicios de autenticación de Java para contenedores (JASPIC) 1.0.
+* El **Java Unified Expression Language 2.0** (**JUEL** o simplemente **EL**) se agregó a las tecnologías de aplicaciones web.
 
-* Enterprise Application Technologies logró el aumento más dramático en características, incluyendo Contexts and Dependency Injection para Java (CDI) 1.0, Dependency Injection para Java 1.0, Bean Validation 1.0, Managed Beans 1.0 e Interceptors 1.1, además de actualizaciones para todos sus otros componentes.
+* Las tecnologías de gestión y seguridad vieron la incorporación de **Java Authentication Service Provider Interface for Containers (JASPIC) 1.0.**.
 
-Java EE 6 también representó un importante punto de inflexión en la arquitectura de Java EE en dos frentes:
+* **Enterprise Application Technologies** logró el aumento más dramático en características, incluyendo **Contexts and Dependency Injection para Java (CDI) 1.0**, **Dependency Injection para Java 1.0**, **Bean Validation 1.0**, **Managed Beans 1.0** e **Interceptors 1.1**, además de actualizaciones para todos sus otros componentes.
 
-* Esta versión introdujo una configuración de aplicación programática y basada en anotaciones para complementar la configuración XML tradicional utilizada durante más de una década.
+**Java EE 6** también representó un importante punto de inflexión en la arquitectura de Java EE en dos frentes:
 
-* Esta versión marcó la introducción del perfil web Java EE.
+* ***Esta versión introdujo una configuración de aplicación programática y basada en anotaciones para complementar la configuración XML tradicional utilizada durante más de una década***.
 
-Para tener en cuenta el hecho de que Java EE se había vuelto tan grande (y mantener y actualizar las implementaciones certificadas se estaba volviendo cada vez más difícil), el programa de certificación Web Profile ofreció la oportunidad de certificar las implementaciones de Java EE que incluían solo un subconjunto de toda la plataforma Java EE. Este subconjunto incluyó las características consideradas más críticas para un gran número de aplicaciones y excluyó especificaciones que son utilizadas solo por una pequeña minoría de aplicaciones. A partir de Java EE 6:
+* ***Esta versión marcó la introducción del Java EE Web Profile***.
 
-* Ninguno de los Web Services o Management y Security forma parte del perfil web de Java EE.
+Para tener en cuenta el hecho de que Java EE se había vuelto tan grande (y mantener y actualizar las implementaciones certificadas se estaba volviendo cada vez más difícil), el programa de certificación Web Profile ofreció la oportunidad de certificar las implementaciones de Java EE que incluían solo un subconjunto de toda la plataforma Java EE. Este subconjunto incluyó las características consideradas más críticas para un gran número de aplicaciones y excluyó especificaciones que son utilizadas solo por una pequeña minoría de aplicaciones. ***A partir de Java EE 6***:
 
-* El perfil web incluye todo, desde tecnologías de aplicaciones web y todo desde tecnologías de aplicaciones empresariales, excepto Java EE Connector Architecture, JMS y JavaMail.
+* ***Ninguno de los Web Services o Management y Security forma parte del Java EE Web Profile***.
+
+* ***El Web Profile incluye todo, desde Web Application Technologies y todo desde Enterprise Application Technologies, excepto Java EE Connector Architecture, JMS y JavaMail***.
 
 **Fue durante la sequía de Java de 5 años que Oracle Corporation compró Sun Microsystems en enero de 2010***. Junto con la sequía de Java SE, esto trajo un conjunto completamente nuevo de preocupaciones para la comunidad de Java. Oracle nunca fue conocido por su agilidad o voluntad de cooperar con proyectos de código abierto, y mucha gente temía que Oracle hubiera comprado Sun para cerrar Java. Sin embargo, este resultó no ser el caso.
 
-Al principio, Oracle comenzó a reorganizar el equipo de Java, creando canales de comunicación con la comunidad de código abierto y lanzando hojas de ruta para futuras versiones de Java SE y Java EE que eran más realistas de lo que Sun había prometido. El trabajo comenzó de nuevo en Java SE 7, que se publicó según el programa (de Oracle) en junio de 2011, casi 5 años después de Java SE 6. Una segunda sequía de Java EE terminó con el ***lanzamiento de Java EE 7 en junio de 2013***, 3 años y 7 meses después de Java EE 6. Oracle ahora dice que está en camino de comenzar a lanzar nuevas versiones de ambas plataformas cada 2 años, en años alternos. Queda por ver si eso sucederá.
+Al principio, ***Oracle comenzó a reorganizar el equipo de Java***, creando canales de comunicación con la comunidad de código abierto y lanzando hojas de ruta para futuras versiones de Java SE y Java EE que eran más realistas de lo que Sun había prometido. ***El trabajo comenzó de nuevo en Java SE 7, que se publicó según el programa (de Oracle) en junio de 2011, casi 5 años después de Java SE 6***. ***Una segunda sequía de Java EE terminó con el ***lanzamiento de Java EE 7 en junio de 2013, 3 años y 7 meses después de Java EE 6***. ***Oracle ahora dice que está en camino de comenzar a lanzar nuevas versiones de ambas plataformas cada 2 años, en años alternos***. Queda por ver si eso sucederá.
 
 ### ENTENDIENDO LAS CARACTERÍSTICAS MÁS RECIENTES DE LA PLATAFORMA
 
-Java SE 7 y 8 y Java EE 7 han introducido cambios importantes en el lenguaje y las API de soporte y han dado como resultado un rejuvenecimiento de las tecnologías Java. Utiliza estas nuevas funciones a lo largo de este libro, por lo que esta sección proporciona una descripción general de ellas.
+***Java SE 7 y 8 y Java EE 7 han introducido cambios importantes en el lenguaje y las API de soporte y han dado como resultado un rejuvenecimiento de las tecnologías Java***. Utiliza estas nuevas funciones a lo largo de este libro, por lo que esta sección proporciona una descripción general de ellas.
 
 #### Java SE 7
 
-Originalmente, Java SE 7 tenía una lista de funciones muy ambiciosa, pero después de adquirir Sun, Oracle admitió rápidamente que lograr los objetivos de Java SE 7 llevaría muchos, muchos años. Cada característica era la característica más importante para algún grupo de usuarios, por lo que se tomó la decisión de posponer algunas de ellas a versiones futuras. La alternativa era retrasar el lanzamiento de Java SE 7 hasta 2015 o más tarde, una opción que no era aceptable.
+*Originalmente, Java SE 7 tenía una lista de funciones muy ambiciosa, pero después de adquirir Sun, Oracle admitió rápidamente que lograr los objetivos de Java SE 7 llevaría muchos, muchos años. Cada característica era la característica más importante para algún grupo de usuarios, por lo que se tomó la decisión de posponer algunas de ellas a versiones futuras*. ***La alternativa era retrasar el lanzamiento de Java SE 7 hasta 2015 o más tarde, una opción que no era aceptable***.
 
-Java SE 7 incluía soporte para lenguajes dinámicos, así como punteros comprimidos de 64 bits (para mejorar el rendimiento en JVM de 64 bits). También agregó varias características de lenguaje que hicieron que el desarrollo de aplicaciones Java fuera más productivo. ***Quizás uno de los cambios más útiles fueron los diamonds, un atajo para la creación de instancias genéricas***. Antes de Java 7, tanto la declaración de variable como la asignación de variable para tipos genéricos tenían que incluir los argumentos de tipo genérico. Por ejemplo, aquí hay una declaración y asignación para una variable `java.util.Map` muy compleja:
+Java SE 7 incluía soporte para lenguajes dinámicos, así como punteros comprimidos de 64 bits (para mejorar el rendimiento en JVM de 64 bits). También agregó varias características de lenguaje que hicieron que el desarrollo de aplicaciones Java fuera más productivo. ***Quizás uno de los cambios más útiles fueron los diamonds, un atajo para la creación de instancias genéricas***. *Antes de Java 7, tanto la declaración de variable como la asignación de variable para tipos genéricos tenían que incluir los argumentos de tipo genérico*. Por ejemplo, aquí hay una declaración y asignación para una variable **`java.util.Map`** muy compleja:
 
 ```java
 Map<String, Map<String, Map<Integer, List<MyBean>>>> map = new Hashtable<String, Map<String, Map<Integer, List<MyBean>>>>();
 ```
 
-Por supuesto, esta declaración contiene mucha información redundante. Asignar cualquier cosa que no sea `Map<String, Map<String, Map<Integer, List<MyBean>>>>` a esta variable sería ilegal, entonces, ¿por qué debería tener que especificar todos esos argumentos de tipo nuevamente? Usando diamonds de Java 7, esta declaración y asignación se vuelve mucho más simple. El compilador infiere los argumentos de tipo para el `java.util.Hashtable` instanciado.
+Por supuesto, esta declaración contiene mucha información redundante. Asignar cualquier cosa que no sea **`Map<String, Map<String, Map<Integer, List<MyBean>>>>`** a esta variable sería ilegal, entonces, ¿por qué debería tener que especificar todos esos argumentos de tipo nuevamente? ***Usando diamonds de Java 7***, esta declaración y asignación se vuelve mucho más simple. El compilador infiere los argumentos de tipo para el **`java.util.Hashtable`** instanciado.
 
 ```java
 Map<String, Map<String, Map<Integer, List<MyBean>>>> map = new Hashtable<>();
 ```
 
-Otra queja común sobre Java anterior a Java 7 es la gestión de recursos que se pueden cerrar en lo que respecta a los bloques `try-catch-finally`. En particular, considere este fragmento desagradable de código JDBC:
+Otra queja común sobre Java anterior a Java 7 es la *gestión de recursos que se pueden cerrar en lo que respecta a los bloques* **`try-catch-finally`**. En particular, *considere este fragmento desagradable de código JDBC*:
 
 ```java
     Connection connection = null;
@@ -186,7 +186,7 @@ Otra queja común sobre Java anterior a Java 7 es la gestión de recursos que se
     }
 ```
 
-***try-with-resources*** de Java 7 ha simplificado drásticamente esta tarea. Cualquier clase que implemente `java.lang.AutoCloseable` es elegible para su uso en una construcción try-with-resources. Las interfaces JDBC `Connection`, `PreparedStatement` y `ResultSet` amplían esta interfaz. Cuando usa try-with-resources como se muestra en el siguiente ejemplo, los recursos que declara dentro del paréntesis de la palabra clave `try` se cierran automáticamente en un bloque `finally` implícito. Cualquier excepción lanzada durante esta limpieza se agrega a las excepciones suprimidas de una excepción existente o, si no existe ninguna excepción, se lanza después de que se hayan cerrado todos los recursos.
+**try-with-resources de Java 7*** ha simplificado drásticamente esta tarea. ***Cualquier clase que implemente `java.lang.AutoCloseable` es elegible para su uso en una construcción try-with-resources***. Las interfaces JDBC **`Connection`**, **`PreparedStatement`** y **`ResultSet`** amplían esta interfaz. Cuando usa ***try-with-resources*** como se muestra en el siguiente ejemplo, ***los recursos que declara dentro del paréntesis de la palabra clave `try` se cierran automáticamente en un bloque `finally` implícito***. Cualquier excepción lanzada durante esta limpieza se agrega a las excepciones suprimidas de una excepción existente o, si no existe ninguna excepción, se lanza después de que se hayan cerrado todos los recursos.
 
 ```java
     try(Connection connection = dataSource.getConnection();
@@ -201,7 +201,7 @@ Otra queja común sobre Java anterior a Java 7 es la gestión de recursos que se
     }
 ```
 
-Otra mejora realizada en try-catch-finally es la adición de ***multi-catch***. A partir de Java 7, ahora puede detectar varias excepciones dentro de un solo bloque `catch`, separando los tipos de excepción con un single pipe (`|`). Por ejemplo:
+***Otra mejora realizada en try-catch-finally es la adición de multi-catch***. A partir de Java 7, ahora ***puede detectar varias excepciones dentro de un solo bloque `catch`, separando los tipos de excepción con un single pipe (`|`)***. Por ejemplo:
 
 ```java
     try {
@@ -211,7 +211,7 @@ Otra mejora realizada en try-catch-finally es la adición de ***multi-catch***. 
     }
 ```
 
-Una advertencia a tener en cuenta es que no se pueden capturar dos o más excepciones de forma que una herede de otra. Por ejemplo, lo siguiente está prohibido porque `FileNotFoundException` extiende de `IOException`:
+***Una advertencia a tener en cuenta es que no se pueden capturar dos o más excepciones de forma que una herede de otra***. Por ejemplo, lo siguiente está prohibido porque **`FileNotFoundException`** extiende de **`IOException`***:
 
 ```java
     try {
@@ -221,27 +221,27 @@ Una advertencia a tener en cuenta es que no se pueden capturar dos o más excepc
     }
 ```
 
-Por supuesto, esto puede considerarse fácilmente una cuestión de sentido común. En este caso, simplemente capturaría `IOException`, que capturaría ambos tipos de excepciones.
+Por supuesto, esto puede considerarse fácilmente una cuestión de sentido común. ***En este caso, simplemente capturaría `IOException`, que capturaría ambos tipos de excepciones***.
 
-Algunas otras características de lenguaje misceláneas en Java 7 incluyen ***literales binarios*** para bytes e integers (puede escribir el literal 1928 como 0b11110001000) y guiones bajos en literales numéricos (puede escribir los mismos literales como 1_928 y 0b111_1000_1000, si lo desea). Además, finalmente puede usar `Strings` como argumentos de un `switch`.
+Algunas otras características de lenguaje misceláneas en Java 7 incluyen ***literales binarios*** para bytes e integers (puede escribir el literal 1928 como 0b11110001000) y ***guiones bajos en literales numéricos*** (puede escribir los mismos literales como 1_928 y 0b111_1000_1000, si lo desea). Además, finalmente ***puede usar `Strings` como argumentos de un `switch`***.
 
 #### Java EE 7
 
-***Java EE 7, lanzado el 12 de junio de 2013***, contiene una serie de cambios y nuevas funciones. Cubrirá muchas de estas nuevas funciones a lo largo de este libro, por lo que no se detallan aquí. En resumen, los cambios en Java EE 7 son los siguientes:
+***Java EE 7, lanzado el 12 de junio de 2013***, contiene una serie de cambios y nuevas funciones. Cubrirá muchas de estas nuevas funciones a lo largo de este libro, por lo que no se detallan aquí. En resumen, ***los cambios en Java EE 7 son los siguientes***:
 
-* JAXB se agregó a Java SE 7 y ya no se incluye en Java EE.
+* ***JAXB se agregó a Java SE 7 y ya no se incluye en Java EE***.
 
-* Se agregaron aplicaciones por lotes para Java Platform 1.0 y Concurrency Utilities para Java EE 1.0 a las tecnologías de aplicaciones empresariales.
+* **Batch Applications** para **Java Platform 1.0 and Concurrency Utilities for Java EE 1.0** fueron añadidos para el **Enterprise Application Technologies**.
 
-* Web Application Technologies eligió la API de Java para WebSockets 1.0 (sobre la cual aprenderá en el Capítulo 10) y la API de Java para JSON Processing 1.0.
+* **Web Application Technologies** eligió la **Java API for WebSockets 1.0** (sobre la cual aprenderá en el Capítulo 10) y la **Java API for JSON Processing 1.0.**
 
-* El Java Unified Expression Language se ha ampliado significativamente para incluir expresiones lambda y un análogo de la Java SE 8 Collections Stream API. (Aprenderá más sobre esto en el Capítulo 6.)
+* El **Java Unified Expression Language** se ha ampliado significativamente para incluir expresiones lambda y un análogo de **Java SE 8 Collections Stream API**. (Aprenderá más sobre esto en el Capítulo 6.)
 
-* El Web Profile se amplió ligeramente para incluir especificaciones que es más probable que sean necesarias en aplicaciones web comunes: JAX-RS, API de Java para WebSockets y API de Java para procesamiento JSON.
+* El **Web Profile** se amplió ligeramente para incluir especificaciones que es más probable que sean necesarias en aplicaciones web comunes: **JAX-RS**, **Java API for WebSockets** y **Java API for JSON Processing**.
 
 #### Java SE 8
 
-Las nuevas funciones de Java SE 8 pueden resultar muy útiles a medida que trabaja con los ejemplos de este libro. Quizás lo más visible es la adición de ***expresiones lambda*** (conocidas extraoficialmente como ***closures***). Las expresiones lambda son funciones anónimas que se definen, y posiblemente se llaman, sin que se les asigne un nombre de tipo o estén vinculadas a un identificador. Las expresiones Lambda son particularmente útiles para implementar de forma anónima las interfaces de un método que son tan comunes en las aplicaciones Java. Por ejemplo, un `Thread` que se creó previamente con un `Runnable` anónimo como este:
+Las nuevas funciones de Java SE 8 pueden resultar muy útiles a medida que trabaja con los ejemplos de este libro. Quizás lo más visible es la adición de ***expresiones lambda*** (conocidas extraoficialmente como ***closures***). ***Las expresiones lambda son funciones anónimas que se definen, y posiblemente se llaman, sin que se les asigne un nombre de tipo o estén vinculadas a un identificador***. Las expresiones Lambda son particularmente útiles para implementar de forma anónima las interfaces de un método que son tan comunes en las aplicaciones Java. Por ejemplo, un **`Thread`** que se creó previamente con un **`Runnable`** anónimo como este:
 
 ```java
     public String doSomethingInThread(String someArgument) {
@@ -268,7 +268,7 @@ ahora se puede simplificar con una expresión lambda:
     }
 ```
 
-Las expresiones lambda pueden tener argumentos, tipos de retorno y genéricos. Y donde lo desee, puede usar una referencia de método en lugar de una expresión lambda para pasar una referencia a un método de coincidencia de interfaz. El siguiente código también es equivalente a las dos instancias anteriores de Thread. También puede asignar referencias de métodos y expresiones lambda a variables.
+***Las expresiones lambda pueden tener argumentos, tipos de retorno y genéricos***. Y donde lo desee, puede usar una referencia de método en lugar de una expresión lambda para pasar una referencia a un método de coincidencia de interfaz. El siguiente código también es equivalente a las dos instancias anteriores de Thread. También puede asignar referencias de métodos y expresiones lambda a variables.
 
 
 ```java
@@ -283,7 +283,7 @@ Las expresiones lambda pueden tener argumentos, tipos de retorno y genéricos. Y
     }
 ```
 
-Una de las mayores quejas entre los usuarios de Java desde sus inicios es la falta de una API de fecha y hora decente. `java.util.Date` siempre ha estado plagado de problemas, y la adición de `java.util.Calendar` solo empeoró muchos problemas. Java SE 8 finalmente aborda eso con JSR 310, una nueva API de fecha y hora. Esta API se basa en gran medida en ***Joda Time***, pero con mejoras en la arquitectura subyacente para solucionar problemas que señaló el inventor de Joda Time. Esta API es una adición revolucionaria a las API de la plataforma Java SE y finalmente trae una API de fecha y hora poderosa y bien diseñada para Java.
+*Una de las mayores quejas entre los usuarios de Java desde sus inicios es la falta de una API de fecha y hora decente*. **`java.util.Date`** siempre ha estado plagado de problemas, y la adición de **`java.util.Calendar`** solo empeoró muchos problemas. Java SE 8 finalmente aborda eso con **JSR 310**, una nueva API de fecha y hora. Esta API se basa en gran medida en **Joda Time**, pero con mejoras en la arquitectura subyacente para solucionar problemas que señaló el inventor de **Joda Time**. Esta API es una adición revolucionaria a las **Java SE platform APIs** y finalmente trae una API de fecha y hora poderosa y bien diseñada para Java.
 
 ### UNA EVOLUCIÓN CONTINUA
 
@@ -291,29 +291,29 @@ Como puede ver, las plataformas Java SE y EE nacieron juntas y han evolucionado 
 
 La Parte I de este libro le enseña las características más importantes de Java EE, que incluyen:
 
-* Servidores de aplicaciones y contenedores web (Capítulo 2)
-* Servlets (Capítulo 3)
-* JSPs (Capítulo 4, 6, 7, and 8)
-* HTTP sessions (Capítulo 5)
-* Filters (Capítulo 9)
-* WebSockets (Capítulo 10).
+* ***Servidores de aplicaciones y contenedores web*** (Capítulo 2)
+* ***Servlets*** (Capítulo 3)
+* ***JSPs*** (Capítulo 4, 6, 7, and 8)
+* ***HTTP sessions*** (Capítulo 5)
+* ***Filters*** (Capítulo 9)
+* ***WebSockets*** (Capítulo 10).
 
 ## ENTENDIENDO LA ESTRUCTURA BÁSICA DE LA APLICACIÓN WEB
 
-Se utilizan muchos componentes para crear una aplicación web Java EE. Primero, tiene su código y las bibliotecas de terceros de las que depende. Luego tiene el deployment descriptor, que incluye instrucciones para implementar e iniciar su aplicación. También tiene los `ClassLoaders` responsables de aislar su aplicación de otras aplicaciones web en el mismo servidor. Finalmente, debe empaquetar su aplicación de alguna manera, y para eso tiene los archivos WAR y EAR.
+Se utilizan muchos componentes para crear una **Java EE web application**. Primero, tiene su código y las libraries de terceros de las que depende. Luego tiene el deployment descriptor, que incluye instrucciones para implementar e iniciar su aplicación. También tiene los **`ClassLoaders`** responsables de aislar su aplicación de otras aplicaciones web en el mismo servidor. Finalmente, debe empaquetar su aplicación de alguna manera, y para eso tiene los archivos **WAR** y **EAR**.
 
-### SERVLETS, FILTERS, LISTENERS Y JSPS
+### SERVLETS, FILTERS, LISTENERS Y JSPs
 
-Los servlets son un componente clave de cualquier aplicación web Java EE. Los servlets, sobre los que aprenderá en el Capítulo 3, son clases de Java responsables de aceptar y responder a las solicitudes HTTP. Casi todas las solicitudes a su aplicación pasan por un Servlet de algún tipo, excepto aquellas solicitudes que son erróneas o interceptadas por algún otro componente. Un filtro es uno de esos componentes que puede interceptar solicitudes a sus Servlets. Puede utilizar filtros para satisfacer una variedad de necesidades, desde formato de datos hasta compresión de respuestas, autenticación y autorización. Explorará los diversos usos de los filtros en el Capítulo 9.
+***Los servlets*** son un componente clave de cualquier aplicación web Java EE. Los servlets, sobre los que aprenderá en el Capítulo 3, ***son clases de Java responsables de aceptar y responder a las solicitudes HTTP***. *Casi todas las solicitudes a su aplicación pasan por un Servlet de algún tipo, excepto aquellas solicitudes que son erróneas o interceptadas por algún otro componente*. ***Un filtro es uno de esos componentes que puede interceptar solicitudes a sus Servlets. Puede utilizar filtros para satisfacer una variedad de necesidades, desde formato de datos hasta compresión de respuestas, autenticación y autorización***. Explorará los diversos usos de los filtros en el Capítulo 9.
 
-Como ocurre con muchos otros tipos diferentes de aplicaciones, las aplicaciones web tienen un ciclo de vida. Hay procesos de inicio y cierre, y suceden muchas cosas diferentes durante estas etapas. Las aplicaciones web Java EE admiten varios tipos de oyentes, que conocerá en las Partes I y II. Estos oyentes pueden notificar a su código de varios eventos, como el inicio de la aplicación, el cierre de la aplicación, la creación de sesiones HTTP y la destrucción de sesiones.
+Como ocurre con muchos otros tipos diferentes de aplicaciones, ***las aplicaciones web tienen un ciclo de vida. Hay procesos de inicio y cierre, y suceden muchas cosas diferentes durante estas etapas***. Las **Java EE web applications** admiten varios tipos de ***listeners***, que conocerá en las Partes I y II. ***Estos listeners pueden notificar a su código de varios eventos, como el inicio de la aplicación, el cierre de la aplicación, la creación de sesiones HTTP y la destrucción de sesiones***.
 
-Quizás una de las herramientas Java EE más poderosas a su disposición es la tecnología JavaServer Pages, o JSP. Las JSP le proporcionan los medios para crear fácilmente interfaces de usuario gráficas dinámicas basadas en HTML para sus aplicaciones web sin tener que escribir manualmente `String`s de HTML en un `OutputStream` o `PrintWriter`. El tema de las JSP abarca muchas facetas diferentes, incluida la JavaServer Pages Standard Tag Library, el Java Unified Expression Language, las custom tags y la internacionalización y localización. Dedicará mucho tiempo a estas funciones en el Capítulo 4 y los Capítulos 6 al 9.
+Quizás ***una de las herramientas Java EE más poderosas a su disposición es la tecnología JavaServer Pages, o JSP***. ***Las JSP le proporcionan los medios para crear fácilmente interfaces de usuario gráficas dinámicas basadas en HTML*** para sus aplicaciones web sin tener que escribir manualmente **`String`**s de HTML en un **`OutputStream`** o **`PrintWriter`**. El tema de las JSP abarca muchas facetas diferentes, incluida la **JavaServer Pages Standard Tag Library**, el **Java Unified Expression Language**, las **custom tags** y la **internationalization** y **localization**. Dedicará mucho tiempo a estas funciones en el Capítulo 4 y los Capítulos 6 al 9.
 
-Por supuesto, hay muchas más funciones en Java EE tal como Servlets, filters, listeners y JSPs. Cubrirá muchos de estos en este libro, pero no todos.
+Por supuesto, hay muchas más funciones en Java EE tal como **Servlets**, **filters**, **listeners** y **JSPs**. Cubrirá muchos de estos en este libro, pero no todos.
 
 ### ESTRUCTURA DEL DIRECTORIO Y ARCHIVOS WAR
-
+AQUUIIIIIIIII
 Las aplicaciones web estándar de Java EE se implementan como archivos WAR o directorios de aplicaciones web "exploded" (no archivados). Ya debería estar familiarizado con los archivos ***JAR*** o ***Java Archive***. Recuerde que un archivo JAR es simplemente un archivo con formato ZIP con una estructura de directorio estándar reconocida por las JVM. No hay nada de propiedad sobre el formato de archivo JAR, y cualquier aplicación de archivo ZIP puede crear y leer archivos JAR. Un archivo ***Web Application Archive***, o ***WAR***, es el archivo equivalente para aplicaciones web Java EE.
 
 Todos los servidores de aplicaciones web Java EE admiten archivos de aplicaciones de archivos WAR. La mayoría también admite directorios de aplicaciones ampliados. Ya sea archivado o descompuesto, la convención de estructura de directorios, como se muestra en la Figura 1-2, es la misma. Como un archivo JAR, esta estructura contiene clases y otros recursos de la aplicación, pero esas clases no se almacenan en relación con la raíz de la aplicación como en un archivo JAR. En cambio, los archivos de clase viven en `/WEB-INF/classes`. El directorio `WEB-INF` almacena archivos informativos e instructivos que los servidores de aplicaciones web Java EE utilizan para determinar cómo implementar y ejecutar la aplicación. Su directorio de clases actúa como raíz del paquete. Todos los archivos de clases de aplicaciones compilados y otros recursos se encuentran dentro de este directorio.
