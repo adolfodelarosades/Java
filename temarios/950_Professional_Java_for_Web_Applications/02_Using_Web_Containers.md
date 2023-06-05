@@ -68,20 +68,20 @@ Puede leer más sobre GlassFish y descargarlo si lo desea en el [sitio web de Gl
 
 ### OTROS CONTENEDORES Y SERVIDORES DE APLICACIONES
 
-***Hay muchos otros contenedores web, como Jetty y Tiny, y servidores de aplicaciones Java EE completos de código abierto, como JOnAS, Resin, Caucho y Enhydra. También ***hay varios servidores comerciales de aplicaciones completas, de los cuales Oracle WebLogic e IBM WebSphere son los más populares***. La Tabla 2-2 muestra algunos de estos servidores y las versiones que admitían varias especificaciones de Java EE.
+Hay muchos otros contenedores web, como **Jetty** y **Tiny**, y servidores de aplicaciones Java EE completos de código abierto, como **JOnAS**, **Resin**, **Caucho** y **Enhydra**. También ***hay varios servidores comerciales de aplicaciones completas, de los cuales Oracle WebLogic e IBM WebSphere son los más populares***. La Tabla 2-2 muestra algunos de estos servidores y las versiones que admitían varias especificaciones de Java EE.
 
-![02-02-T](images/02-02-T.png)
+<img width="1106" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f9097114-639a-4672-8861-753312dca897">
 
 Cada contenedor web o servidor de aplicaciones tiene sus propias ventajas y desventajas. La tarea de elegir un servidor de aplicaciones no se puede cubrir en un solo capítulo y está fuera del alcance de este libro. Se deben comprender las necesidades del proyecto de su organización y se debe elegir el contenedor web o el servidor de aplicaciones adecuado que satisfaga esas necesidades. Se deben considerar los presupuestos operativos porque los servidores de aplicaciones comerciales tienden a tener un costo de licencia extremadamente alto. Todos estos factores afectarán su decisión, y puede elegir un servidor que ni siquiera figura en este libro.
 
 ### POR QUÉ USARÁ TOMCAT EN ESTE LIBRO
 
-Muchas de las ventajas de Apache Tomcat (que se denomina simplemente Tomcat en el resto de este libro) ya se han descrito. Quizás lo más importante de este libro es la facilidad con la que los desarrolladores pueden empezar a utilizar Tomcat. Con mucho, Tomcat es más fácil de ejecutar rápidamente que cualquier otro contenedor web y proporciona todas las funciones que necesita para completar los ejemplos de este libro. Además, todos los principales IDE de Java proporcionan herramientas para ejecutar, implementar y depurar Tomcat, lo que le facilita el desarrollo de su aplicación.
+Muchas de las ventajas de Apache Tomcat (que se denomina simplemente Tomcat en el resto de este libro) ya se han descrito. Quizás lo más importante de este libro es la facilidad con la que los desarrolladores pueden empezar a utilizar Tomcat. Con mucho, ***Tomcat es más fácil de ejecutar rápidamente que cualquier otro contenedor web y proporciona todas las funciones que necesita para completar los ejemplos de este libro. Además, todos los principales IDE de Java proporcionan herramientas para ejecutar, implementar y depurar Tomcat, lo que le facilita el desarrollo de su aplicación***.
 
 Aunque algunos desarrolladores prefieren utilizar otros contenedores web, y con el conocimiento adecuado, casi cualquier contenedor web puede servirte bien en una máquina de desarrollo, es difícil defender el uso de Tomcat. Al usar Tomcat para este libro, puede concentrarse en el código y las prácticas de desarrollo, prestando poca o ninguna atención a la administración de su contenedor. El resto de este capítulo le ayuda a instalar y configurar Tomcat en su máquina. También le presenta la implementación y anulación de la implementación de aplicaciones con el administrador de Tomcat y la depuración de Tomcat en su IDE de Java.
 
 ## INSTALACIÓN DE TOMCAT EN SU MÁQUINA
-
+AQUIIIIIIIII
 Antes de poder instalar Tomcat en su máquina, debe descargarlo del sitio del proyecto Tomcat. Vaya a la [página de descargas de Tomcat 8.0](http://tomcat.apache.org/download-80.cgi) y desplácese hacia abajo hasta la sección "Binary Distributions". Hay muchas descargas en esta página, y las únicas que necesita para este libro se encuentran bajo el título "Core". Como usuario de Windows, las dos descargas que le preocupan son el "32-bit/64-bit Windows Service Installer" (funciona para cualquier arquitectura de sistema) y el "32-bit Windows zip" o el "64-bit Windows zip". (dependiendo de la arquitectura de su máquina). Si ejecuta Linux, Mac OS X o algún otro sistema operativo, necesita el archivo zip que no sea de Windows, que simplemente se llama "zip".
 
 ### INSTALACIÓN COMO SERVICIO DE WINDOWS
