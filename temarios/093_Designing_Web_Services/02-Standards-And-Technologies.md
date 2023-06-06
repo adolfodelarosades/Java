@@ -64,65 +64,73 @@ Una **Document Type Definition (DTD)** o **XML Schema Definition (XSD)** describ
 <!ELEMENT EMail (#PCDATA)>
 ```
 
-Desafortunadamente, las DTD son una forma inadecuada de definir formatos de documentos XML. Por ejemplo, las DTD no brindan ninguna facilidad real para expresar tipos de datos o relaciones estructurales complejas. Las definiciones de esquema XML estandarizan las definiciones de formato de los documentos XML. El ejemplo de código 2.4 muestra el esquema XSD para el documento XML de muestra en el ejemplo de código 2.3 .
+Desafortunadamente, ***las DTD son una forma inadecuada de definir formatos de documentos XML***. Por ejemplo, las **DTD** no brindan ninguna facilidad real para expresar tipos de datos o relaciones estructurales complejas. Las definiciones de **XML schema** estandarizan las definiciones de formato de los documentos **XML**. El ejemplo de código 2.4 muestra el **XSD schema** para el documento **XML** de muestra en el ejemplo de código 2.3.
 
-Ejemplo de código 2.3. Documento XML
-<?versión xml="1.0" codificación="ISO-8859-1" standalone="sí"?>
-<Información de contacto
-       xmlns="http://simple.ejemplo.com/CInfoXmlDoc"
-       xmlns:xsi=" http://www.w3.org/2001/XMLSchema-instance "
+**Ejemplo de código 2.3. Documento XML**
+
+```xml
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<ContactInformation
+       xmlns="http://simple.example.com/CInfoXmlDoc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation=
-          " http://simple.example.com/Archivo 
-						CInfoXmlDoc:./CInfoXmlDoc.xsd ">
-    <Nombre>Juan Pérez</Nombre>
-    <Dirección>
-        <Street>4140 Red Circle</Street>
-        <Ciudad>Santa Clara</Ciudad>
-        <Estado>California</Estado>
-        <País>EE.UU.</País>
-    </dirección>
-    <Teléfono de casa>123-456-7890</Teléfono de casa>
-     <Correo electrónico> j2eeblueprints@sun.com </Correo electrónico>
-</Información de contacto>
+          "http://simple.example.com/CInfoXmlDoc
+						file:./CInfoXmlDoc.xsd">
+    <Name>John doe</Name>
+    <Address>
+        <Street>4140 Network Circle</Street>
+        <City>Santa Clara</City>
+        <State>California</State>
+        <Country>USA</Country>
+    </Address>
+    <HomePhone>123-456-7890</HomePhone>
+    <EMail>j2eeblueprints@sun.com</EMail>
+</ContactInformation>
+```
 
-Ejemplo de código 2.4. Esquema XSD
-<?versión xml="1.0" codificación="UTF-8"?>
-<xsd:esquema xmlns:xsd=" http://www.w3.org/2001/XMLSchema "
-   targetNamespace=" http://simple.example.com/CInfoXmlDoc "
-   xmlns=" http://simple.ejemplo.com/CInfoXmlDoc "
-   elementFormDefault="calificado">
-   <xsd:element name="Información de contacto">
-      <xsd:tipocomplejo>
-         <xsd:secuencia>
-             <xsd:elemento nombre="Nombre" tipo="xsd:cadena" />
-             <xsd:nombre del elemento="Dirección">
-                <xsd:tipocomplejo>
-                    <xsd:secuencia>
-                       <xsd:nombre del elemento="Calle"
-                                 tipo="xsd:cadena" />
-                       <xsd:nombre del elemento="Ciudad"
-                                 tipo="xsd:cadena" />
-                       <xsd:nombre del elemento="Estado"
-                                 tipo="xsd:cadena" />
-                       <xsd:nombre del elemento="País"
-                                 tipo="xsd:cadena" />
-                     </xsd:secuencia>
-                 </xsd:tipocomplejo>
-              </xsd:elemento>
+
+**Ejemplo de código 2.4. XSD Schema**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="http://simple.example.com/CInfoXmlDoc"
+   xmlns=" http://simple.example.com/CInfoXmlDoc"
+   elementFormDefault="qualified">
+   <xsd:element name="ContactInformation">
+      <xsd:complexType>
+         <xsd:sequence>
+             <xsd:element name="Name" type="xsd:string" />
+             <xsd:element name="Address">
+                <xsd:complexType>
+                    <xsd:sequence>
+                       <xsd:element name="Street"
+                                 type="xsd:string" />
+                       <xsd:element name="City"
+                                 type="xsd:string" />
+                       <xsd:element name="State"
+                                 type="xsd:string" />
+                       <xsd:element name="Country"
+                                 type="xsd:string" />
+                     </xsd:sequence>
+                 </xsd:complexType>
+              </xsd:element>
               <xsd:element name="HomePhone" type="xsd:string" />
-              <xsd:nombre del elemento="Correo electrónico" tipo="xsd:cadena"/>
-          </xsd:secuencia>
-       </xsd:tipocomplejo>
-   </xsd:elemento>
-</xsd:esquema>
+              <xsd:element name="EMail" type="xsd:string" />
+          </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+</xsd:schema>
+```
 
-Al considerar esquemas XML, es importante comprender el concepto de espacios de nombres XML. Para habilitar el uso del mismo nombre con diferentes significados en diferentes contextos, los esquemas XML pueden definir un espacio de nombres. Un espacio de nombres es un conjunto de nombres únicos que se definen para un contexto particular y que se ajustan a reglas específicas para el espacio de nombres. Dado que un espacio de nombres es específico de un contexto particular, cada espacio de nombres no está relacionado con ningún otro espacio de nombres. Por lo tanto, el mismo nombre se puede usar en diferentes espacios de nombres sin causar un conflicto de nombres duplicados. Los documentos XML, que se ajustan a un esquema XML y tienen múltiples elementos y atributos, a menudo se basan en espacios de nombres para evitar una colisión en los nombres de etiquetas o atributos o para poder usar la misma etiqueta o nombre de atributo en diferentes contextos.
+Al considerar **XML schemas**, es importante comprender el concepto de **XML namespaces**. Para habilitar el uso del mismo nombre con diferentes significados en diferentes contextos, los **XML schemas** pueden definir un **namespaces**. *Un **namespaces** es un conjunto de nombres únicos que se definen para un contexto particular y que se ajustan a reglas específicas para el **namespaces***. Dado que un **namespaces** es específico de un contexto particular, cada **namespaces** no está relacionado con ningún otro **namespaces**. Por lo tanto, el mismo nombre se puede usar en diferentes **namespaces** sin causar un conflicto de nombres duplicados. Los documentos XML, que se ajustan a un esquema XML y tienen múltiples elementos y atributos, a menudo se basan en **namespaces** para evitar una colisión en los tag o nombres de atributos o para poder usar el mismo tag o nombres de atributos en diferentes contextos.
 
-Técnicamente hablando, un espacio de nombres XML define una colección de nombres y se identifica mediante una referencia URI. (Observe en el Ejemplo de código 2.4 el código xmlns="http://simple.example.com/CInfoXmlDoc" . Un código como este indica que el esquema XML define un espacio de nombres para los diversos elementos y atributos del documento). Nombres en el El espacio de nombres se puede utilizar como tipos de elementos o atributos en un documento XML. La combinación de URI y tipo de elemento o nombre de atributo comprende un nombre universal único que evita colisiones.
+Técnicamente hablando, un **XML namespace** define una colección de nombres y se identifica mediante una referencia URI. (Observe en el Ejemplo de código 2.4 el código **`xmlns="http://simple.example.com/CInfoXmlDoc"`**. Un código como este indica que el **XML schema** define un **namespace** para los diversos elementos y atributos del documento). **Names** y el **namespace** se puede utilizar como tipos de elementos o atributos en un documento XML. La combinación de URI y tipo de elemento o nombre de atributo comprende un nombre universal único que evita colisiones.
 
-Por ejemplo, en el Ejemplo de código 2.4 , hay un espacio de nombres que define los tipos de elementos del documento Información de contacto , como Nombre y Dirección . Estos tipos de elementos son únicos dentro del contexto de la información de contacto. Si el documento incluyera otro contexto de espacio de nombres, como BankInformation que definiera sus propios tipos de elementos de Nombre y Dirección , estos dos espacios de nombres serían separados y distintos. Es decir, un nombre y dirección usados ​​en el contexto de información bancaria no entrarían en conflicto con un nombre y dirección usados ​​en el contexto de información de contacto .
+Por ejemplo, en el Ejemplo de código 2.4 , hay un **namespace** que define los tipos de elementos del documento **`ContactInformation`**, como  **`Name`** y **`Address`**. Estos tipos de elementos son únicos dentro del contexto de la información de contacto. Si el documento incluyera otro contexto de espacio de nombres, como **`BankInformation`** que definiera sus propios tipos de elementos de **`Name`** y **`Address`**, estos dos namespaces serían separados y distintos. Es decir, un **`Name`** y **`Address`** usados en el contexto de información bancaria no entrarían en conflicto con un **`Name`** y **`Address`** usados en el contexto de información de contacto .
 
-2.1.2. Simple Object Access Protocol
+### 2.1.2. Simple Object Access Protocol (SOAP)
+
 XML resuelve la necesidad de un lenguaje común, y el Protocolo simple de acceso a objetos (SOAP) satisface la necesidad de un formato de mensajería común. SOAP permite que objetos desconocidos entre sí se comuniquen; es decir, para intercambiar mensajes. SOAP, un protocolo de conexión similar al Internet Inter-ORB Protocol (IIOP) y al Java Remote Method Protocol (JRMP), es un protocolo basado en texto que utiliza un formato de codificación de datos basado en XML y HTTP/SMTP para transportar mensajes. SOAP es independiente tanto del lenguaje de programación como de la plataforma operativa, y no requiere ninguna tecnología específica en sus terminales, lo que lo hace completamente independiente de los proveedores, las plataformas y las tecnologías. Su formato de texto también convierte a SOAP en un protocolo compatible con cortafuegos. Además, SOAP cuenta con el respaldo de los principales actores industriales y se puede esperar que tenga soporte universal.
 
 Para habilitar los intercambios de mensajes, SOAP define un sobre, que contiene un cuerpo SOAP, dentro del cual se incluye el mensaje, y un encabezado opcional específico de SOAP. Todo el sobre (cuerpo más encabezado) es un documento XML completo. (Consulte la Figura 2.1 ).
