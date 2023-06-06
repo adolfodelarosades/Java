@@ -127,51 +127,56 @@ Al considerar **XML schemas**, es importante comprender el concepto de **XML nam
 
 Técnicamente hablando, un **XML namespace** define una colección de nombres y se identifica mediante una referencia URI. (Observe en el Ejemplo de código 2.4 el código **`xmlns="http://simple.example.com/CInfoXmlDoc"`**. Un código como este indica que el **XML schema** define un **namespace** para los diversos elementos y atributos del documento). **Names** y el **namespace** se puede utilizar como tipos de elementos o atributos en un documento XML. La combinación de URI y tipo de elemento o nombre de atributo comprende un nombre universal único que evita colisiones.
 
-Por ejemplo, en el Ejemplo de código 2.4 , hay un **namespace** que define los tipos de elementos del documento **`ContactInformation`**, como  **`Name`** y **`Address`**. Estos tipos de elementos son únicos dentro del contexto de la información de contacto. Si el documento incluyera otro contexto de espacio de nombres, como **`BankInformation`** que definiera sus propios tipos de elementos de **`Name`** y **`Address`**, estos dos namespaces serían separados y distintos. Es decir, un **`Name`** y **`Address`** usados en el contexto de información bancaria no entrarían en conflicto con un **`Name`** y **`Address`** usados en el contexto de información de contacto .
+Por ejemplo, en el Ejemplo de código 2.4 , hay un **namespace** que define los tipos de elementos del documento **`ContactInformation`**, como  **`Name`** y **`Address`**. Estos tipos de elementos son únicos dentro del contexto de la información de contacto. Si el documento incluyera otro contexto de espacio de nombres, como **`BankInformation`** que definiera sus propios tipos de elementos de **`Name`** y **`Address`**, estos dos ***namespaces*** serían separados y distintos. Es decir, un **`Name`** y **`Address`** usados en el contexto de información bancaria no entrarían en conflicto con un **`Name`** y **`Address`** usados en el contexto de información de contacto .
 
 ### 2.1.2. Simple Object Access Protocol (SOAP)
 
-XML resuelve la necesidad de un lenguaje común, y el Protocolo simple de acceso a objetos (SOAP) satisface la necesidad de un formato de mensajería común. SOAP permite que objetos desconocidos entre sí se comuniquen; es decir, para intercambiar mensajes. SOAP, un protocolo de conexión similar al Internet Inter-ORB Protocol (IIOP) y al Java Remote Method Protocol (JRMP), es un protocolo basado en texto que utiliza un formato de codificación de datos basado en XML y HTTP/SMTP para transportar mensajes. SOAP es independiente tanto del lenguaje de programación como de la plataforma operativa, y no requiere ninguna tecnología específica en sus terminales, lo que lo hace completamente independiente de los proveedores, las plataformas y las tecnologías. Su formato de texto también convierte a SOAP en un protocolo compatible con cortafuegos. Además, SOAP cuenta con el respaldo de los principales actores industriales y se puede esperar que tenga soporte universal.
+***XML resuelve la necesidad de un lenguaje común, y el Simple Object Access Protocol (SOAP) satisface la necesidad de un formato de mensajería común***. ***SOAP permite que objetos desconocidos entre sí se comuniquen; es decir, para intercambiar mensajes. SOAP***, un protocolo de conexión similar a **Internet Inter-ORB Protocol (IIOP)** y **Java Remote Method Protocol (JRMP)**, ***es un protocolo basado en texto que utiliza un formato de codificación de datos basado en XML y HTTP/SMTP para transportar mensajes***. SOAP es independiente tanto del lenguaje de programación como de la plataforma operativa, y no requiere ninguna tecnología específica en sus terminales, lo que lo hace completamente independiente de los proveedores, las plataformas y las tecnologías. Su formato de texto también convierte a SOAP en un protocolo compatible con cortafuegos. Además, SOAP cuenta con el respaldo de los principales actores industriales y se puede esperar que tenga soporte universal.
 
-Para habilitar los intercambios de mensajes, SOAP define un sobre, que contiene un cuerpo SOAP, dentro del cual se incluye el mensaje, y un encabezado opcional específico de SOAP. Todo el sobre (cuerpo más encabezado) es un documento XML completo. (Consulte la Figura 2.1 ).
+Para habilitar los intercambios de mensajes, SOAP define un **envelope(sobre)**, que contiene un **body(cuerpo) SOAP**, dentro del cual se incluye el **message(mensaje)**, y un header opcional específico de SOAP. ***Todo el envelope (body más header) es un documento XML completo****. (Consulte la Figura 2.1 ).
 
-Figura 2.1. Estructura del mensaje SOAP
+**Figura 2.1. Estructura del SOAP Message**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/58d580dc-d034-4378-9e0f-44b7afb591cd)
 
-
-Las entradas del encabezado pueden contener información útil para los destinatarios, y estas entradas del encabezado también pueden ser útiles para los procesadores intermedios, ya que habilitan funciones avanzadas. El cuerpo, que contiene el contenido del mensaje, es consumido por el destinatario. SOAP es independiente del contenido del mensaje; la única restricción es que el mensaje esté en formato XML.
+Las entradas del header pueden contener información útil para los destinatarios, y estas entradas del header también pueden ser útiles para los procesadores intermedios, ya que habilitan funciones avanzadas. El body, que contiene el contenido del message, es consumido por el destinatario. SOAP es independiente del contenido del message; ***la única restricción es que el message esté en formato XML***.
 
 El ejemplo de código 2.5 muestra un ejemplo simple pero completo de una solicitud SOAP para obtener una cotización de acciones.
 
-Ejemplo de código 2.5. Ejemplo de solicitud SOAP
-<SOAP-ENV:Sobre xmlns:SOAP-ENV="SoapEnvelopeURI"
+**Ejemplo de código 2.5. Ejemplo de SOAP Request**
+
+```xml
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="SoapEnvelopeURI"
        SOAP-ENV:encodingStyle="SoapEncodingURI">
-    <SOAP-ENV:Encabezado>
-    </SOAP-ENV:Encabezado>
-    <SOAP-ENV:Cuerpo>
-        <m:GetLastTradePrice xmlns:m="URI del servicio">
+    <SOAP-ENV:Header>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <m:GetLastTradePrice xmlns:m="ServiceURI">
             <tickerSymbol>SUNW</tickerSymbol>
-        </m:ObtenerPrecioÚltimoTrade>
-    </SOAP-ENV:Cuerpo>
-</SOAP-ENV:Sobre>
+        </m:GetLastTradePrice>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+```
 
-Este ejemplo muestra cómo se codifica un mensaje SOAP utilizando XML e ilustra algunos elementos y atributos SOAP. Todos los mensajes SOAP deben tener un elemento Envelope y deben definir dos espacios de nombres: un espacio de nombres connota el sobre SOAP ( xmlns:SOAP-ENV ) y el otro indica la codificación SOAP ( SOAP-ENV:encodingStyle ). Los mensajes SOAP sin la especificación adecuada del espacio de nombres se consideran mensajes no válidos. El atributo encodingStyle es importante, ya que se usa para especificar reglas de serialización para el mensaje SOAP. Además, no puede haber referencias de DTD desde dentro de los mensajes SOAP.
+Este ejemplo muestra cómo se codifica un mensaje SOAP utilizando XML e ilustra algunos elementos y atributos SOAP. Todos los mensajes SOAP deben tener un elemento **`Envelope`** y deben definir dos namespaces: Un namespace connota el **SOAP envelope (`xmlns:SOAP-ENV`)** y el otro indica la codificación **SOAP encoding (`SOAP-ENV:encodingStyle`)**. Los SOAP messages sin la especificación adecuada del namespace se consideran messages no válidos. El atributo **`encodingStyle`** es importante, ya que se usa para especificar reglas de serialización para el SOAP message. Además, no puede haber referencias de DTD desde dentro de los SOAP message.
 
-Si bien es opcional, el elemento Header , cuando se usa, debe ser el primer elemento secundario inmediato después del Envelope . El elemento de encabezado proporciona una forma de extender el mensaje SOAP al especificar información adicional, como autenticación y transacciones. Especificar esta información adicional como parte del encabezado le dice al destinatario del mensaje cómo manejar el mensaje.
-
+Si bien es opcional el elemento **`Header`**, cuando se usa, debe ser el first child inmediato después del **`Envelope`**. El elemento **`Header`** proporciona una forma de extender el mensaje SOAP al especificar información adicional, como autenticación y transacciones. Especificar esta información adicional como parte del **`Header`** le dice al destinatario del mensaje cómo manejar el mensaje.
+AQUIIIIIIIIIIIIII
 Hay muchos atributos que se pueden usar en el elemento de encabezado SOAP . Por ejemplo, el atributo actor del elemento Header permite que un mensaje SOAP pase a través de procesos intermedios en ruta hacia su destino final. Cuando el atributo actor está ausente, el destinatario es el destino final del mensaje SOAP. De manera similar, se pueden usar muchos otros atributos. Sin embargo, este capítulo no aborda estos detalles.
 
 El elemento Body , que debe estar presente en todos los mensajes SOAP, debe seguir inmediatamente después del elemento Header , si está presente. De lo contrario, el elemento Body debe seguir inmediatamente después del inicio del elemento Envelope . El cuerpo contiene la especificación de la solicitud real (como las llamadas a métodos). El elemento Fault en SOAP Body permite el manejo de errores para solicitudes de mensajes.
 
 Tenga en cuenta que este capítulo no analiza los detalles de los elementos de encabezado , los atributos y otras funciones adicionales, como SOAP con archivos adjuntos y enlace HTTP, aunque forman parte del estándar SOAP. Los lectores interesados ​​deben consultar las especificaciones de SOAP.
 
-2.1.3. Normas de registro
+### 2.1.3. Normas de registro
+
 La especificación Universal Description, Discovery, and Integration (UDDI) define una forma estándar para registrar, cancelar el registro y buscar servicios web. UDDI es una especificación basada en estándares para el registro, la descripción y el descubrimiento de servicios web. Al igual que las páginas amarillas de un sistema telefónico, el único propósito de un registro UDDI es permitir que los proveedores registren sus servicios y que los solicitantes encuentren servicios. Una vez que un solicitante encuentra un servicio, el registro ya no tiene ningún papel que desempeñar entre el solicitante y el proveedor.
 
 La figura 2.2 muestra cómo UDDI permite la descripción dinámica, el descubrimiento y la integración de servicios web. Un proveedor de servicios web registra sus servicios con el registro UDDI. Un solicitante de servicios web busca los servicios requeridos en el registro UDDI y, cuando encuentra un servicio, el solicitante se vincula directamente con el proveedor para usar el servicio.
 
-Figura 2.2. Rol de un Registry en un Servicio Web
+**Figura 2.2. Rol de un Registry en un Servicio Web**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/02f65543-0518-4213-8947-80a1a9f81db1)
 
 
 La especificación UDDI define un esquema XML para mensajes SOAP y API para aplicaciones que desean usar el registro. Un proveedor que registre un servicio web con UDDI debe proporcionar información comercial, de servicio, vinculante y técnica sobre el servicio. Esta información se almacena en un formato común que consta de tres partes:
@@ -190,65 +195,70 @@ API de editores : permite que las aplicaciones registren servicios en el registr
 
 Las API de UDDI se comportan de manera síncrona. Además, para garantizar que un proveedor o solicitante de servicios web pueda usar el registro, UDDI usa SOAP como protocolo base. Tenga en cuenta que UDDI es una especificación para un registro, no un repositorio. Como registro, funciona como un catálogo, lo que permite a los solicitantes encontrar los servicios disponibles. Un registro no es un repositorio porque no contiene los servicios en sí.
 
-2.1.4. Lenguaje de descripción de servicios web
+### 2.1.4. Lenguaje de descripción de servicios web
+
 El lenguaje de descripción de servicios web (WSDL) define una forma estándar de especificar los detalles de un servicio web. Es un esquema XML de propósito general que se puede usar para especificar detalles de interfaces de servicios web, enlaces y otros detalles de implementación. Al tener una forma estándar de especificar los detalles de un servicio, los clientes que no tienen conocimiento previo del servicio aún pueden usar ese servicio web.
 
 WSDL especifica una gramática que describe los servicios web como una colección de puntos finales de comunicación, llamados puertos. Los datos que se intercambian se especifican como parte de los mensajes. Todo tipo de acción permitida en un punto final se considera una operación. Las colecciones de operaciones posibles en un punto final se agrupan en tipos de puerto. Los mensajes, las operaciones y los tipos de puerto son definiciones abstractas, lo que significa que las definiciones no contienen detalles específicos de la implementación para permitir su reutilización.
 
 Las especificaciones de protocolo y formato de datos para un tipo de puerto en particular se especifican como un enlace. Un puerto se define asociando una dirección de red con un enlace reutilizable y una colección de puertos define un servicio. Además, WSDL especifica un mecanismo de vinculación común para reunir todos los formatos de datos y protocolos con un mensaje, una operación o un punto final abstractos. Consulte la Figura 2.3 .
 
-Figura 2.3. Descripción del servicio WSDL
+**Figura 2.3. Descripción del servicio WSDL**
 
-
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/644ea4e2-0851-43fe-b364-9c64820c67bf)
 
 El ejemplo de código 2.6 muestra un documento WSDL para un servicio web meteorológico que devuelve la información meteorológica de una ciudad determinada. El servicio web, que utiliza SOAP como protocolo de comunicación, espera recibir el nombre de la ciudad como datos de tipo String y envía datos de tipo String como respuesta.
 
-Ejemplo de código 2.6. Documento WSDL para servicio web meteorológico
-<?versión xml="1.0" codificación="UTF-8"?>
-<definiciones nombre="WeatherWebService"
-         targetNamespace="urna:WeatherWebService"
-         xmlns:tns="urna:WeatherWebService"
-         xmlns="http://esquemas.xmlsoap.org/wsdl/"
+**Ejemplo de código 2.6. Documento WSDL para servicio web meteorológico**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="WeatherWebService"
+         targetNamespace="urn:WeatherWebService"
+         xmlns:tns="urn:WeatherWebService"
+         xmlns="http://schemas.xmlsoap.org/wsdl/"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
          xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
-   <tipos/>
-   <mensaje nombre="WeatherService_getWeather">
-      <parte nombre="Cadena_1" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje nombre="WeatherService_getWeatherResponse">
-      <parte nombre="resultado" tipo="xsd:cadena"/>
-   </mensaje>
-   <portType name="Servicio Meteorológico">
-      <operación nombre="getWeather" parámetroOrder="String_1">
-         <mensaje de entrada="tns:WeatherService_getWeather"/>
-         <salida
-            mensaje="tns:WeatherService_getWeatherResponse"/>
-      </operación>
-   </tipo de puerto>
+   <types/>
+   <message name="WeatherService_getWeather">
+      <part name="String_1" type="xsd:string"/>
+   </message>
+   <message name="WeatherService_getWeatherResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   <portType name="WeatherService">
+      <operation name="getWeather" parameterOrder="String_1">
+         <input message="tns:WeatherService_getWeather"/>
+         <output
+            message="tns:WeatherService_getWeatherResponse"/>
+      </operation>
+   </portType>
    <binding name="WeatherServiceBinding"
-                            type="tns:Servicio Meteorológico">
-      <operación nombre="getWeather">
-         <entrada>
-            <jabón:uso corporal="literal"
-               namespace="urna:WeatherWebService"/>
-         </entrada>
-         <salida>
-            <jabón:uso corporal="literal"
-               namespace="urna:WeatherWebService"/>
-         </salida>
-         <soap:operación soapAction=""/></operación>
-      <jabón: vinculante
-             transporte="http://schemas.xmlsoap.org/soap/http"
-             estilo="rpc"/>
-   </enlace>
-   <nombre del servicio="WeatherWebService">
-      <port name="PuertoServicioMeteorológico"
-                        vinculante="tns:WeatherServiceBinding">
-         <soap:dirección
+                            type="tns:WeatherService">
+      <operation name="getWeather">
+         <input>
+            <soap:body use="literal"
+               namespace="urn:WeatherWebService"/>
+         </input>
+         <output>
+            <soap:body use="literal"
+               namespace="urn:WeatherWebService"/>
+         </output>
+         <soap:operation soapAction=""/></operation>
+      <soap:binding
+             transport="http://schemas.xmlsoap.org/soap/http"
+             style="rpc"/>
+   </binding>
+   <service name="WeatherWebService">
+      <port name="WeatherServicePort"
+                        binding="tns:WeatherServiceBinding">
+         <soap:address
             location="http://mycompany.com/weatherservice"/>
-      </puerto>
-   </servicio>
-</definiciones>
+      </port>
+   </service>
+</definitions>
+```
+
 
 Un documento WSDL completo consta de un conjunto de definiciones que comienzan con un elemento de definiciones raíz seguido de seis definiciones de elementos individuales ( tipos , mensaje , tipo de puerto , enlace , puerto y servicio ) que describen los servicios.
 
@@ -264,7 +274,8 @@ Los elementos de servicio y puerto juntos definen el nombre del servicio web y, 
 
 Esta descripción es para un documento WSDL simple. Cada definición de elemento tiene varios atributos y WSDL tiene características adicionales, como el manejo de fallas. WSDL también especifica cómo enlazar directamente con HTTP/MIME, SMTP/MIME, etc., pero estos están más allá del alcance de la discusión actual. Para obtener más detalles, consulte la especificación WSDL disponible en http://www.w3c.org/TR/wsdl .
 
-2.1.5. Estándares emergentes
+### 2.1.5. Estándares emergentes
+
 Hasta ahora hemos examinado los estándares existentes, que satisfacen las necesidades de los servicios web simples. Se han formado organizaciones que cruzan varias industrias para crear y promover estándares multiplataforma. La Organización de Interoperabilidad de Servicios Web (WS-I) es uno de esos grupos. WS-I ha publicado un perfil básico de WS-I que define un conjunto de estándares multiplataforma, como los que acabamos de examinar, para promover y garantizar la interoperabilidad. Pero se requieren otros estándares para abordar los problemas de los servicios web que manejan procesos comerciales complejos. Estos problemas incluyen estrictos requisitos de seguridad, procesos comerciales que interactúan con otros procesos comerciales y tienen transacciones de larga duración o transacciones que abarcan múltiples procesos comerciales, o procesos comerciales anidados dentro de otros procesos. Estos procesos comerciales también deben ejecutarse correctamente incluso cuando se ejecutan en diferentes plataformas. Varios organismos y organizaciones de estándares, como WS-I, están trabajando actualmente en estos estándares. Dado que estos estándares aún se están definiendo y aún no está claro qué estándares se aceptarán como universales, no entraremos en los detalles de los estándares emergentes.
 
 Ahora que hemos examinado los estándares de servicios web, veamos cómo J2EE admite estos estándares aceptados.
