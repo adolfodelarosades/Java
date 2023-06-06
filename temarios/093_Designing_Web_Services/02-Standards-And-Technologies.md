@@ -23,39 +23,46 @@ Los estándares establecen una base común y permiten que los Web Service logren
 * ***Common means(medios comunes) para la búsqueda de servicios***: De la misma manera que los proveedores necesitan una forma común de especificar los detalles del servicio, los solicitantes de servicios deben tener una forma común de buscar y obtener detalles de un servicio. Esto se logra teniendo lugares comunes y bien conocidos donde los proveedores pueden registrar las especificaciones de sus servicios y donde los solicitantes saben dónde ir para encontrar los servicios. Al tener estas ubicaciones comunes y conocidas y una forma estándar de acceder a ellas, todos los proveedores y solicitantes pueden acceder universalmente a los servicios. La especificación **Universal Description, Discovery and Integration (UDDI)** define un medio común para buscar servicios web.
 
 Aunque no analizan exhaustivamente estos estándares básicos, las siguientes secciones brindan suficiente información sobre los estándares para permitir una mayor discusión sobre las tecnologías J2EE que los implementan. Para obtener detalles completos, consulte la sección de referencia al final de este capítulo. Además de estos estándares básicos, los Web services más complejos que implementan procesos de nivel empresarial necesitan ***estándares de seguridad, transacciones, control de flujo de procesos***, etc.
-AQUIIIIIIIII
+
+
 ### 2.1.1.Extensible Markup Language
 
-El **eXtensible Markup Language - Lenguaje de Marcado Extensible (XML)**, un estándar aceptado en toda la industria, permite que los proveedores de servicios y los solicitantes se comuniquen entre sí en un idioma común. XML no depende de una plataforma o tecnología propietaria, y los mensajes en XML se pueden comunicar a través de Internet utilizando protocolos estándar de Internet, como HTTP. Debido a que XML es un producto del cuerpo del Consorcio World Wide Web (W3C), todos los actores principales admitirán los cambios que se realicen en él. Esto garantiza que, a medida que evoluciona XML, los servicios web también pueden evolucionar sin problemas de compatibilidad con versiones anteriores.
+El **eXtensible Markup Language - Lenguaje de Marcado Extensible (XML)**, un estándar aceptado en toda la industria, permite que los proveedores de servicios y los solicitantes se comuniquen entre sí en un idioma común. **XML** no depende de una plataforma o tecnología propietaria, y los mensajes en XML se pueden comunicar a través de Internet utilizando protocolos estándar de Internet, como **HTTP**. Debido a que **XML** es un producto del cuerpo del **World Wide Web Consortium (W3C)**, todos los actores principales admitirán los cambios que se realicen en él. Esto garantiza que, a medida que evoluciona **XML**, los Web services también pueden evolucionar sin problemas de compatibilidad con versiones anteriores.
 
-XML es un lenguaje de marcado simple, flexible y basado en texto. Los datos XML se marcan mediante etiquetas encerradas entre corchetes angulares. Las etiquetas contienen el significado de los datos que marcan. Dicho marcado permite que diferentes sistemas intercambien datos fácilmente entre sí. Esto difiere del uso de etiquetas en HTML, que está orientado a mostrar datos. A diferencia de HTML, la visualización no es inherente a XML. El ejemplo de código 2.1 muestra el código de un documento XML que representa la información de contacto de una persona.
+***XML es un lenguaje de marcado simple, flexible y basado en texto. Los datos XML se marcan mediante etiquetas encerradas entre corchetes angulares. Las etiquetas contienen el significado de los datos que marcan***. Dicho marcado permite que diferentes sistemas intercambien datos fácilmente entre sí. Esto difiere del uso de etiquetas en **HTML**, que está orientado a mostrar datos. A diferencia de **HTML**, la visualización no es inherente a **XML**. El ejemplo de código 2.1 muestra el código de un documento **XML** que representa la información de contacto de una persona.
 
-Ejemplo de código 2.1. Ejemplo de documento XML
-<?versión xml="1.0" codificación="ISO-8859-1" standalone="sí"?>
-<Información de contacto>
-    <Nombre>Juan Pérez</Nombre>
-    <Dirección>
-        <Street>4140 Red Circle</Street>
-        <Ciudad>Santa Clara</Ciudad>
-        <Estado>California</Estado>
-        <País>EE.UU.</País>
-    </dirección>
-    <Teléfono de casa>123-456-7890</Teléfono de casa>
-    <Correo electrónico>j2eeblueprints@sun.com</Correo electrónico>
-</Información de contacto>
+**Ejemplo de código 2.1. Ejemplo de Documento XML**
 
-Una definición de tipo de documento (DTD) o una definición de esquema XML (XSD) describe la estructura de un documento XML. Tiene información sobre las etiquetas que puede tener el documento XML correspondiente, el orden de esas etiquetas, etc. Un documento XML se puede validar contra su DTD o su XSD. La validación de un documento XML garantiza que el documento sigue la estructura definida en su DTD o XSD y que no tiene etiquetas XML no válidas. Por lo tanto, los sistemas que intercambian documentos XML para algún propósito pueden acordar una sola DTD o XSD y validar todos los documentos XML recibidos para ese propósito contra la DTD/XSD acordada antes de procesar el documento. El ejemplo de código 2.2 es la DTD para el documento XML en el ejemplo de código 2.1 .
+```xml
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<ContactInformation>
+    <Name>John Doe</Name>
+    <Address>
+        <Street>4140 Network Circle</Street>
+        <City>Santa Clara</City>
+        <State>California</State>
+        <Country>USA</Country>
+    </Address>
+    <HomePhone>123-456-7890</HomePhone>
+    <EMail>j2eeblueprints@sun.com</EMail>
+</ContactInformation>
+```
 
-Ejemplo de código 2.2. Definición de tipo de documento
-<!ELEMENT Información de contacto (nombre, dirección, teléfono particular, correo electrónico)>
-<!ELEMENTO Nombre (#PCDATA)>
-<!ELEMENT Dirección (Calle, Ciudad, Estado, País)>
-<!ELEMENT Calle (#PCDATA)>
-<!ELEMENT Ciudad (#PCDATA)>
-<!ELEMENTO Estado (#PCDATA)>
-<!ELEMENT País (#PCDATA)>
-<!ELEMENT Teléfono particular (#PCDATA)>
-<!ELEMENTO CORREO ELECTRÓNICO (#PCDATA)>
+Una **Document Type Definition (DTD)** o **XML Schema Definition (XSD)** describe la estructura de un documento **XML**. ***Tiene información sobre las etiquetas que puede tener el documento XML correspondiente, el orden de esas etiquetas, etc***. Un documento **XML** se puede validar contra su **DTD** o su **XSD**. ***La validación de un documento XML garantiza que el documento sigue la estructura definida en su DTD o XSD y que no tiene etiquetas XML no válidas***. Por lo tanto, los sistemas que intercambian documentos **XML** para algún propósito pueden acordar una sola **DTD** o **XSD** y validar todos los documentos **XML** recibidos para ese propósito contra la **DTD/XSD** acordada antes de procesar el documento. El ejemplo de código 2.2 es la **DTD** para el documento **XML** en el ejemplo de código 2.1 .
+
+**Ejemplo de código 2.2. Document Type Definition**
+
+```dtd
+<!ELEMENT ContactInformation (Name, Address, HomePhone, EMail)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Address (Street, City, State, Country)>
+<!ELEMENT Street (#PCDATA)>
+<!ELEMENT City (#PCDATA)>
+<!ELEMENT State (#PCDATA)>
+<!ELEMENT Country (#PCDATA)>
+<!ELEMENT HomePhone (#PCDATA)>
+<!ELEMENT EMail (#PCDATA)>
+```
 
 Desafortunadamente, las DTD son una forma inadecuada de definir formatos de documentos XML. Por ejemplo, las DTD no brindan ninguna facilidad real para expresar tipos de datos o relaciones estructurales complejas. Las definiciones de esquema XML estandarizan las definiciones de formato de los documentos XML. El ejemplo de código 2.4 muestra el esquema XSD para el documento XML de muestra en el ejemplo de código 2.3 .
 
