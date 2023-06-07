@@ -81,12 +81,12 @@ Muchas de las ventajas de Apache Tomcat (que se denomina simplemente Tomcat en e
 Aunque algunos desarrolladores prefieren utilizar otros contenedores web, y con el conocimiento adecuado, casi cualquier contenedor web puede servirte bien en una máquina de desarrollo, es difícil defender el uso de Tomcat. Al usar Tomcat para este libro, puede concentrarse en el código y las prácticas de desarrollo, prestando poca o ninguna atención a la administración de su contenedor. El resto de este capítulo le ayuda a instalar y configurar Tomcat en su máquina. También le presenta la implementación y anulación de la implementación de aplicaciones con el administrador de Tomcat y la depuración de Tomcat en su IDE de Java.
 
 ## INSTALACIÓN DE TOMCAT EN SU MÁQUINA
-AQUIIIIIIIII
-Antes de poder instalar Tomcat en su máquina, debe descargarlo del sitio del proyecto Tomcat. Vaya a la [página de descargas de Tomcat 8.0](http://tomcat.apache.org/download-80.cgi) y desplácese hacia abajo hasta la sección "Binary Distributions". Hay muchas descargas en esta página, y las únicas que necesita para este libro se encuentran bajo el título "Core". Como usuario de Windows, las dos descargas que le preocupan son el "32-bit/64-bit Windows Service Installer" (funciona para cualquier arquitectura de sistema) y el "32-bit Windows zip" o el "64-bit Windows zip". (dependiendo de la arquitectura de su máquina). Si ejecuta Linux, Mac OS X o algún otro sistema operativo, necesita el archivo zip que no sea de Windows, que simplemente se llama "zip".
+
+Antes de poder instalar Tomcat en su máquina, debe descargarlo del sitio del proyecto Tomcat. Vaya a la [página de descargas de Tomcat 8.0](http://tomcat.apache.org/download-80.cgi) y desplácese hacia abajo hasta la sección **"Binary Distributions"**. Hay muchas descargas en esta página, y las únicas que necesita para este libro se encuentran bajo el título **"Core"**. Como usuario de Windows, las dos descargas que le preocupan son el **"32-bit/64-bit Windows Service Installer"** (funciona para cualquier arquitectura de sistema) y el **"32-bit Windows zip"** o el **"64-bit Windows zip"**. (dependiendo de la arquitectura de su máquina). Si ejecuta Linux, Mac OS X o algún otro sistema operativo, necesita el archivo zip que no sea de Windows, que simplemente se llama **"zip"**.
 
 ### INSTALACIÓN COMO SERVICIO DE WINDOWS
 
-Muchos desarrolladores quieren instalar Tomcat como un servicio de Windows. Esto tiene varias ventajas, especialmente en un entorno de producción o garantía de calidad. Facilita la administración de la memoria JVM y otros recursos, y simplifica enormemente el inicio automático de Tomcat cuando se inicia Windows. Sin embargo, en un entorno de desarrollo, la instalación de Tomcat como servicio puede tener algunos inconvenientes. Esta técnica instala solo el servicio y no instala los scripts de línea de comandos que ejecutan Tomcat desde la línea de comandos. La mayoría de los IDE utilizan estos scripts de línea de comandos para ejecutar y depurar Tomcat desde el IDE. Puede instalar Tomcat como un servicio descargando el "32-bit/64-bit Windows Service Installer", pero también necesita descargar el "Windows zip" para ejecutar Tomcat desde su IDE.
+Muchos desarrolladores quieren instalar ***Tomcat como un servicio de Windows***. Esto tiene varias ventajas, especialmente en un entorno de producción o garantía de calidad. Facilita la administración de la memoria JVM y otros recursos, y simplifica enormemente el inicio automático de Tomcat cuando se inicia Windows. Sin embargo, en un entorno de desarrollo, la instalación de Tomcat como servicio puede tener algunos inconvenientes. Esta técnica instala solo el servicio y no instala los scripts de línea de comandos que ejecutan Tomcat desde la línea de comandos. La mayoría de los IDE utilizan estos scripts de línea de comandos para ejecutar y depurar Tomcat desde el IDE. Puede instalar Tomcat como un servicio descargando el **"32-bit/64-bit Windows Service Installer"**, pero también necesita descargar el "Windows zip" para ejecutar Tomcat desde su IDE.
 
 Este libro no cubre la instalación de Tomcat como un servicio de Windows porque normalmente lo haría solo para entornos de producción o de control de calidad. La documentación en el sitio web de Tomcat es muy útil si desea explorar esto más a fondo. Por supuesto, si no está utilizando Windows, el instalador de Windows no le será de utilidad. Hay formas de iniciar Tomcat automáticamente en otros sistemas operativos, pero también están fuera del alcance de este libro.
 
@@ -96,11 +96,11 @@ La mayoría de los desarrolladores de aplicaciones necesitan ejecutar Tomcat sol
 
 1. Descargue el zip de Windows apropiado para la arquitectura (si usa Windows) o el zip que no es de Windows (si usa cualquier otro) desde la página de descarga de Tomcat 8.0 y descomprima el directorio.
 
-2. Coloque el contenido del directorio Tomcat en este archivo zip en la carpeta `C:\Program Files\Apache Software Foundation\Tomcat 8.0` en su máquina local (o en el directorio apropiado para un servidor en su sistema operativo). Por ejemplo, el directorio de aplicaciones web ahora debería estar ubicado en `C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps`.
+2. Coloque el contenido del directorio Tomcat en este archivo zip en la carpeta **`C:\Program Files\Apache Software Foundation\Tomcat 8.0`** en su máquina local (o en el directorio apropiado para un servidor en su sistema operativo). Por ejemplo, el directorio de aplicaciones web ahora debería estar ubicado en **`C:\Program Files\Apache Software Foundation\Tomcat 8.0\webapps`**.
 
-3. Si usa Windows 7 o una versión posterior, debe cambiar algunos permisos para que Tomcat sea accesible desde su IDE. Haga clic con el botón derecho en el directorio `Apache Software Foundation` en `C:\Program Files` y haga clic en Properties. En la pestaña Seguridad, haga clic en el botón Editar. Agregue su usuario o el grupo Usuarios y déle a esa entrada control total sobre el directorio.
+3. Si usa Windows 7 o una versión posterior, debe cambiar algunos permisos para que Tomcat sea accesible desde su IDE. Haga clic con el botón derecho en el directorio **`Apache Software Foundation`** en **`C:\Program Files`** y haga clic en **Properties**. En la pestaña Seguridad, haga clic en el **botón Editar**. Agregue su usuario o el grupo Usuarios y déle a esa entrada control total sobre el directorio.
 
-4. Para configurar Tomcat para su primer uso, comience abriendo el archivo `conf/tomcat-users.xml` en su editor de texto favorito. Coloque la siguiente etiqueta entre las etiquetas XML `<tomcat-users></tomcat-users>`:
+4. Para configurar Tomcat para su primer uso, comience abriendo el archivo **`conf/tomcat-users.xml`** en su editor de texto favorito. Coloque la siguiente etiqueta entre las etiquetas XML **`<tomcat-users></tomcat-users>`**:
 
 ```html
   <user username="admin" password="admin" roles="manager-gui,admin-gui" />
@@ -108,9 +108,9 @@ La mayoría de los desarrolladores de aplicaciones necesitan ejecutar Tomcat sol
 
 **ADVERTENCIA** *Esto configura un usuario administrador que puede utilizar para iniciar sesión en la interfaz de administración web de Tomcat. Por supuesto, esta combinación de nombre de usuario y contraseña es muy insegura y nunca debe usarse para servidores de producción o de cara al público. Sin embargo, para probar en su máquina local es suficiente*.
 
-5. Abra el archivo `conf/web.xml`. Busque en el archivo el texto `org.apache.jasper.servlet.JspServlet`. Debajo de la etiqueta que contiene este texto hay dos etiquetas `<init-param>`. Aprenderá sobre los parámetros de inicio de Servlet en el siguiente capítulo, pero por ahora agregue los siguientes parámetros de inicio debajo de los parámetros de inicio existentes:
+5. Abra el archivo **`conf/web.xml`**. Busque en el archivo el texto **`org.apache.jasper.servlet.JspServlet`**. Debajo de la etiqueta que contiene este texto hay dos etiquetas **`<init-param>`**. Aprenderá sobre los parámetros de inicio de Servlet en el siguiente capítulo, pero por ahora agregue los siguientes parámetros de inicio debajo de los parámetros de inicio existentes:
 
-```html
+```xml
   <init-param>            
     <param-name>compilerSourceVM</param-name>            
     <param-value>1.8</param-value>        
@@ -121,72 +121,72 @@ La mayoría de los desarrolladores de aplicaciones necesitan ejecutar Tomcat sol
   </init-param>
 ```
 
-De forma predeterminada, Tomcat 8.0 compila archivos JavaServer Pages con compatibilidad con el lenguaje Java SE 6 incluso si se ejecuta en Java SE 8. Estos nuevos parámetros de inicio de Servlet indican a Tomcat que compile archivos JSP con características del lenguaje Java SE 8, en su lugar.
+De forma predeterminada, **Tomcat 8.0** compila archivos **JavaServer Pages** con compatibilidad con el lenguaje **Java SE 6** incluso si se ejecuta en **Java SE 8**. Estos nuevos parámetros de inicio de Servlet indican a Tomcat que compile archivos JSP con características del lenguaje **Java SE 8**, en su lugar.
 
-6. Después de realizar estos cambios y guardar estos archivos, ahora debería estar listo para iniciar Tomcat y asegurarse de que se ejecute correctamente. Abra un símbolo del sistema y cambie su directorio al directorio de inicio de Tomcat (`C:\Program Files\Apache Software Foundation\Tomcat 8.0`).
+6. Después de realizar estos cambios y guardar estos archivos, ahora debería estar listo para iniciar Tomcat y asegurarse de que se ejecute correctamente. Abra un símbolo del sistema y cambie su directorio al directorio de inicio de Tomcat (**`C:\Program Files\Apache Software Foundation\Tomcat 8.0`**).
 
-7. Escriba el comando `echo %JAVA_HOME%` (o `echo $JAVA_HOME` en un sistema operativo que no sea Windows) y presione Entrar para verificar si la variable de entorno `JAVA_HOME` está configurada correctamente en su directorio de inicio de Java Development Kit (JDK). Si no es así, configure la variable de entorno y luego cierre la sesión y vuelva a iniciarla antes de continuar (consulte la Nota que sigue). Tomcat no se puede ejecutar sin esta variable configurada correctamente.
+7. Escriba el comando **`echo %JAVA_HOME%`** (o **`echo $JAVA_HOME`** en un sistema operativo que no sea Windows) y presione Enter para verificar si la variable de entorno **`JAVA_HOME`** está configurada correctamente en su directorio de inicio de **Java Development Kit (JDK)**. Si no es así, configure la variable de entorno y luego cierre la sesión y vuelva a iniciarla antes de continuar (consulte la Nota que sigue). Tomcat no se puede ejecutar sin esta variable configurada correctamente.
 
-8. Escriba el comando `bin\startup.bat` (o `bin/startup.sh` si no usa Windows) y presione Entrar. Debería abrirse una ventana de la consola Java mostrando la salida del proceso Tomcat en ejecución. Después de unos segundos, debería ver el mensaje “INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1827 ms” o algo similar en la ventana de la consola. Esto significa que Tomcat se ha iniciado correctamente.
+8. Escriba el comando **`bin\startup.bat`** (o **`bin/startup.sh`** si no usa Windows) y presione Enter. Debería abrirse una ventana de la consola Java mostrando la salida del proceso Tomcat en ejecución. Después de unos segundos, debería ver el mensaje **“INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1827 ms”** o algo similar en la ventana de la consola. Esto significa que Tomcat se ha iniciado correctamente.
 
-**NOTA** *Al iniciar, Tomcat busca inicialmente la variable de entorno `JRE_HOME` y la usa si está configurada. Si no es así, busca la variable `JAVA_HOME`. Si no se establece ninguno, Tomcat no se inicia. Sin embargo, para depurar Tomcat debe tener configurado `JAVA_HOME`, por lo que es mejor simplemente seguir adelante y configurarlo*.
+**NOTA** *Al iniciar, Tomcat busca inicialmente la variable de entorno **`JRE_HOME`** y la usa si está configurada. Si no es así, busca la variable **`JAVA_HOME`**. Si no se establece ninguno, Tomcat no se inicia. Sin embargo, para depurar Tomcat debe tener configurado **`JAVA_HOME`**, por lo que es mejor simplemente seguir adelante y configurarlo*.
 
-9. Abra su navegador web favorito y navegue hasta http://localhost:8080/. Debería ver una página que se parece a la Figura 2-1. Esto significa que Tomcat se está ejecutando y las JSP se están compilando correctamente con Java SE 8. Si esta pantalla no aparece o si observa un error en la consola de Java, debe verificar los pasos anteriores y posiblemente consultar la documentación de Tomcat.
+9. Abra su navegador web favorito y navegue hasta http://localhost:8080/. Debería ver una página que se parece a la Figura 2-1. Esto significa que Tomcat se está ejecutando y las **JSP** se están compilando correctamente con **Java SE 8**. Si esta pantalla no aparece o si observa un error en la consola de Java, debe verificar los pasos anteriores y posiblemente consultar la documentación de Tomcat.
 
-![02-01](images/02-01.png)
+<img width="892" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2e83b2f4-8b61-4890-9882-a321ba8bbc70">
 
-Cuando termine de usar Tomcat, puede detenerlo ejecutando el comando `bin\shutdown.bat` (o `bin/shutdown.sh`) en el símbolo del sistema en el directorio de inicio de Tomcat 8.0. La ventana de la consola de Java debería cerrarse y Tomcat se detendrá. Sin embargo, no hagas esto todavía; En la siguiente sección, explorará la implementación y la cancelación de la implementación de aplicaciones en Tomcat. (Si ya cerró Tomcat, no se preocupe. Es fácil volver a iniciarlo).
+Cuando termine de usar **Tomcat**, puede detenerlo ejecutando el comando **`bin\shutdown.bat`** (o **`bin/shutdown.sh`**) en el símbolo del sistema en el directorio de inicio de **Tomcat 8.0.** La ventana de la consola de Java debería cerrarse y Tomcat se detendrá. Sin embargo, no hagas esto todavía; En la siguiente sección, explorará la implementación y la cancelación de la implementación de aplicaciones en Tomcat. (Si ya cerró Tomcat, no se preocupe. Es fácil volver a iniciarlo).
 
-**ADVERTENCIA** *Las primeras versiones de Tomcat 8.0 no admiten la compilación de JSP para Java 8. Sabrá que este es el caso de su versión si ve "WARNING: Unknown source VM 1.8 ignored" o similar en la consola de Java. Si es así, debe completar los siguientes pasos para "Configurar un compilador JSP personalizado"*.
+**ADVERTENCIA** *Las primeras versiones de **Tomcat 8.0** no admiten la compilación de **JSP** para **Java 8**. Sabrá que este es el caso de su versión si ve **"WARNING: Unknown source VM 1.8 ignored"** o similar en la consola de Java. Si es así, debe completar los siguientes pasos para "Configurar un compilador JSP personalizado"*.
 
 #### CONFIGURAR UN COMPILADOR JSP PERSONALIZADO
 
-Tomcat incluye y utiliza el compilador Eclipse JDT para compilar archivos JavaServer Pages en aplicaciones web. (Aprenderá más sobre los archivos JSP y cómo se compilan en el Capítulo 4). Esto permite que Tomcat se ejecute correctamente sin requerir una instalación de JDK. Con el compilador de Eclipse, todo lo que necesita es una instalación simple de Java Runtime Edition (JRE). Debido a que las JSP suelen ser muy simples, el compilador de Eclipse suele ser bastante adecuado para cualquier entorno Tomcat. Sin embargo, existen circunstancias en las que no desea utilizar el compilador de Eclipse. Quizás encuentre un error en el compilador de Eclipse que impide que se compile una de sus JSP. O si aparece una nueva versión de Java con características de lenguaje que desea usar en sus JSP, podría pasar algún tiempo antes de que Eclipse tenga un compilador compatible. Cualquiera sea la razón que pueda tener, puede configurar fácilmente Tomcat para usar el compilador JDK en lugar de Eclipse.
+Tomcat incluye y utiliza el **compilador Eclipse JDT** para compilar archivos **JavaServer Pages** en aplicaciones web. (Aprenderá más sobre los archivos **JSP** y cómo se compilan en el Capítulo 4). Esto permite que Tomcat se ejecute correctamente sin requerir una instalación de **JDK**. Con el compilador de Eclipse, todo lo que necesita es una instalación simple de **Java Runtime Edition (JRE)**. Debido a que las **JSP** suelen ser muy simples, el compilador de Eclipse suele ser bastante adecuado para cualquier entorno Tomcat. Sin embargo, existen circunstancias en las que no desea utilizar el compilador de Eclipse. Quizás encuentre un error en el compilador de Eclipse que impide que se compile una de sus **JSP**. O si aparece una nueva versión de Java con características de lenguaje que desea usar en sus **JSP**, podría pasar algún tiempo antes de que Eclipse tenga un compilador compatible. Cualquiera sea la razón que pueda tener, puede configurar fácilmente Tomcat para usar el compilador JDK en lugar de Eclipse.
 
-1. Abra la copia de seguridad del archivo `conf/web.xml` de Tomcat y busque el `JspServlet` nuevamente.
+1. Abra la copia de seguridad del archivo **`conf/web.xml`** de Tomcat y busque el **`JspServlet`** nuevamente.
 
-2. Agregue el siguiente parámetro init, que le dice al Servlet que use Apache Ant con el compilador JDK para compilar JSP en lugar del compilador Eclipse.
+2. Agregue el siguiente init parameter, que le dice al Servlet que use **Apache Ant** con el compilador JDK para compilar JSP en lugar del compilador Eclipse.
 
-```html
+```xml
   <init-param>
     <param-name>compiler</param-name>
     <param-value>modern</param-value>
   </init-param>
 ```
         
-3. Tomcat no tiene una forma de usar el compilador JDK directamente, por lo que debe tener la última versión de Ant instalada en su sistema. También necesita agregar el archivo `tools.jar` del JDK y los archivos `ant.jar` y `ant-launcher.jar` de Ant a su classpath. La forma más fácil de hacer esto es crear un archivo `bin\setenv.bat` y agregarle la siguiente línea de código (ignore las nuevas líneas aquí), reemplazando las rutas de archivo según sea necesario para su sistema.
+3. Tomcat no tiene una forma de usar el compilador JDK directamente, por lo que debe tener la última versión de **Ant** instalada en su sistema. También necesita agregar el archivo **`tools.jar`** del JDK y los archivos **`ant.jar`** y **`ant-launcher.jar`** de **Ant** a su **classpath**. La forma más fácil de hacer esto es crear un archivo **`bin\setenv.bat`** y agregarle la siguiente línea de código (ignore las nuevas líneas aquí), reemplazando las rutas de archivo según sea necesario para su sistema.
 
 ```html
   set "CLASSPATH=C:\path\to\jdk8\lib\tools.jar;C:\path\to\ant\lib\ant.jar;
   C:\path\to\ant\lib\ant-launcher.jar"
 ```
 
-Por supuesto, esto se aplica solo a las máquinas con Windows. Para entornos que no sean de Windows, debe crear un archivo `bin/setenv.sh` con el siguiente contenido, reemplazando las rutas de archivo según sea necesario para su sistema:
+Por supuesto, esto se aplica solo a las máquinas con Windows. Para entornos que no sean de Windows, debe crear un archivo **`bin/setenv.sh`** con el siguiente contenido, reemplazando las rutas de archivo según sea necesario para su sistema:
 
 ```html
   export CLASSPATH=/path/to/jdk8/lib/tools.jar:/path/to/ant/lib/ant.jar:
   /path/to/ant/lib/ant-launcher.jar
 ```
 
-Al ejecutar Tomcat con una configuración de compilación JSP personalizada de este tipo, asegúrese de observar detenidamente la salida en los registros de Tomcat. Si Tomcat no puede encontrar Ant o Ant no puede encontrar el compilador JDK, Tomcat recurre automáticamente al compilador Eclipse y genera solo una advertencia en los registros.
+Al ejecutar Tomcat con una configuración de compilación **JSP** personalizada de este tipo, asegúrese de observar detenidamente la salida en los registros de Tomcat. Si Tomcat no puede encontrar Ant o Ant no puede encontrar el compilador JDK, Tomcat recurre automáticamente al compilador Eclipse y genera solo una advertencia en los registros.
 
 ## DEPLOYING Y UNDEPLOYING APPLICATIONS EN TOMCAT
 
 En esta sección aprenderá a deploy y undeploy la implementación de aplicaciones web Java EE en Tomcat. Tiene dos opciones para lograr esto:
 
-* Manualmente colocando la aplicación en el directorio `webapps`
+* Manualmente colocando la aplicación en el directorio **`webapps`**
 
 * Usando la aplicación del administrador de Tomcat
 
-Si aún no lo ha hecho, debe descargar la aplicación de muestra `sample-deployment.war` de la sección del Capítulo 2. Esto es lo que debe utilizar para practicar la deployment y undeployment.
+Si aún no lo ha hecho, debe descargar la aplicación de muestra **`sample-deployment.war`** de la sección del Capítulo 2. Esto es lo que debe utilizar para practicar la deployment y undeployment.
 
 ### REALIZAR MANUALMENTE UN DEPLOY Y UNDEPLOY
 
-Deploying una aplicación manualmente en Tomcat es simple: simplemente coloque el archivo `sample-deployment.war` en el directorio de aplicaciones web de Tomcat. Si Tomcat se está ejecutando, en unos momentos Tomcat debería descomprimir automáticamente el archivo de la aplicación en un directorio con el mismo nombre sin la extensión `.war`. Si Tomcat no se está ejecutando, puede iniciarlo y el archivo de la aplicación se descomprimirá cuando se inicie Tomcat. Cuando la aplicación se haya descomprimido, abra su navegador y navegue hasta http://localhost:8080/sample-deployment/. Debería ver una página que se parece a la Figura 2-2. Esto significa que la aplicación de muestra se ha implementado correctamente.
+Deploying una aplicación manualmente en Tomcat es simple: simplemente coloque el archivo **`sample-deployment.war`** en el directorio de aplicaciones web de Tomcat. Si Tomcat se está ejecutando, en unos momentos Tomcat debería descomprimir automáticamente el archivo de la aplicación en un directorio con el mismo nombre sin la extensión **`.war`**. Si Tomcat no se está ejecutando, puede iniciarlo y el archivo de la aplicación se descomprimirá cuando se inicie Tomcat. Cuando la aplicación se haya descomprimido, abra su navegador y navegue hasta http://localhost:8080/sample-deployment/. Debería ver una página que se parece a la Figura 2-2. Esto significa que la aplicación de muestra se ha implementado correctamente.
 
-![02-02](images/02-02.png)
+<img width="831" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7738144c-fe53-460a-90d6-f508e3f34249">
 
-Undeploying la aplicación es tan simple como revertir el proceso. Elimine el archivo `sample-deployment.war` y espere unos momentos. Cuando Tomcat detecta que el archivo fue eliminado, anula la implementación de la aplicación y elimina el directorio descomprimido, y la aplicación ya no será accesible desde su navegador. No es necesario apagar Tomcat para realizar esta tarea.
+Undeploying la aplicación es tan simple como revertir el proceso. Elimine el archivo **`sample-deployment.war`** y espere unos momentos. Cuando Tomcat detecta que el archivo fue eliminado, anula la implementación de la aplicación y elimina el directorio descomprimido, y la aplicación ya no será accesible desde su navegador. No es necesario apagar Tomcat para realizar esta tarea.
 
 #### USO DEL TOMCAT MANAGER
 
@@ -194,15 +194,15 @@ También puede implementar una aplicación Java EE mediante la interfaz web del 
 
 1. Abra su navegador y navegue hasta http://localhost:8080/manager/html.
 
-2. Cuando se le solicite un nombre de usuario y contraseña, ingrese **admin** como nombre de usuario y **admin** como contraseña (o lo que haya configurado en `conf/tomcat-users.xml`). La página que se le presenta debe parecerse a la Figura 2-3.
+2. Cuando se le solicite un nombre de usuario y contraseña, ingrese **admin** como nombre de usuario y **admin** como contraseña (o lo que haya configurado en **`conf/tomcat-users.xml`**). La página que se le presenta debe parecerse a la Figura 2-3.
 
-![02-03](images/02-03.png)
+<img width="808" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c7208c7d-0931-492c-9e0d-4adceef6e73b">
 
-3. Desplácese hacia abajo hasta la sección Deploy y busque el formulario "WAR file to deploy". En el campo "Select WAR file to upload", elija el archivo ` sample-deployment.war` de su sistema de archivos, como se muestra en la Figura 2-4, y luego haga clic en el botón Implementar. El archivo WAR se carga en Tomcat, que implementa la aplicación. El directorio `sample-deployment` se crea nuevamente en el directorio `webapps` de Tomcat. Cuando termine, Tomcat lo regresa a la lista de aplicaciones donde puede ver que la aplicación de muestra se ha implementado, como se muestra en la Figura 2-5.
+3. Desplácese hacia abajo hasta la sección Deploy y busque el formulario **"WAR file to deploy"**. En el campo **"Select WAR file to upload"**, elija el archivo **`sample-deployment.war`** de su sistema de archivos, como se muestra en la Figura 2-4, y luego haga clic en el botón Implementar. El archivo **WAR** se carga en Tomcat, que implementa la aplicación. El directorio **`sample-deployment`** se crea nuevamente en el directorio **`webapps`** de Tomcat. Cuando termine, Tomcat lo regresa a la lista de aplicaciones donde puede ver que la aplicación de muestra se ha implementado, como se muestra en la Figura 2-5.
 
-![02-04](images/02-04.png)
+<img width="809" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5b5a6370-3629-429d-b0f2-0ac4f7baba79">
 
-![02-05](images/02-05.png)
+<img width="807" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9d16ccca-fefe-4fdf-903e-4f5f531edbd0">
 
 4. Como antes, puede ir a http://localhost:8080/sample-deployment/ y ver la página de muestra en la aplicación de muestra.
 
@@ -212,7 +212,7 @@ Undeploying es igual de fácil de lograr. En la página del administrador de Tom
 
 ## DEBUGGING TOMCAT DESDE EL IDE
 
-Como desarrollador de Java EE, una de las habilidades más importantes que puede tener es la capacidad de implementar y depurar aplicaciones en Tomcat desde su IDE de Java. Esto le proporciona inconmensurables habilidades de resolución de problemas para determinar por qué una aplicación no se ejecuta o averiguar por qué ocurre el error que informó su cliente. Esta sección cubre la configuración, ejecución y depuración de aplicaciones web en Tomcat utilizando IntelliJ IDEA y Eclipse. Puede leer ambos conjuntos de instrucciones o simplemente el conjunto que pertenece al IDE que ha elegido; esa elección depende de usted.
+Como desarrollador de **Java EE**, una de las habilidades más importantes que puede tener es la capacidad de implementar y depurar aplicaciones en Tomcat desde su IDE de Java. Esto le proporciona inconmensurables habilidades de resolución de problemas para determinar por qué una aplicación no se ejecuta o averiguar por qué ocurre el error que informó su cliente. Esta sección cubre la configuración, ejecución y depuración de aplicaciones web en Tomcat utilizando IntelliJ IDEA y Eclipse. Puede leer ambos conjuntos de instrucciones o simplemente el conjunto que pertenece al IDE que ha elegido; esa elección depende de usted.
 
 En el resto de este libro hay muy pocas instrucciones para hacer esto. Esto mantiene el texto desacoplado de cualquier IDE en particular. Tampoco verá capturas de pantalla específicas de IDE después de este capítulo. Asegúrese de estar familiarizado y cómodo con la implementación y depuración de aplicaciones en Tomcat utilizando su IDE antes de continuar, incluso si eso significa repasar esta sección varias veces.
 
