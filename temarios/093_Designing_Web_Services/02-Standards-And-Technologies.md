@@ -441,50 +441,50 @@ String info = port.getWeather("New York");
 
 Estos ejemplos ilustran que un desarrollador tiene que codificar muy poca información de configuración e implementación. La implementación de **JAX-RPC** maneja los detalles de la creación de una solicitud **SOAP**, el manejo de la respuesta **SOAP**, etc., aliviando así al desarrollador de estas complejidades.
 
-### 2.2.3.  JavaTM API para XML Registries
+### 2.2.3. JavaTM API para XML Registries
 
-La API de Java TM para registros XML (JAXR), una API de Java para acceder a los registros comerciales, tiene una arquitectura flexible que admite UDDI y otras especificaciones de registro (como ebXML). La figura 2.7 ilustra la arquitectura JAXR.
+La **JavaTM API for XML Registries (JAXR)**, una Java API para acceder a los registros comerciales, tiene una arquitectura flexible que admite **UDDI** y otras especificaciones de registro (como **ebXML**). La figura 2.7 ilustra la arquitectura **JAXR**.
 
 **Figura 2.7. Arquitectura JAXR**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1daca7a6-2383-448c-8d73-6c294e3f62db)
 
+***Un cliente JAXR, que puede ser una aplicación Java independiente(stand-alone Java application) o un componente J2EE***, utiliza una implementación de la **JAXR API provided** proporcionada por **JAXR provider** para acceder a los registros comerciales. Un **JAXR provider** consta de dos partes: un **registry-specific JAXR provider**, que proporciona una implementación específica del registro de la API, y un **JAXR pluggable provider**, que implementa las características de la API que son independientes del tipo de registro. El ***pluggable provider*** oculta los detalles de los ***registry-specific providers*** de los clientes.
 
-Un cliente JAXR, que puede ser una aplicación Java independiente o un componente J2EE, utiliza una implementación de la API JAXR proporcionada por un proveedor JAXR para acceder a los registros comerciales. Un proveedor JAXR consta de dos partes: un proveedor JAXR específico del registro, que proporciona una implementación específica del registro de la API, y un proveedor conectable de JAXR, que implementa las características de la API que son independientes del tipo de registro. El proveedor conectable oculta los detalles de los proveedores específicos del registro de los clientes.
+El ***registry-specific provider plugs*** en el ***pluggable provider*** y actúa sobre las solicitudes y respuestas entre el cliente y el registro de destino. El ***registry-specific provider*** convierte las solicitudes de los clientes en un formato que el ***target registry*** entiende y envía las solicitudes al ***registry provider*** mediante ***registry-specific provider***. Convierte las respuestas del ***registry provider*** de un ***registry-specific*** a una respuesta **JAXR** y luego pasa la respuesta al cliente.
 
-El proveedor específico del registro se conecta al proveedor conectable y actúa sobre las solicitudes y respuestas entre el cliente y el registro de destino. El proveedor específico del registro convierte las solicitudes de los clientes en un formato que el registro de destino entiende y envía las solicitudes al proveedor del registro mediante protocolos específicos del registro. Convierte las respuestas del proveedor de registro de un formato específico de registro a una respuesta JAXR y luego pasa la respuesta al cliente.
+Consulte la especificación **JAXR** para obtener más información.
 
-Consulte la especificación JAXR para obtener más información.
+**2.2.4. SOAP with Attachments API for JavaTM - SOAP con API de archivos adjuntos para Java TM**
 
-**2.2.4. SOAP con API de archivos adjuntos para Java TM**
+**SOAP with Attachments API for JavaTM (SAAJ)**, que permite a los desarrolladores producir y consumir mensajes conforme a la especificación **SOAP 1.1** y la nota SOAP con archivos adjuntos, proporciona una abstracción para manejar mensajes **SOAP** con archivos adjuntos. Los desarrolladores avanzados pueden usar **SAAJ** para que sus aplicaciones operen directamente con mensajes **SOAP**. Los archivos adjuntos pueden ser documentos **XML** completos, fragmentos **XML** o archivos adjuntos de tipo **MIME**. Además, **SAAJ** permite a los desarrolladores habilitar la compatibilidad con otros tipos de **MIME**. Las tecnologías **JAX**, como **JAX-RPC**, utilizan internamente **SAAJ** para ocultar las complejidades de **SOAP** a los desarrolladores.
 
-SOAP con API de archivos adjuntos para Java TM (SAAJ), que permite a los desarrolladores producir y consumir mensajes conforme a la especificación SOAP 1.1 y la nota SOAP con archivos adjuntos, proporciona una abstracción para manejar mensajes SOAP con archivos adjuntos. Los desarrolladores avanzados pueden usar SAAJ para que sus aplicaciones operen directamente con mensajes SOAP. Los archivos adjuntos pueden ser documentos XML completos, fragmentos XML o archivos adjuntos de tipo MIME. Además, SAAJ permite a los desarrolladores habilitar la compatibilidad con otros tipos de MIME. Las tecnologías JAX, como JAX-RPC, utilizan internamente SAAJ para ocultar las complejidades de SOAP a los desarrolladores.
+**SAAJ** permite los siguientes modos de intercambio de mensajes:
 
-SAAJ permite los siguientes modos de intercambio de mensajes:
+* ***Synchronous request-response messaging - Mensajería de solicitud-respuesta síncrona***: El cliente envía un mensaje y luego espera la respuesta
 
-Mensajería de solicitud-respuesta síncrona : el cliente envía un mensaje y luego espera la respuesta
+* ***One-way asynchronous messaging (also called fire and forget) - Mensajería asíncrona unidireccional(también llamada disparar y olvidar)***: El cliente envía un mensaje y continúa con su procesamiento sin esperar una respuesta
 
-Mensajería asíncrona unidireccional (también llamada disparar y olvidar) : el cliente envía un mensaje y continúa con su procesamiento sin esperar una respuesta
+Consulte la especificación **SAAJ** para obtener más información.
 
-Consulte la especificación SAAJ para obtener más información.
+### 2.2.5. Web Service Technologies Integrated in J2EE Platform - Tecnologías de Servicios Web Integradas en Plataforma J2EE
 
-### 2.2.5. Tecnologías de Servicios Web Integradas en Plataforma J2EE
+Hasta ahora, hemos examinado cómo las tecnologías **Java XML** admiten varios estándares de Web service. Ahora veamos cómo la plataforma J2EE 1.4 combina estas tecnologías en una plataforma estándar que es portátil e integrada. Las tecnologías **Java XML** no solo están integradas en la plataforma, sino que la plataforma también define las responsabilidades relacionadas con el Web service para los contenedores, artefactos y componentes de puertos web y EJB existentes. La plataforma J2EE 1.4 garantiza la portabilidad al integrar las tecnologías **Java XML** como extensiones de los contenedores J2EE, los formatos de empaquetado, los modelos de implementación y los servicios de tiempo de ejecución existentes.
 
-Hasta ahora, hemos examinado cómo las tecnologías Java XML admiten varios estándares de servicios web. Ahora veamos cómo la plataforma J2EE 1.4 combina estas tecnologías en una plataforma estándar que es portátil e integrada. Las tecnologías XML de Java no solo están integradas en la plataforma, sino que la plataforma también define las responsabilidades relacionadas con el servicio web para los contenedores, artefactos y componentes de puertos web y EJB existentes. La plataforma J2EE 1.4 garantiza la portabilidad al integrar las tecnologías XML de Java como extensiones de los contenedores J2EE, los formatos de empaquetado, los modelos de implementación y los servicios de tiempo de ejecución existentes.
+Un Web service en la plataforma J2EE 1.4 se puede implementar de la siguiente manera:
 
-Un servicio web en la plataforma J2EE 1.4 se puede implementar de la siguiente manera:
+* ***Uso de un JAX-RPC service endpoint***: La implementación del servicio es una clase Java en el Web container. El servicio se adhiere al ciclo de vida del servlet y los requisitos de simultaneidad del Web container.
 
-Uso de un punto final de servicio JAX-RPC : la implementación del servicio es una clase Java en el contenedor web. El servicio se adhiere al ciclo de vida del servlet y los requisitos de simultaneidad del contenedor web.
+* ***Uso de un EJB service endpoint***: La implementación del servicio es un stateless session bean - bean de sesión sin estado en un contenedor EJB. El servicio cumple con los requisitos de simultaneidad y ciclo de vida del contenedor EJB.
 
-Uso de un punto final de servicio EJB : la implementación del servicio es un bean de sesión sin estado en un contenedor EJB. El servicio cumple con los requisitos de simultaneidad y ciclo de vida del contenedor EJB.
+En cualquier caso, el servicio se hace portátil con la definición de un componente de puerto, que proporciona la vista exterior del servicio para la implementación del Web service. Un componente de puerto consta de:
 
-En cualquier caso, el servicio se hace portátil con la definición de un componente de puerto, que proporciona la vista exterior del servicio para la implementación del servicio web. Un componente de puerto consta de:
+* Un documento **WSDL** que describe el Web service que sus clientes pueden usar
 
-Un documento WSDL que describe el servicio web que sus clientes pueden usar
+* Una service endpoint interface que define los métodos del Web service que están disponibles para los clientes
 
-Una interfaz de punto final de servicio que define los métodos del servicio web que están disponibles para los clientes
-
-Un bean de implementación de servicio que implementa la lógica empresarial de los métodos definidos en la interfaz de punto final de servicio. La implementación puede ser una clase Java en el contenedor Web o un bean de sesión sin estado en el contenedor EJB.
-
+* Un bean de implementación de servicio que implementa la lógica empresarial de los métodos definidos en la service endpoint interface. La implementación puede ser una clase Java en el contenedor Web o un bean de sesión sin estado(stateless session bean) en el contenedor EJB.
+AQUUIIIIII
 Las interfaces de servicio específicas del contenedor, creadas por el contenedor J2EE, proporcionan stub estático y proxies dinámicos para todos los puertos. Un cliente de un servicio web de plataforma J2EE puede ser un par de servicio web, un componente J2EE o una aplicación independiente. No se requiere que el cliente sea un servicio Web o una aplicación implementada en Java.
 
 ¿Cómo utilizan los clientes un servicio web de la plataforma J2EE? Aquí hay un ejemplo de un componente J2EE que es un cliente de algún servicio web. Tal cliente usa JNDI para buscar el servicio, luego accede al puerto del servicio web usando métodos definidos en la interfaz javax.xml.rpc.Service . El cliente accede a la funcionalidad del servicio mediante su interfaz de extremo de servicio. Un cliente que es un componente J2EE solo necesita considerar que la implementación del servicio web no tiene estado. Por lo tanto, el cliente no puede depender del estado de retención del servicio entre invocaciones de servicio sucesivas. Un cliente de componente J2EE no tiene que conocer ningún otro detalle del servicio web, como por ejemplo, cómo accede la interfaz del servicio al servicio, la implementación del servicio, cómo se generan sus stubs, etc.
