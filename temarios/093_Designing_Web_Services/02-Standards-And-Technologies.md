@@ -161,55 +161,54 @@ El ejemplo de código 2.5 muestra un ejemplo simple pero completo de una solicit
 Este ejemplo muestra cómo se codifica un mensaje SOAP utilizando XML e ilustra algunos elementos y atributos SOAP. Todos los mensajes SOAP deben tener un elemento **`Envelope`** y deben definir dos namespaces: Un namespace connota el **SOAP envelope (`xmlns:SOAP-ENV`)** y el otro indica la codificación **SOAP encoding (`SOAP-ENV:encodingStyle`)**. Los SOAP messages sin la especificación adecuada del namespace se consideran messages no válidos. El atributo **`encodingStyle`** es importante, ya que se usa para especificar reglas de serialización para el SOAP message. Además, no puede haber referencias de DTD desde dentro de los SOAP message.
 
 Si bien es opcional el elemento **`Header`**, cuando se usa, debe ser el first child inmediato después del **`Envelope`**. El elemento **`Header`** proporciona una forma de extender el mensaje SOAP al especificar información adicional, como autenticación y transacciones. Especificar esta información adicional como parte del **`Header`** le dice al destinatario del mensaje cómo manejar el mensaje.
-AQUIIIIIIIIIIIIII
-Hay muchos atributos que se pueden usar en el elemento de encabezado SOAP . Por ejemplo, el atributo actor del elemento Header permite que un mensaje SOAP pase a través de procesos intermedios en ruta hacia su destino final. Cuando el atributo actor está ausente, el destinatario es el destino final del mensaje SOAP. De manera similar, se pueden usar muchos otros atributos. Sin embargo, este capítulo no aborda estos detalles.
 
-El elemento Body , que debe estar presente en todos los mensajes SOAP, debe seguir inmediatamente después del elemento Header , si está presente. De lo contrario, el elemento Body debe seguir inmediatamente después del inicio del elemento Envelope . El cuerpo contiene la especificación de la solicitud real (como las llamadas a métodos). El elemento Fault en SOAP Body permite el manejo de errores para solicitudes de mensajes.
+Hay muchos atributos que se pueden usar en el elemento **`Header`** de SOAP. Por ejemplo, el atributo **`actor`** del elemento **`Header`** permite que un SOAP message pase a través de procesos intermedios en ruta hacia su destino final. Cuando el atributo **`actor`** está ausente, el destinatario es el destino final del SOAP message. De manera similar, se pueden usar muchos otros atributos. Sin embargo, este capítulo no aborda estos detalles.
 
-Tenga en cuenta que este capítulo no analiza los detalles de los elementos de encabezado , los atributos y otras funciones adicionales, como SOAP con archivos adjuntos y enlace HTTP, aunque forman parte del estándar SOAP. Los lectores interesados ​​deben consultar las especificaciones de SOAP.
+El elemento **`Body`**, que debe estar presente en todos los SOAP messages, debe seguir inmediatamente después del elemento **`Header`**, si está presente. De lo contrario, el elemento **`Body`** debe seguir inmediatamente después del inicio del elemento **`Envelope`**. El **`Body`** contiene la especificación del actual request(como las llamadas a métodos). El elemento **`Fault`** en SOAP **`Body`** permite el manejo de errores para solicitudes de mensajes.
 
-### 2.1.3. Normas de registro
+Tenga en cuenta que este capítulo no analiza los detalles de los elementos **`Header`**, los atributos y otras funciones adicionales, como SOAP con archivos adjuntos y enlace HTTP, aunque forman parte del estándar SOAP. Los lectores interesados deben consultar las especificaciones de SOAP.
 
-La especificación Universal Description, Discovery, and Integration (UDDI) define una forma estándar para registrar, cancelar el registro y buscar servicios web. UDDI es una especificación basada en estándares para el registro, la descripción y el descubrimiento de servicios web. Al igual que las páginas amarillas de un sistema telefónico, el único propósito de un registro UDDI es permitir que los proveedores registren sus servicios y que los solicitantes encuentren servicios. Una vez que un solicitante encuentra un servicio, el registro ya no tiene ningún papel que desempeñar entre el solicitante y el proveedor.
+### 2.1.3. Registry Standards- Normas de registro
 
-La figura 2.2 muestra cómo UDDI permite la descripción dinámica, el descubrimiento y la integración de servicios web. Un proveedor de servicios web registra sus servicios con el registro UDDI. Un solicitante de servicios web busca los servicios requeridos en el registro UDDI y, cuando encuentra un servicio, el solicitante se vincula directamente con el proveedor para usar el servicio.
+La especificación **Universal Description, Discovery, and Integration (UDDI)** define una forma estándar para registrar, cancelar el registro y buscar Web services. ***UDDI** es una especificación basada en estándares para el registro, la descripción y el descubrimiento de Web services*. Al igual que las páginas amarillas de un sistema telefónico, el único propósito de un registro **UDDI** es permitir que los proveedores registren sus servicios y que los solicitantes encuentren servicios. Una vez que un solicitante encuentra un servicio, el registro ya no tiene ningún papel que desempeñar entre el solicitante y el proveedor.
+
+La figura 2.2 muestra cómo **UDDI** permite la descripción dinámica, el descubrimiento y la integración de Web services. Un proveedor de Web services registra sus servicios con el registro **UDDI**. Un solicitante de Web services busca los servicios requeridos en el registro **UDDI** y, cuando encuentra un servicio, el solicitante se vincula directamente con el proveedor para usar el servicio.
 
 **Figura 2.2. Rol de un Registry en un Servicio Web**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/02f65543-0518-4213-8947-80a1a9f81db1)
 
+La especificación **UDDI** define un **XML schema** para SOAP messages y APIs para aplicaciones que desean usar el registro. Un proveedor que registre un Web service con **UDDI** debe proporcionar información comercial, de servicio, vinculante(binding) y técnica sobre el servicio. Esta información se almacena en un formato común que consta de tres partes:
 
-La especificación UDDI define un esquema XML para mensajes SOAP y API para aplicaciones que desean usar el registro. Un proveedor que registre un servicio web con UDDI debe proporcionar información comercial, de servicio, vinculante y técnica sobre el servicio. Esta información se almacena en un formato común que consta de tres partes:
+1. ***White pages***: Describen información comercial general, como nombre, descripción, números de teléfono, etc.
 
-Páginas blancas : describen información comercial general, como nombre, descripción, números de teléfono, etc.
+* ***Yellow pages***: Describen el negocio en términos de taxonomías estándar. Esta información debe seguir las categorizaciones industriales estándar para que los servicios puedan ubicarse por industria, categoría o ubicación geográfica.
 
-Páginas amarillas : describen el negocio en términos de taxonomías estándar. Esta información debe seguir las categorizaciones industriales estándar para que los servicios puedan ubicarse por industria, categoría o ubicación geográfica.
+* ***Green pages***: Enumeran el servicio, la vinculación y la información técnica específica del servicio
 
-Páginas verdes : enumeran el servicio, la vinculación y la información técnica específica del servicio
+La especificación **UDDI** incluye dos categorías de API para acceder a los servicios **UDDI** desde las aplicaciones:
 
-La especificación UDDI incluye dos categorías de API para acceder a los servicios UDDI desde las aplicaciones:
+1. ***Inquiry APIs***: Habilite la búsqueda y exploración de información de registro
 
-API de consulta : habilite la búsqueda y exploración de información de registro
+2. ***Publishers APIs***: Permite que las aplicaciones registren servicios en el registro
 
-API de editores : permite que las aplicaciones registren servicios en el registro
+Las API de **UDDI** se comportan de manera síncrona. Además, para garantizar que un proveedor o solicitante de Web service pueda usar el registro, **UDDI** usa **SOAP** como protocolo base. Tenga en cuenta que **UDDI** es una especificación para un registro, no un repositorio. Como registro, funciona como un catálogo, lo que permite a los solicitantes encontrar los servicios disponibles. *Un registro no es un repositorio porque no contiene los servicios en sí*.
 
-Las API de UDDI se comportan de manera síncrona. Además, para garantizar que un proveedor o solicitante de servicios web pueda usar el registro, UDDI usa SOAP como protocolo base. Tenga en cuenta que UDDI es una especificación para un registro, no un repositorio. Como registro, funciona como un catálogo, lo que permite a los solicitantes encontrar los servicios disponibles. Un registro no es un repositorio porque no contiene los servicios en sí.
+### 2.1.4. Web Services Description Language
 
-### 2.1.4. Lenguaje de descripción de servicios web
+El **Web Services Description Language(WSDL)** define una forma estándar de especificar los detalles de un Web service. Es un **XML schema** de propósito general que se puede usar para especificar detalles de interfaces de Web service, enlaces y otros detalles de implementación. Al tener una forma estándar de especificar los detalles de un servicio, los clientes que no tienen conocimiento previo del servicio aún pueden usar ese Web service.
 
-El lenguaje de descripción de servicios web (WSDL) define una forma estándar de especificar los detalles de un servicio web. Es un esquema XML de propósito general que se puede usar para especificar detalles de interfaces de servicios web, enlaces y otros detalles de implementación. Al tener una forma estándar de especificar los detalles de un servicio, los clientes que no tienen conocimiento previo del servicio aún pueden usar ese servicio web.
+**WSDL** especifica una gramática que describe los Web service como una colección de puntos finales de comunicación, llamados *ports(puertos)*. Los datos que se intercambian se especifican como parte de los mensajes. Todo tipo de acción permitida en un endpoint se considera una operación. Las colecciones de operaciones posibles en un endpoint se agrupan en tipos de puerto. Los mensajes, las operaciones y los tipos de puerto son definiciones abstractas, lo que significa que las definiciones no contienen detalles específicos de la implementación para permitir su reutilización.
 
-WSDL especifica una gramática que describe los servicios web como una colección de puntos finales de comunicación, llamados puertos. Los datos que se intercambian se especifican como parte de los mensajes. Todo tipo de acción permitida en un punto final se considera una operación. Las colecciones de operaciones posibles en un punto final se agrupan en tipos de puerto. Los mensajes, las operaciones y los tipos de puerto son definiciones abstractas, lo que significa que las definiciones no contienen detalles específicos de la implementación para permitir su reutilización.
-
-Las especificaciones de protocolo y formato de datos para un tipo de puerto en particular se especifican como un enlace. Un puerto se define asociando una dirección de red con un enlace reutilizable y una colección de puertos define un servicio. Además, WSDL especifica un mecanismo de vinculación común para reunir todos los formatos de datos y protocolos con un mensaje, una operación o un punto final abstractos. Consulte la Figura 2.3 .
+Las especificaciones de protocolo y formato de datos para un tipo de puerto en particular se especifican como un enlace. Un puerto se define asociando una dirección de red con un enlace reutilizable y una colección de puertos define un servicio. Además, **WSDL** especifica un mecanismo de vinculación común para reunir todos los formatos de datos y protocolos con un mensaje, una operación o un punto final abstractos. Consulte la Figura 2.3 .
 
 **Figura 2.3. Descripción del servicio WSDL**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/644ea4e2-0851-43fe-b364-9c64820c67bf)
 
-El ejemplo de código 2.6 muestra un documento WSDL para un servicio web meteorológico que devuelve la información meteorológica de una ciudad determinada. El servicio web, que utiliza SOAP como protocolo de comunicación, espera recibir el nombre de la ciudad como datos de tipo String y envía datos de tipo String como respuesta.
+El ejemplo de código 2.6 muestra un documento **WSDL** para un Web service meteorológico que devuelve la información meteorológica de una ciudad determinada. El Web service, que utiliza **SOAP** como protocolo de comunicación, espera recibir el nombre de la ciudad como datos de tipo **`String`** y envía datos de tipo **`String`** como respuesta.
 
-**Ejemplo de código 2.6. Documento WSDL para servicio web meteorológico**
+**Ejemplo de código 2.6. Documento WSDL para Weather Web Service**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -258,8 +257,7 @@ El ejemplo de código 2.6 muestra un documento WSDL para un servicio web meteoro
    </service>
 </definitions>
 ```
-
-
+AQUIIIII
 Un documento WSDL completo consta de un conjunto de definiciones que comienzan con un elemento de definiciones raíz seguido de seis definiciones de elementos individuales ( tipos , mensaje , tipo de puerto , enlace , puerto y servicio ) que describen los servicios.
 
 El elemento de tipos define los tipos de datos contenidos en los mensajes intercambiados como parte del servicio. Los tipos de datos pueden ser tipos simples, complejos, derivados o de matriz. Los tipos, ya sean definiciones de esquema o referencias, a los que se hace referencia en el elemento de mensaje de un documento WSDL se definen en el elemento de tipo del documento WSDL.
