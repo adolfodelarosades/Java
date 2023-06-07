@@ -277,159 +277,175 @@ Hasta ahora hemos examinado los estándares existentes, que satisfacen las neces
 
 Ahora que hemos examinado los estándares de Web services, veamos cómo J2EE admite estos estándares aceptados.
 
-## 2.2. J2EE: la plataforma integrada para servicios web
-A partir de la plataforma J2EE 1.4, con su enfoque principal en los servicios web, las tecnologías Java-XML existentes se integran en una plataforma consolidada de forma estándar, lo que permite que las aplicaciones se expongan como servicios web a través de una interfaz SOAP/HTTP. Las siguientes secciones describen brevemente las adiciones específicas del servicio web realizadas en la plataforma J2EE 1.4. ( El Capítulo 1 incluye una descripción general de la plataforma J2EE 1.4. Consulte la especificación J2EE 1.4 que se enumera en " Referencias y recursos " en la página xx para obtener información completa sobre la plataforma).
+## 2.2. J2EE: la Plataforma Integrada para Web Services
 
-Esta sección pretende brindarle una descripción general de las diversas adiciones específicas del servicio web en la plataforma J2EE. Los próximos tres capítulos cubren cómo usar estas tecnologías en detalle.
+A partir de la plataforma J2EE 1.4, con su enfoque principal en los Web services, las tecnologías **Java-XML** existentes se integran en una plataforma consolidada de forma estándar, lo que permite que las aplicaciones se expongan como Web services a través de una interfaz **SOAP/HTTP**. Las siguientes secciones describen brevemente las ***adiciones Web service-specific en la plataforma J2EE 1.4.*** ( El Capítulo 1 incluye una descripción general de la plataforma J2EE 1.4. Consulte la especificación J2EE 1.4 que se enumera en “References and Resources” en la página xx para obtener información completa sobre la plataforma).
 
-2.2.1. API de Java para el procesamiento de XML
-Java TM APIs for XML Processing (JAXP) es un conjunto independiente de proveedores de APIs ligeras para analizar o procesar documentos XML. Debido a que XML es el lenguaje común que permite los servicios web, un analizador XML es necesario para procesar los mensajes (los documentos XML) intercambiados entre los servicios web. La Figura 2.4 muestra cómo la API JAXP abstrae las implementaciones del analizador de la aplicación del usuario.
+Esta sección pretende brindarle una descripción general de las diversas adiciones Web service-specific en la plataforma J2EE. Los próximos tres capítulos cubren cómo usar estas tecnologías en detalle.
 
-Figura 2.4. Uso de JAXP para abstraer implementaciones del analizador desde la aplicación del usuario
+### 2.2.1.  Java APIs para XML Processing
 
+**JavaTM APIs for XML Processing (JAXP)** es un conjunto independiente de proveedores de APIs ligeras para analizar o procesar documentos **XML**. Debido a que **XML** es el lenguaje común que permite los Web services, un **XML parser** es necesario para procesar los mensajes (los documentos XML) intercambiados entre los Web services. La Figura 2.4 muestra cómo la **API JAXP** abstrae las implementaciones del parser(analizador) de la aplicación del usuario.
 
+**Figura 2.4. Uso de JAXP para Abstract Parser Implementations desde User Application**
 
-Tenga en cuenta que la API JAXP no es nueva en la plataforma J2EE 1.4. Ha sido parte de las versiones anteriores de las plataformas J2EE y Java TM 2 Standard Edition (J2SE TM ). En la implementación de la plataforma J2EE 1.4, JAXP ha agregado soporte para esquemas XML.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/40998bac-ee11-4e43-ad3f-6833a754bd1d)
 
-Aunque tiene su propia implementación de referencia, JAXP permite que se conecten analizadores que cumplen con la especificación JAXP de otros proveedores. JAXP vuelve a analizar un documento XML usando su propia implementación si no se proporciona otra implementación. JAXP procesa documentos XML utilizando los modelos SAX o DOM, y permite el uso de motores XSLT durante el procesamiento de documentos. (XSLT, que significa transformación de lenguaje de hoja de estilo extensible, se utiliza para transformar documentos XML de un formato a otro).
+***Tenga en cuenta que la API JAXP no es nueva en la plataforma J2EE 1.4. Ha sido parte de las versiones anteriores de las plataformas J2EE y Java TM 2 Standard Edition (J2SE TM). En la implementación de la plataforma J2EE 1.4, JAXP ha agregado soporte para esquemas XML***.
 
-Las principales API de JAXP están disponibles a través del paquete javax.xml.parsers , que proporciona dos interfaces de fábrica independientes del proveedor: una interfaz para procesamiento SAX y otra para procesamiento DOM. Estas interfaces de fábrica permiten el uso de otras implementaciones JAXP.
+Aunque tiene su propia implementación de referencia, **JAXP** permite que se conecten parsers que cumplen con la **especificación JAXP** de otros proveedores. **JAXP** vuelve a analizar un documento XML usando su propia implementación si no se proporciona otra implementación. **JAXP** procesa documentos **XML** utilizando los modelos **SAX** o **DOM**, y permite el uso de motores **XSLT** durante el procesamiento de documentos. (**XSLT**, que significa **eXtensible Stylesheet Language Transformation**, ***se utiliza para transformar documentos XML de un formato a otro***).
 
-La Figura 2.5 muestra cómo funcionan los analizadores SAX y DOM. SAX procesa documentos en serie, convirtiendo los elementos de un documento XML en una serie de eventos. Cada elemento en particular genera un evento, con eventos únicos que representan varias partes del documento. Los controladores de eventos proporcionados por el usuario manejan los eventos y toman las medidas adecuadas. El procesamiento de SAX es rápido debido a su acceso en serie y a los pequeños requisitos de almacenamiento de memoria. El ejemplo de código 2.7 muestra cómo usar las API de JAXP y SAX para procesar un documento XML.
+Las principales **JAXP APIs** están disponibles a través del paquete **`javax.xml.parsers`**, que ***proporciona dos factory interfaces*** independientes del proveedor: ***una interfaz para procesamiento SAX y otra para procesamiento DOM***. Estas factory interfaces permiten el uso de otras implementaciones JAXP.
 
-Ejemplo de código 2.7. Uso de SAX para procesar un documento XML
-clase pública AnAppThatUsesSAXForXMLProcessing
-       extiende DefaultHandler {
+La Figura 2.5 muestra cómo funcionan los ***analizadores(parsers) SAX y DOM***. ***SAX procesa documentos en serie, convirtiendo los elementos de un documento XML en una serie de eventos***. Cada elemento en particular genera un evento, con eventos únicos que representan varias partes del documento. Los controladores de eventos proporcionados por el usuario manejan los eventos y toman las medidas adecuadas. El procesamiento de SAX es rápido debido a su acceso en serie y a los pequeños requisitos de almacenamiento de memoria. El ejemplo de código 2.7 muestra cómo usar las **API de JAXP y SAX** para procesar un **documento XML**.
+
+**Ejemplo de código 2.7. Uso de SAX para procesar un documento XML**
+
+```java
+public class AnAppThatUsesSAXForXMLProcessing
+       extends DefaultHandler {
 
    public void someMethodWhichReadsXMLDocument() {
 
-      // Obtenga una SAX PArser Factory y establezca la validación en verdadero
+      // Get a SAX PArser Factory and set validation to true
       SAXParserFactory spf = SAXParserFactory.newInstance();
-      spf.setValidating(verdadero);
+      spf.setValidating(true);
 
-      // Crear un JAXP SAXParser
+      // Create a JAXP SAXParser
       SAXParser saxParser = spf.newSAXParser();
 
-      // Obtener el SAX XMLReader encapsulado
+      // Get the encapsulated SAX XMLReader
       xmlReader = saxParser.getXMLReader();
 
-      // Establecer el ContentHandler del XMLReader
-      xmlReader.setContentHandler(esto);
+      // Set the ContentHandler of the XMLReader
+      xmlReader.setContentHandler(this);
 
-      // Dile al XMLReader que analice el documento XML
+      // Tell the XMLReader to parse the XML document
       xmlReader.parse(XMLDocumentName);
    }
 }
+```
 
-Figura 2.5. API de analizador XML basadas en SAX y DOM
+**Figura 2.5. SAX- y DOM-Based XML Parser APIs**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/294830d4-8d45-4ded-99f6-ddb1fd6fdb06)
 
+***El procesamiento DOM crea un árbol a partir de los elementos del documento XML***. Aunque esto requiere más memoria (para almacenar el árbol), esta función permite el acceso aleatorio al contenido del documento y permite dividir los documentos en fragmentos, lo que facilita el procesamiento del código DOM. ***DOM facilita las creaciones, los cambios o las adiciones a los documentos XML entrantes***. El ejemplo de código 2.8 muestra cómo utilizar las **JAXP APIs** y **DOM** para procesar un documento XML.
 
-El procesamiento DOM crea un árbol a partir de los elementos del documento XML. Aunque esto requiere más memoria (para almacenar el árbol), esta función permite el acceso aleatorio al contenido del documento y permite dividir los documentos en fragmentos, lo que facilita el procesamiento del código DOM. DOM facilita las creaciones, los cambios o las adiciones a los documentos XML entrantes. El ejemplo de código 2.8 muestra cómo utilizar las API de JAXP y el DOM para procesar un documento XML.
+**Ejemplo de código 2.8. Uso de DOM para Procesar un Documento XML**
 
-Ejemplo de código 2.8. Uso de DOM para procesar un documento XML
-clase pública AnAppThatUsesDOMForXMLProcessing {
+```java
+public class AnAppThatUsesDOMForXMLProcessing {
 
    public void someMethodWhichReadsXMLDocument() {
 
-      // Paso 1: crear una DocumentBuilderFactory
+      // Step 1: create a DocumentBuilderFactory
       DocumentBuilderFactory dbf =
                 DocumentBuilderFactory.newInstance();
-      dbf.setValidating(verdadero);
-      // Paso 2: crear un DocumentBuilder que satisfaga
-      // las restricciones especificadas por DocumentBuilderFactory
+      dbf.setValidating(true);
+      // Step 2: create a DocumentBuilder that satisfies
+      // the constraints specified by the DocumentBuilderFactory
       db = dbf.newDocumentBuilder();
 
-      // Paso 3: analizar el archivo de entrada
-      Documento doc = db.parse(XMLDocumentFile);
+      // Step 3: parse the input file
+      Document doc = db.parse(XMLDocumentFile);
 
-      // Analizar el árbol creado - nodo por nodo
+      // Parse the tree created - node by node
    }
 }
+```
 
-2.2.2. API de Java TM para RPC basado en XML
-Java TM API para RPC basado en XML (JAX-RPC) admite RPC basado en XML para plataformas Java y J2EE. Habilita un mecanismo tradicional de llamada a procedimiento remoto (RPC) cliente-servidor mediante un protocolo basado en XML. JAX-RPC permite a los desarrolladores de tecnología Java desarrollar servicios web interoperables y portátiles basados ​​en SOAP. Los desarrolladores utilizan el modelo de programación JAX-RPC para desarrollar puntos finales de servicios web basados ​​en SOAP, junto con sus correspondientes descripciones WSDL y clientes. Una implementación de servicio web basada en JAX-RPC puede interactuar con clientes que no están basados ​​en Java. De manera similar, un cliente basado en JAX-RPC puede interactuar con una implementación de servicio web no basada en Java.
+### 2.2.2. JavaTM API para XML-Based RPC
 
-Para escenarios típicos de servicios web, el uso de JAX-RPC reduce la complejidad para los desarrolladores al:
+**JavaTM API for XML-based RPC (JAX-RPC)** admite **XML-based RPC for Java and J2EE platforms**. Habilita un mecanismo tradicional **client-server remote procedure call (RPC)** mediante un protocolo basado en XML. **JAX-RPC** permite a los desarrolladores de tecnología Java desarrollar Web services interoperables y portátiles basados en **SOAP**. Los desarrolladores utilizan el modelo de programación **JAX-RPC** para desarrollar puntos finales de Web services basados en **SOAP**, junto con sus correspondientes descripciones **WSDL** y clientes. Una implementación de  Web services basada en **JAX-RPC** puede interactuar con clientes que no están basados en Java. De manera similar, un cliente basado en **JAX-RPC** puede interactuar con una implementación de Web services no basada en Java.
 
-Estandarización de la creación de solicitudes y respuestas SOAP
+Para escenarios típicos de Web services, el uso de **JAX-RPC** reduce la complejidad para los desarrolladores al:
 
-Estandarización de clasificación y desclasificación de parámetros y otros detalles específicos de implementación y tiempo de ejecución
+* Estandarización de la creación de solicitudes y respuestas SOAP
+* Estandarización de clasificación y desclasificación de parámetros y otros detalles específicos de implementación y tiempo de ejecución
+* Eliminar estas tareas de creación y clasificación/desclasificación de SOAP de las responsabilidades de un desarrollador al proporcionar estas funciones en una biblioteca o una herramienta
+* Brindar soporte estandarizado para diferentes escenarios de mapeo, incluidos ***XML a Java***, ***Java a XML***, ***WSDL a Java*** y mapeos de ***Java a WSDL***.
 
-Eliminar estas tareas de creación y clasificación/desclasificación de SOAP de las responsabilidades de un desarrollador al proporcionar estas funciones en una biblioteca o una herramienta
+**JAX-RPC** también define asignaciones estándar entre **WSDL/XML** y **Java**, lo que le permite admitir un conjunto de tipos enriquecido. Sin embargo, los desarrolladores pueden usar tipos que no tienen asignaciones de tipo estándar. **JAX-RPC** define un conjunto de API para un framework de mapeo de tipos extensible que los desarrolladores pueden usar para tipos sin mapeos de tipos estándar. Con estas API, es posible desarrollar e implementar serializadores y deserializadores conectables para un mapeo extensible. La figura 2.6 muestra la arquitectura de alto nivel de la implementación de **JAX-RPC**.
 
-Brindar soporte estandarizado para diferentes escenarios de mapeo, incluidos XML a Java, Java a XML, WSDL a Java y mapeos de Java a WSDL.
+**Figura 2.6. Arquitectura JAX-RPC**
 
-JAX-RPC también define asignaciones estándar entre WSDL/XML y Java, lo que le permite admitir un conjunto de tipos enriquecido. Sin embargo, los desarrolladores pueden usar tipos que no tienen asignaciones de tipo estándar. JAX-RPC define un conjunto de API para un marco de mapeo de tipos extensible que los desarrolladores pueden usar para tipos sin mapeos de tipos estándar. Con estas API, es posible desarrollar e implementar serializadores y deserializadores conectables para un mapeo extensible. La figura 2.6 muestra la arquitectura de alto nivel de la implementación de JAX-RPC.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e828d823-46d5-4473-bb18-6795cc4a228a)
 
-Figura 2.6. Arquitectura JAX-RPC
+Una aplicación cliente puede realizar una solicitud a un Web services de una de tres maneras. El Capítulo 5 contiene descripciones detalladas de estos enfoques de acceso de clientes.
 
+1. ***Invocación de métodos en stubs generados***: Según el contenido de una descripción **WSDL** de un servicio, se pueden usar herramientas para generar stubs. Estos stubs generados se configuran con toda la información necesaria sobre el Web service y su punto final. La aplicación cliente utiliza los stubs (apéndices) para invocar los métodos remotos disponibles en el extremo del Web services.
 
+2. ***Uso de un proxy dinámico***: Un proxy dinámico soporta un Web service endpoint. Cuando se usa este modo, no hay necesidad de crear endpoint-specific stubs para el cliente.
 
-Una aplicación cliente puede realizar una solicitud a un servicio web de una de tres maneras. El Capítulo 5 contiene descripciones detalladas de estos enfoques de acceso de clientes.
+3. ***Uso de una dynamic invocation interface (DII)***: En este modo, se accede dinámicamente a las operaciones en los endpoints del servicio de destino en función de un modelo en memoria de la descripción **WSDL** del servicio.
 
-Invocación de métodos en stubs generados : según el contenido de una descripción WSDL de un servicio, se pueden usar herramientas para generar stubs. Estos stubs generados se configuran con toda la información necesaria sobre el servicio web y su punto final. La aplicación cliente utiliza los apéndices para invocar los métodos remotos disponibles en el extremo del servicio web.
+Independientemente del modo que se utilice, la solicitud de la aplicación cliente pasa por el tiempo de ejecución **JAX-RPC** del lado del cliente. El tiempo de ejecución asigna los tipos Java de la solicitud a XML y forma un mensaje SOAP correspondiente para la solicitud. Luego envía el mensaje SOAP a través de la red al servidor.
 
-Uso de un proxy dinámico : un proxy dinámico admite un extremo de servicio web. Cuando se usa este modo, no hay necesidad de crear apéndices específicos de punto final para el cliente.
+En el lado del servidor, el tiempo de ejecución **JAX-RPC** recibe el mensaje **SOAP** para la solicitud. El tiempo de ejecución del lado del servidor aplica las asignaciones de XML a Java, luego asigna la solicitud a la llamada de método Java correspondiente, junto con sus parámetros.
 
-Uso de una interfaz de invocación dinámica (DII) : en este modo, se accede dinámicamente a las operaciones en los puntos finales del servicio de destino en función de un modelo en memoria de la descripción WSDL del servicio.
+Tenga en cuenta que un cliente de un servicio **JAX-RPC** puede ser un cliente que no sea Java. Además, **JAX-RPC** puede interoperar con cualquier Web service, ya sea que ese servicio esté basado en **JAX-RPC** o no. También tenga en cuenta que los desarrolladores solo necesitan tratar con **JAX-RPC APIs**; todos los detalles para manejar **SOAP** suceden bajo el capó.
 
-Independientemente del modo que se utilice, la solicitud de la aplicación cliente pasa por el tiempo de ejecución JAX-RPC del lado del cliente. El tiempo de ejecución asigna los tipos Java de la solicitud a XML y forma un mensaje SOAP correspondiente para la solicitud. Luego envía el mensaje SOAP a través de la red al servidor.
+**JAX-RPC** admite tres modos de funcionamiento:
 
-En el lado del servidor, el tiempo de ejecución JAX-RPC recibe el mensaje SOAP para la solicitud. El tiempo de ejecución del lado del servidor aplica las asignaciones de XML a Java, luego asigna la solicitud a la llamada de método Java correspondiente, junto con sus parámetros.
+1. ***Synchronous request–response mode - Modo de solicitud-respuesta síncrona***: Después de invocar un método remoto, el subproceso del cliente del servicio se bloquea hasta que se devuelve un valor devuelto o una excepción.
 
-Tenga en cuenta que un cliente de un servicio JAX-RPC puede ser un cliente que no sea Java. Además, JAX-RPC puede interoperar con cualquier servicio web, ya sea que ese servicio esté basado en JAX-RPC o no. También tenga en cuenta que los desarrolladores solo necesitan tratar con las API JAX- RPC ; todos los detalles para manejar SOAP suceden bajo el capó.
+2. ***One-way RPC mode - Modo RPC unidireccional***: Después de invocar un método remoto, el subproceso del cliente no se bloquea y continúa el procesamiento. No se espera ningún valor de retorno o excepción en esta llamada.
 
-JAX-RPC admite tres modos de funcionamiento:
+3. ***Non-blocking RPC invocation mode- Modo de invocación RPC sin bloqueo***: Un cliente invoca un procedimiento remoto y continúa en su subproceso sin bloquear. Posteriormente, el cliente procesa la devolución del método remoto realizando una llamada de recepción bloqueada o sondeando el valor de devolución.
 
-Modo de solicitud-respuesta síncrona : después de invocar un método remoto, el subproceso del cliente del servicio se bloquea hasta que se devuelve un valor devuelto o una excepción.
+Además, **JAX-RPC**, al especificar una forma estándar de conectar los controladores de mensajes **SOAP**, permite el procesamiento previo y posterior de las solicitudes y respuestas **SOAP**. Estos controladores de mensajes pueden interceptar solicitudes **SOAP** entrantes y respuestas **SOAP** salientes, lo que permite que el servicio realice un procesamiento adicional. Consulte la especificación **JAX-RPC** (enumerada en “References and Resources” en la página xx ) para obtener más información sobre **JAX-RPC**.
 
-Modo RPC unidireccional : después de invocar un método remoto, el subproceso del cliente no se bloquea y continúa el procesamiento. No se espera ningún valor de retorno o excepción en esta llamada.
+El ejemplo de código 2.9 es un ejemplo de una interfaz de servicio **JAX-RPC** para un servicio simple que proporciona información meteorológica para una ciudad.
 
-Modo de invocación RPC sin bloqueo : un cliente invoca un procedimiento remoto y continúa en su subproceso sin bloquear. Posteriormente, el cliente procesa la devolución del método remoto realizando una llamada de recepción bloqueada o sondeando el valor de devolución.
+**Ejemplo de código 2.9. Ejemplo de JAX-RPC Service Endpoint Interface**
 
-Además, JAX-RPC, al especificar una forma estándar de conectar los controladores de mensajes SOAP, permite el procesamiento previo y posterior de las solicitudes y respuestas SOAP. Estos controladores de mensajes pueden interceptar solicitudes SOAP entrantes y respuestas SOAP salientes, lo que permite que el servicio realice un procesamiento adicional. Consulte la especificación JAX-RPC (enumerada en “ Referencias y recursos ” en la página xx ) para obtener más información sobre JAX-RPC.
-
-El ejemplo de código 2.9 es un ejemplo de una interfaz de servicio JAX-RPC para un servicio simple que proporciona información meteorológica para una ciudad.
-
-Ejemplo de código 2.9. Ejemplo de interfaz de punto final de servicio JAX-RPC
-La interfaz pública WeatherService extiende Remote {
-   public String getWeather(String city) lanza RemoteException;
+```java
+public interface WeatherService extends Remote {
+   public String getWeather(String city) throws RemoteException;
 }
+```
 
-El ejemplo de código 2.10 muestra la implementación de la interfaz del servicio meteorológico mediante un componente web.
+El ejemplo de código 2.10 muestra la implementación de weather service interface mediante un Web component.
 
-Ejemplo de código 2.10. Implementación del servicio JAX-RPC
-implementa la clase pública WeatherServiceImpl
-                 Servicio meteorológico, ciclo de vida del servicio {
-   public void init (contexto de objeto) arroja JAXRPCException {}
+**Ejemplo de código 2.10. Implementación del JAX-RPC Service**
 
-   public String getTiempo(String ciudad) {
-      volver ("La niebla de la mañana se despeja al mediodía; " +
-             "sobre todo se espera un gran día en " + ciudad);
+```java
+public class WeatherServiceImpl implements
+                 WeatherService, ServiceLifecycle {
+   public void init(Object context) throws JAXRPCException {}
+
+   public String getWeather(String city) {
+      return ("Early morning fog clearing midday; " +
+             "over all great day expected in " + city);
    }
 
-   vacío público destruir () {}
+   public void destroy() {}
 }
+```
 
-El ejemplo de código 2.11 muestra cómo un cliente, usando JAX-RPC para acceder a este servicio meteorológico.
+El ejemplo de código 2.11 muestra cómo un cliente, usando **JAX-RPC** para acceder a este weather service.
 
-Ejemplo de código 2.11. Un cliente Java/J2EE que accede al servicio meteorológico
+**Ejemplo de código 2.11.Un Cliente Java/J2EE que Accede al Weather Service**
+
+```java
 .....
-Contexto ic = new InitialContext();
-Servicio de servicio = (Servicio)
+Context ic = new InitialContext();
+Service svc = (Service)
        ic.lookup("java:comp/env/service/WeatherService");
-Puerto WeatherSvcIntf = (WeatherSvcIntf)
-       svc.getPort(TiempoSvcIntf.clase);
-String info = port.getWeather("Nueva York");
+WeatherSvcIntf port = (WeatherSvcIntf)
+       svc.getPort(WeatherSvcIntf.class);
+String info = port.getWeather("New York");
 .....
+```
 
-Estos ejemplos ilustran que un desarrollador tiene que codificar muy poca información de configuración e implementación. La implementación de JAX-RPC maneja los detalles de la creación de una solicitud SOAP, el manejo de la respuesta SOAP, etc., aliviando así al desarrollador de estas complejidades.
+Estos ejemplos ilustran que un desarrollador tiene que codificar muy poca información de configuración e implementación. La implementación de **JAX-RPC** maneja los detalles de la creación de una solicitud **SOAP**, el manejo de la respuesta **SOAP**, etc., aliviando así al desarrollador de estas complejidades.
 
-2.2.3. API de Java TM para registros XML
+### 2.2.3.  JavaTM API para XML Registries
+
 La API de Java TM para registros XML (JAXR), una API de Java para acceder a los registros comerciales, tiene una arquitectura flexible que admite UDDI y otras especificaciones de registro (como ebXML). La figura 2.7 ilustra la arquitectura JAXR.
 
-Figura 2.7. Arquitectura JAXR
+**Figura 2.7. Arquitectura JAXR**
 
 
 
@@ -439,7 +455,8 @@ El proveedor específico del registro se conecta al proveedor conectable y actú
 
 Consulte la especificación JAXR para obtener más información.
 
-2.2.4. SOAP con API de archivos adjuntos para Java TM
+**2.2.4. SOAP con API de archivos adjuntos para Java TM**
+
 SOAP con API de archivos adjuntos para Java TM (SAAJ), que permite a los desarrolladores producir y consumir mensajes conforme a la especificación SOAP 1.1 y la nota SOAP con archivos adjuntos, proporciona una abstracción para manejar mensajes SOAP con archivos adjuntos. Los desarrolladores avanzados pueden usar SAAJ para que sus aplicaciones operen directamente con mensajes SOAP. Los archivos adjuntos pueden ser documentos XML completos, fragmentos XML o archivos adjuntos de tipo MIME. Además, SAAJ permite a los desarrolladores habilitar la compatibilidad con otros tipos de MIME. Las tecnologías JAX, como JAX-RPC, utilizan internamente SAAJ para ocultar las complejidades de SOAP a los desarrolladores.
 
 SAAJ permite los siguientes modos de intercambio de mensajes:
@@ -450,7 +467,8 @@ Mensajería asíncrona unidireccional (también llamada disparar y olvidar) : el
 
 Consulte la especificación SAAJ para obtener más información.
 
-2.2.5. Tecnologías de Servicios Web Integradas en Plataforma J2EE
+### 2.2.5. Tecnologías de Servicios Web Integradas en Plataforma J2EE
+
 Hasta ahora, hemos examinado cómo las tecnologías Java XML admiten varios estándares de servicios web. Ahora veamos cómo la plataforma J2EE 1.4 combina estas tecnologías en una plataforma estándar que es portátil e integrada. Las tecnologías XML de Java no solo están integradas en la plataforma, sino que la plataforma también define las responsabilidades relacionadas con el servicio web para los contenedores, artefactos y componentes de puertos web y EJB existentes. La plataforma J2EE 1.4 garantiza la portabilidad al integrar las tecnologías XML de Java como extensiones de los contenedores J2EE, los formatos de empaquetado, los modelos de implementación y los servicios de tiempo de ejecución existentes.
 
 Un servicio web en la plataforma J2EE 1.4 se puede implementar de la siguiente manera:
@@ -473,23 +491,10 @@ Las interfaces de servicio específicas del contenedor, creadas por el contenedo
 
 Recuerde (del ejemplo de código 2.9 y el ejemplo de código 2.10 ) cómo se ve una interfaz de servicio web, como el servicio web meteorológico, cuando se implementa como punto final de servicio JAX-RPC en una plataforma J2EE. Por el contrario, el ejemplo de código 2.12 muestra la implementación de punto final de servicio EJB equivalente para el mismo servicio meteorológico.
 
-Ejemplo de código 2.12. Implementación de punto final de servicio EJB para un servicio meteorológico
-clase pública HelloService implementa SessionBean {
-   contexto de sesión privado sc;
+**Ejemplo de código 2.12. Implementación de punto final de servicio EJB para un servicio meteorológico**
 
-   servicio meteorológico público(){}
-   vacío público ejbCreate() {}
-   public String getTiempo(String ciudad) {
-      volver ("La niebla de la mañana se despeja al mediodía; " +
-             "sobre todo se espera un gran día en " + ciudad);
-   }
-   public void setSessionContext(SessionContext sc) {
-      esto.sc = sc;
-   }
-   vacío público ejbRemove() {}
-   ejbActivate vacío público () {}
-   vacío público ejbPassivate() {}
-}
+```java
+```
 
 Tenga en cuenta que cualquier cliente puede usar el código que se muestra en el ejemplo de código 2.11 para acceder a este servicio meteorológico. esto es cierto
 
@@ -497,7 +502,8 @@ Independientemente de si el servicio se implementa como un punto final de servic
 
 Independientemente de si el cliente es un servlet, un bean empresarial o un cliente Java independiente
 
-2.2.6. Compatibilidad con el perfil básico de WS-I
+### 2.2.6. Compatibilidad con el perfil básico de WS-I
+
 Hasta ahora hemos visto cómo las diversas tecnologías Java soportan los estándares de servicios web. También hemos examinado cómo estas tecnologías Java se han integrado en la plataforma J2EE de forma estándar para garantizar la portabilidad de las implementaciones de servicios web en las plataformas J2EE. Dado que garantizar la interoperabilidad entre plataformas heterogéneas es una fuerza principal para los servicios web, la plataforma J2EE admite el perfil básico WS-I.
 
 Como ya se vio en “ Estándares emergentes ” en la página 40 , WS-I es una organización que abarca industrias y cuyo estatuto es crear y promover la interoperabilidad de los servicios web. WS-I ha publicado el perfil básico de WS-I, que dicta cómo se debe usar un conjunto de estándares de servicios web para garantizar la interoperabilidad. El perfil básico de WS-I cubre:
