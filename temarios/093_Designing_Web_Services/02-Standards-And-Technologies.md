@@ -88,7 +88,6 @@ Desafortunadamente, ***las DTD son una forma inadecuada de definir formatos de d
 </ContactInformation>
 ```
 
-
 **Ejemplo de código 2.4. XSD Schema**
 
 ```xml
@@ -257,18 +256,18 @@ El ejemplo de código 2.6 muestra un documento **WSDL** para un Web service mete
    </service>
 </definitions>
 ```
-AQUIIIII
-Un documento WSDL completo consta de un conjunto de definiciones que comienzan con un elemento de definiciones raíz seguido de seis definiciones de elementos individuales ( tipos , mensaje , tipo de puerto , enlace , puerto y servicio ) que describen los servicios.
 
-El elemento de tipos define los tipos de datos contenidos en los mensajes intercambiados como parte del servicio. Los tipos de datos pueden ser tipos simples, complejos, derivados o de matriz. Los tipos, ya sean definiciones de esquema o referencias, a los que se hace referencia en el elemento de mensaje de un documento WSDL se definen en el elemento de tipo del documento WSDL.
+Un documento **WSDL** completo consta de un conjunto de definiciones que comienzan con un elemento raíz **`definitions`** seguido de seis definiciones de elementos individuales **`types`**, **`message`**, **`portType`**,**`binding`**, **`port`** y **`service`** que describen los servicios.
 
-El elemento de mensaje define los mensajes que intercambia el servicio web. Un documento WSDL tiene un elemento de mensaje para cada mensaje que se intercambia y el elemento de mensaje contiene los tipos de datos asociados con el mensaje.
+* El elemento **`types`** define los tipos de datos contenidos en los mensajes intercambiados como parte del servicio. Los tipos de datos pueden ser tipos simples, complejos, derivados o array. Los tipos, ya sean definiciones de esquema o referencias, a los que se hace referencia en el elemento de mensaje de un documento **WSDL** se definen en el elemento de tipo del documento **WSDL**.
 
-El elemento portType especifica, de forma abstracta, operaciones y mensajes que forman parte del servicio web. Un documento WSDL tiene una o más definiciones de tipo de puerto para cada servicio web que define.
+* El elemento **`message`** define los mensajes que intercambia el Web service. Un documento **WSDL** tiene un elemento **`message`** para cada mensaje que se intercambia y el elemento **`message`** contiene los tipos de datos asociados con el mensaje.
 
-El elemento de enlace vincula el tipo de puerto abstracto y sus mensajes y operaciones a un protocolo de transporte ya formatos de mensaje.
+* El elemento **`portType`** especifica, de forma abstracta, operaciones y mensajes que forman parte del servicio web. Un documento WSDL tiene una o más definiciones de tipo de puerto para cada servicio web que define.
 
-Los elementos de servicio y puerto juntos definen el nombre del servicio web y, al proporcionar una dirección única para el enlace, asignan un punto final individual para el servicio. Un puerto solo puede tener una dirección. El elemento de servicio agrupa los puertos relacionados y, a través de su atributo de nombre , proporciona un nombre lógico para el servicio.
+* El elemento de enlace vincula el tipo de puerto abstracto y sus mensajes y operaciones a un protocolo de transporte ya formatos de mensaje.
+
+* Los elementos de servicio y puerto juntos definen el nombre del servicio web y, al proporcionar una dirección única para el enlace, asignan un punto final individual para el servicio. Un puerto solo puede tener una dirección. El elemento de servicio agrupa los puertos relacionados y, a través de su atributo de nombre , proporciona un nombre lógico para el servicio.
 
 Esta descripción es para un documento WSDL simple. Cada definición de elemento tiene varios atributos y WSDL tiene características adicionales, como el manejo de fallas. WSDL también especifica cómo enlazar directamente con HTTP/MIME, SMTP/MIME, etc., pero estos están más allá del alcance de la discusión actual. Para obtener más detalles, consulte la especificación WSDL disponible en http://www.w3c.org/TR/wsdl .
 
