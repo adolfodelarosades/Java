@@ -554,21 +554,41 @@ Una solicitud que tarda mucho en ser procesada, tanto que no es buena idea hacer
 
 El servicio de información meteorológica es un buen ejemplo de una interacción síncrona entre un cliente y un servicio. Cuando recibe la solicitud de un cliente, el servicio meteorológico debe buscar la información requerida y enviar una respuesta al cliente. Esta búsqueda y devolución de la información se puede lograr en un tiempo relativamente corto, durante el cual se puede esperar que el cliente bloquee y espere. El cliente continúa su procesamiento solo después de obtener una respuesta del servicio. (Consulte la Figura 3.5 ).
 
-**Figura 3.5. Interacción del servicio de información meteorológica**
+**Figura 3.5. Weather Information Service Interaction - Interacción del servicio de información meteorológica**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/c7c96e5a-63db-4f11-bded-690bb5de0124)
 
 
 Un Web service como este se puede diseñar utilizando un extremo de servicio que recibe la solicitud del cliente y luego delega la solicitud directamente a la lógica apropiada del servicio en la capa de procesamiento. La capa de procesamiento del servicio procesa la solicitud y, cuando se completa el procesamiento, el extremo del servicio devuelve la respuesta al cliente. (Consulte la Figura 3.6 ).
 
-**Figura 3.6. Interacción síncrona entre el cliente y el servicio**
+**Figura 3.6. Synchronous Interaction Between Client and Service - Interacción síncrona entre el cliente y el servicio**
 
-
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/fd5c7b24-5594-4608-9c94-7c099df69fdb)
 
 El ejemplo de código 3.15 muestra la interfaz del servicio meteorológico realizando algunas comprobaciones de validación de parámetros básicos en la capa de interacción. La interfaz también obtiene la información requerida y pasa esa información al cliente de manera síncrona:
 
 **Ejemplo de código 3.15. Realización de una interacción de cliente síncrona**
 
 ```java
+public class WeatherServiceImpl implements
+                     WeatherService, ServiceLifecycle {
+
+   public void init(Object context) throws JAXRPCException {....}
+
+   public String getWeather(String city)
+                        throws CityNotFoundException {
+
+      /** Validate parameters **/
+      if(!validCity(city))
+         throw new CityNotFoundException(....);
+
+      /** Get weather info form processing layer and **/
+      / **return results **/
+      return (getWeatherInfoFromDataSource(city));
+   }
+
+   public void destroy() {....}
+}
 ```
 
 Ahora examinemos una interacción asíncrona entre un cliente y un servicio. Al realizar una solicitud de este tipo de servicio, el cliente no puede darse el lujo de esperar la respuesta debido al tiempo significativo que tarda el servicio en procesar la solicitud por completo. En su lugar, el cliente puede querer continuar con algún otro procesamiento. Posteriormente, cuando recibe la respuesta, el cliente retoma el procesamiento que inició la solicitud de servicio. Por lo general, en estos tipos de servicios, el contenido de los parámetros de solicitud inicia y determina el flujo de trabajo de procesamiento (los pasos para cumplir con la solicitud) para el Web service. A menudo, cumplir con una solicitud requiere múltiples pasos de flujo de trabajo.
@@ -579,21 +599,52 @@ La figura 3.7 muestra un enfoque recomendado para delegar asincrónicamente este
 
 Debe evitarse delegar una solicitud a la capa de procesamiento a través de JMS antes de validar la solicitud.
 
-**Figura 3.7. Interacción asíncrona entre el cliente y el servicio**
+**Figura 3.7. Asynchronous Interaction Between Client and Service - Interacción asíncrona entre el cliente y el servicio**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/99f47ea7-1858-4b0c-a1fe-6c2d44056625)
 
 
 La validación asegura que una solicitud es correcta. Delegar la solicitud antes de la validación puede dar como resultado que se pase una solicitud no válida a la capa de procesamiento, lo que hace que el seguimiento y el manejo de errores sean demasiado complejos. Una vez que la solicitud se delega con éxito a la capa de procesamiento, el extremo del servicio puede devolver un identificador de correlación al cliente. Este identificador de correlación es para referencia futura del cliente y puede ayudar al cliente a asociar una respuesta que corresponda a su solicitud anterior. Si la lógica empresarial se implementa utilizando beans empresariales, los beans controlados por mensajes en el nivel EJB leen la solicitud e inician el procesamiento para que, en última instancia, se pueda formular una respuesta.
 
 La Figura 3.8 muestra cómo el servicio de agencia de viajes podría implementar esta interacción, y el Ejemplo de código 3.16 muestra el código real que podría usarse.
 
-**Ejemplo de código 3.16. Implementación de la interacción del servicio de la agencia de viajes**
+**Ejemplo de código 3.16. Implementing Travel Agency Service Interaction - Implementación de la interacción del servicio de la agencia de viajes**
 
 ```java
+public class ReservationRequestRcvr {
+   public ReservationRequestRcvr() throws RemoteException {....}
+
+   public String receiveRequest(Source reservationDetails) throws
+                        RemoteException, InvalidRequestException{
+
+      /** Validate incoming XML document **/
+      String xmlDoc = getDocumentAsString(reservationDetails);
+      if(!validDocument(xmlDoc))
+         throw new InvalidRequestException(...);
+
+      /** Get a JMS Queue and delegate the incoming request **/
+      /** to the queue **/
+      QueueConnectionFactory queueFactory =
+         serviceLocator.getQueueConnectionFactory(....);
+      Queue reservationRequestQueue =
+                    serviceLocator.getQueue(...);
+      QueueConnection connection =
+         queueFactory.createQueueConnection();
+      QueueSession session = connection.createQueueSession(false,
+                       Session.AUTO_ACKNOWLEDGE);
+      QueueSender queueSender = session.createSender(queue);
+      TextMessage message = session.createTextMessage();
+      message.setText(xmlDoc);
+      queueSender.send(message);
+      /** Generate and return a correlation identifier **/
+      return generateCorrelationID();
+   }
+}
 ```
 
-**Figura 3.8. Interacción de servicios de agencias de viajes**
+**Figura 3.8. Travel Agency Service Interaction - Interacción de servicios de agencias de viajes**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7a4a4d09-3446-438a-a13e-e5c1a0b1307a)
 
 
 
