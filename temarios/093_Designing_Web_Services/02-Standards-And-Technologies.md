@@ -481,39 +481,97 @@ En cualquier caso, el servicio se hace portátil con la definición de un compon
 
 * Un documento **WSDL** que describe el Web service que sus clientes pueden usar
 
-* Una service endpoint interface que define los métodos del Web service que están disponibles para los clientes
+* Una **service endpoint interface** que define los métodos del Web service que están disponibles para los clientes
 
-* Un bean de implementación de servicio que implementa la lógica empresarial de los métodos definidos en la service endpoint interface. La implementación puede ser una clase Java en el contenedor Web o un bean de sesión sin estado(stateless session bean) en el contenedor EJB.
-AQUUIIIIII
-Las interfaces de servicio específicas del contenedor, creadas por el contenedor J2EE, proporcionan stub estático y proxies dinámicos para todos los puertos. Un cliente de un servicio web de plataforma J2EE puede ser un par de servicio web, un componente J2EE o una aplicación independiente. No se requiere que el cliente sea un servicio Web o una aplicación implementada en Java.
+* Un **service implementation bean** que implementa la lógica de negocio de los métodos definidos en la **service endpoint interface**. La implementación puede ser una clase Java en el contenedor Web o un stateless session bean en el contenedor EJB.
 
-¿Cómo utilizan los clientes un servicio web de la plataforma J2EE? Aquí hay un ejemplo de un componente J2EE que es un cliente de algún servicio web. Tal cliente usa JNDI para buscar el servicio, luego accede al puerto del servicio web usando métodos definidos en la interfaz javax.xml.rpc.Service . El cliente accede a la funcionalidad del servicio mediante su interfaz de extremo de servicio. Un cliente que es un componente J2EE solo necesita considerar que la implementación del servicio web no tiene estado. Por lo tanto, el cliente no puede depender del estado de retención del servicio entre invocaciones de servicio sucesivas. Un cliente de componente J2EE no tiene que conocer ningún otro detalle del servicio web, como por ejemplo, cómo accede la interfaz del servicio al servicio, la implementación del servicio, cómo se generan sus stubs, etc.
+Las interfaces de servicio específicas del contenedor, creadas por el contenedor J2EE, proporcionan stub estático y proxies dinámicos para todos los puertos. Un cliente de un Web service de plataforma J2EE puede ser un Web service, un J2EE component, o una aplicación stand-alone. No se requiere que el cliente sea un Web service o una aplicación implementada en Java.
 
-Recuerde (del ejemplo de código 2.9 y el ejemplo de código 2.10 ) cómo se ve una interfaz de servicio web, como el servicio web meteorológico, cuando se implementa como punto final de servicio JAX-RPC en una plataforma J2EE. Por el contrario, el ejemplo de código 2.12 muestra la implementación de punto final de servicio EJB equivalente para el mismo servicio meteorológico.
+***¿Cómo utilizan los clientes un Web service de la plataforma J2EE?*** Aquí hay un ejemplo de un componente J2EE que es un cliente de algún Web service. Tal cliente usa **JNDI** para buscar el servicio, luego accede al puerto del Web service usando métodos definidos en la interfaz **`javax.xml.rpc.Service`**. El cliente accede a la funcionalidad del servicio mediante su ***service endpoint interface***. *Un cliente que es un componente J2EE solo necesita considerar que la implementación del Web service no tiene estado*. Por lo tanto, el cliente no puede depender del estado de retención del servicio entre invocaciones de servicio sucesivas. Un cliente de componente J2EE no tiene que conocer ningún otro detalle del Web service, como por ejemplo, cómo accede la interfaz del servicio al servicio, la implementación del servicio, cómo se generan sus stubs, etc.
 
-**Ejemplo de código 2.12. Implementación de punto final de servicio EJB para un servicio meteorológico**
+Recuerde (del ejemplo de código 2.9 y el ejemplo de código 2.10 ) cómo se ve una interfaz de servicio web, como el weather Web service, cuando se implementa como punto final de servicio **JAX-RPC** en una plataforma J2EE. Por el contrario, el ejemplo de código 2.12 muestra la implementación del  EJB service endpoint implementation equivalente para el mismo weather service.
+
+**Ejemplo de código 2.12. EJB Service Endpoint Implementation para un Weather Service**
 
 ```java
+public class HelloService implements SessionBean {
+   private SessionContext sc;
+
+   public WeatherService(){}
+   public void ejbCreate() {}
+   public String getWeather(String city) {
+      return ("Early morning fog clearing midday; " +
+             "over all great day expected in " + city);
+   }
+   public void setSessionContext(SessionContext sc) {
+      this.sc = sc;
+   }
+   public void ejbRemove() {}
+   public void ejbActivate() {}
+   public void ejbPassivate() {}
+}
 ```
 
-Tenga en cuenta que cualquier cliente puede usar el código que se muestra en el ejemplo de código 2.11 para acceder a este servicio meteorológico. esto es cierto
+Tenga en cuenta que cualquier cliente puede usar el código que se muestra en el ejemplo de código 2.11 para acceder a este weather service. Esto es cierto
 
-Independientemente de si el servicio se implementa como un punto final de servicio JAX-RPC o un punto final de servicio EJB
+* Independientemente de si el servicio se implementa como un **JAX-RPC service endpoint** o un **EJB service endpoint**
 
-Independientemente de si el cliente es un servlet, un bean empresarial o un cliente Java independiente
+* Independientemente de si el cliente es un ***servlet***, un ***enterprise bean***, o un ***stand-alone Java client***
 
-### 2.2.6. Compatibilidad con el perfil básico de WS-I
+### 2.2.6. Compatibilidad con el WS-I Basic Profile
 
-Hasta ahora hemos visto cómo las diversas tecnologías Java soportan los estándares de servicios web. También hemos examinado cómo estas tecnologías Java se han integrado en la plataforma J2EE de forma estándar para garantizar la portabilidad de las implementaciones de servicios web en las plataformas J2EE. Dado que garantizar la interoperabilidad entre plataformas heterogéneas es una fuerza principal para los servicios web, la plataforma J2EE admite el perfil básico WS-I.
+Hasta ahora hemos visto cómo las diversas tecnologías Java soportan los estándares de Web service. También hemos examinado cómo estas tecnologías Java se han integrado en la plataforma J2EE de forma estándar para garantizar la portabilidad de las implementaciones de Web service en las plataformas J2EE. Dado que garantizar la interoperabilidad entre plataformas heterogéneas es una fuerza principal para los Web service, la plataforma J2EE admite **WS-I Basic Profile**.
 
-Como ya se vio en “ Estándares emergentes ” en la página 40 , WS-I es una organización que abarca industrias y cuyo estatuto es crear y promover la interoperabilidad de los servicios web. WS-I ha publicado el perfil básico de WS-I, que dicta cómo se debe usar un conjunto de estándares de servicios web para garantizar la interoperabilidad. El perfil básico de WS-I cubre:
+Como ya se vio en **“Emerging Standards”** en la página 40 , **WS-I** es una organización que abarca industrias y cuyo estatuto es crear y promover la interoperabilidad de los Web service. **WS-I** ha publicado **WS-I Basic Profile**, que dicta cómo se debe usar un conjunto de estándares de Web service para garantizar la interoperabilidad. El **WS-I Basic Profile** cubre:
 
-Estándares de mensajería (como SOAP)
+* Messaging standards (tal como SOAP)
+* Description and discovery standards (tal como UDDI)
+* Security
 
-Estándares de descripción y descubrimiento (como UDDI)
+Al soportar el **WS-I Basic Profile**, la plataforma J2EE está asegurada de proporcionar una plataforma interoperable y portátil para el desarrollo de Web service.
 
-Seguridad
+## 2.3. Otras tecnologías Java-XML
 
-Al soportar el Perfil Básico WS-I, la plataforma J2EE está asegurada de proporcionar una plataforma interoperable y portátil para el desarrollo de servicios Web.
+Hasta ahora, hemos discutido las tecnologías específicas de Web service que son una parte obligatoria de la plataforma J2EE. Como tal, estas tecnologías deben estar presentes en cualquier implementación J2EE de cualquier proveedor. Además de estas, existen otras tecnologías **Java-XML** que, si bien no son un requisito obligatorio de la plataforma J2EE, resultan muy útiles para implementar Web service. Si bien existen varias tecnologías de este tipo, aquí analizamos solo aquellas a las que se hace referencia a lo largo de este libro. Una de esas tecnologías **Java-XML** no obligatorias pero útiles es la arquitectura **Java Architecture for XML Binding (JAXB)**, que estandariza la representación de un documento **XML** como un objeto en memoria.
 
+Como ya hemos visto, cuando dos partes se comunican pasando documentos XML entre ellas, los documentos XML deben seguir alguna estructura para que las partes que se comunican puedan entender el contenido de los documentos. La estructura del documento XML se define utilizando la función de esquema estándar para documentos XML. Por supuesto, si bien los desarrolladores pueden usar un parser DOM o SAX para analizar dichos documentos, es mucho más fácil si las diversas partes de los documentos XML están asignadas o vinculadas a objetos en memoria que realmente representan el significado previsto del documento, según la definición del esquema. Además de usar estos objetos, los desarrolladores tienen acceso a las definiciones del esquema como parte de su lógica. Esta instalación se denomina comúnmente **XML data-binding facility**(instalación de enlace de datos JAXB). **JAXB** proporciona una función de enlace de datos **XML** de buena calidad para la plataforma J2EE. La figura 2.8 muestra la arquitectura general de la **JAXB data-binding facility**.
+
+**Figura 2.8. JAXB Architecture**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ac128d33-7fae-48a3-a1b5-4ca75d50c4c7)
+
+
+**JAXB** consta de tres componentes principales:
+
+* Un **binding compiler- compilador vinculante** que crea clases Java (también denominadas content classes - clases de contenido) a partir de un esquema determinado. Las definiciones de tipos complejos dentro del esquema se asignan a clases de contenido separadas, mientras que los tipos simples (como declaraciones de atributos/elementos) se asignan a campos dentro de una clase de contenido. Los desarrolladores usan métodos get y set (similares a los métodos get y set de JavaBeans) para acceder y modificar el contenido del objeto.
+
+* Un **binding framework - framework vinculante** que proporciona servicios de tiempo de ejecución, como marshalling(clasificación), unmarshalling(desclasificación) y validación, que se pueden realizar en las clases de contenido.
+
+* Un **binding language - lenguaje de vinculación** que describe la vinculación del esquema a las clases de Java. Este lenguaje permite que un desarrollador anule las reglas de vinculación predeterminadas, lo que ayuda al desarrollador a personalizar las clases de contenido que crea el compilador de vinculación.
+
+Para obtener más detalles sobre **JAXB**, consulte la especificación **JAXB** disponible a través del enlace proporcionado en la siguiente sección.
+
+Además de **JAXB**, existen otras tecnologías Java emergentes que admiten estándares de Web service en términos de transacciones de larga duración, flujo de trabajo de procesos comerciales, etc. En el momento de redactar este documento, no se han finalizado y, por lo tanto, se tratarán en una versión futura de este libro.
+
+## 2.4. Conclusión
+
+Este capítulo describió los diversos estándares de Web service y las tecnologías de la plataforma J2EE 1.4 que admiten esos estándares de manera portátil e interoperable. Explicó por qué dichos estándares, incluidos **XML**, **SOAP**, **WSDL** y **UDDI**, son beneficiosos para los desarrolladores y describió brevemente cada estándar. Mostró cómo la plataforma integra las tecnologías **Java** y **Web service/XML**  existentes para permitir que las aplicaciones existentes y nuevas se expongan como Web service.
+
+Además, este capítulo describió las diferentes APIs relacionadas con **XML** de la plataforma J2EE, incluidas **JAXP**, **JAXR**, **JAX-RPC** y **SAAJ**. Describió estas tecnologías desde un punto de vista arquitectónico de alto nivel y, cuando correspondía, ilustró su uso con código de muestra. También mostró cómo implementar un Web service en una plataforma J2EE utilizando un extremo de servicio **JAX-RPC** o **EJB**.
+
+La Tabla 2.1 resume los estándares soportados por las diferentes tecnologías de la plataforma J2EE.
+
+**Tabla 2.1. Soporte de Web service de la plataforma J2EE**
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/d17fce9c-6049-422d-b1fc-ac684dd8c21b)
+
+Nombre de la tecnología | Estándar de apoyo | Objetivo
+------------------------|-------------------|---------
+JAXP | XML schema | Habilita el procesamiento de documentos XML de forma independiente al proveedor; admite modelos SAX y DOM
+JAX-RPC | SOAP | Permite el intercambio de solicitudes y respuestas de SOAP a través de una API que oculta los detalles complejos de SOAP a los desarrolladores.
+JAXR | UDDI, ebXML | Permite acceder a registros comerciales con una API que admite cualquier tipo de especificación de registro
+SAAJ | SOAP with Attachments | Permite el intercambio de mensajes XML orientados a documentos utilizando las API de Java
+J2EE for Web Services | Integra tecnologías Java XML en la plataforma J2EE; admite el perfil básico WS-I | Permite el desarrollo y la implementación de servicios web portátiles e interoperables en la plataforma J2EE
+JAXB (opcional) | Representación estándar en memoria de un documento XML | Proporciona una función de enlace de datos XML para la plataforma J2EE
+
+Ahora que tiene un buen conocimiento de las tecnologías de Web service, está listo para continuar con los problemas específicos de diseño e implementación. El Capítulo 3 describe cómo diseñar e implementar un punto final para que su aplicación pueda hacer que su funcionalidad esté disponible como un Web service.
 
