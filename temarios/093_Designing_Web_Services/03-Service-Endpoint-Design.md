@@ -9,6 +9,7 @@ El capítulo cubre la mayoría de las decisiones que se deben tomar cuando se di
 A lo largo del camino, el capítulo hace recomendaciones y ofrece algunas pautas para diseñar un Web service. Estas recomendaciones y puntos clave, marcados con casillas de verificación, incluyen discusiones sobre justificaciones y compensaciones. Se ilustran con los escenarios de servicio de ejemplo. Dado que los Web services básicamente exponen interfaces interoperables para aplicaciones nuevas y existentes, un gran segmento de la audiencia de este libro puede tener aplicaciones existentes para las que ya han implementado la lógica comercial. Por esa razón, y dado que el principal interés de la mayoría de los lectores son los Web services, este capítulo mantiene su enfoque en el desarrollo de Web services y no profundiza en los detalles del diseño e implementación de la lógica empresarial.
 
 ## 3.1. Escenarios de ejemplo
+
 Repasemos los escenarios presentados en “ Escenarios típicos de Web services ” en la página 11 : el escenario empresarial de creación de aventuras y los ejemplos que ilustran cuándo los Web services funcionan bien para una empresa, desde el punto de vista del diseño de un Web service. Este capítulo, en lugar de discutir los problemas de diseño de manera abstracta, amplía estos escenarios típicos para ilustrar problemas de diseño importantes y mantener la discusión en la perspectiva adecuada.
 
 En este capítulo, nos centramos en tres tipos de Web services:
@@ -22,15 +23,17 @@ Un Web service de proceso de negocio cuyo procesamiento de una solicitud de clie
 Las discusiones sobre problemas de diseño de Web services en este capítulo incluyen referencias a estos ejemplos y escenarios. Sin embargo, las discusiones usan solo las características apropiadas de estos escenarios en lo que respecta a un problema de diseño en particular, y no pretenden representar un diseño completo de un escenario.
 
 ## 3.2. Flujo de una llamada de Web service
+
 En un escenario de Web service, un cliente realiza una solicitud a un Web service en particular, como solicitar el clima en un lugar determinado, y el servicio, después de procesar la solicitud, envía una respuesta al cliente para cumplir con la solicitud. Cuando tanto el cliente como el Web service se implementan en un entorno Java, el cliente realiza la llamada al servicio invocando un método Java, junto con la configuración y el paso de los parámetros necesarios, y recibe como respuesta el resultado de la invocación del método. .
 
 Para ayudarlo a comprender el contexto dentro del cual diseña los Web services, primero observemos de alto nivel lo que sucede debajo del capó en una implementación típica de Web services en un entorno Java. La figura 3.1 muestra cómo un cliente Java se comunica con un Web service Java en la plataforma J2EE 1.4.
 
-Figura 3.1. Flujo de un Web service en Plataforma Java
+**Figura 3.1. Flujo de un Web service en Plataforma Java**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/371232db-8f64-4282-a99e-d4a41b32ca1f)
 
 
-
-Nota : la figura 3.1 cambia cuando un cliente que no es de Java interactúa con un Web service de Java. En tal caso, el lado derecho de la figura, que refleja las acciones del Web service, sigue siendo el mismo que se muestra aquí, pero el lado izquierdo de la figura reflejaría las acciones de la plataforma del cliente. Cuando un cliente Java invoca un Web service que se encuentra en una plataforma que no es Java, el lado derecho de la figura cambia para reflejar la plataforma del Web service y el lado izquierdo, que refleja las acciones del cliente, permanece como se muestra en la figura.
+**Nota**: la figura 3.1 cambia cuando un cliente que no es de Java interactúa con un Web service de Java. En tal caso, el lado derecho de la figura, que refleja las acciones del Web service, sigue siendo el mismo que se muestra aquí, pero el lado izquierdo de la figura reflejaría las acciones de la plataforma del cliente. Cuando un cliente Java invoca un Web service que se encuentra en una plataforma que no es Java, el lado derecho de la figura cambia para reflejar la plataforma del Web service y el lado izquierdo, que refleja las acciones del cliente, permanece como se muestra en la figura.
 
 Una vez que el cliente sabe cómo acceder al servicio, realiza una solicitud al servicio invocando un método Java, que se pasa con sus parámetros al tiempo de ejecución JAX-RPC del lado del cliente. Con la llamada al método, el cliente en realidad está invocando una operación en el servicio. Estas operaciones representan los diferentes servicios de interés para los clientes. El tiempo de ejecución JAX-RPC asigna los tipos Java a tipos XML estándar y forma un mensaje SOAP que encapsula la llamada al método y los parámetros. Luego, el tiempo de ejecución pasa el mensaje SOAP a través de los controladores SOAP, si los hay, y luego al puerto de servicio del lado del servidor.
 
@@ -40,9 +43,10 @@ Antes de que el puerto pase la solicitud al punto final, se asegura de que el co
 
 El contenedor J2EE extrae la llamada de método invocada por el cliente junto con los parámetros de la llamada, realiza cualquier asignación de objeto de XML a Java necesaria y entrega el método a la implementación de la interfaz del Web service para su posterior procesamiento. Un conjunto similar de pasos ocurre cuando el servicio devuelve su respuesta.
 
-Nota : Todos los detalles entre la invocación del método y la respuesta que acabamos de describir suceden bajo el capó. La plataforma protege al desarrollador de estos detalles. En su lugar, el desarrollador solo se ocupa de la semántica típica del lenguaje de programación Java, como las llamadas a métodos Java, los tipos Java, etc.
+**Nota**: Todos los detalles entre la invocación del método y la respuesta que acabamos de describir suceden bajo el capó. La plataforma protege al desarrollador de estos detalles. En su lugar, el desarrollador solo se ocupa de la semántica típica del lenguaje de programación Java, como las llamadas a métodos Java, los tipos Java, etc.
 
-## 3.3. Decisiones clave de diseño de servicios web
+## 3.3. Key Web Services Design Decisions - Decisiones Clave de Diseño de Web Services
+
 Ahora que comprende lo que sucede en la interacción de un Web service, analicemos más a fondo los problemas relacionados con el diseño y la implementación de un Web service. En primer lugar, analizamos lo que sucede en el diseño de un Web service, examinamos los problemas para los que se requieren decisiones y, cuando es posible, hacemos recomendaciones. (Del mismo modo, el Capítulo 5 examina las cuestiones que se deben tener en cuenta al diseñar un cliente de servicios web). Antes de hacerlo, vale la pena repetir este punto:
 
 Las tecnologías de servicios web básicamente lo ayudan a exponer una interfaz interoperable para una aplicación nueva o existente. Es decir, puede agregar una interfaz de Web service a una aplicación existente para que sea interoperable con otras aplicaciones, o puede desarrollar una aplicación completamente nueva que sea interoperable desde su inicio.
@@ -63,37 +67,31 @@ Formula y envía una respuesta a la solicitud.
 
 Dado este flujo de lógica, los siguientes son los pasos típicos para diseñar un Web service.
 
-1.
-Decidir sobre la interfaz para los clientes. Decida si desea publicar esta interfaz y cómo hacerlo.
+1. Decidir sobre la interfaz para los clientes. Decida si desea publicar esta interfaz y cómo hacerlo.
 
-Usted, como desarrollador de servicios web, inicia el proceso de diseño decidiendo la interfaz que su servicio hace público a los clientes. La interfaz debe reflejar el tipo y la naturaleza de las llamadas que realizarán los clientes para utilizar el servicio. Debe considerar el tipo de puntos finales que desea usar (puntos finales de servicio EJB o puntos finales de servicio JAX-RPC) y cuándo usarlos. También debe decidir si va a utilizar controladores SOAP. Por último, pero no menos importante, dado que una de las razones para agregar una interfaz de Web service es lograr la interoperabilidad, debe asegurarse de que sus decisiones de diseño no afecten la interoperabilidad del servicio como un todo.
+   Usted, como desarrollador de servicios web, inicia el proceso de diseño decidiendo la interfaz que su servicio hace público a los clientes. La interfaz debe reflejar el tipo y la naturaleza de las llamadas que realizarán los clientes para utilizar el servicio. Debe considerar el tipo de puntos finales que desea usar (puntos finales de servicio EJB o puntos finales de servicio JAX-RPC) y cuándo usarlos. También debe decidir si va a utilizar controladores SOAP. Por último, pero no menos importante, dado que una de las razones para agregar una interfaz de Web service es lograr la interoperabilidad, debe asegurarse de que sus decisiones de diseño no afecten la interoperabilidad del servicio como un todo.
 
-A continuación, decide si desea publicar la interfaz de servicio y, de ser así, cómo publicarla. Publicar un servicio lo pone a disposición de los clientes. Puede restringir la disponibilidad del servicio a los clientes a los que haya notificado personalmente sobre el servicio, o puede hacer que su servicio sea completamente público y registrarlo en un registro público. Tenga en cuenta que no es obligatorio que publique los detalles de su servicio, especialmente cuando diseña su servicio para socios de confianza y no quiere que otros sepan sobre su servicio. Tenga en cuenta también que restringir los detalles del servicio a socios de confianza no garantiza automáticamente la seguridad. Efectivamente, está dando a conocer los detalles sobre su servicio y su acceso solo a los socios y no al público en general.
+   A continuación, decide si desea publicar la interfaz de servicio y, de ser así, cómo publicarla. Publicar un servicio lo pone a disposición de los clientes. Puede restringir la disponibilidad del servicio a los clientes a los que haya notificado personalmente sobre el servicio, o puede hacer que su servicio sea completamente público y registrarlo en un registro público. Tenga en cuenta que no es obligatorio que publique los detalles de su servicio, especialmente cuando diseña su servicio para socios de confianza y no quiere que otros sepan sobre su servicio. Tenga en cuenta también que restringir los detalles del servicio a socios de confianza no garantiza automáticamente la seguridad. Efectivamente, está dando a conocer los detalles sobre su servicio y su acceso solo a los socios y no al público en general.
 
-2.
-Determine cómo recibir y preprocesar las solicitudes.
+2. Determine cómo recibir y preprocesar las solicitudes.
 
-Una vez que haya decidido la interfaz y, si es necesario, cómo hacer que esté disponible, estará listo para considerar cómo recibir solicitudes de los clientes. Debe diseñar su servicio no solo para recibir una llamada que ha realizado un cliente, sino también para realizar el preprocesamiento necesario de la solicitud, como traducir el contenido de la solicitud a un formato interno, antes de aplicar la lógica empresarial del servicio.
+   Una vez que haya decidido la interfaz y, si es necesario, cómo hacer que esté disponible, estará listo para considerar cómo recibir solicitudes de los clientes. Debe diseñar su servicio no solo para recibir una llamada que ha realizado un cliente, sino también para realizar el preprocesamiento necesario de la solicitud, como traducir el contenido de la solicitud a un formato interno, antes de aplicar la lógica empresarial del servicio.
 
-3.
-Determine cómo delegar la solicitud a la lógica empresarial.
+3. Determine cómo delegar la solicitud a la lógica empresarial.
 
 Una vez que se ha recibido y preprocesado una solicitud, está listo para delegarla a la lógica comercial del servicio.
 
-4.
-Decidir cómo procesar la solicitud.
+4. Decidir cómo procesar la solicitud.
 
-A continuación, el servicio procesa una solicitud. Si el servicio ofrece una interfaz de Web service para la lógica de negocios existente, entonces el trabajo de este paso puede ser simplemente determinar cómo se pueden usar las interfaces de lógica de negocios existentes para manejar las solicitudes del Web service.
+   A continuación, el servicio procesa una solicitud. Si el servicio ofrece una interfaz de Web service para la lógica de negocios existente, entonces el trabajo de este paso puede ser simplemente determinar cómo se pueden usar las interfaces de lógica de negocios existentes para manejar las solicitudes del Web service.
 
-5.
-Determinar cómo formular y enviar la respuesta.
+5. Determinar cómo formular y enviar la respuesta.
 
-Por último, debe diseñar cómo el servicio formula y envía una respuesta al cliente. Es mejor mantener estas operaciones lógicamente juntas. Hay otras consideraciones a tener en cuenta antes de enviar la respuesta al cliente.
+   Por último, debe diseñar cómo el servicio formula y envía una respuesta al cliente. Es mejor mantener estas operaciones lógicamente juntas. Hay otras consideraciones a tener en cuenta antes de enviar la respuesta al cliente.
 
-6.
-Determinar cómo reportar problemas.
+6. Determinar cómo reportar problemas.
 
-Dado que los servicios web no son inmunes a los errores, debe decidir cómo iniciar o manejar las excepciones o los errores que se produzcan. Debe abordar cuestiones tales como generar excepciones específicas del servicio o permitir que el sistema subyacente genere excepciones específicas del sistema. También debe formular un plan para recuperarse de excepciones en aquellas situaciones que requieren recuperación.
+   Dado que los servicios web no son inmunes a los errores, debe decidir cómo iniciar o manejar las excepciones o los errores que se produzcan. Debe abordar cuestiones tales como generar excepciones específicas del servicio o permitir que el sistema subyacente genere excepciones específicas del sistema. También debe formular un plan para recuperarse de excepciones en aquellas situaciones que requieren recuperación.
 
 Después de considerar estos pasos, comience a diseñar su Web service ideando respuestas adecuadas a estas preguntas:
 
@@ -115,9 +113,9 @@ Antes de explorar los detalles de estos problemas de diseño, veamos un servicio
 
 Es útil ver un servicio en términos de capas: una capa de interacción y una capa de procesamiento.
 
-Figura 3.2. Vista en capas de un Web service
+**Figura 3.2. Vista en capas de un Web service**
 
-
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e4ca488e-bcce-4033-8a0d-9d896f9fc1bd)
 
 La capa de interacción del servicio consta de la interfaz de punto final que el servicio expone a los clientes y a través de la cual recibe las solicitudes de los clientes. La capa de interacción también incluye la lógica de cómo el servicio delega las solicitudes a la lógica empresarial y formula respuestas. Cuando recibe solicitudes de los clientes, la capa de interacción realiza cualquier preprocesamiento necesario antes de delegar las solicitudes a la lógica comercial. Cuando se completa el procesamiento de la lógica empresarial, la capa de interacción devuelve la respuesta al cliente. La capa de interacción puede tener responsabilidades adicionales para aquellos escenarios en los que el servicio espera recibir documentos XML de los clientes, pero la lógica empresarial se ocupa de los objetos. En estos casos,
 
@@ -143,7 +141,8 @@ El escenario del servicio meteorológico es uno de esos servicios que podría be
 
 La capa de interacción de un servicio tiene varias responsabilidades importantes, y la principal de ellas es el diseño de la interfaz que el servicio presenta al cliente. Dado que los clientes acceden al servicio a través de ella, la interfaz es el punto de partida de la interacción de un cliente con el servicio. La capa de interacción también maneja otras responsabilidades, como recibir solicitudes de clientes, delegar solicitudes a la lógica comercial adecuada y crear y enviar respuestas. Esta sección examina las responsabilidades de la capa de interacción y destaca algunas pautas para su diseño.
 
-3.4.1. Diseño de la interfaz
+### 3.4.1. Diseño de la interfaz
+
 Hay algunas consideraciones que se deben tener en cuenta al diseñar la interfaz de su Web service, como los problemas relacionados con los métodos de sobrecarga, la elección del tipo de punto final, etc. Antes de examinar estos problemas, decida el enfoque que desea adoptar para desarrollar la definición de la interfaz del servicio.
 
 Dos enfoques para desarrollar la definición de interfaz para un Web service son:
@@ -162,7 +161,8 @@ Por otro lado, el enfoque de WSDL a Java le brinda una forma poderosa de exponer
 
 Después de decidir el enfoque a seguir, aún debe resolver otros detalles del diseño de la interfaz, que se describen en las siguientes secciones.
 
-3.4.1.1. Elección del tipo de punto final de la interfaz
+#### 3.4.1.1. Elección del tipo de punto final de la interfaz
+
 En la plataforma J2EE, tiene dos opciones para implementar la interfaz de Web service: puede usar un punto final de servicio JAX-RPC (también denominado punto final de nivel web) o un punto final de servicio EJB (también denominado punto final de nivel EJB) . El uso de uno de estos tipos de puntos finales hace posible integrar el punto final en el mismo nivel que la implementación del servicio. Esto simplifica la implementación del servicio, porque evita la necesidad de colocar el punto final en su propio nivel donde la presencia del punto final es únicamente para actuar como un proxy que dirige las solicitudes a otros niveles que contienen la lógica comercial del servicio.
 
 Cuando desarrolla un nuevo Web service que no usa la lógica de negocios existente, elegir el tipo de punto final que se usará para la interfaz del Web service es sencillo. La elección del tipo de punto final depende de la naturaleza de su lógica comercial, ya sea que la lógica comercial del servicio esté completamente contenida en el nivel web o en el nivel EJB:
@@ -195,7 +195,8 @@ Los beans empresariales permiten la declaración de permisos de acceso a nivel d
 
 Consideraciones sobre el acceso a la sesión HTTP : un punto final de servicio JAX-RPC, debido a que se ejecuta en el contenedor web, tiene acceso completo a una HttpSessionobjeto. El acceso a un objeto HttpSession , que se puede usar para incrustar cookies y almacenar el estado del cliente, puede ayudarlo a crear clientes conscientes de la sesión. Un punto final de servicio EJB, que se ejecuta en el contenedor EJB, no tiene acceso al estado del contenedor web. Sin embargo, generalmente el soporte de sesión HTTP es apropiado para interacciones conversacionales de corta duración, mientras que los servicios web a menudo representan procesos comerciales con duraciones más largas y, por lo tanto, necesitan mecanismos adicionales. Consulte “ Correlación de mensajes ” en la página 359 para conocer una de esas estrategias.
 
-3.4.1.2. Granularidad del servicio
+#### 3.4.1.2. Granularidad del servicio
+
 Gran parte del diseño de una interfaz de Web service implica diseñar las operaciones del servicio o sus métodos. Primero determina las operaciones del servicio y luego define la firma del método para cada operación. Es decir, usted define los parámetros de cada operación, sus valores de retorno y cualquier error o excepción que pueda generar.
 
 Es importante tener en cuenta la granularidad de las operaciones del servicio al diseñar la interfaz del Web service.
@@ -218,36 +219,44 @@ Si planea exponer beans de sesión sin estado existentes como puntos finales de 
 
 Un buen diseño para nuestro Web service de reservas de aerolíneas, por ejemplo, es esperar que los clientes del servicio envíen toda la información necesaria para una reserva (destino, horarios preferidos de salida y llegada, aerolínea preferida, etc.) en una sola invocación al servicio, que es, como un gran mensaje. Esto es mucho más preferible que hacer que un cliente invoque un método separado para cada pieza de información que comprende la reserva. Para ilustrar, es preferible que los clientes usen la interfaz que se muestra en el ejemplo de código 3.1 .
 
-Ejemplo de código 3.1. Uso de la consolidación para una mayor eficiencia (recomendado)
-interfaz pública AirlineTicketsIntf extiende remoto {
-   Public String enviarReservationRequest(
-          detalles de AirReservationDetails) arroja RemoteException;
+**Ejemplo de código 3.1. Uso de la consolidación para una mayor eficiencia (recomendado)**
+
+```java
+public interface AirlineTicketsIntf extends Remote {
+   public String submitReservationRequest(
+          AirReservationDetails details) throws RemoteException;
 }
+```
 
 El ejemplo de código 3.1 combina datos relacionados lógicamente en un mensaje grande para una interacción más eficiente del cliente con el servicio. Esto es preferible a recibir los datos con llamadas a métodos individuales, como se muestra en el ejemplo de código 3.2 .
 
-Ejemplo de código 3.2. Recuperación de datos con llamadas a métodos separados (no recomendado)
-interfaz pública AirlineTicketsIntf extiende remoto {
-   cadena pública enviar información de vuelo (FlightDetails fltInfo)
-                     lanza RemoteException;
-   public String submitPreferredDates (fecha de salida, fecha de llegada)
-                 lanza RemoteException;
-   // otros métodos similares
+**Ejemplo de código 3.2. Recuperación de datos con llamadas a métodos separados (no recomendado)**
+
+```java
+public interface AirlineTicketsIntf extends Remote {
+   public String submitFlightInformation(FlightDetails fltInfo)
+                     throws RemoteException;
+   public String submitPreferredDates(Date depart, Date arrive)
+                 throws RemoteException;
+   // other similar methods
 }
+```
 
 Sin embargo, puede que no sea una buena idea combinar en una única invocación de servicio la misma reserva con una llamada de método de consulta.
 
 Junto con la granularidad óptima, debe considerar los problemas de almacenamiento en caché de datos. Los servicios de granularidad gruesa implican la transferencia de grandes cantidades de datos. Si opta por operaciones de servicio más detalladas, es más eficiente almacenar en caché los datos en el lado del cliente para reducir la cantidad de viajes de ida y vuelta entre el cliente y el servidor.
 
-3.4.1.3. Tipos de parámetros para operaciones de servicios web
+#### 3.4.1.3. Tipos de parámetros para operaciones de servicios web
+
 Una interfaz de Web service expone un conjunto de llamadas de método a los clientes. Al invocar un método de interfaz de servicio, es posible que un cliente deba establecer valores para los parámetros asociados con la llamada. Cuando diseñe los métodos de una interfaz, elija cuidadosamente los tipos de estos parámetros. Tenga en cuenta que una llamada de método y sus parámetros se envían como un mensaje SOAP entre el cliente y el servicio. Para formar parte de un mensaje SOAP, los parámetros deben asignarse a XML. Cuando se reciben en el cliente o en el extremo del servicio, los mismos parámetros deben asignarse desde XML a sus tipos u objetos adecuados. En esta sección, se describen algunas pautas que se deben tener en cuenta al definir los parámetros de llamadas a métodos y los valores devueltos.
 
 Nota : dado que cada llamada puede devolver potencialmente un valor, la discusión en esta sección sobre los valores de los parámetros se aplica igualmente a los valores devueltos.
 
 Los parámetros para las llamadas a métodos de servicios web pueden ser tipos y objetos Java estándar, documentos XML o incluso tipos no estándar. Ya sea que utilice el enfoque de Java a WSDL o el enfoque de WSDL a Java, cada tipo de parámetro debe asignarse a su equivalente XML en el mensaje SOAP. La Figura 3.3 muestra cómo ocurre la vinculación para varios tipos de parámetros.
 
-Figura 3.3. Enlace de parámetros y valores devueltos con JAX-RPC
+**Figura 3.3. Binding Parameters and Return Values with JAX-RPC - Enlace de parámetros y valores devueltos con JAX-RPC**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/f7a50911-3d4a-4a8a-9f76-bda4031fa461)
 
 
 #### 3.4.1.3.1. Objetos Java como parámetros
@@ -256,13 +265,13 @@ Los parámetros para las llamadas de servicios web pueden ser tipos y objetos es
 
 La plataforma admite los siguientes tipos de datos de Java. (Consulte la especificación JAX-RPC en http://java.sun.com/xml/jaxrpc/ para conocer las asignaciones WSDL equivalentes para estos tipos de datos Java).
 
-Tipos primitivos de Java boolean , byte , short , int , long , float y double , junto con sus clases contenedoras de Java correspondientes
+* Tipos primitivos de Java boolean , byte , short , int , long , float y double , junto con sus clases contenedoras de Java correspondientes
 
-Clases estándar de Java: String , Date , Calendar , BigInteger , BigDecimal , QName y URI
+* Clases estándar de Java: String , Date , Calendar , BigInteger , BigDecimal , QName y URI
 
-Matrices de Java con tipos de Java compatibles con JAX-RPC como miembros
+* Matrices de Java con tipos de Java compatibles con JAX-RPC como miembros
 
-Tipos de valor JAX-RPC : clases de Java definidas por el usuario, incluidas clases con propiedades similares a componentes de JavaBeans TM
+* Tipos de valor JAX-RPC : clases de Java definidas por el usuario, incluidas clases con propiedades similares a componentes de JavaBeans TM
 
 Al diseñar parámetros para llamadas a métodos en una interfaz de Web service, elija parámetros que tengan asignaciones de tipo estándar. (Consulte la Figura 3.3 ). Tenga siempre en cuenta que la portabilidad y la interoperabilidad de su servicio se reducen cuando utiliza tipos de parámetros que, de forma predeterminada, no son compatibles.
 
@@ -280,28 +289,23 @@ La plataforma J2EE admite tipos de valores JAX-RPC anidados; es decir, tipos de 
 
 La plataforma J2EE, debido a su compatibilidad con el mensaje SOAP con protocolo adjunto, también admite el uso de contenido codificado en MIME. Proporciona asignaciones de Java para un subconjunto de tipos MIME. (Consulte la Tabla 3.1 ).
 
-Tabla 3.1. Mapeo de tipos MIME
-Tipo de Mimica	Tipo Java
-imagen/gif	java.awt.Imagen
-imagen/jpeg	java.awt.Imagen
-Texto sin formato	java.lang.String
-multiparte/*	javax.mail.internet.MimeMultipart
-texto/xml o aplicación/xml	javax.xml.transform.Fuente
+**Tabla 3.1. Mapeo de tipos MIME**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a12bf3da-8e62-44ff-ac87-50485915a85a)
 
 Dado que el contenedor J2EE maneja automáticamente las asignaciones basadas en los tipos de Java, el uso de estas asignaciones Java-MIME lo libera de las complejidades de enviar y recuperar documentos e imágenes como parte del manejo de solicitudes y respuestas de un servicio. Por ejemplo, si su servicio espera recibir una imagen GIF con un tipo MIME de image/gif , puede esperar que el cliente envíe un objeto java.awt.Image . Una interfaz de Web service de muestra que recibe una imagen podría parecerse a la que se muestra en el ejemplo de código 3.3 :
 
-Ejemplo de código 3.3. Recibir un objeto java.awt.Image
-importar java.awt.Imagen;
-interfaz pública WeatherMapService extiende remoto {
-   public void enviarWeatherMap(Imagen weatherMap)
-                 lanza RemoteException, InvalidMapException;
-}
+**Ejemplo de código 3.3. Recibir un objeto java.awt.Image**
+
+```java
+```
 
 En este ejemplo, el objeto Image permite que la implementación del contenedor maneje los detalles del paso de imágenes. El contenedor proporciona clases javax.activation.DataHandler , que funcionan con Java Activation Framework para realizar las asignaciones Java-MIME y MIME-Java.
 
 Teniendo en cuenta esta asignación entre los tipos Java y MIME, es mejor enviar imágenes y documentos XML que se encuentran en una interfaz de Web service utilizando los tipos Java que se muestran en la Tabla 3.1 . Sin embargo, debe tener cuidado con el efecto sobre la interoperabilidad de su servicio. Consulte “ Interoperabilidad ” en la página 86 para obtener más detalles.
 
-3.4.1.3.2. Documentos XML como parámetros
+##### 3.4.1.3.2. Documentos XML como parámetros
+
 Hay escenarios en los que desea pasar documentos XML como parámetros. Por lo general, esto ocurre en las interacciones de empresa a empresa donde existe la necesidad de intercambiar documentos comerciales legalmente vinculantes, realizar un seguimiento de lo que se intercambia, etc. El intercambio de documentos XML como parte de un Web service se trata en una sección separada; consulte “ Manejo de documentos XML en un Web service ” en la página 105 para conocer las pautas a seguir al pasar documentos XML como parámetros.
 
 ##### 3.4.1.3.3. Manejo de parámetros de tipo no estándar
@@ -316,7 +320,8 @@ Debido a las limitaciones de portabilidad, debe evitar pasar parámetros que req
 
 En su lugar, una mejor manera es pasar estos parámetros como fragmentos de documentos SOAP representados como un subárbol DOM en la interfaz del punto final del servicio. (Consulte la Figura 3.3 ). Si es así, debe considerar enlazar (ya sea manualmente o utilizando JAXB) los fragmentos SOAP a objetos Java antes de pasarlos a la capa de procesamiento para evitar un acoplamiento estrecho de la lógica comercial con el fragmento del documento.
 
-3.4.1.4. Interfaces con métodos sobrecargados
+#### 3.4.1.4. Interfaces con métodos sobrecargados
+
 En la interfaz de su servicio, puede sobrecargar los métodos y exponerlos a los clientes del servicio. Los métodos sobrecargados comparten el mismo nombre de método pero tienen diferentes parámetros y valores de retorno. Si elige utilizar métodos sobrecargados como parte de su interfaz de servicio, tenga en cuenta que existen algunas limitaciones, como se indica a continuación:
 
 Si elige el enfoque de WSDL a Java, existen limitaciones para representar métodos sobrecargados en una descripción de WSDL. En la descripción de WSDL, cada llamada de método y su respuesta se representan como mensajes SOAP únicos. Para representar métodos sobrecargados, la descripción WSDL debería admitir varios mensajes SOAP con el mismo nombre. WSDL versión 1.1 no tiene esta capacidad para admitir varios mensajes con el mismo nombre.
@@ -325,44 +330,24 @@ Si elige el enfoque de Java a WSDL y su servicio expone métodos sobrecargados, 
 
 Veamos cómo se aplica esto en el escenario del servicio meteorológico. Como proveedor, puede ofrecer el servicio a los clientes, permitiéndoles buscar información meteorológica por nombre de ciudad o código postal. Si utiliza el enfoque de Java a WSDL, primero puede definir la interfaz WeatherService como se muestra en el ejemplo de código 3.4 .
 
-Ejemplo de código 3.4. Interfaz WeatherService para el enfoque de Java a WSDL
-La interfaz pública WeatherService extiende Remote {
-   public String getWeather(String city) lanza RemoteException;
-   public String getWeather(int zip) lanza RemoteException;
-}
+**Ejemplo de código 3.4. Interfaz WeatherService para el enfoque de Java a WSDL**
+
+```java
+```
 
 Después de definir la interfaz, ejecute la herramienta proporcionada por el proveedor para crear el WSDL desde la interfaz. Cada herramienta tiene su propia forma de representar los métodos sobrecargados de getWeather en el WSDL, y su WSDL refleja la herramienta particular que utiliza. Por ejemplo, si usa J2EE 1.4 SDK de Sun Microsystems, su herramienta wscompile crea desde la interfaz WeatherService el WSDL que se muestra en el Ejemplo de código 3.5 .
 
-Ejemplo de código 3.5. WSDL generado para la interfaz WeatherService
-<?versión xml="1.0" codificación="UTF-8"?>
-<definiciones nombre="WeatherWebService" .......>
-   <tipos/>
-   <mensaje nombre="WeatherService_getWeather">
-      <parte nombre="int_1" tipo="xsd:int"/>
-   </mensaje>
-   <mensaje nombre="WeatherService_getWeatherResponse">
-      <parte nombre="resultado" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje nombre="ServicioMeteorológico_getWeather2">
-      <parte nombre="Cadena_1" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje nombre="WeatherService_getWeather2Response">
-      <parte nombre="resultado" tipo="xsd:cadena"/>
-   </mensaje>
-   ...
-</definiciones>
+**Ejemplo de código 3.5. WSDL generado para la interfaz WeatherService**
+
+```xml
+```
 
 Tenga en cuenta que el WSDL representa los métodos sobrecargados de getWeather como dos mensajes SOAP diferentes, llamando a uno getWeather , que toma un número entero para el código postal como su parámetro, y el otro getWeather2 , que toma un parámetro de cadena para la ciudad. Como resultado, un cliente interesado en obtener información meteorológica utilizando el nombre de una ciudad invoca el servicio llamando a getWeather2, como se muestra en el ejemplo de código 3.6 .
 
-Ejemplo de código 3.6. Uso de la interfaz de servicio meteorológico con el enfoque de Java a WSDL
-...
-Contexto ic = new InitialContext();
-WeatherWebService weatherSvc = (WeatherWebService)
-       ic.lookup("java:comp/env/service/WeatherService");
-Puerto WeatherServiceIntf = (WeatherServiceIntf)
-       weatherSvc.getPort(WeatherServiceIntf.class);
-String returnValue = port.getWeather2("San Francisco");
-...
+**Ejemplo de código 3.6. Uso de la interfaz de servicio meteorológico con el enfoque de Java a WSDL**
+
+```java
+```
 
 Por ejemplo, para obtener la información meteorológica de San Francisco, el cliente llamó a port.getWeather2("San Francisco") . Tenga en cuenta que es muy probable que otra herramienta genere un WSDL cuya representación de métodos sobrecargados sea diferente.
 
@@ -370,38 +355,20 @@ Es posible que desee evitar el uso de métodos sobrecargados en su interfaz Java
 
 Si, en cambio, elige utilizar el enfoque de WSDL a Java, su descripción de WSDL podría tener el siguiente aspecto. (Consulte el ejemplo de código 3.7 ).
 
-Ejemplo de código 3.7. WSDL para servicio meteorológico con métodos sobrecargados evitados
-<?versión xml="1.0" codificación="UTF-8"?>
-<definiciones nombre="WeatherWebService" ...>
-   <tipos/>
-   <mensaje nombre="WeatherService_getWeatherByZip">
-      <parte nombre="int_1" tipo="xsd:int"/>
-   </mensaje>
-   <mensaje nombre="WeatherService_getWeatherByZipResponse">
-      <parte nombre="resultado" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje name="WeatherService_getWeatherByCity">
-      <parte nombre="Cadena_1" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje nombre="WeatherService_getWeatherByCityResponse">
-      <parte nombre="resultado" tipo="xsd:cadena"/>
-   </mensaje>
-   ...
-</definiciones>
+**Ejemplo de código 3.7. WSDL para servicio meteorológico con métodos sobrecargados evitados**
+
+```xml
+```
 
 Dado que los mensajes en un archivo WSDL deben tener nombres exclusivos, debe usar nombres de mensaje diferentes para representar métodos que, de otro modo, sobrecargaría. Estos diferentes nombres de mensajes en realidad se convierten en diferentes llamadas a métodos en su interfaz. Tenga en cuenta que el WSDL incluye un método getWeatherByZip , que toma un parámetro de número entero, y un método getWeatherByCity , que toma un parámetro de cadena. Por lo tanto, un cliente que desee obtener información meteorológica por nombre de ciudad desde una interfaz WeatherService asociada con el WSDL en el Ejemplo de código 3.7 podría invocar el servicio como se muestra en el Ejemplo de código 3.8 .
 
-Ejemplo de código 3.8. Uso del servicio meteorológico con el enfoque de WSDL a Java
-...
-Contexto ic = new InitialContext();
-WeatherWebService weatherSvc = (WeatherWebService)
-       ic.lookup("java:comp/env/service/WeatherService");
-Puerto WeatherServiceIntf = (WeatherServiceIntf)
-       weatherSvc.getPort(WeatherServiceIntf.class);
-String returnValue = port.getWeatherByCity("San Francisco");
-...
+**Ejemplo de código 3.8. Uso del servicio meteorológico con el enfoque de WSDL a Java**
 
-3.4.1.5. Manejo de excepciones
+```java
+```
+
+#### 3.4.1.5. Manejo de excepciones
+
 Al igual que cualquier aplicación Java o J2EE, una aplicación de Web service puede encontrar una condición de error al procesar una solicitud de cliente. Una aplicación de Web service necesita detectar adecuadamente cualquier excepción generada por una condición de error y propagar estas excepciones. Para una aplicación Java que se ejecuta en una sola máquina virtual, puede propagar excepciones en la pila de llamadas hasta llegar a un método con un controlador de excepciones que maneja el tipo de excepción lanzada. Para decirlo de otra manera, para las aplicaciones Java y J2EE que no son servicios web, puede continuar lanzando excepciones en la pila de llamadas, pasando por todo el seguimiento de la pila, hasta llegar a un método con un controlador de excepciones que maneja el tipo de excepción lanzada. También puede escribir excepciones que amplíen o hereden otras excepciones.
 
 Sin embargo, lanzar excepciones en las aplicaciones de servicios web tiene restricciones adicionales que afectan el diseño del punto final del servicio. Al considerar cómo el extremo del servicio maneja las condiciones de error y notifica a los clientes sobre los errores, debe tener en cuenta estos puntos:
@@ -416,37 +383,24 @@ Una aplicación de Web service también puede encontrar una condición de error 
 
 Para ilustrar el mecanismo de manejo de excepciones del Web service, examinémoslo en el contexto del ejemplo del Web service meteorológico. Al diseñar el servicio meteorológico, desea que el servicio pueda manejar un escenario en el que el cliente solicita información meteorológica para una ciudad inexistente. Puede diseñar el servicio para generar una excepción específica del servicio, como CityNotFoundException , al cliente que realizó la solicitud. Puede codificar la interfaz de servicio para que el método getWeather arroje esta excepción. (Consulte el ejemplo de código 3.9 ).
 
-Ejemplo de código 3.9. Lanzar una excepción específica del servicio
-La interfaz pública WeatherService extiende Remote {
-   public String getWeather(String city) lanza
-              CityNotFoundException, RemoteException;
-}
+**Ejemplo de código 3.9. Lanzar una excepción específica del servicio**
+
+```java
+```
 
 Las excepciones específicas del servicio como CityNotFoundException , que lanza el Web service para indicar condiciones de error específicas de la aplicación, deben ser excepciones comprobadas que directa o indirectamente extienden java.lang.Exception . No pueden ser excepciones no verificadas. El ejemplo de código 3.10 muestra una implementación típica de una excepción específica del servicio, como CityNotFoundException .
 
-Ejemplo de código 3.10. Implementación de una excepción específica del servicio
-La clase pública CityNotFoundException extiende la excepción {
-   mensaje de cadena privado;
-   CityNotFoundException pública (mensaje de cadena) {
-      super(mensaje);
-      este.mensaje = mensaje;
-   }
-   cadena pública getMessage() {
-      mensaje de vuelta;
-   }
-}
+**Ejemplo de código 3.10. Implementación de una excepción específica del servicio**
+
+```java
+```
 
 El ejemplo de código 3.11 muestra la implementación del servicio para la misma interfaz de servicio meteorológico. Este ejemplo ilustra cómo el servicio podría generar CityNotFoundException .
 
-Ejemplo de código 3.11. Ejemplo de un servicio que arroja una excepción específica del servicio
-clase pública WeatherServiceImpl implementa WeatherService {
-   public String getWeather(String city)
-                            lanza CityNotFoundException {
-      if(!ciudadvalida(ciudad))
-         lanzar una nueva excepción CityNotFoundException(ciudad + "no encontrada");
-      // Obtener información meteorológica y devolverla
-   }
-}
+**Ejemplo de código 3.11. Ejemplo de un servicio que arroja una excepción específica del servicio**
+
+```java
+```
 
 El Capítulo 5 describe los detalles del manejo de excepciones en el lado del cliente. (En particular, consulte “ Manejo de excepciones ” en la página 230 ). En el lado del servicio, tenga en cuenta cómo incluir excepciones en la interfaz del servicio y cómo lanzarlas. En general, desea hacer lo siguiente:
 
@@ -460,16 +414,10 @@ Cuando un servicio lanza excepciones java o javax , el tipo de excepción y su i
 
 Como resultado, debe evitar lanzar excepciones java y javax directamente a los clientes. En su lugar, cuando su servicio encuentre uno de estos tipos de excepciones, envuélvalo dentro de una excepción específica del servicio significativa y envíe esta excepción específica del servicio al cliente. Por ejemplo, suponga que su servicio encuentra una excepción javax.ejb.FinderException mientras procesa una solicitud de cliente. El servicio debe detectar la excepción FinderException y luego, en lugar de devolver esta excepción al cliente, el servicio debe generar una excepción específica del servicio que tenga más significado para el cliente. Consulte el ejemplo de código 3.12 .
 
-Ejemplo de código 3.12. Conversión de una excepción en una excepción específica del servicio
-...
-intentar {
-    // encontrarPorClavePrincipal
-    // Hacer el procesamiento
-    // devuelve resultados
-} captura (javax.ejb.FinderException fe) {
-   lanzar una nueva InvalidKeyException(
-      "No se pudo encontrar la fila con la clave principal dada");
-}
+**Ejemplo de código 3.12. Conversión de una excepción en una excepción específica del servicio**
+
+```java
+```
 
 Las herencias de excepción se pierden cuando lanza una excepción específica del servicio.
 
@@ -487,33 +435,13 @@ Una falla de SOAP define excepciones a nivel del sistema, como RemoteException ,
 
 El ejemplo de código 3.13 muestra el código WSDL para el mismo ejemplo de Web service meteorológico. Este ejemplo ilustra cómo se asignan las excepciones específicas del servicio al igual que se asignan los mensajes de entrada y salida.
 
-Ejemplo de código 3.13. Asignación de una excepción específica del servicio en WSDL
-<?versión xml="1.0" codificación="UTF-8"?>
-<definiciones...>
-   ...
-   <mensaje nombre="WeatherService_getWeather">
-      <parte nombre="Cadena_1" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje nombre="WeatherService_getWeatherResponse">
-      <parte nombre="resultado" tipo="xsd:cadena"/>
-   </mensaje>
-   <mensaje nombre="CityNotFoundException">
-      <part name="ExcepciónCiudadNoEncontrada"
-                    elemento="tns:CityNotFoundException"/>
-   </mensaje>
-   <portType name="Servicio Meteorológico">
-      <operación nombre="getWeather" parámetroOrder="String_1">
-         <mensaje de entrada="tns:WeatherService_getWeather"/>
-         <mensaje de salida=
-                "tns:WeatherService_getWeatherResponse"/>
-         <nombre de la falla="ExcepciónCiudadNoEncontrada"
-                   mensaje="tns:CityNotFoundException"/>
-      </operación>
-   </tipo de puerto>
-   ...
-</definiciones>
+**Ejemplo de código 3.13. Asignación de una excepción específica del servicio en WSDL**
 
-3.4.1.6. Uso de manipuladores
+```xml
+```
+
+#### 3.4.1.6. Uso de manipuladores
+
 Como se discutió en el Capítulo 2 , y como se muestra en la Figura 3.1 , la tecnología JAX-RPC le permite conectar controladores de mensajes SOAP, lo que permite el procesamiento de mensajes SOAP que representan solicitudes y respuestas. La conexión de controladores de mensajes SOAP le brinda la capacidad de examinar y modificar las solicitudes SOAP antes de que sean procesadas por el Web service y de examinar y modificar las respuestas SOAP antes de que se entreguen al cliente.
 
 Los controladores son particulares de un Web service y están asociados con el puerto específico del servicio. Como resultado de esta asociación, la lógica del controlador se aplica a todas las solicitudes y respuestas SOAP que pasan por el puerto de un servicio. Por lo tanto, utilice estos controladores de mensajes cuando su Web service deba realizar algún procesamiento específico de mensajes SOAP común a todas sus solicitudes y respuestas. Debido a que los controladores son comunes a todas las solicitudes y respuestas que pasan a través de un punto final de Web service, tenga en cuenta la siguiente directriz:
@@ -546,25 +474,10 @@ La forma más efectiva de usar controladores
 
 WSDL admite dos tipos de estilos de mensajería: rpc y document . El atributo de estilo WSDL indica el estilo de mensajería. (Consulte el Ejemplo de código 3.14 ). Un atributo de estilo establecido en rpc indica una operación orientada a RPC, donde los mensajes contienen parámetros y valores devueltos, o firmas de funciones. Cuando el atributo de estilo se establece en documento , indica una operación orientada a documentos, en la que los mensajes contienen documentos. Cada estilo de operación tiene un efecto diferente en el formato del cuerpo de un mensaje SOAP.
 
-Ejemplo de código 3.14. Especificación de enlaces WSDL
-<?versión xml="1.0" codificación="UTF-8"?>
-<definiciones .......>
-<binding name="WeatherServiceBinding" type="tns:WeatherService">
-   <operación nombre="getWeather">
-      <entrada>
-         <jabón:uso corporal="literal"
-                   namespace="urna:WeatherWebService"/>
-      </entrada>
-      <salida>
-         <jabón:uso corporal="literal"
-                   namespace="urna:WeatherWebService"/>
-      </salida>
-      <soap:operación soapAction=""/></operación>
-      <soap:estilo vinculante="rpc"
-             transporte="http://schemas.xmlsoap.org/soap/http" />
-      </enlace>
-      <servicio .....>
-</definiciones>
+**Ejemplo de código 3.14. Especificación de enlaces WSDL**
+
+```xml
+```
 
 Junto con los estilos de operación, WSDL admite dos tipos de mecanismos de serialización y deserialización: un mecanismo literal y uno codificado . El atributo de uso de WSDL indica qué mecanismo se admite. (Consulte el Ejemplo de código 3.14 ). Un literalEl valor para el atributo de uso indica que los datos están formateados de acuerdo con las definiciones abstractas dentro del documento WSDL. El valor codificado significa que los datos se formatean de acuerdo con las codificaciones definidas en el URI especificado por el atributo encodingStyle . Por lo tanto, puede elegir entre un estilo rpc o documento de paso de mensajes y cada mensaje puede usar un formato de datos literal o codificado.
 
@@ -600,21 +513,19 @@ Para los parámetros que se pasan como objetos Java (como String, int , tipos de
 
 Es posible que deba realizar pasos adicionales para manejar documentos XML que se pasan como parámetros. Estos pasos, que se realizan mejor en la capa de interacción de su servicio, son los siguientes:
 
-1.
-El extremo del servicio debe validar el documento XML entrante con su esquema. Para obtener detalles y pautas sobre cómo y cuándo validar los documentos XML entrantes, junto con las técnicas de validación recomendadas, consulte “ Validación de documentos XML ” en la página 139 .
+1. El extremo del servicio debe validar el documento XML entrante con su esquema. Para obtener detalles y pautas sobre cómo y cuándo validar los documentos XML entrantes, junto con las técnicas de validación recomendadas, consulte “ Validación de documentos XML ” en la página 139 .
 
-2.
-Cuando la capa de procesamiento del servicio y la lógica empresarial están diseñadas para manejar documentos XML, debe transformar el documento XML en un esquema compatible internamente, si el esquema para el documento XML difiere del esquema interno, antes de pasar el documento a la capa de procesamiento.
+2. Cuando la capa de procesamiento del servicio y la lógica empresarial están diseñadas para manejar documentos XML, debe transformar el documento XML en un esquema compatible internamente, si el esquema para el documento XML difiere del esquema interno, antes de pasar el documento a la capa de procesamiento.
 
-3.
-Cuando la capa de procesamiento trata con objetos pero la interfaz de servicio recibe documentos XML, entonces, como parte de la capa de interacción, asigne los documentos XML entrantes a objetos de dominio antes de delegar la solicitud a la capa de procesamiento. Para obtener detalles y pautas sobre técnicas de mapeo para documentos XML entrantes, consulte “ Mapeo de esquemas al modelo de datos de la aplicación ” en la página 143 .
+3. Cuando la capa de procesamiento trata con objetos pero la interfaz de servicio recibe documentos XML, entonces, como parte de la capa de interacción, asigne los documentos XML entrantes a objetos de dominio antes de delegar la solicitud a la capa de procesamiento. Para obtener detalles y pautas sobre técnicas de mapeo para documentos XML entrantes, consulte “ Mapeo de esquemas al modelo de datos de la aplicación ” en la página 143 .
 
 Es importante que estos tres pasos (validación de parámetros entrantes o documentos XML, traducción de documentos XML a esquemas compatibles internos y asignación de documentos a objetos de dominio) se realicen lo más cerca posible del extremo del servicio y, sin duda, en la capa de interacción del servicio. .
 
 Un diseño como este ayuda a detectar errores temprano y, por lo tanto, evita llamadas innecesarias y viajes de ida y vuelta a la capa de procesamiento. La figura 3.4 muestra la forma recomendada de manejar solicitudes y respuestas en la capa de interacción del Web service.
 
-Figura 3.4. Procesamiento de solicitudes de servicios web
+**Figura 3.4. Web Service Request Processing - Procesamiento de Peticiones de Servicios Web**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/04ef87f6-384f-446f-9da3-d01ea65e29f5)
 
 
 La capa de interacción del Web service maneja todas las solicitudes entrantes y las delega a la lógica empresarial expuesta en la capa de procesamiento. Cuando se implementa de esta manera, la capa de interacción del Web service tiene varias ventajas, ya que le brinda una ubicación común para las siguientes tareas:
@@ -631,14 +542,15 @@ Manejo de errores
 
 En general, se recomienda realizar todo el procesamiento común, como controles de seguridad, registro, auditoría, validación de entrada, etc., para las solicitudes en la capa de interacción tan pronto como se recibe una solicitud y antes de pasarla a la capa de procesamiento.
 
-3.4.3. Delegación de solicitudes de servicios web a la capa de procesamiento
+### 3.4.3. Delegación de solicitudes de servicios web a la capa de procesamiento
+
 Después de diseñar las tareas de preprocesamiento de solicitudes, el siguiente paso es diseñar cómo delegar la solicitud a la capa de procesamiento. En este punto, considere el tipo de procesamiento que requiere la solicitud, ya que esto lo ayuda a decidir cómo delegar la solicitud a la capa de procesamiento. Todas las solicitudes se pueden clasificar en dos grandes categorías según el tiempo que lleva procesar la solicitud, a saber:
 
 Una solicitud que se procesa en un tiempo lo suficientemente corto como para que un cliente pueda bloquear y esperar a recibir la respuesta antes de continuar. En otras palabras, el cliente y el servicio interactúan de manera síncrona, de modo que el cliente que invoca se bloquea hasta que la solicitud se procesa por completo y se recibe la respuesta.
 
 Una solicitud que tarda mucho en ser procesada, tanto que no es buena idea hacer esperar al cliente hasta que finalice la tramitación. En otras palabras, el cliente y el servicio interactúan de manera asíncrona, de modo que el cliente que invoca no necesita bloquear y esperar hasta que la solicitud se procese por completo.
 
-Nota : Cuando nos referimos al procesamiento de solicitudes, usamos los términos síncrono y asíncrono desde el punto de vista de cuándo se completa completamente el procesamiento de la solicitud del cliente. Tenga en cuenta que, bajo el capó, una interacción asíncrona entre un cliente y un servicio puede resultar en una invocación síncrona a través de la red, ya que HTTP es síncrono por naturaleza. De manera similar, los mensajes SOAP enviados a través de HTTP también son síncronos.
+**Nota**: Cuando nos referimos al procesamiento de solicitudes, usamos los términos síncrono y asíncrono desde el punto de vista de cuándo se completa completamente el procesamiento de la solicitud del cliente. Tenga en cuenta que, bajo el capó, una interacción asíncrona entre un cliente y un servicio puede resultar en una invocación síncrona a través de la red, ya que HTTP es síncrono por naturaleza. De manera similar, los mensajes SOAP enviados a través de HTTP también son síncronos.
 
 El servicio de información meteorológica es un buen ejemplo de una interacción síncrona entre un cliente y un servicio. Cuando recibe la solicitud de un cliente, el servicio meteorológico debe buscar la información requerida y enviar una respuesta al cliente. Esta búsqueda y devolución de la información se puede lograr en un tiempo relativamente corto, durante el cual se puede esperar que el cliente bloquee y espere. El cliente continúa su procesamiento solo después de obtener una respuesta del servicio. (Consulte la Figura 3.5 ).
 
