@@ -561,8 +561,9 @@ Además, este capítulo describió las diferentes APIs relacionadas con **XML** 
 
 La Tabla 2.1 resume los estándares soportados por las diferentes tecnologías de la plataforma J2EE.
 
-**Tabla 2.1. Soporte de Web service de la plataforma J2EE**
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/d17fce9c-6049-422d-b1fc-ac684dd8c21b)
+
+**Tabla 2.1. Soporte de Web service de la plataforma J2EE**
 
 Nombre de la tecnología | Estándar de apoyo | Objetivo
 ------------------------|-------------------|---------
