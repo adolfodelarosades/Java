@@ -240,6 +240,22 @@ El sistema en este caso, no tiene un mensajito diciendo que se ha detenido el se
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/97c8d79a-bfe3-4ffa-96c1-75067291497c">
 
+7. Ejemplos
+
+Si volvemos a levantar el Servidor Tomcat podemos ver algunos ejemplos que vienen dentro de la instalación de Tomcat. Vamos a pulsar en el link **`Examples`**
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f2cd00a8-d2cf-4d69-8ec2-42f891ead1ad">
+
+Se nos abre un pequeño menú con tres opciones.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/1f538cfa-8647-491d-a0b2-fe2f0d6e2104">
+
+Vamos a seleccionar **JSP Samples** y nos abren todos los ejemplos JSPs.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b38b05c4-a87c-45b1-bbd7-9ee64fd6b2a8">
+
+
+
 
 
 
