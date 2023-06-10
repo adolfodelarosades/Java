@@ -223,7 +223,6 @@ Para comprobar que efectivamente está funcionando, abrimos un navegador web (Ch
 
 Para detener el servidor Tomcat desde la terminal, lo único que tendremos que hacer es escribir el siguiente comando:
 
-
 ```sh
 /usr/local/Tomcat/bin/shutdown.sh
 ```
@@ -254,11 +253,31 @@ Vamos a seleccionar **JSP Samples** y nos abren todos los ejemplos JSPs.
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b38b05c4-a87c-45b1-bbd7-9ee64fd6b2a8">
 
+Podemos ejecutarlos o ver el código fuente, en este caso vamos a dar en **Execute** del ejemplo **Panels using Tag Files**, temos:
 
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/109e3017-36e7-40bd-b11c-7ebf863451ef">
 
+Podemos ejecutar algún otro ejemplo, por ejemplo **Display Products Tag File**.
 
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/33083e6c-f23a-41d2-9039-8ab38919430f">
 
+Si ejecutamos el ejemplo **Display Products Tag File**.
 
+Y si consultamos su **Source** vemos la lista de archivos que conforman esta aplicación.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a05b1791-4338-4579-a142-b9f4677b16c0">
+
+Al pulsar en el nombre del archivo podemos ver el código fuente.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7bf7f839-6437-4744-9405-b8a1e3e29793">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/79198862-9898-4f8e-9f23-b27f2b4d7a31">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/49043225-a88c-43fd-8437-4aa4836cb436">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cc14f6a1-428a-4a0c-878b-f68b339329a3">
+
+Hemos visto los **JSP Examples** lo mismo lo podemos hacer con **Servlets examples** o **WebSocket Examples**.
 
 
 #### CONFIGURAR UN COMPILADOR JSP PERSONALIZADO
