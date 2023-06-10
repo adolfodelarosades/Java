@@ -279,6 +279,10 @@ Al pulsar en el nombre del archivo podemos ver el código fuente.
 
 Hemos visto los **JSP Examples** lo mismo lo podemos hacer con **Servlets examples** o **WebSocket Examples**.
 
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9bb2c8a1-e004-4be0-8f93-22d0f691e75f">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/89ae3b7f-84b2-4810-b8d0-cab0d2649ee4">
+
 
 #### CONFIGURAR UN COMPILADOR JSP PERSONALIZADO
 
