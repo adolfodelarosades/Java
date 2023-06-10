@@ -333,7 +333,50 @@ Deploying una aplicación manualmente en Tomcat es simple: simplemente coloque e
 
 Undeploying la aplicación es tan simple como revertir el proceso. Elimine el archivo **`sample-deployment.war`** y espere unos momentos. Cuando Tomcat detecta que el archivo fue eliminado, anula la implementación de la aplicación y elimina el directorio descomprimido, y la aplicación ya no será accesible desde su navegador. No es necesario apagar Tomcat para realizar esta tarea.
 
-#### USO DEL TOMCAT MANAGER
+#### 💻 REALIZAR MANUALMENTE UN DEPLOY Y UNDEPLOY
+
+1. Como ya se menciono anteriormente en el código del libre tenemos el archivo **sample-deployment.war**.
+
+<img width="942" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ac5d1f68-06c3-4c04-a002-2608d2fba0c7">
+
+2. Vamos a colocar el archivo **sample-deployment.war** en el directorio **`webapps`**, teniendo el Tomcat levantado.
+
+Podemos acceder a la carpeta carpeta **`/usr/local`** con Finder dando en la opción IR e ingresar la carpeta.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f2c4fd9f-0e53-4c90-8607-bef01c87169c">
+
+Ya que tenemos localizada la carpeta dejamos caer allí el archivo **sample-deployment.war**.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7c73666e-6445-4353-9d15-de57166d7068">
+
+Cuando dejamos caer el archivo **sample-deployment.war** Tomcat lo desplega y crea una carpeta **sample-deployment** que contiene todos los archivos del proyecto, en este caso el archivo **`index.jsp`**.
+
+3. Para ejecutar la aplicación debemos cargar la siguiente URL http://localhost:8080/sample-deployment/. 
+
+En este caso nos esta marcando un error.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2fff0bb3-b691-4240-aad9-3d06e9a7da55">
+
+Si abrimos el archivo vemos el código.
+
+<img width="1274" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/21b2cb49-2d01-483a-873a-67121c0fa7d9">
+
+Como en mi ordenador tengo instalada la versión 17, debe hacer un pequeño cambio en el código para que funcione.
+
+<img width="518" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/1d746060-27f3-4299-8123-9cd7e87bb2c3">
+
+Con este cambio la aplicación ya se ejecuta.
+
+4. Para anular el desplegado simplemente eliminamos el archivo ****`sample-deployment.war`** y automáticamente se eliminara la carpeta.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/da8a1709-dbb2-46df-ae2a-d8ee42687d05">
+
+Si intentamos acceder al URL [tenmos:](http://localhost:8080/sample-deployment/) ya no podemos encontrar dicho recurso.
+
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/948b6902-4399-4390-a7a0-6915fd527fa8">
+
+
+### USO DEL TOMCAT MANAGER
 
 También puede implementar una aplicación Java EE mediante la interfaz web del administrador de Tomcat. Para hacerlo, siga estos pasos:
 
