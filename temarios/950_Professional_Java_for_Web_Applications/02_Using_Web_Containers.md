@@ -139,6 +139,112 @@ Cuando termine de usar **Tomcat**, puede detenerlo ejecutando el comando **`bin\
 
 **ADVERTENCIA** *Las primeras versiones de **Tomcat 8.0** no admiten la compilación de **JSP** para **Java 8**. Sabrá que este es el caso de su versión si ve **"WARNING: Unknown source VM 1.8 ignored"** o similar en la consola de Java. Si es así, debe completar los siguientes pasos para "Configurar un compilador JSP personalizado"*.
 
+#### 💻 INSTALACIÓN EN MY MAC
+
+Después de descargat el ZIP de Tomcat lo colocamos en la carpeta **`Document\dev`**.
+
+Al intentar seguir los pasos aquí descritos no permitio ejecutar el el comando **`bin/startup.sh`**, por lo que he seguidos los pasos descritos en https://dryant.com/programacion/como-instalar-un-servidor-java-tomcat-en-mac-os-todas-las-versiones/
+
+1. Descargar archivos de instalación
+
+2. Descomprimir el archivo comprimido
+
+   Una vez descargado, descomprime el archivo zip, y la carpeta resultante que se llamará algo así como **`apache-tomcat-8.5.89`** cambiando los números según la versión que te hayas descargado, renombrala como Tomcat. No es necesario cambiar el nombre a la carpeta pero nos será mas cómodo.
+   
+3. Mover la carpeta Tomcat a **`/usr/local`**
+
+   La carpeta Tomcat  hay que moverla ahora a la carpeta de sistema **`/usr/local`**. La forma más rápida de hacerlo es mediante la terminal. Si la carpeta Tomcat la tienes en la carpeta de Descargas, hazlo con el siguiente comando:
+
+```sh
+sudo mv ~/Downloads/Tomcat2/ /usr/local/
+```
+
+En este caso 
+
+```sh
+sudo mv apache-tomcat-8.5.89 /usr/local/
+```
+
+Te pedirá el password de tu usuario.
+
+<img width="992" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9713d8ca-a886-4b8a-b1bc-fa40a00d66d7">
+
+4. Cambiar dueño a la carpeta Tomcat
+
+Ya tenemos la carpeta Tomcat en su ubicación correcta. Ahora lo que hay que hacer es hacernos dueños de esa carpeta con el comando:
+
+```sh
+sudo chown -R dryant /usr/local/Tomcat/
+```
+
+Cambiando  dryant por tu nombre de usuario.
+
+<img width="1071" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b5c14ea7-4458-4f72-b988-4cad87f7f899">
+
+5. Dar permisos de ejecución a los scripts de Tomcat
+
+Necesitaremos darle permisos de ejecución a todos los scripts de la carpeta bin que está dentro de la carpeta Tomcat con el comando:
+
+```sh
+sudo chmod +x /usr/local/Tomcat/bin/*.sh
+```
+
+En nuestro caso:
+
+```sh
+sudo chmod +x /usr/local/apache-tomcat-8.5.89/bin/*.sh
+```
+
+<img width="988" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/46915ae7-b90b-4c60-954a-2df4cd61f42b">
+
+6. Ejecutar y parar Tomcat desde terminal
+
+Ya hemos terminado! Ahora solo queda lanzar el servidor y comprobar que todo funciona correctamente.
+
+Para iniciar el servidor Tomcat desde terminal, simplemente tendremos que teclear en la terminal el siguiente comando:
+
+```sh
+/usr/local/Tomcat/bin/startup.sh
+```
+
+En nuestro caso:
+
+```sh
+/usr/local/apache-tomcat-8.5.89/bin/startup.sh
+```
+
+Si todo ha ido bien, veremos un mensaje diciendo: Tomcat started. como se ve en la siguiente imagen:
+
+<img width="1408" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ce63f4d0-a7e6-4e78-a02f-eda79a0f865f">
+
+Para comprobar que efectivamente está funcionando, abrimos un navegador web (Chrome, Safari, Firefox..) y vamos a la dirección http://localhost:8080/ si todo es correcto, deberá aparecer en tu navegador la siguiente web de inicio del servidor de Apache Tomcat:
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/af79f68e-6f01-4149-8c1d-70e96bf35e47">
+
+Para detener el servidor Tomcat desde la terminal, lo único que tendremos que hacer es escribir el siguiente comando:
+
+
+```sh
+/usr/local/Tomcat/bin/shutdown.sh
+```
+
+En nuestro caso:
+
+```sh
+/usr/local/apache-tomcat-8.5.89/bin/shutdown.sh
+```
+
+<img width="1508" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c690b4f3-b0d9-4a24-83a3-55aec0ee4613">
+
+El sistema en este caso, no tiene un mensajito diciendo que se ha detenido el servidor, pero podremos comprobar que si ahora vamos a http://localhost:8080/  ya no cargará la pagina de inicio de Tomcat.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/97c8d79a-bfe3-4ffa-96c1-75067291497c">
+
+
+
+
+
+
 #### CONFIGURAR UN COMPILADOR JSP PERSONALIZADO
 
 Tomcat incluye y utiliza el **compilador Eclipse JDT** para compilar archivos **JavaServer Pages** en aplicaciones web. (Aprenderá más sobre los archivos **JSP** y cómo se compilan en el Capítulo 4). Esto permite que Tomcat se ejecute correctamente sin requerir una instalación de **JDK**. Con el compilador de Eclipse, todo lo que necesita es una instalación simple de **Java Runtime Edition (JRE)**. Debido a que las **JSP** suelen ser muy simples, el compilador de Eclipse suele ser bastante adecuado para cualquier entorno Tomcat. Sin embargo, existen circunstancias en las que no desea utilizar el compilador de Eclipse. Quizás encuentre un error en el compilador de Eclipse que impide que se compile una de sus **JSP**. O si aparece una nueva versión de Java con características de lenguaje que desea usar en sus **JSP**, podría pasar algún tiempo antes de que Eclipse tenga un compilador compatible. Cualquiera sea la razón que pueda tener, puede configurar fácilmente Tomcat para usar el compilador JDK en lugar de Eclipse.
