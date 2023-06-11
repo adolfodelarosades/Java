@@ -108,6 +108,176 @@ Ahora su servlet está listo para responder a los requests **`GET`** y devolver 
 
 Obviamente, podría hacer mucho más con este método **`doGet`**, como usar request parameters, y aún no ha echado un vistazo a los otros métodos. Tenga la seguridad de que pronto llegará a ambos.
 
+### 💻 Creando una Clase Servlet
+
+1. Lo primero que vamos a hacer es que desde las propiedades de Eclipse vamos a configurar la opción para garantizar que los arquetipos de Maven siempre esten actualizados. Vamos a **Eclipse Preferences => Maven**
+
+<img width="631" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/406e5fc7-60aa-4894-906b-3f9b62f6a593">
+
+Debemos marcar el check **Download repository index updates on startup**.
+
+<img width="625" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/56c5799b-35a1-445b-b60b-601a745922e3">
+
+Damos en el botón **Apply and Close**. 
+
+2. Vamos a crear un nuevo proyecto Maven con la opción **File => New => Maven Project**. 
+
+<img width="769" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fc10990f-5452-4316-85a4-07ef97319d7c">
+
+<img width="970" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/683cc410-9526-4db7-a03f-fb9f9dcaf39c">
+
+Damos en el botón **Next**.
+
+El arquetipo que vamos a usar es **`maven-archetype-webapp`**, en el fitro hemos metido **`webapp`** y nos desplazamos hasta encontrar el grupo **`org.apache.maven.archetypes.`**
+
+<img width="1019" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3c2288c6-aed7-40d8-93f6-867594fda5f0">
+
+Vamos a preionar el botón **Next**. Nos pide los siguientes datos.
+
+<img width="1019" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6d4497f3-32d2-49c9-82d8-37cf8bc875c0">
+
+Introducimos los siguientes datos.
+
+<img width="1026" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/452a1a74-3845-4606-8a46-8ed7ceca390e">
+
+Presionamos el botón **Finish**.
+
+En la consola nos muestra que todo ha ido bien al crear el proyecto.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cd74bbd8-6868-46cf-ac6f-c8ac821ef26e">
+
+La estructura básica del proyecto que se ha creado es la siguiente:
+
+<img width="426" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6edb3cf2-7160-47b4-8b55-ef41d51fc792">
+
+Podemos ver que tenemos el archivo **`pom.xml`**.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c1443eea-f64f-40e9-8794-891db6dd565e">
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.javaangular</groupId>
+  <artifactId>hola-mundo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>hola-mundo Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>hola-mundo</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+```
+
+Como podemos ver el proyecto por default usa **Java 1.7**, podemos modificar y cambiarla a la que desemos, en este caso lo cambiare a la versión **Java 17**.
+
+Debemos dar **Maven => Maven update...**
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fab21716-bee1-420d-8755-c0d0a6f41aaa">
+
+Y en la ventana que sale seleccionamos nuestro proyecto.
+
+<img width="592" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c498a9f4-01f2-46bc-a566-d44d19d32450">
+
+presionamos **OK**, vemos como se actualiza la versión de Java.
+
+<img width="428" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/1dc14a96-1d9b-4591-9c06-d2e555fe1ab0">
+
+Otro archivo que tenemos es **`index.jsp`** que podemos ver a contininuación.
+
+<img width="975" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/be48e0e1-b406-47cf-8edb-b23c971a622a">
+
+Vemos que nos esta marcando un error, esto es por que es necesario añadir una dependencia más a nuestro proyecto y que es la que se menciona al inicio de este capítulo:
+
+```xml
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.1.0</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+La añadimos al archivo **`pom.xml`**.
+
+<img width="1415" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3c414d4d-3efb-40d2-91f5-05eee3bfc216">
+
+Al dar **Maven => Maven update...** vemos como el error desaparece del archivo **`index.jsp`**.
+
+<img width="435" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/4f7380b6-84ee-431f-808a-a4fc3efc7e8d">
+
+Podriamos ejecutar ya la aplicación.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/36dd3c29-2b26-4cb1-9d6f-1504e5d988ad">
+
+Vamos a editar el archivo **`index.jsp`** para poner el mensaje en español.
+
+<img width="527" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/efd49ed7-ccb8-476c-829f-f4bf9e5a1b51">
+
+Al refrescar el navegador tenemos:
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b9c0ed5a-c35e-4d22-916e-cebb01f80c87">
+
+
+
+AQUIIIIIIIIIIIIIIIIII
+
+
 ### UTILIZAR EL INITIALIZER Y DESTROYER
 
 Mientras obtiene su primer Servlet en funcionamiento, probablemente debería conocer los métodos `init` y `destroy`. Cuando un contenedor web inicia por primera vez un Servlet, llama al método `init` de ese Servlet. Esto es a veces, aunque no siempre, cuando se implementa la aplicación. (Aprenderá a controlar esto en la siguiente sección). Más adelante, cuando el contenedor web cierra el Servlet, llama al método de destrucción del Servlet. Estos métodos no son los mismos que los del constructor y finalizer de Java, y no se llaman al mismo tiempo que el constructor y finalizer. Normalmente, estos métodos no hacen nada, pero puede anularlos para realizar alguna acción:
