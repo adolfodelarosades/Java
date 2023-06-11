@@ -23,9 +23,9 @@
 
 El código de este capítulo se divide en los siguientes ejemplos principales:
 
-* Proyecto Hello-World
-* Proyecto Hello-User
-* Proyecto Customer-Support-v1
+* Proyecto **Hello-World**
+* Proyecto **Hello-User**
+* Proyecto **Customer-Support-v1**
 
 ### DEPENDENCIAS DE NEW MAVEN PARA ESTE CAPÍTULO
 
@@ -40,33 +40,35 @@ En este capítulo, necesitará su primera dependencia de Maven, que se muestra e
   </dependency>
 ```
 
-En el último capítulo, se familiarizó con los servidores de aplicaciones y los contenedores web y aprendió a ejecutar, implementar y depurar Apache Tomcat 8.0 desde su IDE de Java. En este capítulo, comenzará a crear aplicaciones web explorando primero el mundo de los servlets. A lo largo de este capítulo y el resto del libro, cambiará y mejorará continuamente estas aplicaciones, implementándolas en Tomcat para probarlas y depurarlas.
+En el último capítulo, se familiarizó con los servidores de aplicaciones y los contenedores web y aprendió a ejecutar, implementar y depurar **Apache Tomcat 8.5** desde su IDE de Java. En este capítulo, comenzará a crear aplicaciones web explorando primero el mundo de los servlets. A lo largo de este capítulo y el resto del libro, cambiará y mejorará continuamente estas aplicaciones, implementándolas en Tomcat para probarlas y depurarlas.
 
 ## CREANDO UNA CLASE SERVLET
 
-En Java Platform, Enterprise Edition, un `Servlet` es lo que recibe y responde a las solicitudes(requests) del usuario final. La especificación de la API de Java EE define un servlet de la siguiente manera:
+En Java Platform, Enterprise Edition, un **`Servlet`** es lo que recibe y responde a las solicitudes(requests) del usuario final. La especificación de la **API de Java EE** define un servlet de la siguiente manera:
 
-*Un Servlet es un pequeño programa Java que se ejecuta dentro de un servidor Web. Los servlets reciben y responden a solicitudes de clientes web, generalmente a través de HTTP, el Protocolo de transferencia de hipertexto*.
+***Un Servlet es un pequeño programa Java que se ejecuta dentro de un servidor Web. Los servlets reciben y responden a solicitudes de clientes web, generalmente a través de HTTP HyperText Transfer Protocol - Protocolo de transferencia de hipertexto***.
 
 http://docs.oracle.com/javaee/7/api/javax/servlet/Servlet.html
 
-Los servlets son las clases centrales en cualquier aplicación web, las únicas clases que realizan el trabajo de responder a las solicitudes o delegan ese trabajo a alguna otra parte de la aplicación. A menos que algún filtro termine prematuramente una solicitud (discutida en el Capítulo 9), cada solicitud a su aplicación pasa por algún Servlet. El contenedor web en el que ejecuta su aplicación tendrá uno o más Servlets integrados. Estos servlets manejan el servicio de JavaServer Pages, mostrando listados de directorios (si los tiene habilitados) y accediendo a recursos estáticos, como páginas HTML y gráficos. No tendrá que preocuparse por estos Servlets todavía (en algunos casos, nunca). En este capítulo, aprenderá a escribir y configurar los Servlets personalizados que componen su aplicación.
+***Los Servlets son las clases centrales en cualquier aplicación web, las únicas clases que realizan el trabajo de responder a los requests o delegan ese trabajo a alguna otra parte de la aplicación***. A menos que algún filter termine prematuramente un request (discutida en el Capítulo 9), cada request a su aplicación pasa por algún Servlet. El contenedor web en el que ejecuta su aplicación tendrá uno o más Servlets integrados. Estos servlets manejan el servicio de **JavaServer Pages**, mostrando listados de directorios (si los tiene habilitados) y accediendo a recursos estáticos, como páginas HTML y gráficos. No tendrá que preocuparse por estos Servlets todavía (en algunos casos, nunca). En este capítulo, aprenderá a escribir y configurar los Servlets personalizados que componen su aplicación.
 
-Cada Servlet implementa la interfaz `javax.servlet.Servlet`, pero generalmente no directamente. `Servlet` es una interfaz simple, que contiene métodos para inicializar y destruir el Servlet y atender las solicitudes. Sin embargo, se llamará al método `service` para cualquier solicitud de cualquier tipo, incluso si no es una solicitud HTTP (en teoría, suponiendo que su contenedor web admita dicha solicitud). Como ejemplo, en el futuro es posible que se agreguen nuevos Servlets a Java EE para admitir el Protocolo de transferencia de archivos (FTP). Por esa razón, existen varias clases de Servlet que puede ampliar en su lugar. A partir de Java EE 7, el único protocolo Servlet admitido actualmente es HTTP.
+Cada Servlet implementa la interfaz **`javax.servlet.Servlet`**, pero generalmente no directamente. **`Servlet`** es una interfaz simple, que contiene métodos para inicializar y destruir el Servlet y atender los requests. Sin embargo, se llamará al método **`service`** para cualquier request de cualquier tipo, incluso si no es un request HTTP (en teoría, suponiendo que su contenedor web admita dicha solicitud). Como ejemplo, en el futuro es posible que se agreguen nuevos Servlets a Java EE para admitir el **File Transfer Protocol (FTP)**. Por esa razón, existen varias clases de Servlet que puede ampliar en su lugar. ***A partir de Java EE 7, el único protocolo Servlet admitido actualmente es HTTP***.
 
 ### QUE EXTENDER
 
-En casi todos los casos, los servlets heredan de `javax.servlet.GenericServlet. GenericServlet` sigue siendo un Servlet independiente del protocolo con el método de servicio abstracto y solitario, pero contiene varios métodos auxiliares para registrar y obtener información sobre la aplicación y la configuración del Servlet (más sobre esto más adelante en la sección "Configuración de un Servlet para la implementación(Deployment)").
+En casi todos los casos, los Servlets heredan de **`javax.servlet.GenericServlet. GenericServlet`** sigue siendo un Servlet independiente del protocolo con el método **`service`** abstracto y solitario, pero contiene varios métodos auxiliares para registrar y obtener información sobre la aplicación y la configuración del Servlet (más sobre esto más adelante en la sección **"Configuración de un Servlet para la implementación(Deployment)"**).
 
-Para responder a solicitudes específicas de HTTP, `javax.servlet.http.HttpServlet` extiende `GenericServlet` e implementa el método de servicio para aceptar solo solicitudes HTTP. Luego, proporciona implementaciones vacías para los métodos correspondientes a cada tipo de método HTTP, como se ilustra en la Tabla 3-1.
+Para responder a requests específicas de HTTP, **`javax.servlet.http.HttpServlet`** extiende **`GenericServlet`** e implementa el método **`service`** para aceptar solo solicitudes HTTP. Luego, proporciona implementaciones vacías para los métodos correspondientes a cada tipo de método HTTP, como se ilustra en la Tabla 3-1.
 
-TABLA 3.1: Implementaciones vacías para tipos de métodos HTTP
+**TABLA 3.1: Implementaciones vacías para HTTP Method Types**
 
 ![03-01-T](images/03-01-T.png)
 
-**NOTA** *La mayoría de los programadores web están familiarizados con los métodos `GET` y `POST` y los utilizan la mayor parte del tiempo. Si no está familiarizado con los distintos métodos HTTP o le gustaría obtener más información, ahora es el momento de hacer clic en http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html para ver la sección de especificaciones RFC-2616 sobre definiciones de métodos*.
+<img width="830" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/625c733c-b3bb-4e6a-a779-bfebc7f2c08c">
 
-Sin excepciones en este libro, sus Servlets siempre extenderán `HttpServlet`. Proporciona todas las herramientas que necesita para aceptar y responder selectivamente a diferentes tipos de solicitudes HTTP, y sus métodos aceptan los argumentos `javax.servlet.http.HttpServletRequest` y `javax.servlet.http.HttpServletResponse` en lugar de `javax.servlet.ServletRequest` y `javax.servlet.ServletResponse` para que tenga fácil acceso a los atributos específicos de HTTP de las solicitudes de sus servicios de Servlet. Debe comenzar por crear un Servlet nuevo y vacío que amplíe `HttpServlet`:
+**NOTA** *La mayoría de los programadores web están familiarizados con los métodos **`GET`** y **`POST`** y los utilizan la mayor parte del tiempo. Si no está familiarizado con los distintos métodos HTTP o le gustaría obtener más información, ahora es el momento de hacer clic en http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html para ver la sección de especificaciones RFC-2616 sobre definiciones de métodos*.
+
+Sin excepciones en este libro, sus Servlets siempre extenderán **`HttpServlet`**. Proporciona todas las herramientas que necesita para aceptar y responder selectivamente a diferentes tipos de solicitudes HTTP, y sus métodos aceptan los argumentos **`javax.servlet.http.HttpServletRequest`** y **`javax.servlet.http.HttpServletResponse`** en lugar de **`javax.servlet.ServletRequest`** y **`javax.servlet.ServletResponse`** para que tenga fácil acceso a los atributos específicos de HTTP de las solicitudes de sus servicios de Servlet. Debe comenzar por crear un Servlet nuevo y vacío que amplíe **`HttpServlet`**:
 
 ```java
 package com.wrox;
@@ -78,9 +80,9 @@ public class HelloServlet extends HttpServlet {
 }
 ```
 
-**NOTA** *Para que este código se compile, debe tener la biblioteca API de Java EE Servlet en su ruta de clase de compilación. Aquí es donde entra en juego el Maven artifact enumerado en la primera página de este capítulo. En cada capítulo, necesitará los artefactos Maven enumerados para compilar los ejemplos de ese capítulo*.
+**NOTA** *Para que este código se compile, debe tener la **Java EE Servlet API library** en su ruta de clase de compilación. Aquí es donde entra en juego **Maven artifact listed** en la primera página de este capítulo. En cada capítulo, necesitará los **listed Maven artifacts** para compilar los ejemplos de ese capítulo*.
 
-En este formulario, su Servlet ya está preparado para aceptar cualquier solicitud HTTP y responder a ella con un error 405 Method Not Allowed. Así es como puede controlar a qué métodos HTTP responde su Servlet: Cualquier método de Servlet HTTP que no anule será respondido con HTTP `status 405`. Un Servlet que no maneja ninguna solicitud, por supuesto, no es muy útil, así que sobreescriba(override) el método `doGet` para agregar soporte para el método HTTP `GET`:
+En este form, su Servlet ya está preparado para aceptar cualquier solicitud HTTP y responder a ella con un error **405 Method Not Allowed**. Así es como puede controlar a qué métodos HTTP responde su Servlet: Cualquier método de Servlet HTTP que no override(anule) será respondido con **HTTP `status 405`**. Un Servlet que no maneja ninguna requests, por supuesto, no es muy útil, así que sobreescriba(override) el método **`doGet`** para agregar soporte para el método **HTTP `GET`**:
 
 ```java
 package com.wrox;
@@ -100,11 +102,11 @@ public class HelloServlet extends HttpServlet {
 }
 ```
 
-Ahora su servlet está listo para responder a las solicitudes `GET` y devolver la respuesta de texto sin formato "Hello, World!" en el response body. El código de este ejemplo es bastante sencillo. Llamar a `getWriter` en el parámetro `response` devuelve un `java.io.PrintWriter`, una clase Java común que se utiliza para escribir texto en un flujo de salida. A continuación, el código llama al método `println` de `PrintWriter` para escribir el texto "Hello, World!" al flujo de salida. Tenga en cuenta que no tiene que preocuparse por ninguno de los detalles de la solicitud o respuesta HTTP sin procesar. El contenedor web se encarga de interpretar la solicitud y leer los encabezados y parámetros del socket. Después de que su método regrese, se encarga de formatear los encabezados y el cuerpo de la respuesta y escribirlos en el socket.
+Ahora su servlet está listo para responder a los requests **`GET`** y devolver la response de texto plano(sin formato) **"`Hello, World!`"** en el response body. El código de este ejemplo es bastante sencillo. Llamar a **`getWriter`** en el parámetro **`response`** devuelve un **`java.io.PrintWriter`**, ***una clase Java común que se utiliza para escribir texto en un flujo de salida***. A continuación, el código llama al método **`println`** de **`PrintWriter`** para escribir el texto **"`Hello, World!`"** al flujo de salida. Tenga en cuenta que no tiene que preocuparse por ninguno de los detalles de la HTTP request o response sin procesar. El contenedor web se encarga de interpretar el request y leer los headers y parameters del socket. Después de que su método retorne, se encarga de formatear los headers y el body de la response y escribirlos en el socket.
 
-**NOTA** *Observe que no llamó al método `close` de `PrintWriter` que obtuvo de `response`. En términos generales, **en Java solo necesita cerrar los recursos que cree**. El contenedor web creó este recurso, por lo que es responsable de cerrarlo. Incluso si hubiera asignado la instancia a una variable local y hubiera llamado a varios métodos en ella, este sería el caso*.
+**NOTA** *Observe que no llamó al método **`close`** de **`PrintWriter`** que obtuvo de **`response`**. En términos generales, **en Java solo necesita cerrar los recursos que cree**. El contenedor web creó este recurso, por lo que es responsable de cerrarlo. Incluso si hubiera asignado la instancia a una variable local y hubiera llamado a varios métodos en ella, este sería el caso*.
 
-Obviamente, podría hacer mucho más con este método `doGet`, como usar parámetros de la solicitud, y aún no ha echado un vistazo a los otros métodos. Tenga la seguridad de que pronto llegará a ambos.
+Obviamente, podría hacer mucho más con este método **`doGet`**, como usar request parameters, y aún no ha echado un vistazo a los otros métodos. Tenga la seguridad de que pronto llegará a ambos.
 
 ### UTILIZAR EL INITIALIZER Y DESTROYER
 
