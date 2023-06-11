@@ -586,43 +586,135 @@ Otra cosa a tener en cuenta es que, de forma predeterminada, Eclipse utiliza un 
 
 ##### Usar el servidor Tomcat en un proyecto
 
-Al crear un nuevo proyecto en Eclipse, debe seleccionar el servidor de tiempo de ejecución configurado que va a usar para ese proyecto en el primer cuadro de diálogo, como se muestra en la Figura 2-11. Sin embargo, esto configura solo las bibliotecas para su aplicación. No selecciona el servidor Tomcat 8.0 que creó. Para eso, siga estos pasos:
+Al crear un nuevo proyecto en Eclipse, debe seleccionar el servidor de tiempo de ejecución configurado que va a usar para ese proyecto en el primer cuadro de diálogo, como se muestra en la Figura 2-11. Sin embargo, esto configura solo las bibliotecas para su aplicación. No selecciona el servidor **Tomcat 8.0** que creó. Para eso, siga estos pasos:
 
 ![02-11](images/02-11.png)
 
-1. Después de crear o abrir el proyecto, vaya a Project ⇒ Properties y haga clic en el elemento del menú Server en el lado izquierdo del cuadro de diálogo Propiedades del proyecto que aparece.
+1. Después de crear o abrir el proyecto, vaya a **Project ⇒ Properties** y haga clic en el elemento del menú **Server** en el lado izquierdo del cuadro de diálogo **Properties** del proyecto que aparece.
 
-2. De forma predeterminada, el servidor seleccionado es "<None>", por lo que debería cambiarlo a "Tomcat v8.0 Server en localhost", como se muestra en la Figura 2-12.
+2. De forma predeterminada, el servidor seleccionado es **"`<None>`"**, por lo que debería cambiarlo a **"Tomcat v8.0 Server at localhost"**, como se muestra en la Figura 2-12.
 
 ![02-12](images/02-12.png)
 
-3. Haga clic en Apply para guardar los cambios.
+3. Haga clic en **Apply** para guardar los cambios.
 
-4. Cambie la URL de contexto de la aplicación en la que se implementa la aplicación en Tomcat (asumiendo que no la configuró cuando creó el proyecto). En el cuadro de diálogo Propiedades del proyecto, puede hacer clic en el elemento de menú Configuración del proyecto web y actualizar el campo "Raíz de contexto" para cambiar esta configuración.
+4. Cambie la URL de contexto de la aplicación en la que se implementa la aplicación en Tomcat (asumiendo que no la configuró cuando creó el proyecto). En el cuadro de diálogo **Properties** del proyecto, puede hacer clic en el elemento de menú **Web Project Settings** y actualizar el campo **"Context root"** para cambiar esta configuración.
 
-5. Después de hacer clic en Aplicar para guardar los cambios, haga clic en OK para cerrar el cuadro de diálogo.
+5. Después de hacer clic en **Apply** para guardar los cambios, haga clic en **OK** para cerrar el cuadro de diálogo.
 
-   Puede descargar el proyecto Sample-Debug-Eclipse desde el sitio de descarga de código de wrox.com para ver una aplicación web de muestra ya configurada para ejecutarse en su servidor de aplicaciones Tomcat 8.0 local. (Sin embargo, aún debe configurar su instalación de Tomcat 8.0 en las preferencias de IDE de Eclipse).
-
+   Puede descargar el proyecto **Sample-Debug-Eclipse** desde el sitio de descarga de código de wrox.com para ver una aplicación web de muestra ya configurada para ejecutarse en su servidor de aplicaciones Tomcat 8.0 local. (Sin embargo, aún debe configurar su instalación de **Tomcat 8.0** en las preferencias de **IDE de Eclipse**).
+  
 ##### Iniciar una aplicación y alcanzar Breakpoints
 
 Ahora está listo para iniciar su aplicación y depurarla desde Eclipse.
 
-1. Descargue el proyecto Sample-Debug-Eclipse del sitio de descarga de código wrox.com y ábralo con Eclipse IDE para desarrolladores de Java EE.
+1. Descargue el proyecto **Sample-Debug-Eclipse** del sitio de descarga de código wrox.com y ábralo con **Eclipse IDE** para desarrolladores de Java EE.
 
 2. Asegúrese de que la configuración del servidor esté configurada correctamente para utilizar su servidor de aplicaciones local Tomcat 8.0. Debe realizar esta verificación para cada proyecto de muestra que descargue para este libro antes de intentar iniciarlo.
 
-3. Cuando se abra, debería ver una pantalla como la Figura 2-13, con un punto de interrupción ya establecido para `index.jsp`.
+3. Cuando se abra, debería ver una pantalla como la **Figura 2-13**, con un punto de interrupción ya establecido para **`index.jsp`**.
 
 ![02-13](images/02-13.png)
 
-4. Haga clic en el icono Depurar en la barra de herramientas (resaltado por el puntero del mouse en la Figura 2-13) para compilar e iniciar su aplicación en modo de depuración. Eclipse debería iniciar el navegador configurado y debería llegar inmediatamente al punto de interrupción en `index.jsp`. Puede volver a ver la página web de la Figura 2-2 para indicar que su aplicación se implementó correctamente.
+4. Haga clic en el icono **Debug** en la barra de herramientas (resaltado por el puntero del mouse en la Figura 2-13) para compilar e iniciar su aplicación en modo de depuración. Eclipse debería iniciar el navegador configurado y debería llegar inmediatamente al punto de interrupción en **`index.jsp`**. Puede volver a ver la página web de la Figura 2-2 para indicar que su aplicación se implementó correctamente.
 
 5. Para continuar desde el punto de interrupción, haga clic en el icono de continuar (que se muestra aquí en el margen) en la barra de herramientas de Eclipse.
 
 **ADVERTENCIA** *Cuando ejecuta Tomcat desde Eclipse, Eclipse anula cualquier archivo `conf\setenv.bat` o `conf/setenv.sh` personalizado que cree para configurar la compilación JSP avanzada. Si no desea utilizar el compilador Eclipse JDT para compilar sus JSP, debe agregar la configuración CLASSPATH en este archivo a algún otro archivo de configuración de Tomcat. Consulte la documentación de Tomcat para determinar el archivo apropiado para colocarlo*.
 
 **NOTA** *Es probable que haya notado que JSP en Eclipse solo tiene un punto de interrupción, mientras que JSP en IntelliJ IDEA tiene dos puntos de interrupción. El depurador JSP de Eclipse es mucho más limitado que el depurador JSP de IDEA, por lo que colocar un punto de interrupción en la línea 7 en esta JSP no es posible en Eclipse*.
+
+##### 💻 Iniciar una aplicación y alcanzar Breakpoints
+
+1. Descargue el proyecto **Sample-Debug-Eclipse** del sitio de descarga de código y ábralo con **Eclipse IDE** para desarrolladores de Java EE.
+ 
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ee24ce04-99ad-4139-9f83-cb7c6f9486a5">
+
+  
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e0623082-f664-4153-a529-d26e21de130d">
+
+<img width="661" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e62db8d6-dd66-4684-838a-18927401f226">
+  
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6ba1ee20-d6f1-41d7-843d-1f6a6ee5d949">
+
+2. Asegúrese de que la configuración del servidor esté configurada correctamente para utilizar su servidor de aplicaciones local **Tomcat 8.5**. Debe realizar esta verificación para cada proyecto de muestra que descargue para este libro antes de intentar iniciarlo.
+
+De forma predeterminada, en las propediades del proyecto no tiene asignado un sevidor, por lo que debería cambiarlo a **"Tomcat v8.5 Server at localhost"**
+
+<img width="1145" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/bbc1ee8a-b4e1-46c3-983b-23c9bf2fb095">
+
+***No lo he podido cambiar, desde las propiedades.***
+
+3. Cuando se abra, debería toda la estructura del proyecto, puede abrir el archivo **`index.jsp`** que es el nucleo de la aplicación.
+
+<img width="1144" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/93ad88aa-997e-416b-b1f6-6a327f0468a7">
+
+4. Vamos a intentar ejecutar la aplicación dando click derecho en el nombre de la aplicación. Vamos a ir a **Run As ⇒ Run on Server**
+
+<img width="795" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e7ffd477-ed0f-4d88-979c-7b39af53c1d8">
+
+Seleccionamos el Servidor a usar.
+
+<img width="594" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3a967f02-ee7c-44aa-bec5-4c80054e16fd">
+
+Se indica que ya hay un Servidor ejecutandose en el puerto 8080.
+
+<img width="416" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7010c5aa-cce3-4971-90b1-cda8e9bb8ddc">
+
+Vamos a repetir el proceso pero seleccionando **Run As ⇒ Run Configuration**
+
+<img width="786" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/25af6c82-d9c3-4632-b9fd-c2c6d2b789b6">
+
+<img width="806" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d5273f65-da57-47f5-be3b-9407251cb7c9">
+
+presionamos **Run** y tenemos el mismo fallo.
+
+<img width="405" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/467b0d34-d510-4361-8844-93d50b56c5d5">
+
+Vamos a proceder a detener el Servidor que levantamos con la consola.
+
+Y ahora vamos a intentar ejecutar el Servidor con alguna de las dos formas anteriores.
+
+En la consola vemos que el Servidor se ha levantado en el puerto **8080**
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e0623d0c-bd5b-439c-8470-647ce0cc6063">
+
+Cargamos la URL http://localhost:8080/sample-debug-eclipse/
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c27f918e-da8a-434b-8725-668fea728752">
+
+Nos marca el error por el código que hemos estado usando, vamos a editar el JSP.
+
+<img width="1147" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8bd98f7b-86fc-4dbc-8e15-1f55b0fd13c5">
+
+Al recargar el URL ya va la aplicación.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/bb5d37b2-e7a0-4f0a-ac16-922aa435d59a">
+
+
+5. Vamos a parar el Servidor y lo vamos a arrancar en modo Debug pulsando en el icono **Debug** en la barra de herramientas  para compilar e iniciar su aplicación en modo de depuración. Eclipse debería iniciar el navegador configurado y debería llegar inmediatamente al punto de interrupción en **`index.jsp`**. Puede volver a ver la página web de la Figura 2-2 para indicar que su aplicación se implementó correctamente.
+
+6. Para continuar desde el punto de interrupción, haga clic en el icono de continuar (que se muestra aquí en el margen) en la barra de herramientas de Eclipse.
+
+La aplicación se pone en blanco y no termina de cargar.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2e21b036-27a0-4ccc-9ada-2f47be7a9e2d">
+
+Esto es por que el programa se a detenido en el punto de ruptura que indicamos.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fc3d6dfc-04dc-49bf-a98b-43b92f37ff6d">
+
+Podemos dar a que continue la ejecución para ver la salida en el navegador.
+
+<img width="1020" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/bceed9d1-8ad5-4aac-a393-8eb2636b5e60">
+
+Cuando damos que se ejecute todo el código podemos ver la salida en el navegador.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3664601e-6046-4637-9fcc-4d0b81fb9cb4">
+
+
+**NOTA**: Estamos desplegando en Tomcat pero no el servidor instalado en **`usr/local`** sino en uno que se encuentra dentro de Eclipse.
+
 
 ## RESUMEN
 
