@@ -398,6 +398,7 @@ Ahora ha implementado la aplicación utilizando el administrador de Tomcat.
 
 Undeploying es igual de fácil de lograr. En la página del administrador de Tomcat que vio anteriormente, debería notar un botón Undeploy junto a la aplicación de muestra (consulte la Figura 2-5). Haga clic en este botón y la aplicación de muestra se undeployed y se eliminará del directorio de aplicaciones web. Cuando termine, ya no podrá acceder a la aplicación en http://localhost:8080/sample-deployment/.
 
+
 #### 💻 USO DEL TOMCAT MANAGER
 
 También puede implementar una aplicación Java EE mediante la interfaz web del administrador de Tomcat. Para hacerlo, siga estos pasos:
@@ -441,7 +442,6 @@ Recuerde cambiar el código para que funcione, ya que estamos usando la versión
 
 <img width="708" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cd142550-e09a-4de0-b6c9-fb64d8ededb3">
 
-
 6. Undeploying es igual de fácil de lograr. En la página del administrador de Tomcat que vio anteriormente, debería notar un botón **Undeploy(Replegar)** junto a la aplicación de muestra. Haga clic en este botón y la aplicación de muestra se ***undeployed*** y se eliminará del directorio de aplicaciones web. Cuando termine, ya no podrá acceder a la aplicación en http://localhost:8080/sample-deployment/.
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7d3cbf9c-e84c-4e01-bef3-b291386e04b7">
@@ -450,7 +450,7 @@ Recuerde cambiar el código para que funcione, ya que estamos usando la versión
 
 ## DEBUGGING TOMCAT DESDE EL IDE
 
-Como desarrollador de **Java EE**, una de las habilidades más importantes que puede tener es la capacidad de implementar y depurar aplicaciones en Tomcat desde su IDE de Java. Esto le proporciona inconmensurables habilidades de resolución de problemas para determinar por qué una aplicación no se ejecuta o averiguar por qué ocurre el error que informó su cliente. Esta sección cubre la configuración, ejecución y depuración de aplicaciones web en Tomcat utilizando IntelliJ IDEA y Eclipse. Puede leer ambos conjuntos de instrucciones o simplemente el conjunto que pertenece al IDE que ha elegido; esa elección depende de usted.
+Como desarrollador de **Java EE**, una de las habilidades más importantes que puede tener es la capacidad de implementar y depurar aplicaciones en Tomcat desde su IDE de Java. Esto le proporciona inconmensurables habilidades de resolución de problemas para determinar por qué una aplicación no se ejecuta o averiguar por qué ocurre el error que informó su cliente. Esta sección cubre la configuración, ejecución y depuración de aplicaciones web en Tomcat utilizando **IntelliJ IDEA** y **Eclipse**. Puede leer ambos conjuntos de instrucciones o simplemente el conjunto que pertenece al IDE que ha elegido; esa elección depende de usted.
 
 En el resto de este libro hay muy pocas instrucciones para hacer esto. Esto mantiene el texto desacoplado de cualquier IDE en particular. Tampoco verá capturas de pantalla específicas de IDE después de este capítulo. Asegúrese de estar familiarizado y cómodo con la implementación y depuración de aplicaciones en Tomcat utilizando su IDE antes de continuar, incluso si eso significa repasar esta sección varias veces.
 
@@ -518,7 +518,7 @@ Debería volver a ver la página web de la Figura 2-2 para indicar que su aplica
 
 ### USANDO ECLIPSE
 
-El uso de Tomcat en Eclipse tiene algunas similitudes con el uso de Tomcat en IntelliJ IDEA, pero también tiene muchas diferencias y las pantallas se ven muy diferentes. El mismo proceso básico aún se aplica: debe configurar Tomcat en la configuración global de Eclipse, configurarlo para un proyecto e iniciar y depurar el proyecto. En esta última parte de esta sección. aprenderá a usar Tomcat de Eclipse en caso de que lo haya elegido como su IDE para este libro.
+El uso de Tomcat en Eclipse tiene algunas similitudes con el uso de Tomcat en IntelliJ IDEA, pero también tiene muchas diferencias y las pantallas se ven muy diferentes. El mismo proceso básico aún se aplica: ***debe configurar Tomcat en la configuración global de Eclipse, configurarlo para un proyecto e iniciar y depurar el proyecto***. En esta última parte de esta sección. aprenderá a usar Tomcat de Eclipse en caso de que lo haya elegido como su IDE para este libro.
 
 **ADVERTENCIA** *Como se discutió en la introducción, a la fecha de publicación de este libro, Eclipse aún no es compatible con Java SE 8, Java EE 7 o Tomcat 8.0. Debe esperar hasta que se lance Eclipse 4.4 Luna en junio de 2014 para obtener soporte para estas tecnologías. Como tal, las instrucciones y figuras de Eclipse en esta sección pueden no ser completamente precisas, y debe responder según sea necesario a los cambios realizados en la versión de lanzamiento de Eclipse Luna*.
 
@@ -545,6 +545,44 @@ Para comenzar, debe configurar Tomcat 8.0 como un entorno de ejecución en las p
 Ahora está listo para utilizar Tomcat 8.0 en sus proyectos de Eclipse.
 
 Otra cosa a tener en cuenta es que, de forma predeterminada, Eclipse utiliza un navegador integrado para abrir sus aplicaciones web. Debe deshabilitar esta función y usar un navegador convencional, como Google Chrome, Mozilla Firefox o Microsoft Internet Explorer. Para cambiar esta configuración, vaya al menú Window ⇒ Web Browser y seleccione algo que no sea "0 Internal Web Browser". La opción "1 Default System Web Browser" debería ser suficiente en la mayoría de los casos, pero es fácil cambiar esta configuración con frecuencia para satisfacer sus necesidades en un momento dado.
+
+##### 💻 Configuración de Tomcat 8.0 en Eclipse
+
+Para comenzar, debe configurar Tomcat 8.0 como un entorno de ejecución en las preferencias globales de Eclipse. Para hacerlo, siga estos pasos:
+
+1. Abra su Eclipse IDE para desarrolladores Java EE, el Workspaces sera **950_Java_for_Web** y vaya a Windows ⇒ Preferencias.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c172be43-5837-4523-b9bf-1799d252e920">
+
+2. En el cuadro de diálogo Preferencias que aparece, expanda **Server** y luego haga clic en **Runtime Environments**. Aparece un panel **Server Runtime Environments** donde puede gestionar los servidores de aplicaciones y los contenedores web disponibles para todos sus proyectos de Eclipse.
+
+<img width="639" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c520c937-a83d-42d7-a48c-733f01d1eda9">
+
+3. Haga clic en el botón **Add** para abrir el cuadro de diálogo **New Server Runtime Environment**.
+
+<img width="647" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c1a3b0b0-15c6-4cb7-9c03-2b20dbce3059">
+
+4. Expanda la carpeta **Apache** y seleccione **Apache Tomcat v8.5**, asegurándose de seleccionar la casilla de verificación **"Create a new local server"**. Luego haga clic en el botón **Next**.
+
+<img width="642" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/68a3c4d6-bbe9-410d-967c-f7f9decd0ba2">
+
+5. En la siguiente pantalla, haga clic en el botón **Browse** y busque el directorio de inicio de Tomcat 8.5 (por ejemplo, **`/usr/local/apache-tomcat-8.5.89`**).
+
+En el menú desplegable de JRE, seleccione su instalación local de **Java SE 17 JRE**. Nombra el servidor como quieras. Los proyectos de muestra de Eclipse que descarga a lo largo de este libro asumen que el servidor se llama **Apache Tomcat v8.0**, que es el valor predeterminado de Eclipse. En este punto, debería ver una pantalla como la de la Figura.
+
+<img width="590" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/42ee6bea-9b7f-4f0f-a332-801541edb505">
+
+7. Haga clic en el botón **Finish** para completar la adición de su servidor Tomcat local a Eclipse y luego haga clic en **OK** para cerrar el cuadro de diálogo de preferencias.
+
+<img width="640" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/03eb0fb0-81cd-4ca3-a7b3-812d2281e9a5">
+
+Presionamos **Apply and Close**.
+
+Ahora está listo para utilizar Tomcat 8.5 en sus proyectos de Eclipse.
+
+Otra cosa a tener en cuenta es que, de forma predeterminada, Eclipse utiliza un navegador integrado para abrir sus aplicaciones web. Debe deshabilitar esta función y usar un navegador convencional, como **Google Chrome**, **Mozilla Firefox** o **Microsoft Internet Explorer**. Para cambiar esta configuración, vaya al menú **Window ⇒ Web Browser** y seleccione algo que no sea **"0 Internal Web Browser"**. La opción **"1 Default System Web Browser"** debería ser suficiente en la mayoría de los casos, pero es fácil cambiar esta configuración con frecuencia para satisfacer sus necesidades en un momento dado.
+
+<img width="441" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0c3877c4-e879-43ac-9388-aa84632b6d19">
 
 ##### Usar el servidor Tomcat en un proyecto
 
