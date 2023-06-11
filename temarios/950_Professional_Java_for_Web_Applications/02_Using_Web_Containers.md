@@ -398,6 +398,67 @@ Ahora ha implementado la aplicación utilizando el administrador de Tomcat.
 
 Undeploying es igual de fácil de lograr. En la página del administrador de Tomcat que vio anteriormente, debería notar un botón Undeploy junto a la aplicación de muestra (consulte la Figura 2-5). Haga clic en este botón y la aplicación de muestra se undeployed y se eliminará del directorio de aplicaciones web. Cuando termine, ya no podrá acceder a la aplicación en http://localhost:8080/sample-deployment/.
 
+#### 💻 USO DEL TOMCAT MANAGER
+
+También puede implementar una aplicación Java EE mediante la interfaz web del administrador de Tomcat. Para hacerlo, siga estos pasos:
+
+1. Abra su navegador y navegue hasta http://localhost:8080/manager/html.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9b45f898-fcb4-4d50-8945-0ddc44f7d973">
+
+Nos pide **`username`** y **`password`**, pero como no hemos configurado esto, lo haremos a continuación.
+
+2. Para configurar Tomcat para su primer uso, comience abriendo el archivo **`conf/tomcat-users.xml`** en su editor de texto favorito. Coloque la siguiente etiqueta entre las etiquetas XML **`<tomcat-users></tomcat-users>`**:
+
+```html
+  <user username="admin" password="admin" roles="manager-gui,admin-gui" />
+```
+
+**ADVERTENCIA** *Esto configura un usuario administrador que puede utilizar para iniciar sesión en la interfaz de administración web de Tomcat. Por supuesto, esta combinación de nombre de usuario y contraseña es muy insegura y nunca debe usarse para servidores de producción o de cara al público. Sin embargo, para probar en su máquina local es suficiente*.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0ba86743-7311-489e-ab04-02a12d89e6c2">
+
+3. Ahora si, cCuando se le solicite un nombre de usuario y contraseña, ingrese **admin** como nombre de usuario y **admin** como contraseña (que es lo configurado en **`conf/tomcat-users.xml`**). La página que se le presenta es: 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/936a27c6-ac16-4cf1-acbb-692ee3946e82">
+
+<img width="808" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c7208c7d-0931-492c-9e0d-4adceef6e73b">
+
+5. Abra el archivo **`conf/web.xml`**. Busque en el archivo el texto **`org.apache.jasper.servlet.JspServlet`**. Debajo de la etiqueta que contiene este texto hay dos etiquetas **`<init-param>`**. Aprenderá sobre los parámetros de inicio de Servlet en el siguiente capítulo, pero por ahora agregue los siguientes parámetros de inicio debajo de los parámetros de inicio existentes:
+
+```xml
+  <init-param>            
+    <param-name>compilerSourceVM</param-name>            
+    <param-value>1.8</param-value>        
+  </init-param>        
+  <init-param>            
+    <param-name>compilerTargetVM</param-name>            
+    <param-value>1.8</param-value>        
+  </init-param>
+```
+
+De forma predeterminada, **Tomcat 8.0** compila archivos **JavaServer Pages** con compatibilidad con el lenguaje **Java SE 6** incluso si se ejecuta en **Java SE 8**. Estos nuevos parámetros de inicio de Servlet indican a Tomcat que compile archivos JSP con características del lenguaje **Java SE 8**, en su lugar.
+
+6. Después de realizar estos cambios y guardar estos archivos, ahora debería estar listo para iniciar Tomcat y asegurarse de que se ejecute correctamente. Abra un símbolo del sistema y cambie su directorio al directorio de inicio de Tomcat (**`C:\Program Files\Apache Software Foundation\Tomcat 8.0`**).
+
+7. Escriba el comando **`echo %JAVA_HOME%`** (o **`echo $JAVA_HOME`** en un sistema operativo que no sea Windows) y presione Enter para verificar si la variable de entorno **`JAVA_HOME`** está configurada correctamente en su directorio de inicio de **Java Development Kit (JDK)**. Si no es así, configure la variable de entorno y luego cierre la sesión y vuelva a iniciarla antes de continuar (consulte la Nota que sigue). Tomcat no se puede ejecutar sin esta variable configurada correctamente.
+
+8. Escriba el comando **`bin\startup.bat`** (o **`bin/startup.sh`** si no usa Windows) y presione Enter. Debería abrirse una ventana de la consola Java mostrando la salida del proceso Tomcat en ejecución. Después de unos segundos, debería ver el mensaje **“INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 1827 ms”** o algo similar en la ventana de la consola. Esto significa que Tomcat se ha iniciado correctamente.
+
+**NOTA** *Al iniciar, Tomcat busca inicialmente la variable de entorno **`JRE_HOME`** y la usa si está configurada. Si no es así, busca la variable **`JAVA_HOME`**. Si no se establece ninguno, Tomcat no se inicia. Sin embargo, para depurar Tomcat debe tener configurado **`JAVA_HOME`**, por lo que es mejor simplemente seguir adelante y configurarlo*.
+
+9. Abra su navegador web favorito y navegue hasta http://localhost:8080/. Debería ver una página que se parece a la Figura 2-1. Esto significa que Tomcat se está ejecutando y las **JSP** se están compilando correctamente con **Java SE 8**. Si esta pantalla no aparece o si observa un error en la consola de Java, debe verificar los pasos anteriores y posiblemente consultar la documentación de Tomcat.
+
+<img width="892" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2e83b2f4-8b61-4890-9882-a321ba8bbc70">
+
+Cuando termine de usar **Tomcat**, puede detenerlo ejecutando el comando **`bin\shutdown.bat`** (o **`bin/shutdown.sh`**) en el símbolo del sistema en el directorio de inicio de **Tomcat 8.0.** La ventana de la consola de Java debería cerrarse y Tomcat se detendrá. Sin embargo, no hagas esto todavía; En la siguiente sección, explorará la implementación y la cancelación de la implementación de aplicaciones en Tomcat. (Si ya cerró Tomcat, no se preocupe. Es fácil volver a iniciarlo).
+
+**ADVERTENCIA** *Las primeras versiones de **Tomcat 8.0** no admiten la compilación de **JSP** para **Java 8**. Sabrá que este es el caso de su versión si ve **"WARNING: Unknown source VM 1.8 ignored"** o similar en la consola de Java. Si es así, debe completar los siguientes pasos para "Configurar un compilador JSP personalizado"*.
+
+
+
+
+
 ## DEBUGGING TOMCAT DESDE EL IDE
 
 Como desarrollador de **Java EE**, una de las habilidades más importantes que puede tener es la capacidad de implementar y depurar aplicaciones en Tomcat desde su IDE de Java. Esto le proporciona inconmensurables habilidades de resolución de problemas para determinar por qué una aplicación no se ejecuta o averiguar por qué ocurre el error que informó su cliente. Esta sección cubre la configuración, ejecución y depuración de aplicaciones web en Tomcat utilizando IntelliJ IDEA y Eclipse. Puede leer ambos conjuntos de instrucciones o simplemente el conjunto que pertenece al IDE que ha elegido; esa elección depende de usted.
