@@ -1,12 +1,12 @@
 # Capítulo 3. Diseño de Service Endpoint
 
-Los Web services interactúan con los clientes para recibir los requests(solicitudes) de los clientes y devolver las responses(respuestas). Entre la solicitud y la respuesta, un Web service aplica la lógica comercial adecuada para procesar y cumplir con la solicitud de un cliente. El diseño de un Web service efectivo comienza con la comprensión de la naturaleza del servicio que se proporcionará, es decir, cómo el servicio interactuará con el cliente y cómo procesará y cumplirá la solicitud del cliente, junto con cómo los usuarios del servicio encontrar y hacer sus solicitudes. Este capítulo examina los Web services desde la perspectiva de la funcionalidad de interacción y procesamiento de un servicio.
+Los Web services interactúan con los clientes para recibir los requests(solicitudes) de los clientes y devolver las responses(respuestas). Entre la solicitud y la respuesta, un Web service aplica la lógica de negocio adecuada para procesar y cumplir con la solicitud de un cliente. El diseño de un Web service efectivo comienza con la comprensión de la naturaleza del servicio que se proporcionará, es decir, cómo el servicio interactuará con el cliente y cómo procesará y cumplirá la solicitud del cliente, junto con cómo los usuarios del servicio encontrar y hacer sus solicitudes. Este capítulo examina los Web services desde la perspectiva de la funcionalidad de interacción y procesamiento de un servicio.
 
 El capítulo describe los aspectos clave que debe tener en cuenta al diseñar un Web service y luego muestra cómo estas consideraciones impulsan el diseño y la implementación de la interfaz y la funcionalidad del Web service. En particular, el capítulo examina las interacciones entre un servicio y sus clientes y el procesamiento comercial que realiza el servicio. Ilustra estas consideraciones a partir de ejemplos que utilizan tres escenarios típicos de Web services.
 
 El capítulo cubre la mayoría de las decisiones que se deben tomar cuando se diseña e implementa un Web service, incluyendo la identificación de las diferentes posibilidades que dan lugar a diferentes soluciones. Describe cómo recibir requests, delegar requests a la lógica de negocio, formular responses, publicar un Web service y manejar interacciones basadas en documentos.
 
-A lo largo del camino, el capítulo hace recomendaciones y ofrece algunas pautas para diseñar un Web service. Estas recomendaciones y puntos clave, marcados con check boxes, incluyen discusiones sobre justificaciones y compensaciones. Se ilustran con los escenarios de servicio de ejemplo. Dado que los Web services básicamente exponen interfaces interoperables para aplicaciones nuevas y existentes, un gran segmento de la audiencia de este libro puede tener aplicaciones existentes para las que ya han implementado la lógica comercial. Por esa razón, y dado que el principal interés de la mayoría de los lectores son los Web services, este capítulo mantiene su enfoque en el desarrollo de Web services y no profundiza en los detalles del diseño e implementación de la lógica de negocio.
+A lo largo del camino, el capítulo hace recomendaciones y ofrece algunas pautas para diseñar un Web service. Estas recomendaciones y puntos clave, marcados con check boxes, incluyen discusiones sobre justificaciones y compensaciones. Se ilustran con los escenarios de servicio de ejemplo. Dado que los Web services básicamente exponen interfaces interoperables para aplicaciones nuevas y existentes, un gran segmento de la audiencia de este libro puede tener aplicaciones existentes para las que ya han implementado la lógica de negocio. Por esa razón, y dado que el principal interés de la mayoría de los lectores son los Web services, este capítulo mantiene su enfoque en el desarrollo de Web services y no profundiza en los detalles del diseño e implementación de la lógica de negocio.
 
 ## 3.1. Example Scenarios - Ejemplo de Escenarios  
 
@@ -18,7 +18,7 @@ En este capítulo, nos centramos en tres tipos de Web services:
 
 2. ***Un Web service que al mismo tiempo completa los requests de los clientes mientras maneja una alta proporción de datos compartidos que se actualizan con frecuencia y, por lo tanto, requieren un uso intensivo de EIS o transacciones de bases de datos***. El sistema de reservas de aerolíneas asociado con el adventure builder es un buen ejemplo de este tipo de Web service. Muchos clientes pueden enviar simultáneamente detalles de las reservas de aerolíneas deseadas, y el Web service maneja y realiza estas reservas simultáneamente.
 
-3. ***Un Web service de proceso de negocio cuyo procesamiento de un request de cliente incluye el inicio de una serie de procesos de flujo de trabajo y de negocio de ejecución prolongada***. La decisión de ***Adventure Builder Enterprise*** de crear una interfaz de servicio para las agencias de viajes asociadas es un buen ejemplo de este tipo de Web service. A través de esta interfaz de servicio, las agencias asociadas pueden ofrecer a sus clientes los mismos servicios que se ofrecen en ***el sitio web de Adventure Builder***. Las agencias asociadas utilizan la lógica comercial de ***Adventure Builder*** para cumplir con los pedidos de sus clientes. Un servicio como este recibe los detalles de una solicitud(request) de plan de viaje de una agencia asociada y luego el servicio inicia una serie de procesos para reservar aerolíneas, hoteles, autos de alquiler, etc. para las fechas especificadas.
+3. ***Un Web service de proceso de negocio cuyo procesamiento de un request de cliente incluye el inicio de una serie de procesos de flujo de trabajo y de negocio de ejecución prolongada***. La decisión de ***Adventure Builder Enterprise*** de crear una interfaz de servicio para las agencias de viajes asociadas es un buen ejemplo de este tipo de Web service. A través de esta interfaz de servicio, las agencias asociadas pueden ofrecer a sus clientes los mismos servicios que se ofrecen en ***el sitio web de Adventure Builder***. Las agencias asociadas utilizan la lógica de negocio de ***Adventure Builder*** para cumplir con los pedidos de sus clientes. Un servicio como este recibe los detalles de una solicitud(request) de plan de viaje de una agencia asociada y luego el servicio inicia una serie de procesos para reservar aerolíneas, hoteles, autos de alquiler, etc. para las fechas especificadas.
 
 Las discusiones sobre problemas de diseño de Web services en este capítulo incluyen referencias a estos ejemplos y escenarios. Sin embargo, las discusiones usan solo las características apropiadas de estos escenarios en lo que respecta a un problema de diseño en particular, y no pretenden representar un diseño completo de un escenario.
 
@@ -51,7 +51,7 @@ Ahora que comprende lo que sucede en la interacción de un Web service, analicem
 
 ✅ ***Las tecnologías de Web services básicamente lo ayudan a exponer una interfaz interoperable para una aplicación nueva o existente. Es decir, puede agregar una interfaz de Web service a una aplicación existente para que sea interoperable con otras aplicaciones, o puede desarrollar una aplicación completamente nueva que sea interoperable desde su inicio***.
 
-Es importante tener en cuenta que el diseño de capacidades de Web services para una aplicación es independiente del diseño de la lógica comercial de la aplicación. De hecho, usted diseña la lógica comercial de una aplicación sin tener en cuenta si la aplicación tiene una interfaz de Web service. ***Dicho de otro modo, el diseño de la lógica de negocio de la aplicación es el mismo independientemente de si la aplicación tiene o no una interfaz de Web service. Cuando diseña una interfaz de Web service para una aplicación, debe tener en cuenta los aspectos relacionados específicamente con la interoperabilidad y los Web services, y no con la lógica de negocio, y debe tomar sus decisiones de diseño en función de estos aspectos***.
+Es importante tener en cuenta que el diseño de capacidades de Web services para una aplicación es independiente del diseño de la lógica de negocio de la aplicación. De hecho, usted diseña la lógica de negocio de una aplicación sin tener en cuenta si la aplicación tiene una interfaz de Web service. ***Dicho de otro modo, el diseño de la lógica de negocio de la aplicación es el mismo independientemente de si la aplicación tiene o no una interfaz de Web service. Cuando diseña una interfaz de Web service para una aplicación, debe tener en cuenta los aspectos relacionados específicamente con la interoperabilidad y los Web services, y no con la lógica de negocio, y debe tomar sus decisiones de diseño en función de estos aspectos***.
 
 Al diseñar un Web service, tenga en cuenta el flujo lógico de los Web services típicos y los problemas que abordan. En general, un Web service:
 
@@ -73,59 +73,51 @@ Dado este flujo de lógica, los siguientes son los pasos típicos para diseñar 
 
    Una vez que haya decidido la interfaz y, si es necesario, cómo hacer que esté disponible, estará listo para considerar cómo recibir requests de los clientes. Debe diseñar su servicio no solo para recibir una llamada que ha realizado un cliente, sino también para realizar el preprocesamiento necesario de la request, como traducir el contenido de la request a un formato interno, antes de aplicar la lógica de negocio del servicio.
 
-3. Determine cómo delegar la solicitud a la lógica de negocio.
+3. ***Determine cómo delegar la request a la lógica de negocio.
 
-Una vez que se ha recibido y preprocesado una solicitud, está listo para delegarla a la lógica comercial del servicio.
+   Una vez que se ha recibido y preprocesado una request, está listo para delegarla a la lógica de negocio del servicio.
 
-4. Decidir cómo procesar la solicitud.
+4. ***Decidir cómo procesar la request***.
 
-   A continuación, el servicio procesa una solicitud. Si el servicio ofrece una interfaz de Web service para la lógica de negocios existente, entonces el trabajo de este paso puede ser simplemente determinar cómo se pueden usar las interfaces de lógica de negocios existentes para manejar las solicitudes del Web service.
+   A continuación, el servicio procesa una request. Si el servicio ofrece una interfaz de Web service para la lógica de negocios existente, entonces el trabajo de este paso puede ser simplemente determinar cómo se pueden usar las interfaces de lógica de negocios existentes para manejar las requests del Web service.
 
-5. Determinar cómo formular y enviar la respuesta.
+5. ***Determinar cómo formular y enviar la response***.
 
-   Por último, debe diseñar cómo el servicio formula y envía una respuesta al cliente. Es mejor mantener estas operaciones lógicamente juntas. Hay otras consideraciones a tener en cuenta antes de enviar la respuesta al cliente.
+   Por último, debe diseñar cómo el servicio formula y envía una response al cliente. Es mejor mantener estas operaciones lógicamente juntas. Hay otras consideraciones a tener en cuenta antes de enviar la response al cliente.
 
-6. Determinar cómo reportar problemas.
+6. ***Determinar cómo reportar problemas***.
 
    Dado que los Web services no son inmunes a los errores, debe decidir cómo iniciar o manejar las excepciones o los errores que se produzcan. Debe abordar cuestiones tales como generar excepciones específicas del servicio o permitir que el sistema subyacente genere excepciones específicas del sistema. También debe formular un plan para recuperarse de excepciones en aquellas situaciones que requieren recuperación.
 
 Después de considerar estos pasos, comience a diseñar su Web service ideando respuestas adecuadas a estas preguntas:
 
-¿Cómo harán uso de sus servicios los clientes? Considere qué tipo de llamadas pueden hacer los clientes y cuáles podrían ser los parámetros de esas llamadas.
+* ***¿Cómo harán uso de sus servicios los clientes?*** Considere qué tipo de llamadas pueden hacer los clientes y cuáles podrían ser los parámetros de esas llamadas.
+* ***¿Cómo recibirá su Web service las requests de los clientes?*** Considere qué tipo de endpoints utilizará para su Web service.
+* ***¿Qué tipo de preprocesamiento común, como transformaciones, traducciones y logging(registro), debe realizarse?***
+* ***¿Cómo se delegará la request a la lógica de negocio?***
+* ***¿Cómo se formará y devolverá la response?***
+* ***¿Qué tipo de excepciones devolverá el servicio a los clientes y cuándo sucederá esto?***
+* ***¿Cómo va a informar a los clientes acerca de su Web service? ¿Vas a publicar tu servicio en registros públicos, en registros privados o de alguna otra forma que no sean registros?***
 
-¿Cómo recibirá su Web service las solicitudes de los clientes? Considere qué tipo de puntos finales utilizará para su Web service.
+Antes de explorar los detalles de estos problemas de diseño, veamos un servicio desde un alto nivel. Esencialmente, se puede considerar que la implementación de un servicio tiene dos capas: ***una interacción y una capa de procesamiento***. (Consulte la Figura 3.2 ).
 
-¿Qué tipo de preprocesamiento común, como transformaciones, traducciones y registro, debe realizarse?
-
-¿Cómo se delegará la solicitud a la lógica de negocio?
-
-¿Cómo se formará y devolverá la respuesta?
-
-¿Qué tipo de excepciones devolverá el servicio a los clientes y cuándo sucederá esto?
-
-¿Cómo va a informar a los clientes acerca de su Web service? ¿Vas a publicar tu servicio en registros públicos, en registros privados o de alguna otra forma que no sean registros?
-
-Antes de explorar los detalles de estos problemas de diseño, veamos un servicio desde un alto nivel. Esencialmente, se puede considerar que la implementación de un servicio tiene dos capas: una interacción y una capa de procesamiento. (Consulte la Figura 3.2 ).
-
-Es útil ver un servicio en términos de capas: una capa de interacción y una capa de procesamiento.
+✅ ***Es útil ver un servicio en términos de capas: una capa de interacción y una capa de procesamiento.***
 
 **Figura 3.2. Vista en capas de un Web service**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/e4ca488e-bcce-4033-8a0d-9d896f9fc1bd)
 
-La capa de interacción del servicio consta de la interfaz de punto final que el servicio expone a los clientes y a través de la cual recibe las solicitudes de los clientes. La capa de interacción también incluye la lógica de cómo el servicio delega las solicitudes a la lógica de negocio y formula respuestas. Cuando recibe solicitudes de los clientes, la capa de interacción realiza cualquier preprocesamiento necesario antes de delegar las solicitudes a la lógica comercial. Cuando se completa el procesamiento de la lógica de negocio, la capa de interacción devuelve la respuesta al cliente. La capa de interacción puede tener responsabilidades adicionales para aquellos escenarios en los que el servicio espera recibir documentos XML de los clientes, pero la lógica de negocio se ocupa de los objetos. En estos casos,
+**La capa de interacción del servicio consta de la interfaz de endpoint que el servicio expone a los clientes y a través de la cual recibe las solicitudes de los clientes. La capa de interacción también incluye la lógica de cómo el servicio delega las requests a la lógica de negocio y formula responses. Cuando recibe requests de los clientes, la capa de interacción realiza cualquier preprocesamiento necesario antes de delegar las requests a la lógica de negocio. Cuando se completa el procesamiento de la lógica de negocio, la capa de interacción devuelve la response al cliente. En estos casos, la capa de interacción puede tener responsabilidades adicionales para aquellos escenarios en los que el servicio espera recibir documentos XML de los clientes, pero la lógica de negocio se ocupa de los objetos.**
 
-La capa de procesamiento de servicios contiene toda la lógica de negocio utilizada para procesar las solicitudes de los clientes. También es responsable de la integración con EIS y otros Web services. En el caso de aplicaciones existentes que agregan una interfaz de Web service, la aplicación existente en sí misma suele formar la capa de procesamiento del servicio.
+**La capa de procesamiento de servicios contiene toda la lógica de negocio utilizada para procesar las requests de los clientes. También es responsable de la integración con EIS y otros Web services. En el caso de aplicaciones existentes que agregan una interfaz de Web service, la aplicación existente en sí misma suele formar la capa de procesamiento del servicio.**
 
 Ver la implementación de su servicio en términos de capas ayuda a:
 
-Divide claramente las responsabilidades
+* Divide claramente las responsabilidades
+* Proporcione una ubicación común o única para la lógica de procesamiento de requests (tanto antes como después del procesamiento) en la capa de interacción
+* Exponer la lógica de negocio existente como un Web service
 
-Proporcione una ubicación común o única para la lógica de procesamiento de solicitudes (tanto antes como después del procesamiento) en la capa de interacción
-
-Exponer la lógica comercial existente como un Web service
-
-Para poner esta noción de una vista en capas en el contexto adecuado, veamos un ejemplo como el escenario del Web service del proceso empresarial del creador de aventuras. En este escenario, una agencia de viajes asociada utiliza el Web service de Adventure Builder Enterprise para crear un itinerario de viaje para sus clientes. A través de la interfaz de servicio que expone a estas agencias de viajes, la empresa constructora de aventuras recibe documentos comerciales (en formato XML) que contienen todos los detalles necesarios para las solicitudes de itinerarios de viaje. Adventure builder utiliza sus sistemas de flujo de trabajo existentes para procesar y satisfacer estas solicitudes de socios. La capa de interacción de la interfaz de Web service expuesta de Adventure Builder valida estos documentos comerciales entrantes y luego convierte los documentos XML entrantes a su formato interno o asigna el contenido del documento a objetos Java. Una vez finalizada la conversión, el control pasa a los mecanismos de flujo de trabajo en la capa de procesamiento donde se completan las solicitudes de viaje. La capa de interacción genera respuestas para las solicitudes de viaje completadas, convierte las respuestas en documentos XML u otros formatos apropiados y garantiza que las respuestas se transmitan a las agencias asociadas.
+Para poner esta noción de una vista en capas en el contexto adecuado, veamos un ejemplo como el escenario del Web service del proceso empresarial de ***Adventure builder***. En este escenario, una agencia de viajes asociada utiliza el Web service de ***Adventure Builder Enterprise*** para crear un itinerario de viaje para sus clientes. A través de la interfaz de servicio que expone a estas agencias de viajes, la ***Adventure Builder Enterprise*** recibe documentos comerciales (en formato XML) que contienen todos los detalles necesarios para las solicitudes de itinerarios de viaje. ***Adventure builder*** utiliza sus sistemas de flujo de trabajo existentes para procesar y satisfacer estas solicitudes de socios. La capa de interacción de la interfaz de Web service expuesta de ***Adventure Builder*** valida estos documentos comerciales entrantes y luego convierte los documentos XML entrantes a su formato interno o asigna el contenido del documento a objetos Java. Una vez finalizada la conversión, el control pasa a los mecanismos de flujo de trabajo en la capa de procesamiento donde se completan las solicitudes de viaje. La capa de interacción genera respuestas para las solicitudes de viaje completadas, convierte las respuestas en documentos XML u otros formatos apropiados y garantiza que las respuestas se transmitan a las agencias asociadas.
 
 Es importante aclarar el alcance del preprocesamiento realizado en la capa de interacción, ya que difiere del procesamiento en tiempo de ejecución JAX-RPC. La capa de interacción de Adventure Builder, su interfaz de Web service expuesta, aplica un preprocesamiento específico del servicio a las solicitudes que ingresan al servicio. Este preprocesamiento específico del servicio se realiza solo si lo requiere la lógica del servicio e incluye la conversión de documentos XML entrantes a un formato adecuado o la asignación del contenido del documento a objetos Java. Esta asignación de documentos XML entrantes a objetos comerciales no es la misma que la asignación en tiempo de ejecución JAX-RPC entre documentos XML y objetos Java. Aunque el contenedor realiza la asignación de tiempo de ejecución JAX-RPC para todas las solicitudes y respuestas, el desarrollador elige la asignación de documentos XML entrantes a objetos comerciales.
 
@@ -135,7 +127,7 @@ El escenario del servicio meteorológico es uno de esos servicios que podría be
 
 ## 3.4. Diseño de la capa de interacción de un servicio
 
-La capa de interacción de un servicio tiene varias responsabilidades importantes, y la principal de ellas es el diseño de la interfaz que el servicio presenta al cliente. Dado que los clientes acceden al servicio a través de ella, la interfaz es el punto de partida de la interacción de un cliente con el servicio. La capa de interacción también maneja otras responsabilidades, como recibir solicitudes de clientes, delegar solicitudes a la lógica comercial adecuada y crear y enviar respuestas. Esta sección examina las responsabilidades de la capa de interacción y destaca algunas pautas para su diseño.
+La capa de interacción de un servicio tiene varias responsabilidades importantes, y la principal de ellas es el diseño de la interfaz que el servicio presenta al cliente. Dado que los clientes acceden al servicio a través de ella, la interfaz es el punto de partida de la interacción de un cliente con el servicio. La capa de interacción también maneja otras responsabilidades, como recibir solicitudes de clientes, delegar solicitudes a la lógica de negocio adecuada y crear y enviar respuestas. Esta sección examina las responsabilidades de la capa de interacción y destaca algunas pautas para su diseño.
 
 ### 3.4.1. Diseño de la interfaz
 
@@ -159,19 +151,19 @@ Después de decidir el enfoque a seguir, aún debe resolver otros detalles del d
 
 #### 3.4.1.1. Elección del tipo de punto final de la interfaz
 
-En la plataforma J2EE, tiene dos opciones para implementar la interfaz de Web service: puede usar un punto final de servicio JAX-RPC (también denominado punto final de nivel web) o un punto final de servicio EJB (también denominado punto final de nivel EJB) . El uso de uno de estos tipos de puntos finales hace posible integrar el punto final en el mismo nivel que la implementación del servicio. Esto simplifica la implementación del servicio, porque evita la necesidad de colocar el punto final en su propio nivel donde la presencia del punto final es únicamente para actuar como un proxy que dirige las solicitudes a otros niveles que contienen la lógica comercial del servicio.
+En la plataforma J2EE, tiene dos opciones para implementar la interfaz de Web service: puede usar un punto final de servicio JAX-RPC (también denominado punto final de nivel web) o un punto final de servicio EJB (también denominado punto final de nivel EJB) . El uso de uno de estos tipos de puntos finales hace posible integrar el punto final en el mismo nivel que la implementación del servicio. Esto simplifica la implementación del servicio, porque evita la necesidad de colocar el punto final en su propio nivel donde la presencia del punto final es únicamente para actuar como un proxy que dirige las solicitudes a otros niveles que contienen la lógica de negocio del servicio.
 
-Cuando desarrolla un nuevo Web service que no usa la lógica de negocios existente, elegir el tipo de punto final que se usará para la interfaz del Web service es sencillo. La elección del tipo de punto final depende de la naturaleza de su lógica comercial, ya sea que la lógica comercial del servicio esté completamente contenida en el nivel web o en el nivel EJB:
+Cuando desarrolla un nuevo Web service que no usa la lógica de negocios existente, elegir el tipo de punto final que se usará para la interfaz del Web service es sencillo. La elección del tipo de punto final depende de la naturaleza de su lógica de negocio, ya sea que la lógica de negocio del servicio esté completamente contenida en el nivel web o en el nivel EJB:
 
 Utilice un punto final de servicio JAX-RPC cuando la capa de procesamiento esté dentro del nivel web.
 
 Utilice un punto final de servicio EJB cuando la capa de procesamiento solo se encuentre en el nivel EJB.
 
-Cuando agrega una interfaz de Web service a una aplicación o servicio existente, debe considerar si la aplicación o el servicio existente procesa previamente las solicitudes antes de delegarlas a la lógica comercial. Si es así, tenga en cuenta la siguiente pauta:
+Cuando agrega una interfaz de Web service a una aplicación o servicio existente, debe considerar si la aplicación o el servicio existente procesa previamente las solicitudes antes de delegarlas a la lógica de negocio. Si es así, tenga en cuenta la siguiente pauta:
 
 Cuando agrega una interfaz de Web service para una aplicación existente, elija un tipo de punto final adecuado para el nivel en el que se produce la lógica de preprocesamiento en la aplicación existente. Utilice un punto final de servicio JAX-RPC cuando el preprocesamiento se produzca en el nivel web de la aplicación existente y un punto final de servicio EJB cuando el preprocesamiento se produzca en el nivel EJB.
 
-Si la aplicación o el servicio existente no requiere el preprocesamiento de la solicitud entrante, elija el punto final adecuado que esté presente en el mismo nivel que la lógica comercial existente. Además de estas consideraciones importantes para elegir un tipo de punto final, existen otras diferencias más sutiles entre un punto final de servicio EJB y un punto final de servicio JAX-RPC. Puede que le resulte útil tener en cuenta estos puntos adicionales al elegir un tipo de punto final de Web service:
+Si la aplicación o el servicio existente no requiere el preprocesamiento de la solicitud entrante, elija el punto final adecuado que esté presente en el mismo nivel que la lógica de negocio existente. Además de estas consideraciones importantes para elegir un tipo de punto final, existen otras diferencias más sutiles entre un punto final de servicio EJB y un punto final de servicio JAX-RPC. Puede que le resulte útil tener en cuenta estos puntos adicionales al elegir un tipo de punto final de Web service:
 
 Consideraciones de acceso de subprocesos múltiples : un punto final de servicio EJB, debido a que se implementa como un bean de sesión sin estado, no necesita preocuparse por el acceso de subprocesos múltiples, ya que se requiere el contenedor EJB para serializar solicitudes a cualquier instancia particular de un bean de sesión sin estado. Para un punto final de servicio JAX-RPC, por otro lado, debe realizar la sincronización usted mismo en el código fuente.
 
@@ -314,7 +306,7 @@ Actualmente, los proveedores pueden proporcionar sus propias soluciones a este p
 
 Debido a las limitaciones de portabilidad, debe evitar pasar parámetros que requieran el uso de serializadores o deserializadores específicos del proveedor.
 
-En su lugar, una mejor manera es pasar estos parámetros como fragmentos de documentos SOAP representados como un subárbol DOM en la interfaz del punto final del servicio. (Consulte la Figura 3.3 ). Si es así, debe considerar enlazar (ya sea manualmente o utilizando JAXB) los fragmentos SOAP a objetos Java antes de pasarlos a la capa de procesamiento para evitar un acoplamiento estrecho de la lógica comercial con el fragmento del documento.
+En su lugar, una mejor manera es pasar estos parámetros como fragmentos de documentos SOAP representados como un subárbol DOM en la interfaz del punto final del servicio. (Consulte la Figura 3.3 ). Si es así, debe considerar enlazar (ya sea manualmente o utilizando JAXB) los fragmentos SOAP a objetos Java antes de pasarlos a la capa de procesamiento para evitar un acoplamiento estrecho de la lógica de negocio con el fragmento del documento.
 
 #### 3.4.1.4. Interfaces con métodos sobrecargados
 
@@ -501,7 +493,7 @@ Esto finaliza la discusión de las consideraciones para diseñar una interfaz de
 	
 La capa de interacción, a través del punto final, recibe las solicitudes de los clientes. La plataforma asigna las solicitudes de los clientes entrantes, que tienen la forma de mensajes SOAP, a llamadas de método presentes en la interfaz del Web service.
 
-Antes de delegar estas solicitudes de clientes entrantes a la lógica comercial del Web service, debe realizar cualquier validación de seguridad requerida, transformación de parámetros y otro procesamiento previo de parámetros requerido.
+Antes de delegar estas solicitudes de clientes entrantes a la lógica de negocio del Web service, debe realizar cualquier validación de seguridad requerida, transformación de parámetros y otro procesamiento previo de parámetros requerido.
 
 Como se indica en “ Tipos de parámetros para operaciones de Web services ” en la página 72 y en otros lugares, las llamadas a Web services son básicamente llamadas a métodos cuyos parámetros se pasan como objetos Java, documentos XML ( objetos javax.xml.transform.Source ) o incluso documentos SOAP. fragmentos ( objetos javax.xml.soap.SOAPElement ).
 
@@ -667,11 +659,11 @@ Esto permite tener una ubicación común para el ensamblado de respuestas y las 
 
 Considere la generación de respuestas desde el punto de vista del servicio de información meteorológica. El servicio de información meteorológica puede ser utilizado por una variedad de tipos de clientes, desde navegadores hasta clientes enriquecidos y dispositivos portátiles. Un servicio de información meteorológica bien diseñado daría sus respuestas en formatos adecuados para estos diferentes tipos de clientes.
 
-Sin embargo, no es un buen diseño tener una implementación diferente de la lógica del servicio para cada tipo de cliente. Más bien, es mejor diseñar una lógica comercial común para todos los tipos de clientes. Luego, en la capa de interacción, transforme los resultados por tipo de cliente para renderizar. Por lo tanto, es importante tener en cuenta las pautas anteriores, especialmente cuando su servicio tiene una lógica de procesamiento común, pero potencialmente tiene diferentes necesidades de representación de respuestas para adaptarse a sus variados tipos de clientes.
+Sin embargo, no es un buen diseño tener una implementación diferente de la lógica del servicio para cada tipo de cliente. Más bien, es mejor diseñar una lógica de negocio común para todos los tipos de clientes. Luego, en la capa de interacción, transforme los resultados por tipo de cliente para renderizar. Por lo tanto, es importante tener en cuenta las pautas anteriores, especialmente cuando su servicio tiene una lógica de procesamiento común, pero potencialmente tiene diferentes necesidades de representación de respuestas para adaptarse a sus variados tipos de clientes.
   
 ## 3.5. Diseño de capa de procesamiento
 	
-La capa de procesamiento es donde se aplica la lógica comercial a una solicitud de Web service. Recuerde que el Web service es una forma interoperable de exponer aplicaciones nuevas o existentes. Por lo tanto, independientemente de los medios que utilice para exponer la funcionalidad de su aplicación, los problemas de diseño de la lógica de negocio son los mismos. Todavía debe diseñar la lógica de negocio teniendo en cuenta aspectos como el uso de beans empresariales, la exposición de un modelo de interfaz EJB local o remoto, el uso de persistencia administrada por contenedor o administrada por beans, etc.
+La capa de procesamiento es donde se aplica la lógica de negocio a una solicitud de Web service. Recuerde que el Web service es una forma interoperable de exponer aplicaciones nuevas o existentes. Por lo tanto, independientemente de los medios que utilice para exponer la funcionalidad de su aplicación, los problemas de diseño de la lógica de negocio son los mismos. Todavía debe diseñar la lógica de negocio teniendo en cuenta aspectos como el uso de beans empresariales, la exposición de un modelo de interfaz EJB local o remoto, el uso de persistencia administrada por contenedor o administrada por beans, etc.
 
 Los problemas y las consideraciones para diseñar la capa de lógica de negocio o de procesamiento de una aplicación, como si se debe realizar esta lógica en el nivel Web o EJB, son los mismos independientemente de que utilice o no un Web service.
 
@@ -681,7 +673,7 @@ Además de estas pautas generales, hay algunas cuestiones específicas que se de
 
 Mantenga la capa de procesamiento independiente de la capa de interacción . Al mantener las capas independientes y débilmente acopladas, la capa de procesamiento sigue siendo genérica y puede admitir diferentes tipos de clientes, como clientes de Web services, clientes web clásicos, etc. Para lograr un acoplamiento débil entre las capas, considere el uso de clases delegadas que encapsulen el acceso a los componentes comerciales.
 
-Enlace documentos XML a objetos Java en la capa de interacción . Hay ocasiones en las que su Web service espera recibir de un cliente un documento XML que contiene una solicitud completa, pero la lógica comercial del servicio no necesita operar en el documento. En estas ocasiones, se recomienda que la capa de interacción vincule el contenido del documento XML a los objetos Java antes de pasar la solicitud a la capa de procesamiento. Dado que la lógica de procesamiento no tiene que realizar la conversión de XML a Java, una sola capa de procesamiento puede admitir documentos XML que se basan en diferentes esquemas. Esto también facilita la compatibilidad con varias versiones de un esquema XML.
+Enlace documentos XML a objetos Java en la capa de interacción . Hay ocasiones en las que su Web service espera recibir de un cliente un documento XML que contiene una solicitud completa, pero la lógica de negocio del servicio no necesita operar en el documento. En estas ocasiones, se recomienda que la capa de interacción vincule el contenido del documento XML a los objetos Java antes de pasar la solicitud a la capa de procesamiento. Dado que la lógica de procesamiento no tiene que realizar la conversión de XML a Java, una sola capa de procesamiento puede admitir documentos XML que se basan en diferentes esquemas. Esto también facilita la compatibilidad con varias versiones de un esquema XML.
 
 Tenga en cuenta que su lógica de procesamiento puede operar sobre el contenido de un documento XML recibido de un cliente. Consulte “ Manejo de documentos XML en un Web service ” en la página 105 , que destaca los problemas a tener en cuenta cuando pasa documentos XML a su lógica de procesamiento comercial.
 
@@ -828,7 +820,7 @@ Al utilizar el enfoque de WSDL a Java, puede asignar directamente el documento q
 
 ### 3.7.2. Separación de la manipulación de documentos de la lógica de procesamiento
 
-Cuando la lógica comercial de su servicio opera en el contenido de un documento XML entrante, la lógica de procesamiento comercial debe, como mínimo, leer el documento, si no modificarlo. Al separar la lógica de manipulación de documentos de la lógica de procesamiento, un desarrollador puede cambiar entre varios mecanismos de manipulación de documentos sin afectar la lógica de procesamiento. Además, existe una clara división entre las habilidades de los desarrolladores.
+Cuando la lógica de negocio de su servicio opera en el contenido de un documento XML entrante, la lógica de procesamiento comercial debe, como mínimo, leer el documento, si no modificarlo. Al separar la lógica de manipulación de documentos de la lógica de procesamiento, un desarrollador puede cambiar entre varios mecanismos de manipulación de documentos sin afectar la lógica de procesamiento. Además, existe una clara división entre las habilidades de los desarrolladores.
 
 Es una buena práctica separar la lógica de manipulación de documentos XML de la lógica de negocio.
 
@@ -836,7 +828,7 @@ La sección “ Resumir el procesamiento XML de la lógica de la aplicación ”
 
 ### 3.7.3. Fragmentación de documentos XML
 
-Cuando la lógica comercial de su servicio opera en el contenido de un documento XML entrante, es una buena idea dividir los documentos XML en fragmentos lógicos cuando corresponda. Cuando la lógica de procesamiento recibe un documento XML que contiene toda la información para procesar una solicitud, el documento XML generalmente tiene segmentos bien definidos para diferentes entidades y cada segmento contiene los detalles sobre una entidad específica.
+Cuando la lógica de negocio de su servicio opera en el contenido de un documento XML entrante, es una buena idea dividir los documentos XML en fragmentos lógicos cuando corresponda. Cuando la lógica de procesamiento recibe un documento XML que contiene toda la información para procesar una solicitud, el documento XML generalmente tiene segmentos bien definidos para diferentes entidades y cada segmento contiene los detalles sobre una entidad específica.
 
 En lugar de pasar el documento completo a diferentes componentes que manejan varias etapas del proceso comercial, es mejor si la lógica de procesamiento divide el documento en fragmentos y pasa solo los fragmentos necesarios a otros componentes o servicios que implementan partes de la lógica del proceso comercial.
 
