@@ -356,121 +356,202 @@ Después de definir la interfaz, ejecute la herramienta proporcionada por el pro
 </definitions>
 ```
 
-Tenga en cuenta que el WSDL representa los métodos sobrecargados de getWeather como dos mensajes SOAP diferentes, llamando a uno getWeather , que toma un número entero para el código postal como su parámetro, y el otro getWeather2 , que toma un parámetro de cadena para la ciudad. Como resultado, un cliente interesado en obtener información meteorológica utilizando el nombre de una ciudad invoca el servicio llamando a getWeather2, como se muestra en el ejemplo de código 3.6 .
+Tenga en cuenta que el WSDL representa los métodos sobrecargados **`getWeather`** como dos SOAP messages diferentes, llamando a uno **`getWeather`**, que toma un número entero para el código postal como su parámetro, y el otro **`getWeather2`**, que toma un parámetro string para la ciudad. Como resultado, un cliente interesado en obtener información meteorológica utilizando el nombre de una ciudad invoca el servicio llamando a **`getWeather2`**, como se muestra en el ejemplo de código 3.6 .
 
-**Ejemplo de código 3.6. Uso de la interfaz de servicio meteorológico con el enfoque de Java a WSDL**
+**Ejemplo de código 3.6. Using Weather Service Interface with Java-to-WSDL Approach - Uso de la Interfaz de Servicio Meteorológico con el Enfoque de Java a WSDL**
 
 ```java
+...
+Context ic = new InitialContext();
+WeatherWebService weatherSvc = (WeatherWebService) ic.lookup("java:comp/env/service/WeatherService");
+WeatherServiceIntf port = (WeatherServiceIntf) weatherSvc.getPort(WeatherServiceIntf.class);
+String returnValue = port.getWeather2("San Francisco");
+...
 ```
 
-Por ejemplo, para obtener la información meteorológica de San Francisco, el cliente llamó a port.getWeather2("San Francisco") . Tenga en cuenta que es muy probable que otra herramienta genere un WSDL cuya representación de métodos sobrecargados sea diferente.
+Por ejemplo, para obtener la información meteorológica de San Francisco, el cliente llamó a **`port.getWeather2("San Francisco")`**. Tenga en cuenta que es muy probable que otra herramienta genere un WSDL cuya representación de métodos sobrecargados sea diferente.
 
 Es posible que desee evitar el uso de métodos sobrecargados en su interfaz Java si prefiere tener solo nombres de métodos intuitivos en el WSDL.
 
-Si, en cambio, elige utilizar el enfoque de WSDL a Java, su descripción de WSDL podría tener el siguiente aspecto. (Consulte el ejemplo de código 3.7 ).
+Si, en cambio, elige utilizar el enfoque de **WSDL a Java**, su descripción de WSDL podría tener el siguiente aspecto. (Consulte el ejemplo de código 3.7).
 
-**Ejemplo de código 3.7. WSDL para servicio meteorológico con métodos sobrecargados evitados**
+**Ejemplo de código 3.7. WSDL for Weather Service with Overloaded Methods Avoided - WSDL para Servicio Meteorológico con Métodos Sobrecargados Evitados**
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="WeatherWebService" ...>
+   <types/>
+   <message name="WeatherService_getWeatherByZip">
+      <part name="int_1" type="xsd:int"/>
+   </message>
+   <message name="WeatherService_getWeatherByZipResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   <message name="WeatherService_getWeatherByCity">
+      <part name="String_1" type="xsd:string"/>
+   </message>
+   <message name="WeatherService_getWeatherByCityResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   ...
+</definitions>
 ```
 
-Dado que los mensajes en un archivo WSDL deben tener nombres exclusivos, debe usar nombres de mensaje diferentes para representar métodos que, de otro modo, sobrecargaría. Estos diferentes nombres de mensajes en realidad se convierten en diferentes llamadas a métodos en su interfaz. Tenga en cuenta que el WSDL incluye un método getWeatherByZip , que toma un parámetro de número entero, y un método getWeatherByCity , que toma un parámetro de cadena. Por lo tanto, un cliente que desee obtener información meteorológica por nombre de ciudad desde una interfaz WeatherService asociada con el WSDL en el Ejemplo de código 3.7 podría invocar el servicio como se muestra en el Ejemplo de código 3.8 .
+Dado que los mensajes en un archivo WSDL deben tener nombres exclusivos, debe usar nombres de mensaje diferentes para representar métodos que, de otro modo, sobrecargaría. Estos diferentes nombres de mensajes en realidad se convierten en diferentes llamadas a métodos en su interfaz. Tenga en cuenta que el WSDL incluye un método **`getWeatherByZip`**, que toma un parámetro de número entero, y un método **`getWeatherByCity`**, que toma un parámetro string. Por lo tanto, un cliente que desee obtener información meteorológica por nombre de ciudad desde una interfaz **`WeatherService`** asociada con el WSDL en el Ejemplo de código 3.7 podría invocar el servicio como se muestra en el Ejemplo de código 3.8 .
 
-**Ejemplo de código 3.8. Uso del servicio meteorológico con el enfoque de WSDL a Java**
+**Ejemplo de código 3.8. Using Weather Service with WSDL-to-Java Approach - Uso del Servicio Meteorológico con el Enfoque de WSDL a Java**
 
 ```java
+...
+Context ic = new InitialContext();
+WeatherWebService weatherSvc = (WeatherWebService) ic.lookup("java:comp/env/service/WeatherService");
+WeatherServiceIntf port = (WeatherServiceIntf) weatherSvc.getPort(WeatherServiceIntf.class);
+String returnValue = port.getWeatherByCity("San Francisco");
+...
 ```
 
-#### 3.4.1.5. Manejo de excepciones
+#### 3.4.1.5. Manejo de Excepciones
 
-Al igual que cualquier aplicación Java o J2EE, una aplicación de Web service puede encontrar una condición de error al procesar una solicitud de cliente. Una aplicación de Web service necesita detectar adecuadamente cualquier excepción generada por una condición de error y propagar estas excepciones. Para una aplicación Java que se ejecuta en una sola máquina virtual, puede propagar excepciones en la pila de llamadas hasta llegar a un método con un controlador de excepciones que maneja el tipo de excepción lanzada. Para decirlo de otra manera, para las aplicaciones Java y J2EE que no son Web services, puede continuar lanzando excepciones en la pila de llamadas, pasando por todo el seguimiento de la pila, hasta llegar a un método con un controlador de excepciones que maneja el tipo de excepción lanzada. También puede escribir excepciones que amplíen o hereden otras excepciones.
+Al igual que cualquier aplicación Java o J2EE, una aplicación de Web service puede encontrar una condición de error al procesar una solicitud de cliente. Una aplicación de Web service necesita detectar adecuadamente cualquier excepción generada por una condición de error y propagar estas excepciones. Para una aplicación Java que se ejecuta en una sola máquina virtual, puede propagar excepciones en la pila(stack) de llamadas hasta llegar a un método con un controlador de excepciones que maneja el tipo de excepción lanzada. Para decirlo de otra manera, para las aplicaciones Java y J2EE que no son Web services, puede continuar lanzando excepciones en la pila de llamadas, pasando por todo el seguimiento de la pila, hasta llegar a un método con un controlador de excepciones que maneja el tipo de excepción lanzada. También puede escribir excepciones que amplíen o hereden otras excepciones.
 
-Sin embargo, lanzar excepciones en las aplicaciones de Web services tiene restricciones adicionales que afectan el diseño del punto final del servicio. Al considerar cómo el extremo del servicio maneja las condiciones de error y notifica a los clientes sobre los errores, debe tener en cuenta estos puntos:
+Sin embargo, lanzar excepciones en las aplicaciones de Web services tiene restricciones adicionales que afectan el diseño del endpoint del servicio. Al considerar cómo el extremo del servicio maneja las condiciones de error y notifica a los clientes sobre los errores, debe tener en cuenta estos puntos:
 
-De forma similar a las solicitudes y respuestas, las excepciones también se devuelven al cliente como parte de los mensajes SOAP.
+* De forma similar a las requests y responses, las excepciones también se devuelven al cliente como parte de los mensajes SOAP.
 
-Su aplicación de Web service debe admitir clientes que se ejecutan en plataformas distintas de Java que pueden no tener los mismos mecanismos de manejo de errores, o incluso similares, que el mecanismo de manejo de excepciones de Java.
+* Su aplicación de Web service debe admitir clientes que se ejecutan en plataformas distintas de Java que pueden no tener los mismos mecanismos de manejo de errores, o incluso similares, que el mecanismo de manejo de excepciones de Java.
 
-Una aplicación de Web service puede encontrar dos tipos de condiciones de error. Un tipo de error podría ser un error irrecuperable del sistema, como un error debido a un problema de conexión a la red. Cuando se produce un error como este, el tiempo de ejecución de JAX-RPC en el cliente genera el equivalente de la plataforma del cliente a una excepción irrecuperable del sistema. Para los clientes de Java, esto se traduce en una excepción remota .
+***Una aplicación de Web service puede encontrar dos tipos de condiciones de error***. ***Un tipo de error podría ser un error irrecuperable del sistema***, como un error debido a un problema de conexión a la red. Cuando se produce un error como este, el tiempo de ejecución de JAX-RPC en el cliente genera el equivalente de la plataforma del cliente a ***una excepción irrecuperable del sistema***. Para los clientes de Java, esto se traduce en una **`RemoteException`**.
 
-Una aplicación de Web service también puede encontrar una condición de error de aplicación recuperable. Este tipo de error se denomina excepción específica del servicio. El error es particular del servicio específico. Por ejemplo, un Web service meteorológico puede indicar un error si no puede encontrar información meteorológica para una ciudad específica.
+Una aplicación de Web service ***también puede encontrar una condición de error de aplicación recuperable***. Este tipo de error se denomina ***excepción específica del servicio***. El error es particular del servicio específico. Por ejemplo, un Web service meteorológico puede indicar un error si no puede encontrar información meteorológica para una ciudad específica.
 
-Para ilustrar el mecanismo de manejo de excepciones del Web service, examinémoslo en el contexto del ejemplo del Web service meteorológico. Al diseñar el servicio meteorológico, desea que el servicio pueda manejar un escenario en el que el cliente solicita información meteorológica para una ciudad inexistente. Puede diseñar el servicio para generar una excepción específica del servicio, como CityNotFoundException , al cliente que realizó la solicitud. Puede codificar la interfaz de servicio para que el método getWeather arroje esta excepción. (Consulte el ejemplo de código 3.9 ).
+Para ilustrar el mecanismo de manejo de excepciones del Web service, examinémoslo en el contexto del ejemplo del Web service meteorológico. Al diseñar el weather service, desea que el servicio pueda manejar un escenario en el que el cliente solicita información meteorológica para una ciudad inexistente. Puede diseñar el servicio para generar una excepción específica del servicio, como **`CityNotFoundException`**, al cliente que realizó la solicitud. Puede codificar la interfaz de servicio para que el método **`getWeather`** arroje esta excepción. (Consulte el ejemplo de código 3.9 ).
 
-**Ejemplo de código 3.9. Lanzar una excepción específica del servicio**
+**Ejemplo de código 3.9. Throwing a Service-Specific Exception - Lanzar una Excepción Específica del Servicio**
 
 ```java
+public interface WeatherService extends Remote {
+   public String getWeather(String city) throws
+              CityNotFoundException, RemoteException;
+}
 ```
 
-Las excepciones específicas del servicio como CityNotFoundException , que lanza el Web service para indicar condiciones de error específicas de la aplicación, deben ser excepciones comprobadas que directa o indirectamente extienden java.lang.Exception . No pueden ser excepciones no verificadas. El ejemplo de código 3.10 muestra una implementación típica de una excepción específica del servicio, como CityNotFoundException .
+Las excepciones específicas del servicio como **`CityNotFoundException`**, que lanza el Web service para indicar condiciones de error específicas de la aplicación, deben ser excepciones comprobadas que directa o indirectamente extienden **`java.lang.Exception`**. No pueden ser excepciones no verificadas. El ejemplo de código 3.10 muestra una implementación típica de una excepción específica del servicio, como **`CityNotFoundException`**.
 
-**Ejemplo de código 3.10. Implementación de una excepción específica del servicio**
+**Ejemplo de código 3.10. Implementation of a Service-Specific Exception - Implementación de una Excepción Específica del Servicio**
 
 ```java
+public class CityNotFoundException extends Exception {
+   private String message;
+   public CityNotFoundException(String message) {
+      super(message);
+      this.message = message;
+   }
+   public String getMessage() {
+      return message;
+   }
+}
 ```
 
-El ejemplo de código 3.11 muestra la implementación del servicio para la misma interfaz de servicio meteorológico. Este ejemplo ilustra cómo el servicio podría generar CityNotFoundException .
+El ejemplo de código 3.11 muestra la implementación del servicio para la misma interfaz de servicio meteorológico. Este ejemplo ilustra cómo el servicio podría generar **`CityNotFoundException`**.
 
-**Ejemplo de código 3.11. Ejemplo de un servicio que arroja una excepción específica del servicio**
+**Ejemplo de código 3.11. Example of a Service Throwing a Service-Specific Exception - Ejemplo de un Servicio que Arroja una Excepción Específica del Servicio**
 
 ```java
+public class WeatherServiceImpl implements WeatherService {
+   public String getWeather(String city)
+                            throws CityNotFoundException {
+      if(!validCity(city))
+         throw new CityNotFoundException(city + " not found");
+      // Get weather info and return it back
+   }
+}
 ```
 
-El Capítulo 5 describe los detalles del manejo de excepciones en el lado del cliente. (En particular, consulte “ Manejo de excepciones ” en la página 230 ). En el lado del servicio, tenga en cuenta cómo incluir excepciones en la interfaz del servicio y cómo lanzarlas. En general, desea hacer lo siguiente:
+El Capítulo 5 describe los detalles del manejo de excepciones en el lado del cliente. (En particular, consulte **“Handling Exceptions”** en la página 230). En el lado del servicio, tenga en cuenta cómo incluir excepciones en la interfaz del servicio y cómo lanzarlas. En general, desea hacer lo siguiente:
 
-Convierta los errores específicos de la aplicación y otras excepciones de Java en excepciones significativas específicas del servicio y arroje estas excepciones específicas del servicio a los clientes.
+✅ ***Convierta los errores específicos de la aplicación y otras excepciones de Java en excepciones significativas específicas del servicio y arroje estas excepciones específicas del servicio a los clientes.***
 
-Aunque promueven la interoperabilidad entre plataformas heterogéneas, los estándares de Web services no pueden abordar todos los tipos de excepciones lanzadas por diferentes plataformas. Por ejemplo, los estándares no especifican cómo deben devolverse al cliente las excepciones de Java, como java.io.IOException y javax.ejb.EJBException . Como consecuencia, es importante para un Web service, desde el punto de vista de la interoperabilidad del servicio, no exponer excepciones específicas de Java (como las que se acaban de mencionar) en la interfaz del Web service. En su lugar, lanza una excepción específica del servicio. Además, ten en cuenta los siguientes puntos:
+Aunque promueven la interoperabilidad entre plataformas heterogéneas, los estándares de Web services no pueden abordar todos los tipos de excepciones lanzadas por diferentes plataformas. Por ejemplo, los estándares no especifican cómo deben devolverse al cliente las excepciones de Java, como **`java.io.IOException`** y **`javax.ejb.EJBException`** . Como consecuencia, es importante para un Web service, desde el punto de vista de la interoperabilidad del servicio, no exponer excepciones específicas de Java (como las que se acaban de mencionar) en la interfaz del Web service. En su lugar, lanza una excepción específica del servicio. Además, ten en cuenta los siguientes puntos:
 
-No puede lanzar excepciones no serializables a un cliente a través del punto final del Web service.
+* No puede lanzar excepciones no serializables a un cliente a través del endpoint del Web service.
 
-Cuando un servicio lanza excepciones java o javax , el tipo de excepción y su información de contexto se pierden para el cliente que recibe la excepción lanzada. Por ejemplo, si su servicio lanza una excepción javax.ejb.FinderException al cliente, el cliente puede recibir una excepción llamada FinderException , pero su información de tipo puede no estar disponible para el cliente. Además, el tipo de excepción para el cliente puede no ser el mismo que el tipo de excepción lanzada. (Dependiendo de la herramienta utilizada para generar las interfaces del lado del cliente, la excepción puede incluso pertenecer a algún paquete que no sea javax.ejb ).
+* Cuando un servicio lanza excepciones **`java`** o **`javax`**, el tipo de excepción y su información de contexto se pierden para el cliente que recibe la excepción lanzada. Por ejemplo, si su servicio lanza una excepción **`javax.ejb.FinderException`** al cliente, el cliente puede recibir una excepción llamada **`FinderException`**, pero su información de tipo puede no estar disponible para el cliente. Además, el tipo de excepción para el cliente puede no ser el mismo que el tipo de excepción lanzada. (Dependiendo de la herramienta utilizada para generar las interfaces del lado del cliente, la excepción puede incluso pertenecer a algún paquete que no sea **`javax.ejb`**).
 
-Como resultado, debe evitar lanzar excepciones java y javax directamente a los clientes. En su lugar, cuando su servicio encuentre uno de estos tipos de excepciones, envuélvalo dentro de una excepción específica del servicio significativa y envíe esta excepción específica del servicio al cliente. Por ejemplo, suponga que su servicio encuentra una excepción javax.ejb.FinderException mientras procesa una solicitud de cliente. El servicio debe detectar la excepción FinderException y luego, en lugar de devolver esta excepción al cliente, el servicio debe generar una excepción específica del servicio que tenga más significado para el cliente. Consulte el ejemplo de código 3.12 .
+Como resultado, debe evitar lanzar excepciones **`java`** y **`javax`** directamente a los clientes. En su lugar, cuando su servicio encuentre uno de estos tipos de excepciones, envuélvalo dentro de una excepción específica del servicio significativa y envíe esta excepción específica del servicio al cliente. Por ejemplo, suponga que su servicio encuentra una excepción **`javax.ejb.FinderException`** mientras procesa una request de cliente. El servicio debe detectar la excepción **`FinderException`** y luego, en lugar de devolver esta excepción al cliente, el servicio debe generar una excepción específica del servicio que tenga más significado para el cliente. Consulte el ejemplo de código 3.12 .
 
-**Ejemplo de código 3.12. Conversión de una excepción en una excepción específica del servicio**
+**Ejemplo de código 3.12. Converting an Exception into a Service-Specific Exception - Conversión de una Excepción en una Excepción Específica del Servicio**
 
 ```java
+...
+try {
+    // findByPrimaryKey
+    // Do processing
+    // return results
+} catch (javax.ejb.FinderException fe) {
+   throw new InvalidKeyException(
+      "Unable to find row with given primary key");
+}
 ```
 
-Las herencias de excepción se pierden cuando lanza una excepción específica del servicio.
+✅ ***Las herencias de excepción se pierden cuando lanza(throw) una excepción específica del servicio.***
 
-Debe evitar definir excepciones específicas del servicio que heredan o amplían otras excepciones. Por ejemplo, si CityNotFoundException en el ejemplo de código 3.10 extiende otra excepción, como RootException , cuando el servicio genera CityNotFoundException, los métodos y propiedades heredados de RootException no se pasan al cliente.
+Debe evitar definir excepciones específicas del servicio que  inherit(heredan) o extend(extiendan) otras excepciones. Por ejemplo, si **`CityNotFoundException`** en el ejemplo de código 3.10 extiende otra excepción, como **`RootException`**, cuando el servicio genera **`CityNotFoundException`**, los métodos y propiedades heredados de **`RootException`** no se pasan al cliente.
 
-El seguimiento de la pila de excepciones no se pasa al cliente.
+✅ ***El exception stack trace(seguimiento de la pila de excepciones) no se pasa al cliente.***
 
-El seguimiento de la pila para una excepción solo es relevante para el entorno de ejecución actual y no tiene sentido en un sistema diferente. Por lo tanto, cuando un servicio lanza una excepción al cliente, el cliente no tiene el seguimiento de la pila que explica las condiciones bajo las cuales ocurrió la excepción. Por lo tanto, debe considerar pasar información adicional en el mensaje para la excepción.
+El stack trace(seguimiento de la pila) para una excepción solo es relevante para el entorno de ejecución actual y no tiene sentido en un sistema diferente. Por lo tanto, cuando un servicio lanza una excepción al cliente, el cliente no tiene el stack trace que explica las condiciones bajo las cuales ocurrió la excepción. Por lo tanto, debe considerar pasar información adicional en el mensaje para la excepción.
 
 Los estándares de Web services facilitan que un servicio transmita condiciones de error a un cliente de forma independiente a la plataforma. Si bien la siguiente discusión puede ser de interés, no es esencial que los desarrolladores conozcan estos detalles sobre los mecanismos de manejo de errores de la plataforma J2EE para los Web services.
 
-Como se señaló anteriormente, las condiciones de error se incluyen dentro de los mensajes SOAP que un servicio devuelve a los clientes. La especificación SOAP define un tipo de mensaje, llamado falla , que permite que las condiciones de error se transmitan como parte del mensaje SOAP y aún así se diferencien de la parte de solicitud o respuesta. De manera similar, la especificación WSDL define un conjunto de operaciones que son posibles en un punto final. Estas operaciones incluyen entraday operaciones de salida , que representan la petición y la respuesta respectivamente, y una operación denominada fallo .
+Como se señaló anteriormente, las condiciones de error se incluyen dentro de los mensajes SOAP que un servicio devuelve a los clientes. La especificación SOAP define un tipo de mensaje, llamado **`fault`**, que permite que las condiciones de error se transmitan como parte del mensaje SOAP y aún así se diferencien de la parte de request o response. De manera similar, la especificación WSDL define un conjunto de operaciones que son posibles en un endpoint. Estas operaciones incluyen **`input`** y **`output`**, que representan la request y la response respectivamente, y una operación denominada **`fault`**.
 
-Una falla de SOAP define excepciones a nivel del sistema, como RemoteException , que son errores irrecuperables. La falla de WSDL denota excepciones específicas del servicio, como CityNotFoundException, y estas son condiciones de error de aplicación recuperables. Dado que la falla de WSDL denota una condición de error recuperable, la plataforma puede pasarla como parte del mensaje de respuesta SOAP. Por lo tanto, los estándares proporcionan una forma de intercambiar mensajes de error y asignar estos mensajes a operaciones en el punto final.
+Un **`fault`** de SOAP define excepciones a nivel del sistema, como **`RemoteException`**, que son errores irrecuperables. La falla de WSDL denota excepciones específicas del servicio, como **`CityNotFoundException`**, y estas son condiciones de error de aplicación recuperables. Dado que la falla de WSDL denota una condición de error recuperable, la plataforma puede pasarla como parte del mensaje de respuesta SOAP. Por lo tanto, los estándares proporcionan una forma de intercambiar mensajes de error y asignar estos mensajes a operaciones en el endpoint.
 
-El ejemplo de código 3.13 muestra el código WSDL para el mismo ejemplo de Web service meteorológico. Este ejemplo ilustra cómo se asignan las excepciones específicas del servicio al igual que se asignan los mensajes de entrada y salida.
+El ejemplo de código 3.13 muestra el código WSDL para el mismo ejemplo de Web service weather. Este ejemplo ilustra cómo se asignan las excepciones específicas del servicio al igual que se asignan los mensajes de entrada y salida.
 
-**Ejemplo de código 3.13. Asignación de una excepción específica del servicio en WSDL**
+**Ejemplo de código 3.13. Mapping a Service-Specific Exception in WSDL - Asignación de una Excepción Específica del Servicio en WSDL**
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions ...>
+   ...
+   <message name="WeatherService_getWeather">
+      <part name="String_1" type="xsd:string"/>
+   </message>
+   <message name="WeatherService_getWeatherResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   <message name="CityNotFoundException">
+      <part name="CityNotFoundException" element="tns:CityNotFoundException"/>
+   </message>
+   <portType name="WeatherService">
+      <operation name="getWeather" parameterOrder="String_1">
+         <input message="tns:WeatherService_getWeather"/>
+         <output message="tns:WeatherService_getWeatherResponse"/>
+         <fault name="CityNotFoundException" message="tns:CityNotFoundException"/>
+      </operation>
+   </portType>
+   ...
+</definitions>
 ```
 
-#### 3.4.1.6. Uso de manipuladores
+#### 3.4.1.6. Uso de Handlers(Manipuladores)
 
-Como se discutió en el Capítulo 2 , y como se muestra en la Figura 3.1 , la tecnología JAX-RPC le permite conectar controladores de mensajes SOAP, lo que permite el procesamiento de mensajes SOAP que representan solicitudes y respuestas. La conexión de controladores de mensajes SOAP le brinda la capacidad de examinar y modificar las solicitudes SOAP antes de que sean procesadas por el Web service y de examinar y modificar las respuestas SOAP antes de que se entreguen al cliente.
+Como se discutió en el Capítulo 2, y como se muestra en la Figura 3.1, la tecnología **JAX-RPC** le permite conectar en SOAP message handlers, lo que permite el procesamiento de SOAP messages que representan requests y responses. Plugging en SOAP message handlers le brinda la capacidad de examinar y modificar las SOAP requests antes de que sean procesadas por el Web service y de examinar y modificar las SOAP responses antes de que se entreguen al cliente.
 
-Los controladores son particulares de un Web service y están asociados con el puerto específico del servicio. Como resultado de esta asociación, la lógica del controlador se aplica a todas las solicitudes y respuestas SOAP que pasan por el puerto de un servicio. Por lo tanto, utilice estos controladores de mensajes cuando su Web service deba realizar algún procesamiento específico de mensajes SOAP común a todas sus solicitudes y respuestas. Debido a que los controladores son comunes a todas las solicitudes y respuestas que pasan a través de un punto final de Web service, tenga en cuenta la siguiente directriz:
+***Los Handlers son particulares de un Web service y están asociados con el puerto específico del servicio***. Como resultado de esta asociación, la lógica del handler se aplica a todas las SOAP requests y responses que pasan por el puerto de un servicio. Por lo tanto, utilice estos message handlers cuando su Web service deba realizar algún procesamiento específico de SOAP message común a todas sus requests y responses. Debido a que los handlers son comunes a todas las requests y responses que pasan a través de un endpoint de Web service, tenga en cuenta la siguiente directriz:
 
-No es recomendable poner en un manejador una lógica de negocios o un procesamiento particular para solicitudes y respuestas específicas.
+✅ ***No es recomendable poner en un handler una lógica de negocios o un procesamiento particular para requests y responses específicas.***
 
-No puede almacenar el estado específico del cliente en un controlador: la lógica de un controlador actúa en todas las solicitudes y respuestas que pasan a través de un punto final. Sin embargo, puede usar el controlador para almacenar el estado específico del puerto, que es un estado común a todas las llamadas a métodos en esa interfaz de servicio. Tenga en cuenta también que los controladores se ejecutan en el contexto del componente en el que están presentes.
+***No puede almacenar el estado específico del cliente en un handler***: La lógica de un handler actúa en todas las requests y responses que pasan a través de un endpoint. Sin embargo, puede usar el handler para almacenar el estado específico del puerto, que es un estado común a todas las llamadas a métodos en esa interfaz de servicio. Tenga en cuenta también que los handlers se ejecutan en el contexto del componente en el que están presentes.
 
-No almacene el estado específico del cliente en un controlador.
+✅ ***No almacene el estado específico del cliente en un handler.***
 
-También tenga en cuenta que los controladores funcionan directamente en el mensaje SOAP, y esto implica el procesamiento de XML. Puede usar controladores para pasar el estado específico del cliente a través del contexto del mensaje. (Consulte “ Transmisión de información de contexto en llamadas de Web service ” en la página 366 ).
+También tenga en cuenta que los handlers funcionan directamente en el SOAP message, y esto implica el procesamiento de XML. Puede usar handlers para pasar el estado específico del cliente a través del contexto del mensaje. (Consulte **“Passing Context Information on Web Service Calls”** en la página 366).
 
-El uso de controladores puede tener un impacto significativo en el rendimiento del servicio como un todo.
+✅ ***El uso de handlers puede tener un impacto significativo en el rendimiento del servicio como un todo.***
 
-El uso de controladores podría afectar potencialmente la interoperabilidad de su servicio. Consulte la siguiente sección sobre interoperabilidad. Tenga en cuenta que se necesita un conocimiento avanzado de las API de manipulación de mensajes SOAP (como SAAJ) para usar correctamente los controladores. Para evitar errores, los desarrolladores de Web services deben intentar usar controladores existentes o proporcionados por proveedores. El uso de controladores tiene sentido principalmente para escribir servicios del sistema, como auditoría, registro, etc.
+El uso de handlers podría afectar potencialmente la interoperabilidad de su servicio. Consulte la siguiente sección sobre interoperabilidad. Tenga en cuenta que se necesita un conocimiento avanzado de las **SOAP message manipulation APIs (como SAAJ)** para usar correctamente los handlers. Para evitar errores, los desarrolladores de Web services deben intentar usar handlers existentes o proporcionados por proveedores. El uso de handlers tiene sentido principalmente para escribir servicios del sistema, como auditoría, registro, etc.
 
 #### 3.4.1.7. interoperabilidad
 
