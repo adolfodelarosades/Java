@@ -182,32 +182,32 @@ Si la aplicación o el servicio existente no requiere el preprocesamiento de la 
    ***Los Enterprise beans permiten la declaración de permisos de acceso a nivel de método en el deployment descriptor***: Puede declarar varios permisos de acceso para diferentes métodos de Enterprise beans y el contenedor maneja correctamente el acceso a estos métodos. Esto es válido para un endpoint de servicio EJB, ya que es un stateless session bean. Un endpoint de servicio JAX-RPC, por otro lado, no tiene una función para declarar restricciones de acceso a nivel de método, lo que requiere que lo haga mediante programación. Consulte el Capítulo 7 para obtener más información.
 
 * ***Consideraciones sobre el acceso a la sesión HTTP***: Un endpoint de servicio JAX-RPC, debido a que se ejecuta en el contenedor web, tiene acceso completo a un objeto **`HttpSession`**. El acceso a un objeto **`HttpSession`**, que se puede usar para incrustar cookies y almacenar el estado del cliente, puede ayudarlo a crear clientes conscientes de la sesión. Un endpoint de servicio EJB, que se ejecuta en el contenedor EJB, no tiene acceso al estado del contenedor web. Sin embargo, generalmente el soporte de sesión HTTP es apropiado para interacciones conversacionales de corta duración, mientras que los Web services a menudo representan procesos comerciales con duraciones más largas y, por lo tanto, necesitan mecanismos adicionales. Consulte **“Correlating Messages”** en la página 359 para conocer una de esas estrategias.
-AQUUIIIII
+
 #### 3.4.1.2. Granularidad del servicio
 
-Gran parte del diseño de una interfaz de Web service implica diseñar las operaciones del servicio o sus métodos. Primero determina las operaciones del servicio y luego define la firma del método para cada operación. Es decir, usted define los parámetros de cada operación, sus valores de retorno y cualquier error o excepción que pueda generar.
+***Gran parte del diseño de una interfaz de Web service implica diseñar las operaciones del servicio o sus métodos. Primero determina las operaciones del servicio y luego define la firma del método para cada operación. Es decir, usted define los parámetros de cada operación, sus valores de retorno y cualquier error o excepción que pueda generar***.
 
-Es importante tener en cuenta la granularidad de las operaciones del servicio al diseñar la interfaz del Web service.
+✅ ***Es importante tener en cuenta la granularidad de las operaciones del servicio al diseñar la interfaz del Web service.***
 
 Para aquellos Web services que implementan un proceso de negocios, la naturaleza del proceso de negocios mismo a menudo dicta la granularidad del servicio. Los procesos comerciales que intercambian documentos, como órdenes de compra y facturas, por su naturaleza dan como resultado una interfaz de Web service de granularidad gruesa. Con Web services más interactivos, debe elegir cuidadosamente la granularidad de estas operaciones.
 
-Debe tener en cuenta las mismas consideraciones cuando diseñe los métodos para un Web service que cuando diseñe los métodos de un bean empresarial remoto. Esto es particularmente cierto no solo con respecto al impacto del acceso remoto en el rendimiento, sino también con los Web services; es importante con los Web services porque hay una representación XML subyacente que requiere analizar y tomar ancho de banda. Por lo tanto, una buena regla es definir la interfaz del Web service para una granularidad óptima de sus operaciones; es decir, encuentre el equilibrio correcto entre la granularidad de grano grueso y de grano fino.
+Debe tener en cuenta las mismas consideraciones cuando diseñe los métodos para un Web service que cuando diseñe los métodos de un enterprise bean remoto. Esto es particularmente cierto no solo con respecto al impacto del acceso remoto en el rendimiento, sino también con los Web services; es importante con los Web services porque hay una representación XML subyacente que requiere analizar y tomar ancho de banda. Por lo tanto, ***una buena regla es definir la interfaz del Web service para una granularidad óptima de sus operaciones; es decir, encuentre el equilibrio correcto entre la granularidad de grano grueso y de grano fino***.
 
-En general, debe consolidar las operaciones detalladas relacionadas en operaciones más detalladas para minimizar las costosas llamadas a métodos remotos.
+✅ ***En general, debe consolidar las operaciones detalladas relacionadas en operaciones más detalladas para minimizar las costosas llamadas a métodos remotos.***
 
 Las operaciones de servicio más detalladas, como la devolución de entradas de catálogo en conjuntos de categorías, reducen la sobrecarga de la red y mejoran el rendimiento. Sin embargo, a veces son menos flexibles desde el punto de vista del cliente. Si bien las operaciones de servicio más detalladas, como la exploración de un catálogo por productos o artículos, ofrecen una mayor flexibilidad al cliente, estas operaciones dan como resultado una mayor sobrecarga de la red y un rendimiento reducido.
 
-Tenga en cuenta que demasiada consolidación conduce a ineficiencias.
+✅ ***Tenga en cuenta que demasiada consolidación conduce a ineficiencias.***
 
 Por ejemplo, la consolidación de operaciones lógicamente diferentes es ineficiente y debe evitarse. Es mucho mejor consolidar operaciones similares u operaciones que es probable que un cliente utilice juntas, como operaciones de consulta.
 
-Cuando exponga beans de sesión sin estado existentes como extremos de Web services, asegúrese de que las operaciones de Web services sean lo suficientemente detalladas.
+✅ ***Cuando exponga stateless session beans existentes como extremos de Web services, asegúrese de que las operaciones de Web services sean lo suficientemente detalladas.***
 
-Si planea exponer beans de sesión sin estado existentes como puntos finales de Web services, recuerde que es posible que dichos beans no se hayan diseñado teniendo en cuenta los Web services. Por lo tanto, pueden ser demasiado detallados para ser buenos puntos finales de Web services. Debería considerar la consolidación de operaciones relacionadas en una única operación de Web service.
+Si planea exponer stateless session beans existentes como endpoints de Web services, recuerde que es posible que dichos beans no se hayan diseñado teniendo en cuenta los Web services. Por lo tanto, pueden ser demasiado detallados para ser buenos endpoints de Web services. Debería considerar la consolidación de operaciones relacionadas en una única operación de Web service.
 
 Un buen diseño para nuestro Web service de reservas de aerolíneas, por ejemplo, es esperar que los clientes del servicio envíen toda la información necesaria para una reserva (destino, horarios preferidos de salida y llegada, aerolínea preferida, etc.) en una sola invocación al servicio, que es, como un gran mensaje. Esto es mucho más preferible que hacer que un cliente invoque un método separado para cada pieza de información que comprende la reserva. Para ilustrar, es preferible que los clientes usen la interfaz que se muestra en el ejemplo de código 3.1 .
 
-**Ejemplo de código 3.1. Uso de la consolidación para una mayor eficiencia (recomendado)**
+**Ejemplo de código 3.1. Uso de la Consolidación para una Mayor Eficiencia (Recomendado)**
 
 ```java
 public interface AirlineTicketsIntf extends Remote {
@@ -218,7 +218,7 @@ public interface AirlineTicketsIntf extends Remote {
 
 El ejemplo de código 3.1 combina datos relacionados lógicamente en un mensaje grande para una interacción más eficiente del cliente con el servicio. Esto es preferible a recibir los datos con llamadas a métodos individuales, como se muestra en el ejemplo de código 3.2 .
 
-**Ejemplo de código 3.2. Recuperación de datos con llamadas a métodos separados (no recomendado)**
+**Ejemplo de código 3.2. Recuperación de Datos con Llamadas a Métodos Separados (No recomendado)**
 
 ```java
 public interface AirlineTicketsIntf extends Remote {
@@ -234,100 +234,126 @@ Sin embargo, puede que no sea una buena idea combinar en una única invocación 
 
 Junto con la granularidad óptima, debe considerar los problemas de almacenamiento en caché de datos. Los servicios de granularidad gruesa implican la transferencia de grandes cantidades de datos. Si opta por operaciones de servicio más detalladas, es más eficiente almacenar en caché los datos en el lado del cliente para reducir la cantidad de viajes de ida y vuelta entre el cliente y el servidor.
 
-#### 3.4.1.3. Tipos de parámetros para operaciones de Web services
+#### 3.4.1.3. Tipos de Parámetros para Operaciones de Web Services
 
 Una interfaz de Web service expone un conjunto de llamadas de método a los clientes. Al invocar un método de interfaz de servicio, es posible que un cliente deba establecer valores para los parámetros asociados con la llamada. Cuando diseñe los métodos de una interfaz, elija cuidadosamente los tipos de estos parámetros. Tenga en cuenta que una llamada de método y sus parámetros se envían como un mensaje SOAP entre el cliente y el servicio. Para formar parte de un mensaje SOAP, los parámetros deben asignarse a XML. Cuando se reciben en el cliente o en el extremo del servicio, los mismos parámetros deben asignarse desde XML a sus tipos u objetos adecuados. En esta sección, se describen algunas pautas que se deben tener en cuenta al definir los parámetros de llamadas a métodos y los valores devueltos.
 
-Nota : dado que cada llamada puede devolver potencialmente un valor, la discusión en esta sección sobre los valores de los parámetros se aplica igualmente a los valores devueltos.
+**Nota**: Dado que cada llamada puede devolver potencialmente un valor, la discusión en esta sección sobre los valores de los parámetros se aplica igualmente a los valores devueltos.
 
-Los parámetros para las llamadas a métodos de Web services pueden ser tipos y objetos Java estándar, documentos XML o incluso tipos no estándar. Ya sea que utilice el enfoque de Java a WSDL o el enfoque de WSDL a Java, cada tipo de parámetro debe asignarse a su equivalente XML en el mensaje SOAP. La Figura 3.3 muestra cómo ocurre la vinculación para varios tipos de parámetros.
+Los parámetros para las llamadas a métodos de Web services pueden ser tipos y objetos Java estándar, documentos XML o incluso tipos no estándar. Ya sea que utilice el enfoque de **Java a WSDL** o el enfoque de **WSDL a Java**, cada tipo de parámetro debe asignarse a su equivalente XML en el mensaje SOAP. La Figura 3.3 muestra cómo ocurre la vinculación para varios tipos de parámetros.
 
-**Figura 3.3. Binding Parameters and Return Values with JAX-RPC - Enlace de parámetros y valores devueltos con JAX-RPC**
+**Figura 3.3. Binding Parameters and Return Values with JAX-RPC - Enlace de Parámetros y Valores Devueltos con JAX-RPC**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/f7a50911-3d4a-4a8a-9f76-bda4031fa461)
 
 
-#### 3.4.1.3.1. Objetos Java como parámetros
+#### 3.4.1.3.1. Java Objects as Parameters - Objetos Java como Parámetros
 
-Los parámetros para las llamadas de Web services pueden ser tipos y objetos estándar de Java. Si utiliza el enfoque de Java a WSDL, especifique los tipos de parámetros como parte de los argumentos de las llamadas a métodos de su interfaz Java. Si utiliza el enfoque de WSDL a Java, especifique los tipos de parámetros como el tipo o los atributos de elemento del elemento de parte de cada mensaje en su WSDL. El tipo de parámetro que utiliza tiene un efecto significativo en la portabilidad y la interoperabilidad de su servicio.
+Los parámetros para las llamadas de Web services pueden ser tipos y objetos estándar de Java. Si utiliza el enfoque de **Java a WSDL**, especifique los tipos de parámetros como parte de los argumentos de las llamadas a métodos de su interfaz Java. Si utiliza el enfoque de **WSDL a Java**, especifique los tipos de parámetros como el tipo o los atributos de elemento del elemento de parte de cada mensaje en su WSDL. El tipo de parámetro que utiliza tiene un efecto significativo en la portabilidad y la interoperabilidad de su servicio.
 
 La plataforma admite los siguientes tipos de datos de Java. (Consulte la especificación JAX-RPC en http://java.sun.com/xml/jaxrpc/ para conocer las asignaciones WSDL equivalentes para estos tipos de datos Java).
 
-* Tipos primitivos de Java boolean , byte , short , int , long , float y double , junto con sus clases contenedoras de Java correspondientes
+* ***Tipos primitivos de Java***: **`boolean`**, **`byte`**, **`short`**, **`int`**, **`long`**, **`float`** y **`double`**, junto con sus clases contenedoras de Java correspondientes
 
-* Clases estándar de Java: String , Date , Calendar , BigInteger , BigDecimal , QName y URI
+* ***Clases estándar de Java***: **`String`**, **`Date`**, **`Calendar`**, **`BigInteger`**, **`BigDecimal`**, **`QName`** y **`URI`**
 
-* Matrices de Java con tipos de Java compatibles con JAX-RPC como miembros
+* ***Arrays de Java con tipos de Java compatibles con JAX-RPC como members***
 
-* Tipos de valor JAX-RPC : clases de Java definidas por el usuario, incluidas clases con propiedades similares a componentes de JavaBeans TM
+* ***Tipos de valor JAX-RPC***: Clases de Java definidas por el usuario, incluidas clases con propiedades similares a componentes de JavaBeansTM
 
-Al diseñar parámetros para llamadas a métodos en una interfaz de Web service, elija parámetros que tengan asignaciones de tipo estándar. (Consulte la Figura 3.3 ). Tenga siempre en cuenta que la portabilidad y la interoperabilidad de su servicio se reducen cuando utiliza tipos de parámetros que, de forma predeterminada, no son compatibles.
+✅ ***Al diseñar parámetros para llamadas a métodos en una interfaz de Web service, elija parámetros que tengan asignaciones de tipo estándar. (Consulte la Figura 3.3 ). Tenga siempre en cuenta que la portabilidad y la interoperabilidad de su servicio se reducen cuando utiliza tipos de parámetros que, de forma predeterminada, no son compatibles.***
 
-Como muestra la figura 3.3 , los parámetros que tienen asignaciones de tipo estándar están vinculados implícitamente. Sin embargo, el desarrollador debe trabajar más cuando usa parámetros que no tienen asignaciones de tipo estándar. Consulte “ Manejo de parámetros de tipo no estándar ” en la página 76 para obtener más detalles sobre el uso de tipos de Java no estándar y los posibles efectos secundarios de dicho uso.
+Como muestra la figura 3.3, los parámetros que tienen asignaciones de tipo estándar están vinculados implícitamente. Sin embargo, el desarrollador debe trabajar más cuando usa parámetros que no tienen asignaciones de tipo estándar. Consulte **“Handling Nonstandard Type Parameters”** en la página 76 para obtener más detalles sobre el uso de tipos de Java no estándar y los posibles efectos secundarios de dicho uso.
 
 Estos son algunos puntos útiles adicionales que debe tener en cuenta cuando utiliza objetos Java con asignaciones de tipo estándar como parámetros.
 
-Muchas aplicaciones y servicios necesitan pasar listas de objetos. Sin embargo, las utilidades para manejar listas, como ArrayList y Collection , por nombrar algunas, no son tipos estándar admitidos. En cambio, las matrices de Java brindan una funcionalidad equivalente y tienen un mapeo estándar proporcionado por la plataforma.
+1. Muchas aplicaciones y servicios necesitan pasar listas de objetos. Sin embargo, las utilidades para manejar listas, como **`ArrayList`** y **`Collection`**, por nombrar algunas, no son tipos estándar admitidos. En cambio, los arrays de Java brindan una funcionalidad equivalente y tienen un mapeo estándar proporcionado por la plataforma.
 
-Los tipos de valor JAX-RPC son clases Java definidas por el usuario con algunas restricciones. Tienen constructores y pueden tener campos públicos, privados, protegidos, estáticos o transitorios. Los tipos de valor JAX-RPC también pueden tener métodos, incluidos los métodos set y get para establecer y obtener campos de clase Java.
+2. Los tipos de valor JAX-RPC son clases Java definidas por el usuario con algunas restricciones. Tienen constructores y pueden tener campos públicos, privados, protegidos, estáticos o transitorios. Los tipos de valor JAX-RPC también pueden tener métodos, incluidos los métodos set y get para establecer y obtener campos de clase Java.
 
-Sin embargo, cuando se mapean tipos de valores JAX-RPC hacia y desde XML, no existe una forma estándar de retener el orden de los parámetros para los constructores y otros métodos. Por lo tanto, evite configurar los campos de tipo de valor JAX-RPC a través del constructor. El uso de los métodos get y set para recuperar o establecer campos de tipo de valor evita este problema de asignación y garantiza la portabilidad y la interoperabilidad.
+Sin embargo, cuando se mapean tipos de valores JAX-RPC hacia y desde XML, no existe una forma estándar de retener el orden de los parámetros para los constructores y otros métodos. Por lo tanto, evite configurar los campos de tipo de valor JAX-RPC a través del constructor. El uso de los métodos get y set para recuperar o establecer campos de tipo de valor evitan este problema de asignación y garantizan la portabilidad y la interoperabilidad.
 
-La plataforma J2EE admite tipos de valores JAX-RPC anidados; es decir, tipos de valor JAX-RPC que hacen referencia a otros tipos de valor JAX-RPC dentro de sí mismos. Para mayor claridad, es preferible usar esta función e incrustar referencias de tipo de valor en lugar de usar una sola clase de tipo de valor JAX-RPC plana y grande.
+3. La plataforma J2EE admite tipos de valores JAX-RPC anidados; es decir, tipos de valor JAX-RPC que hacen referencia a otros tipos de valor JAX-RPC dentro de sí mismos. Para mayor claridad, es preferible usar esta función e incrustar referencias de tipo de valor en lugar de usar una sola clase de tipo de valor JAX-RPC plana y grande.
 
-La plataforma J2EE, debido a su compatibilidad con el mensaje SOAP con protocolo adjunto, también admite el uso de contenido codificado en MIME. Proporciona asignaciones de Java para un subconjunto de tipos MIME. (Consulte la Tabla 3.1 ).
+4. La plataforma J2EE, debido a su compatibilidad con el mensaje SOAP con protocolo adjunto, también admite el uso de contenido codificado en MIME. Proporciona asignaciones de Java para un subconjunto de tipos MIME. (Consulte la Tabla 3.1 ).
 
 **Tabla 3.1. Mapeo de tipos MIME**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/a12bf3da-8e62-44ff-ac87-50485915a85a)
 
-Dado que el contenedor J2EE maneja automáticamente las asignaciones basadas en los tipos de Java, el uso de estas asignaciones Java-MIME lo libera de las complejidades de enviar y recuperar documentos e imágenes como parte del manejo de solicitudes y respuestas de un servicio. Por ejemplo, si su servicio espera recibir una imagen GIF con un tipo MIME de image/gif , puede esperar que el cliente envíe un objeto java.awt.Image . Una interfaz de Web service de muestra que recibe una imagen podría parecerse a la que se muestra en el ejemplo de código 3.3 :
+Dado que el contenedor J2EE maneja automáticamente las asignaciones basadas en los tipos de Java, el uso de estas asignaciones Java-MIME lo libera de las complejidades de enviar y recuperar documentos e imágenes como parte del manejo de solicitudes y respuestas de un servicio. Por ejemplo, si su servicio espera recibir una imagen GIF con un tipo MIME de **`image/gif`**, puede esperar que el cliente envíe un objeto **`java.awt.Image`**. Una interfaz de Web service de muestra que recibe una imagen podría parecerse a la que se muestra en el ejemplo de código 3.3:
 
-**Ejemplo de código 3.3. Recibir un objeto java.awt.Image**
-
-```java
-```
-
-En este ejemplo, el objeto Image permite que la implementación del contenedor maneje los detalles del paso de imágenes. El contenedor proporciona clases javax.activation.DataHandler , que funcionan con Java Activation Framework para realizar las asignaciones Java-MIME y MIME-Java.
-
-Teniendo en cuenta esta asignación entre los tipos Java y MIME, es mejor enviar imágenes y documentos XML que se encuentran en una interfaz de Web service utilizando los tipos Java que se muestran en la Tabla 3.1 . Sin embargo, debe tener cuidado con el efecto sobre la interoperabilidad de su servicio. Consulte “ Interoperabilidad ” en la página 86 para obtener más detalles.
-
-##### 3.4.1.3.2. Documentos XML como parámetros
-
-Hay escenarios en los que desea pasar documentos XML como parámetros. Por lo general, esto ocurre en las interacciones de empresa a empresa donde existe la necesidad de intercambiar documentos comerciales legalmente vinculantes, realizar un seguimiento de lo que se intercambia, etc. El intercambio de documentos XML como parte de un Web service se trata en una sección separada; consulte “ Manejo de documentos XML en un Web service ” en la página 105 para conocer las pautas a seguir al pasar documentos XML como parámetros.
-
-##### 3.4.1.3.3. Manejo de parámetros de tipo no estándar
-
-La tecnología JAX-RPC, además de proporcionar un rico conjunto de mapeo estándar entre tipos de datos XML y Java, también proporciona un marco de mapeo de tipo extensible. Los desarrolladores pueden usar este marco para especificar serializadores y deserializadores personalizados conectables que admitan asignaciones de tipos no estándar.
-
-Los marcos de mapeo de tipos extensibles, que los desarrolladores pueden usar para admitir mapeos de tipos no estándar, aún no son una parte estándar de la plataforma J2EE.
-
-Actualmente, los proveedores pueden proporcionar sus propias soluciones a este problema. Debe enfatizarse que si implementa un servicio utilizando el marco de mapeo de tipo específico de implementación de algún proveedor, entonces no se garantiza que su servicio sea portátil e interoperable.
-
-Debido a las limitaciones de portabilidad, debe evitar pasar parámetros que requieran el uso de serializadores o deserializadores específicos del proveedor.
-
-En su lugar, una mejor manera es pasar estos parámetros como fragmentos de documentos SOAP representados como un subárbol DOM en la interfaz del punto final del servicio. (Consulte la Figura 3.3 ). Si es así, debe considerar enlazar (ya sea manualmente o utilizando JAXB) los fragmentos SOAP a objetos Java antes de pasarlos a la capa de procesamiento para evitar un acoplamiento estrecho de la lógica de negocio con el fragmento del documento.
-
-#### 3.4.1.4. Interfaces con métodos sobrecargados
-
-En la interfaz de su servicio, puede sobrecargar los métodos y exponerlos a los clientes del servicio. Los métodos sobrecargados comparten el mismo nombre de método pero tienen diferentes parámetros y valores de retorno. Si elige utilizar métodos sobrecargados como parte de su interfaz de servicio, tenga en cuenta que existen algunas limitaciones, como se indica a continuación:
-
-Si elige el enfoque de WSDL a Java, existen limitaciones para representar métodos sobrecargados en una descripción de WSDL. En la descripción de WSDL, cada llamada de método y su respuesta se representan como mensajes SOAP únicos. Para representar métodos sobrecargados, la descripción WSDL debería admitir varios mensajes SOAP con el mismo nombre. WSDL versión 1.1 no tiene esta capacidad para admitir varios mensajes con el mismo nombre.
-
-Si elige el enfoque de Java a WSDL y su servicio expone métodos sobrecargados, asegúrese de verificar cómo las herramientas específicas del proveedor que está utilizando representan estos métodos sobrecargados en la descripción de WSDL. Debe asegurarse de que la representación WSDL de los métodos sobrecargados funcione en el contexto de su aplicación.
-
-Veamos cómo se aplica esto en el escenario del servicio meteorológico. Como proveedor, puede ofrecer el servicio a los clientes, permitiéndoles buscar información meteorológica por nombre de ciudad o código postal. Si utiliza el enfoque de Java a WSDL, primero puede definir la interfaz WeatherService como se muestra en el ejemplo de código 3.4 .
-
-**Ejemplo de código 3.4. Interfaz WeatherService para el enfoque de Java a WSDL**
+**Ejemplo de código 3.3. Recibir un Objeto `java.awt.Image`**
 
 ```java
+import java.awt.Image;
+public interface WeatherMapService extends Remote {
+   public void submitWeatherMap(Image weatherMap)
+                 throws RemoteException, InvalidMapException;
+}
 ```
 
-Después de definir la interfaz, ejecute la herramienta proporcionada por el proveedor para crear el WSDL desde la interfaz. Cada herramienta tiene su propia forma de representar los métodos sobrecargados de getWeather en el WSDL, y su WSDL refleja la herramienta particular que utiliza. Por ejemplo, si usa J2EE 1.4 SDK de Sun Microsystems, su herramienta wscompile crea desde la interfaz WeatherService el WSDL que se muestra en el Ejemplo de código 3.5 .
+En este ejemplo, el objeto **`Image`** permite que la implementación del contenedor maneje los detalles del paso de imágenes. El contenedor proporciona clases **`javax.activation.DataHandler`**, que funcionan con **Java Activation Framework** para realizar las asignaciones **Java-MIME** y **MIME-Java**.
 
-**Ejemplo de código 3.5. WSDL generado para la interfaz WeatherService**
+Teniendo en cuenta esta asignación entre los tipos Java y MIME, es mejor enviar imágenes y documentos XML que se encuentran en una interfaz de Web service utilizando los tipos Java que se muestran en la Tabla 3.1 . Sin embargo, debe tener cuidado con el efecto sobre la interoperabilidad de su servicio. Consulte **“Interoperability”*** en la página 86 para obtener más detalles.
+
+##### 3.4.1.3.2. Documentos XML como Parámetros
+
+Hay escenarios en los que desea pasar documentos XML como parámetros. Por lo general, esto ocurre en las interacciones de empresa a empresa donde existe la necesidad de intercambiar documentos comerciales legalmente vinculantes, realizar un seguimiento de lo que se intercambia, etc. El intercambio de documentos XML como parte de un Web service se trata en una sección separada; consulte **“Handling XML Documents in a Web Service”** en la página 105 para conocer las pautas a seguir al pasar documentos XML como parámetros.
+
+##### 3.4.1.3.3. Handling Nonstandard Type Parameters - Manejo de Parámetros de Tipo No Estándar
+
+La tecnología JAX-RPC, además de proporcionar un rico conjunto de mapeo estándar entre tipos de datos XML y Java, también proporciona un framework de mapeo de tipo extensible. Los desarrolladores pueden usar este framework para especificar serializadores y deserializadores personalizados conectables(pluggable) que admitan asignaciones de tipos no estándar.
+
+✅ ***Los frameworks de mapeo de tipos extensibles, que los desarrolladores pueden usar para admitir mapeos de tipos no estándar, aún no son una parte estándar de la plataforma J2EE.***
+
+Actualmente, los proveedores pueden proporcionar sus propias soluciones a este problema. Debe enfatizarse que si implementa un servicio utilizando el framework de mapeo de tipo específico de implementación de algún proveedor, entonces no se garantiza que su servicio sea portátil e interoperable.
+
+✅ ***Debido a las limitaciones de portabilidad, debe evitar pasar parámetros que requieran el uso de serializadores o deserializadores específicos del proveedor.***
+
+En su lugar, una mejor manera es pasar estos parámetros como fragmentos de documentos SOAP representados como un subárbol DOM en la interfaz del punto final del servicio. (Consulte la Figura 3.3 ). Si es así, debe considerar enlazar (ya sea manualmente o utilizando **JAXB**) los fragmentos SOAP a objetos Java antes de pasarlos a la capa de procesamiento para evitar un acoplamiento estrecho de la lógica de negocio con el fragmento del documento.
+
+#### 3.4.1.4. Interfaces with Overloaded Methods - Interfaces con Métodos Sobrecargados
+
+En la interfaz de su servicio, puede sobrecargar los métodos y exponerlos a los clientes del servicio. ***Los métodos sobrecargados comparten el mismo nombre de método pero tienen diferentes parámetros y valores de retorno***. Si elige utilizar métodos sobrecargados como parte de su interfaz de servicio, tenga en cuenta que existen algunas limitaciones, como se indica a continuación:
+
+* Si elige el enfoque de **WSDL a Java**, existen limitaciones para representar métodos sobrecargados en una descripción de WSDL. En la descripción de WSDL, cada llamada de método y su respuesta se representan como mensajes SOAP únicos. Para representar métodos sobrecargados, la descripción WSDL debería admitir varios mensajes SOAP con el mismo nombre. WSDL versión 1.1 no tiene esta capacidad para admitir varios mensajes con el mismo nombre.
+
+* Si elige el enfoque de **Java a WSDL** y su servicio expone métodos sobrecargados, asegúrese de verificar cómo las herramientas específicas del proveedor que está utilizando representan estos métodos sobrecargados en la descripción de WSDL. Debe asegurarse de que la representación WSDL de los métodos sobrecargados funcione en el contexto de su aplicación.
+
+Veamos cómo se aplica esto en el escenario del servicio meteorológico. Como proveedor, puede ofrecer el servicio a los clientes, permitiéndoles buscar información meteorológica por nombre de ciudad o código postal. Si utiliza el enfoque de **Java a WSDL**, primero puede definir la interfaz WeatherService como se muestra en el ejemplo de código 3.4.
+
+**Ejemplo de código 3.4. Interfaz `WeatherService` para el Enfoque de Java a WSDL**
+
+```java
+public interface WeatherService extends Remote {
+   public String getWeather(String city) throws RemoteException;
+   public String getWeather(int zip) throws RemoteException;
+}
+```
+
+Después de definir la interfaz, ejecute la herramienta proporcionada por el proveedor para crear el WSDL desde la interfaz. Cada herramienta tiene su propia forma de representar los métodos sobrecargados **`getWeather`** en el WSDL, y su WSDL refleja la herramienta particular que utiliza. Por ejemplo, si usa J2EE 1.4 SDK de Sun Microsystems, su herramienta **`wscompile`** crea desde la interfaz **`WeatherService`** el WSDL que se muestra en el Ejemplo de código 3.5.
+
+**Ejemplo de código 3.5. WSDL Generado para la interfaz `WeatherService`**
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="WeatherWebService" .......>
+   <types/>
+   <message name="WeatherService_getWeather">
+      <part name="int_1" type="xsd:int"/>
+   </message>
+   <message name="WeatherService_getWeatherResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   <message name="WeatherService_getWeather2">
+      <part name="String_1" type="xsd:string"/>
+   </message>
+   <message name="WeatherService_getWeather2Response">
+      <part name="result" type="xsd:string"/>
+   </message>
+   ...
+</definitions>
 ```
 
 Tenga en cuenta que el WSDL representa los métodos sobrecargados de getWeather como dos mensajes SOAP diferentes, llamando a uno getWeather , que toma un número entero para el código postal como su parámetro, y el otro getWeather2 , que toma un parámetro de cadena para la ciudad. Como resultado, un cliente interesado en obtener información meteorológica utilizando el nombre de una ciudad invoca el servicio llamando a getWeather2, como se muestra en el ejemplo de código 3.6 .
