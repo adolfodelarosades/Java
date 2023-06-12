@@ -553,50 +553,64 @@ También tenga en cuenta que los handlers funcionan directamente en el SOAP mess
 
 El uso de handlers podría afectar potencialmente la interoperabilidad de su servicio. Consulte la siguiente sección sobre interoperabilidad. Tenga en cuenta que se necesita un conocimiento avanzado de las **SOAP message manipulation APIs (como SAAJ)** para usar correctamente los handlers. Para evitar errores, los desarrolladores de Web services deben intentar usar handlers existentes o proporcionados por proveedores. El uso de handlers tiene sentido principalmente para escribir servicios del sistema, como auditoría, registro, etc.
 
-#### 3.4.1.7. interoperabilidad
+#### 3.4.1.7. Interoperability - Interoperabilidad
 
-Un beneficio importante de los Web services es la interoperabilidad entre plataformas heterogéneas. Para obtener el máximo beneficio, desea diseñar su Web service para que sea interoperable con clientes en cualquier plataforma y, como se explicó en el Capítulo 2 , la organización de interoperabilidad de Web services (WS-I) ayuda en este sentido. WS-I promueve un conjunto de protocolos genéricos para el intercambio interoperable de mensajes entre Web services. El perfil básico de WS-I promueve la interoperabilidad al definir y recomendar cómo se puede usar un conjunto de especificaciones y estándares de Web services básicos (incluidos SOAP, WSDL, UDDI y XML) para desarrollar Web services interoperables.
+Un beneficio importante de los Web services es la interoperabilidad entre plataformas heterogéneas. Para obtener el máximo beneficio, desea diseñar su Web service para que sea interoperable con clientes en cualquier plataforma y, como se explicó en el Capítulo 2, la **Web Services Interoperability (WS-I)** ayuda en este sentido. **WS-I** promueve un conjunto de protocolos genéricos para el intercambio interoperable de mensajes entre Web services. El perfil básico de **WS-I** promueve la interoperabilidad al definir y recomendar cómo se puede usar un conjunto de especificaciones y estándares de Web services básicos (incluidos **SOAP**, **WSDL**, **UDDI** y **XML**) para desarrollar Web services interoperables.
 
-Además de los protocolos WS-I, otros grupos, como el grupo de interoperabilidad de SOAPBuilders (consulte http://java.sun.com/wsinterop/sb/index.html ), proporcionan bases de prueba comunes que facilitan la prueba de interoperabilidad. de varias implementaciones SOAP. Esto ha hecho posible que varios proveedores de tecnología de Web services prueben la interoperabilidad de las implementaciones de sus estándares. Cuando implementa su servicio utilizando tecnologías que se adhieren a las especificaciones del perfil básico de WS-I, tiene la seguridad de que dichos servicios son interoperables.
+Además de los protocolos **WS-I**, otros grupos, como el grupo **SOAPBuilders Interoperability** (consulte http://java.sun.com/wsinterop/sb/index.html ), proporcionan bases de prueba comunes que facilitan la prueba de interoperabilidad de varias implementaciones SOAP. Esto ha hecho posible que varios proveedores de tecnología de Web services prueben la interoperabilidad de las implementaciones de sus estándares. Cuando implementa su servicio utilizando tecnologías que se adhieren a las especificaciones del perfil básico de **WS-I**, tiene la seguridad de que dichos servicios son interoperables.
 
 Además de estos estándares y entornos de prueba, usted, como desarrollador de servicios, debe diseñar e implementar su Web service para que sea posible la máxima interoperabilidad. Para lograr la máxima interoperabilidad, debe tener en cuenta estos tres puntos:
 
-Los dos estilos de mensajería y enlaces admitidos por WSDL
+1. Los dos estilos de mensajería y enlaces admitidos por WSDL
+2. El soporte WS-I para archivos adjuntos
+3. La forma más efectiva de usar controladores
 
-El soporte WS-I para archivos adjuntos
+WSDL admite dos tipos de estilos de mensajería: **`rpc`** y **`document`**. El atributo **`style`** WSDL indica el estilo de mensajería. (Consulte el Ejemplo de código 3.14 ). Un atributo **`style`** establecido con **`rpc`** indica una operación orientada a **RPC**, donde los mensajes contienen parámetros y retornan valores, o function signatures. Cuando el atributo **`style`** se establece con **`document`**, indica una operación orientada a documentos, en la que los mensajes contienen documentos. Cada estilo de operación tiene un efecto diferente en el formato del body de un SOAP message.
 
-La forma más efectiva de usar controladores
-
-WSDL admite dos tipos de estilos de mensajería: rpc y document . El atributo de estilo WSDL indica el estilo de mensajería. (Consulte el Ejemplo de código 3.14 ). Un atributo de estilo establecido en rpc indica una operación orientada a RPC, donde los mensajes contienen parámetros y valores devueltos, o firmas de funciones. Cuando el atributo de estilo se establece en documento , indica una operación orientada a documentos, en la que los mensajes contienen documentos. Cada estilo de operación tiene un efecto diferente en el formato del cuerpo de un mensaje SOAP.
-
-**Ejemplo de código 3.14. Especificación de enlaces WSDL**
+**Ejemplo de código 3.14. Specifying WSDL Bindings - Especificación de Enlaces WSDL**
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions .......>
+   <binding name="WeatherServiceBinding" type="tns:WeatherService">
+      <operation name="getWeather">
+         <input>
+            <soap:body use="literal" namespace="urn:WeatherWebService"/>
+         </input>
+         <output>
+            <soap:body use="literal" namespace="urn:WeatherWebService"/>
+         </output>
+         <soap:operation soapAction=""/>
+      </operation>
+      <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+   </binding>
+   <service .....>
+</definitions>
 ```
 
-Junto con los estilos de operación, WSDL admite dos tipos de mecanismos de serialización y deserialización: un mecanismo literal y uno codificado . El atributo de uso de WSDL indica qué mecanismo se admite. (Consulte el Ejemplo de código 3.14 ). Un literalEl valor para el atributo de uso indica que los datos están formateados de acuerdo con las definiciones abstractas dentro del documento WSDL. El valor codificado significa que los datos se formatean de acuerdo con las codificaciones definidas en el URI especificado por el atributo encodingStyle . Por lo tanto, puede elegir entre un estilo rpc o documento de paso de mensajes y cada mensaje puede usar un formato de datos literal o codificado.
+Junto con los estilos de operación, WSDL admite dos tipos de mecanismos de serialización y deserialización: un mecanismo **`literal`** y un **`encoded`** . El atributo **`use`** de WSDL indica qué mecanismo se admite. (Consulte el Ejemplo de código 3.14 ). Un valor **`literal`** para el atributo **`use`** indica que los datos están formateados de acuerdo con las definiciones abstractas dentro del documento WSDL. El valor **`encoded`** significa que los datos se formatean de acuerdo con las codificaciones definidas en el URI especificado por el atributo **`encodingStyle`**. Por lo tanto, puede elegir entre un estilo  **`rpc`** o **`document`** de paso de mensajes y cada mensaje puede usar un formato de datos **`literal`** o **`encoded`**.
 
-Dado que WS-I Basic Profile 1.0, al que se ajusta la plataforma J2EE1.4, solo admite enlaces literales, debe evitar los enlaces codificados.
+✅ ***Dado que WS-I Basic Profile 1.0, al que se ajusta la plataforma J2EE1.4, solo admite literal bindings, debe evitar los encoded bindings.***
 
-Los enlaces literales no pueden representar tipos complejos, como objetos con referencias circulares, de forma estándar.
+✅ ***Los Literal bindings no pueden representar tipos complejos, como objetos con referencias circulares, de forma estándar.***
 
-El ejemplo de código 3.14 muestra un fragmento del documento WSDL que ilustra cómo el servicio meteorológico de muestra especifica estos enlaces.
+El ejemplo de código 3.14 muestra un fragmento del documento WSDL que ilustra cómo el weather service de muestra especifica estos bindings(enlaces).
 
-Es importante tener en cuenta estos estilos y enlaces de mensajes, especialmente cuando diseñe la interfaz utilizando el enfoque de WSDL a Java y cuando diseñe el WSDL para su servicio. Cuando utiliza el enfoque de Java a WSDL, confía en las herramientas proporcionadas por el proveedor para generar el WSDL para sus interfaces Java, y puede contar con ellas para crear un WSDL compatible con WS-I para su servicio. Sin embargo, tenga en cuenta que algunos proveedores pueden esperar que especifique ciertas opciones para garantizar la creación de un WSDL compatible con WS-I. Por ejemplo, el SDK J2EE 1.4 de Sun Microsystems proporciona una herramienta wscompile , que espera que el desarrollador utilice el -f:wsimarca para crear el WSDL compatible con WS-I para el servicio. También es una buena idea verificar el documento WSDL para asegurarse de que cualquier herramienta que use haya creado el documento correctamente.
+Es importante tener en cuenta estos message styles y bindings, especialmente cuando diseñe la interfaz utilizando el enfoque de **WSDL a Java** y cuando diseñe el WSDL para su servicio. Cuando utiliza el enfoque de **Java a WSDL**, confía en las herramientas proporcionadas por el proveedor para generar el WSDL para sus interfaces Java, y puede contar con ellas para crear un WSDL compatible con **WS-I** para su servicio. Sin embargo, tenga en cuenta que algunos proveedores pueden esperar que especifique ciertas opciones para garantizar la creación de un WSDL compatible con **WS-I**. Por ejemplo, el SDK J2EE 1.4 de Sun Microsystems proporciona una herramienta **`wscompile`**, que espera que el desarrollador utilice el flag **`-f:wsi`** para crear el WSDL compatible con **WS-I** para el servicio. También es una buena idea verificar el documento WSDL para asegurarse de que cualquier herramienta que use haya creado el documento correctamente.
 
-Con respecto al segundo problema, debe tener en cuenta que el perfil básico WS-I 1.0 (que es el perfil compatible con la plataforma J2EE 1.4) no aborda los archivos adjuntos. La sección, “ Tipos de parámetros para operaciones de Web services ” en la página 72 , que analiza las asignaciones de tipo Java-MIME proporcionadas por la plataforma J2EE, recomienda que un diseño eficiente es usar estas asignaciones para enviar imágenes y documentos XML dentro de un entorno completamente Java. Debido a que el perfil básico de WS-I, versión 1.0, no se ocupa de los archivos adjuntos, es posible que un Web service que utilice estas asignaciones no pueda interoperar con clientes en una plataforma que no sea Java.
+Con respecto al segundo problema, debe tener en cuenta que el **WS-I Basic Profile 1.0** (que es el perfil compatible con la plataforma J2EE 1.4) no aborda los archivos adjuntos. La sección, **“Parameter Types for Web Service Operations”** en la página 72, que analiza las asignaciones de tipo Java-MIME proporcionadas por la plataforma J2EE, recomienda que un diseño eficiente es usar estas asignaciones para enviar imágenes y documentos XML dentro de un entorno completamente Java. Debido a que el **WS-I Basic Profile 1.0**, no se ocupa de los archivos adjuntos, es posible que un Web service que utilice estas asignaciones no pueda interoperar con clientes en una plataforma que no sea Java.
 
-Dado que la especificación WS-I Basic Profile 1.0 no aborda los archivos adjuntos, no se garantiza que un Web service que utilice las asignaciones Java-MIME proporcionadas por la plataforma J2EE sea interoperable.
+✅ ***Dado que la especificación WS-I Basic Profile 1.0 no aborda los archivos adjuntos, no se garantiza que un Web service que utilice las asignaciones Java-MIME proporcionadas por la plataforma J2EE sea interoperable.***
 
-Dado que la mayoría de los Web services se basan en un intercambio de documentos comerciales y la interoperabilidad no siempre está garantizada, es importante que comprenda correctamente las opciones para manejar documentos XML. La sección, “ Intercambio de documentos XML ” en la página 107 , explica las diversas opciones disponibles para los Web services para intercambiar documentos XML de manera interoperable. También se debe tener en cuenta que la próxima versión de la especificación del perfil básico de WS-I aborda una forma estándar de enviar archivos adjuntos, y las versiones posteriores de las plataformas J2EE incorporarán esto.
+Dado que la mayoría de los Web services se basan en un intercambio de documentos comerciales y la interoperabilidad no siempre está garantizada, es importante que comprenda correctamente las opciones para manejar documentos XML. La sección,**“Exchanging XML Documents”** en la página 107, explica las diversas opciones disponibles para los Web services para intercambiar documentos XML de manera interoperable. También se debe tener en cuenta que la próxima versión de la especificación del **WS-I Basic Profile** aborda una forma estándar de enviar archivos adjuntos, y las versiones posteriores de las plataformas J2EE incorporarán esto.
 
-El último es el tema de los controladores. Los controladores, que le dan acceso a los mensajes SOAP, al mismo tiempo le imponen responsabilidades importantes.
+El último es el tema de los handlers. Los handlers, que le dan acceso a los SOAP messages, al mismo tiempo le imponen responsabilidades importantes.
 
-Cuando utilice controladores, debe tener cuidado de no cambiar un mensaje SOAP hasta el punto de que el mensaje ya no cumpla con las especificaciones WS-I, lo que pone en peligro la interoperabilidad de su servicio.
+✅ ***Cuando utilice handlers, debe tener cuidado de no cambiar un SOAP message hasta el punto de que el mensaje ya no cumpla con las especificaciones WS-I, lo que pone en peligro la interoperabilidad de su servicio.***
 
-Esto finaliza la discusión de las consideraciones para diseñar una interfaz de Web service. Las siguientes secciones examinan otras responsabilidades de la capa de interacción, como recibir y delegar solicitudes y formular respuestas.
+Esto finaliza la discusión de las consideraciones para diseñar una interfaz de Web service. Las siguientes secciones examinan otras responsabilidades de la capa de interacción, como recibir y delegar requests y formular responses.
 
-### 3.4.2. Recepción de solicitudes
+### 3.4.2. Receiving Requests  - Recepción de Solicitudes
 	
 La capa de interacción, a través del punto final, recibe las solicitudes de los clientes. La plataforma asigna las solicitudes de los clientes entrantes, que tienen la forma de mensajes SOAP, a llamadas de método presentes en la interfaz del Web service.
 
