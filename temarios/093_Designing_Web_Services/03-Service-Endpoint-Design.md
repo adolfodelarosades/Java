@@ -612,71 +612,67 @@ Esto finaliza la discusión de las consideraciones para diseñar una interfaz de
 
 ### 3.4.2. Receiving Requests  - Recepción de Solicitudes
 	
-La capa de interacción, a través del punto final, recibe las solicitudes de los clientes. La plataforma asigna las solicitudes de los clientes entrantes, que tienen la forma de mensajes SOAP, a llamadas de método presentes en la interfaz del Web service.
+La capa de interacción, a través del endpoint, recibe las requests de los clientes. La plataforma asigna(maps) las requests de los clientes entrantes, que tienen la forma de SOAP messages, a llamadas de método presentes en la interfaz del Web service.
 
-Antes de delegar estas solicitudes de clientes entrantes a la lógica de negocio del Web service, debe realizar cualquier validación de seguridad requerida, transformación de parámetros y otro procesamiento previo de parámetros requerido.
+✅ ***Antes de delegar estas requests de clientes entrantes a la lógica de negocio del Web service, debe realizar cualquier validación de seguridad requerida, transformación de parámetros y otro procesamiento previo de parámetros requerido.***
 
-Como se indica en “ Tipos de parámetros para operaciones de Web services ” en la página 72 y en otros lugares, las llamadas a Web services son básicamente llamadas a métodos cuyos parámetros se pasan como objetos Java, documentos XML ( objetos javax.xml.transform.Source ) o incluso documentos SOAP. fragmentos ( objetos javax.xml.soap.SOAPElement ).
+Como se indica en **“Parameter Types for Web Service Operations”** en la página 72 y en otros lugares, las llamadas a Web services son básicamente llamadas a métodos cuyos parámetros se pasan como objetos Java, documentos XML ( objetos **`javax.xml.transform.Source`** ) o incluso SOAP document fragments ( objetos **`javax.xml.soap.SOAPElement`** ).
 
-Para los parámetros que se pasan como objetos Java (como String, int , tipos de valor JAX-RPC, etc.), realice la validación de parámetros específica de la aplicación y asigne los objetos entrantes a objetos específicos del dominio en la capa de interacción antes de delegar la solicitud a la capa de procesamiento.
+✅ ***Para los parámetros que se pasan como objetos Java (como `String`, `int`, tipos de valor JAX-RPC, etc.), realice la validación de parámetros específica de la aplicación y asigne los objetos entrantes a objetos específicos del dominio en la capa de interacción antes de delegar la request a la capa de procesamiento.***
 
 Es posible que deba realizar pasos adicionales para manejar documentos XML que se pasan como parámetros. Estos pasos, que se realizan mejor en la capa de interacción de su servicio, son los siguientes:
 
-1. El extremo del servicio debe validar el documento XML entrante con su esquema. Para obtener detalles y pautas sobre cómo y cuándo validar los documentos XML entrantes, junto con las técnicas de validación recomendadas, consulte “ Validación de documentos XML ” en la página 139 .
+1. El extremo del servicio debe validar el documento XML entrante con su esquema. Para obtener detalles y pautas sobre cómo y cuándo validar los documentos XML entrantes, junto con las técnicas de validación recomendadas, consulte **“Validating XML Documents”** en la página 139.
 
 2. Cuando la capa de procesamiento del servicio y la lógica de negocio están diseñadas para manejar documentos XML, debe transformar el documento XML en un esquema compatible internamente, si el esquema para el documento XML difiere del esquema interno, antes de pasar el documento a la capa de procesamiento.
 
-3. Cuando la capa de procesamiento trata con objetos pero la interfaz de servicio recibe documentos XML, entonces, como parte de la capa de interacción, asigne los documentos XML entrantes a objetos de dominio antes de delegar la solicitud a la capa de procesamiento. Para obtener detalles y pautas sobre técnicas de mapeo para documentos XML entrantes, consulte “ Mapeo de esquemas al modelo de datos de la aplicación ” en la página 143 .
+3. Cuando la capa de procesamiento trata con objetos pero la interfaz de servicio recibe documentos XML, entonces, como parte de la capa de interacción, asigne los documentos XML entrantes a objetos de dominio antes de delegar la request a la capa de procesamiento. Para obtener detalles y pautas sobre técnicas de mapeo para documentos XML entrantes, consulte **“Mapping Schemas to the Application Data Model”** en la página 143.
 
-Es importante que estos tres pasos (validación de parámetros entrantes o documentos XML, traducción de documentos XML a esquemas compatibles internos y asignación de documentos a objetos de dominio) se realicen lo más cerca posible del extremo del servicio y, sin duda, en la capa de interacción del servicio. .
+✅ ***Es importante que estos tres pasos - validación de parámetros entrantes o documentos XML, traducción de documentos XML a esquemas compatibles internos y asignación de documentos a objetos de dominio - se realicen lo más cerca posible del service endpoint y, sin duda, en la capa de interacción del servicio.***
 
-Un diseño como este ayuda a detectar errores temprano y, por lo tanto, evita llamadas innecesarias y viajes de ida y vuelta a la capa de procesamiento. La figura 3.4 muestra la forma recomendada de manejar solicitudes y respuestas en la capa de interacción del Web service.
+Un diseño como este ayuda a detectar errores temprano y, por lo tanto, evita llamadas innecesarias y viajes de ida y vuelta a la capa de procesamiento. La figura 3.4 muestra la forma recomendada de manejar requests y responses en la capa de interacción del Web service.
 
 **Figura 3.4. Web Service Request Processing - Procesamiento de Peticiones de Servicios Web**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/04ef87f6-384f-446f-9da3-d01ea65e29f5)
 
 
-La capa de interacción del Web service maneja todas las solicitudes entrantes y las delega a la lógica de negocio expuesta en la capa de procesamiento. Cuando se implementa de esta manera, la capa de interacción del Web service tiene varias ventajas, ya que le brinda una ubicación común para las siguientes tareas:
+La capa de interacción del Web service maneja todas las requests entrantes y las delega a la lógica de negocio expuesta en la capa de procesamiento. Cuando se implementa de esta manera, la capa de interacción del Web service tiene varias ventajas, ya que le brinda una ubicación común para las siguientes tareas:
 
-Administrar el manejo de solicitudes para que el extremo del servicio sirva como punto de contacto inicial
+* Administrar el manejo de requests para que el service endpoint sirva como punto de contacto inicial
+* Invocación de servicios de seguridad, incluidas la autenticación y la autorización(authentication and authorization).
+* Validación y transformación de documentos XML entrantes y asignación de documentos XML a objetos de dominio
+* Delegar a la lógica de negocio existente
+* Manejo de errores
 
-Invocación de servicios de seguridad, incluidas la autenticación y la autorización.
+En general, se recomienda realizar todo el procesamiento común, como controles de seguridad, registro, auditoría, validación de entrada, etc., para las requests  en la capa de interacción tan pronto como se recibe una request y antes de pasarla a la capa de procesamiento.
 
-Validación y transformación de documentos XML entrantes y asignación de documentos XML a objetos de dominio
+### 3.4.3. Delegating Web Service Requests to Processing Layer - Delegación de Solicitudes de Web Services a la Capa de Procesamiento
 
-Delegar a la lógica de negocio existente
+Después de diseñar las tareas de preprocesamiento de requests, el siguiente paso es diseñar cómo delegar la request a la capa de procesamiento. En este punto, considere el tipo de procesamiento que requiere la request, ya que esto lo ayuda a decidir cómo delegar la request a la capa de procesamiento. Todas las requests se pueden clasificar en dos grandes categorías según el tiempo que lleva procesar la request, a saber:
 
-Manejo de errores
+* **Una request que se procesa en un tiempo lo suficientemente corto como para que un cliente pueda bloquear y esperar a recibir la response antes de continuar. En otras palabras, *el cliente y el servicio interactúan de manera síncrona*, de modo que el cliente que invoca se bloquea hasta que la response se procesa por completo y se recibe la response.**
 
-En general, se recomienda realizar todo el procesamiento común, como controles de seguridad, registro, auditoría, validación de entrada, etc., para las solicitudes en la capa de interacción tan pronto como se recibe una solicitud y antes de pasarla a la capa de procesamiento.
+* **a request que tarda mucho en ser procesada, tanto que no es buena idea hacer esperar al cliente hasta que finalice la tramitación. En otras palabras, *el cliente y el servicio interactúan de manera asíncrona*, de modo que el cliente que invoca no necesita bloquear y esperar hasta que la solicitud se procese por completo.**
 
-### 3.4.3. Delegación de solicitudes de Web services a la capa de procesamiento
+**Nota**: ***Cuando nos referimos al procesamiento de requests, usamos los términos síncrono y asíncrono desde el punto de vista de cuándo se completa completamente el procesamiento de la request del cliente. Tenga en cuenta que, bajo el capó, una interacción asíncrona entre un cliente y un servicio puede resultar en una invocación síncrona a través de la red, ya que HTTP es síncrono por naturaleza. De manera similar, los mensajes SOAP enviados a través de HTTP también son síncronos.***
 
-Después de diseñar las tareas de preprocesamiento de solicitudes, el siguiente paso es diseñar cómo delegar la solicitud a la capa de procesamiento. En este punto, considere el tipo de procesamiento que requiere la solicitud, ya que esto lo ayuda a decidir cómo delegar la solicitud a la capa de procesamiento. Todas las solicitudes se pueden clasificar en dos grandes categorías según el tiempo que lleva procesar la solicitud, a saber:
-
-Una solicitud que se procesa en un tiempo lo suficientemente corto como para que un cliente pueda bloquear y esperar a recibir la respuesta antes de continuar. En otras palabras, el cliente y el servicio interactúan de manera síncrona, de modo que el cliente que invoca se bloquea hasta que la solicitud se procesa por completo y se recibe la respuesta.
-
-Una solicitud que tarda mucho en ser procesada, tanto que no es buena idea hacer esperar al cliente hasta que finalice la tramitación. En otras palabras, el cliente y el servicio interactúan de manera asíncrona, de modo que el cliente que invoca no necesita bloquear y esperar hasta que la solicitud se procese por completo.
-
-**Nota**: Cuando nos referimos al procesamiento de solicitudes, usamos los términos síncrono y asíncrono desde el punto de vista de cuándo se completa completamente el procesamiento de la solicitud del cliente. Tenga en cuenta que, bajo el capó, una interacción asíncrona entre un cliente y un servicio puede resultar en una invocación síncrona a través de la red, ya que HTTP es síncrono por naturaleza. De manera similar, los mensajes SOAP enviados a través de HTTP también son síncronos.
-
-El servicio de información meteorológica es un buen ejemplo de una interacción síncrona entre un cliente y un servicio. Cuando recibe la solicitud de un cliente, el servicio meteorológico debe buscar la información requerida y enviar una respuesta al cliente. Esta búsqueda y devolución de la información se puede lograr en un tiempo relativamente corto, durante el cual se puede esperar que el cliente bloquee y espere. El cliente continúa su procesamiento solo después de obtener una respuesta del servicio. (Consulte la Figura 3.5 ).
+***El servicio de información meteorológica es un buen ejemplo de una interacción síncrona entre un cliente y un servicio***. Cuando recibe la request de un cliente, el servicio meteorológico debe buscar la información requerida y enviar una response al cliente. Esta búsqueda y devolución de la información se puede lograr en un tiempo relativamente corto, durante el cual se puede esperar que el cliente bloquee y espere. El cliente continúa su procesamiento solo después de obtener una response del servicio. (Consulte la Figura 3.5 ).
 
 **Figura 3.5. Weather Information Service Interaction - Interacción del servicio de información meteorológica**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/c7c96e5a-63db-4f11-bded-690bb5de0124)
 
 
-Un Web service como este se puede diseñar utilizando un extremo de servicio que recibe la solicitud del cliente y luego delega la solicitud directamente a la lógica apropiada del servicio en la capa de procesamiento. La capa de procesamiento del servicio procesa la solicitud y, cuando se completa el procesamiento, el extremo del servicio devuelve la respuesta al cliente. (Consulte la Figura 3.6 ).
+Un Web service como este se puede diseñar utilizando un service endpoint que recibe la request del cliente y luego delega la request directamente a la lógica apropiada del servicio en la capa de procesamiento. La capa de procesamiento del servicio procesa la request y, cuando se completa el procesamiento, el service endpoint devuelve la response al cliente. (Consulte la Figura 3.6 ).
 
 **Figura 3.6. Synchronous Interaction Between Client and Service - Interacción síncrona entre el cliente y el servicio**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/fd5c7b24-5594-4608-9c94-7c099df69fdb)
 
-El ejemplo de código 3.15 muestra la interfaz del servicio meteorológico realizando algunas comprobaciones de validación de parámetros básicos en la capa de interacción. La interfaz también obtiene la información requerida y pasa esa información al cliente de manera síncrona:
+El ejemplo de código 3.15 muestra la interfaz del weather service realizando algunas comprobaciones de validación de parámetros básicos en la capa de interacción. La interfaz también obtiene la información requerida y pasa esa información al cliente de manera síncrona:
 
-**Ejemplo de código 3.15. Realización de una interacción de cliente síncrona**
+**Ejemplo de código 3.15. Performing a Synchronous Client Interaction - Realización de una Interacción de Cliente Síncrona**
 
 ```java
 public class WeatherServiceImpl implements
@@ -700,19 +696,19 @@ public class WeatherServiceImpl implements
 }
 ```
 
-Ahora examinemos una interacción asíncrona entre un cliente y un servicio. Al realizar una solicitud de este tipo de servicio, el cliente no puede darse el lujo de esperar la respuesta debido al tiempo significativo que tarda el servicio en procesar la solicitud por completo. En su lugar, el cliente puede querer continuar con algún otro procesamiento. Posteriormente, cuando recibe la respuesta, el cliente retoma el procesamiento que inició la solicitud de servicio. Por lo general, en estos tipos de servicios, el contenido de los parámetros de solicitud inicia y determina el flujo de trabajo de procesamiento (los pasos para cumplir con la solicitud) para el Web service. A menudo, cumplir con una solicitud requiere múltiples pasos de flujo de trabajo.
+Ahora examinemos una interacción asíncrona entre un cliente y un servicio. Al realizar una request de este tipo de servicio, el cliente no puede darse el lujo de esperar la response debido al tiempo significativo que tarda el servicio en procesar la request por completo. En su lugar, el cliente puede querer continuar con algún otro procesamiento. Posteriormente, cuando recibe la response, el cliente retoma el procesamiento que inició la request de servicio. Por lo general, en estos tipos de servicios, el contenido de los parámetros de request inicia y determina el flujo de trabajo de procesamiento (los pasos para cumplir con la request) para el Web service. A menudo, cumplir con una request requiere múltiples pasos de flujo de trabajo.
 
-El servicio de agencia de viajes es un buen ejemplo de una interacción asíncrona entre un cliente y un servicio. Un cliente solicita arreglos para un viaje en particular enviando al servicio de viajes toda la información pertinente (muy probablemente en un documento XML). Según el contenido del documento, el servicio realiza pasos como verificar la cuenta del usuario, verificar y obtener la autorización de la tarjeta de crédito, verificar la disponibilidad de alojamiento y transporte, crear un itinerario, comprar boletos, etc. Dado que el servicio de viajes debe realizar una serie de pasos que a menudo consumen mucho tiempo en su flujo de trabajo normal, el cliente no puede darse el lujo de hacer una pausa y esperar a que se completen estos pasos.
+***El servicio de agencia de viajes es un buen ejemplo de una interacción asíncrona entre un cliente y un servicio***. Un cliente solicita arreglos para un viaje en particular enviando al servicio de viajes toda la información pertinente (muy probablemente en un documento XML). Según el contenido del documento, el servicio realiza pasos como verificar la cuenta del usuario, verificar y obtener la autorización de la tarjeta de crédito, verificar la disponibilidad de alojamiento y transporte, crear un itinerario, comprar boletos, etc. Dado que el servicio de viajes debe realizar una serie de pasos que a menudo consumen mucho tiempo en su flujo de trabajo normal, el cliente no puede darse el lujo de hacer una pausa y esperar a que se completen estos pasos.
 
-La figura 3.7 muestra un enfoque recomendado para delegar asincrónicamente este tipo de solicitudes de Web services a la capa de procesamiento. En esta arquitectura, el cliente envía una solicitud al extremo del servicio. El extremo del servicio valida la solicitud entrante en la capa de interacción y luego delega la solicitud del cliente a la capa de procesamiento adecuada del servicio. Lo hace enviando la solicitud como un mensaje JMS a una cola o tema JMS designado específicamente para este tipo de solicitud.
+La figura 3.7 muestra un enfoque recomendado para delegar asincrónicamente este tipo de requests de Web services a la capa de procesamiento. En esta arquitectura, el cliente envía una request al service endpoint. El service endpoint valida la request entrante en la capa de interacción y luego delega la request del cliente a la capa de procesamiento adecuada del servicio. Lo hace enviando la request como un **JMS message** a un **JMS queue** designado específicamente para este tipo de request.
 
-Debe evitarse delegar una solicitud a la capa de procesamiento a través de JMS antes de validar la solicitud.
+Debe evitarse delegar una request a la capa de procesamiento a través de **JMS** antes de validar la request.
 
 **Figura 3.7. Asynchronous Interaction Between Client and Service - Interacción asíncrona entre el cliente y el servicio**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/99f47ea7-1858-4b0c-a1fe-6c2d44056625)
 
-
+AQUIIIIII
 La validación asegura que una solicitud es correcta. Delegar la solicitud antes de la validación puede dar como resultado que se pase una solicitud no válida a la capa de procesamiento, lo que hace que el seguimiento y el manejo de errores sean demasiado complejos. Una vez que la solicitud se delega con éxito a la capa de procesamiento, el extremo del servicio puede devolver un identificador de correlación al cliente. Este identificador de correlación es para referencia futura del cliente y puede ayudar al cliente a asociar una respuesta que corresponda a su solicitud anterior. Si la lógica de negocio se implementa utilizando beans empresariales, los beans controlados por mensajes en el nivel EJB leen la solicitud e inician el procesamiento para que, en última instancia, se pueda formular una respuesta.
 
 La Figura 3.8 muestra cómo el servicio de agencia de viajes podría implementar esta interacción, y el Ejemplo de código 3.16 muestra el código real que podría usarse.
