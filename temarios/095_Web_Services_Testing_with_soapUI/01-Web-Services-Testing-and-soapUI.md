@@ -1,58 +1,66 @@
 # Capítulo 1. Pruebas de web services y soapUI
 
-Los web services son una de las clavesbloques de construcción de soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales, se espera que los equipos de proyecto estén bien informados y familiarizados con las tecnologías asociadas con los web services y la arquitectura orientada a servicios ( SOA ). El aspecto de prueba de los web services en particular es uno de los temas clave que debe discutirse cuando se trabaja con web services.
+Los web services son una de las claves de los bloques de construcción para soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales(enterprise applications), se espera que los equipos del proyecto estén bien informados y familiarizados con las tecnologías asociadas con los web services y la **arquitectura orientada a servicios - service-oriented architecture(SOA)**. El aspecto de prueba de los web services en particular es uno de los temas clave que debe discutirse cuando se trabaja con web services.
 
-Las pruebas de web services se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en marcos de web services como Apache Axis2 se pueden usar para invocar web services mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los web services automáticamente. soapUI es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de web services.
+Las pruebas(testing) de web services se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en frameworks de web services como **Apache Axis2** se pueden usar para invocar web services mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los web services automáticamente. **soapUI** es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de web services.
 
-Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de SOA, pruebas de web services y soapUI:
+Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de **SOA**, pruebas de web services y **soapUI**:
 
-Descripción general de algunas de las características clave de los web services
-El papel de los web services en SOA
-Enfoques de prueba de web services
-Desafíos de prueba de web services
-Introducción a la interfaz de usuario de jabón
-Instalación de la interfaz de usuario de jabón
-SOA y web services
-SOA es un distintivoenfoque para separar preocupaciones y construir soluciones comerciales utilizando componentes reutilizables y poco acoplados. SOA ya no es una característica agradable para la mayoría de las empresas y se usa ampliamente en las organizaciones para lograr muchas ventajas estratégicas. Al adoptar SOA, las organizaciones pueden permitir que sus aplicaciones comerciales respondan de manera rápida y eficiente a los cambios comerciales, de procesos y de integración que generalmente ocurren en cualquier entorno empresarial.
+* Descripción general de algunas de las características clave de los web services
+* El papel de los web services en SOA
+* Enfoques de testing de web services
+* Desafíos de testing de web services
+* Introducción a la interfaz de usuario de soapUI
+* Instalación de la interfaz de usuario de soapUI
 
-Soluciones orientadas al servicio
-Si un sistema de software se construye siguiendo los principios asociados con SOA, se puede considerar como una solución orientada a servicios. Las organizaciones generalmente tienden a crear soluciones orientadas a servicios para aprovechar la flexibilidad en sus negocios, fusionarse o adquirir nuevos negocios y lograr ventajas competitivas. Para comprender el uso y el propósito de SOA y las soluciones orientadas a servicios, echemos un vistazo a un estudio de caso simplificado.
+## SOA y Web Services
 
-Caso de estudio
-Smith and Co. es un gran proveedor de pólizas de seguros de automóviles ubicado en América del Norte. La empresa utiliza un sistema de software para realizar todas sus operaciones asociadas con el procesamiento de reclamos de seguros.El sistema consta de varios módulos, incluidos los siguientes:
+***SOA es un distintivo enfoque para separar preocupaciones y construir soluciones comerciales utilizando componentes reutilizables y poco acoplados***. SOA ya no es una característica agradable para la mayoría de las empresas y se usa ampliamente en las organizaciones para lograr muchas ventajas estratégicas. Al adoptar SOA, las organizaciones pueden permitir que sus aplicaciones comerciales respondan de manera rápida y eficiente a los cambios comerciales, de procesos y de integración que generalmente ocurren en cualquier entorno empresarial.
 
-Inscripción y registro de clientes
-Tramitación de pólizas de seguro
-Procesamiento de reclamos de seguros
-Gestión de clientes
-Contabilidad
-Gestión de proveedores de servicios
-Con el enorme éxito y la satisfacción del cliente de las reclamaciones de seguros procesadas por la compañía durante el pasado reciente, Smith and Co. adquirió InsurePlus Inc., uno de sus proveedores de seguros competidores, hace unos meses.
+### Service-oriented solutions - Soluciones orientadas al servicio
 
-InsurePlus también ha proporcionado algunas de las pólizas de reclamaciones de automóviles de seguros que son similares a las que Smith and Co. proporciona a sus clientes. Por lo tanto, la dirección de la empresa ha decidido integrar los sistemas de procesamiento de reclamaciones de seguros utilizados por ambas empresas y ofrecer una solución a sus clientes.
+Si un sistema de software se construye siguiendo los principios asociados con SOA, se puede considerar como una solución orientada a servicios. ***Las organizaciones generalmente tienden a crear soluciones orientadas a servicios para aprovechar la flexibilidad en sus negocios, fusionarse o adquirir nuevos negocios y lograr ventajas competitivas***. Para comprender el uso y el propósito de SOA y las soluciones orientadas a servicios, echemos un vistazo a un estudio de caso simplificado.
 
-Smith and Co. utiliza muchas tecnologías de Microsoft(TM) y todas sus aplicaciones de software, incluido el sistema general de administración de pólizas de seguros, se basan en el marco .NET. Por otro lado, InsurePlus usa mucho J2EE y sus aplicaciones de procesamiento de seguros están todas basadas en tecnologías Java. Para empeorar el problema de la integración, InsurePlus también consta de un componente de aplicación de administración de clientes heredado, que se ejecuta en un sistema AS-400.
+#### Caso de Estudio
 
-Los departamentos de TI de ambas empresas enfrentaron numerosas dificultades cuando intentaron integrar las aplicaciones de software en Smith and Co. e InsurePlus Inc. Tuvieron que escribir muchos módulos adaptadores para que ambas aplicaciones se comunicaran entre sí y realizaran las conversiones de protocolo como necesario.
+**Smith and Co.** es un gran proveedor de pólizas de seguros de automóviles ubicado en América del Norte. La empresa utiliza un sistema de software para realizar todas sus operaciones asociadas con el procesamiento de reclamos de seguros. El sistema consta de varios módulos, incluidos los siguientes:
 
-Para superar estos y futuros problemas de integración, la gerencia de TI de Smith and Co. decidió adoptar SOA en su metodología de desarrollo de aplicaciones comerciales y convertir el sistema de procesamiento de seguros en una solución orientada a servicios.
+* Inscripción y registro de clientes
+* Tramitación de pólizas de seguro
+* Procesamiento de reclamos de seguros
+* Gestión de clientes
+* Contabilidad
+* Gestión de proveedores de servicios
 
-Como primer paso, se construyeron muchos servicios de envoltura (web services que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como web services. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración.Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en Smith and Co. pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en InsurePlus Inc.
+Con el enorme éxito y la satisfacción del cliente de las reclamaciones de seguros procesadas por la compañía durante el pasado reciente, **Smith and Co.** adquirió **InsurePlus Inc.**, uno de sus proveedores de seguros competidores, hace unos meses.
 
-Al implementar una solución orientada al servicio, el sistema de Smith and Co. pudo fusionarse con muchos otros sistemas heredados con una sobrecarga de integración mínima.
+**InsurePlus** también ha proporcionado algunas de las pólizas de reclamaciones de automóviles de seguros que son similares a las que **Smith and Co.** proporciona a sus clientes. Por lo tanto, la dirección de la empresa ha decidido integrar los sistemas de procesamiento de reclamaciones de seguros utilizados por ambas empresas y ofrecer una solución a sus clientes.
 
-Bloques de construcción de SOA
-Al estudiar soluciones típicas orientadas a servicios,Podemos identificar tres bloques de construcción principales de la siguiente manera:
+**Smith and Co.** utiliza muchas tecnologías de Microsoft(TM) y todas sus aplicaciones de software, incluido el sistema general de administración de pólizas de seguros, se basan en el framework .NET. Por otro lado, **InsurePlus** usa mucho **J2EE** y sus aplicaciones de procesamiento de seguros están todas basadas en tecnologías Java. Para empeorar el problema de la integración, **InsurePlus** también consta de un componente de aplicación de administración de clientes heredado, que se ejecuta en un sistema AS-400.
 
-web services
-Mediación
-Composición
-web services
-Los web services son las unidades individuales de lógica empresarial en SOA. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
+Los departamentos de TI de ambas empresas enfrentaron numerosas dificultades cuando intentaron integrar las aplicaciones de software en **Smith and Co.** e **InsurePlus Inc.**. Tuvieron que escribir muchos módulos adaptadores para que ambas aplicaciones se comunicaran entre sí y realizaran las conversiones de protocolo necesarios.
 
-El contenedor de servicios es el componente de middleware SOA donde se aloja el web service para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los marcos de web services. Una lista de usos comunesLos marcos de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de web services populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
+Para superar estos y futuros problemas de integración, la gerencia de TI de **Smith and Co.** decidió adoptar **SOA** en su metodología de desarrollo de aplicaciones comerciales y convertir el sistema de procesamiento de seguros en una solución orientada a servicios.
 
-El contenedor de servicios contiene la lógica empresarial , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
+Como ***primer paso***, se construyeron muchos wrapper services (web services que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como web services. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración. ***Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes*** y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en **Smith and Co.** pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en **InsurePlus Inc**.
+
+Al implementar una solución orientada al servicio, el sistema de **Smith and Co.** pudo fusionarse con muchos otros sistemas heredados con una sobrecarga de integración mínima.
+
+#### Bloques de construcción de SOA
+
+Al estudiar soluciones típicas orientadas a servicios, podemos identificar tres bloques de construcción principales de la siguiente manera:
+
+* Web services
+* Mediation(Mediación)
+* Composition(Composición)
+
+##### Web Services
+
+***Los web services son las unidades individuales de lógica de negocio en SOA***. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
+
+El **service container** es el componente SOA middleware donde se aloja el web service para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los frameworks de web services. Una lista de usos comunes de los frameworks de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks; aquí puede encontrar algunos web service middleware populares como **Windows Communication Foundation ( WCF )**, **Apache CXF**, **Apache Axis2**, etc. Usaremos **Apache Axis2** como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. **Apache Axis2** se puede encontrar en http://axis.apache.org/ .
+
+El **service container** contiene la lógica de negocio , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
 
 
 Mediación
@@ -110,11 +118,11 @@ web services
 Mediación
 Composición
 web services
-Los web services son las unidades individuales de lógica empresarial en SOA. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
+Los web services son las unidades individuales de lógica de negocio en SOA. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
 
 El contenedor de servicios es el componente de middleware SOA donde se aloja el web service para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los marcos de web services. Una lista de usos comunesLos marcos de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de web services populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
 
-El contenedor de servicios contiene la lógica empresarial , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
+El contenedor de servicios contiene la lógica de negocio , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
 
 
 Mediación
@@ -235,7 +243,7 @@ En el caso de la mensajería SOAP v1.2, faultcodese cambia el nombre a Codey fau
   
 ## Enfoques de prueba de web services
   
-Discutimos un conjunto de conceptos más asociados con los web services. Ahora es el momento de analizar los aspectos de prueba de los web services. Como notamos, los web services son componentes autónomos y poco acoplados que son unidades individuales de lógica empresarial en SOA. Esto facilita un enfoque distinguido para probar web services. Debido a la naturaleza débilmente acoplada, los servicios no mantienen estrechas dependencias entre servicios entre sí. Por lo tanto, una vez que se implementa un web service en particular, se puede probar independientemente de los demás.
+Discutimos un conjunto de conceptos más asociados con los web services. Ahora es el momento de analizar los aspectos de prueba de los web services. Como notamos, los web services son componentes autónomos y poco acoplados que son unidades individuales de lógica de negocio en SOA. Esto facilita un enfoque distinguido para probar web services. Debido a la naturaleza débilmente acoplada, los servicios no mantienen estrechas dependencias entre servicios entre sí. Por lo tanto, una vez que se implementa un web service en particular, se puede probar independientemente de los demás.
 
 Esto brinda a los probadores la capacidad de seguir una metodología de prueba a nivel de componente. Antes de pasar a varias integraciones, se puede probar un web service para verificar los requisitos funcionales y no funcionales. Una vez que el servicio se mejora con diferentes atributos, como políticas de seguridad, dicho servicio también se puede probar individualmente para garantizar que funcione correctamente antes de tener en cuenta los escenarios de integración. Esto brinda una gran flexibilidad para los evaluadores y brinda agilidad a los procesos de prueba.
 
@@ -248,7 +256,7 @@ Pruebas de rendimiento
 Analicemos cada uno de estos enfoques en detalle.
 
 Pruebas unitarias de web services
-Un web service es una unidad de lógica empresarial y consta de una o más operaciones. Estas operaciones deben probarse individualmente para asegurarse de que el web service aborde los problemas comerciales previstos. operaciones. Por lo tanto, al igual que los métodos individuales en un programa de computadora se prueban como unidades, las operaciones del web service también deben probarse como unidades. Las pruebas unitarias se pueden desarrollar utilizando el marco de pruebas unitarias asociado con el lenguaje de programación que se utiliza para implementar los web services. Por ejemplo, si los web services están escritos en Java, el marco JUnit se puede usar como marco de pruebas unitarias. Generalmente, es responsabilidad del autor del web service escribir una cantidad suficiente de pruebas unitarias para cubrir la lógica de las operaciones del web service.
+Un web service es una unidad de lógica de negocio y consta de una o más operaciones. Estas operaciones deben probarse individualmente para asegurarse de que el web service aborde los problemas comerciales previstos. operaciones. Por lo tanto, al igual que los métodos individuales en un programa de computadora se prueban como unidades, las operaciones del web service también deben probarse como unidades. Las pruebas unitarias se pueden desarrollar utilizando el marco de pruebas unitarias asociado con el lenguaje de programación que se utiliza para implementar los web services. Por ejemplo, si los web services están escritos en Java, el marco JUnit se puede usar como marco de pruebas unitarias. Generalmente, es responsabilidad del autor del web service escribir una cantidad suficiente de pruebas unitarias para cubrir la lógica de las operaciones del web service.
 
 Pruebas funcionales
 Una vez que un web service se implementa en un contenedor de servicios, se somete a una verificación funcional integral. El propósito de La prueba funcional de un web service es para garantizar que el web service proporciona la funcionalidad comercial esperada. Hay muchos enfoques para realizar pruebas funcionales como se explica a continuación.
@@ -456,7 +464,7 @@ Dejaré que usted navegue por el resto de los elementos de la interfaz de usuari
   
 ## Resumen
   
-Los web services son las unidades individuales de lógica empresarial en SOA. Para probar los web services, debemos poseer un buen conocimiento sobre SOA y los web services, así como los componentes tecnológicos asociados. Este capítulo se ha dedicado a construir esa base.
+Los web services son las unidades individuales de lógica de negocio en SOA. Para probar los web services, debemos poseer un buen conocimiento sobre SOA y los web services, así como los componentes tecnológicos asociados. Este capítulo se ha dedicado a construir esa base.
 
 Comenzamos a buscar en soapUI, la herramienta de prueba de web services y SOA líder y más completa del mundo. Discutimos las metas y objetivos principales del uso de soapUI en las pruebas de web services. Analizamos un poco la historia de soapUI y sus modelos de distribución. Finalmente, se explicaron los pasos para instalar soapUI en Linux, Windows y Mac OS.
 
