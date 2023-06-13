@@ -1019,114 +1019,159 @@ Usar JAXM para escenarios que requieren pasar documentos XML puede ser una buena
   
 ## 3.8. Deploying and Packaging a Service Endpoint - Implementación y Empaquetado de un Service Endpoint
 
-Hasta ahora, hemos examinado los Web services en la plataforma J2EE en términos de diseño, desarrollo e implementación. Una vez que complete la implementación de los Web services, debe escribir sus descriptores de implementación, empaquetar el servicio con todos sus componentes e implementar el servicio.
+Hasta ahora, hemos examinado los Web services en la plataforma J2EE en términos de diseño, desarrollo e implementación. Una vez que complete la implementación de los Web services, debe escribir sus deployment descriptors, empaquetar el servicio con todos sus componentes e implementar el servicio.
 
-Los desarrolladores deben, si es posible, usar herramientas o IDE para desarrollar un Web service. Estas herramientas de desarrollo de Web services e IDE crean automáticamente los descriptores de implementación adecuados para el servicio y manejan correctamente el paquete del servicio, pasos necesarios para que un servicio funcione correctamente. Además, las herramientas y los IDE ocultan estos detalles al desarrollador.
+✅ ***Los desarrolladores deben, si es posible, usar herramientas o IDE para desarrollar un Web service. Estas herramientas de desarrollo de Web services e IDE crean automáticamente los deployment descriptors adecuados para el servicio y manejan correctamente el paquete del servicio, pasos necesarios para que un servicio funcione correctamente. Además, las herramientas y los IDE ocultan estos detalles al desarrollador.***
 
-Aunque puede esperar que su herramienta de desarrollo realice estas tareas por usted, es bueno tener una comprensión conceptual del descriptor de implementación de la plataforma J2EE 1.4 y la estructura de empaquetado, ya que determinan cómo se implementa un servicio en un servidor J2EE y la disponibilidad del servicio para clientela. Esta sección, que proporciona una descripción general conceptual de los detalles de implementación y empaquetado, no es una lectura esencial. No obstante, puede que valga la pena ver cómo estos detalles contribuyen a los Web services portátiles e interoperables.
+Aunque puede esperar que su herramienta de desarrollo realice estas tareas por usted, es bueno tener una comprensión conceptual del deployment descriptors de la plataforma J2EE 1.4 y la estructura de empaquetado, ya que determinan cómo se implementa un servicio en un servidor J2EE y la disponibilidad del servicio para clientela. Esta sección, que proporciona una descripción general conceptual de los detalles de implementación y empaquetado, no es una lectura esencial. No obstante, puede que valga la pena ver cómo estos detalles contribuyen a los Web services portátiles e interoperables.
 
-3.8.1. Información de servicio en los descriptores de implementación
+### 3.8.1. Service Information in the Deployment Descriptors - Información de Servicio en los Descriptores de Implementación
+
 Para implementar correctamente un servicio, el desarrollador proporciona la siguiente información.
 
-Detalles relacionados con la implementación de la implementación del servicio, incluida la interfaz del Web service, las clases que implementan la interfaz del Web service, etc.
+* Detalles relacionados con la implementación del servicio, incluida la interfaz del Web service, las clases que implementan la interfaz del Web service, etc.
+* Detalles sobre los Web services que se implementarán, como los puertos y las asignaciones(mappings)
+* Detalles sobre la relación de componente de puerto a puerto de WSDL
 
-Detalles sobre los Web services que se implementarán, como los puertos y las asignaciones
+Más específicamente, el deployment descriptor contiene información sobre el puerto de un servicio y el WSDL asociado. Recuerde de **“Web Service Technologies Integrated in J2EE Platform”** en la página 49:
 
-Detalles sobre la relación de componente de puerto a puerto de WSDL
+* Un componente port(puerto) (también llamado port) brinda una vista del servicio a los clientes, de modo que el cliente no necesita preocuparse por cómo se ha implementado el servicio.
+* Cada puerto tiene un WSDL asociado.
+* Cada puerto tiene asociado un service endpoint (y su implementación). El endpoint atiende todas las requests que pasan por la ubicación definida en la dirección del puerto WSDL.
 
-Más específicamente, el descriptor de implementación contiene información sobre el puerto de un servicio y el WSDL asociado. Recuerde de “ Tecnologías de Web services integradas en la plataforma J2EE ” en la página 49 :
+Para comenzar, la implementación del servicio declara sus detalles de implementación en los deployment descriptors específicos del módulo apropiado. Por ejemplo, una implementación de servicio que utiliza un endpoint de servicio JAX-RPC declara sus detalles en el archivo **` WEB-INF/web.xml`** utilizando el elemento **`servlet-class`**. (Consulte el ejemplo de código 3.21 ).
 
-Un componente de puerto (también llamado puerto) brinda una vista del servicio a los clientes, de modo que el cliente no necesita preocuparse por cómo se ha implementado el servicio.
-
-Cada puerto tiene un WSDL asociado.
-
-Cada puerto tiene un punto final de servicio asociado (y su implementación). El punto final atiende todas las solicitudes que pasan por la ubicación definida en la dirección del puerto WSDL.
-
-Para comenzar, la implementación del servicio declara sus detalles de implementación en los descriptores de implementación específicos del módulo apropiado. Por ejemplo, una implementación de servicio que utiliza un punto final de servicio JAX-RPC declara sus detalles en WEB-INF/web.xmlarchivo utilizando el elemento de clase de servlet . (Consulte el ejemplo de código 3.21 ).
-
-**Ejemplo de código 3.21. Archivo web.xml para un punto final de servicio JAX-RPC**
+**Ejemplo de código 3.21. Archivo `web.xml` para un JAX-RPC Service Endpoint**
 
 ```xml
+<web-app ...>
+   ...
+   <servlet>
+      <description>Endpoint for Some Web Service</description>
+      <display-name>SomeWebService</display-name>
+      <servlet-name>SomeService</servlet-name>
+      <servlet-class>com.a.b.c.SomeServiceImpl</servlet-class>
+      <load-on-startup>0</load-on-startup>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>SomeService</servlet-name>
+      <url-pattern>/webservice/SomeService</url-pattern>
+   </servlet-mapping>
+   ...
+</web-app>
 ```
 
-Tenga en cuenta que cuando tiene un servicio que funciona puramente como un Web service mediante puntos finales de servicio JAX-RPC, algunas especificaciones en el archivo web.xml , como <error-page> y <welcome-file-list> , no tienen efecto.
+Tenga en cuenta que cuando tiene un servicio que funciona puramente como un Web service mediante JAX-RPC service endpoints, algunas especificaciones en el archivo **`web.xml`** , como **`<error-page>`** y **`<welcome-file-list>`**, no tienen efecto.
 
-Una implementación de servicio que usa un punto final de servicio EJB declara sus detalles de implementación en el archivo META-INF/ejb-jar.xml usando el elemento de sesión . (Consulte el ejemplo de código 3.22 ).
+Una implementación de servicio que usa un EJB service endpoint declara sus detalles de implementación en el archivo **`META-INF/ejb-jar.xml`** usando el elemento **`session`**. (Consulte el ejemplo de código 3.22 ).
 
-**Ejemplo de código 3.22. Archivo ejb-jar.xml para un punto final de servicio EJB**
+**Ejemplo de código 3.22. Archivo `ejb-jar.xml` para un EJB Service Endpoint**
 	
 ```xml
+<ejb-jar ...>
+   <display-name>Some Enterprise Bean</display-name>
+   <enterprise-beans>
+      <session>
+         <ejb-name>SomeBean</ejb-name>
+         <service-endpoint>com.a.b.c.SomeIntf</service-endpoint>
+         <ejb-class>com.a.b.c.SomeServiceEJB</ejb-class>
+         <session-type>Stateless</session-type>
+         <transaction-type>Container</transaction-type>
+      </session>
+   </enterprise-beans>
+   ...
+</ejb-jar>
 ```
 
-A continuación, se especifican los detalles del puerto. El descriptor de implementación del Web service, llamado webservices.xml , define y declara los detalles estructurales para el puerto de un Web service. Este archivo contiene la siguiente información:
+A continuación, se especifican los detalles del puerto. El deployment descriptor del Web service, llamado **`webservices.xml`**, define y declara los detalles estructurales para el puerto de un Web service. Este archivo contiene la siguiente información:
 
-Un nombre lógico para el puerto que también es único entre todos los componentes del puerto ( elemento port-component-name )
+* Un nombre lógico para el puerto que también es único entre todos los componentes del puerto ( elemento **`port-component-name`** )
+* La service endpoint interface para el puerto ( elemento **`service-endpoint-interface`** )
+* El nombre de la clase que implementa la service interface ( elemento **`service-impl-bean`** )
+* El archivo WSDL para el servicio ( elemento **`service-impl-bean`** )
+* Un **`QName`** para el puerto ( elemento **`wsdl-port`**)
+* Una correlación entre las definiciones de WSDL y las interfaces y definiciones de Java reales utilizando el archivo de mapeo ( elemento **`jaxrpc-mapping-file`** )
+* Detalles opcionales sobre cualquier handlers
 
-La interfaz de punto final de servicio para el puerto ( elemento de interfaz de punto final de servicio )
+La referencia al bean de implementación del servicio, especificado mediante el elemento **`service-impl-bean`** en **`webservices.xml`**, es un **`servlet-link`** o un **`ejb-link`** dependiendo de si el endpoint es un JAX-RPC o EJB service endpoint. Este elemento de enlace asocia al Web service port a la implementación del endpoint real definida en el archivo **`web.xml`** o **`ejb-jar.xml`**.
 
-El nombre de la clase que implementa la interfaz de servicio ( elemento service-impl-bean )
+El JAX-RPC mapping file, que se especifica utilizando el elemento **`jaxrpc-mapping-file`** en **`webservices.xml`**, mantiene detalles sobre las relaciones y los mapeos entre las definiciones WSDL y las interfaces y definiciones Java correspondientes. La información contenida en este archivo, junto con la información en el WSDL, se usa para crear apéndices y vínculos para los servicios implementados.
 
-El archivo WSDL para el servicio ( elemento wsdl-file )
+Por lo tanto, el Web services deployment descriptor, **`webservices.xml`**, vincula la información del puerto WSDL a un componente de puerto único y desde allí a las clases de implementación reales y las asignaciones de Java a WSDL. El ejemplo de código 3.23 es un ejemplo del  Web services deployment descriptor para nuestro Web service meteorológico de muestra, que utiliza un JAX-RPC service endpoint.
 
-Un QNombrepara el puerto ( elemento wsdl-port)
-
-Una correlación entre las definiciones de WSDL y las interfaces y definiciones de Java reales utilizando el archivo de mapeo ( elemento jaxrpc-mapping-file )
-
-Detalles opcionales sobre cualquier controlador
-
-La referencia al bean de implementación del servicio, especificado mediante el elemento service-impl-bean en webservices.xml , es un enlace de servlet o un enlace ejb dependiendo de si el punto final es un punto final de servicio JAX-RPC o EJB. Este elemento de enlace asocia el puerto del Web service a la implementación del punto final real definida en el archivo web.xml o ejb-jar.xml .
-
-El archivo de mapeo JAX-RPC, que se especifica utilizando el elemento jaxrpc-mapping-file en webservices.xml , mantiene detalles sobre las relaciones y los mapeos entre las definiciones WSDL y las interfaces y definiciones Java correspondientes. La información contenida en este archivo, junto con la información en el WSDL, se usa para crear apéndices y vínculos para los servicios implementados.
-
-Por lo tanto, el descriptor de implementación de Web services, webservices.xml , vincula la información del puerto WSDL a un componente de puerto único y desde allí a las clases de implementación reales y las asignaciones de Java a WSDL. El ejemplo de código 3.23 es un ejemplo del descriptor de implementación de Web services para nuestro Web service meteorológico de muestra, que utiliza un extremo de servicio JAX-RPC.
-
-**Ejemplo de código 3.23. Descriptor de implementación del Web service meteorológico**
+**Ejemplo de código 3.23. Weather Web Service Deployment Descriptor - Descriptor de Implementación del Web Service Meteorológico**
 	
 ```xml
+<webservices ...>
+   <description>Web Service Descriptor for weather service
+   </description>
+   <webservice-description>
+      <webservice-description-name>
+         WeatherWebService
+      </webservice-description-name>
+      <wsdl-file>
+         WEB-INF/wsdl/WeatherWebService.wsdl
+      </wsdl-file>
+      <jaxrpc-mapping-file>
+         WEB-INF/WeatherWebServiceMapping.xml
+      </jaxrpc-mapping-file>
+      <port-component>
+         <description>port component description</description>
+         <port-component-name>
+            WeatherServicePort
+         </port-component-name>
+         <wsdl-port xmlns:weatherns="urn:WeatherWebService">
+            weatherns:WeatherServicePort
+         </wsdl-port>
+         <service-endpoint-interface>
+            endpoint.WeatherService
+         </service-endpoint-interface>
+         <service-impl-bean>
+            <servlet-link>WeatherService</servlet-link>
+         </service-impl-bean>
+      </port-component>
+   </webservice-description>
+</webservices>
 ```
 
-### 3.8.2. Estructura del paquete
+### 3.8.2. Package Structure - Estructura del paquete
 	
-Una vez que se completan la implementación del servicio y los descriptores de implementación, los siguientes archivos deben empaquetarse en el módulo J2EE apropiado:
+Una vez que se completan la implementación del servicio y los deployment descriptors, los siguientes archivos deben empaquetarse en el módulo J2EE apropiado:
 
-El archivo WSDL
+* El archivo WSDL
+* La service endpoint interface, incluida su implementación y clases dependientes
+* El  JAX-RPC mapping file, que especifica el nombre del package que contiene las runtime classes generadas y define el namespace URI para el servicio. Consulte el ejemplo de código 5.21 en la página 242 .
+* El Web service deployment descriptor
 
-La interfaz de punto final de servicio, incluida su implementación y clases dependientes
+El tipo de endpoint utilizado para la implementación del servicio determina el tipo de módulo J2EE que se utilizará.
 
-El archivo de asignación JAX-RPC, que especifica el nombre del paquete que contiene las clases de tiempo de ejecución generadas y define el URI del espacio de nombres para el servicio. Consulte el ejemplo de código 5.21 en la página 242 .
-
-El descriptor de implementación del Web service
-
-El tipo de punto final utilizado para la implementación del servicio determina el tipo de módulo J2EE que se utilizará.
-
-El módulo J2EE apropiado para un servicio con un punto final de servicio JAX-RPC es un archivo WAR. Un servicio que utiliza un punto final de servicio EJB debe empaquetarse en un archivo EJB-JAR.
+✅ ***El módulo J2EE apropiado para un servicio con un JAX-RPC service endpoint es un WAR file. Un servicio que utiliza un  EJB service endpoint debe empaquetarse en un archivo EJB-JAR.***
 
 La estructura del paquete es la siguiente:
 
-Los archivos WSDL se encuentran en relación con la raíz del módulo.
+* Los archivos WSDL se encuentran en relación con la raíz del módulo.
+* La service interface, las clases de implementación del servicio y las clases dependientes se empaquetan como cualquier otro componente J2EE.
+* El JAX-RPC mapping file se encuentra en relación con la raíz del módulo (normalmente en el mismo lugar que el deployment descriptor del módulo).
+* La ubicación del deployment descriptor del Web service depende del tipo service endpoint, de la siguiente manera:
 
-La interfaz de servicio, las clases de implementación del servicio y las clases dependientes se empaquetan como cualquier otro componente J2EE.
+   * Para un EJB service endpoint, el Web service deployment descriptor se empaqueta en un EJB-JAR en el directorio META-INF como **`META-INF/webservice.xml`**
+   * Para un JAX-RPC service endpoint, el deployment descriptor se empaqueta en un archivo WAR en el directorio WEB-INF como **`WEB-INF/webservices.xml`**.
 
-El archivo de asignación JAX-RPC se encuentra en relación con la raíz del módulo (normalmente en el mismo lugar que el descriptor de implementación del módulo).
+Consulte la Figura 3.10 , que muestra una estructura de paquete típica para un Web service que utiliza un EJB endpoint. La figura 3.11 muestra la estructura típica de un Web service que utiliza un JAX-RPC endpoint.
 
-La ubicación del descriptor de implementación del Web service depende del tipo de extremo del servicio, de la siguiente manera:
+**Figura 3.10. Package Structure for EJB Endpoint - Estructura del Paquete para EJB Endpoint**
 
-Para un punto final de servicio EJB, el descriptor de implementación del Web service se empaqueta en un EJB-JAR en el directorio META-INF como META-INF/webservice.xml
-
-Para un punto final de servicio JAX-RPC, el descriptor de implementación se empaqueta en un archivo WAR en el directorio WEB-INF como WEB-INF/webservices.xml.
-
-Consulte la Figura 3.10 , que muestra una estructura de paquete típica para un Web service que utiliza un punto final EJB. La figura 3.11 muestra la estructura típica de un Web service que utiliza un extremo JAX-RPC.
-
-**Figura 3.10. Estructura del paquete para EJB Endpoint**
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/996e4d0f-d984-4216-a200-2a034172fd8a)
 
 
+**Figura 3.11. Package Structure for JAX-RPC Service Endpoint - Estructura del Paquete para JAX-RPC Service Endpoint**
 
-**Figura 3.11. Estructura del paquete para punto final de servicio JAX-RPC**
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/5d93faf7-ee56-4ade-8313-a72221478242)
 
 
 ## 3.9. Conclusión
 	
-Este capítulo comenzó con una descripción de los fundamentos de los Web services. Describió el flujo subyacente de un Web service típico en la plataforma Java, mostrando cómo los diversos componentes que conforman los clientes y servicios pasan solicitudes y respuestas entre ellos. El capítulo también describió algunos escenarios de ejemplo, que utilizó para ilustrar varios conceptos. Una vez que se establecieron las bases, el capítulo analizó las decisiones de diseño clave que debe tomar un desarrollador de Web services, principalmente el diseño de un servicio como una interacción y una capa de procesamiento. Trazó cómo tomar decisiones de diseño y recomendar buenas opciones de diseño para escenarios específicos.
+Este capítulo comenzó con una descripción de los fundamentos de los Web services. Describió el flujo subyacente de un Web service típico en la plataforma Java, mostrando cómo los diversos componentes que conforman los clientes y servicios pasan requests y responses entre ellos. El capítulo también describió algunos escenarios de ejemplo, que utilizó para ilustrar varios conceptos. Una vez que se establecieron las bases, el capítulo analizó las decisiones de diseño clave que debe tomar un desarrollador de Web services, principalmente el diseño de un servicio como una interacción y una capa de procesamiento. Trazó cómo tomar decisiones de diseño y recomendar buenas opciones de diseño para escenarios específicos.
 
 El siguiente capítulo se centra en el desarrollo de clientes de Web services.
   
