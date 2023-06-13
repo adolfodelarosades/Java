@@ -60,93 +60,37 @@ Al estudiar soluciones típicas orientadas a servicios, podemos identificar tres
 
 El **service container** es el componente SOA middleware donde se aloja el web service para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los frameworks de web services. Una lista de usos comunes de los frameworks de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks; aquí puede encontrar algunos web service middleware populares como **Windows Communication Foundation ( WCF )**, **Apache CXF**, **Apache Axis2**, etc. Usaremos **Apache Axis2** como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. **Apache Axis2** se puede encontrar en http://axis.apache.org/ .
 
-El **service container** contiene la lógica de negocio , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
+El **service container** contiene la **business logic**, que interactúa con el **service consumer** a través de una **service interface**.Esto se muestra en el siguiente diagrama:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e816edc2-e3ae-43fa-b8cd-df8743cb6eb5)
 
 
-Mediación
-Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto. En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes.y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para web services,un intermediario es el componente de middleware SOA correspondiente para la mediación de mensajes. Por lo general, bus de servicio empresarial ( ESB )actúa como intermediario en soluciones orientadas a servicios.
+##### Mediation(Mediación)
 
-Composición
-En las soluciones orientadas a servicios, no podemos esperar que los web services individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples web services trabajan juntos y participan en varias composiciones de servicios. Por lo general, los web services se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el coordinador de procesos , que es el componente de middleware SOA asociado a las composiciones de web services.
+Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto(point-to-point channels). En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para web services, un intermediario es el SOA middleware component correspondiente para la mediación de mensajes. Por lo general, **enterprise service bus (ESB)** actúa como intermediario en soluciones orientadas a servicios.
 
-Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los componentes de middleware SOA correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los web services.Estos son mensajería SOAP, lenguaje de descripción de web services ( WSDL ), patrones de intercambio de mensajes y servicios RESTful.Capítulo 1. Pruebas de web services y soapUI
-Los web services son una de las clavesbloques de construcción de soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales, se espera que los equipos de proyecto estén bien informados y familiarizados con las tecnologías asociadas con los web services y la arquitectura orientada a servicios ( SOA ). El aspecto de prueba de los web services en particular es uno de los temas clave que debe discutirse cuando se trabaja con web services.
+##### Composition(Composición)
 
-Las pruebas de web services se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en marcos de web services como Apache Axis2 se pueden usar para invocar web services mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los web services automáticamente. soapUI es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de web services.
+En las soluciones orientadas a servicios, no podemos esperar que los web services individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples web services trabajan juntos y participan en varias composiciones de servicios. Por lo general, los web services se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el **process coordinator(coordinador de procesos)**, que es el SOA middleware component asociado a las composiciones de web services.
 
-Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de SOA, pruebas de web services y soapUI:
-
-Descripción general de algunas de las características clave de los web services
-El papel de los web services en SOA
-Enfoques de prueba de web services
-Desafíos de prueba de web services
-Introducción a la interfaz de usuario de jabón
-Instalación de la interfaz de usuario de jabón
-SOA y web services
-SOA es un distintivoenfoque para separar preocupaciones y construir soluciones comerciales utilizando componentes reutilizables y poco acoplados. SOA ya no es una característica agradable para la mayoría de las empresas y se usa ampliamente en las organizaciones para lograr muchas ventajas estratégicas. Al adoptar SOA, las organizaciones pueden permitir que sus aplicaciones comerciales respondan de manera rápida y eficiente a los cambios comerciales, de procesos y de integración que generalmente ocurren en cualquier entorno empresarial.
-
-Soluciones orientadas al servicio
-Si un sistema de software se construye siguiendo los principios asociados con SOA, se puede considerar como una solución orientada a servicios. Las organizaciones generalmente tienden a crear soluciones orientadas a servicios para aprovechar la flexibilidad en sus negocios, fusionarse o adquirir nuevos negocios y lograr ventajas competitivas. Para comprender el uso y el propósito de SOA y las soluciones orientadas a servicios, echemos un vistazo a un estudio de caso simplificado.
-
-Caso de estudio
-Smith and Co. es un gran proveedor de pólizas de seguros de automóviles ubicado en América del Norte. La empresa utiliza un sistema de software para realizar todas sus operaciones asociadas con el procesamiento de reclamos de seguros.El sistema consta de varios módulos, incluidos los siguientes:
-
-Inscripción y registro de clientes
-Tramitación de pólizas de seguro
-Procesamiento de reclamos de seguros
-Gestión de clientes
-Contabilidad
-Gestión de proveedores de servicios
-Con el enorme éxito y la satisfacción del cliente de las reclamaciones de seguros procesadas por la compañía durante el pasado reciente, Smith and Co. adquirió InsurePlus Inc., uno de sus proveedores de seguros competidores, hace unos meses.
-
-InsurePlus también ha proporcionado algunas de las pólizas de reclamaciones de automóviles de seguros que son similares a las que Smith and Co. proporciona a sus clientes. Por lo tanto, la dirección de la empresa ha decidido integrar los sistemas de procesamiento de reclamaciones de seguros utilizados por ambas empresas y ofrecer una solución a sus clientes.
-
-Smith and Co. utiliza muchas tecnologías de Microsoft(TM) y todas sus aplicaciones de software, incluido el sistema general de administración de pólizas de seguros, se basan en el marco .NET. Por otro lado, InsurePlus usa mucho J2EE y sus aplicaciones de procesamiento de seguros están todas basadas en tecnologías Java. Para empeorar el problema de la integración, InsurePlus también consta de un componente de aplicación de administración de clientes heredado, que se ejecuta en un sistema AS-400.
-
-Los departamentos de TI de ambas empresas enfrentaron numerosas dificultades cuando intentaron integrar las aplicaciones de software en Smith and Co. e InsurePlus Inc. Tuvieron que escribir muchos módulos adaptadores para que ambas aplicaciones se comunicaran entre sí y realizaran las conversiones de protocolo como necesario.
-
-Para superar estos y futuros problemas de integración, la gerencia de TI de Smith and Co. decidió adoptar SOA en su metodología de desarrollo de aplicaciones comerciales y convertir el sistema de procesamiento de seguros en una solución orientada a servicios.
-
-Como primer paso, se construyeron muchos servicios de envoltura (web services que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como web services. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración.Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en Smith and Co. pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en InsurePlus Inc.
-
-Al implementar una solución orientada al servicio, el sistema de Smith and Co. pudo fusionarse con muchos otros sistemas heredados con una sobrecarga de integración mínima.
-
-Bloques de construcción de SOA
-Al estudiar soluciones típicas orientadas a servicios,Podemos identificar tres bloques de construcción principales de la siguiente manera:
-
-web services
-Mediación
-Composición
-web services
-Los web services son las unidades individuales de lógica de negocio en SOA. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
-
-El contenedor de servicios es el componente de middleware SOA donde se aloja el web service para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los marcos de web services. Una lista de usos comunesLos marcos de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de web services populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
-
-El contenedor de servicios contiene la lógica de negocio , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
-
-
-Mediación
-Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto. En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes.y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para web services,un intermediario es el componente de middleware SOA correspondiente para la mediación de mensajes. Por lo general, bus de servicio empresarial ( ESB )actúa como intermediario en soluciones orientadas a servicios.
-
-Composición
-En las soluciones orientadas a servicios, no podemos esperar que los web services individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples web services trabajan juntos y participan en varias composiciones de servicios. Por lo general, los web services se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el coordinador de procesos , que es el componente de middleware SOA asociado a las composiciones de web services.
-
-Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los componentes de middleware SOA correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los web services.Estos son mensajería SOAP, lenguaje de descripción de web services ( WSDL ), patrones de intercambio de mensajes y servicios RESTful.
+Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los SOA middleware component correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los web services. Estos son mensajería SOAP messaging, **Web Services Description Language (WSDL)**, message exchanging patterns, y RESTful services.
 
 ## Simple Object Access Protocol
-Protocolo simple de acceso a objetos ( SOAP )puede considerarse como el principal estándar de mensajería para su uso con web services. Está definido por el World Wide Web Consortium ( W3C ) en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/ de la siguiente manera:
 
-SOAP es un protocolo ligero para el intercambio de información en un entorno distribuido y descentralizado. Es un protocolo basado en XML que consta de tres partes: un sobre que define un marco para describir el contenido de un mensaje y cómo procesarlo, un conjunto de reglas de codificación para expresar instancias de tipos de datos definidos por la aplicación y una convención para representar llamadas y respuestas a procedimientos remotos.
+**Simple Object Access Protocol ( SOAP )** puede considerarse como el principal estándar de mensajería para su uso con web services. Está definido por el **World Wide Web Consortium (W3C)** en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/ de la siguiente manera:
 
-La especificación SOAP ha sido universalmente aceptada como el protocolo de transporte estándar para mensajes procesados por web services. Hay dos versiones diferentes de la especificación SOAP y ambas se utilizan ampliamente en soluciones orientadas a servicios. Estas dos versiones son SOAP v1.1 y SOAP v1.2.
+   ***SOAP es un protocolo ligero para el intercambio de información en un entorno distribuido y descentralizado. Es un protocolo basado en XML que consta de tres partes: un envelope que define un framework para describir el contenido de un message y cómo procesarlo, un conjunto de reglas de codificación para expresar instancias de tipos de datos definidos por la aplicación y una convención para representar llamadas y respuestas a procedimientos remotos.***
 
-Independientemente de la versión de la especificación SOAP, el formato de mensaje de un mensaje SOAP permanece intacto. Un mensaje SOAP es un documento XML que consta de un sobre SOAP obligatorio, un encabezado SOAP opcional y un cuerpo SOAP obligatorio.
+La especificación SOAP ha sido universalmente aceptada como el protocolo de transporte estándar para mensajes procesados por web services. Hay dos versiones diferentes de la especificación SOAP y ambas se utilizan ampliamente en soluciones orientadas a servicios. Estas dos versiones son **SOAP v1.1** y **SOAP v1.2.**
 
-La estructura de un mensaje SOAPse muestra en el siguiente diagrama:
+Independientemente de la versión de la especificación SOAP, el formato de mensaje de un SOAP message permanece intacto. Un SOAP message es un documento XML que consta de un SOAP envelope obligatorio, un SOAP header opcional y un SOAP body obligatorio.
 
+La estructura de un SOAP message se muestra en el siguiente diagrama:
 
-El sobre SOAP es el elemento contenedor que contiene todos los nodos secundarios dentro de un mensaje SOAP.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/421c339d-cdfa-4b1f-9f06-308cf0e6e258)
 
+El SOAP Envelope es el elemento contenedor que contiene todos los child nodes dentro de un SOAP message.
+AQUIIIIIIIII
 El elemento de encabezado SOAP es un bloque opcional donde se almacena la metainformación. Usando los encabezados, los mensajes SOAP pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los web services, ya que al mantener los encabezados SOAP, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los encabezados SOAP pueden incluir lo siguiente:
 
 Instrucciones de procesamiento de mensajes
