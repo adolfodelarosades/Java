@@ -89,9 +89,9 @@ La estructura de un SOAP message se muestra en el siguiente diagrama:
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/421c339d-cdfa-4b1f-9f06-308cf0e6e258)
 
-El SOAP Envelope es el elemento contenedor que contiene todos los child nodes dentro de un SOAP message.
+***El SOAP Envelope es el elemento contenedor que contiene todos los child nodes dentro de un SOAP message.***
 
-El elemento SOAP Header es un bloque opcional donde se almacena la metainformación. Usando los headers, los SOAP messages pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los web services, ya que al mantener los SOAP headers, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los SOAP headers pueden incluir lo siguiente:
+***El elemento SOAP Header es un bloque opcional donde se almacena la metainformación.*** Usando los headers, los SOAP messages pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los web services, ya que al mantener los SOAP headers, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los SOAP headers pueden incluir lo siguiente:
 
 * Instrucciones de procesamiento de mensajes
 * Metadatos de la política de seguridad
@@ -99,7 +99,7 @@ El elemento SOAP Header es un bloque opcional donde se almacena la metainformaci
 * Datos de correlación de mensajes
 * Metadatos de mensajería fiables
 
-El SOAP body es el elemento donde se alojan los contenidos reales del mensaje. Estos contenidos del body se conocen generalmente como el message payload.
+***El SOAP body es el elemento donde se alojan los contenidos reales del mensaje. Estos contenidos del body se conocen generalmente como el message payload.***
 
 Echemos un vistazo a un SOAP message de muestra y relacionemos los conceptos anteriores a través del siguiente diagrama:
 
@@ -137,43 +137,58 @@ El formato JSON correspondiente del XML payload está representada por:
 
 Puede consultar http://www.json.org para obtener más detalles sobre JSON.
   
-## Web Services Description Language - Lenguaje de Descripción de Web Services
+## Web Services Description Language WSDL - Lenguaje de Descripción de Web Services
   
 Según la especificación WSDL 1.1, WSDL esdefinido como:
 
-WSDL es un formato XML para describir los servicios de red como un conjunto de puntos finales que operan en mensajes que contienen información orientada a documentos oa procedimientos. Las operaciones y los mensajes se describen de forma abstracta y luego se vinculan a un protocolo de red y un formato de mensaje concretos para definir un punto final. Los puntos finales concretos relacionados se combinan en puntos finales abstractos (servicios)
+   ***WSDL es un formato XML para describir los network services como un conjunto de endpoints que operan en mensajes que contienen información orientada a documentos o a procedimientos. Las operaciones y los mensajes se describen de forma abstracta y luego se vinculan a un protocolo de red y un formato de mensaje concretos para definir un endpoint. Los endpoints concretos relacionados se combinan en endpoints abstractos (servicios).***
 
 En términos simples, WSDL proporciona una definición formal del web service a través de definiciones abstractas y concretas de la interfaz. El siguiente diagrama muestra la estructura principal de un documento WSDL:
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/82d31b91-9511-4273-9b18-cd209b1e3048)
 
-WSDL es un documento XML con un <definitions>elemento en la raíz y los elementos secundarios, <types>, <message>, <portType>y <binding>. Estos se pueden explicar de la siguiente manera:
+WSDL es un documento XML con un elemento **`<definitions>`** en la root y los child elements, **`<types>`**, **`<message>`**, **`<portType>`** y **`<binding>`**. Estos se pueden explicar de la siguiente manera:
 
-el <types>elementose utiliza para definir los tipos de datos utilizados por el web service, generalmente a través de un esquema XML. El esquema se puede definir en línea como un elemento secundario <types>o se puede importar desde una URL externa.
-el <message>elementodefine una representación abstracta de todos los mensajes utilizados por el web service. Un mensaje consta de partes lógicas, cada una de las cuales está asociada con una definición dentro de algún tipo en el esquema XML del web service. La siguiente imagen es un ejemplo de un mensaje:
+* El elemento **`<types>`** se utiliza para definir los tipos de datos utilizados por el web service, generalmente a través de un XML schema. El schema se puede definir en línea como un child element **`<types>`** o se puede importar desde una URL externa.
 
-El <portType>elemento es una representación abstracta de las operaciones y los patrones de intercambio de mensajes utilizados en el web service. Las operaciones representan una acción específica.realizado por un web service y que puede estar relacionado con los métodos públicos utilizados por un programa. Las operaciones tienen parámetros de entrada y salida y estos se representan como mensajes. Por lo tanto, una operación consta de conjuntos de mensajes de entrada y salida. Esto es evidente en la siguiente imagen:
+* El elemento **`<message>`** define una representación abstracta de todos los mensajes utilizados por el web service. Un mensaje consta de partes lógicas, cada una de las cuales está asociada con una definición dentro de algún tipo en el XML schema del web service. La siguiente imagen es un ejemplo de un message:
 
-En el ejemplo anterior, el SampleServicePortTypeelemento incluye un solo elemento secundario, <wsdl:operation name="echoString">que a su vez incluye dos elementos secundarios para definir los mensajes de entrada y salida procesados ​​por la echoStringoperación.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ce7255a5-458d-47ed-86ef-46b607b2fd80)
 
-el <binding>elementoconecta la interfaz de web service abstracta definida por <portType>los <message>elementos y en un protocolo de transporte físico. Un enlace representa una tecnología de transporte particular que el servicio utiliza para comunicarse. Por ejemplo, SOAP v1.1 es uno de esos enlaces de uso común.
-Hablaremos sobre el WSDL en detalle en el Capítulo 2 , El proyecto de muestra , usando el que se usa en el proyecto de muestra.
+
+* El elemento **`<portType>`** es una representación abstracta de las operaciones y los patrones de intercambio de mensajes utilizados en el web service. Las operaciones representan una acción específica realizada por un web service y que puede estar relacionado con los métodos públicos utilizados por un programa. Las operaciones tienen parámetros de entrada y salida y estos se representan como messages. Por lo tanto, una operación consta de conjuntos de mensajes de entrada y salida. Esto es evidente en la siguiente imagen:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e65955ab-78d0-4ba7-82dd-ee6c513bf315)
+
+En el ejemplo anterior, el elemento **`SampleServicePortType`** incluye un single child element, **`<wsdl:operation name="echoString">`**, que a su vez incluye dos child elements para definir los mensajes de entrada y salida procesados por la operación **`echoString`**.
+
+* El elemento **`<binding>`** conecta la web service interface abstracta definida por los elementos **`<portType>`** y **`<message>`** en un protocolo de transporte físico. Un binding (enlace) representa una tecnología de transporte particular que el servicio utiliza para comunicarse. Por ejemplo, **SOAP v1.1** es uno de esos enlaces de uso común.
+
+Hablaremos sobre el WSDL en detalle en el Capítulo 2, *El Sample Project*, usando el que se usa en el proyecto de muestra.
   
-## Patrones de intercambio de mensajes
-Como ya hemos comentado, los web services se comunican entre sí y con los demás programas mediante el envío de mensajes. Si consideramos dos nodos de procesamiento SOAP, el patrón de comunicación entre las dos entidades se puede definir como un patrón de intercambio de mensajes ( MEP ).Los principales patrones de intercambio de mensajes son:
+## Message exchanging patterns - Patrones de Intercambio de Mensajes
 
-Solicitar respuesta
-Dispara y olvida
-En un patrón de solicitud-respuesta, cuando una entidad de origen (solicitante de servicio) transmite un mensaje a un destino (proveedor de servicio), el proveedor debe responder al solicitante. Este es el patrón de intercambio de mensajes más utilizado y lo usaremos en la mayoría de los ejemplos de este libro.
+Como ya hemos comentado, los web services se comunican entre sí y con los demás programas mediante el envío de mensajes. Si consideramos dos SOAP processing nodes, el patrón de comunicación entre las dos entidades se puede definir como un **message exchanging pattern (MEP)**. Los principales patrones de intercambio de mensajes son:
 
-En el siguiente diagrama, un solicitante de servicios envía un mensaje de solicitud SOAP a un proveedor de servicios:
+* Request-response
+* Fire and forget
 
-Patrones de intercambio de mensajes
-Al recibir el mensaje de solicitud SOAP, el proveedor de servicios responde con una respuesta SOAP como se muestra en el siguiente diagrama:
+En un patrón Request-response, cuando una entidad de origen (service requester - solicitante de servicio) transmite un mensaje a un destino (service provider - proveedor de servicio), el proveedor debe responder al solicitante. Este es el patrón de intercambio de mensajes más utilizado y lo usaremos en la mayoría de los ejemplos de este libro.
 
-Patrones de intercambio de mensajes
-Cuando no se espera una respuesta a un mensaje de solicitud de un web service (o proveedor de servicios), se conoce como un patrón de intercambio de mensajes de disparar y olvidar. Por ejemplo, si enviamos una solicitud de ping a un web service, no esperamos un mensaje de respuesta.
+En el siguiente diagrama, un service requester envía un SOAP request message a un service provider:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7bd13a59-001c-4110-84ea-959a98b2d4d4)
+
+
+Al recibir el SOAP request message, el service provider responds con una SOAP response como se muestra en el siguiente diagrama:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ecf01816-cfcf-44cf-875f-3426bc89bfa9)
+
+Cuando no se espera una response a un request message de un web service (o service provider - proveedor de servicios), se conoce como un patrón de intercambio fire and forget message. Por ejemplo, si enviamos una request de ping a un web service, no esperamos un response message.
   
+AQUIIIIIIIII
 ## Errores de SOAP
+
 Antes de concluir nuestra discusión sobre los web services y los conceptos asociados, debemos analizar el mecanismo de manejo de fallas de los web services. Los web services pueden devolver fallas debido a varias razones. Por ejemplo, si el mensaje de solicitud no se ajusta al esquema XML del web service, el servicio responde con un error de SOAP. El elemento de error de SOAP se utiliza para transportardichas fallas ocurrieron durante la comunicación del web service. Este elemento debe incluirse dentro del cuerpo de un mensaje SOAP. Un mensaje de error típico de SOAP 1.1 consta de los siguientes elementos secundarios:
 
 faultcode: El faultcodeelemento se utiliza para definir el tipo de fallo. Por ejemplo, si el problemade la transmisión del mensaje se debe al servidor, el código de falla asociado es Server. Del mismo modo, podemos usar VersionMismatchy códigos de error según corresponda MustUnderstand.Client
