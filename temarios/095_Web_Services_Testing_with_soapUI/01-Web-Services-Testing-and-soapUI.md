@@ -1,17 +1,18 @@
-# Capítulo 1. Pruebas de servicios web y soapUI
-Los servicios web son una de las clavesbloques de construcción de soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales, se espera que los equipos de proyecto estén bien informados y familiarizados con las tecnologías asociadas con los servicios web y la arquitectura orientada a servicios ( SOA ). El aspecto de prueba de los servicios web en particular es uno de los temas clave que debe discutirse cuando se trabaja con servicios web.
+# Capítulo 1. Pruebas de web services y soapUI
 
-Las pruebas de servicios web se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en marcos de servicios web como Apache Axis2 se pueden usar para invocar servicios web mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los servicios web automáticamente. soapUI es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de servicios web.
+Los web services son una de las clavesbloques de construcción de soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales, se espera que los equipos de proyecto estén bien informados y familiarizados con las tecnologías asociadas con los web services y la arquitectura orientada a servicios ( SOA ). El aspecto de prueba de los web services en particular es uno de los temas clave que debe discutirse cuando se trabaja con web services.
 
-Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de SOA, pruebas de servicios web y soapUI:
+Las pruebas de web services se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en marcos de web services como Apache Axis2 se pueden usar para invocar web services mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los web services automáticamente. soapUI es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de web services.
 
-Descripción general de algunas de las características clave de los servicios web
-El papel de los servicios web en SOA
-Enfoques de prueba de servicios web
-Desafíos de prueba de servicios web
+Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de SOA, pruebas de web services y soapUI:
+
+Descripción general de algunas de las características clave de los web services
+El papel de los web services en SOA
+Enfoques de prueba de web services
+Desafíos de prueba de web services
 Introducción a la interfaz de usuario de jabón
 Instalación de la interfaz de usuario de jabón
-SOA y servicios web
+SOA y web services
 SOA es un distintivoenfoque para separar preocupaciones y construir soluciones comerciales utilizando componentes reutilizables y poco acoplados. SOA ya no es una característica agradable para la mayoría de las empresas y se usa ampliamente en las organizaciones para lograr muchas ventajas estratégicas. Al adoptar SOA, las organizaciones pueden permitir que sus aplicaciones comerciales respondan de manera rápida y eficiente a los cambios comerciales, de procesos y de integración que generalmente ocurren en cualquier entorno empresarial.
 
 Soluciones orientadas al servicio
@@ -36,44 +37,44 @@ Los departamentos de TI de ambas empresas enfrentaron numerosas dificultades cua
 
 Para superar estos y futuros problemas de integración, la gerencia de TI de Smith and Co. decidió adoptar SOA en su metodología de desarrollo de aplicaciones comerciales y convertir el sistema de procesamiento de seguros en una solución orientada a servicios.
 
-Como primer paso, se construyeron muchos servicios de envoltura (servicios web que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como servicios web. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración.Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en Smith and Co. pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en InsurePlus Inc.
+Como primer paso, se construyeron muchos servicios de envoltura (web services que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como web services. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración.Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en Smith and Co. pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en InsurePlus Inc.
 
 Al implementar una solución orientada al servicio, el sistema de Smith and Co. pudo fusionarse con muchos otros sistemas heredados con una sobrecarga de integración mínima.
 
 Bloques de construcción de SOA
 Al estudiar soluciones típicas orientadas a servicios,Podemos identificar tres bloques de construcción principales de la siguiente manera:
 
-servicios web
+web services
 Mediación
 Composición
-servicios web
-Los servicios web son las unidades individuales de lógica empresarial en SOA. Los servicios web se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los servicios web consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
+web services
+Los web services son las unidades individuales de lógica empresarial en SOA. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
 
-El contenedor de servicios es el componente de middleware SOA donde se aloja el servicio web para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar servicios web y también representa la función del procesador del lado del servidor en los marcos de servicios web. Una lista de usos comunesLos marcos de servicios web se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de servicios web populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
+El contenedor de servicios es el componente de middleware SOA donde se aloja el servicio web para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los marcos de web services. Una lista de usos comunesLos marcos de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de web services populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
 
 El contenedor de servicios contiene la lógica empresarial , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
 
 
 Mediación
-Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto. En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes.y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para servicios web,un intermediario es el componente de middleware SOA correspondiente para la mediación de mensajes. Por lo general, bus de servicio empresarial ( ESB )actúa como intermediario en soluciones orientadas a servicios.
+Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto. En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes.y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para web services,un intermediario es el componente de middleware SOA correspondiente para la mediación de mensajes. Por lo general, bus de servicio empresarial ( ESB )actúa como intermediario en soluciones orientadas a servicios.
 
 Composición
-En las soluciones orientadas a servicios, no podemos esperar que los servicios web individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples servicios web trabajan juntos y participan en varias composiciones de servicios. Por lo general, los servicios web se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el coordinador de procesos , que es el componente de middleware SOA asociado a las composiciones de servicios web.
+En las soluciones orientadas a servicios, no podemos esperar que los web services individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples web services trabajan juntos y participan en varias composiciones de servicios. Por lo general, los web services se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el coordinador de procesos , que es el componente de middleware SOA asociado a las composiciones de web services.
 
-Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los componentes de middleware SOA correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los servicios web.Estos son mensajería SOAP, lenguaje de descripción de servicios web ( WSDL ), patrones de intercambio de mensajes y servicios RESTful.Capítulo 1. Pruebas de servicios web y soapUI
-Los servicios web son una de las clavesbloques de construcción de soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales, se espera que los equipos de proyecto estén bien informados y familiarizados con las tecnologías asociadas con los servicios web y la arquitectura orientada a servicios ( SOA ). El aspecto de prueba de los servicios web en particular es uno de los temas clave que debe discutirse cuando se trabaja con servicios web.
+Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los componentes de middleware SOA correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los web services.Estos son mensajería SOAP, lenguaje de descripción de web services ( WSDL ), patrones de intercambio de mensajes y servicios RESTful.Capítulo 1. Pruebas de web services y soapUI
+Los web services son una de las clavesbloques de construcción de soluciones orientadas a servicios. Debido a su uso e importancia en las aplicaciones empresariales, se espera que los equipos de proyecto estén bien informados y familiarizados con las tecnologías asociadas con los web services y la arquitectura orientada a servicios ( SOA ). El aspecto de prueba de los web services en particular es uno de los temas clave que debe discutirse cuando se trabaja con web services.
 
-Las pruebas de servicios web se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en marcos de servicios web como Apache Axis2 se pueden usar para invocar servicios web mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los servicios web automáticamente. soapUI es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de servicios web.
+Las pruebas de web services se pueden realizar utilizando muchos enfoques. Las API de cliente incluidas en marcos de web services como Apache Axis2 se pueden usar para invocar web services mediante programación. Además de eso, hay varias herramientas de propiedad y de código abierto disponibles para probar los web services automáticamente. soapUI es una de esas herramientas de prueba gratuitas y de código abierto que admite evaluaciones funcionales y no funcionales de web services.
 
-Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de SOA, pruebas de servicios web y soapUI:
+Discutiremos los siguientes temas en este capítulo que le proporcionarán una introducción a los conceptos básicos de SOA, pruebas de web services y soapUI:
 
-Descripción general de algunas de las características clave de los servicios web
-El papel de los servicios web en SOA
-Enfoques de prueba de servicios web
-Desafíos de prueba de servicios web
+Descripción general de algunas de las características clave de los web services
+El papel de los web services en SOA
+Enfoques de prueba de web services
+Desafíos de prueba de web services
 Introducción a la interfaz de usuario de jabón
 Instalación de la interfaz de usuario de jabón
-SOA y servicios web
+SOA y web services
 SOA es un distintivoenfoque para separar preocupaciones y construir soluciones comerciales utilizando componentes reutilizables y poco acoplados. SOA ya no es una característica agradable para la mayoría de las empresas y se usa ampliamente en las organizaciones para lograr muchas ventajas estratégicas. Al adoptar SOA, las organizaciones pueden permitir que sus aplicaciones comerciales respondan de manera rápida y eficiente a los cambios comerciales, de procesos y de integración que generalmente ocurren en cualquier entorno empresarial.
 
 Soluciones orientadas al servicio
@@ -98,38 +99,38 @@ Los departamentos de TI de ambas empresas enfrentaron numerosas dificultades cua
 
 Para superar estos y futuros problemas de integración, la gerencia de TI de Smith and Co. decidió adoptar SOA en su metodología de desarrollo de aplicaciones comerciales y convertir el sistema de procesamiento de seguros en una solución orientada a servicios.
 
-Como primer paso, se construyeron muchos servicios de envoltura (servicios web que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como servicios web. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración.Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en Smith and Co. pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en InsurePlus Inc.
+Como primer paso, se construyeron muchos servicios de envoltura (web services que encapsulan la lógica de diferentes módulos de procesamiento de seguros), exponiéndolos como web services. Por lo tanto, los módulos individuales pudieron comunicarse entre sí con preocupaciones mínimas de integración.Al adoptar SOA, sus aplicaciones usaban un lenguaje común, XML, en la transmisión de mensajes y, por lo tanto, sistemas heterogéneos como el sistema de manejo de pólizas de seguro basado en .NET en Smith and Co. pudo comunicarse con las aplicaciones basadas en Java que se ejecutan en InsurePlus Inc.
 
 Al implementar una solución orientada al servicio, el sistema de Smith and Co. pudo fusionarse con muchos otros sistemas heredados con una sobrecarga de integración mínima.
 
 Bloques de construcción de SOA
 Al estudiar soluciones típicas orientadas a servicios,Podemos identificar tres bloques de construcción principales de la siguiente manera:
 
-servicios web
+web services
 Mediación
 Composición
-servicios web
-Los servicios web son las unidades individuales de lógica empresarial en SOA. Los servicios web se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los servicios web consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
+web services
+Los web services son las unidades individuales de lógica empresarial en SOA. Los web services se comunican entre sí y con otros programas o aplicaciones mediante el envío de mensajes. Los web services consisten en una interfaz pública definición que es una pieza central de información que asigna una identidad al servicio y permite su invocación.
 
-El contenedor de servicios es el componente de middleware SOA donde se aloja el servicio web para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar servicios web y también representa la función del procesador del lado del servidor en los marcos de servicios web. Una lista de usos comunesLos marcos de servicios web se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de servicios web populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
+El contenedor de servicios es el componente de middleware SOA donde se aloja el servicio web para que las aplicaciones que lo consumen interactúen con él. Permite a los desarrolladores crear, implementar y administrar web services y también representa la función del procesador del lado del servidor en los marcos de web services. Una lista de usos comunesLos marcos de web services se pueden encontrar en http://en.wikipedia.org/wiki/List_of_web_service_frameworks ; aquí puede encontrar algunos middleware de web services populares como Windows Communication Foundation ( WCF ), Apache CXF, Apache Axis2, etc. Usaremos Apache Axis2 como contenedor de servicios para proyectos de muestra dentro del contexto de este libro. Apache Axis2 se puede encontrar en http://axis.apache.org/ .
 
 El contenedor de servicios contiene la lógica empresarial , que interactúa con el consumidor del servicio a través de una interfaz de servicio .Esto se muestra en el siguiente diagrama:
 
 
 Mediación
-Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto. En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes.y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para servicios web,un intermediario es el componente de middleware SOA correspondiente para la mediación de mensajes. Por lo general, bus de servicio empresarial ( ESB )actúa como intermediario en soluciones orientadas a servicios.
+Por lo general, la transmisión de mensajes entre nodos en una solución orientada a servicios no solo ocurre a través de los típicos canales punto a punto. En cambio, una vez que se recibe un mensaje, puede fluir a través de múltiples intermediarios y someterse a diversas transformaciones y conversiones según sea necesario. Este comportamiento se conoce comúnmente como mediación de mensajes.y es otro bloque de construcción importante en soluciones orientadas a servicios. Similar a cómo se utiliza el contenedor de servicios como plataforma de alojamiento para web services,un intermediario es el componente de middleware SOA correspondiente para la mediación de mensajes. Por lo general, bus de servicio empresarial ( ESB )actúa como intermediario en soluciones orientadas a servicios.
 
 Composición
-En las soluciones orientadas a servicios, no podemos esperar que los servicios web individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples servicios web trabajan juntos y participan en varias composiciones de servicios. Por lo general, los servicios web se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el coordinador de procesos , que es el componente de middleware SOA asociado a las composiciones de servicios web.
+En las soluciones orientadas a servicios, no podemos esperar que los web services individuales se ejecuten solos para proporcionar la funcionalidad empresarial deseada. En cambio, múltiples web services trabajan juntos y participan en varias composiciones de servicios. Por lo general, los web services se reúnen dinámicamente en el tiempo de ejecución según las reglas especificadas en las definiciones de procesos comerciales. La gestión o coordinación de estos procesos de negocio se rigen por el coordinador de procesos , que es el componente de middleware SOA asociado a las composiciones de web services.
 
-Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los componentes de middleware SOA correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los servicios web.Estos son mensajería SOAP, lenguaje de descripción de servicios web ( WSDL ), patrones de intercambio de mensajes y servicios RESTful.
+Examinamos los componentes básicos principales de las soluciones orientadas a servicios y los componentes de middleware SOA correspondientes. A continuación, vamos a discutir algunos de los elementos distinguidos asociados específicamente con los web services.Estos son mensajería SOAP, lenguaje de descripción de web services ( WSDL ), patrones de intercambio de mensajes y servicios RESTful.
 
 ## Simple Object Access Protocol
-Protocolo simple de acceso a objetos ( SOAP )puede considerarse como el principal estándar de mensajería para su uso con servicios web. Está definido por el World Wide Web Consortium ( W3C ) en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/ de la siguiente manera:
+Protocolo simple de acceso a objetos ( SOAP )puede considerarse como el principal estándar de mensajería para su uso con web services. Está definido por el World Wide Web Consortium ( W3C ) en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/ de la siguiente manera:
 
 SOAP es un protocolo ligero para el intercambio de información en un entorno distribuido y descentralizado. Es un protocolo basado en XML que consta de tres partes: un sobre que define un marco para describir el contenido de un mensaje y cómo procesarlo, un conjunto de reglas de codificación para expresar instancias de tipos de datos definidos por la aplicación y una convención para representar llamadas y respuestas a procedimientos remotos.
 
-La especificación SOAP ha sido universalmente aceptada como el protocolo de transporte estándar para mensajes procesados ​​por servicios web. Hay dos versiones diferentes de la especificación SOAP y ambas se utilizan ampliamente en soluciones orientadas a servicios. Estas dos versiones son SOAP v1.1 y SOAP v1.2.
+La especificación SOAP ha sido universalmente aceptada como el protocolo de transporte estándar para mensajes procesados por web services. Hay dos versiones diferentes de la especificación SOAP y ambas se utilizan ampliamente en soluciones orientadas a servicios. Estas dos versiones son SOAP v1.1 y SOAP v1.2.
 
 Independientemente de la versión de la especificación SOAP, el formato de mensaje de un mensaje SOAP permanece intacto. Un mensaje SOAP es un documento XML que consta de un sobre SOAP obligatorio, un encabezado SOAP opcional y un cuerpo SOAP obligatorio.
 
@@ -138,7 +139,7 @@ La estructura de un mensaje SOAPse muestra en el siguiente diagrama:
 
 El sobre SOAP es el elemento contenedor que contiene todos los nodos secundarios dentro de un mensaje SOAP.
 
-El elemento de encabezado SOAP es un bloque opcional donde se almacena la metainformación. Usando los encabezados, los mensajes SOAP pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los servicios web, ya que al mantener los encabezados SOAP, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los encabezados SOAP pueden incluir lo siguiente:
+El elemento de encabezado SOAP es un bloque opcional donde se almacena la metainformación. Usando los encabezados, los mensajes SOAP pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los web services, ya que al mantener los encabezados SOAP, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los encabezados SOAP pueden incluir lo siguiente:
 
 Instrucciones de procesamiento de mensajes
 Metadatos de la política de seguridad
@@ -187,7 +188,8 @@ The corresponding JSON format of the preceding XML payload is represented by:
 Java Script Object Notation
 You may refer to http://www.json.org for more details about JSON.
   
-## Lenguaje de descripción de servicios web
+## Lenguaje de descripción de web services
+  
 Según la especificación WSDL 1.1, WSDL esdefinido como:
 
 WSDL es un formato XML para describir los servicios de red como un conjunto de puntos finales que operan en mensajes que contienen información orientada a documentos oa procedimientos. Las operaciones y los mensajes se describen de forma abstracta y luego se vinculan a un protocolo de red y un formato de mensaje concretos para definir un punto final. Los puntos finales concretos relacionados se combinan en puntos finales abstractos (servicios)
@@ -208,7 +210,7 @@ el <binding>elementoconecta la interfaz de servicio web abstracta definida por <
 Hablaremos sobre el WSDL en detalle en el Capítulo 2 , El proyecto de muestra , usando el que se usa en el proyecto de muestra.
   
 ## Patrones de intercambio de mensajes
-Como ya hemos comentado, los servicios web se comunican entre sí y con los demás programas mediante el envío de mensajes. Si consideramos dos nodos de procesamiento SOAP, el patrón de comunicación entre las dos entidades se puede definir como un patrón de intercambio de mensajes ( MEP ).Los principales patrones de intercambio de mensajes son:
+Como ya hemos comentado, los web services se comunican entre sí y con los demás programas mediante el envío de mensajes. Si consideramos dos nodos de procesamiento SOAP, el patrón de comunicación entre las dos entidades se puede definir como un patrón de intercambio de mensajes ( MEP ).Los principales patrones de intercambio de mensajes son:
 
 Solicitar respuesta
 Dispara y olvida
@@ -223,7 +225,7 @@ Patrones de intercambio de mensajes
 Cuando no se espera una respuesta a un mensaje de solicitud de un servicio web (o proveedor de servicios), se conoce como un patrón de intercambio de mensajes de disparar y olvidar. Por ejemplo, si enviamos una solicitud de ping a un servicio web, no esperamos un mensaje de respuesta.
   
 ## Errores de SOAP
-Antes de concluir nuestra discusión sobre los servicios web y los conceptos asociados, debemos analizar el mecanismo de manejo de fallas de los servicios web. Los servicios web pueden devolver fallas debido a varias razones. Por ejemplo, si el mensaje de solicitud no se ajusta al esquema XML del servicio web, el servicio responde con un error de SOAP. El elemento de error de SOAP se utiliza para transportardichas fallas ocurrieron durante la comunicación del servicio web. Este elemento debe incluirse dentro del cuerpo de un mensaje SOAP. Un mensaje de error típico de SOAP 1.1 consta de los siguientes elementos secundarios:
+Antes de concluir nuestra discusión sobre los web services y los conceptos asociados, debemos analizar el mecanismo de manejo de fallas de los web services. Los web services pueden devolver fallas debido a varias razones. Por ejemplo, si el mensaje de solicitud no se ajusta al esquema XML del servicio web, el servicio responde con un error de SOAP. El elemento de error de SOAP se utiliza para transportardichas fallas ocurrieron durante la comunicación del servicio web. Este elemento debe incluirse dentro del cuerpo de un mensaje SOAP. Un mensaje de error típico de SOAP 1.1 consta de los siguientes elementos secundarios:
 
 faultcode: El faultcodeelemento se utiliza para definir el tipo de fallo. Por ejemplo, si el problemade la transmisión del mensaje se debe al servidor, el código de falla asociado es Server. Del mismo modo, podemos usar VersionMismatchy códigos de error según corresponda MustUnderstand.Client
 faultstring: El faultstringelementotiene la intención de proporcionar una explicación legible por humanos sobre la falla.
@@ -231,59 +233,66 @@ faultactor: ElfaultactorEl elemento proporciona una indicación sobre la parte r
 detail: EldetailEl elemento se utiliza para transportar información de error específica de la aplicación relacionada con el elemento del cuerpo. Por ejemplo, si el servicio web no puede procesar la carga útil de la solicitud SOAP, la respuesta asociada debe incluir el elemento de detalle dentro de la falla SOAP.
 En el caso de la mensajería SOAP v1.2, faultcodese cambia el nombre a Codey faultstringse cambia el nombre a Reason. Además de eso, un mensaje de error de SOAP v1.2 puede incluir los elementos secundarios opcionales Node, Role,y Detail.Puede encontrar una explicación detallada de las fallas de SOAP 1.1 en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507 . Las fallas de SOAP 1.2 se explican en detalle en http://www.w3.org/TR/soap12-part1/#soapfault .
   
-## Enfoques de prueba de servicios web
-Discutimos un conjunto de conceptos más asociados con los servicios web. Ahora es el momento de analizar los aspectos de prueba de los servicios web. Como notamos, los servicios web son componentes autónomos y poco acoplados que son unidades individuales de lógica empresarial en SOA. Esto facilita un enfoque distinguido para probar servicios web. Debido a la naturaleza débilmente acoplada, los servicios no mantienen estrechas dependencias entre servicios entre sí. Por lo tanto, una vez que se implementa un servicio web en particular, se puede probar independientemente de los demás.
+## Enfoques de prueba de web services
+  
+Discutimos un conjunto de conceptos más asociados con los web services. Ahora es el momento de analizar los aspectos de prueba de los web services. Como notamos, los web services son componentes autónomos y poco acoplados que son unidades individuales de lógica empresarial en SOA. Esto facilita un enfoque distinguido para probar web services. Debido a la naturaleza débilmente acoplada, los servicios no mantienen estrechas dependencias entre servicios entre sí. Por lo tanto, una vez que se implementa un servicio web en particular, se puede probar independientemente de los demás.
 
 Esto brinda a los probadores la capacidad de seguir una metodología de prueba a nivel de componente. Antes de pasar a varias integraciones, se puede probar un servicio web para verificar los requisitos funcionales y no funcionales. Una vez que el servicio se mejora con diferentes atributos, como políticas de seguridad, dicho servicio también se puede probar individualmente para garantizar que funcione correctamente antes de tener en cuenta los escenarios de integración. Esto brinda una gran flexibilidad para los evaluadores y brinda agilidad a los procesos de prueba.
 
-Podemos identificar un conjunto de enfoques comunes paraprobando los servicios web de la siguiente manera:
+Podemos identificar un conjunto de enfoques comunes paraprobando los web services de la siguiente manera:
 
 Examen de la unidad
-Pruebas funcionales de servicios web.
-Pruebas de integración de servicios web
+Pruebas funcionales de web services.
+Pruebas de integración de web services
 Pruebas de rendimiento
 Analicemos cada uno de estos enfoques en detalle.
 
-Pruebas unitarias de servicios web
-Un servicio web es una unidad de lógica empresarial y consta de una o más operaciones. Estas operaciones deben probarse individualmente para asegurarse de que el servicio web aborde los problemas comerciales previstos. operaciones. Por lo tanto, al igual que los métodos individuales en un programa de computadora se prueban como unidades, las operaciones del servicio web también deben probarse como unidades. Las pruebas unitarias se pueden desarrollar utilizando el marco de pruebas unitarias asociado con el lenguaje de programación que se utiliza para implementar los servicios web. Por ejemplo, si los servicios web están escritos en Java, el marco JUnit se puede usar como marco de pruebas unitarias. Generalmente, es responsabilidad del autor del servicio web escribir una cantidad suficiente de pruebas unitarias para cubrir la lógica de las operaciones del servicio web.
+Pruebas unitarias de web services
+Un servicio web es una unidad de lógica empresarial y consta de una o más operaciones. Estas operaciones deben probarse individualmente para asegurarse de que el servicio web aborde los problemas comerciales previstos. operaciones. Por lo tanto, al igual que los métodos individuales en un programa de computadora se prueban como unidades, las operaciones del servicio web también deben probarse como unidades. Las pruebas unitarias se pueden desarrollar utilizando el marco de pruebas unitarias asociado con el lenguaje de programación que se utiliza para implementar los web services. Por ejemplo, si los web services están escritos en Java, el marco JUnit se puede usar como marco de pruebas unitarias. Generalmente, es responsabilidad del autor del servicio web escribir una cantidad suficiente de pruebas unitarias para cubrir la lógica de las operaciones del servicio web.
 
 Pruebas funcionales
 Una vez que un servicio web se implementa en un contenedor de servicios, se somete a una verificación funcional integral. El propósito de La prueba funcional de un servicio web es para garantizar que el servicio web proporciona la funcionalidad comercial esperada. Hay muchos enfoques para realizar pruebas funcionales como se explica a continuación.
 
 Pruebas asistidas por herramientas
-El objetivo principal de usar herramientas para la prueba de servicios web es admitir la generación y el envío automáticos de solicitudes de servicios web. Como la interfaz del servicio web es un documento XML legible por máquina, No es una tarea fácil leer el WSDL y derivar pruebas manualmente. Por lo tanto, se pueden utilizar herramientas para apuntar al WSDL y generar automáticamente las solicitudes correspondientes, para que los probadores puedan enviarlas al servicio con o sin alteraciones. soapUI es un buen ejemplo de una herramienta de prueba de este tipo, que se puede utilizar en las pruebas funcionales de los servicios web.
+El objetivo principal de usar herramientas para la prueba de web services es admitir la generación y el envío automáticos de solicitudes de web services. Como la interfaz del servicio web es un documento XML legible por máquina, No es una tarea fácil leer el WSDL y derivar pruebas manualmente. Por lo tanto, se pueden utilizar herramientas para apuntar al WSDL y generar automáticamente las solicitudes correspondientes, para que los probadores puedan enviarlas al servicio con o sin alteraciones. soapUI es un buen ejemplo de una herramienta de prueba de este tipo, que se puede utilizar en las pruebas funcionales de los web services.
 
 Uso de las API de cliente proporcionadas por el middleware del contenedor de servicios
-La vida de un servicio web viene dada por el middleware del contenedor de servicios donde se aloja el servicio. Por lo general, los proveedores de middleware envían las bibliotecas de API de cliente asociadas que se pueden usar para invocar servicios web mediante programación sin usar ninguna herramienta de terceros.
+La vida de un servicio web viene dada por el middleware del contenedor de servicios donde se aloja el servicio. Por lo general, los proveedores de middleware envían las bibliotecas de API de cliente asociadas que se pueden usar para invocar web services mediante programación sin usar ninguna herramienta de terceros.
 
-Pruebas de integración de servicios web
-Los servicios web esencialmente no se ejecutan solos. En cambio, están integrados con múltiples componentes, como corredores o servicios.coordinadores Una vez que un servicio se integra o se une a otro componente, debemos realizar pruebas para asegurarnos de que dichas integraciones no rompan el sistema. Por ejemplo, en una solución orientada a servicios, si una aplicación de consumidor de servicios envía un mensaje a un servicio web pero el mensaje no se ajusta al esquema anunciado del servicio web. En este caso, el servicio web suele responder con un fallo de SOAP. Sin embargo, si queremos tomar dicha solicitud y transformar el mensaje SOAP de solicitud para que sea válido de acuerdo con el esquema, entonces no queremos pedir a los consumidores de nuestro servicio web que cambien las aplicaciones cliente a medida que se modifica el esquema del servicio. . Este tipo de transformación de mensajes se logra mediante el uso de un componente de intermediario, en otras palabras, bus de servicio empresarial ( ESB) software intermedio. Según las reglas de transformación definidas en el bus de servicios empresariales, la solicitud se convierte al formato correcto y se reenvía al servicio web. Este es un tipicoejemplo de integración de servicios web. Para probar este tipo de integración, el mensaje de solicitud debe reenviarse al componente ESB en lugar de enviarlo directamente al servicio web. Las herramientas como soapUI se pueden usar fácilmente para enviar los mensajes a las ubicaciones de destino deseadas de manera adecuada.
+Pruebas de integración de web services
+  
+Los web services esencialmente no se ejecutan solos. En cambio, están integrados con múltiples componentes, como corredores o servicios.coordinadores Una vez que un servicio se integra o se une a otro componente, debemos realizar pruebas para asegurarnos de que dichas integraciones no rompan el sistema. Por ejemplo, en una solución orientada a servicios, si una aplicación de consumidor de servicios envía un mensaje a un servicio web pero el mensaje no se ajusta al esquema anunciado del servicio web. En este caso, el servicio web suele responder con un fallo de SOAP. Sin embargo, si queremos tomar dicha solicitud y transformar el mensaje SOAP de solicitud para que sea válido de acuerdo con el esquema, entonces no queremos pedir a los consumidores de nuestro servicio web que cambien las aplicaciones cliente a medida que se modifica el esquema del servicio. . Este tipo de transformación de mensajes se logra mediante el uso de un componente de intermediario, en otras palabras, bus de servicio empresarial ( ESB) software intermedio. Según las reglas de transformación definidas en el bus de servicios empresariales, la solicitud se convierte al formato correcto y se reenvía al servicio web. Este es un tipicoejemplo de integración de web services. Para probar este tipo de integración, el mensaje de solicitud debe reenviarse al componente ESB en lugar de enviarlo directamente al servicio web. Las herramientas como soapUI se pueden usar fácilmente para enviar los mensajes a las ubicaciones de destino deseadas de manera adecuada.
 
-Pruebas de rendimiento de los servicios web.
-Una vez que estamos satisfechos con los aspectos funcionales del servicio web, debe probarse exhaustivamente el rendimiento. Esto incluye pruebas de carga y estrés del servicio web, así como la medición del rendimiento bajovarias condiciones Podemos utilizar varias herramientas comerciales o de código abierto en las pruebas de rendimiento de los servicios web. Apache JMeter(que se encuentra en http://jmeter.apache.org/ ) es un buen ejemplo de una herramienta de prueba de código abierto que se puede usar para probar servicios web. Las pruebas funcionales que creamos en soapUI se pueden ampliar fácilmente para probar el rendimiento de los servicios web. Discutiremos las capacidades de prueba de rendimiento de soapUI en detalle en el Capítulo 5 , Pruebas de carga y rendimiento con soapUI .
+Pruebas de rendimiento de los web services.
+  
+Una vez que estamos satisfechos con los aspectos funcionales del servicio web, debe probarse exhaustivamente el rendimiento. Esto incluye pruebas de carga y estrés del servicio web, así como la medición del rendimiento bajovarias condiciones Podemos utilizar varias herramientas comerciales o de código abierto en las pruebas de rendimiento de los web services. Apache JMeter(que se encuentra en http://jmeter.apache.org/ ) es un buen ejemplo de una herramienta de prueba de código abierto que se puede usar para probar web services. Las pruebas funcionales que creamos en soapUI se pueden ampliar fácilmente para probar el rendimiento de los web services. Discutiremos las capacidades de prueba de rendimiento de soapUI en detalle en el Capítulo 5 , Pruebas de carga y rendimiento con soapUI .
 
-Los desafíos comunes de las pruebas de servicios web
-En comparación con los enfoques de prueba tradicionales, existen algunos desafíos únicos asociados con las pruebas de servicios web.
+Los desafíos comunes de las pruebas de web services
+  
+En comparación con los enfoques de prueba tradicionales, existen algunos desafíos únicos asociados con las pruebas de web services.
 
-Uso de servicios web externos
-La naturaleza autónoma y débilmente acoplada de los servicios web introduce un mayor nivel de escalabilidad y extensibilidad al sistema. Todos los servicios incluidos en un sistema no necesariamente se construyen internamente. Algunos servicios web pueden ser desarrollados y alojados por terceros. Estos servicios pueden serdescubierto y utilizado dinámicamente de acuerdo con los requisitos del negocio. Si bien esto acelera la entrega de soluciones, probar un sistema de este tipo se vuelve complejo porque la garantía de calidad y la disponibilidad de los servicios de terceros están fuera de su control.
+Uso de web services externos
+  
+La naturaleza autónoma y débilmente acoplada de los web services introduce un mayor nivel de escalabilidad y extensibilidad al sistema. Todos los servicios incluidos en un sistema no necesariamente se construyen internamente. Algunos web services pueden ser desarrollados y alojados por terceros. Estos servicios pueden serdescubierto y utilizado dinámicamente de acuerdo con los requisitos del negocio. Si bien esto acelera la entrega de soluciones, probar un sistema de este tipo se vuelve complejo porque la garantía de calidad y la disponibilidad de los servicios de terceros están fuera de su control.
 
 Implicaciones del uso de estándares y protocolos complejos
-Los servicios web, especialmente los servicios basados ​​en SOAP, pueden usar varias especificaciones WS-*. Cuando se prueban servicios web que se adhieren a especificaciones como WS-Security, el evaluador debe poseer una buena cantidad de conocimiento sobre los estándares y conceptos para llevar a cabo las pruebas de manera efectiva. Esto introduce una curva de aprendizaje más alta para que los evaluadores comiencen a probar los servicios web.
+  
+Los web services, especialmente los servicios basados ​​en SOAP, pueden usar varias especificaciones WS-*. Cuando se prueban web services que se adhieren a especificaciones como WS-Security, el evaluador debe poseer una buena cantidad de conocimiento sobre los estándares y conceptos para llevar a cabo las pruebas de manera efectiva. Esto introduce una curva de aprendizaje más alta para que los evaluadores comiencen a probar los web services.
 
-Los servicios web también se pueden exponer a través de múltiples protocolos de transporte. Por lo tanto, las pruebas no se limitan a un transporte en particular, como HTTP. Se puede acceder al mismo servicio web a través de transportes como JMS o VFS, lo que requiere cambios en la configuración de la prueba, así como un conjunto diferente de escenarios de prueba.
+Los web services también se pueden exponer a través de múltiples protocolos de transporte. Por lo tanto, las pruebas no se limitan a un transporte en particular, como HTTP. Se puede acceder al mismo servicio web a través de transportes como JMS o VFS, lo que requiere cambios en la configuración de la prueba, así como un conjunto diferente de escenarios de prueba.
 
-Naturaleza sin cabeza de los servicios web
-En las pruebas de aplicaciones web tradicionales, los escenarios de prueba se pueden identificar con bastante facilidad estudiando la GUI de los componentes. Como discutimos anteriormente, las operaciones de los servicios web están expuestas al mundo exterior a través de contratos de servicio legibles por máquina (como WSDL). Por lo tanto, durante las primeras etapas del desarrollo de servicios web, los evaluadores deben usar WSDL como referencia para la derivación de escenarios de prueba, lo que puede ser difícil en comparación con la exploración de una GUI.
+Naturaleza sin cabeza de los web services
+  
+En las pruebas de aplicaciones web tradicionales, los escenarios de prueba se pueden identificar con bastante facilidad estudiando la GUI de los componentes. Como discutimos anteriormente, las operaciones de los web services están expuestas al mundo exterior a través de contratos de servicio legibles por máquina (como WSDL). Por lo tanto, durante las primeras etapas del desarrollo de web services, los evaluadores deben usar WSDL como referencia para la derivación de escenarios de prueba, lo que puede ser difícil en comparación con la exploración de una GUI.
 
-A medida que avancemos con los capítulos de este libro, aprenderemos cómo soapUI aborda algunos de los desafíos antes mencionados y facilita la vida de un probador de servicios web.
+A medida que avancemos con los capítulos de este libro, aprenderemos cómo soapUI aborda algunos de los desafíos antes mencionados y facilita la vida de un probador de web services.
 
-Hemos discutido los fundamentos de SOA y las pruebas de servicios web. Ahora, estamos listos para explorar el mundo de las pruebas de servicios web con soapUI.
+Hemos discutido los fundamentos de SOA y las pruebas de web services. Ahora, estamos listos para explorar el mundo de las pruebas de web services con soapUI.
   
 ## ¿Qué es SoapUI?
 El objetivo principal de diseñar herramientas de prueba es ayudar a las personas a probar el software reduciendo el tiempo que lleva la ejecución de la prueba.Hay diferentes tipos de herramientas que se pueden utilizar para pruebas funcionales y no funcionales. Algunas de las herramientas están diseñadas para automatizar las interacciones basadas en la interfaz de usuario y otras se utilizan para derivar automáticamente varios tipos de mensajes de solicitud y transmitirlos a las aplicaciones con o sin modificaciones. Algunas herramientas admiten ambos aspectos.
 
-soapUI es una herramienta que se puede utilizar tanto para pruebas funcionales como no funcionales. No se limita a los servicios web, aunque es la herramienta de facto utilizada en las pruebas de servicios web. En las pruebas de servicios web, soapUI es capaz de desempeñar el papel de cliente y servicio. Permite a los usuarios crear pruebas funcionales y no funcionales de forma rápida y eficiente mediante el uso de un único entorno.
+soapUI es una herramienta que se puede utilizar tanto para pruebas funcionales como no funcionales. No se limita a los web services, aunque es la herramienta de facto utilizada en las pruebas de web services. En las pruebas de web services, soapUI es capaz de desempeñar el papel de cliente y servicio. Permite a los usuarios crear pruebas funcionales y no funcionales de forma rápida y eficiente mediante el uso de un único entorno.
 
 El primer lanzamiento de soapUI (v1.0) fue en octubre de 2005. Mientras trabajaba en un proyecto relacionado con SOA, Ole Lensmer sintió la necesidad de una herramienta de prueba para respaldar el desarrollo ágil. Por lo tanto, comenzó a desarrollar soapUI en su tiempo libre. Eventualmente, el proyecto fue de código abierto y la comunidad creció. Desde entonces, se han lanzado varias versiones con varias funciones y mejoras nuevas, y la versión más reciente de soapUI es la 4.0.1 al momento de escribir este libro.
 
@@ -297,16 +306,17 @@ NOTA
 soapUI v4.0.1 era la versión más nueva en el momento de escribir el libro. Por lo tanto, se utiliza en todo el contexto de este libro. Sin embargo, no discutiremos ningún tema específico de la versión, por lo que las versiones anteriores 3.x de soapUI también se pueden usar para probar los proyectos de muestra y las demostraciones.
   
   ## Capacidades de soapUI
-El objetivo principal de los autores de soapUI es brindar a los usuarios una utilidad simple y fácil de usar que se pueda usar para crear y ejecutar pruebas funcionales y no funcionales a través de un solo entorno de prueba. Sobre la base de ese objetivo, soapUI se ha convertido en la herramienta de prueba de servicios web y SOA líder en el mundo. soapUI se puede instalar sin sobrecarga de configuración en la mayoría de lossistemas operativos que permiten a los usuarios comenzar a utilizar la herramienta sin perder tiempo configurando varios requisitos previos de instalación.
+  
+El objetivo principal de los autores de soapUI es brindar a los usuarios una utilidad simple y fácil de usar que se pueda usar para crear y ejecutar pruebas funcionales y no funcionales a través de un solo entorno de prueba. Sobre la base de ese objetivo, soapUI se ha convertido en la herramienta de prueba de web services y SOA líder en el mundo. soapUI se puede instalar sin sobrecarga de configuración en la mayoría de lossistemas operativos que permiten a los usuarios comenzar a utilizar la herramienta sin perder tiempo configurando varios requisitos previos de instalación.
 
 Al usar la GUI basada en Java Swing fácil de usar, puede comenzar a crear pruebas funcionales sin codificación. Eventualmente, las mismas pruebas funcionales se pueden usar para las pruebas de carga y rendimiento a través del mismo entorno de prueba. Esto brinda a los usuarios una gran flexibilidad ya que todas las pruebas funcionales y no funcionales se pueden administrar a través de un único punto de acceso.
 
 Veamos algunas de las características importantes.de soapUI que estamos planeando discutir en los siguientes capítulos.
 
-Cobertura completa de los aspectos funcionales de los servicios web y las aplicaciones web : soapUI admite la mayoría de los estándares utilizados en las aplicaciones web, como la transmisión de mensajes a través de HTTP, el transporte HTTPS y JMS. También admite pruebas de servicios web SOAP y RESTful. Específicamente, soapUI admite la mayoría de las especificaciones de servicios web, como WS-Security, WS-Addressing, entre otros.
-Simulación de servicios : con los servicios simulados de soapUI, puede simular los servicios web antes de que se implementen realmente. Esto le brinda la posibilidad de probar las aplicaciones de consumo de servicios web sin esperar hasta que se implementen los proveedores de servicios web.
+Cobertura completa de los aspectos funcionales de los web services y las aplicaciones web : soapUI admite la mayoría de los estándares utilizados en las aplicaciones web, como la transmisión de mensajes a través de HTTP, el transporte HTTPS y JMS. También admite pruebas de web services SOAP y RESTful. Específicamente, soapUI admite la mayoría de las especificaciones de web services, como WS-Security, WS-Addressing, entre otros.
+Simulación de servicios : con los servicios simulados de soapUI, puede simular los web services antes de que se implementen realmente. Esto le brinda la posibilidad de probar las aplicaciones de consumo de web services sin esperar hasta que se implementen los proveedores de web services.
 Secuencias de comandos : ya sea con Groovy o JavaScript, soapUI le permite realizar varias configuraciones de prueba previas o posteriores al procesamiento, como respuestas simuladas dinámicas, pruebas de inicialización o limpieza, envío de operaciones simuladas dinámicas, etc.
-Pruebas funcionales : soapUI le permite realizar verificaciones funcionales contra servicios web, aplicaciones web y fuentes de datos JDBC. Puedes validar las respuestas de tus pruebasutilizando varias aserciones integradas y personalizadas. También le permite agregar pasos de prueba condicionales para controlar el flujo de ejecución de la prueba.
+Pruebas funcionales : soapUI le permite realizar verificaciones funcionales contra web services, aplicaciones web y fuentes de datos JDBC. Puedes validar las respuestas de tus pruebasutilizando varias aserciones integradas y personalizadas. También le permite agregar pasos de prueba condicionales para controlar el flujo de ejecución de la prueba.
 Pruebas de rendimiento : con solocon unos pocos clics, puede generar pruebas de rendimiento y carga rápidamente usando soapUI.
 Automatización de pruebas : soapUI se puede integrar en marcos de prueba automatizados como JUnit, y las pruebas también se pueden iniciar a través de los marcos de compilación Apache Maven y Apache Ant. También se puede integrar en herramientas de integración continua como Hudson o Bamboo.
 Además de las funciones anteriores, la versión propietaria de soapUI, soapUI Pro, brinda a los usuarios capacidades de prueba basadas en datos, grabación HTTP e informes de prueba que no están dentro del alcance de este libro.
@@ -430,7 +440,7 @@ Instalación de soapUI en MacOS
 La instalación de soapUI en Mac OS es sencillo y similar a los pasos anteriores que describimos para los instaladores de Linux y Windows.
   
 ## Un vistazo a la interfaz de usuario de soapUI
-soapUI es una herramienta de prueba que se explica por sí misma. La interfaz de usuario fácil de usar simplifica el trabajo con soapUI para cualquier tipo de usuario. Con unos pocos clics, puede comenzar a probar un servicio web o una aplicación web con el mínimo esfuerzo.Esta interfaz de usuario altamente usable y flexible ayudó a soapUI a convertirse en la herramienta de prueba de SOA y servicios web más fácil de usar y más fácil entre la comunidad de prueba.
+soapUI es una herramienta de prueba que se explica por sí misma. La interfaz de usuario fácil de usar simplifica el trabajo con soapUI para cualquier tipo de usuario. Con unos pocos clics, puede comenzar a probar un servicio web o una aplicación web con el mínimo esfuerzo.Esta interfaz de usuario altamente usable y flexible ayudó a soapUI a convertirse en la herramienta de prueba de SOA y web services más fácil de usar y más fácil entre la comunidad de prueba.
 
 Una vez que se inicie soapUI, se le mostrará la interfaz de usuario de inicio como se muestra en la siguiente captura de pantalla:
 
@@ -442,9 +452,10 @@ Dejaré que usted navegue por el resto de los elementos de la interfaz de usuari
   
   
 ## Resumen
-Los servicios web son las unidades individuales de lógica empresarial en SOA. Para probar los servicios web, debemos poseer un buen conocimiento sobre SOA y los servicios web, así como los componentes tecnológicos asociados. Este capítulo se ha dedicado a construir esa base.
+  
+Los web services son las unidades individuales de lógica empresarial en SOA. Para probar los web services, debemos poseer un buen conocimiento sobre SOA y los web services, así como los componentes tecnológicos asociados. Este capítulo se ha dedicado a construir esa base.
 
-Comenzamos a buscar en soapUI, la herramienta de prueba de servicios web y SOA líder y más completa del mundo. Discutimos las metas y objetivos principales del uso de soapUI en las pruebas de servicios web. Analizamos un poco la historia de soapUI y sus modelos de distribución. Finalmente, se explicaron los pasos para instalar soapUI en Linux, Windows y Mac OS.
+Comenzamos a buscar en soapUI, la herramienta de prueba de web services y SOA líder y más completa del mundo. Discutimos las metas y objetivos principales del uso de soapUI en las pruebas de web services. Analizamos un poco la historia de soapUI y sus modelos de distribución. Finalmente, se explicaron los pasos para instalar soapUI en Linux, Windows y Mac OS.
 
 Ahora, tenemos SOAPUI ejecutándose en nuestros sistemas. Ensuciémonos las manos con un proyecto de muestra en el próximo capítulo.
   
