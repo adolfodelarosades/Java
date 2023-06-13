@@ -653,9 +653,9 @@ Después de diseñar las tareas de preprocesamiento de requests, el siguiente pa
 
 * **Una request que se procesa en un tiempo lo suficientemente corto como para que un cliente pueda bloquear y esperar a recibir la response antes de continuar. En otras palabras, *el cliente y el servicio interactúan de manera síncrona*, de modo que el cliente que invoca se bloquea hasta que la response se procesa por completo y se recibe la response.**
 
-* **a request que tarda mucho en ser procesada, tanto que no es buena idea hacer esperar al cliente hasta que finalice la tramitación. En otras palabras, *el cliente y el servicio interactúan de manera asíncrona*, de modo que el cliente que invoca no necesita bloquear y esperar hasta que la solicitud se procese por completo.**
+* **Una request que tarda mucho en ser procesada, tanto que no es buena idea hacer esperar al cliente hasta que finalice la tramitación. En otras palabras, *el cliente y el servicio interactúan de manera asíncrona*, de modo que el cliente que invoca no necesita bloquear y esperar hasta que la solicitud se procese por completo.**
 
-**Nota**: ***Cuando nos referimos al procesamiento de requests, usamos los términos síncrono y asíncrono desde el punto de vista de cuándo se completa completamente el procesamiento de la request del cliente. Tenga en cuenta que, bajo el capó, una interacción asíncrona entre un cliente y un servicio puede resultar en una invocación síncrona a través de la red, ya que HTTP es síncrono por naturaleza. De manera similar, los mensajes SOAP enviados a través de HTTP también son síncronos.***
+**Nota**: *Cuando nos referimos al procesamiento de requests, usamos los términos síncrono y asíncrono desde el punto de vista de cuándo se completa completamente el procesamiento de la request del cliente. Tenga en cuenta que, bajo el capó, una interacción asíncrona entre un cliente y un servicio puede resultar en una invocación síncrona a través de la red, ya que HTTP es síncrono por naturaleza. De manera similar, los mensajes SOAP enviados a través de HTTP también son síncronos.*
 
 ***El servicio de información meteorológica es un buen ejemplo de una interacción síncrona entre un cliente y un servicio***. Cuando recibe la request de un cliente, el servicio meteorológico debe buscar la información requerida y enviar una response al cliente. Esta búsqueda y devolución de la información se puede lograr en un tiempo relativamente corto, durante el cual se puede esperar que el cliente bloquee y espere. El cliente continúa su procesamiento solo después de obtener una response del servicio. (Consulte la Figura 3.5 ).
 
@@ -664,7 +664,7 @@ Después de diseñar las tareas de preprocesamiento de requests, el siguiente pa
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/c7c96e5a-63db-4f11-bded-690bb5de0124)
 
 
-Un Web service como este se puede diseñar utilizando un service endpoint que recibe la request del cliente y luego delega la request directamente a la lógica apropiada del servicio en la capa de procesamiento. La capa de procesamiento del servicio procesa la request y, cuando se completa el procesamiento, el service endpoint devuelve la response al cliente. (Consulte la Figura 3.6 ).
+Un Web service como este se puede diseñar utilizando un service endpoint que recibe la request del cliente y luego delega la request directamente a la lógica apropiada del servicio en la capa de procesamiento. La capa de procesamiento del servicio procesa la request y, cuando se completa el procesamiento, el service endpoint devuelve la response al cliente. (Consulte la Figura 3.6).
 
 **Figura 3.6. Synchronous Interaction Between Client and Service - Interacción síncrona entre el cliente y el servicio**
 
@@ -708,8 +708,8 @@ Debe evitarse delegar una request a la capa de procesamiento a través de **JMS*
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/99f47ea7-1858-4b0c-a1fe-6c2d44056625)
 
-AQUIIIIII
-La validación asegura que una solicitud es correcta. Delegar la solicitud antes de la validación puede dar como resultado que se pase una solicitud no válida a la capa de procesamiento, lo que hace que el seguimiento y el manejo de errores sean demasiado complejos. Una vez que la solicitud se delega con éxito a la capa de procesamiento, el extremo del servicio puede devolver un identificador de correlación al cliente. Este identificador de correlación es para referencia futura del cliente y puede ayudar al cliente a asociar una respuesta que corresponda a su solicitud anterior. Si la lógica de negocio se implementa utilizando beans empresariales, los beans controlados por mensajes en el nivel EJB leen la solicitud e inician el procesamiento para que, en última instancia, se pueda formular una respuesta.
+
+La validación asegura que una request es correcta. Delegar la request antes de la validación puede dar como resultado que se pase una request no válida a la capa de procesamiento, lo que hace que el seguimiento y el manejo de errores sean demasiado complejos. Una vez que la request se delega con éxito a la capa de procesamiento, el endpoint del servicio puede devolver un identificador de correlación al cliente. Este identificador de correlación es para referencia futura del cliente y puede ayudar al cliente a asociar una respuesta que corresponda a su request anterior. Si la lógica de negocio se implementa utilizando enterprise beans, los beans controlados por mensajes en el nivel EJB leen la request e inician el procesamiento para que, en última instancia, se pueda formular una response.
 
 La Figura 3.8 muestra cómo el servicio de agencia de viajes podría implementar esta interacción, y el Ejemplo de código 3.16 muestra el código real que podría usarse.
 
@@ -752,85 +752,86 @@ public class ReservationRequestRcvr {
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/7a4a4d09-3446-438a-a13e-e5c1a0b1307a)
 
 
+En la Figura 3.8, las líneas verticales representan el paso del tiempo, de arriba hacia abajo. Los cuadros rectangulares verticales indican cuando la entidad (cliente o servicio) está ocupada procesando la request o esperando a que la otra entidad complete el procesamiento. El tipo de media flecha indica comunicación asíncrona y la línea vertical discontinua indica que la entidad es libre de trabajar en otras cosas mientras se procesa una request.
 
-En la Figura 3.8 , las líneas verticales representan el paso del tiempo, de arriba hacia abajo. Los cuadros rectangulares verticales indican cuando la entidad (cliente o servicio) está ocupada procesando la solicitud o esperando a que la otra entidad complete el procesamiento. El tipo de media flecha indica comunicación asíncrona y la línea vertical discontinua indica que la entidad es libre de trabajar en otras cosas mientras se procesa una solicitud.
+Queda una pregunta: ***¿Cómo obtiene el cliente el resultado final de su solicitud?*** El servicio puede poner a disposición el resultado de la request del cliente de una de dos maneras:
 
-Queda una pregunta: ¿Cómo obtiene el cliente el resultado final de su solicitud? El servicio puede poner a disposición el resultado de la solicitud del cliente de una de dos maneras:
+* El cliente que invocó el servicio verifica periódicamente el estado de la request utilizando el identificador de correlación que se proporcionó en el momento en que se envió la request. Esto también se conoce como polling(sondeo) y aparece como la Opción 1 en la Figura 3.8 .
 
-El cliente que invocó el servicio verifica periódicamente el estado de la solicitud utilizando el identificador de correlación que se proporcionó en el momento en que se envió la solicitud. Esto también se conoce como sondeo y aparece como la Opción 1 en la Figura 3.8 .
-
-O bien, si el propio cliente es un par de Web services, el servicio devuelve la llamada al servicio del cliente con el resultado. El cliente puede usar el identificador de correlación para relacionar la respuesta con la solicitud original (Opción 2 en la Figura 3.8 ).
+* O bien, si el propio cliente es un Web service peer, el servicio devuelve la llamada al servicio del cliente con el resultado. El cliente puede usar el identificador de correlación para relacionar la respuesta con la request original (Opción 2 en la Figura 3.8 ).
 
 A menudo, esto se decide por la naturaleza del servicio en sí. Por ejemplo, si el servicio ejecuta un flujo de trabajo de proceso comercial, el flujo de trabajo requiere que el servicio tome las medidas adecuadas después de procesar la solicitud.
 
-3.4.4. Formulación de respuestas
-Después de delegar la solicitud a la parte de la lógica de negocios de la aplicación, y la lógica de negocios completa su procesamiento, está listo para el siguiente paso: formar la respuesta a la solicitud.
+### 3.4.4. Formulación de Responses
 
-Debe realizar la generación de respuestas, que es simplemente construir los valores de retorno de la llamada al método y los parámetros de salida, en la capa de interacción, lo más cerca posible del punto final del servicio.
+Después de delegar la request a la parte de la lógica de negocios de la aplicación, y la lógica de negocios completa su procesamiento, está listo para el siguiente paso: ***formar la response de la request***.
 
-Esto permite tener una ubicación común para el ensamblado de respuestas y las transformaciones de documentos XML, especialmente si el documento que devuelve a la persona que llama debe ajustarse a un esquema diferente del esquema interno. Mantener esta funcionalidad cerca del punto final le permite implementar el almacenamiento en caché de datos y evitar viajes adicionales a la capa de procesamiento. (Consulte la Figura 3.9 ).
+✅ ***Debe realizar la generación de respuestas, que es simplemente construir los valores de retorno de la llamada al método y los parámetros de salida, en la capa de interacción, lo más cerca posible del service endpoint.***
 
-**Figura 3.9. Procesamiento de respuestas de Web services**
+Esto permite tener una ubicación común para el ensamblado de response y las transformaciones de documentos XML, especialmente si el documento que devuelve a la persona que llama debe ajustarse a un esquema diferente del esquema interno. Mantener esta funcionalidad cerca del endpoint le permite implementar el almacenamiento en caché de datos y evitar viajes adicionales a la capa de procesamiento. (Consulte la Figura 3.9 ).
 
+**Figura 3.9. Web Service Response Processing - Procesamiento de respuestas de Web services**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/df99a3df-929a-447a-a282-0909eaa29bec)
 
-Considere la generación de respuestas desde el punto de vista del servicio de información meteorológica. El servicio de información meteorológica puede ser utilizado por una variedad de tipos de clientes, desde navegadores hasta clientes enriquecidos y dispositivos portátiles. Un servicio de información meteorológica bien diseñado daría sus respuestas en formatos adecuados para estos diferentes tipos de clientes.
+Considere la generación de response desde el punto de vista del servicio de información meteorológica. El servicio de información meteorológica puede ser utilizado por una variedad de tipos de clientes, desde navegadores hasta clientes enriquecidos y dispositivos portátiles. Un servicio de información meteorológica bien diseñado daría sus respuestas en formatos adecuados para estos diferentes tipos de clientes.
 
-Sin embargo, no es un buen diseño tener una implementación diferente de la lógica del servicio para cada tipo de cliente. Más bien, es mejor diseñar una lógica de negocio común para todos los tipos de clientes. Luego, en la capa de interacción, transforme los resultados por tipo de cliente para renderizar. Por lo tanto, es importante tener en cuenta las pautas anteriores, especialmente cuando su servicio tiene una lógica de procesamiento común, pero potencialmente tiene diferentes necesidades de representación de respuestas para adaptarse a sus variados tipos de clientes.
+Sin embargo, no es un buen diseño tener una implementación diferente de la lógica del servicio para cada tipo de cliente. Más bien, es mejor diseñar una lógica de negocio común para todos los tipos de clientes. Luego, en la capa de interacción, transforme los resultados por tipo de cliente para renderizar. Por lo tanto, es importante tener en cuenta las pautas anteriores, especialmente cuando su servicio tiene una lógica de procesamiento común, pero potencialmente tiene diferentes necesidades de representación de response para adaptarse a sus variados tipos de clientes.
   
-## 3.5. Diseño de capa de procesamiento
+## 3.5. Processing Layer Design - Diseño de Capa de Procesamiento
 	
-La capa de procesamiento es donde se aplica la lógica de negocio a una solicitud de Web service. Recuerde que el Web service es una forma interoperable de exponer aplicaciones nuevas o existentes. Por lo tanto, independientemente de los medios que utilice para exponer la funcionalidad de su aplicación, los problemas de diseño de la lógica de negocio son los mismos. Todavía debe diseñar la lógica de negocio teniendo en cuenta aspectos como el uso de beans empresariales, la exposición de un modelo de interfaz EJB local o remoto, el uso de persistencia administrada por contenedor o administrada por beans, etc.
+La capa de procesamiento es donde se aplica la lógica de negocio a una request de Web service. Recuerde que el Web service es una forma interoperable de exponer aplicaciones nuevas o existentes. Por lo tanto, independientemente de los medios que utilice para exponer la funcionalidad de su aplicación, los problemas de diseño de la lógica de negocio son los mismos. Todavía debe diseñar la lógica de negocio teniendo en cuenta aspectos como el uso de enterprise beans, la exposición de un modelo de interfaz EJB local o remoto, el uso de persistencia administrada por contenedor o administrada por beans, etc.
 
-Los problemas y las consideraciones para diseñar la capa de lógica de negocio o de procesamiento de una aplicación, como si se debe realizar esta lógica en el nivel Web o EJB, son los mismos independientemente de que utilice o no un Web service.
+✅ ***Los problemas y las consideraciones para diseñar la capa de lógica de negocio o de procesamiento de una aplicación, como si se debe realizar esta lógica en el nivel Web o EJB, son los mismos independientemente de que utilice o no un Web service.***
 
-No abordamos estos problemas de diseño de lógica de negocios aquí, ya que gran parte de esta discusión ya se cubrió en el libro Diseño de aplicaciones empresariales con la plataforma J2EE TM , segunda edición , y puede consultar ese libro para obtener pautas y recomendaciones generales. También debe consultar el sitio web de BluePrints en http://java.sun.com/blueprints para obtener recomendaciones sobre el diseño de la lógica de procesamiento empresarial de una aplicación.
+No abordamos estos problemas de diseño de lógica de negocios aquí, ya que gran parte de esta discusión ya se cubrió en el libro **Designing Enterprise Applications with the J2EETM Platform, Second Edition**, y puede consultar ese libro para obtener pautas y recomendaciones generales. También debe consultar el sitio web de BluePrints en http://java.sun.com/blueprints para obtener recomendaciones sobre el diseño de la lógica de procesamiento empresarial de una aplicación.
 
 Además de estas pautas generales, hay algunas cuestiones específicas que se deben tener en cuenta al diseñar la capa de procesamiento de un Web service.
 
-Mantenga la capa de procesamiento independiente de la capa de interacción . Al mantener las capas independientes y débilmente acopladas, la capa de procesamiento sigue siendo genérica y puede admitir diferentes tipos de clientes, como clientes de Web services, clientes web clásicos, etc. Para lograr un acoplamiento débil entre las capas, considere el uso de clases delegadas que encapsulen el acceso a los componentes comerciales.
+* Mantenga la capa de procesamiento independiente de la capa de interacción. Al mantener las capas independientes y débilmente acopladas, la capa de procesamiento sigue siendo genérica y puede admitir diferentes tipos de clientes, como clientes de Web services, clientes web clásicos, etc. Para lograr un acoplamiento débil entre las capas, considere el uso de clases delegadas que encapsulen el acceso a los componentes comerciales.
 
-Enlace documentos XML a objetos Java en la capa de interacción . Hay ocasiones en las que su Web service espera recibir de un cliente un documento XML que contiene una solicitud completa, pero la lógica de negocio del servicio no necesita operar en el documento. En estas ocasiones, se recomienda que la capa de interacción vincule el contenido del documento XML a los objetos Java antes de pasar la solicitud a la capa de procesamiento. Dado que la lógica de procesamiento no tiene que realizar la conversión de XML a Java, una sola capa de procesamiento puede admitir documentos XML que se basan en diferentes esquemas. Esto también facilita la compatibilidad con varias versiones de un esquema XML.
+* Bind XML documents a objetos Java en la capa de interacción. Hay ocasiones en las que su Web service espera recibir de un cliente un documento XML que contiene una request completa, pero la lógica de negocio del servicio no necesita operar en el documento. En estas ocasiones, se recomienda que la capa de interacción vincule el contenido del documento XML a los objetos Java antes de pasar la request a la capa de procesamiento. Dado que la lógica de procesamiento no tiene que realizar la conversión de XML a Java, una sola capa de procesamiento puede admitir documentos XML que se basan en diferentes esquemas. Esto también facilita la compatibilidad con varias versiones de un esquema XML.
 
-Tenga en cuenta que su lógica de procesamiento puede operar sobre el contenido de un documento XML recibido de un cliente. Consulte “ Manejo de documentos XML en un Web service ” en la página 105 , que destaca los problemas a tener en cuenta cuando pasa documentos XML a su lógica de procesamiento comercial.
+Tenga en cuenta que su lógica de procesamiento puede operar sobre el contenido de un documento XML recibido de un cliente. Consulte ** “Handling XML Documents in a Web Service”** en la página 105, que destaca los problemas a tener en cuenta cuando pasa documentos XML a su lógica de procesamiento comercial.
 
-Según el escenario de su aplicación, es posible que se requiera que su capa de procesamiento trabaje con otros pares de Web services para completar la solicitud de un cliente. Si es así, su capa de procesamiento se convierte efectivamente en un cliente de otro Web service. Consulte el Capítulo 5 para conocer las pautas sobre los clientes de Web services. En otras circunstancias, es posible que su capa de procesamiento tenga que interactuar con los EIS. Para estos casos, consulte el Capítulo 6 para obtener pautas.
+Según el escenario de su aplicación, es posible que se requiera que su capa de procesamiento trabaje con otros Web service peers para completar la request de un cliente. Si es así, su capa de procesamiento se convierte efectivamente en un cliente de otro Web service. Consulte el Capítulo 5 para conocer las pautas sobre los clientes de Web services. En otras circunstancias, es posible que su capa de procesamiento tenga que interactuar con los EIS. Para estos casos, consulte el Capítulo 6 para obtener pautas.
   
-## 3.6. Publicación de un Web service
+## 3.6. Publishing a Web Service - Publicación de un Web Service
 	
 Hasta ahora, este capítulo ha cubierto las pautas para diseñar e implementar su Web service. Igual de importante, su Web service debe ser accesible para sus clientes previstos. Recuerde que algunos Web services están destinados al uso del público en general. Otros Web services están destinados a ser utilizados únicamente entre socios comerciales de confianza (entre empresas), y otros están destinados a ser utilizados únicamente dentro de una empresa (intraempresa).
 
-Independientemente de si un servicio debe ser accesible para el público, otras empresas o incluso dentro de una sola empresa, primero debe hacer que los detalles sobre el Web service (su interfaz, parámetros, dónde se encuentra el servicio, etc.) sean accesibles. a los clientes Lo hace poniendo a disposición de los interesados una descripción del Web service. Como se indica en “ Lenguaje de descripción de Web services ” en la página 36 , WSDL es el lenguaje estándar para describir un servicio. Poner esta descripción WSDL a disposición de los clientes les permite utilizar el servicio.
+Independientemente de si un servicio debe ser accesible para el público, otras empresas o incluso dentro de una sola empresa, primero debe hacer que los detalles sobre el Web service (su interfaz, parámetros, dónde se encuentra el servicio, etc.) sean accesibles a los clientes. Lo hace poniendo a disposición de los interesados una descripción del Web service. Como se indica en **“Web Services Description Language”** en la página 36, WSDL es el lenguaje estándar para describir un servicio. Poner esta descripción WSDL a disposición de los clientes les permite utilizar el servicio.
 
 Una vez que el WSDL está listo, tiene la opción de publicarlo en un registro. La siguiente sección describe cuándo es posible que desee publicar el WSDL en un registro. Si hace que la descripción WSDL de su servicio esté disponible en un registro público, entonces un cliente basado en Java puede usar las API de JAXR para buscar la descripción de su servicio y luego usar el servicio. De hecho, un cliente puede usar las mismas API JAXR para buscar la descripción de cualquier Web service con una descripción WSDL disponible. Esta sección examina los registros desde el punto de vista de un desarrollador de servicios.
 
-### 3.6.1. Publicación de un servicio en un registro
+### 3.6.1. Publishing a Service in a Registry - Publicación de un Servicio en un Registro
 	
 La publicación de un servicio en un registro es un método para poner el servicio a disposición de los clientes. Si decide publicar su servicio en un registro, decide el tipo de registro que utilizará en función de los posibles escenarios de uso de su servicio. Los registros abarcan toda la gama, desde registros públicos hasta registros corporativos disponibles solo dentro de una sola empresa.
 
-Es posible que desee registrar los Web services para el consumo del público en general en un registro público conocido.
+✅ ***Es posible que desee registrar los Web services para el consumo del público en general en un registro público conocido.***
 
 Cuando hace que su servicio esté disponible a través de un registro público, esencialmente abre la accesibilidad del servicio a la audiencia más amplia posible. Cuando un servicio se inscribe en un registro público, cualquier cliente, incluso sin conocimiento previo del servicio, puede consultar y utilizar el servicio. Tenga en cuenta que el registro público contiene la descripción del Web service, que consta no solo de la descripción WSDL del servicio, sino también de los esquemas XML a los que hace referencia la descripción del servicio. En resumen, su Web service debe publicar sus esquemas XML públicos y cualquier esquema adicional definido en el contexto del servicio. También debe publicar en el mismo registro público los esquemas XML a los que hace referencia la descripción del Web service.
 
-Cuando un Web service es estrictamente para uso dentro de la empresa, puede publicar una descripción del Web service en un registro corporativo dentro de la empresa.
+✅ ***Cuando un Web service es estrictamente para uso dentro de la empresa, puede publicar una descripción del Web service en un registro corporativo dentro de la empresa.***
 
-No necesita usar un registro si todos los clientes de sus Web services son socios dedicados y existe un acuerdo entre los socios sobre el uso de los servicios. Cuando este sea el caso, puede publicar la descripción de su Web service (el WSDL y los esquemas XML referenciados) en una ubicación conocida con las protecciones de acceso adecuadas.
+✅ ***No necesita usar un registro si todos los clientes de sus Web services son socios dedicados y existe un acuerdo entre los socios sobre el uso de los servicios. Cuando este sea el caso, puede publicar la descripción de su Web service (el WSDL y los esquemas XML referenciados) en una ubicación conocida con las protecciones de acceso adecuadas.***
 
 ### 3.6.2. Comprender los conceptos de registro
 	
 Al considerar publicar su servicio a través de un registro, es importante comprender algunos de los conceptos, como repositorios y taxonomías, que están asociados con los registros.
 
-Los registros públicos no son repositorios. En lugar de contener detalles completos sobre los servicios, los registros públicos contienen solo detalles sobre qué servicios están disponibles y cómo acceder a estos servicios. Por ejemplo, un servicio de venta de paquetes de aventura no puede registrar su catálogo completo de productos. Un registro solo puede almacenar el tipo de servicio, su ubicación y la información requerida para acceder al servicio. Un cliente interesado en un servicio primero debe descubrir el servicio desde el registro y luego vincularse con el servicio para obtener el catálogo completo de productos del servicio. Una vez que obtiene el catálogo de servicios, el cliente puede verificar si el servicio en particular cubre sus necesidades. Si no, el cliente debe volver al registro y repetir el proceso de descubrimiento y vinculación: el cliente busca en el registro algún otro servicio que potencialmente ofrezca lo que quiere, se vincula a ese servicio, obtiene y evalúa su catálogo, etc. Dado que este proceso, que no es insignificante, puede tener que repetirse varias veces, es fácil ver que es importante registrar un servicio bajo su taxonomía adecuada.
+***Los registros públicos no son repositorios***. En lugar de contener detalles completos sobre los servicios, los registros públicos contienen solo detalles sobre qué servicios están disponibles y cómo acceder a estos servicios. Por ejemplo, un servicio de venta de paquetes de aventura no puede registrar su catálogo completo de productos. Un registro solo puede almacenar el tipo de servicio, su ubicación y la información requerida para acceder al servicio. Un cliente interesado en un servicio primero debe descubrir el servicio desde el registro y luego vincularse con el servicio para obtener el catálogo completo de productos del servicio. Una vez que obtiene el catálogo de servicios, el cliente puede verificar si el servicio en particular cubre sus necesidades. Si no, el cliente debe volver al registro y repetir el proceso de descubrimiento y vinculación(binding) - el cliente busca en el registro algún otro servicio que potencialmente ofrezca lo que quiere, se vincula a ese servicio, obtiene y evalúa su catálogo, etc. Dado que este proceso, que no es insignificante, puede tener que repetirse varias veces, es fácil ver que es importante registrar un servicio bajo su taxonomía adecuada.
 
-Registrar un servicio bajo la taxonomía adecuada.
+✅ ***Registrar un servicio bajo la taxonomía adecuada.***
 
-Es importante registrar su servicio bajo las taxonomías adecuadas. Cuando desee publicar su servicio en un registro, ya sea un registro público o corporativo, debe hacerlo contra una taxonomía que clasifique o categorice correctamente su Web service. Es importante decidir la taxonomía adecuada, ya que esto afecta la facilidad con la que los clientes pueden encontrar y utilizar su servicio. Actualmente existen varias taxonomías estándar de la industria bien definidas, como las definidas por organizaciones como el Sistema de Clasificación de la Industria de América del Norte (NAICS).
+***Es importante registrar su servicio bajo las taxonomías adecuadas***. Cuando desee publicar su servicio en un registro, ya sea un registro público o corporativo, debe hacerlo contra una taxonomía que clasifique o categorice correctamente su Web service. Es importante decidir la taxonomía adecuada, ya que esto afecta la facilidad con la que los clientes pueden encontrar y utilizar su servicio. Actualmente existen varias taxonomías estándar de la industria bien definidas, como las definidas por organizaciones como el **North American Industry Classification System (NAICS)**.
 
-El uso de taxonomías conocidas y existentes brinda a los clientes de su Web service una base estándar desde la cual buscar su servicio, lo que facilita que los clientes encuentren su servicio. Por ejemplo, supongamos que su empresa de viajes ofrece paquetes de aventuras relacionados con las islas de los Mares del Sur, así como aventuras alpinas o de montañismo. En lugar de crear su propia taxonomía para categorizar su servicio, los clientes pueden encontrar su servicio más fácilmente si publica la descripción de su servicio utilizando dos taxonomías estándar diferentes: una taxonomía para aventuras en islas y otra para aventuras alpinas y montañismo.
+El uso de taxonomías conocidas y existentes brinda a los clientes de su Web service una base estándar desde la cual buscar su servicio, lo que facilita que los clientes encuentren su servicio. Por ejemplo, supongamos que su empresa de viajes ofrece paquetes de aventuras relacionados con las islas de los Mares del Sur, así como aventuras alpinas o de montañismo. En lugar de crear su propia taxonomía para categorizar su servicio, los clientes pueden encontrar su servicio más fácilmente si publica la descripción de su servicio utilizando dos taxonomías estándar diferentes - una taxonomía para aventuras en islas y otra para aventuras alpinas y montañismo.
 
-Puede publicar su Web service en más de un registro. Para ayudar aún más a los clientes a encontrar su servicio, también es una buena idea publicar en tantas categorías aplicables como sea posible. Por ejemplo, una empresa de viajes que vende paquetes de aventuras podría registrarse utilizando una taxonomía de categorías de productos, además de una taxonomía geográfica. Esto brinda a los clientes la oportunidad de utilizar estrategias óptimas para localizar un servicio. Por ejemplo, si existen varias instancias de un servicio para un producto en particular, el cliente puede refinar aún más su selección considerando la ubicación geográfica y eligiendo un servicio cercano a su propia ubicación. Usando el servicio de negocios de viajes como ejemplo, dicho servicio podría registrarse bajo las taxonomías para tipos de paquetes de aventura (isla y montañismo),
+***Puede publicar su Web service en más de un registro***. Para ayudar aún más a los clientes a encontrar su servicio, también es una buena idea publicar en tantas categorías aplicables como sea posible. Por ejemplo, una empresa de viajes que vende paquetes de aventuras podría registrarse utilizando una taxonomía de categorías de productos, además de una taxonomía geográfica. Esto brinda a los clientes la oportunidad de utilizar estrategias óptimas para localizar un servicio. Por ejemplo, si existen varias instancias de un servicio para un producto en particular, el cliente puede refinar aún más su selección considerando la ubicación geográfica y eligiendo un servicio cercano a su propia ubicación. Usando el servicio de negocios de viajes como ejemplo, dicho servicio podría registrarse bajo las taxonomías para tipos de paquetes de aventura (isla y montañismo),
 
-3.6.3. Escenarios de implementación del registro
+### 3.6.3. Registry Implementation Scenarios - Escenarios de Implementación del Registro
+
 Una vez que decida publicar su servicio y establezca las taxonomías que mejor identifiquen su servicio, estará listo para implementar sus decisiones. Antes de hacerlo, puede que le resulte útil examinar algunos de los escenarios de implementación del registro que puede encontrar.
 
 Cuando se usa un registro, hemos visto que el proveedor de servicios publica la descripción del Web service en un registro y los clientes descubren y se unen al Web service para usar sus servicios. En general, un cliente debe realizar tres pasos para utilizar un Web service:
@@ -841,137 +842,182 @@ Cuando se usa un registro, hemos visto que el proveedor de servicios publica la 
 
 3. El cliente debe estar ligado a la ubicación específica del servicio, y esto puede ocurrir en una de tres ocasiones:
 
-Cuando se desarrolla el cliente (llamado enlace estático)
-
-Cuando se implementa el cliente (también llamado enlace estático)
-
-Durante el tiempo de ejecución (llamado enlace dinámico)
+* Cuando se desarrolla el cliente (llamado static binding)
+* Cuando se implementa el cliente (también llamado static binding)
+* Durante el tiempo de ejecución (llamado dynamic binding)
 
 Estos tres pasos pueden producir tres escenarios. El escenario particular depende de cuándo ocurre el enlace y si el cliente se implementa únicamente para un servicio específico o es un cliente genérico. Los siguientes párrafos describen estos escenarios. (Consulte la Tabla 3.2 para obtener un resumen). También señalan puntos importantes que debe tener en cuenta al diseñar e implementar un Web service. ( El Capítulo 5 considera estos escenarios desde el punto de vista de un cliente).
 
-***Escenario 1***: el Web service tiene un acuerdo con sus socios y publica su descripción WSDL y sus esquemas XML referenciados en una ubicación conocida y especificada. Espera que los desarrolladores de sus clientes conozcan esta ubicación. Cuando este es el caso, el cliente se implementa teniendo en cuenta la interfaz del servicio. Cuando se construye, el cliente ya está diseñado para buscar la interfaz del servicio directamente en lugar de usar un registro para encontrar el servicio.
+* ***Escenario 1***: El Web service tiene un acuerdo con sus socios y publica su descripción WSDL y sus esquemas XML referenciados en una ubicación conocida y especificada. Espera que los desarrolladores de sus clientes conozcan esta ubicación. Cuando este es el caso, el cliente se implementa teniendo en cuenta la interfaz del servicio. Cuando se construye, el cliente ya está diseñado para buscar la interfaz del servicio directamente en lugar de usar un registro para encontrar el servicio.
 
-***Escenario 2***: similar al escenario 1, el Web service publica su descripción WSDL y esquemas XML en una ubicación conocida y espera que sus socios conozcan esta ubicación o puedan descubrirla fácilmente. O bien, cuando se construye el socio, puede usar una herramienta para descubrir dinámicamente y luego incluir la implementación específica del servicio o la definición de la interfaz del servicio, junto con su implementación específica. En este caso, el enlace es estático porque el socio se crea cuando ya conoce la definición y la implementación de la interfaz de servicio, aunque esta información se haya encontrado de forma dinámica.
+* ***Escenario 2***: Similar al escenario 1, el Web service publica su descripción WSDL y esquemas XML en una ubicación conocida y espera que sus socios conozcan esta ubicación o puedan descubrirla fácilmente. O bien, cuando se construye el socio, puede usar una herramienta para descubrir dinámicamente y luego incluir la implementación específica del servicio o la definición de la interfaz del servicio, junto con su implementación específica. En este caso, el enlace es estático porque el socio se crea cuando ya conoce la definición y la implementación de la interfaz de servicio, aunque esta información se haya encontrado de forma dinámica.
 
-***Escenario 3***: el servicio implementa una interfaz en una ubicación conocida o espera que sus clientes utilicen herramientas para encontrar la interfaz en el momento de la compilación. Dado que los clientes del Web service son clientes genéricos, no son clientes diseñados únicamente para usar este Web service, debe diseñar el servicio para que pueda registrarse en un registro. Dichos clientes genéricos encuentran dinámicamente la implementación específica de un servicio en tiempo de ejecución utilizando registros. Elija el tipo de registro para el servicio, ya sea público, corporativo o privado, según los tipos de sus clientes, ya sea público en general o dentro de la empresa, sus restricciones de seguridad, etc.
+* ***Escenario 3***: El servicio implementa una interfaz en una ubicación conocida o espera que sus clientes utilicen herramientas para encontrar la interfaz en el momento de la compilación. Dado que los clientes del Web service son clientes genéricos, no son clientes diseñados únicamente para usar este Web service, debe diseñar el servicio para que pueda registrarse en un registro. Dichos clientes genéricos encuentran dinámicamente la implementación específica de un servicio en tiempo de ejecución utilizando registros. Elija el tipo de registro para el servicio, ya sea público, corporativo o privado, según los tipos de sus clientes, ya sea público en general o dentro de la empresa, sus restricciones de seguridad, etc.
 
-Tabla 3.2. Escenarios de enlace de detección para clientes
-Escenarios	Descubrir la definición de interfaz de servicio	Descubra la implementación del servicio	Enlace a una ubicación específica
-1	Ninguno	Ninguno	Estático
-2	Ninguno o dinámico en tiempo de compilación	Dinámico en tiempo de construcción	Estático
-3	Ninguno o dinámico en tiempo de compilación	Dinámico en tiempo de ejecución	Dinámico en tiempo de construcción
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/583e9715-369c-41b8-8904-f10ccd2640e6)
+
+
+**Tabla 3.2. Escenarios de enlace de detección para clientes**
+
+Escenarios | Descubrir la definición de interfaz de servicio | Descubra la implementación del servicio | Enlace a una ubicación específica
+-----------|-------------------------------------------------|-----------------------------------------|----------------------------------- 
+1 | Ninguno | Ninguno | Estático
+2 | Ninguno o dinámico en tiempo de compilación	| Dinámico en tiempo de construcción | Estático
+3 | Ninguno o dinámico en tiempo de compilación	| Dinámico en tiempo de ejecución | Dinámico en tiempo de construcción
   
-## 3.7. Manejo de documentos XML en un Web service
+## 3.7. Handling XML Documents in a Web Service - Manejo de Documentos XML en un Web Service
 	
-Hasta ahora, este capítulo abordó temas aplicables a todas las implementaciones de Web services. Hay consideraciones adicionales cuando la implementación de un Web service espera recibir un documento XML que contiene toda la información de un cliente y que el servicio utiliza para iniciar un proceso comercial para manejar la solicitud. Hay varias razones por las que es apropiado intercambiar documentos:
+Hasta ahora, este capítulo abordó temas aplicables a todas las implementaciones de Web services. Hay consideraciones adicionales cuando la implementación de un Web service espera recibir un documento XML que contiene toda la información de un cliente y que el servicio utiliza para iniciar un proceso comercial para manejar la request. Hay varias razones por las que es apropiado intercambiar documentos:
 
-Los documentos, especialmente los documentos comerciales, pueden ser muy grandes y, como tales, a menudo se envían como un lote de información relacionada. Pueden comprimirse independientemente del mensaje SOAP.
+* Los documentos, especialmente los documentos comerciales, pueden ser muy grandes y, como tales, a menudo se envían como un lote de información relacionada. Pueden comprimirse independientemente del mensaje SOAP.
 
-Los documentos pueden ser documentos comerciales legalmente vinculantes. Como mínimo, su forma original debe conservarse durante el intercambio y, lo más probable, es posible que deban archivarse y conservarse como evidencia en caso de desacuerdo. Para estos documentos, se debe conservar el conjunto de información completo del documento original, incluidos los comentarios y las referencias a entidades externas (así como a las entidades referidas).
+* Los documentos pueden ser documentos comerciales legalmente vinculantes. Como mínimo, su forma original debe conservarse durante el intercambio y, lo más probable, es posible que deban archivarse y conservarse como evidencia en caso de desacuerdo. Para estos documentos, se debe conservar el conjunto de información completo del documento original, incluidos los comentarios y las referencias a entidades externas (así como a las entidades referidas).
 
-El procesamiento de algunas aplicaciones requiere el conjunto completo de información del documento, incluidos los comentarios y las referencias a entidades externas. Al igual que con los documentos legalmente vinculantes, es necesario conservar el conjunto de información completo, incluidos los comentarios y las referencias a entidades externas, del documento original.
+* El procesamiento de algunas aplicaciones requiere el conjunto completo de información del documento, incluidos los comentarios y las referencias a entidades externas. Al igual que con los documentos legalmente vinculantes, es necesario conservar el conjunto de información completo, incluidos los comentarios y las referencias a entidades externas, del documento original.
 
-Cuando se envían como archivos adjuntos, es posible manejar documentos que pueden ajustarse a esquemas expresados ​​en idiomas no admitidos por el extremo del Web service o que no pueden estar presentes en un conjunto de información de mensajes SOAP (como la declaración de tipo de documento <!DOCTYPE > para un esquema basado en DTD).
+* Cuando se envían como archivos adjuntos, es posible manejar documentos que pueden ajustarse a esquemas expresados en idiomas no admitidos por el extremo del Web service o que no pueden estar presentes en un conjunto de información de SOAP message (como **Document Type Declaration `<!DOCTYPE>` para un DTD-based schema**).
 
-Por ejemplo, considere el Web service de la agencia de viajes, que normalmente recibe la solicitud de un cliente como un documento XML que contiene toda la información necesaria para organizar un viaje en particular. La información del documento incluye detalles sobre la cuenta del cliente, el estado de la tarjeta de crédito, los destinos de viaje deseados, las aerolíneas preferidas, la clase de viaje, las fechas, etc. El Web service utiliza el contenido de los documentos para realizar pasos como verificar la cuenta del cliente, obtener la autorización de la tarjeta de crédito, verificar la disponibilidad de alojamiento y transporte, crear un itinerario y comprar boletos.
+Por ejemplo, considere el Web service de la agencia de viajes, que normalmente recibe la request de un cliente como un documento XML que contiene toda la información necesaria para organizar un viaje en particular. La información del documento incluye detalles sobre la cuenta del cliente, el estado de la tarjeta de crédito, los destinos de viaje deseados, las aerolíneas preferidas, la clase de viaje, las fechas, etc. El Web service utiliza el contenido de los documentos para realizar pasos como verificar la cuenta del cliente, obtener la autorización de la tarjeta de crédito, verificar la disponibilidad de alojamiento y transporte, crear un itinerario y comprar boletos.
 
-En esencia, el servicio, que recibe la solicitud con el documento XML, inicia un proceso comercial para realizar una serie de pasos para completar la solicitud. El contenido del documento XML se utiliza en todo el proceso empresarial. Manejar este tipo de escenario de manera efectiva requiere algunas consideraciones además de las generales para todos los Web services.
+En esencia, el servicio, que recibe la request con el documento XML, inicia un proceso comercial para realizar una serie de pasos para completar la request. El contenido del documento XML se utiliza en todo el proceso empresarial. Manejar este tipo de escenario de manera efectiva requiere algunas consideraciones además de las generales para todos los Web services.
 
-Un buen diseño espera que los documentos XML se reciban como objetos javax.xml.transform.Source . Consulte “ Intercambio de documentos XML ” en la página 107 , que trata sobre el intercambio de documentos XML como parámetros. Tenga en cuenta el efecto sobre la interoperabilidad (consulte “ Interoperabilidad ” en la página 86 ).
+✅ ***Un buen diseño espera que los documentos XML se reciban como objetos `javax.xml.transform.Source`. Consulte “Exchanging XML Documents” en la página 107 , que trata sobre el intercambio de documentos XML como parámetros. Tenga en cuenta el efecto sobre la interoperabilidad (consulte “Interoperability” en la página 86 ).***
 
-Es un buen diseño realizar la validación y cualquier transformación necesaria de los documentos XML lo más cerca posible del punto final. La validación y la transformación deben realizarse antes de aplicar cualquier lógica de procesamiento al contenido del documento. Consulte la Figura 3.4 y la discusión sobre la recepción de solicitudes en “ Recepción de solicitudes ” en la página 89 .
+✅ ***Es un buen diseño realizar la validación y cualquier transformación necesaria de los documentos XML lo más cerca posible del endpoint. La validación y la transformación deben realizarse antes de aplicar cualquier lógica de procesamiento al contenido del documento. Consulte la Figura 3.4 y la discusión sobre la recepción de requests en “Receiving Requests” en la página 89 .***
 
-Es importante considerar el tiempo de procesamiento de una solicitud y si el cliente espera la respuesta. Cuando un servicio espera un documento XML como entrada e inicia un largo proceso comercial basado en el contenido del documento, los clientes normalmente no desean esperar la respuesta. Un buen diseño cuando el tiempo de procesamiento puede ser extenso es delegar una solicitud a una cola o tema JMS y devolver un identificador de correlación para referencia futura del cliente. (Recuerde la Figura 3.7 en la página 96 y su discusión).
+✅ ***Es importante considerar el tiempo de procesamiento de una request y si el cliente espera la response. Cuando un servicio espera un documento XML como entrada e inicia un largo proceso comercial basado en el contenido del documento, los clientes normalmente no desean esperar la response. Un buen diseño cuando el tiempo de procesamiento puede ser extenso es delegar una request a una JMS queue o topic y devolver un identificador de correlación para referencia futura del cliente. (Recuerde la Figura 3.7 en la página 96 y su discusión).***
 
 En las siguientes secciones se analizan otras consideraciones.
 
-### 3.7.1. Intercambio de documentos XML
+### 3.7.1. Exchanging XML Documents - Intercambio de Documentos XML
 	
 Como se señaló anteriormente, hay ocasiones en las que puede tener que intercambiar documentos XML como parte de su Web service y dichos documentos se reciben como parámetros de una llamada de método. La plataforma J2EE proporciona tres formas de intercambiar documentos XML.
 
-La primera opción es utilizar las asignaciones Java-MIME proporcionadas por la plataforma J2EE. Consulte la Tabla 3.1 en la página 75 . Con esta opción, el extremo del Web service recibe documentos como objetos javax.xml.transform.Source . (Consulte el Ejemplo de código 3.3 en la página 75 ). Junto con el documento, el extremo del servicio también puede esperar recibir otros argumentos JAX-RPC que contengan metadatos, requisitos de procesamiento, información de seguridad, etc. Cuando un documento XML se pasa como fuenteobjeto, el contenedor maneja automáticamente el documento como un archivo adjunto; de hecho, la implementación del contenedor maneja los detalles del paso del documento por usted. Esto lo libera de las complejidades de enviar y recuperar documentos como parte del manejo de solicitudes/respuestas del terminal.
+La primera opción es utilizar las asignaciones Java-MIME proporcionadas por la plataforma J2EE. Consulte la Tabla 3.1 en la página 75 . Con esta opción, el extremo del Web service recibe documentos como objetos **`javax.xml.transform.Source`**. (Consulte el Ejemplo de código 3.3 en la página 75 ). Junto con el documento, el extremo del servicio también puede esperar recibir otros argumentos JAX-RPC que contengan metadatos, requisitos de procesamiento, información de seguridad, etc. Cuando un documento XML se pasa como objeto **`Source`**, el contenedor maneja automáticamente el documento como un archivo adjunto; de hecho, la implementación del contenedor maneja los detalles del paso del documento por usted. Esto lo libera de las complejidades de enviar y recuperar documentos como parte del manejo de endpoint's request/response.
 
-Pasar documentos XML como objetos de origen es la opción más eficaz en un entorno completamente basado en Java (uno en el que todos los clientes de Web services se basan en Java). Sin embargo, es posible que el envío de documentos como objetos de origen no sea interoperable con clientes que no sean de Java. (Como ya se indicó en la sección “ Interoperabilidad ” en la página 86 , actualmente se están formulando formas estándar de intercambiar archivos adjuntos. Las versiones futuras de la plataforma J2EE incorporarán estos estándares una vez que sean finales).
+✅ ***Pasar documentos XML como objetos de origen es la opción más eficaz en un entorno completamente basado en Java (uno en el que todos los clientes de Web services se basan en Java). Sin embargo, es posible que el envío de documentos como objetos de origen no sea interoperable con clientes que no sean de Java. (Como ya se indicó en la sección “Interoperability” en la página 86, actualmente se están formulando formas estándar de intercambiar archivos adjuntos. Las versiones futuras de la plataforma J2EE incorporarán estos estándares una vez que sean finales).***
 
-La segunda opción es diseñar su extremo de servicio de modo que reciba documentos como tipos de cadena . El ejemplo de código 3.17 muestra la descripción de WSDL para un servicio que recibe documentos como tipos de cadena, lo que ilustra cómo WSDL asigna el documento XML.
+La segunda opción es diseñar su service endpoint de modo que reciba documentos como tipos **`String`**. El ejemplo de código 3.17 muestra la descripción de WSDL para un servicio que recibe documentos como tipos **`String`**, lo que ilustra cómo WSDL asigna el documento XML.
 
-**Ejemplo de código 3.17. Asignación de documento XML a xsd: cadena**
+**Ejemplo de código 3.17. Mapping XML Document to `xsd:string` - Asignación de Documento XML a `xsd:string`**
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions ...>
+   <types/>
+   <message name="PurchaseOrderService_submitPurchaseOrder">
+      <part name="PurchaseOrderXMLDoc" type="xsd:string"/>
+   </message>
+   <message name="PurchaseOrderService_submitPurchaseOrderResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   <portType name="PurchaseOrderService">
+      <operation name="submitPurchaseOrder" parameterOrder="PurchaseOrderXMLDoc">
+         <input message="tns:PurchaseOrderService_submitPurchaseOrder"/>
+         <output message="tns:PurchaseOrderService_submitPurchaseOrderResponse"/>
+      </operation>
+   </portType>
+   ...
+</definitions>
 ```
 
-El ejemplo de código 3.18 muestra la interfaz Java equivalente para el WSDL que se muestra en el ejemplo de código 3.17 .
+El ejemplo de código 3.18 muestra la interfaz Java equivalente para el WSDL que se muestra en el ejemplo de código 3.17.
 
-**Ejemplo de código 3.18. Recibir un documento XML como un objeto de cadena**
+**Ejemplo de código 3.18. Recibir un Documento XML como un Objeto `String`**
 
 ```java
+public interface PurchaseOrderService extends Remote {
+   public String submitPurchaseOrder(String poDocument)
+          throws RemoteException, InvalidOrderException;
+}
 ```
 
-Si está desarrollando su servicio utilizando el enfoque de Java a WSDL, y el servicio debe intercambiar documentos XML y ser interoperable con clientes en cualquier plataforma, entonces pasar documentos como objetos String puede ser su única opción.
+Si está desarrollando su servicio utilizando el enfoque de **Java a WSDL**, y el servicio debe intercambiar documentos XML y ser interoperable con clientes en cualquier plataforma, entonces pasar documentos como objetos **`String`** puede ser su única opción.
 
-Puede haber un inconveniente de rendimiento al enviar un documento XML como un objeto de cadena : a medida que crece el tamaño del documento, también crece el tamaño equivalente de cadena del documento. Como resultado, el tamaño de la carga útil del mensaje que envías también crece. Además, el documento XML pierde su formato original ya que enviar un documento como un objeto String lo envía en un formato canónico.
+✅ ***Puede haber un inconveniente de rendimiento al enviar un documento XML como un objeto `String`: A medida que crece el tamaño del documento, también crece el tamaño equivalente de `String` del documento. Como resultado, el tamaño de la carga útil del mensaje que envías también crece. Además, el documento XML pierde su formato original ya que enviar un documento como un objeto `String` lo envía en un formato canónico.***
 
-La tercera opción es intercambiar el documento XML como un fragmento de documento SOAP. Con esta opción, asigna el documento XML a xsd:anyType en el archivo WSDL del servicio.
+La tercera opción es intercambiar el documento XML como un fragmento de SOAP document. Con esta opción, asigna el documento XML a **`xsd:anyType`** en el archivo WSDL del servicio.
 
-Se recomienda que los Web services intercambien documentos XML como fragmentos de documentos SOAP porque pasar documentos XML de esta manera es portátil entre implementaciones J2EE e interoperable con todas las plataformas.
+✅ ***Se recomienda que los Web services intercambien documentos XML como SOAP document fragments porque pasar documentos XML de esta manera es portátil entre implementaciones J2EE e interoperable con todas las plataformas.***
 
-Para pasar fragmentos de documentos SOAP, debe implementar su servicio utilizando el enfoque de WSDL a Java.
+✅ ***Para pasar SOAP document fragments, debe implementar su servicio utilizando el enfoque de WSDL a Java.***
 
-Por ejemplo, el servicio de agencia de viajes recibe un documento XML que representa una orden de compra que contiene todos los detalles sobre los planes de viaje preferidos del cliente. Para implementar este servicio, defina el WSDL para el servicio y, en el WSDL, asigne el tipo de documento XML como xsd:anyType . Consulte el ejemplo de código 3.19 .
+Por ejemplo, el servicio de agencia de viajes recibe un documento XML que representa una orden de compra que contiene todos los detalles sobre los planes de viaje preferidos del cliente. Para implementar este servicio, defina el WSDL para el servicio y, en el WSDL, asigne el tipo de documento XML como **`xsd:anyType`**. Consulte el ejemplo de código 3.19 .
 
-**Ejemplo de código 3.19. Asignación de documentos XML a xsd:anyType**
+**Ejemplo de código 3.19. Mapping XML document to `xsd:anyType` - Asignación de documentos XML a `xsd:anyType`**
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions ...>
+   <types/>
+   <message name="PurchaseOrderService_submitPurchaseOrder">
+      <part name="PurchaseOrderXMLDoc" type="xsd:anyType"/>
+   </message>
+   <message name="PurchaseOrderService_submitPurchaseOrderResponse">
+      <part name="result" type="xsd:string"/>
+   </message>
+   <portType name="PurchaseOrderService">
+      <operation name="submitPurchaseOrder" parameterOrder="PurchaseOrderXMLDoc">
+         <input message="tns:PurchaseOrderService_submitPurchaseOrder"/>
+         <output message="tns:PurchaseOrderService_submitPurchaseOrderResponse"/>
+      </operation>
+   </portType>
+   ...
+</definitions>
 ```
 
-Una asignación WSDL del tipo de documento XML a xsd:anyType requiere que la plataforma asigne el parámetro del documento como un objeto javax.xml.soap.SOAPElement . Por ejemplo, el Ejemplo de código 3.20 muestra la interfaz Java generada para la descripción WSDL en el Ejemplo de código 3.19 .
+Una asignación WSDL del tipo de documento XML a **`xsd:anyType`** requiere que la plataforma asigne el parámetro del documento como un objeto **`javax.xml.soap.SOAPElement`**. Por ejemplo, el Ejemplo de código 3.20 muestra la interfaz Java generada para la descripción WSDL en el Ejemplo de código 3.19 .
 
 **Ejemplo de código 3.20. Interfaz Java para WSDL en el ejemplo de código 3.19**
 
 ```java
+public interface PurchaseOrderService extends Remote {
+   public String submitPurchaseOrder(SOAPElement
+                    purchaseOrderXMLDoc) throws RemoteException;
+}
 ```
 
-En este ejemplo, el parámetro SOAPElement en submitPurchaseOrder representa el fragmento de documento SOAP enviado por el cliente. Para el servicio de agencia de viajes, esta es la orden de compra. El servicio puede analizar el fragmento de documento SOAP recibido utilizando la API javax.xml.soap.SOAPElement . O bien, el servicio puede utilizar JAXB para asignar el fragmento de documento a un objeto Java o transformarlo en otro esquema. Un cliente de este Web service crea el documento de orden de compra utilizando la API específica de la plataforma del cliente para crear fragmentos de documentos SOAP (en la plataforma Java, esta es la API javax.xml.soap.SOAPElement ) y envía el documento como uno de los parámetros de llamada del servicio.
+En este ejemplo, el parámetro **`SOAPElement`** en **`submitPurchaseOrder`** representa el SOAP document fragment enviado por el cliente. Para el servicio de agencia de viajes, esta es la orden de compra. El servicio puede analizar el SOAP document fragment recibido utilizando la API **`javax.xml.soap.SOAPElement`**. O bien, el servicio puede utilizar JAXB para asignar el fragmento de documento a un objeto Java o transformarlo en otro esquema. Un cliente de este Web service crea el documento de orden de compra utilizando la API específica de la plataforma del cliente para crear SOAP document fragment (en la plataforma Java, esta es la API **`javax.xml.soap.SOAPElement`** ) y envía el documento como uno de los parámetros de llamada del servicio.
 
-Al utilizar el enfoque de WSDL a Java, puede asignar directamente el documento que se va a intercambiar a su esquema adecuado en el WSDL. La interfaz Java generada correspondiente representa el documento como su objeto Java equivalente . Como resultado, el extremo del servicio nunca ve el documento que se intercambia en su forma de documento original. También significa que el punto final está estrechamente relacionado con el esquema del documento: cualquier cambio en el esquema del documento requiere un cambio correspondiente en el punto final. Si no desea un acoplamiento tan estrecho, considere usar xsd:anyType para mapear el documento.
+Al utilizar el enfoque de **WSDL a Java**, puede asignar directamente el documento que se va a intercambiar a su esquema adecuado en el WSDL. La interfaz Java generada correspondiente representa el documento como su **`Object`** Java equivalente. Como resultado, el service endpoint nunca ve el documento que se intercambia en su forma de documento original. También significa que el endpoint está estrechamente relacionado con el esquema del documento - cualquier cambio en el esquema del documento requiere un cambio correspondiente en el endpoint. Si no desea un acoplamiento tan estrecho, considere usar **`xsd:anyType`** para mapear el documento.
 
-### 3.7.2. Separación de la manipulación de documentos de la lógica de procesamiento
+### 3.7.2. Separación de la Manipulación de Documentos de la Lógica de Procesamiento
 
 Cuando la lógica de negocio de su servicio opera en el contenido de un documento XML entrante, la lógica de procesamiento comercial debe, como mínimo, leer el documento, si no modificarlo. Al separar la lógica de manipulación de documentos de la lógica de procesamiento, un desarrollador puede cambiar entre varios mecanismos de manipulación de documentos sin afectar la lógica de procesamiento. Además, existe una clara división entre las habilidades de los desarrolladores.
 
-Es una buena práctica separar la lógica de manipulación de documentos XML de la lógica de negocio.
+✅ ***Es una buena práctica separar la lógica de manipulación de documentos XML de la lógica de negocio.***
 
-La sección “ Resumir el procesamiento XML de la lógica de la aplicación ” en la página 155 proporciona más información sobre cómo lograr esta separación y sus méritos.
+La sección **“Abstracting XML Processing from Application Logic”** en la página 155 proporciona más información sobre cómo lograr esta separación y sus méritos.
 
-### 3.7.3. Fragmentación de documentos XML
+### 3.7.3. Fragmenting XML Documents - Fragmentación de Documentos XML
 
-Cuando la lógica de negocio de su servicio opera en el contenido de un documento XML entrante, es una buena idea dividir los documentos XML en fragmentos lógicos cuando corresponda. Cuando la lógica de procesamiento recibe un documento XML que contiene toda la información para procesar una solicitud, el documento XML generalmente tiene segmentos bien definidos para diferentes entidades y cada segmento contiene los detalles sobre una entidad específica.
+Cuando la lógica de negocio de su servicio opera en el contenido de un documento XML entrante, es una buena idea dividir los documentos XML en fragmentos lógicos cuando corresponda. Cuando la lógica de procesamiento recibe un documento XML que contiene toda la información para procesar una request, el documento XML generalmente tiene segmentos bien definidos para diferentes entidades y cada segmento contiene los detalles sobre una entidad específica.
 
-En lugar de pasar el documento completo a diferentes componentes que manejan varias etapas del proceso comercial, es mejor si la lógica de procesamiento divide el documento en fragmentos y pasa solo los fragmentos necesarios a otros componentes o servicios que implementan partes de la lógica del proceso comercial.
+✅ ***En lugar de pasar el documento completo a diferentes componentes que manejan varias etapas del proceso comercial, es mejor si la lógica de procesamiento divide el documento en fragmentos y pasa solo los fragmentos necesarios a otros componentes o servicios que implementan partes de la lógica del proceso comercial.***
 
-Consulte “ Fragmentación de documentos XML entrantes ” en la página 153 para obtener más detalles sobre la fragmentación.
+Consulte **“Fragmenting Incoming XML Documents”** en la página 153 para obtener más detalles sobre la fragmentación.
 
 ### 3.7.4. Usando XML
 
-XML, si bien tiene muchos beneficios, también tiene desventajas de rendimiento. Debe sopesar las ventajas y desventajas de pasar documentos XML a través de las etapas de procesamiento de la lógica de negocio. Los pros y los contras de pasar documentos XML cobran mayor importancia cuando la implementación de la lógica de negocio abarca varios contenedores. Consulte el Capítulo 5 , específicamente la sección titulada “ Use XML juiciosamente ” en la página 194 , que proporciona pautas sobre este tema. Seguir estas pautas puede ayudar a minimizar la sobrecarga de rendimiento que conlleva el paso de documentos XML a través de las etapas del flujo de trabajo.
+XML, si bien tiene muchos beneficios, también tiene desventajas de rendimiento. Debe sopesar las ventajas y desventajas de pasar documentos XML a través de las etapas de procesamiento de la lógica de negocio. Los pros y los contras de pasar documentos XML cobran mayor importancia cuando la implementación de la lógica de negocio abarca varios contenedores. Consulte el Capítulo 5 , específicamente la sección titulada **“Use XML Judiciously”** en la página 194 , que proporciona pautas sobre este tema. Seguir estas pautas puede ayudar a minimizar la sobrecarga de rendimiento que conlleva el paso de documentos XML a través de las etapas del flujo de trabajo.
 
 Además, cuando decida un enfoque, tenga en cuenta los costos que implica el uso de XML y sopéselos junto con las recomendaciones sobre análisis, validación y vinculación de documentos a objetos Java. Véase el Capítulo 4 para una discusión de estos temas.
 
-### 3.7.5. Uso de tecnologías JAXM y SAAJ
+### 3.7.5. Uso de Tecnologías JAXM y SAAJ
 
-La plataforma J2EE proporciona una serie de tecnologías, incluidas tecnologías obligatorias como JAX-RPC y SAAJ y tecnologías opcionales como Java TM API para mensajería XML (JAXM), que permiten el intercambio de mensajes y documentos con SOAP. Cada una de estas tecnologías J2EE ofrece un nivel diferente de soporte para mensajería y comunicación basada en SOAP. (Vea el Capítulo 2 para la discusión sobre JAX-RPC y SAAJ).
+La plataforma J2EE proporciona una serie de tecnologías, incluidas tecnologías obligatorias como **JAX-RPC** y **SAAJ** y tecnologías opcionales como **JavaTM API for XML Messaging (JAXM)**, que permiten el intercambio de mensajes y documentos con SOAP. Cada una de estas tecnologías J2EE ofrece un nivel diferente de soporte para mensajería y comunicación basada en SOAP. (Vea el Capítulo 2 para la discusión sobre **JAX-RPC** y **SAAJ**).
 
-Una pregunta obvia que surge es: ¿Por qué no utilizar las tecnologías JAXM o SAAJ en escenarios donde hay que pasar documentos XML? Si recuerdas:
+Una pregunta obvia que surge es: ***¿Por qué no utilizar las tecnologías JAXM o SAAJ en escenarios donde hay que pasar documentos XML?*** Si recuerdas:
 
-SAAJ permite a los desarrolladores tratar directamente con mensajes SOAP y es más adecuado para entornos de mensajería punto a punto. SAAJ es mejor para los desarrolladores que desean tener más control sobre los mensajes SOAP que se intercambian y para los desarrolladores que usan controladores.
+* **SAAJ** permite a los desarrolladores tratar directamente con SOAP messages y es más adecuado para entornos de mensajería punto a punto. SAAJ es mejor para los desarrolladores que desean tener más control sobre los SOAP messages que se intercambian y para los desarrolladores que usan controladores.
 
-JAXM define una infraestructura para la entrega garantizada de mensajes. Proporciona una forma de enviar y recibir documentos XML y garantizar su recepción, y está diseñado para casos de uso que implican almacenar y reenviar documentos y mensajes XML.
+* **JAXM** define una infraestructura para la entrega garantizada de mensajes. Proporciona una forma de enviar y recibir documentos XML y garantizar su recepción, y está diseñado para casos de uso que implican almacenar y reenviar documentos y mensajes XML.
 
-SAAJ se considera más útil para desarrolladores avanzados que conocen a fondo la tecnología y que deben tratar directamente con mensajes SOAP.
+SAAJ se considera más útil para desarrolladores avanzados que conocen a fondo la tecnología y que deben tratar directamente con SOAP messages.
 
-Usar JAXM para escenarios que requieren pasar documentos XML puede ser una buena opción. Tenga en cuenta, sin embargo, que JAXM es opcional en la plataforma J2EE 1.4. Como resultado, es posible que un servicio desarrollado con JAXM no sea portátil. Cuando controla ambos puntos finales de un Web service, puede tener más sentido considerar el uso de JAXM.
+Usar JAXM para escenarios que requieren pasar documentos XML puede ser una buena opción. Tenga en cuenta, sin embargo, que JAXM es opcional en la plataforma J2EE 1.4. Como resultado, es posible que un servicio desarrollado con JAXM no sea portátil. Cuando controla ambos endpoints de un Web service, puede tener más sentido considerar el uso de JAXM.
   
-## 3.8. Implementación y empaquetado de un extremo de servicio
+## 3.8. Deploying and Packaging a Service Endpoint - Implementación y Empaquetado de un Service Endpoint
 
 Hasta ahora, hemos examinado los Web services en la plataforma J2EE en términos de diseño, desarrollo e implementación. Una vez que complete la implementación de los Web services, debe escribir sus descriptores de implementación, empaquetar el servicio con todos sus componentes e implementar el servicio.
 
