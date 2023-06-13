@@ -34,7 +34,7 @@ El **Capítulo 13**, ***Miscellaneous Topics - Temas varios***, presenta algunas
 Haremos uso de una gran cantidad de software de código abierto para ejecutar los ejemplos de código de este libro. En primer lugar, debe instalar **soapUI 4.0.1** o una versión posterior como se explica en el ***Capítulo 1, Web Services Testing and soapUI - Pruebas de servicios web y soapUI***. Necesitará **MySQL** y **Apache Axis2-1.6.1** o una versión posterior para ejecutar los servicios web de muestra. También necesitará **Apache Ant** para compilar el proyecto de servicios web de muestra. Se requieren las bibliotecas de código abierto **Apache Rampart**, **Apache Maven**, **Apache ActiveMQ** y **Apache Wink** para algunas demostraciones, como se explica en los capítulos respectivos.
 
 
-## Pra quien es este libro
+## Para quien es este libro
 
 Si forma parte de un equipo que crea soluciones orientadas a servicios o utiliza servicios web en su proyecto, y su participación principal es probar dicha solución, entonces este libro es la referencia ideal para usted. Este libro lo ayudará a comprender los desafíos comunes de las pruebas **SOA** y cómo se puede utilizar **soapUI** de manera efectiva para probar sus aplicaciones.
 
