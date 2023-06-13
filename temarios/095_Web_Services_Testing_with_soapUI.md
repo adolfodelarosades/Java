@@ -38,7 +38,7 @@ Al final, habrá aprendido a probar los aspectos funcionales y no funcionales de
    * Support files, eBooks, discount offers and more
       * Why Subscribe?
       * Free Access for Packt account holders
-* Preface
+* [Preface](https://github.com/adolfodelarosades/Java/blob/master/temarios/095_Web_Services_Testing_with_soapUI/00-Preface.md)
    * What this book covers
    * What you need for this book
    * Who this book is for
@@ -49,6 +49,7 @@ Al final, habrá aprendido a probar los aspectos funcionales y no funcionales de
       * Errata
       * Piracy
       * Questions
+      
 ### 1. Web Services Testing and soapUI
 
 * SOA and web services
