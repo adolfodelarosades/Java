@@ -38,17 +38,17 @@ La cobertura de temas clave incluye:
 ## Content
 
 
-* [Foreword](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/00_Foreword.md)
+* [Foreword](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/00_Foreword.md) :+1:
 
 * Preface
 
-1. [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/01-Introduccion.md)
+1. [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/01-Introduccion.md):+1:
 
-2. Standards And Technologies
+2. [Standards And Technologies](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/02-Standards-And-Technologies.md):+1:
 
-3. Service Endpoint Design
+3. [Service Endpoint Design](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/03-Service-Endpoint-Design.md):+1:
 
-4. XML Processing
+4. [XML Processing](https://github.com/adolfodelarosades/Java/blob/master/temarios/093_Designing_Web_Services/04-XML%20Processing.md)
 
 5. Client Design
 
