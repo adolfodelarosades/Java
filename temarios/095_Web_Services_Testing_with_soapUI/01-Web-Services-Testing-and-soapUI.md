@@ -90,57 +90,54 @@ La estructura de un SOAP message se muestra en el siguiente diagrama:
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/421c339d-cdfa-4b1f-9f06-308cf0e6e258)
 
 El SOAP Envelope es el elemento contenedor que contiene todos los child nodes dentro de un SOAP message.
-AQUIIIIIIIII
-El elemento de encabezado SOAP es un bloque opcional donde se almacena la metainformación. Usando los encabezados, los mensajes SOAP pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los web services, ya que al mantener los encabezados SOAP, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los encabezados SOAP pueden incluir lo siguiente:
 
-Instrucciones de procesamiento de mensajes
-Metadatos de la política de seguridad
-Información de direccionamiento
-Datos de correlación de mensajes
-Metadatos de mensajería fiables
-El cuerpo SOAPes el elemento donde se alojan los contenidos reales del mensaje. Estos contenidos del cuerpo se conocen generalmente como el mensaje.carga útil.
+El elemento SOAP Header es un bloque opcional donde se almacena la metainformación. Usando los headers, los SOAP messages pueden contener diferentes tipos de información complementaria relacionada con la entrega y el procesamiento de mensajes. Esto proporciona indirectamente la ausencia de estado para los web services, ya que al mantener los SOAP headers, los servicios no necesariamente necesitan almacenar la lógica específica del mensaje. Por lo general, los SOAP headers pueden incluir lo siguiente:
 
-Echemos un vistazo a un mensaje SOAP de muestra y relacionemos los conceptos anteriores a través del siguiente diagrama:
+* Instrucciones de procesamiento de mensajes
+* Metadatos de la política de seguridad
+* Información de direccionamiento
+* Datos de correlación de mensajes
+* Metadatos de mensajería fiables
 
+El SOAP body es el elemento donde se alojan los contenidos reales del mensaje. Estos contenidos del body se conocen generalmente como el message payload.
 
-En este ejemplo de mensaje SOAP, podemos identificar claramente los tres elementos; sobre, cuerpo y encabezado. El elemento de encabezado incluye un conjunto de elementos secundarios como <wsa:To>, <wsa:ReplyTo>, <wsa:Address>, <wsa:MessageID>y <wsa:Action>. Estos bloques de encabezado forman parte de la especificación WS-Addressing. De manera similar, cualquier elemento de encabezado asociado con las especificaciones WS-* se puede incluir dentro del elemento de encabezado SOAP.
+Echemos un vistazo a un SOAP message de muestra y relacionemos los conceptos anteriores a través del siguiente diagrama:
 
-El <s:Body>elemento lleva la carga útil del mensaje real. En este ejemplo, es el <p:echoString>elemento con un elemento secundario.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/65106acd-10da-4db1-9bee-bd9c4800ebc2)
 
-CONSEJO
-Cuando se trabaja con mensajes SOAP, la identificación de la versión del mensaje SOAP es uno de los requisitos importantes. A primera vista, puede determinar la versión de la especificación utilizada en el mensaje SOAP a través del identificador de espacio de nombres del <Envelope>elemento. Si el mensaje cumple con la especificación SOAP 1.1, sería http://schemas.xmlsoap.org/soap/envelope/ ; de lo contrario, http://www.w3.org/2003/05/soap-envelope es el identificador del espacio de nombres de mensajes SOAP 1.2.
+En este ejemplo de SOAP message, podemos identificar claramente los tres elementos; envelope, body y header. El elemento header incluye un conjunto de child elements como **`<wsa:To>`**, **`<wsa:ReplyTo>`**, **`<wsa:Address>`**, **`<wsa:MessageID>`** y  **`<wsa:Action>`**. Estos bloques header forman parte de la especificación **WS-Addressing**. De manera similar, cualquier elemento header asociado con las especificaciones **`WS-*`** se puede incluir dentro del elemento SOAP header.
+
+El elemento **`<s:Body>`** lleva la carga útil del message payload. En este ejemplo, es el elemento **`<p:echoString>`** con un child element.
+
+<hr>
+
+**TIP**
+
+Cuando se trabaja con SOAP messages, la identificación de la versión del SOAP message es uno de los requisitos importantes. A primera vista, puede determinar la versión de la especificación utilizada en el SOAP message a través del identificador de espacio de nombres del elemento **`<Envelope>`**. Si el mensaje cumple con la especificación SOAP 1.1, sería http://schemas.xmlsoap.org/soap/envelope/ ; de lo contrario, http://www.w3.org/2003/05/soap-envelope es el identificador del espacio de nombres de SOAP 1.2 messages.
   
-## Alternatives to SOAP
-Though SOAP is considered as the standard protocol for web services communication, it is not the only possible transport protocol which is used. SOAP was designed to be extensible so that the other standards could be integrated into it. The WS-* extensions such as WS-Security, WS-Addressing, and WS-ReliableMessaging are associated with SOAP messaging due to this extensible nature. In addition to the platform and language agnosticism, SOAP messages can be transmitted over various transports such as HTTP, HTTPS, JMS, and SMTP among others. However, there are a few drawbacks associated with SOAP messaging. The performance degradations due to heavy XML processing and the complexities associated with the usage of various WS-* specifications are two of the most common disadvantages of the SOAP messaging model. Because of these concerns, we can identify some alternative approaches to SOAP.
-
-REST
-Due to the complexities accompanied with the SOAP model, Representational State Transfer (REST) architecture has emerged as a result. RESTful web services can be considered as a lightweight alternative to the bulky and complex SOAP based web service standards. In RESTful web services, the emphasis is on point-to-point communication over HTTP, primarily using plain old XML (POX) messages. We will discuss RESTful web services in detail in Chapter 8, Getting started with REST Testing.
-
-Java Script Object Notation
-Java Script Object Notation (JSON) is a lightweight data exchange format similar to XML. It is based on a subset of JavaScript language. JSON uses key value pairs to represent data which are carried inside the message. The following example shows how the XML payload of a SOAP message can be represented in JSON:
-
-Java Script Object Notation
-The corresponding JSON format of the preceding XML payload is represented by:
-
-Java Script Object Notation
-You may refer to http://www.json.org for more details about JSON.
+<hr>
   
-## Alternatives to SOAP
-Though SOAP is considered as the standard protocol for web services communication, it is not the only possible transport protocol which is used. SOAP was designed to be extensible so that the other standards could be integrated into it. The WS-* extensions such as WS-Security, WS-Addressing, and WS-ReliableMessaging are associated with SOAP messaging due to this extensible nature. In addition to the platform and language agnosticism, SOAP messages can be transmitted over various transports such as HTTP, HTTPS, JMS, and SMTP among others. However, there are a few drawbacks associated with SOAP messaging. The performance degradations due to heavy XML processing and the complexities associated with the usage of various WS-* specifications are two of the most common disadvantages of the SOAP messaging model. Because of these concerns, we can identify some alternative approaches to SOAP.
+## Alternativas a SOAP
 
-REST
-Due to the complexities accompanied with the SOAP model, Representational State Transfer (REST) architecture has emerged as a result. RESTful web services can be considered as a lightweight alternative to the bulky and complex SOAP based web service standards. In RESTful web services, the emphasis is on point-to-point communication over HTTP, primarily using plain old XML (POX) messages. We will discuss RESTful web services in detail in Chapter 8, Getting started with REST Testing.
+Aunque **SOAP** se considera el protocolo estándar para la comunicación de servicios web, no es el único protocolo de transporte posible que se utiliza. SOAP fue diseñado para ser extensible para que los otros estándares pudieran integrarse en él. Las extensiones **`WS-*`** como **WS-Security**, **WS-Addressing** y **WS-ReliableMessaging** está asociado con la SOAP messaging debido a esta naturaleza extensible. Además del lenguaje agnosticismo de la plataforma, los SOAP messages se pueden transmitir a través de varios transportes, como **HTTP**, **HTTPS**, **JMS** y **SMTP**, entre otros. Sin embargo, existen algunos inconvenientes asociados con la SOAP messaging. Las degradaciones de rendimiento debidas al procesamiento pesado de XML y las complejidades asociadas con el uso de varias especificaciones **`WS-*`** son dos de las desventajas más comunes del modelo de SOAP messaging. Debido a estas preocupaciones, podemos identificar algunos enfoques alternativos a SOAP.
 
-Java Script Object Notation
-Java Script Object Notation (JSON) is a lightweight data exchange format similar to XML. It is based on a subset of JavaScript language. JSON uses key value pairs to represent data which are carried inside the message. The following example shows how the XML payload of a SOAP message can be represented in JSON:
+### REST
 
-Java Script Object Notation
-The corresponding JSON format of the preceding XML payload is represented by:
+Debido a las complejidades que acompañan al modelo **SOAP**, la arquitectura **Representational State Transfer (REST)** ha surgido como resultado. Los **RESTful web services** se pueden considerar como una alternativa ligera a los voluminosos y complejos estándares de servicios web basados en **SOAP**. En los **RESTful web services**, el énfasis está en la comunicación point-to-point a través de **HTTP**, principalmente utilizando **plain old XML (POX)** messages. Analizaremos los **RESTful web services** en detalle en el Capítulo 8, ***Getting started with REST Testing***.
 
-Java Script Object Notation
-You may refer to http://www.json.org for more details about JSON.
+### Java Script Object Notation
+
+La **Java Script Object Notation ( JSON )** es un formato ligero de intercambio de datos similar a XML. Se basa en un subconjunto del lenguaje **JavaScript**. **JSON** utiliza pares de  key-value para representar los datos que se transportan dentro del mensaje. El siguiente ejemplo muestra cómo se puede representar la  XML payload de un SOAP message en JSON:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/f77abe4d-5a60-4162-a034-70196e42df00)
+
+El formato JSON correspondiente del XML payload está representada por:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/9e2782fa-8f9f-4b7b-868a-fd71603cc1f7)
+
+Puede consultar http://www.json.org para obtener más detalles sobre JSON.
   
-## Lenguaje de descripción de web services
+## Web Services Description Language - Lenguaje de Descripción de Web Services
   
 Según la especificación WSDL 1.1, WSDL esdefinido como:
 
