@@ -556,33 +556,33 @@ Los métodos **`getContentLength`** y **`getContentLengthLong`** devuelven el n�
 
 #### Leer el Contenido de un Request
 
-Los métodos **`getInputStream`**, que devuelve un **`javax.servlet.ServletInputStream`**, y **`getReader`**, que devuelve un `java.io.BufferedReader`, se pueden utilizar para leer el contenido de la solicitud. Cuál es mejor depende completamente del contexto en el que se leen los contenidos de la solicitud. Si se espera que los contenidos sean datos codificados con caracteres, como texto UTF-8 o ISO-8859-1, utilizar `BufferedReader` suele ser la ruta más fácil de tomar porque le permite leer fácilmente los datos `char`. Sin embargo, si los datos de la solicitud son de naturaleza binaria, debe utilizar `ServletInputStream` para poder acceder al contenido del request en formato `byte`. Nunca debe usarlos a ambos en la misma solicitud. Después de una llamada a cualquiera de los métodos, una llamada al otro fallará con una `IllegalStateException`. Recuerde la advertencia anterior y no utilice estos métodos en una solicitud con variables de publicación.
+Los métodos **`getInputStream`**, que devuelve un **`javax.servlet.ServletInputStream`**, y **`getReader`**, que devuelve un **`java.io.BufferedReader`**, se pueden utilizar para leer el contenido de la request. Cuál es mejor depende completamente del contexto en el que se leen los contenidos de la request. Si se espera que los contenidos sean datos codificados con caracteres, como texto **UTF-8** o **ISO-8859-1**, utilizar **`BufferedReader`** suele ser la ruta más fácil de tomar porque le permite leer fácilmente los datos **`char`**. Sin embargo, si los request data son de naturaleza binaria, debe utilizar **`ServletInputStream`** para poder acceder al request content en formato **`byte`**. Nunca debe usarlos a ambos en la misma request. Después de una llamada a cualquiera de los métodos, una llamada al otro fallará con una **`IllegalStateException`**. Recuerde la advertencia anterior y no utilice estos métodos en una request con post variables.
 
-#### Obtener características del Request, tales como URL, URI y Headers
+#### Obtener Características del Request, tales como URL, URI y Headers
 
-Hay muchas características de la solicitud que es posible que deba conocer, como la URL o la URI con la que se realizó la solicitud. Estos son fáciles de obtener del objeto de solicitud:
+Hay muchas características de la request que es posible que deba conocer, como la URL o la URI con la que se realizó la request. Estos son fáciles de obtener del request object:
 
-* `getRequestURL`: Devuelve la URL completa que el cliente utilizó para realizar la solicitud, incluido el protocolo (`http` o `https`), el nombre del servidor, el número de puerto y la ruta del servidor, pero sin incluir la query string. Entonces, en una solicitud a http://www.example.org/application/index.jsp?category=Books, `getRequestURL` devuelve http://www.example.org/application/index.jsp.
+* **`getRequestURL`**: Devuelve la URL completa que el cliente utilizó para realizar la solicitud, incluido el protocolo (**`http`** o **`https`**), el nombre del servidor, el número de puerto y la ruta del servidor(server name, port number, and server path), pero sin incluir la query string. Entonces, en una request a http://www.example.org/application/index.jsp?category=Books, **`getRequestURL`** devuelve http://www.example.org/application/index.jsp.
 
-* `getRequestURI`: Esto es ligeramente diferente de `getRequestURL` en que solo devuelve la parte de la ruta del servidor de la URL; utilizando el ejemplo anterior, sería `/application/index.jsp`.
+* **`getRequestURI`**: Esto es ligeramente diferente de **`getRequestURL`** en que solo devuelve la parte de la server path de la URL; utilizando el ejemplo anterior, sería **`/application/index.jsp`**.
 
-* `getServletPath`: Similar a `getRequestURI`, devuelve incluso menos URL. Si el request es `/hello-world/greeting?foo=world`, la aplicación se implementa como `/hello-world` en Tomcat, y las asignaciones de servlet son `/greeting`, `/salutation` y `/wazzup`, `getServletPath` devuelve solo la parte del URL utilizada para coincidir con la asignación de servlet: `/greeting`.
+* **`getServletPath`**: Similar a **`getRequestURI`**, devuelve incluso menos URL. Si el request es **`/hello-world/greeting?foo=world`**, la aplicación se implementa como **`/hello-world`** en Tomcat, y las asignaciones de servlet son **`/greeting`**, **`/salutation`** y **`/wazzup`**, **`getServletPath`** devuelve solo la parte del URL utilizada para coincidir con la asignación de servlet: **`/greeting`**.
 
-* `getHeader`: Devuelve el valor de un encabezado con el nombre dado. El caso del encabezado no tiene por qué coincidir con el caso de la cadena pasada al método, por lo que `getHeader("content-type")` puede coincidir con el encabezado `Content-Type`. Si hay varios encabezados con el mismo nombre, esto devuelve solo el primer valor. En tales casos, querrá utilizar el método `getHeaders` para devolver una enumeración de todos los valores.
+* **`getHeader`**: Devuelve el valor de el header con el nombre dado. El caso del header no tiene por qué coincidir con el caso de la cadena pasada al método, por lo que **`getHeader("content-type")`** puede coincidir con el header **`Content-Type`**. Si hay varios headers con el mismo nombre, esto devuelve solo el primer valor. En tales casos, querrá utilizar el método **`getHeaders`** para devolver una enumeración de todos los valores.
 
-* `getHeaderNames`: Devuelve una enumeración de los nombres de todos los encabezados de la solicitud, una excelente manera de iterar sobre los encabezados disponibles.
+* **`getHeaderNames`**: Devuelve una enumeración de los nombres de todos los headers de la request, una excelente manera de iterar sobre los headers disponibles.
 
-* `getIntHeader`: Si tiene un encabezado en particular que sabe que siempre es un número, puede llamarlo para devolver el valor ya convertido en un número. Lanza una `NumberFormatException` si el encabezado no se puede convertir en un número entero.
+* **`getIntHeader`**: Si tiene un header en particular que sabe que siempre es un número, puede llamarlo para devolver el valor ya convertido en un número. Lanza una **`NumberFormatException`** si el header no se puede convertir en un número entero.
 
-* `getDateHeader`: Puede llamar a esto para devolver el (milisegundo) equivalente a la marca de tiempo Unix de un valor de encabezado que representa una marca de tiempo válida. Lanza una `IllegalArgumentException` si el valor del encabezado no se reconoce como una fecha.
+* **`getDateHeader`**: Puede llamar a esto para devolver el equivalente (en milisegundo) a la Unix timestamp de un valor de header que representa una timestamp válida. Lanza una **`IllegalArgumentException`** si el valor del header no se reconoce como una fecha(date).
 
 #### Sesiones y Cookies
 
-Los métodos `getSession` y `getCookies` se mencionan solo el tiempo suficiente para decirle que este capítulo no los cubre, pero ambos son ciudadanos importantes en el ámbito `HttpServletRequest`. Puede obtener más información sobre estos en el Capítulo 5.
+Los métodos **`getSession`** y **`getCookies`** se mencionan solo el tiempo suficiente para decirle que este capítulo no los cubre, pero ambos son ciudadanos importantes en el ámbito **`HttpServletRequest`**. Puede obtener más información sobre estos en el Capítulo 5.
 
-### USANDO HTTPSERVLETRESPONSE
+### Usando `HttpServletResponse`
 
-Como la interfaz `HttpServletRequest` extiende `ServletRequest` y brinda acceso a las propiedades específicas del protocolo HTTP de una solicitud, la interfaz `HttpServletResponse` extiende `ServletResponse` y brinda acceso a las propiedades específicas del protocolo HTTP de una respuesta. Utiliza el objeto response para hacer cosas como *establecer encabezados de respuesta, escribir en el cuerpo de la respuesta, redirigir la solicitud, establecer el código de estado HTTP y enviar cookies al cliente*. Nuevamente, aquí se tratan las características más comunes de este objeto.
+Como la interfaz **`HttpServletRequest`** extiende **`ServletRequest`** y brinda acceso a las propiedades específicas del protocolo HTTP de una request, la interfaz **`HttpServletResponse`** extiende **`ServletResponse`** y brinda acceso a las propiedades específicas del protocolo HTTP de una response. Utiliza el response object para hacer cosas como ***establecer response headers, escribir en el response body, redirigir la request, establecer el HTTP status code y enviar cookies al cliente***. Nuevamente, aquí se tratan las características más comunes de este objeto.
 
 #### Escribiendo en el Response Body
 
