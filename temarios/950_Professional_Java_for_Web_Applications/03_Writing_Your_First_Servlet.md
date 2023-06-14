@@ -586,38 +586,34 @@ Como la interfaz **`HttpServletRequest`** extiende **`ServletRequest`** y brinda
 
 #### Escribiendo en el Response Body
 
-Lo más común que puede hacer con un objeto de respuesta, y algo que ya ha hecho con un objeto de respuesta, es escribir contenido en el response body. Puede ser HTML para mostrar en un navegador, una imagen que el navegador está recuperando o el contenido de un archivo que el cliente está descargando. Puede ser texto sin formato o datos binarios. Puede tener solo unos pocos bytes o gigabytes.
+Lo más común que puede hacer con un response object, y algo que ya ha hecho con un response object, es escribir contenido en el response body. Puede ser HTML para mostrar en un navegador, una imagen que el navegador está recuperando o el contenido de un archivo que el cliente está descargando. Puede ser texto sin formato o datos binarios. Puede tener solo unos pocos bytes o gigabytes.
 
-El método `getOutputStream`, que devuelve un `javax.servlet.ServletOutputStream`, y el método `getWriter`, que devuelve un `java.io.PrintWriter`, le permiten escribir datos en la respuesta. Al igual que sus contrapartes en `HttpServletRequest`, probablemente desee utilizar `PrintWriter` para devolver HTML o algún otro texto codificado con caracteres al cliente porque esto facilita la escritura de cadenas y caracteres codificados en la respuesta. Sin embargo, para devolver datos binarios, debe utilizar `ServletOutputStream` para enviar los bytes de respuesta. Además, nunca debe usar `getOutputStream` y `getWriter` en la misma respuesta. Después de llamar a uno, la llamada al otro fallará con una `IllegalStateException`.
+El método **`getOutputStream`**, que devuelve un **`javax.servlet.ServletOutputStream`**, y el método **`getWriter`**, que devuelve un **`java.io.PrintWriter`**, le permiten escribir datos en la response. Al igual que sus contrapartes en **`HttpServletRequest`**, probablemente desee utilizar **`PrintWriter`** para devolver HTML o algún otro texto codificado con caracteres al cliente porque esto facilita la escritura de cadenas y caracteres codificados en la respuesta. Sin embargo, para devolver datos binarios, debe utilizar **`ServletOutputStream`** para enviar los bytes de respuesta. Además, nunca debe usar ***`getOutputStream`** y **`getWriter`** en la misma respuesta. ***Después de llamar a uno, la llamada al otro fallará con una **`IllegalStateException`***.
 
-Mientras escribe en el cuerpo de la respuesta, es posible que sea necesario configurar el tipo de contenido o la codificación. Puede hacer esto con `setContentType` y `setCharacterEncoding`. Puede llamar a estos métodos tantas veces como desee; la última llamada al método es la que importa. Sin embargo, si planea llamar a `setContentType` y `setCharacterEncoding` junto con `getWriter`, debe llamar a `setContentType` y `setCharacterEncoding` antes de `getWriter` para que el writer devuelto esté configurado para la codificación de caracteres correcta. Las llamadas realizadas después de `getWriter` se ignoran. Si no llama a `setContentType` y `setCharacterEncoding` antes de llamar a `getWriter`, el writer devuelto usa la codificación predeterminada del contenedor.
+Mientras escribe en el response body, es posible que sea necesario configurar el tipo de contenido o la codificación. Puede hacer esto con **`setContentType`** y **`setCharacterEncoding`**. Puede llamar a estos métodos tantas veces como desee; la última llamada al método es la que importa. Sin embargo, si planea llamar a **`setContentType`** y **`setCharacterEncoding`** junto con **`getWriter`**, debe llamar a **`setContentType`** y **`setCharacterEncoding`** antes de **`getWriter`** para que el writer devuelto esté configurado para la codificación de caracteres correcta. Las llamadas realizadas después de **`getWriter`** se ignoran. Si no llama a **`setContentType`** y **`setCharacterEncoding`** antes de llamar a **`getWriter`**, el writer devuelto usa la codificación predeterminada del contenedor.
 
-A su disposición, también tiene los métodos `setContentLength` y `setContentLengthLong`. En casi todos los casos, no es necesario llamarlos. El contenedor web establece el encabezado `Content-Length` cuando finaliza su respuesta, y es más seguro dejar que lo haga.
+A su disposición, también tiene los métodos **`setContentLength`** y **`setContentLengthLong`**. En casi todos los casos, no es necesario llamarlos. El contenedor web establece el **`Content-Length`** header cuando finaliza su respuesta, y es más seguro dejar que lo haga.
 
-**NOTA** *La especificación Servlet 3.1 en Java EE 7 es la primera versión que admite el método `setContentLengthLong`. Antes de esta versión, tenía que llamar a `setHeader("Content-Length", Long.toString (length))` para obtener respuestas que pudieran ser mayores que 2,147,483,647 bytes.
+**NOTA** *La Servlet 3.1 specification in Java EE 7 es la primera versión que admite el método **`setContentLengthLong`**. Antes de esta versión, tenía que llamar a **`setHeader("Content-Length", Long.toString (length))`** para obtener respuestas que pudieran ser mayores que 2,147,483,647 bytes.
 
 #### Establecer Headers y otras Propiedades del Response
 
-Sirviendo como contrapartes de los métodos en `HttpServletRequest`, puede llamar a `setHeader`, `setIntHeader` y `setDateHeader` para 
-establecer casi cualquier valor de encabezado que desee. Si los encabezados de respuesta existentes ya incluyen un encabezado con el nombre que está configurando, el valor de ese encabezado se overridden. Para evitar esto, puede usar `addHeader`, `addIntHeader` o `addDateHeader`. Estas versiones no anulan los valores de encabezado existentes, sino que agregan valores adicionales para los encabezados dados. También puede llamar a `getHeader`, `getHeaders`, `getHeaderNames` y  `containsHeader` para investigar qué encabezados ya se han establecido en el response.
+Sirviendo como contrapartes de los métodos en **`HttpServletRequest`**, puede llamar a **`setHeader`**, **`setIntHeader`** y **`setDateHeader`** para establecer casi cualquier valor de header que desee. Si los response headers existentes ya incluyen un header con el nombre que está configurando, el valor de ese header se sobreescribe(overridden). Para evitar esto, puede usar **`addHeader`**, **`addIntHeader`** o **`addDateHeader`**. Estas versiones no anulan los valores de header existentes, sino que agregan valores adicionales para los headers dados. También puede llamar a **`getHeader`**, **`getHeaders`**, **`getHeaderNames`** y  **`containsHeader`** para investigar qué headers ya se han establecido en el response.
 
 Además, puede utilizar:
 
-* `setStatus`: para establecer el código de estado de respuesta HTTP
+* **`setStatus`**: Para establecer el HTTP response status code
+* **`getStatus`**: Para determinar cuál es el estado actual de la response
+* **`sendError`**: Para establecer el status code, indique un mensaje de error opcional para escribir en response data, indique al contenedor web que proporcione una página de error al cliente y borre el búfer
+* **`sendRedirect`**: Para redirigir al cliente a una URL diferente
 
-* `getStatus`: para determinar cuál es el estado actual de la respuesta
-
-* `sendError`: para establecer el código de estado, indique un mensaje de error opcional para escribir en los datos de respuesta, indique al contenedor web que proporcione una página de error al cliente y borre el búfer
-
-* `sendRedirect`: para redirigir al cliente a una URL diferente
-
-Esta sección cubrió la mayoría de las cosas que puede hacer mientras atiende una solicitud HTTP en su Servlet y señaló detalles importantes y precauciones cuando sea necesario. En varias secciones anteriores, ha utilizado el proyecto **950-03-01-hello-world** para demostrar cómo trabaja con Servlets. En la siguiente sección, pasa a un ejemplo un poco más complejo.
+Esta sección cubrió la mayoría de las cosas que puede hacer mientras atiende una HTTP request en su Servlet y señaló detalles importantes y precauciones cuando sea necesario. En varias secciones anteriores, ha utilizado el proyecto **950-03-01-hello-world** para demostrar cómo trabaja con Servlets. En la siguiente sección, pasa a un ejemplo un poco más complejo.
 
 ## USO DE PARÁMETROS Y ACEPTACIÓN DE ENVÍOS DE FORMULARIOS
 
-En esta sección, hará que su proyecto **950-03-01-hello-world** sea un poco más dinámico al aceptar parámetros y envíos de formularios. También explora la configuración de anotaciones y omite temporalmente el deployment descriptor. Para los ejemplos de esta sección, puede seguir el proyecto completo de **950-03-01-hello-world** Hello-User, o simplemente puede incorporar los cambios en su proyecto existente a medida que se tratan.
+En esta sección, hará que su proyecto **950-03-01-hello-world** sea un poco más dinámico al aceptar parámetros y envíos de formularios. También explora la configuración de anotaciones y omite temporalmente el deployment descriptor. Para los ejemplos de esta sección, puede seguir el proyecto completo de **950-03-01-hello-world** **Hello-User**, o simplemente puede incorporar los cambios en su proyecto existente a medida que se tratan.
 
-Se han realizado varios cambios en el proyecto. Lo primero que debe notar es que el método `doGet` es mucho más complejo ahora:
+Se han realizado varios cambios en el proyecto. Lo primero que debe notar es que el método **`doGet`** es mucho más complejo ahora:
 
 ```java
     private static final String DEFAULT_USER = "Guest";
@@ -653,13 +649,11 @@ Se han realizado varios cambios en el proyecto. Lo primero que debe notar es que
 
 El código ha cambiado. Está haciendo un poco de lógica ahora:
 
-* Prueba si el parámetro `user` está incluido en la solicitud y, si no lo está, usa la constante `DEFAULT_USER` en su lugar.
+* Prueba si el parámetro **`user`** está incluido en la request y, si no lo está, usa la constante **`DEFAULT_USER`** en su lugar.
+* Establece el tipo de contenido de la respuesta en **`text/html`** y la codificación de caracteres en **UTF-8**.
+* Obtiene un **`PrintWriter`** de la response y escribe un documento **HTML5** compatible (tenga en cuenta el **DOCTYPE HTML5**), incluido el saludo(greeting) (ahora dirigido a un usuario en particular) y un formulario para proporcionar su nombre de usuario.
 
-* Establece el tipo de contenido de la respuesta en `text/html` y la codificación de caracteres en UTF-8.
-
-* Obtiene un `PrintWriter` de la respuesta y escribe un documento HTML5 compatible (tenga en cuenta el DOCTYPE HTML5), incluido el saludo (ahora dirigido a un usuario en particular) y un formulario para proporcionar su nombre de usuario.
-
-Quizás se pregunte cómo el método `doGet` puede recibir el envío del formulario cuando el tipo de método para el formulario está configurado como `POST`. Esto se maneja con la implementación simple de `doPost`, que también es nueva:
+Quizás se pregunte cómo el método **`doGet`** puede recibir el envío del formulario cuando el tipo de método para el formulario está configurado como **`POST`**. Esto se maneja con la implementación simple de **`doPost`**, que también es nueva:
 
 ```java
     @Override
@@ -670,9 +664,9 @@ Quizás se pregunte cómo el método `doGet` puede recibir el envío del formula
     }
 ```
   
-Esta implementación simplemente se delega en el método `doGet`. Ya sea un query parameter o un post variable denominada `user` puede activar el saludo para cambiar.
+Esta implementación simplemente se delega en el método **`doGet`**. Ya sea un query parameter o un post variable denominada **`user`** puede activar el saludo para cambiar.
 
-Lo último que debe notar es la anotación justo encima de la declaración de Servlet:
+Lo último que debe notar es ***la anotación justo encima de la declaración de Servlet***:
 
 ```java
 @WebServlet(
@@ -686,21 +680,21 @@ public class HelloServlet extends HttpServlet
 }
 ```
 
-**NOTA** *Notarás que las importaciones de clases se han omitido en el ejemplo de código `HelloServlet` más reciente. A medida que su código se vuelve más complejo, las importaciones pueden comenzar a ocupar muchas docenas de líneas de código. Esto es demasiado para imprimirlo en este libro de manera eficiente. Un buen IDE, como el que usa para este libro, puede reconocer los nombres de las clases y sugerirle las importaciones, lo que le quita el trabajo duro de las manos. Con pocas excepciones, las declaraciones de importación y paquete se omiten del resto de los ejemplos de este libro. Las nuevas clases estarán en el paquete com.wrox a menos que se indique lo contrario*.
+**NOTA** *Notarás que las importaciones de clases se han omitido en el ejemplo de código **`HelloServlet`** más reciente. A medida que su código se vuelve más complejo, las importaciones pueden comenzar a ocupar muchas docenas de líneas de código. Esto es demasiado para imprimirlo en este libro de manera eficiente. Un buen IDE, como el que usa para este libro, puede reconocer los nombres de las clases y sugerirle las importaciones, lo que le quita el trabajo duro de las manos. Con pocas excepciones, las declaraciones de importación y paquete se omiten del resto de los ejemplos de este libro. Las nuevas clases estarán en el paquete **`com.wrox`** a menos que se indique lo contrario*.
 
-Si también echas un vistazo al deployment descriptor, notarás que la declaración y el mapeo del Servlet se eliminaron del archivo `web.xml`. (O si realizó estos cambios en el proyecto existente, debe eliminar todo en el deployment descriptor excepto la etiqueta `<display-name>`). La anotación en el ejemplo anterior reemplaza el XML que escribió en su proyecto anterior y agrega un un poco más.
+Si también echas un vistazo al deployment descriptor, notarás que la declaración y el mapeo del Servlet se eliminaron del archivo **`web.xml`**. (O si realizó estos cambios en el proyecto existente, debe eliminar todo en el deployment descriptor excepto la etiqueta **`<display-name>`**). ***La anotación en el ejemplo anterior reemplaza el XML que escribió en su proyecto anterior y agrega un un poco más***.
 
-Aún obtiene una instancia de `HelloServlet` llamada `helloServlet`; todavía comienza cuando se inicia la aplicación; y todavía está asignado a la URL `/greeting`. Ahora también se asigna a las URL `/salutation` y `/wazzup`. Como puede ver, este es un enfoque mucho más directo y conciso para instanciar y mapear servlets. Sin embargo, tiene algunos inconvenientes, que se señalan a lo largo del resto del capítulo. Por ahora, compile su proyecto e inicie Tomcat en su depurador; luego vaya a http://localhost:8080/hello-world/greeting en su navegador. Debería ver una pantalla como se muestra en la Figura 3-2.
+Aún obtiene una instancia de **`HelloServlet`** llamada **`helloServlet`**; todavía comienza cuando se inicia la aplicación; y todavía está asignado a la URL **`/greeting`**. Ahora también se asigna a las URL **`/salutation`** y **`/wazzup`**. Como puede ver, este es un enfoque mucho más directo y conciso para instanciar y mapear servlets. Sin embargo, tiene algunos inconvenientes, que se señalan a lo largo del resto del capítulo. Por ahora, compile su proyecto e inicie Tomcat en su depurador; luego vaya a http://localhost:8080/hello-world/greeting en su navegador. Debería ver una pantalla como se muestra en la Figura 3-2.
 
-![03-02](images/03-02.png)
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/5d423868-a9ec-428d-827d-34dda0ea6105)
 
-Para entender lo que puede hacer este Servlet, primero agregue la cadena de consulta `user=Allison` a la URL para que sea http://localhost:8080/hello-world/greeting?user=Allison. La pantalla debería cambiar ahora y, en lugar de decir "Hello, Guest!" debería decir "Hello, Allison!" En este caso, la solicitud fue atendida por el método `doGet`, que encontró el parámetro de consulta del usuario y lo mostró en la pantalla.
+Para entender lo que puede hacer este Servlet, primero agregue la query string **`user=Allison`** a la URL para que sea http://localhost:8080/hello-world/greeting?user=Allison. La pantalla debería cambiar ahora y, en lugar de decir **"Hello, Guest!"** debería decir **"Hello, Allison!"** En este caso, la request fue atendida por el método **`doGet`**, que encontró el query parameter **`user`** y lo mostró en la pantalla.
 
-Puede confirmar esto colocando puntos de interrupción en `doGet` y `doPost` y actualizando la página. Ahora, escriba su nombre en el campo del formulario en la pantalla y haga clic en el botón Submit. Si examina la URL en la barra de direcciones, ***no tiene ningún parámetro de consulta(query parameters)***. En cambio, su nombre se incluyó en la solicitud como una post variable, y cuando el método `doPost` atendió la solicitud y se delegó al método `doGet`, la llamada a `getParameter` recuperó la variable post, lo que hizo que su nombre se mostrara en la pantalla. Alcanzar los breakpoints confirmará que esto ha sucedido.
+Puede confirmar esto colocando puntos de interrupción en **`doGet`** y **`doPost`** y actualizando la página. Ahora, escriba su nombre en el campo del formulario en la pantalla y haga clic en el **botón Submit**. Si examina la URL en la barra de direcciones, ***no tiene ningún parámetro de consulta(query parameters)***. En cambio, su nombre se incluyó en la solicitud como una post variable, y cuando el método **`doPost`** atendió la request y se delegó al método **`doGet`**, la llamada a **`getParameter`** recuperó la post variable, lo que hizo que su nombre se mostrara en la pantalla. Alcanzar los breakpoints confirmará que esto ha sucedido.
 
-Recuerde de la sección anterior que los valores de un solo parámetro no son lo único que pueden aceptar sus Servlets. También puede aceptar varios valores de parámetros. El ejemplo más común de esto es un conjunto de casillas de verificación relacionadas, donde el usuario puede marcar uno o más valores. Consulte el Listado de código 3-1, el `MultiValueParameterServlet`, mapeado a `/checkboxes`. Compile y ejecute este código en Tomcat usando su depurador y navegue en su navegador hasta http://localhost:8080/hello-world/checkboxes. El método `doGet` en este Servlet imprime un formulario simple con cinco casillas de verificación. El usuario puede seleccionar cualquier número de estas casillas de verificación y hacer clic en Submit, que es atendido por el método `doPost`. Este método recupera todos los valores de frutas y los enumera en la pantalla usando una lista desordenada. Pruebe esto seleccionando varias combinaciones de casillas de verificación y haciendo clic en Submit.
+Recuerde de la sección anterior que los valores de un solo parámetro no son lo único que pueden aceptar sus Servlets. También puede aceptar varios valores de parámetros. El ejemplo más común de esto es un conjunto de casillas de verificación(check boxes) relacionadas, donde el usuario puede marcar uno o más valores. Consulte el Listado de código 3-1, el **`MultiValueParameterServlet`**, mapeado a **`/checkboxes`**. Compile y ejecute este código en Tomcat usando su depurador y navegue en su navegador hasta http://localhost:8080/hello-world/checkboxes. El método **`doGet`** en este Servlet imprime un formulario simple con cinco casillas de verificación. El usuario puede seleccionar cualquier número de estas casillas de verificación y hacer clic en Submit, que es atendido por el método **`doPost`**. Este método recupera todos los valores de frutas y los enumera en la pantalla usando una lista desordenada. Pruebe esto seleccionando varias combinaciones de casillas de verificación y haciendo clic en Submit.
 
-LISTING 3-1: MULTIVALUEPARAMETERSERVLET.JAVA
+**LISTING 3-1: MULTIVALUEPARAMETERSERVLET.JAVA**
 
 ```java
 @WebServlet(
@@ -777,15 +771,15 @@ public class MultiValueParameterServlet extends HttpServlet
 }
 ```
 
-Esta sección le ha mostrado las diversas formas en que puede usar los parámetros de solicitud dentro de sus métodos de Servlet. Ha explorado parámetros de consulta y variables de publicación, junto con parámetros de valor único y multiválvulas. En la siguiente sección, aprenderá sobre varias formas de configurar su aplicación usando parámetros de inicio.
+Esta sección le ha mostrado las diversas formas en que puede usar los request parameters dentro de sus métodos de Servlet. Ha explorado query parameters y post variables, junto con parámetros de valor único y multivalores. En la siguiente sección, aprenderá sobre varias formas de configurar su aplicación usando parámetros de inicio.
 
 ## CONFIGURAR SU APLICACIÓN USANDO INIT PARAMETERS
 
-Al escribir una aplicación web Java, inevitablemente surgirá la necesidad de proporcionar formas de configurar su aplicación y los Servlets que contiene. Hay muchas formas de hacerlo utilizando numerosas tecnologías, y explorará algunas de ellas en este libro. Los medios más simples de configurar su aplicación, a través de parámetros de inicialización de contexto (generalmente abreviado como init parameters) y parámetros de inicio de Servlet, se tratan en esta sección. Estos parámetros se pueden utilizar para cualquier número de usos, desde definir información de conexión para comunicarse con una base de datos relacional, hasta proporcionar una dirección de correo electrónico para enviar alertas de pedidos de tiendas. Se definen al inicio de la aplicación y no pueden cambiar sin reiniciar la aplicación.
+Al escribir una aplicación Java web, inevitablemente surgirá la necesidad de proporcionar formas de configurar su aplicación y los Servlets que contiene. Hay muchas formas de hacerlo utilizando numerosas tecnologías, y explorará algunas de ellas en este libro. Los medios más simples de configurar su aplicación, a través de ***initialization parameters*** - parámetros de inicialización de contexto (generalmente abreviado como ***init parameters***) y Servlet init parameters, se tratan en esta sección. Estos parámetros se pueden utilizar para cualquier número de usos, desde definir información de conexión para comunicarse con una base de datos relacional, hasta proporcionar una dirección de correo electrónico para enviar alertas de pedidos de tiendas. Se definen al inicio de la aplicación y no pueden cambiar sin reiniciar la aplicación.
 
-### UTILIZAR CONTEXT INIT PARAMETERS
+### Utilizar Context Init Parameters
 
-Anteriormente, vació el archivo deployment descriptor y reemplazó su declaración y asignaciones de Servlet con anotaciones en las clases reales. Aunque esto es una cosa (agregada en la especificación Servlet 3.0 en Java EE 6) que puede hacer sin el deployment descriptor, varias cosas aún requieren el deployment descriptor. Los init parameters de contexto son una de esas características. Usted declara los init parameters de contexto usando la etiqueta `<context-param>` dentro del archivo `web.xml`. El siguiente ejemplo de código muestra dos init parameters de contexto agregados al deployment descriptor:
+Anteriormente, vació el archivo deployment descriptor y reemplazó su declaración y asignaciones de Servlet con anotaciones en las clases. Aunque esto es una cosa (agregada en la Servlet 3.0 specification in Java EE 6) que puede hacer sin el deployment descriptor, varias cosas aún requieren el deployment descriptor. Los init parameters de contexto son una de esas características. Usted declara los init parameters de contexto usando la etiqueta **`<context-param>`** dentro del archivo **`web.xml`**. El siguiente ejemplo de código muestra dos init parameters de contexto agregados al deployment descriptor:
 
 ```sh
     <context-param>
@@ -798,8 +792,7 @@ Anteriormente, vació el archivo deployment descriptor y reemplazó su declaraci
     </context-param>
 ```
 
-Esto crea dos init parameters de contexto: `settingOne` que tiene un valor de `foo` y `settingTwo` que tiene un valor de `bar`. Puede obtener y utilizar fácilmente estos valores de parámetros desde cualquier lugar de su código de Servlet. El `ContextParameterServlet` demuestra esta capacidad:
-
+Esto crea dos init parameters de contexto: **`settingOne`** que tiene un valor de **`foo`** y **`settingTwo`** que tiene un valor de **`bar`**. Puede obtener y utilizar fácilmente estos valores de parámetros desde cualquier lugar de su código de Servlet. El **`ContextParameterServlet`** demuestra esta capacidad:
 
 ```java
 @WebServlet(
@@ -823,11 +816,11 @@ public class ContextParameterServlet extends HttpServlet
 
 Si compila, depura y navega a http://localhost:8080/hello-user/contextParameters, puede ver estos parámetros enumerados en la pantalla. Cada servlet de su aplicación comparte estos parámetros de inicialización y sus valores son los mismos en todos los servlets. Sin embargo, puede haber casos en los que necesite una configuración que se aplique a un solo Servlet. Para este propósito, usaría los Servlet init parameters.
 
-**NOTA** *Debe tenerse en cuenta que a partir de Servlet 3.0 puede llamar al método `setInitParameter` de `ServletContext` como una alternativa para definir los init parameters de contexto usando `<context-param>`. Sin embargo, este método solo se puede llamar dentro del método `contextInitialized` de un `javax.servlet.ServletContextListener` (del cual aprenderá en el Capítulo 9) o el método `onStartup` de un `javax.servlet.ServletContainerInitializer` (del cual aprenderá en el Capítulo 12). Aun así, cambiar los valores requeriría volver a compilar su aplicación, por lo que XML suele ser la mejor opción para los parámetros de inicio de contexto*.
+**NOTA** *Debe tenerse en cuenta que a partir de Servlet 3.0 puede llamar al método **`setInitParameter`** de **`ServletContext`** como una alternativa para definir los init parameters de contexto usando **`<context-param>`**. Sin embargo, este método solo se puede llamar dentro del método **`contextInitialized`** de un **`javax.servlet.ServletContextListener`** (del cual aprenderá en el Capítulo 9) o el método **`onStartup`** de un **`javax.servlet.ServletContainerInitializer`** (del cual aprenderá en el Capítulo 12). Aun así, cambiar los valores requeriría volver a compilar su aplicación, por lo que XML suele ser la mejor opción para los parámetros de inicio de contexto*.
 
-### USO DE LOS SERVLET INIT PARAMETERS
+### Uso de los Servlet Init Parameters
 
-Considere el código de la clase `ServletParameterServlet`. Puede notar inmediatamente que no está anotado con `@WebServlet`. No se preocupe; aprendes por qué en un minuto. Por lo demás, el código es casi idéntico al `ContextParameterServlet`. En lugar de obtener sus parámetros de inicio del objeto `ServletContext`, los obtiene del objeto `ServletConfig`:
+Considere el código de la clase **`ServletParameterServlet`**. Puede notar inmediatamente que no está anotado con **`@WebServlet`**. No se preocupe; aprendes por qué, en un minuto. Por lo demás, el código es casi idéntico al **`ContextParameterServlet`**. En lugar de obtener sus init parameters del objeto **`ServletContext`**, los obtiene del objeto **`ServletConfig`**:
 
 ```java
 public class ServletParameterServlet extends HttpServlet
@@ -847,7 +840,7 @@ public class ServletParameterServlet extends HttpServlet
 
 Por supuesto, tener el código de Servlet no es suficiente. El siguiente XML agregado al deployment descriptor declara y mapea el servlet y también hace un poco más:
 
-```html
+```xml
     <servlet>
         <servlet-name>servletParameterServlet</servlet-name>
         <servlet-class>com.wrox.ServletParameterServlet</servlet-class>
@@ -866,7 +859,7 @@ Por supuesto, tener el código de Servlet no es suficiente. El siguiente XML agr
     </servlet-mapping>
 ```
 
-La etiqueta `<init-param>`, como la etiqueta `<context-param>` para el contexto del Servlet, crea un parámetro de inicio específico para este Servlet. Si compila, depura y navega a http://localhost:8080/hello-user/servletParameters, puede ver los parámetros `database` y `server` del servidor especificados en el deployment descriptor. Entonces, ¿por qué, podría preguntarse, no puede usar anotaciones para esto como puede hacerlo para el resto del mapeo de Servlet? Bueno, técnicamente puedes. Puede lograr el mismo resultado que en el código anterior eliminando la initialization y mapping del deployment descriptor y agregando esta anotación a la declaración del servlet:
+La etiqueta **`<init-param>`**, como la etiqueta **`<context-param>`** para el contexto del Servlet, crea un init parameter específico para este Servlet. Si compila, depura y navega a http://localhost:8080/hello-user/servletParameters, puede ver los parámetros **`database`** y **`server`** del servidor especificados en el deployment descriptor. Entonces, ***¿por qué, podría preguntarse, no puede usar anotaciones para esto como puede hacerlo para el resto del mapeo de Servlet?*** Bueno, técnicamente puedes. Puede lograr el mismo resultado que en el código anterior eliminando la initialization y mapping del deployment descriptor y agregando esta anotación a la declaración del servlet:
 
 ```java
 @WebServlet(
@@ -883,11 +876,12 @@ public class ServletParameterServlet extends HttpServlet
 }
 ```
 
-El inconveniente de hacer esto, sin embargo, es que los valores de los parámetros de inicio de Servlet ya no se pueden cambiar sin recompilar la aplicación. Claro, puede haber configuraciones que no le gustaría cambiar sin volver a compilar la aplicación, pero en ese momento, ¿por qué no simplemente convertirlas en constantes de clase? ***La ventaja de colocar los parámetros de inicio de Servlet en el deployment descriptor es que el administrador del servidor necesita cambiar solo unas pocas líneas de XML y reiniciar la aplicación implementada para efectuar el cambio***. Si dicha configuración contiene información de conexión para una base de datos relacional, lo último que desea hacer es volver a compilar la aplicación para cambiar la dirección IP del servidor de la base de datos.
+***El inconveniente de hacer esto, sin embargo, es que los valores de los parámetros de inicio de Servlet ya no se pueden cambiar sin recompilar la aplicación***. Claro, puede haber configuraciones que no le gustaría cambiar sin volver a compilar la aplicación, pero en ese momento, ***¿por qué no simplemente convertirlas en constantes de clase? La ventaja de colocar los parámetros de inicio de Servlet en el deployment descriptor es que el administrador del servidor necesita cambiar solo unas pocas líneas de XML y reiniciar la aplicación implementada para efectuar el cambio***. Si dicha configuración contiene información de conexión para una base de datos relacional, lo último que desea hacer es volver a compilar la aplicación para cambiar la dirección IP del servidor de la base de datos.
 
-La siguiente sección presenta una nueva característica de `HttpServletRequests` agregada en la especificación Servlet 3.0 y una nueva aplicación de ejemplo que mejorará a lo largo del resto del libro.
+La siguiente sección presenta una nueva característica de **`HttpServletRequests`** agregada en la especificación Servlet 3.0 y una nueva aplicación de ejemplo que mejorará a lo largo del resto del libro.
 
-
+<hr>
+AQUIIIIIIIII
 #### LAS VENTAJAS DE `@CONFIG`
 
 Como se mencionó anteriormente, existen ventajas y desventajas en el uso de la configuración basada en anotaciones (a menudo simplemente llamada `@Config`) en su aplicación web. La principal ventaja es la falta de XML y el lenguaje de anotaciones directo y conciso que se utiliza para configurar su aplicación. Sin embargo, también existen numerosos inconvenientes en este enfoque.
@@ -897,6 +891,8 @@ Un ejemplo de esto es la imposibilidad de crear múltiples instancias de una sol
 En el Capítulo 9, aprenderá sobre los filtros y por qué es importante construir cuidadosamente el orden en el que se ejecutan. Puede hacer que los filtros se ejecuten en un orden específico al declararlos usando la configuración XML o la configuración programática de Java. Sin embargo, si declara sus filtros usando `@javax.servlet.annotation.WebFilter`, es imposible hacer que se ejecuten en un orden específico (algo que muchos sienten es un descuido flagrante en las especificaciones de Servlet 3.0 y 3.1). A menos que su aplicación tenga un solo filtro, `@WebFilter` es virtualmente inútil.
 
 Hay muchas cosas más pequeñas que aún requieren que el deployment descriptor XML se cumpla, como definir páginas de manejo de errores, configurar los parámetros JSP y proporcionar una lista de páginas de bienvenida. **Afortunadamente, puede mezclar y combinar XML, anotaciones y Java programático**, y la configuración, para que pueda usar cada uno cuando sea más conveniente. A lo largo de este libro, utilizará las tres técnicas.
+
+<hr> 
 
 ## UPLOADING FILES DESDE UN FORM
 
