@@ -306,7 +306,7 @@ El Volumen 1 presenta una cobertura completa de los Servlets y las especificacio
 
 #### 7.5. Including Tag Body in the Tag Output
 
-*Tag Bodies: Tag Handler Class
+* Tag Bodies: Tag Handler Class
 * Tag Bodies: Tag Library Descriptor
 * Tag Bodies: JSP File
 
@@ -360,23 +360,23 @@ El Volumen 1 presenta una cobertura completa de los Servlets y las especificacio
 
 #### 9.1. Installation of JSTL
 
-#### 9.2. c:out Tag
+#### 9.2. `c:out` Tag
 
-#### 9.3. c:forEach and c:forTokens Tags
+#### 9.3. `c:forEach` and `c:forTokens` Tags
 
-#### 9.4. c:if Tag
+#### 9.4. `c:if` Tag
 
-#### 9.5. c:choose Tag
+#### 9.5. `c:choose` Tag
 
-#### 9.6. c:set and c:remove Tags
+#### 9.6. `c:set` and `c:remove` Tags
 
-#### 9.7. c:import Tag
+#### 9.7. `c:import` Tag
 
-#### 9.8. c:url and c:param Tags
+#### 9.8. `c:url` and `c:param` Tags
 
-#### 9.9. c:redirect Tag
+#### 9.9. `c:redirect` Tag
 
-#### 9.10. c:catch Tag
+#### 9.10. `c:catch` Tag
 
 ### 10. THE STRUTS FRAMEWORK: BASICS
 
