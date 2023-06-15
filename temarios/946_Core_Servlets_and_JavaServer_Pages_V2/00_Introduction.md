@@ -32,3 +32,12 @@ El libro tiene un sitio web complementario en http://volume2.coreservlets.com/ .
 * Sitios de descarga actualizados para servlet y software JSP.
 * Información sobre descuentos en libros.
 * Adiciones al libro, actualizaciones y noticias.
+
+### Sobre los autores
+
+**Marty Hall** es presidente de coreservlets.com, Inc., una pequeña empresa que ofrece cursos de formación y servicios de consultoría relacionados con la tecnología Java del lado del servidor. También enseña Java y programación Web en el programa de posgrado a tiempo parcial en Ciencias de la Computación de la Universidad Johns Hopkins, donde dirige las áreas de concentración de Computación Distribuida y Tecnología Web. Marty es autor de cinco libros de Prentice Hall y Sun Microsystems Press: la primera y segunda ediciones de ***Core Servlets y JavaServer Pages***, ***More Servlets y JavaServer Pages***, y la primera y segunda ediciones de ***Core Web Programming***. Puede ponerse en contacto con Marty en hall@coreservlets.com.
+
+**Larry Brown** es gerente de Redes y Sistemas en un laboratorio de Investigación y Desarrollo de la Marina de los EE.UU. Es coautor de las segundas ediciones de ***Core Web Programming***, también de Prentice Hall y Sun Microsystems Press. Puede comunicarse con Larry en larry@lmbrown.com .
+
+***Yaakov Chaikin*** es consultor sénior en una empresa de desarrollo de software con sede en Columbia, MD. Además de su trabajo diario, enseña tecnologías de desarrollo Web en el programa de posgrado en Ciencias de la Computación de Loyola College en Maryland, donde dirige la carrera de Desarrollo Web. A veces, también ayuda a su esposa con su negocio de diseño web/gráfico, tbiq.com. Se puede contactar a Yaakov en yaakov.chaikin@gmail.com .
+
