@@ -1,43 +1,52 @@
 # Capítulo 1. Uso e implementación de aplicaciones web
+
 Temas de este capítulo
 
-El propósito de las aplicaciones web.
-La estructura de las aplicaciones web.
-registro de aplicaciones web
-Estrategias de desarrollo y despliegue
-Archivos de guerra
-Uso compartido de datos de aplicaciones web
-Las aplicaciones web (o "aplicaciones web") le permiten agrupar un conjunto de servlets, páginas JSP (JavaServer Pages), bibliotecas de etiquetas, documentos de lenguaje de marcado de hipertexto (HTML), imágenes, hojas de estilo y otro contenido web en una sola colección que puede utilizarse en cualquier servidor compatible con la especificación de servlet. Cuando se diseñan cuidadosamente, las aplicaciones web se pueden mover de un servidor a otro o colocarse en diferentes ubicaciones en el mismo servidor, todo sin realizar ningún cambio en ninguno de los servlets, páginas JSP o archivos HTML en la aplicación.
+* El propósito de las aplicaciones web.
+* La estructura de las aplicaciones web.
+* Registro de aplicaciones web
+* Estrategias de desarrollo y despliegue
+* Archivos WAR
+* Uso compartido de datos de aplicaciones web
 
-Esta capacidad le permite mover aplicaciones complejas con un mínimo esfuerzo, agilizando la reutilización de aplicaciones. Además, debido a que cada aplicación web tiene su propia estructura de directorios, sesiones ServletContexty cargador de clases, el uso de una aplicación web simplifica incluso el desarrollo inicial porque reduce la cantidad de coordinación necesaria entre varias partes de su sistema general.
+Las aplicaciones web (o "Web apps") le permiten agrupar un conjunto de servlets, **JavaServer Pages (JSP) pages**, **tag libraries**, **Hypertext Markup Language (HTML) documents**, **images**, **style sheets**, y otro Web content en una sola collection que puede utilizarse en cualquier servidor compatible con la especificación de servlet. Cuando se diseñan cuidadosamente, las Web apps se pueden mover de un servidor a otro o colocarse en diferentes ubicaciones en el mismo servidor, todo sin realizar ningún cambio en ninguno de los servlets, páginas JSP o archivos HTML en la aplicación.
 
-1.1. Finalidad de las Aplicaciones Web
+Esta capacidad le permite mover aplicaciones complejas con un mínimo esfuerzo, agilizando la reutilización de aplicaciones. Además, debido a que cada aplicación web tiene su propia estructura de directorios, sesiones **`ServletContext`** y class loader, el uso de una aplicación web simplifica incluso el desarrollo inicial porque reduce la cantidad de coordinación necesaria entre varias partes de su sistema general.
+
+## 1.1. Finalidad de las Aplicaciones Web
+
 Las aplicaciones web lo ayudan de tres maneras principales: organizando sus recursos, implementando sus aplicaciones de forma portátil y evitando que diferentes aplicaciones interfieran entre sí. Veamos cada beneficio con un poco más de detalle.
 
-Organización
-La primera ventaja de las aplicaciones web es que sabe dónde va todo: las aplicaciones web tienen una ubicación estándar para cada tipo de recurso. Los archivos de clase Java individuales siempre van en el directorio denominado WEB-INF/classes , los archivos JAR (paquetes de archivos de clase Java) siempre van en WEB-INF/lib , el archivo de configuración web.xml siempre va en el directorio WEB-INF y pronto. Los archivos directamente accesibles para los clientes (por ejemplo, navegadores web) van al directorio de nivel superior de su aplicación web o cualquier subdirectorio debajo del directorio de nivel superior excepto WEB-INF .
+### Organización
+
+La primera ventaja de las aplicaciones web es que sabe dónde va todo: las Web apps tienen una ubicación estándar para cada tipo de recurso. Los archivos de clase Java individuales siempre van en el directorio denominado **`WEB-INF/classes`**, los archivos JAR (paquetes de archivos de clase Java) siempre van en **`WEB-INF/lib`**, el archivo de configuración **`web.xml`** siempre va en el directorio **`WEB-INF`**. Los archivos directamente accesibles para los clientes (por ejemplo, navegadores web) van al directorio de nivel superior de su aplicación web o cualquier subdirectorio debajo del directorio de nivel superior excepto **`WEB-INF`**.
 
 Además, es muy común que los desarrolladores pasen de un proyecto a otro. Tener una forma estándar de organizar los recursos de su aplicación le evita tener que crear una estructura de aplicación cada vez que inicia un nuevo proyecto y también evita que un nuevo desarrollador que se una a su proyecto tenga que aprender su organización de archivos particular.
 
-Portabilidad
-Debido a que la especificación del servlet proporciona una organización de archivos específica, cualquier servidor compatible debería poder implementar y ejecutar su aplicación de inmediato. Esto le brinda mucha libertad para elegir el proveedor de su servidor web. Siempre que un servidor sea compatible, puede seleccionar su aplicación y, casi sin cambios, implementarla y ejecutarla en un servidor de un proveedor diferente, evitando así el temido "bloqueo del proveedor". Por ejemplo, podría comenzar a desarrollar sus aplicaciones utilizando un servidor web gratuito y pasar a un servidor más establecido y respaldado por un proveedor más cerca del momento de la implementación.
+### Portabilidad
 
-Separación
-Las diferentes aplicaciones web implementadas en el mismo servidor no interfieren entre sí. Cada aplicación tiene su propio localizador uniforme de recursos (URL) con el que se puede acceder, su propio ServletContextobjeto, etc. Dos aplicaciones web implementadas en el mismo servidor actúan como si estuvieran implementadas en servidores separados. Ninguno necesita saber del otro.
+Debido a que la especificación del servlet proporciona una organización de archivos específica, cualquier servidor compatible debería poder implementar y ejecutar su aplicación de inmediato. Esto le brinda mucha libertad para elegir el proveedor de su Web server. Siempre que un servidor sea compatible, puede seleccionar su aplicación y, casi sin cambios, implementarla y ejecutarla en un servidor de un proveedor diferente, evitando así el temido "vendor lock-in - bloqueo del proveedor". Por ejemplo, podría comenzar a desarrollar sus aplicaciones utilizando un servidor web gratuito y pasar a un servidor más establecido y respaldado por un proveedor más cerca del momento de la implementación.
+
+### Separación
+
+Las diferentes aplicaciones web implementadas en el mismo servidor no interfieren entre sí. Cada aplicación tiene su propio **uniform resource locator (URL)** con el que se puede acceder, su propio **`ServletContextobjeto`**, etc. Dos aplicaciones web implementadas en el mismo servidor actúan como si estuvieran implementadas en servidores separados. Ninguno necesita saber del otro.
 
 Esto simplifica aún más el desarrollo y la implementación de aplicaciones web. El desarrollador no tiene que preocuparse por cómo se integrará la aplicación con las aplicaciones existentes ya implementadas en el servidor. Ahora, como veremos más adelante en este capítulo, hay algunas formas en las que las aplicaciones web pueden interactuar deliberadamente entre sí. Sin embargo, en su mayor parte, se pueden desarrollar de forma independiente.
 
-1.2. Estructura de Aplicaciones Web
+## 1.2. Estructura de Aplicaciones Web
+
 Como se mencionó anteriormente, una aplicación web tiene un formato estandarizado y es portátil en todos los servidores web o de aplicaciones compatibles. El directorio de nivel superior de una aplicación web es simplemente un directorio con un nombre de su elección. Dentro de ese directorio, ciertos tipos de contenido van en ubicaciones designadas. Esta sección proporciona detalles sobre el tipo de contenido y las ubicaciones en las que debe colocarse.
 
-Ubicaciones para varios tipos de archivos
+### Ubicaciones para varios tipos de archivos
+
 La figura 1-1 muestra un ejemplo representativo de una jerarquía de aplicaciones web. Para ver un ejemplo paso a paso de cómo crear su propia aplicación web, descargue la aplicación web en blanco de la aplicación desde http://volume2.coreservlets.com/ y siga las instrucciones de la Sección 1.6 (Creación de una aplicación web simple).
 
-Figura 1-1. Una aplicación web representativa.
+**Figura 1-1. Una aplicación web representativa.**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/02d52f9d-77d6-4360-901b-ef4aab526998)
 
+### JSP Pages
 
-Páginas JSP
 Las páginas JSP deben colocarse en el directorio de aplicaciones web de nivel superior o en un subdirectorio con cualquier nombre que no sea WEB-INF o META-INF . Los servidores tienen prohibido servir archivos de WEB-INF o META-INF al usuario. Cuando registra una aplicación web (consulte la Sección 1.3 ), le dice al servidor el prefijo de URL que designa la aplicación web y define dónde se encuentra el directorio de la aplicación web. Es común, pero de ninguna manera obligatorio, usar el nombre del directorio principal de la aplicación web como prefijo de URL. Una vez que registra un prefijo, se accede a las páginas JSP con URL de la forma http : //host/webAppPrefix/filename.jsp (si las páginas están en el directorio de nivel superior de la aplicación web) o http://host/webAppPrefix/subdirectory/filename.jsp ( si las páginas están en un subdirectorio) .
 
 Depende del servidor si se puede acceder a un archivo predeterminado como index.jsp con una URL que especifica solo un directorio (p. ej., http:// host/webAppPrefix /) sin que el desarrollador realice primero una entrada en el sitio web de la aplicación web. Archivo INF/web.xml . Si desea que index.jsp sea el nombre de archivo predeterminado, le recomendamos que realice una entrada explícita en el archivo web.xmlwelcome-file-list de su aplicación web . Por ejemplo, la siguiente entrada web.xml especifica que si una URL especifica un nombre de directorio pero no un nombre de archivo, el servidor debe probar index.jsp primero e index.htmlsegundo. Si no se encuentra ninguno, el resultado es específico del servidor (por ejemplo, una lista de directorio).
