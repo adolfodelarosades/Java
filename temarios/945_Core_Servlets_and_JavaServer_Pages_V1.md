@@ -32,3 +32,16 @@ Tratamiento detallado de **Apache Tomcat**, **Macromedia JRun** y **Caucho Resin
 ## Content
 
 ### [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/945_Core_Servlets_and_JavaServer_Pages_V1/00_Introduction.md)
+
+## Part I Servlets 2.1 and 2.2
+ 	
+### Chapter 1 Overview of Servlets and JavaServer Pages
+### Chapter 2 First Servlets
+### Chapter 3 Handling the Client Request: Form Data
+### Chapter 4 Handling the Client Request: HTTP Request Headers
+### Chapter 5 Accessing the Standard CGI Variables
+### Chapter 6 Generating the Server Response: HTTP Status Codes
+### Chapter 7 Generating the Server Response: HTTP Response Headers
+### Chapter 8 Handling Cookies
+### Chapter 9 Session Tracking
+
