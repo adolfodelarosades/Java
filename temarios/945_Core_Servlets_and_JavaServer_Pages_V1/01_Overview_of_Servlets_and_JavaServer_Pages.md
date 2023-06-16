@@ -134,3 +134,156 @@ JavaScript, que es completamente distinto del lenguaje de programación Java, no
 
 El HTML normal, por supuesto, no puede contener información dinámica, por lo que las páginas HTML estáticas no pueden basarse en la entrada del usuario o fuentes de datos del lado del servidor. JSP es tan fácil y conveniente que es bastante razonable aumentar las páginas HTML que solo se benefician ligeramente de la inserción de datos dinámicos. Anteriormente, la dificultad de usar datos dinámicos impedía su uso en todos los casos excepto en los más valiosos.
 
+## 1.5. Instalación y Configuración
+
+Antes de que pueda comenzar, debe descargar el software que necesita y configurar su sistema para aprovecharlo. Aquí hay un resumen de los pasos involucrados. Tenga en cuenta, sin embargo, que aunque su código de servlet seguirá una API estándar, no existe un estándar para descargar y configurar servidores web o de aplicaciones. Por lo tanto, a diferencia de la mayoría de las secciones de este libro, los métodos descritos aquí varían significativamente de un servidor a otro, y los ejemplos de esta sección deben tomarse solo como muestras representativas. Consulte la documentación de su servidor para obtener instrucciones autorizadas.
+
+### Obtenga el software Servlet y JSP
+
+Su primer paso es descargar software que implemente ***las especificaciones Java Servlet 2.1 o 2.2 y JavaServer Pages 1.0 o 1.1***. Si está utilizando un servidor web o de aplicaciones actualizado, es muy probable que ya tenga todo lo que necesita. Consulte la documentación de su servidor o consulte la lista más reciente de servidores que admiten servlets en http://java.sun.com/products/servlet/industry.html. Aunque eventualmente querrá implementar en un servidor de calidad comercial, cuando aprende por primera vez, es útil tener un sistema gratuito que pueda instalar en su máquina de escritorio para fines de desarrollo y prueba. Estas son algunas de las opciones más populares:
+
+* **Apache Tomcat**.
+
+   Tomcat es la implementación de referencia oficial de las especificaciones servlet 2.2 y JSP 1.1. Se puede utilizar como un pequeño servidor independiente para probar servlets y páginas JSP, o se puede integrar en el servidor web Apache. Sin embargo, muchos otros servidores han anunciado soporte próximo, por lo que estas especificaciones se tratarán en detalle a lo largo de este libro. Tomcat, como el propio Apache, es gratuito. Sin embargo, al igual que Apache (que es muy rápido, altamente confiable, pero un poco difícil de configurar e instalar), Tomcat requiere mucho más esfuerzo para configurarlo que los motores de servlets comerciales. Para obtener más información, consulte http://jakarta.apache.org/ .
+
+* **JavaServer Web Development Kit (JSWDK)**.
+
+   El JSWDK es la implementación de referencia oficial de las especificaciones servlet 2.1 y JSP 1.0. Se utiliza como un pequeño servidor independiente para probar servlets y páginas JSP antes de que se implementen en un servidor web completo que admita estas tecnologías. Es gratuito y confiable, pero requiere un poco de esfuerzo para instalarlo y configurarlo. Para obtener más información, consulte http://java.sun.com/products/servlet/download.html .
+
+* **Allaire JRun**.
+
+   JRun es un motor de servlet y JSP que se puede conectar a servidores Netscape Enterprise o FastTrack, IIS, Microsoft Personal Web Server, versiones anteriores de Apache, O'Reilly's WebSite o StarNine WebSTAR. Una versión limitada que admite hasta cinco conexiones simultáneas está disponible de forma gratuita; la versión comercial elimina esta restricción y agrega capacidades como una consola de administración remota. Para obtener más información, consulte http://www.allaire.com/products/jrun/ .
+
+* **New Atlanta's ServletExec**.
+
+   ServletExec es un motor de servlet y JSP que se puede conectar a los servidores web más populares para Solaris, Windows, MacOS, HP-UX y Linux. Puede descargarlo y usarlo de forma gratuita, pero muchas de las funciones avanzadas y las utilidades de administración están deshabilitadas hasta que compre una licencia. Para obtener más información, consulte http://newatlanta.com/ .
+
+* **LiteWebServer (LWS) from Gefion Software**.
+
+   LWS es un pequeño servidor web gratuito derivado de Tomcat que admite servlets versión 2.2 y JSP 1.1. Gefion también tiene un complemento gratuito llamado WAICoolRunner que agrega compatibilidad con servlet 2.2 y JSP 1.1 a los servidores Netscape FastTrack y Enterprise. Para obtener más información, consulte http://www.gefionsoftware.com/ .
+
+* **Sun's Java Web Server**.
+
+   Este servidor está escrito completamente en Java y fue uno de los primeros servidores web en admitir completamente las especificaciones de servlet 2.1 y JSP 1.0. Aunque ya no está en desarrollo activo porque Sun se está concentrando en el servidor Netscape/I-Planet, sigue siendo una opción popular para aprender servlets y JSP. Para obtener una versión de prueba gratuita, consulte http://www.sun.com/software/jwebserver/try/ . Para obtener una versión gratuita que no caduca para fines de enseñanza en instituciones académicas, consulte http://freeware.thesphere.com/ .
+
+**Agregar a favoritos o instalar la documentación de la API de Servlet y JSP**
+
+Así como ningún programador serio debería desarrollar aplicaciones Java de uso general sin acceso a la documentación de la API JDK 1.1 o 1.2, ningún programador serio debería desarrollar servlets o páginas JSP sin acceso a la API para clases en los paquetes **`javax.servlet`**. Aquí hay un resumen de dónde encontrar la API:
+
+* http://java.sun.com/products/jsp/download.html
+
+   Este sitio le permite descargar la API 2.1/1.0 o la API 2.2/1.1 a su sistema local. Es posible que deba descargar la implementación de referencia completa y luego extraer la documentación.
+
+* http://java.sun.com/products/servlet/2.2/javadoc/
+
+   Este sitio le permite explorar la API servlet 2.2 en línea.
+
+* http://www.java.sun.com/j2ee/j2sdkee/techdocs/api/
+
+   Esta dirección le permite navegar por la API completa de Java 2 Platform, Enterprise Edition (J2EE), que incluye los paquetes servlet 2.2 y JSP 1.1.
+
+Si Sun o Apache colocan nuevas adiciones en línea (por ejemplo, un lugar para explorar la API 2.1/1.0), se enumerarán en el Capítulo 1 en el archivo fuente del libro en http://www.coreservlets.com/ .
+
+#### Identificar las clases para el compilador de Java
+
+Una vez que haya obtenido el software necesario, debe decirle al compilador de Java ( **`javac`** ) dónde encontrar los archivos de clase servlet y JSP cuando compila sus servlets. Consulte la documentación de su paquete particular para obtener detalles definitivos, pero los archivos de clase necesarios generalmente se encuentran en el subdirectorio **`lib`** del directorio de instalación del servidor, con las clases de servlet en **`servlet.jar`** y las clases JSP en **`jsp.jar`**, **`jspengine.jar`** o **`jasper.jar`**. Hay un par de formas diferentes de informar a javac sobre estas clases, la más fácil de las cuales es colocar los archivos JAR en su **`CLASSPATH`**. Si nunca ha tratado con **`CLASSPATH`** antes, es la variable que especifica dónde busca **`javac`** las clases al compilar. Si no se especifica la variable, **`javac`** busca en el directorio actual y en las bibliotecas estándar del sistema. Si configura **`CLASSPATH`** usted mismo, asegúrese de incluir **“ . ”**, que significa el directorio actual.
+A continuación se muestra un breve resumen de cómo configurar la variable de entorno en un par de plataformas diferentes. Supongamos que 
+**`dir`** es el directorio en el que se encuentran las clases de servlet y JSP.
+
+#### Unix (C Shell)
+
+```sh
+setenv CLASSPATH .:dir/servlet.jar:dir/jspengine.jar
+```
+
+Agregue **`:$CLASSPATH`** al final de la línea **`setenv`** si su **`:$CLASSPATH`** ya está configurado y desea agregarle más, no reemplazarlo. Tenga en cuenta que en los sistemas Unix se utilizan barras inclinadas para separar directorios dentro de una entrada y dos puntos para separar entradas, mientras que en Windows se utilizan barras inclinadas hacia atrás y punto y coma. Para que esta configuración sea permanente, normalmente colocaría esta declaración en su archivo **`.cshrc`**.
+
+#### Windows
+
+```sh
+set CLASSPATH=.;dir\servlet.jar;dir\jspengine.jar
+```
+
+Agregue **`%CLASSPATH%`**; al final de la línea anterior si su **`CLASSPATH`** ya está configurado y desea agregarle más, no reemplazarlo. Tenga en cuenta que en Windows usa barras diagonales hacia atrás para separar directorios dentro de una entrada y punto y coma para separar entradas, mientras que usa barras diagonales y dos puntos en Unix. Para que esta configuración sea permanente en Windows 95/98, normalmente colocaría esta declaración en su archivo **`autoexec.bat`**. En Windows NT o 2000, debe ir al menú Inicio, seleccionar Configuración, seleccionar Panel de control, seleccionar Sistema, seleccionar Entorno, luego ingresar la variable y el valor.
+
+#### Package the Classes
+
+Como verá en el próximo capítulo, probablemente desee colocar sus servlets en paquetes para evitar conflictos de nombres con servlets que otras personas escriben para el mismo servidor web o de aplicaciones. En ese caso, puede que le resulte conveniente agregar también el directorio de nivel superior de la jerarquía de su paquete a **`CLASSPATH`**. Consulte la Sección 2.4 (Packaging Servlets) para obtener más detalles.
+
+#### Configurar el servidor
+
+Antes de iniciar el servidor, es posible que desee designar parámetros como el puerto en el que escucha, los directorios en los que busca archivos HTML, etc. Este proceso es totalmente específico del servidor y, para los servidores web de calidad comercial, debe documentarse claramente en las notas de instalación. Sin embargo, con los pequeños servidores autónomos que Apache y Sun proporcionan como implementaciones de referencia de las especificaciones servlet 2.2/JSP 1.1 (Apache Tomcat) o 2.1/1.0 (Sun JSWDK), hay una serie de configuraciones importantes pero mal documentadas que Voy a describir aquí.
+
+Port Number
+Tanto Tomcat como JSWDK utilizan un puerto no estándar de forma predeterminada para evitar conflictos con los servidores web existentes. Si utiliza uno de estos productos para el desarrollo y las pruebas iniciales, y no tiene otro servidor web en ejecución, probablemente le resultará conveniente cambiar a 80, el número de puerto HTTP estándar. Con Tomcat 3.0, hágalo editando **`install_dir/server.xml`**, cambiando 8080 a 80 en la línea
+
+
+```xml
+<ContextManager port="8080" hostName="" inet="">
+```
+
+#### Configuración JAVA_HOME
+
+Si usa **JDK 1.2 o 1.3** con Tomcat o JSWDK, debe configurar la variable de entorno **`JAVA_HOME`** para hacer referencia al directorio de instalación de JDK. Esta configuración no es necesaria con JDK 1.1. La forma más fácil de especificar esta variable es insertar una línea que la establezca en la **`startup`** de la secuencia de comandos de inicio (Tomcat) o servidor de inicio (JSWDK). Por ejemplo, aquí está la versión modificada de **`startup.bat`** y **`startserver.bat`** que uso:
+
+```xml
+rem Marty Hall: added JAVA_HOME setting below
+set JAVA_HOME=C:\jdk1.2.2
+```
+
+#### DOS Memory Setting
+
+Si inicia Tomcat o el servidor JSWDK desde Windows 95 o 98, probablemente tenga que modificar la cantidad de memoria que DOS asigna para las variables de entorno. Para hacer esto, inicie una nueva ventana de DOS, haga clic en el icono de MS-DOS en la esquina superior izquierda de la ventana y seleccione **`Properties`**. Desde allí, elija la pestaña **`Memory `**, vaya a la **`Initial Environment`** y cambie el valor de **`Auto `** a **`2816`**. Esta configuración solo debe realizarse una vez.
+
+#### Tomcat 3.0 CR/LF Settings
+
+Las primeras versiones de Tomcat sufrieron un problema grave: los archivos de texto se guardaban en formato Unix (donde el final de línea se marca con un salto de línea), no en formato Windows (donde el final de línea se marca con un carriage return/linefeed pair). Como resultado, los scripts de inicio y apagado fallaron en Windows. Puede determinar si su versión sufre este problema abriendo **`install_dir/startup.bat`** en el Bloc de notas; si parece normal tienes una versión parcheada. Si el archivo parece ser una línea larga y confusa, salga del Bloc de notas y abra e inmediatamente guarde los siguientes archivos usando Wordpad ( no el Bloc de notas):
+
+* **install_dir/startup.bat**
+* **install_dir/tomcat.bat**
+* **install_dir/shutdown.bat**
+* **install_dir/tomcatEnv.bat**
+* **install_dir/webpages/WEB-INF/web.xml**
+* **install_dir/examples/WEB-INF/web.xml** 
+
+#### Start the Server
+
+Para iniciar uno de los servidores web "reales", consulte su documentación. En muchos casos, iniciarlo implica ejecutar un comando llamado **`httpd`** ya sea desde la línea de comando o instruyendo al sistema operativo para que lo haga automáticamente cuando el sistema se inicia por primera vez.
+
+Con **Tomcat 3.0**, inicia el servidor ejecutando un script llamado **`startup`** en el directorio de instalación principal. 
+
+#### Compile e instale sus servlets
+
+Una vez que haya configurado correctamente su **`CLASSPATH`**, como se describe anteriormente en esta sección, simplemente use **`javac ServletName.java`** para compilar un servlet. El archivo de clase resultante debe ir a una ubicación que el servidor sepa verificar durante la ejecución. Como era de esperar, esta ubicación varía de un servidor a otro. A continuación se incluye un breve resumen de las ubicaciones utilizadas por las últimas versiones de Tomcat, JSWDK y Java Web Server. En los tres casos, suponga que **`install_dir`** es el directorio de instalación principal del servidor.
+
+#### Tomcat
+
+* **`install_dir/webpages/WEB-INF/classes`**
+
+   Ubicación estándar para clases de servlet..
+
+* **`install_dir/classes`**
+
+   Ubicación alternativa para las clases de servlet.
+
+* **`install_dir/lib`**
+
+   Ubicación de los archivos JAR que contienen clases.
+
+#### Tomcat 3.1
+
+Justo antes de que este libro fuera a la imprenta, Apache lanzó una versión beta de Tomcat 3.1. Si hay una versión final de esta versión disponible cuando vaya a descargar Tomcat, debe usarla. Aquí está la nueva organización de directorios que usa Tomcat 3.1:
+
+* **`install_dir/webapps/ROOT/WEB-INF/classes`**
+
+   Ubicación estándar para clases de servlet.
+
+* **`install_dir/classes
+
+   Ubicación alternativa para las clases de servlet.
+   
+* **`install_dir/lib
+
+   Ubicación de los archivos JAR que contienen clases.
+
+Me doy cuenta de que esto suena un poco abrumador. No se preocupe, lo guiaré a través del proceso con un par de servidores diferentes cuando presente un código de servlet real en el próximo capítulo.
