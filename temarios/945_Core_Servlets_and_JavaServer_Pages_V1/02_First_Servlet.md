@@ -16,7 +16,7 @@ Temas de este capítulo
 El capítulo anterior le mostró cómo instalar el software que necesita y cómo configurar su entorno de desarrollo. Ahora realmente quieres escribir algunos servlets. Bien. Este capítulo le muestra cómo, describiendo la estructura que siguen casi todos los servlets, guiándolo a través de los pasos necesarios para compilar y ejecutar un servlet, y brindando detalles sobre cómo se inicializan los servlets y cuándo se llaman los distintos métodos. También presenta algunas herramientas generales que encontrará útiles en el desarrollo de su servlet.
 
 
-## 2.1. Estructura básica del servlet
+## 2.1. Estructura Básica del Servlet
 
 El listado 2.1 describe un servlet básico que maneja las solicitudes **`GET`**. Las **`GET`** requests, para aquellos que no están familiarizados con **HTTP**, son el tipo habitual de solicitudes de navegador para páginas web. Un navegador genera esta request cuando el usuario escribe una URL en la línea de dirección, sigue un enlace desde una página web o envía un formulario HTML que no especifica un **`METHOD`**. Los servlets también pueden manejar muy fácilmente las solicitudes **`POST`**, que se generan cuando alguien envía un formulario HTML que especifica **`METHOD="POST"`**. Para obtener detalles sobre el uso de formularios HTML, consulte el Capítulo 16.
 
@@ -52,6 +52,193 @@ Ambos métodos toman dos argumentos: un **`HttpServletRequest`** y un **`HttpSer
 Dado que **`doGet`** y **`doPost`** arrojan dos excepciones, debe incluirlas en la declaración. Finalmente, debe importar clases en **`java.io`** (para **`PrintWriter`**, etc.), **`javax.servlet`** (para **`HttpServlet`**, etc.) y **`javax.servlet.http`** (para **`HttpServletRequest`** y **`HttpServletResponse`** ).
 
 Estrictamente hablando, **`HttpServlet`** no es el único punto de partida para los servlets, ya que los servlets podrían, en principio, extender el mail, FTP, u otros tipos de servidores. Los servlets para estos entornos extenderían una clase personalizada derivada de **`GenericServlet`**, la clase principal de **`HttpServlet`**. Sin embargo, en la práctica, los servlets se usan casi exclusivamente para servidores que se comunican a través de HTTP (es decir, servidores web y de aplicaciones), y la discusión en este libro se limitará a este uso.
+
+### 💻 Estructura Básica del Servlet
+
+Todos los ejemplos de este libro los tendremos en la carpeta **`/Users/adulfodelarosa/Documents/PROYECTOS/Eclipse/945_Core_Servlets_JSP_V1`**, por lo que abriremos ese Workspace en Eclipse.
+
+1. Lo primero que vamos a hacer es que desde las propiedades de Eclipse vamos a configurar la opción para garantizar que los arquetipos de Maven siempre esten actualizados. Vamos a **Eclipse Preferences => Maven**
+
+<img width="627" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b6fd9061-15d3-4cb7-bdf2-0d50b5b89fa2">
+
+Debemos marcar el check **Download repository index updates on startup**.
+
+<img width="630" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fcfc7bab-2a15-4a65-a2ba-29ea3bd56a79">
+
+Damos en el botón **Apply and Close**. 
+
+2. Vamos a crear un nuevo proyecto Maven con la opción **File => New => Maven Project** o seleccionando la opción en la parte de la izquierda. 
+
+<img width="383" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a6481f53-9933-41bf-a106-ec4d346ebe11">
+
+<img width="620" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3c0c5379-3e35-4ade-9195-6e57ccedf903">
+
+Damos en el botón **Next**.
+
+El arquetipo que vamos a usar es **`maven-archetype-webapp`**, en el fitro hemos metido **`webapp`** y nos desplazamos hasta encontrar el grupo **`org.apache.maven.archetypes.`**
+
+<img width="936" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c5e394f2-9f0f-46d9-a0a0-fe59f668e841">
+
+Vamos a preionar el botón **Next**. Nos pide los siguientes datos.
+
+<img width="933" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ce652eeb-734f-4cd2-b0dd-110953f4b131">
+
+Introducimos los siguientes datos.
+
+<img width="932" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/860b12ae-c5c0-4540-8f59-06832c3ec005">
+
+Presionamos el botón **Finish**.
+
+En la consola nos muestra que todo ha ido bien al crear el proyecto.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9a8ed93b-d36a-400e-8a44-22617e01c30a">
+
+La estructura básica del proyecto que se ha creado es la siguiente:
+
+<img width="379" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8d428134-2f5a-416c-80a1-410847aac6c8">
+
+Podemos ver que tenemos el archivo **`pom.xml`**.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8aa50904-1293-488e-b5f8-fb4d4dfb294a">
+
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.javaangular</groupId>
+  <artifactId>ServletTemplate</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>ServletTemplate Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>ServletTemplate</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+```
+
+Como podemos ver el proyecto por default usa **Java 1.7**, podemos modificar y cambiarla a la que desemos, por ejemplo a la versión **Java 17**. En este caso como los ejemplos son de una versión atrasada de Servlets lo voy a dejar así y ya veremos como se comporta.
+
+Otro archivo que tenemos es **`index.jsp`** que podemos ver a contininuación.
+
+<img width="797" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ffc725e7-1862-4616-9f07-7194a53aab37">
+
+
+Vemos que nos esta marcando un error, esto es por que es necesario añadir una dependencia más a nuestro proyecto, según se indica al inicio del libro las especificaciones que se usan en el libro son, "La Parte I cubre el desarrollo de servlets con las **especificaciones 2.1 y 2.2**. Aunque la versión 2.2 (junto con **JSP 1.1**) es un requisito de Java 2 Platform, Enterprise Edition (J2EE)", vamos a buscar esa especificación en el Maven Repositorio.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a2093667-e875-43e6-862f-4c8cfdc3a758">
+
+<img width="1061" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/dd9a279f-627a-4439-8c88-52a68c2b1033">
+
+
+```xml
+<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.2</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+La añadimos al archivo **`pom.xml`**.
+
+<img width="1057" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0d9bdc13-b521-4ce7-a59d-3b2a941a2b4f">
+
+
+Al dar **Maven => Maven update...** vemos como el error desaparece del archivo **`index.jsp`**.
+
+<img width="1052" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/201ce54e-9db0-4b3d-996c-7bf7571e6403">
+
+Podriamos ejecutar ya la aplicación.
+
+<img width="764" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8184fb9b-19cd-4bbf-accf-6f6b1e54ed34">
+
+Tenemos que seleccionar el Servidor, vamos a usar Tomcat 8.5. que es el que tengo descargado en mi ordenador en **`/usr/local/apache-tomcat-8.5.89`**
+
+<img width="596" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/de3de3ca-c7e4-41ba-bfbd-a6c08759b7a1">
+
+<img width="595" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b890afb5-8e01-44f7-82e5-b43a0246be9d">
+
+Se carga la URL **`http://localhost:8080/ServletTemplate/`** y tenemos:
+
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/20a43614-e97e-4430-9613-b1e641e46d61">
+
+Vamos a editar el archivo **`index.jsp`** para poner otro mensaje.
+
+<img width="1053" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/1306fea7-e81a-4ea1-af7c-cca4cf82c427">
+
+Al refrescar el navegador tenemos:
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/545df282-2845-4553-94ef-f45e1595ce57">
+
+Aquí tenemos un JSP pero la idea de esta aplicación es tener nuestro primer Servlet llamado **`ServletTemplate.java`**. 
+
+Vamos a crear el Servlet **`ServletTemplate.java`** en nuestra carpeta **`main`**.
+
+<img width="598" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b7a361db-653f-4713-b577-df37809e0809">
+
+Presionamos el botón **Next**.
+
+<img width="598" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e5a580fb-3cc4-4f28-ac0f-9a259aea4f1a">
+
+Como no lo vamos a crear en ningun paquete simplemente presionamos 
+
 
 
 ## 2.2. Un Servlet Simple que Genera Texto Sin Formato
