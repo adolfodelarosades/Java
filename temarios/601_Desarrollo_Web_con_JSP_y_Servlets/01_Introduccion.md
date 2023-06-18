@@ -23,7 +23,7 @@ Vamos a instalar nuestras herramientas de desarrollo para nuestra aplicación we
 
 ## Creación del primer Servlet 13:12
 
-![1-que-es un servlet](images/1-que-es%20un%20servlet.png))
+![1-que-es un servlet](images/1-que-es%20un%20servlet.png)
 
 Vamos a crear nuestro primer Servlet.
 
