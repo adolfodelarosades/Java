@@ -12,7 +12,7 @@ En este curso vamos a desarrollar una aplicación web dinámica basada en *JSP* 
 
 Al final de este curso vamos a desplegar nuestra aplicación en un servidor web gratuito para que conozcas cómo se configura y cómo desplegarlo con una URL real.
 
-[1-herramientas](images/1-herramientas.png)
+[1-herramientas](images/1-que-es%20un%20servlet.png))
 
 Vamos a instalar nuestras herramientas de desarrollo para nuestra aplicación web las cuales van a ser:
 
