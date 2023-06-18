@@ -324,9 +324,10 @@ Observemos que la URL para invocar el Servlet es: http://localhost:8080/ServletT
 <img width="1509" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/812b2922-005c-4377-a6ce-4d47c74d9855">
 
 
+Podemos seguir invocando nuestro JSP con http://localhost:8080/ServletTemplate/index.jsp
+y vemos que sigue trabajando.
 
-
-
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/04426500-ba6d-40f7-b49e-164917cdda8f">
 
 
 ## 2.2. Un Servlet Simple que Genera Texto Sin Formato
@@ -382,6 +383,72 @@ Con diferentes servidores, las clases de servlet se pueden colocar en una varied
 La Figura 2-1 , que se muestra anteriormente en esta sección, da un ejemplo con el servidor web ejecutándose directamente en mi PC ("localhost" significa "la máquina actual").
 
 La mayoría de los servidores también le permiten registrar nombres para servlets, de modo que se pueda invocar un servlet a través de http://host/any-path/any-file . El proceso para hacer esto es específico del servidor; consulte la documentación de su servidor para obtener más detalles.
+
+### 💻 Un Servlet Simple que Genera Texto Sin Formato
+
+Vamos a crear otro Servlet llamado **HelloWorld.java**.
+
+<img width="595" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fd902abe-9e6d-4263-b886-d0eb63d5676c">
+
+
+La estructura del proyecto queda así:
+
+Se ha modificado nuestro archivo **`web.xml`**
+
+```xml
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>ServletTemplate</servlet-name>
+  	<display-name>ServletTemplate</display-name>
+  	<description></description>
+  	<servlet-class>com.javaangular.ServletTemplate</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>HelloWorld</servlet-name>
+  	<display-name>HelloWorld</display-name>
+  	<description></description>
+  	<servlet-class>com.javaangular.HelloWorld</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ServletTemplate</servlet-name>
+  	<url-pattern>/ServletTemplate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HelloWorld</servlet-name>
+  	<url-pattern>/HelloWorld</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+Vamos a modificar su código para que nos quede así:
+
+```java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloWorld extends HttpServlet {
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+    out.println("Hello World");
+  }
+}
+```
+
+<img width="1017" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/46c92f07-bf4b-45d3-a48d-92d3c935b5b6">
+
+Nos marca un Warning **`The serializable class HelloWorld does not declare a static final serialVersionUID field of type long`**. Por ahora lo vamos a dejar así.
+
+Vamos a ejecutarlo.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ec71df47-4229-480d-a8ab-97e0d0a768b9">
+
 
 ## 2.3. Un servlet que genera HTML
 
