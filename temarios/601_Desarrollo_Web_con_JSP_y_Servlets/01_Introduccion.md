@@ -12,8 +12,6 @@ En este curso vamos a desarrollar una aplicación web dinámica basada en *JSP* 
 
 Al final de este curso vamos a desplegar nuestra aplicación en un servidor web gratuito para que conozcas cómo se configura y cómo desplegarlo con una URL real.
 
-[1-herramientas](https://github.com/adolfodelarosades/Java/blob/master/temarios/601_Desarrollo_Web_con_JSP_y_Servlets/images/1-que-es%20un%20servlet.png)
-
 Vamos a instalar nuestras herramientas de desarrollo para nuestra aplicación web las cuales van a ser:
 
 * [Eclipse](http://www.eclipse.org) 
@@ -25,7 +23,7 @@ Vamos a instalar nuestras herramientas de desarrollo para nuestra aplicación we
 
 ## Creación del primer Servlet 13:12
 
-![1-que-es un servlet](images/1-que-es un servlet.png)
+![1-que-es un servlet](images/1-que-es%20un%20servlet.png))
 
 Vamos a crear nuestro primer Servlet.
 
