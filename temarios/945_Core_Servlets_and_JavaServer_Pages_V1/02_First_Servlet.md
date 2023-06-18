@@ -237,7 +237,95 @@ Presionamos el botón **Next**.
 
 <img width="598" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e5a580fb-3cc4-4f28-ac0f-9a259aea4f1a">
 
-Como no lo vamos a crear en ningun paquete simplemente presionamos 
+Introducimos los siguientes datos 
+
+<img width="593" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fdca8deb-6f97-4d56-bcb7-42927f1407c8">
+
+Pero vemos que tenemos problemas al intentar crear el Servlet. Pero realmente de lo que se quejaba es que no había una carpeta **`java`** dentro de **`src\main`**, la cree y parece que con eso va.
+
+Vamos a crear el Servlet.
+
+<img width="592" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7075ef9b-6330-4c03-aff8-a77eec8d7057">
+
+La estructura del proyecto nos queda así:
+
+<img width="452" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2ceb0ec9-bb43-47f5-9232-999b5b1711f2">
+
+Vamos a ver que tenemos en el archivo recien creado.
+
+```java
+package com.javaangular;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ServletTemplate
+ */
+public class ServletTemplate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ServletTemplate() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+```
+
+Y en el archivo **`web.xml`** tenemos:
+
+```xml
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>ServletTemplate</servlet-name>
+  	<display-name>ServletTemplate</display-name>
+  	<description></description>
+  	<servlet-class>com.javaangular.ServletTemplate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ServletTemplate</servlet-name>
+  	<url-pattern>/ServletTemplate</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+
+Vamos a ejecutar el Servlet para ver que nos pinta.
+
+Observemos que la URL para invocar el Servlet es: http://localhost:8080/ServletTemplate/ServletTemplate
+
+<img width="1509" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/812b2922-005c-4377-a6ce-4d47c74d9855">
+
+
+
+
 
 
 
