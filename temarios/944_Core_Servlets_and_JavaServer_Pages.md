@@ -41,7 +41,7 @@ Cada libro de la serie principal:
 
 ## Content
 
-### [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/944_Core_Servlets_and_JavaServer_Pages/00_Introduction.md)
+### [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/944_Core_Servlets_and_JavaServer_Pages/00-Introduction.md)
 
 ## Part I Servlets 2.1 and 2.2
  	
