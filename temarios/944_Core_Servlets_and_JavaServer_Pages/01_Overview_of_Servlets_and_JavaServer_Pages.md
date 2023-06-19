@@ -278,11 +278,11 @@ Justo antes de que este libro fuera a la imprenta, Apache lanzó una versión be
 
    Ubicación estándar para clases de servlet.
 
-* **`install_dir/classes
+* **`install_dir/classes`**
 
    Ubicación alternativa para las clases de servlet.
    
-* **`install_dir/lib
+* **`install_dir/lib`**
 
    Ubicación de los archivos JAR que contienen clases.
 
