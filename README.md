@@ -194,6 +194,7 @@ Serie de varios cursos Java.
 * [932 Maven for Eclipse](https://github.com/adolfodelarosades/Java/blob/master/temarios/932_Maven_for_Eclipse.md)
 
 * [940 Head First Git](https://github.com/adolfodelarosades/Java/blob/master/temarios/940-Head-First-Git.md)
+* [944 Core Servlets and JavaServer Pages™](https://github.com/adolfodelarosades/Java/blob/master/temarios/944_Core_Servlets_and_JavaServer_Pages.md)
 * [945 Core Servlets and JavaServer Pages™: Volume 1: Core Technologies, 2nd Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/945_Core_Servlets_and_JavaServer_Pages_V1.md)
 * [946 Core Servlets and JavaServer Pages, Volume 2: Advanced Technologies, Second Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/946_Core_Servlets_and_JavaServer_Pages_V2.md)
 * [950 Professional Java for Web Applications](https://github.com/adolfodelarosades/Java/blob/master/temarios/950_Professional_Java_for_Web_Applications.md)
