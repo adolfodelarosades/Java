@@ -55,7 +55,7 @@ Estrictamente hablando, **`HttpServlet`** no es el único punto de partida para 
 
 ### 💻 Estructura Básica del Servlet
 
-Todos los ejemplos de este libro los tendremos en la carpeta **`/Users/adulfodelarosa/Documents/PROYECTOS/Eclipse/945_Core_Servlets_JSP_V1`**, por lo que abriremos ese Workspace en Eclipse.
+Todos los ejemplos de este libro los tendremos en la carpeta **`/Users/adulfodelarosa/Documents/PROYECTOS/Eclipse/944_Core_Servlets_JSP`**, por lo que abriremos ese Workspace en Eclipse.
 
 1. Lo primero que vamos a hacer es que desde las propiedades de Eclipse vamos a configurar la opción para garantizar que los arquetipos de Maven siempre esten actualizados. Vamos a **Eclipse Preferences => Maven**
 
@@ -458,26 +458,131 @@ La mayoría de los servlets generan HTML, no texto sin formato como en el ejempl
 
 2. Modifique las instrucciones **`println`** para crear una página web legal.
 
-El primer paso se logra configurando el encabezado de respuesta HTTP **`Content-Type`**. En general, los headers se establecen mediante el método **`setHeader`** de **`HttpServletResponse`** , pero establecer el tipo de contenido es una tarea tan común que también existe un método especial **`setContentType`** solo para este propósito. La forma de designar HTML es con un tipo de **`text/html`**, por lo que el código se vería así:
+El primer paso se logra configurando el encabezado de respuesta HTTP **`Content-Type`**. En general, los headers se establecen mediante el método **`setHeader`** de **`HttpServletResponse`**, pero establecer el tipo de contenido es una tarea tan común que también existe un método especial **`setContentType`** solo para este propósito. La forma de designar HTML es con un tipo de **`text/html`**, por lo que el código se vería así:
 
 ```java
 response.setContentType("text/html");
 ```
-AQUIIIIIIIIIIII
-Aunque HTML es el tipo de documento más común que crean los servlets, no es inusual crear otros tipos de documentos. Por ejemplo, la Sección 7.5 (Uso de servlets para generar imágenes GIF) muestra cómo los servlets pueden crear y devolver imágenes personalizadas, especificando un tipo de contenido de imagen/gif . Como segundo ejemplo, la Sección 11.2 (El atributo contentType) muestra cómo generar y devolver hojas de cálculo de Excel, utilizando un tipo de contenido de application/vnd.ms-excel .
 
-No se preocupe si aún no está familiarizado con los encabezados de respuesta HTTP; se discuten en detalle en el Capítulo 7 . Tenga en cuenta que debe configurar los encabezados de respuesta antes de devolver el contenido a través de PrintWriter . Esto se debe a que una respuesta HTTP consta de la línea de estado, uno o más encabezados, una línea en blanco y el documento real, en ese orden. Los encabezados pueden aparecer en cualquier orden, y los servlets almacenan los encabezados y los envían todos a la vez, por lo que es legal configurar el código de estado (parte de la primera línea devuelta) incluso después de configurar los encabezados. Pero los servlets no necesariamente almacenan en búfer el documento en sí, ya que los usuarios pueden querer ver resultados parciales para páginas largas. En la versión 2.1 de la especificación del servlet, elLa salida de PrintWriter no se almacena en búfer en absoluto, por lo que la primera vez que usa PrintWriter , es demasiado tarde para volver atrás y establecer encabezados. En la versión 2.2, los motores de servlet pueden almacenar en búfer parcialmente la salida, pero el tamaño del búfer no se especifica. Puede usar el método getBufferSize de HttpServletResponse para determinar el tamaño o usar setBufferSize para especificarlo. En la versión 2.2 con el almacenamiento en búfer habilitado, puede establecer encabezados hasta que el búfer se llene y se envíe al cliente. Si no está seguro de si se envió el búfer, puede usar el método isCommitted para verificar.
+Aunque HTML es el tipo de documento más común que crean los servlets, no es inusual crear otros tipos de documentos. Por ejemplo, la Sección 7.5 (Uso de servlets para generar imágenes GIF) muestra cómo los servlets pueden crear y devolver imágenes personalizadas, especificando un tipo de contenido de **`imagen/gif`** . Como segundo ejemplo, la Sección 11.2 (El atributo **`contentType`**) muestra cómo generar y devolver hojas de cálculo de Excel, utilizando un tipo de contenido de **`application/vnd.ms-excel`**.
 
-Enfoque central
+No se preocupe si aún no está familiarizado con los HTTP response headers; se discuten en detalle en el Capítulo 7. Tenga en cuenta que debe configurar los response headers antes de devolver el contenido a través de **`PrintWriter`**. Esto se debe a que una HTTP response consta de la status line, uno o más headers, una línea en blanco y el documento real, en ese orden. Los headers pueden aparecer en cualquier orden, y los servlets almacenan los headers y los envían todos a la vez, por lo que es legal configurar el status code (parte de la primera línea devuelta) incluso después de configurar los headers. Pero los servlets no necesariamente almacenan en búfer el documento en sí, ya que los usuarios pueden querer ver resultados parciales para páginas largas. En la ***versión 2.1*** de la especificación del servlet, la salida de **`PrintWriter`** no se almacena en búfer en absoluto, por lo que la primera vez que usa **`PrintWriter`**, es demasiado tarde para volver atrás y establecer headers. En la ***versión 2.2***, los motores de servlet pueden almacenar en búfer parcialmente la salida, pero el tamaño del búfer no se especifica. Puede usar el método **`getBufferSize`** de **`HttpServletResponse`** para determinar el tamaño o usar **`setBufferSize`** para especificarlo. En la ***versión 2.2*** con el almacenamiento en búfer habilitado, puede establecer headers hasta que el búfer se llene y se envíe al cliente. Si no está seguro de si se envió el búfer, puede usar el método **`isCommitted`** para verificar.
 
-	
-Configure siempre el tipo de contenido antes de transmitir el documento real.
+Core Approach
 
-
-El segundo paso para escribir un servlet que crea un documento HTML es hacer que sus instrucciones println generen HTML, no texto sin formato. La estructura de un documento HTML se discute más en la Sección 2.5 (Utilidades simples de construcción de HTML), pero debería ser familiar para la mayoría de los lectores. El listado 2.3 proporciona un servlet de ejemplo, con el resultado que se muestra en la figura 2-2 .
-
-Figura 2-2. Resultado del Listado 2.3 (HelloWWW.java).
+   :atom: Configure siempre el tipo de contenido **`before`** de transmitir el documento real.
 
 
+El segundo paso para escribir un servlet que crea un documento HTML es hacer que sus instrucciones **`println`** generen HTML, no texto sin formato. La estructura de un documento HTML se discute más en la Sección 2.5 (Utilidades simples de construcción de HTML), pero debería ser familiar para la mayoría de los lectores. El listado 2.3 proporciona un servlet de ejemplo, con el resultado que se muestra en la figura 2-2 .
 
-Listado 2.3. HolaWWW.java
+**Figura 2-2. Resultado del Listado 2.3 (HelloWWW.java).**
+
+<img width="506" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7bb07c00-5036-4d08-9754-a94fe518ebe2">
+
+**Listado 2.3. HolaWWW.java**
+
+```java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloWWW extends HttpServlet {
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
+	             "Transitional//EN\">\n";
+    out.println(docType +
+		"<HTML>\n" +
+		"<HEAD><TITLE>Hello WWW</TITLE></HEAD>\n" +
+		"<BODY>\n" +
+		"<H1>Hello WWW</H1>\n" +
+		"</BODY></HTML>");
+  }
+}
+```
+
+### 💻 Un servlet que genera HTML
+
+Vamos a generar el Servlet **`HolaWWW.java`**
+
+<img width="592" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2983f39e-0cc4-416c-b363-09e6a35d2466">
+
+<img width="1467" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/4a4063e3-8e57-4dc9-9203-153060a9ae68">
+
+```java
+package com.javaangular;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloWWW extends HttpServlet {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html");
+		
+		PrintWriter out = response.getWriter();
+		
+		String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + 
+		                 "Transitional//EN\">\n";
+		
+		out.println(docType + 
+				"<HTML>\n" + 
+				"<HEAD><TITLE>Hello WWW</TITLE></HEAD>\n" + 
+				"<BODY>\n" + 
+				"<H1>Hello WWW</H1>\n" + 
+				"</BODY></HTML>");
+	}
+
+}
+```
+
+El archivo **`web.xml`** se ha modificado para gestionar el Servlet.
+
+```xml
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>ServletTemplate</servlet-name>
+  	<display-name>ServletTemplate</display-name>
+  	<description></description>
+  	<servlet-class>com.javaangular.ServletTemplate</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>HelloWorld</servlet-name>
+  	<display-name>HelloWorld</display-name>
+  	<description></description>
+  	<servlet-class>com.javaangular.HelloWorld</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>HelloWWW</servlet-name>
+  	<display-name>HelloWWW</display-name>
+  	<description></description>
+  	<servlet-class>com.javaangular.HelloWWW</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ServletTemplate</servlet-name>
+  	<url-pattern>/ServletTemplate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HelloWorld</servlet-name>
+  	<url-pattern>/HelloWorld</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HelloWWW</servlet-name>
+  	<url-pattern>/HelloWWW</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+
+Ejecutamos la aplicación.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e258207f-3968-435e-ae7e-c113e2e12ade">
+
