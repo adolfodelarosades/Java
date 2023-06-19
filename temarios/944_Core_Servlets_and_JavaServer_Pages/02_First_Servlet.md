@@ -470,7 +470,7 @@ No se preocupe si aún no está familiarizado con los HTTP response headers; se 
 
 Core Approach
 
-   :atom: Configure siempre el tipo de contenido **`before`** de transmitir el documento real.
+   :atom: Configure siempre el tipo de contenido **antes** de transmitir el documento real.
 
 
 El segundo paso para escribir un servlet que crea un documento HTML es hacer que sus instrucciones **`println`** generen HTML, no texto sin formato. La estructura de un documento HTML se discute más en la Sección 2.5 (Utilidades simples de construcción de HTML), pero debería ser familiar para la mayoría de los lectores. El listado 2.3 proporciona un servlet de ejemplo, con el resultado que se muestra en la figura 2-2 .
@@ -522,19 +522,19 @@ import javax.servlet.http.*;
 public class HelloWWW extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html");
+	   response.setContentType("text/html");
 		
-		PrintWriter out = response.getWriter();
+	   PrintWriter out = response.getWriter();
 		
-		String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + 
-		                 "Transitional//EN\">\n";
+	   String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + 
+		            "Transitional//EN\">\n";
 		
-		out.println(docType + 
-				"<HTML>\n" + 
-				"<HEAD><TITLE>Hello WWW</TITLE></HEAD>\n" + 
-				"<BODY>\n" + 
-				"<H1>Hello WWW</H1>\n" + 
-				"</BODY></HTML>");
+	   out.println(docType + 
+		       "<HTML>\n" + 
+		       "<HEAD><TITLE>Hello WWW</TITLE></HEAD>\n" + 
+		       "<BODY>\n" + 
+		       "<H1>Hello WWW</H1>\n" + 
+		       "</BODY></HTML>");
 	}
 
 }
@@ -586,3 +586,101 @@ Ejecutamos la aplicación.
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e258207f-3968-435e-ae7e-c113e2e12ade">
 
+## 2.4. Packaging Servlets
+AQUIIIII
+En un entorno de producción, varios programadores pueden estar desarrollando servlets para el mismo servidor. Por lo tanto, colocar todos los servlets en el directorio de servlets de nivel superior da como resultado un directorio masivo difícil de administrar y genera conflictos de nombres cuando dos desarrolladores eligen accidentalmente el mismo nombre de servlet. Los paquetes son la solución natural a este problema. El uso de paquetes da como resultado cambios en la forma en que se crean los servlets, la forma en que se compilan y la forma en que se invocan. Consideremos estas áreas una a la vez en las siguientes tres subsecciones. Los primeros dos cambios son exactamente iguales que con cualquier otra clase de Java que use paquetes; no hay nada específico para los servlets.
+
+Creando Servlets en Paquetes
+Se necesitan dos pasos para colocar servlets en paquetes:
+
+1.
+Mueva los archivos a un subdirectorio que coincida con el nombre del paquete deseado.
+
+Por ejemplo, usaré el paquete coreservlets para la mayoría del resto de los servlets de este libro. Por lo tanto, los archivos de clase deben ir a un subdirectorio llamado coreservlets .
+
+2.
+Inserte una instrucción de paquete en el archivo de clase.
+
+Por ejemplo, para colocar un archivo de clase en un paquete llamado somePackage , la primera línea del archivo debería decir
+
+paquete algúnPaquete;
+
+Por ejemplo, el Listado 2.4 presenta una variación del servlet HelloWWW que se encuentra en el paquete coreservlets . El archivo de clase va en install_dir /webpages/WEB-INF/classes/coreservlets para Tomcat 3.0, en install_dir /webpages/WEB-INF/servlets/coreservlets para JSWDK 1.0.1 y en install_dir /servlets/coreservlets para Java Web. Servidor 2.0.
+
+Listado 2.4. HolaWWW2.java
+							paquete coreservlets;
+
+importar java.io.*;
+importar javax.servlet.*;
+importar javax.servlet.http.*;
+
+clase pública HelloWWW2 extiende HttpServlet {
+  doGet public void (solicitud HttpServletRequest,
+                    respuesta HttpServletResponse)
+      lanza ServletException, IOException {
+    respuesta.setContentType("texto/html");
+    PrintWriter out = respuesta.getWriter();
+    Cadena docType =
+      "<!DOCTYPE HTML PÚBLICO \"-//W3C//DTD HTML 4.0 " +
+      "Transicional//ES\">\n";
+    out.println(docType +
+                "<HTML>\n" +
+                "<HEAD><TITLE>Hola WWW</TITLE></HEAD>\n" +
+                "<CUERPO>\n" +
+                "<H1>Hola WWW</H1>\n" +
+                "</BODY></HTML>");
+  }
+}
+
+Compilando Servlets en Paquetes
+Hay dos formas principales de compilar clases que están en paquetes. La primera opción es colocar el subdirectorio de su paquete justo en el directorio donde el servidor web espera que vayan los servlets. Luego, configuraría la variable CLASSPATH para que apunte al directorio sobre el que realmente contiene sus servlets, es decir, al directorio principal de servlets utilizado por el servidor web. Luego puede compilar normalmente desde el subdirectorio específico del paquete. Por ejemplo, si su directorio de servlets base es C:\JavaWebServer2.0\servlets y el nombre de su paquete (y, por lo tanto, el nombre del subdirectorio) es coreservlets y está ejecutando Windows, haría lo siguiente:
+
+DOS>     set CLASSPATH=C:\JavaWebServer2.0\servlets;%CLASSPATH% 
+DOS>     cd C:\JavaWebServer2.0\servlets\coreservlets 
+DOS>     javac HelloWorld.java
+						
+
+La primera parte, la configuración de CLASSPATH , es probable que desee hacerlo de forma permanente, en lugar de hacerlo cada vez que inicia una nueva ventana de DOS. En Windows 95/98 normalmente coloca el conjunto CLASSPATH=...declaración en su archivo autoexec.bat en algún lugar después de la línea que configura CLASSPATH para que apunte a servlet.jar y al archivo JSP JAR. En Windows NT o Windows 2000, vaya al menú Inicio, seleccione Configuración, seleccione Panel de control, seleccione Sistema, seleccione Entorno, luego ingrese la variable y el valor. En Unix (shell C), establece la variable CLASSPATH por
+
+setenv CLASSPATH / install_dir /servlets:$CLASSPATH
+
+Póngalo en su archivo .cshrc para que sea permanente.
+
+Si su paquete tuviera la forma nombre1.nombre2.nombre3 en lugar de simplemente nombre1 como aquí, CLASSPATH aún debería apuntar al directorio de servlet de nivel superior, es decir, el directorio que contiene nombre1 .
+
+Una segunda forma de compilar clases que están en paquetes es mantener el código fuente en una ubicación distinta de los archivos de clase. Primero, coloque los directorios de sus paquetes en cualquier lugar que le resulte conveniente. CLASSPATH hace referencia a esta ubicación . En segundo lugar, utiliza la opción -d de javac para instalar los archivos de clase en el directorio que espera el servidor web. A continuación se muestra un ejemplo. Una vez más, probablemente querrá configurar CLASSPATH de forma permanente en lugar de configurarlo cada vez.
+
+DOS> cd C:\MyServlets\coreservlets 
+DOS> set CLASSPATH=C:\MyServlets;%CLASSPATH% 
+DOS> javac -d C:\tomcat\webpages\WEB-INF\classes HelloWWW2.java
+						
+
+Mantener el código fuente separado de los archivos de clase es el enfoque que utilizo para mi propio desarrollo. Para complicar aún más mi vida, tengo una serie de configuraciones de CLASSPATH diferentes que uso para diferentes proyectos, y generalmente uso JDK 1.2, no JDK 1.1 como espera el servidor web Java. Entonces, en Windows me parece conveniente automatizar el proceso de compilación de servlet con un archivo por lotes servletc.bat, como se muestra en el Listado 2.5 (los saltos de línea en la línea CLASSPATH del conjunto se insertaron solo para mejorar la legibilidad). Puse este archivo por lotes en C:\Windows\Commando en otro lugar de la RUTA de Windows . Después de esto, para compilar el servlet HelloWWW2 e instalarlo con el Java Web Server, simplemente voy a C:\MyServlets\coreservlets y hago " servletc HelloWWW2.java ". El archivo de código fuente en http://www.coreservlets.com/ contiene variaciones de servletc.bat para JSWDK y Tomcat. Puede hacer algo similar en Unix con un script de shell.
+
+Invocando Servlets en Paquetes
+Para invocar un servlet que está en un paquete, use la URL
+
+http://host/servlet/nombre del paquete.Nombre del servlet
+
+en lugar de
+
+http://host/servlet/ServletName
+
+Por lo tanto, si el servidor web se ejecuta en el sistema local,
+
+Listado 2.5. servletc.bat
+@echo apagado
+
+rem Esta es la versión para Java Web Server.
+rem Ver http://www.coreservlets.com/ para otras versiones.
+
+establecer CLASSPATH=C:\JavaWebServer2.0\lib\servlet.jar;
+    C:\JavaWebServer2.0\lib\jsp.jar;
+    C:\MisServlets
+C:\JDK1.1.8\bin\javac -d C:\JavaWebServer2.0\servlets %1%
+
+http://localhost/servlet/coreservlets.HolaWWW2
+
+invocaría el servlet HelloWWW2 , como se ilustra en la Figura 2-3 .
+
+Figura 2-3. Invocar un servlet en un paquete a través de http://hostname/servlet/packagename.servletName .
