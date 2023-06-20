@@ -45,8 +45,8 @@ Cada libro de la serie principal:
 
 ## Part I Servlets 2.1 and 2.2
  	
-### Chapter 1 Overview of Servlets and JavaServer Pages
-### Chapter 2 First Servlets
+### [Chapter 1 Overview of Servlets and JavaServer Pages](https://github.com/adolfodelarosades/Java/blob/master/temarios/944_Core_Servlets_and_JavaServer_Pages/01_Overview_of_Servlets_and_JavaServer_Pages.md)
+### [Chapter 2 First Servlets](https://github.com/adolfodelarosades/Java/blob/master/temarios/944_Core_Servlets_and_JavaServer_Pages/02_First_Servlet.md)
 ### Chapter 3 Handling the Client Request: Form Data
 ### Chapter 4 Handling the Client Request: HTTP Request Headers
 ### Chapter 5 Accessing the Standard CGI Variables
