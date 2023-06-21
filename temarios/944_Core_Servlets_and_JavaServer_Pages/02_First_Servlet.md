@@ -862,18 +862,157 @@ Aunque este enfoque requiere un par de líneas adicionales de código, tiene cin
 
 Estos métodos contienen la carne real de su servlet. El noventa y nueve por ciento de las veces, solo te preocupas por requests **`GET`** y/o **`POST`**, por lo que anula **`doGet`** y/o **`doPost`**. Sin embargo, si lo desea, también puede anular **`doDelete`** para **`DELETE`** requests, **`doPut`** para **`PUT`** , **`doOptions`** para **`OPTIONS`** y **`doTrace`** para **`TRACE`** . Recuerde, sin embargo, que tiene soporte automático para **`OPCIONES`** y **`TRACE`**, como se describe en la sección anterior sobre el método **`service`**. Tenga en cuenta que no existe un método **`doHead`**. Esto se debe a que el sistema usa automáticamente la línea de estado y la configuración del encabezado de **`doGet`** para responder a las **`HEAD`** requests.
 
-### La interfaz SingleThreadModel
+### La interfaz `SingleThreadModel`
 
-Normalmente, el sistema crea una única instancia de su servlet y luego crea un nuevo subproceso para cada solicitud del usuario, con varios subprocesos simultáneos que se ejecutan si llega una nueva solicitud mientras una solicitud anterior aún se está ejecutando. Esto significa que sus métodos doGet y doPost deben tener cuidado de sincronizar el acceso a los campos y otros datos compartidos, ya que varios subprocesos pueden intentar acceder a los datos simultáneamente. Consulte la Sección 7.3 (Estado persistente del servlet y páginas de recarga automática) para obtener más información al respecto. Si desea evitar este acceso multiproceso, puede hacer que su servlet implemente la interfaz SingleThreadModel , como se muestra a continuación.
+Normalmente, el sistema crea una única instancia de su servlet y luego crea un nuevo subproceso para cada solicitud del usuario, con varios subprocesos simultáneos que se ejecutan si llega una nueva request mientras una request anterior aún se está ejecutando. Esto significa que sus métodos **`doGet`** y **`doPost`** deben tener cuidado de sincronizar el acceso a los campos y otros datos compartidos, ya que varios subprocesos pueden intentar acceder a los datos simultáneamente. Consulte la Sección 7.3 (Persistent Servlet State and Auto-Reloading Pages) para obtener más información al respecto. Si desea evitar este acceso multithreaded(multiproceso), puede hacer que su servlet implemente la interfaz **`SingleThreadModel`**, como se muestra a continuación.
 
-clase pública YourServlet extiende HttpServlet
-                            implementa SingleThreadModel {
+```java
+public class YourServlet   extends HttpServlet
+                           implements SingleThreadModel {
   ...
 }
+```
 
-Si implementa esta interfaz, el sistema garantiza que nunca haya más de un hilo de solicitud accediendo a una sola instancia de su servlet. Lo hace poniendo en cola todas las solicitudes y pasándolas una a la vez a una única instancia de servlet, o creando un grupo de múltiples instancias, cada una de las cuales maneja una solicitud a la vez. Esto significa que no tiene que preocuparse por el acceso simultáneo a campos regulares (variables de instancia) del servlet. Sin embargo , todavía tiene que sincronizar el acceso a las variables de clase ( campos estáticos ) o datos compartidos almacenados fuera del servlet.
+Si implementa esta interfaz, el sistema garantiza que nunca haya más de un request thread accediendo a una sola instancia de su servlet. Lo hace poniendo en cola todas las requests y pasándolas una a la vez a una única instancia de servlet, o creando un pool de múltiples instancias, cada una de las cuales maneja una request a la vez. Esto significa que no tiene que preocuparse por el acceso simultáneo a campos regulares (instance variables - variables de instancia) del servlet. Sin embargo , todavía tiene que sincronizar el acceso a las class variables ( campos **`static`** ) o datos compartidos almacenados fuera del servlet.
 
-El acceso síncrono a sus servlets puede dañar significativamente el rendimiento (latencia) si se accede a su servlet con mucha frecuencia. Así que piénselo dos veces antes de usar el enfoque SingleThreadModel .
+*El acceso síncrono a sus servlets puede dañar significativamente el rendimiento (latencia) si se accede a su servlet con mucha frecuencia. Así que piénselo dos veces antes de usar el enfoque **`SingleThreadModel`***.
 
-El método de destrucción
-El servidor puede decidir eliminar una instancia de servlet previamente cargada, quizás porque el administrador del servidor se lo solicita explícitamente, o quizás porque el servlet está inactivo durante mucho tiempo. Sin embargo, antes de que lo haga, llama al comando destroy del servlet.método. Este método le da a su servlet la oportunidad de cerrar conexiones de bases de datos, detener subprocesos en segundo plano, escribir listas de cookies o recuentos de visitas al disco y realizar otras actividades de limpieza similares. Tenga en cuenta, sin embargo, que es posible que el servidor web se bloquee. Después de todo, no todos los servidores web están escritos en lenguajes de programación confiables como Java; algunos están escritos en lenguajes (como los que tienen nombres de letras del alfabeto) en los que es fácil leer o borrar los extremos de las matrices, hacer encasillamientos ilegales o tener punteros colgantes debido a errores de recuperación de memoria. Además, incluso la tecnología Java no evitará que alguien tropiece con el cable de alimentación que va a la computadora. Entonces, no cuentes con destruircomo el único mecanismo para guardar el estado en el disco. Las actividades como el conteo de visitas o la acumulación de listas de valores de cookies que indican un acceso especial también deben escribir proactivamente su estado en el disco periódicamente.
+### El Método `destroy`
+
+El servidor puede decidir eliminar una instancia de servlet previamente cargada, quizás porque el administrador del servidor se lo solicita explícitamente, o quizás porque el servlet está inactivo durante mucho tiempo. Sin embargo, antes de que lo haga, llama al método **`destroy`** del servlet. Este método le da a su servlet la oportunidad de cerrar conexiones de bases de datos, detener subprocesos en segundo plano, escribir listas de cookies o recuentos de visitas al disco y realizar otras actividades de limpieza similares. Tenga en cuenta, sin embargo, que es posible que el servidor web se bloquee. Después de todo, no todos los servidores web están escritos en lenguajes de programación confiables como Java; algunos están escritos en lenguajes (como los que tienen nombres de letras del alfabeto) en los que es fácil leer o borrar los extremos de los arrays, hacer typecasts ilegales o tener punteros colgantes debido a errores de recuperación de memoria. Además, incluso la tecnología Java no evitará que alguien tropiece con el cable de alimentación que va a la computadora. Entonces, no cuentes con **`destroy`** como el único mecanismo para guardar el estado en el disco. Las actividades como el conteo de visitas o la acumulación de listas de valores de cookies que indican un acceso especial también deben escribir proactivamente su estado en el disco periódicamente.
+
+## 2.7. Un ejemplo usando parámetros de inicialización
+El listado 2.8 muestra un servlet que lee el mensaje y repite los parámetros de inicialización cuando se inicializa. La figura 2-5 muestra el resultado cuando el mensaje es Shibboleth , las repeticiones son 5 y el servlet se registra con el nombre ShowMsg . Recuerde que, aunque los servlets leen los parámetros de inicio de forma estándar, los desarrolladores establecen los parámetros de inicio de forma específica del servidor. Consulte la documentación de su servidor para obtener detalles autorizados. El Listado 2.9 muestra el archivo de configuración utilizado con Tomcat para obtener el resultado de la Figura 2-5, el Listado 2.10 muestra el archivo de configuración utilizado con el JSWDK, y las Figuras 2-6 y 2-7 muestran cómo configurar los parámetros de forma interactiva con el servidor web Java. El resultado es idéntico a la figura 2-5 en los tres casos.
+
+Figura 2-5. El servlet ShowMessage con parámetros de inicialización específicos del servidor.
+
+
+
+Figura 2-6. Registrar un nombre para un servlet con Java Web Server. Los servlets que usan parámetros de inicialización primero deben registrarse de esta manera.
+
+
+
+Figura 2-7. Especificación de parámetros de inicialización para un servlet con nombre con Java Web Server.
+
+
+
+Debido a que el proceso de configuración de los parámetros de inicio es específico del servidor, es una buena idea minimizar el número de entradas de inicialización separadas que deben especificarse. Esto limitará el trabajo que debe realizar al mover servlets que usan parámetros de inicio de un servidor a otro. Si necesita leer una gran cantidad de datos, le recomiendo que el parámetro init solo proporcione la ubicación de un archivo de parámetros y que los datos reales vayan a ese archivo. Se proporciona un ejemplo de este enfoque en la Sección 4.5 (Restricción del acceso a las páginas web), donde el parámetro de inicialización no especifica nada más que la ubicación del archivo de contraseña.
+
+Enfoque central
+
+	
+Para inicializaciones complejas, almacene los datos en un archivo separado y use los parámetros init para dar la ubicación de ese archivo.
+
+
+Listado 2.8. MostrarMensaje.java
+paquete coreservlets;
+
+importar java.io.*;
+importar javax.servlet.*;
+importar javax.servlet.http.*;
+
+/** Ejemplo utilizando la inicialización de servlet. Aquí, el mensaje
+ * para imprimir y el número de veces que el mensaje debe ser
+ * repetido se toma de los parámetros de inicio.
+ */
+
+La clase pública ShowMessage extiende HttpServlet {
+  mensaje de cadena privado;
+  private String defaultMessage = "Sin mensaje.";
+  repeticiones privadas int = 1;
+
+  public void init(ServletConfig config) 
+						lanza ServletException { 
+						// Llamar siempre a super.init 
+						super.init(config); 
+						mensaje = config.getInitParameter("mensaje"); 
+						if (mensaje == nulo) { 
+						mensaje = mensaje predeterminado; 
+						} 
+						intente { 
+						String repetirCadena = config.getInitParameter("repeticiones"); 
+						repite = Integer.parseInt(repeatString); 
+						} catch(NumberFormatException nfe) { 
+						// NumberFormatException maneja el caso en que repeatString 
+						// es nulo *y* el caso en que es algo en un 
+						// formato ilegal. De cualquier manera, no haga nada en catch, 
+						// ya que el valor anterior (1) para el campo de repeticiones 
+						// seguirá siendo válido porque Integer.parseInt arroja
+						// la excepción *antes* del valor se asigna 
+						// a las repeticiones. 
+						} 
+						}
+
+    doGet public void (solicitud HttpServletRequest,
+                    respuesta HttpServletResponse)
+        lanza ServletException, IOException {
+      respuesta.setContentType("texto/html");
+      PrintWriter out = respuesta.getWriter();
+      String title = "El servlet ShowMessage";
+      out.println(ServletUtilities.headWithTitle(título) +
+                  "<CUERPO BGCOLOR=\"#FDF5E6\">\n" +
+                  "<H1 ALIGN=CENTER>" + título + "</H1>");
+      for(int i=0; i<repeticiones; i++) {
+        out.println(mensaje + "<BR>");
+      }
+      salida.println("</BODY></HTML>");
+    }
+}
+
+El Listado 2.9 muestra el archivo de instalación que se usa para proporcionar parámetros de inicialización a los servlets que se usan con Tomcat 3.0. La idea es que primero asocie un nombre con el archivo de clase de servlet, luego asocie los parámetros de inicialización con ese nombre (no con el archivo de clase real). El archivo de instalación se encuentra en install_dir /webpages/WEB-INF . En lugar de recrear una versión similar a mano, es posible que desee descargar este archivo desde http://www.coreservlets.com/ , modificarlo y copiarlo en install_dir /webpages/WEB-INF .
+
+El listado 2.10 muestra el archivo de propiedades utilizado para proporcionar parámetros de inicialización a los servlets en el JSWDK. Al igual que con Tomcat, primero asocia un nombre con la clase de servlet y luego asocia los parámetros de inicialización con el nombre. El archivo de propiedades se encuentra en install_dir /webpages/WEB-INF .
+
+Listado 2.9. web.xml (para Tomcat)
+<?versión xml="1.0" codificación="ISO-8859-1"?>
+
+<!DOCTYPE aplicación web
+    PÚBLICO "-//Sun Microsystems, Inc.//Aplicación web DTD 2.2//ES"
+    "http://java.sun.com/j2ee/dtds/web-app_2.2.dtd">
+
+<aplicación web>
+  <servlet>
+    <nombre-servlet>
+      Mostrar mensaje
+    </nombre-servlet>
+
+    <clase-servlet>
+      coreservlets.ShowMessage
+    </clase-servlet>
+
+    <init-param>
+      <nombre-parámetro>
+        mensaje
+      </param-name>
+      <valor-parámetro>
+        Santo y seña
+      </valor-parámetro>
+    </init-parámetro>
+
+    <init-param>
+      <nombre-parámetro>
+        repite
+      </param-name>
+      <valor-parámetro>
+        5
+      </valor-parámetro>
+    </init-parámetro>
+  </servlet>
+</aplicación web>
+
+Listado 2.10. servlets.properties
+# servlets.properties usados ​​con el JSWDK
+
+# Registrar servlet a través de servletName.code=servletClassFile
+# Accede a él a través de http://host/examples/servlet/servletName
+ShowMsg.code=coreservlets.ShowMessage
+
+# Establecer parámetros de inicio a través de
+# servletName.initparams=param1=val1,param2=val2,...
+ShowMsg.initparams=mensaje=Shibboleth,repeticiones=5
+
+# Configuración estándar
+jsp.code=com.sun.jsp.runtime.JspServlet
+
+# Configure esto para mantener el código fuente del servlet creado a partir de JSP
+jsp.initparams=keepgenerated=true
