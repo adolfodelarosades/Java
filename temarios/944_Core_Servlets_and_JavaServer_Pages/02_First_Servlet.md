@@ -468,7 +468,7 @@ Aunque HTML es el tipo de documento más común que crean los servlets, no es in
 
 No se preocupe si aún no está familiarizado con los HTTP response headers; se discuten en detalle en el Capítulo 7. Tenga en cuenta que debe configurar los response headers antes de devolver el contenido a través de **`PrintWriter`**. Esto se debe a que una HTTP response consta de la status line, uno o más headers, una línea en blanco y el documento real, en ese orden. Los headers pueden aparecer en cualquier orden, y los servlets almacenan los headers y los envían todos a la vez, por lo que es legal configurar el status code (parte de la primera línea devuelta) incluso después de configurar los headers. Pero los servlets no necesariamente almacenan en búfer el documento en sí, ya que los usuarios pueden querer ver resultados parciales para páginas largas. En la ***versión 2.1*** de la especificación del servlet, la salida de **`PrintWriter`** no se almacena en búfer en absoluto, por lo que la primera vez que usa **`PrintWriter`**, es demasiado tarde para volver atrás y establecer headers. En la ***versión 2.2***, los motores de servlet pueden almacenar en búfer parcialmente la salida, pero el tamaño del búfer no se especifica. Puede usar el método **`getBufferSize`** de **`HttpServletResponse`** para determinar el tamaño o usar **`setBufferSize`** para especificarlo. En la ***versión 2.2*** con el almacenamiento en búfer habilitado, puede establecer headers hasta que el búfer se llene y se envíe al cliente. Si no está seguro de si se envió el búfer, puede usar el método **`isCommitted`** para verificar.
 
-Core Approach
+**Core Approach**
 
    :atom: Configure siempre el tipo de contenido **antes** de transmitir el documento real.
 
@@ -666,33 +666,214 @@ DOS> set CLASSPATH=C:\MyServlets;%CLASSPATH%
 DOS> javac -d C:\tomcat\webpages\WEB-INF\classes HelloWWW2.java
 ```
 						
+Mantener el código fuente separado de los archivos de clase es el enfoque que utilizo para mi propio desarrollo. Para complicar aún más mi vida, tengo una serie de configuraciones de **`CLASSPATH`** diferentes que uso para diferentes proyectos, y generalmente uso JDK 1.2, no JDK 1.1 como espera el servidor web Java. Entonces, en Windows me parece conveniente automatizar el proceso de compilación de servlet con un archivo por lotes **`servletc.bat`**, como se muestra en el Listado 2.5 (los saltos de línea en la línea **`CLASSPATH`** del conjunto se insertaron solo para mejorar la legibilidad). Puse este archivo por lotes en **`C:\Windows\Commando`** en otro lugar de la de la **`PATH`** de Windows. Después de esto, para compilar el servlet **`HelloWWW2`** e instalarlo con el Java Web Server, simplemente voy a **`C:\MyServlets\coreservlets`** y hago **`servletc HelloWWW2.java`**. El archivo de código fuente en http://www.coreservlets.com/ contiene variaciones de **`servletc.bat`** para JSWDK y Tomcat. Puede hacer algo similar en Unix con un script de shell.
 
-Mantener el código fuente separado de los archivos de clase es el enfoque que utilizo para mi propio desarrollo. Para complicar aún más mi vida, tengo una serie de configuraciones de CLASSPATH diferentes que uso para diferentes proyectos, y generalmente uso JDK 1.2, no JDK 1.1 como espera el servidor web Java. Entonces, en Windows me parece conveniente automatizar el proceso de compilación de servlet con un archivo por lotes servletc.bat, como se muestra en el Listado 2.5 (los saltos de línea en la línea CLASSPATH del conjunto se insertaron solo para mejorar la legibilidad). Puse este archivo por lotes en C:\Windows\Commando en otro lugar de la RUTA de Windows . Después de esto, para compilar el servlet HelloWWW2 e instalarlo con el Java Web Server, simplemente voy a C:\MyServlets\coreservlets y hago " servletc HelloWWW2.java ". El archivo de código fuente en http://www.coreservlets.com/ contiene variaciones de servletc.bat para JSWDK y Tomcat. Puede hacer algo similar en Unix con un script de shell.
+### Invocando Servlets en Paquetes
 
-Invocando Servlets en Paquetes
 Para invocar un servlet que está en un paquete, use la URL
 
-http://host/servlet/nombre del paquete.Nombre del servlet
+```sh
+http://host/servlet/packageName.ServletName
+```
 
 en lugar de
 
+```sh
 http://host/servlet/ServletName
+```
 
 Por lo tanto, si el servidor web se ejecuta en el sistema local,
 
-Listado 2.5. servletc.bat
-@echo apagado
+**Listado 2.5. servletc.bat**
 
-rem Esta es la versión para Java Web Server.
-rem Ver http://www.coreservlets.com/ para otras versiones.
+```bat
+@echo off
 
-establecer CLASSPATH=C:\JavaWebServer2.0\lib\servlet.jar;
+rem This is the version for the Java Web Server.
+rem See http://www.coreservlets.com/ for other versions.
+
+set CLASSPATH=C:\JavaWebServer2.0\lib\servlet.jar;
     C:\JavaWebServer2.0\lib\jsp.jar;
-    C:\MisServlets
+    C:\MyServlets
 C:\JDK1.1.8\bin\javac -d C:\JavaWebServer2.0\servlets %1%
+```
 
 http://localhost/servlet/coreservlets.HolaWWW2
 
-invocaría el servlet HelloWWW2 , como se ilustra en la Figura 2-3 .
+invocaría el servlet **`HelloWWW2`**, como se ilustra en la Figura 2-3.
 
-Figura 2-3. Invocar un servlet en un paquete a través de http://hostname/servlet/packagename.servletName .
+**Figura 2-3. Invocar un servlet en un paquete a través de http://hostname/servlet/packagename.servletName**.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ad174670-ee9c-40ae-b654-e6f4a80b20cb)
+
+## 2.5. Utilidades Simples de Creación de HTML
+
+Un documento HTML está estructurado de la siguiente manera:
+
+```html
+<!DOCTYPE ...>
+<HTML>
+<HEAD><TITLE>...</TITLE>...</HEAD>
+<BODY ...>
+...
+</BODY>
+</HTML>
+```
+
+Es posible que sienta la tentación de omitir parte de esta estructura, especialmente la línea **`DOCTYPE`**, teniendo en cuenta que prácticamente todos los principales navegadores la ignoran, aunque las especificaciones de **HTML 3.2 y 4.0** así lo requieran. Desaconsejo firmemente esta práctica. La ventaja de la línea **`DOCTYPE`** es que les dice a los validadores de HTML qué versión de HTML está utilizando, para que sepan con qué especificación verificar su documento. Estos validadores son servicios de depuración muy valiosos, que lo ayudan a detectar errores de sintaxis HTML que su navegador adivina bien, pero que otros navegadores tendrán problemas para mostrar. Los dos validadores en línea más populares son los del **World Wide Web Consortium ( http://validator.w3.org/ )** y del **Web Design Group (http://www.htmlhelp.com/tools/validator/ )**. Le permiten enviar una URL, luego recuperan la página, verifican la sintaxis con la especificación HTML formal y le informan cualquier error. Dado que un servlet que genera HTML parece una página web normal para los visitantes, se puede validar de la manera normal a menos que requiera datos **`POST`** para devolver su resultado. Recuerde que los datos **`GET`** se adjuntan a la URL, por lo que puede enviar una URL que incluya datos **`GET`** a los validadores.
+
+**Core Approach**
+
+   :atom: Utilice un validador de HTML para comprobar la sintaxis de las páginas que generan sus servlets.
+
+Es cierto que es un poco engorroso generar HTML con sentencias **`println`**, especialmente líneas largas y tediosas como la declaración **`DOCTYPE`**. Algunas personas solucionan este problema escribiendo utilidades detalladas de generación de HTML en Java y luego las usan en sus servlets. Soy escéptico sobre la utilidad de una library extensa para esto. En primer lugar, el inconveniente de generar HTML mediante programación es uno de los principales problemas abordados por JavaServer Pages (discutido en la segunda parte de este libro). JSP es una mejor solución, así que no desperdicie el esfuerzo creando un paquete complejo de generación de HTML. En segundo lugar, las rutinas de generación de HTML pueden ser engorrosas y tienden a no ser compatibles con la gama completa de atributos HTML ( **`CLASS`** e **`ID`** para hojas de estilo, controladores de eventos de JavaScript, colores de fondo de celdas de tablas, etc.). A pesar del valor cuestionable de una library de generación de HTML completa, si descubre que está repitiendo las mismas construcciones muchas veces, también podría crear un archivo de utilidad simple que simplifique esas construcciones. Para los servlets estándar, hay dos partes de la página web ( **`DOCTYPE`** y **`HEAD`** ) que es poco probable que cambien y, por lo tanto, podrían beneficiarse si se incorporaran a un archivo de utilidad simple. Estos se muestran en el Listado 2.6 , y el Listado 2.7 muestra una variación de **`HelloWWW2`** que hace uso de esta utilidad. Agregaré algunas utilidades más a lo largo del libro.
+
+**Listado 2.6. ServletUtilities.java**
+
+```java
+package coreservlets;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class ServletUtilities {
+  public static final String DOCTYPE = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
+				       "Transitional//EN\">";
+  public static String headWithTitle(String title) {
+	return(DOCTYPE + "\n" +
+	       "<HTML>\n" +
+	       "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n");
+						}
+  ...
+}
+```
+
+**Listado 2.7. `HelloWWW3.java`**
+
+```java
+package coreservlets;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloWWW3 extends HttpServlet {
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    out.println(ServletUtilities.headWithTitle("Hello WWW") +
+                "<BODY>\n" +
+                "<H1>Hello WWW</H1>\n" +
+                "</BODY></HTML>");
+  }
+}
+```
+
+**Figura 2-4. Resultado del servlet `HelloWWW3`.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/9ac2049e-8f82-48e6-a76e-e73ecece6de6)
+
+## 2.6. El Ciclo de Vida del Servlet
+
+Anteriormente en este libro, me referí vagamente al hecho de que solo se crea una única instancia de un servlet, y cada request de usuario da como resultado un nuevo hilo que se entrega a **`doGet`** o **`doPost`**, según corresponda. Ahora seré más específico sobre cómo se crean y destruyen los servlets, y cómo y cuándo se invocan los diversos métodos. Daré un breve resumen aquí, luego lo explicaré en las siguientes subsecciones.
+
+Cuando se crea el servlet por primera vez, se invoca su método **`init`**, por lo que es donde se coloca el código de configuración de una sola vez(one-time setup code). Después de esto, cada user request da como resultado un thread(hilo) que llama al método **`service`** de la instancia creada anteriormente. Múltiples concurrent requests(solicitudes simultáneas) normalmente dan como resultado múltiples threads (subprocesos) que llaman al **`service`** simultáneamente, aunque su servlet puede implementar una interfaz especial que estipula que solo se permite ejecutar un único subproceso en un momento dado. Luego, el método **`service`** llama a **`doGet`** , **`doPost`** u otro **`doXxx`** según el tipo de HTTP request que haya recibido. Finalmente, cuando el servidor decide unload(descargar) un servlet, primero llama al método **`destroy`** del servlet.
+
+### El método `init`
+
+El método **`init`** se llama cuando el servlet se crea por primera vez y no se vuelve a llamar para cada user request(solicitud de usuario). Por lo tanto, ***se usa para inicializaciones únicas***, al igual que con el método **`init`** de los applets. ***El servlet se puede crear cuando un usuario invoca por primera vez una URL correspondiente al servlet o cuando el servidor se inicia por primera vez, dependiendo de cómo haya registrado el servlet con el servidor web***. Se creará para la primera user request si no se registra explícitamente, sino que se coloca en uno de los directorios del servidor estándar. Consulte la discusión de la Sección 2.2 (A Simple Servlet Generating Plain Text) para obtener detalles sobre estos directorios.
+
+Hay dos versiones de **`init`**: una que no toma argumentos y otra que toma un objeto **`ServletConfig`** como argumento. La primera versión se usa cuando el servlet no necesita leer ninguna configuración que varíe de un servidor a otro. La definición del método se ve así:
+
+```java
+public void init() throws ServletException {
+  // Initialization code...
+}
+```
+
+Para ver ejemplos de este tipo de inicialización, consulte la Sección 2.8 (An Example Using Servlet Initialization and Page Modification Dates) más adelante en este capítulo. La Sección 18.8 (Connection Pooling: A Case Study) en el capítulo sobre JDBC ofrece una aplicación más avanzada donde **`init`** se usa para preasignar múltiples database connections(conexiones de base de datos).
+
+La segunda versión de **`init`** se usa cuando el servlet necesita leer la configuración específica del servidor antes de que pueda completar la inicialización. Por ejemplo, es posible que el servlet necesite conocer la configuración de la base de datos, los archivos de contraseñas, los parámetros de rendimiento específicos del servidor, los archivos de recuento de visitas o los datos de cookies serializados de solicitudes anteriores. La segunda versión de **`init`** se ve así:
+
+```java
+public void init(ServletConfig config) throws ServletException {
+  super.init(config);
+  // Initialization code...
+}
+```
+
+Observe dos cosas acerca de este código. Primero, el método **`init`** toma un **`ServletConfig`** como argumento. **`ServletConfig`** tiene un método **`getInitParameter`** con el que puede buscar parámetros de inicialización asociados con el servlet. Al igual que con el método **`getParameter`** utilizado en el método **`init`** de los applets, tanto la entrada (el nombre del parámetro) como la salida (el valor del parámetro) son cadenas. Para ver un ejemplo simple del uso de parámetros de inicialización, consulte la Sección 2.7 (An Example Using Initialization Parameters); para un ejemplo más complejo, consulte la Sección 4.5(Restricting Access to Web Pages) donde la ubicación de un archivo de contraseña se proporciona mediante el uso de **`getInitParameter`**. Tenga en cuenta que aunque busque parámetros de manera portátil, los configura de manera específica del servidor. Por ejemplo, con **Tomcat**, incrusta propiedades de servlet en un archivo llamado **`web.xml`**, con **JSWDK** usa **`servlets.properties`**, con el servidor de aplicaciones **WebLogic** usa **`weblogic.properties`** y con **Java Web Server** configura las propiedades de forma interactiva a través de la consola de administración. Para ver ejemplos de estos ajustes, consulte la Sección 2.7 (An Example Using Initialization Parameters).
+
+La segunda cosa a tener en cuenta sobre la segunda versión de **`init`** es que la primera línea del body del método es una llamada a **`super.init`**. ¡Esta llamada es crítica! El objeto **`ServletConfig`** se usa en otra parte del servlet, y el método **`init`** de la superclase lo registra donde el servlet puede encontrarlo más tarde. Por lo tanto, puede causarse grandes dolores de cabeza más adelante si omite la llamada a **`super.init`**.
+
+**Core Approach**
+
+   :atom: Si escribe un método **`init`** que toma un **`ServletConfig`** como argumento, llame **siempre** a **`super.init`** en la primera línea.
+
+
+### El método `service`
+
+Cada vez que el servidor recibe una request de un servlet, el servidor genera un nuevo thread (hilo) y llama a **`service`**. El método **`service`** comprueba el tipo de HTTP request ( **`GET`**, **`POST`**, **`PUT`**, **`DELETE`**, etc.) y llama a **`doGet`**, **`doPost`**, **`doPut`**, **`doDelete`**, etc., según corresponda. Ahora, si tiene un servlet que necesita manejar las solicitudes **`POST`** y **`GET`** de manera idéntica, puede verse tentado a sobreescribir(override)  el **`service`** directamente como se muestra a continuación, en lugar de implementar tanto **`doGet`** como **`doPost`**.
+
+```java
+public void service(HttpServletRequest request,
+                    HttpServletResponse response)
+    throws ServletException, IOException {
+  // Servlet Code
+}
+```
+
+Esta no es una buena idea. En su lugar, solo haga que **`doPost`** llame a **`doGet`** (o viceversa), como se muestra a continuación.
+
+```java
+public void doGet(HttpServletRequest request,
+                  HttpServletResponse response)
+    throws ServletException, IOException {
+  // Servlet Code
+}
+
+public void doPost(HttpServletRequest request,
+                   HttpServletResponse response)
+    throws ServletException, IOException {
+  doGet(request, response);
+}
+```
+
+Aunque este enfoque requiere un par de líneas adicionales de código, tiene cinco ventajas sobre el overriding **`service`**:
+
+1. Puede agregar soporte para otros servicios más adelante agregando **`doPut`**, **`doTrace`**, etc., quizás en una subclase. El Overriding **`service`** excluye directamente esta posibilidad.
+
+2. Puede agregar soporte para fechas de modificación agregando un método **`getLastModified`**. Si usa **`doGet`**, el **`service`** estándar utiliza el método **`getLastModified`** para establecer los headers **`Last-Modified`** y para responder correctamente a las requests **`GET`** condicionales (aquellas que contienen un header **`If-Modified-Since`**). Consulte la Sección 2.8 (An Example Using Servlet Initialization and Page Modification Dates) para ver un ejemplo.
+
+3. Obtiene soporte automático para requests **`HEAD`**. El sistema simplemente devuelve los headers y los status codes que establece **`doGet`**, pero omite el body de la página. **`HEAD`** es un request method útil para clientes HTTP personalizados. Por ejemplo, los link validators(validadores de enlaces) que verifican una página en busca de enlaces de hipertexto muertos a menudo usan **`HEAD`** en lugar de **`GET`** para reducir la carga del servidor.
+
+4. Obtiene soporte automático para las **`OPTIONS`** requests. Si existe un método **`doGet`**, el método **`service`** estándar responde a las **`OPTIONS`** requests devolviendo un header **`Allow`** que indica que se admiten **`GET`**, **`HEAD`**, **`OPTIONS`** y **`TRACE`**.
+
+5. Obtiene soporte automático para **`TRACE`** requests. **`TRACE`** es un request method utilizado para la client debugging: simplemente devuelve los HTTP request headers al cliente.
+
+**Core Tip**
+	
+   Si su servlet necesita manejar tanto **`GET`** como **`POST`** de manera idéntica, haga que su método **`doPost`** llame a **`doGet`**, o viceversa. No sobreescriba el **`service`** directamente.
+
+
+### Los métodos `doGet`, `doPost` y `doXxx`
+
+Estos métodos contienen la carne real de su servlet. El noventa y nueve por ciento de las veces, solo te preocupas por requests **`GET`** y/o **`POST`**, por lo que anula **`doGet`** y/o **`doPost`**. Sin embargo, si lo desea, también puede anular **`doDelete`** para **`DELETE`** requests, **`doPut`** para **`PUT`** , **`doOptions`** para **`OPTIONS`** y **`doTrace`** para **`TRACE`** . Recuerde, sin embargo, que tiene soporte automático para **`OPCIONES`** y **`TRACE`**, como se describe en la sección anterior sobre el método **`service`**. Tenga en cuenta que no existe un método **`doHead`**. Esto se debe a que el sistema usa automáticamente la línea de estado y la configuración del encabezado de **`doGet`** para responder a las **`HEAD`** requests.
+
+### La interfaz SingleThreadModel
+
+Normalmente, el sistema crea una única instancia de su servlet y luego crea un nuevo subproceso para cada solicitud del usuario, con varios subprocesos simultáneos que se ejecutan si llega una nueva solicitud mientras una solicitud anterior aún se está ejecutando. Esto significa que sus métodos doGet y doPost deben tener cuidado de sincronizar el acceso a los campos y otros datos compartidos, ya que varios subprocesos pueden intentar acceder a los datos simultáneamente. Consulte la Sección 7.3 (Estado persistente del servlet y páginas de recarga automática) para obtener más información al respecto. Si desea evitar este acceso multiproceso, puede hacer que su servlet implemente la interfaz SingleThreadModel , como se muestra a continuación.
+
+clase pública YourServlet extiende HttpServlet
+                            implementa SingleThreadModel {
+  ...
+}
+
+Si implementa esta interfaz, el sistema garantiza que nunca haya más de un hilo de solicitud accediendo a una sola instancia de su servlet. Lo hace poniendo en cola todas las solicitudes y pasándolas una a la vez a una única instancia de servlet, o creando un grupo de múltiples instancias, cada una de las cuales maneja una solicitud a la vez. Esto significa que no tiene que preocuparse por el acceso simultáneo a campos regulares (variables de instancia) del servlet. Sin embargo , todavía tiene que sincronizar el acceso a las variables de clase ( campos estáticos ) o datos compartidos almacenados fuera del servlet.
+
+El acceso síncrono a sus servlets puede dañar significativamente el rendimiento (latencia) si se accede a su servlet con mucha frecuencia. Así que piénselo dos veces antes de usar el enfoque SingleThreadModel .
+
+El método de destrucción
+El servidor puede decidir eliminar una instancia de servlet previamente cargada, quizás porque el administrador del servidor se lo solicita explícitamente, o quizás porque el servlet está inactivo durante mucho tiempo. Sin embargo, antes de que lo haga, llama al comando destroy del servlet.método. Este método le da a su servlet la oportunidad de cerrar conexiones de bases de datos, detener subprocesos en segundo plano, escribir listas de cookies o recuentos de visitas al disco y realizar otras actividades de limpieza similares. Tenga en cuenta, sin embargo, que es posible que el servidor web se bloquee. Después de todo, no todos los servidores web están escritos en lenguajes de programación confiables como Java; algunos están escritos en lenguajes (como los que tienen nombres de letras del alfabeto) en los que es fácil leer o borrar los extremos de las matrices, hacer encasillamientos ilegales o tener punteros colgantes debido a errores de recuperación de memoria. Además, incluso la tecnología Java no evitará que alguien tropiece con el cable de alimentación que va a la computadora. Entonces, no cuentes con destruircomo el único mecanismo para guardar el estado en el disco. Las actividades como el conteo de visitas o la acumulación de listas de valores de cookies que indican un acceso especial también deben escribir proactivamente su estado en el disco periódicamente.
