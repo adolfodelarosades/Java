@@ -586,9 +586,11 @@ Ejecutamos la aplicación.
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e258207f-3968-435e-ae7e-c113e2e12ade">
 
+**NOTA**: Todos los ejemplos hasta aquí no deberían estar en paquetes(pero las hemos metido en paquetes) que es lo que se ve en la siguiente sección.
+
 ## 2.4. Packaging Servlets
-AQUIIIII
-En un entorno de producción, varios programadores pueden estar desarrollando servlets para el mismo servidor. Por lo tanto, colocar todos los servlets en el directorio de servlets de nivel superior da como resultado un directorio masivo difícil de administrar y genera conflictos de nombres cuando dos desarrolladores eligen accidentalmente el mismo nombre de servlet. Los paquetes son la solución natural a este problema. El uso de paquetes da como resultado cambios en la forma en que se crean los servlets, la forma en que se compilan y la forma en que se invocan. Consideremos estas áreas una a la vez en las siguientes tres subsecciones. Los primeros dos cambios son exactamente iguales que con cualquier otra clase de Java que use paquetes; no hay nada específico para los servlets.
+
+En un entorno de producción, varios programadores pueden estar desarrollando servlets para el mismo servidor. Por lo tanto, ***colocar todos los servlets en el directorio de servlets de nivel superior da como resultado un directorio masivo difícil de administrar y genera conflictos de nombres cuando dos desarrolladores eligen accidentalmente el mismo nombre de servlet***. ***Los paquetes son la solución natural a este problema***. El uso de paquetes da como resultado cambios en la forma en que se crean los servlets, la forma en que se compilan y la forma en que se invocan. Consideremos estas áreas una a la vez en las siguientes tres subsecciones. Los primeros dos cambios son exactamente iguales que con cualquier otra clase de Java que use paquetes; no hay nada específico para los servlets.
 
 Creando Servlets en Paquetes
 Se necesitan dos pasos para colocar servlets en paquetes:
