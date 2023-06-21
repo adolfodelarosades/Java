@@ -926,98 +926,104 @@ public class ShowMessage extends HttpServlet {
   private String defaultMessage = "No message.";
   private int repeats = 1;
 
-  public void init(ServletConfig config)	throws ServletException {
-						// Always call super.init
-						super.init(config);
-						message = config.getInitParameter("message");
-						if (message == null) {
-						message = defaultMessage;
-						}
-						try {
-						String repeatString = config.getInitParameter("repeats");
-						repeats = Integer.parseInt(repeatString);
-						} catch(NumberFormatException nfe) {
-						// NumberFormatException handles case where repeatString
-						// is null *and* case where it is something in an
-						// illegal format. Either way, do nothing in catch,
-						// as the previous value (1) for the repeats field will
-						// remain valid because the Integer.parseInt throws
-						// the exception *before* the value gets assigned
-						// to repeats.
-						}
-						}
+  public void init(ServletConfig config) throws ServletException {
+    // Always call super.init
+    super.init(config);
+    message = config.getInitParameter("message");
+    if (message == null) {
+      message = defaultMessage;
+    }
+    try {
+      String repeatString = config.getInitParameter("repeats");
+      repeats = Integer.parseInt(repeatString);
+    } catch(NumberFormatException nfe) {
+      // NumberFormatException handles case where repeatString
+      // is null *and* case where it is something in an
+      // illegal format. Either way, do nothing in catch,
+      // as the previous value (1) for the repeats field will
+      // remain valid because the Integer.parseInt throws
+      // the exception *before* the value gets assigned
+      // to repeats.
+    }
+  }
 
-    public void doGet(HttpServletRequest request,
+  public void doGet(HttpServletRequest request,
                     HttpServletResponse response)
         throws ServletException, IOException {
-      response.setContentType("text/html");
-      PrintWriter out = response.getWriter();
-      String title = "The ShowMessage Servlet";
-      out.println(ServletUtilities.headWithTitle(title) +
-                  "<BODY BGCOLOR=\"#FDF5E6\">\n" +
-                  "<H1 ALIGN=CENTER>" + title + "</H1>");
-      for(int i=0; i<repeats; i++) {
-        out.println(message + "<BR>");
-      }
-      out.println("</BODY></HTML>");
-    }
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    String title = "The ShowMessage Servlet";
+    out.println(ServletUtilities.headWithTitle(title) +
+        "<BODY BGCOLOR=\"#FDF5E6\">\n" +
+        "<H1 ALIGN=CENTER>" + title + "</H1>");
+        for(int i=0; i<repeats; i++) {
+          out.println(message + "<BR>");
+        }
+        out.println("</BODY></HTML>");
+  }
 }
 ```
 
-El Listado 2.9 muestra el archivo de instalación que se usa para proporcionar parámetros de inicialización a los servlets que se usan con Tomcat 3.0. La idea es que primero asocie un nombre con el archivo de clase de servlet, luego asocie los parámetros de inicialización con ese nombre (no con el archivo de clase real). El archivo de instalación se encuentra en install_dir /webpages/WEB-INF . En lugar de recrear una versión similar a mano, es posible que desee descargar este archivo desde http://www.coreservlets.com/ , modificarlo y copiarlo en install_dir /webpages/WEB-INF .
+El Listado 2.9 muestra el archivo de instalación que se usa para proporcionar parámetros de inicialización a los servlets que se usan con **Tomcat 3.0**. La idea es que primero asocie un nombre con el archivo de clase de servlet, luego asocie los parámetros de inicialización con ese nombre (no con el archivo de clase real). El archivo de instalación se encuentra en **`install_dir/webpages/WEB-INF`**. En lugar de recrear una versión similar a mano, es posible que desee descargar este archivo desde http://www.coreservlets.com/, modificarlo y copiarlo en **`install_dir/webpages/WEB-INF`**.
 
-El listado 2.10 muestra el archivo de propiedades utilizado para proporcionar parámetros de inicialización a los servlets en el JSWDK. Al igual que con Tomcat, primero asocia un nombre con la clase de servlet y luego asocia los parámetros de inicialización con el nombre. El archivo de propiedades se encuentra en install_dir /webpages/WEB-INF .
+El listado 2.10 muestra el archivo de propiedades utilizado para proporcionar parámetros de inicialización a los servlets en el JSWDK. Al igual que con Tomcat, primero asocia un nombre con la clase de servlet y luego asocia los parámetros de inicialización con el nombre. El archivo de propiedades se encuentra en **`install_dir/webpages/WEB-INF`**.
 
-Listado 2.9. web.xml (para Tomcat)
-<?versión xml="1.0" codificación="ISO-8859-1"?>
+**Listado 2.9. `web.xml` (para Tomcat)**
 
-<!DOCTYPE aplicación web
-    PÚBLICO "-//Sun Microsystems, Inc.//Aplicación web DTD 2.2//ES"
+```xml
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
     "http://java.sun.com/j2ee/dtds/web-app_2.2.dtd">
 
-<aplicación web>
+<web-app>
   <servlet>
-    <nombre-servlet>
-      Mostrar mensaje
-    </nombre-servlet>
+    <servlet-name>
+      ShowMsg
+    </servlet-name>
 
-    <clase-servlet>
+    <servlet-class>
       coreservlets.ShowMessage
-    </clase-servlet>
+    </servlet-class>
 
     <init-param>
-      <nombre-parámetro>
-        mensaje
+      <param-name>
+        message
       </param-name>
-      <valor-parámetro>
-        Santo y seña
-      </valor-parámetro>
-    </init-parámetro>
+      <param-value>
+        Shibboleth
+      </param-value>
+    </init-param>
 
     <init-param>
-      <nombre-parámetro>
-        repite
+      <param-name>
+        repeats
       </param-name>
-      <valor-parámetro>
+      <param-value>
         5
-      </valor-parámetro>
-    </init-parámetro>
+      </param-value>
+    </init-param>
   </servlet>
-</aplicación web>
+</web-app>
+```
 
-Listado 2.10. servlets.properties
-# servlets.properties usados ​​con el JSWDK
+**Listado 2.10. `servlets.properties`**
 
-# Registrar servlet a través de servletName.code=servletClassFile
-# Accede a él a través de http://host/examples/servlet/servletName
+```properties
+# servlets.properties used with the JSWDK
+
+# Register servlet via servletName.code=servletClassFile
+# You access it via http://host/examples/servlet/servletName
 ShowMsg.code=coreservlets.ShowMessage
 
-# Establecer parámetros de inicio a través de
-# servletName.initparams=param1=val1,param2=val2,...
-ShowMsg.initparams=mensaje=Shibboleth,repeticiones=5
+# Set init params via
+#   servletName.initparams=param1=val1,param2=val2,...
+ShowMsg.initparams=message=Shibboleth,repeats=5
 
-# Configuración estándar
+# Standard setting
 jsp.code=com.sun.jsp.runtime.JspServlet
 
-# Configure esto para mantener el código fuente del servlet creado a partir de JSP
+# Set this to keep servlet source code built from JSP
 jsp.initparams=keepgenerated=true
+```
