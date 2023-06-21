@@ -881,83 +881,88 @@ Si implementa esta interfaz, el sistema garantiza que nunca haya más de un requ
 
 El servidor puede decidir eliminar una instancia de servlet previamente cargada, quizás porque el administrador del servidor se lo solicita explícitamente, o quizás porque el servlet está inactivo durante mucho tiempo. Sin embargo, antes de que lo haga, llama al método **`destroy`** del servlet. Este método le da a su servlet la oportunidad de cerrar conexiones de bases de datos, detener subprocesos en segundo plano, escribir listas de cookies o recuentos de visitas al disco y realizar otras actividades de limpieza similares. Tenga en cuenta, sin embargo, que es posible que el servidor web se bloquee. Después de todo, no todos los servidores web están escritos en lenguajes de programación confiables como Java; algunos están escritos en lenguajes (como los que tienen nombres de letras del alfabeto) en los que es fácil leer o borrar los extremos de los arrays, hacer typecasts ilegales o tener punteros colgantes debido a errores de recuperación de memoria. Además, incluso la tecnología Java no evitará que alguien tropiece con el cable de alimentación que va a la computadora. Entonces, no cuentes con **`destroy`** como el único mecanismo para guardar el estado en el disco. Las actividades como el conteo de visitas o la acumulación de listas de valores de cookies que indican un acceso especial también deben escribir proactivamente su estado en el disco periódicamente.
 
-## 2.7. Un ejemplo usando parámetros de inicialización
-El listado 2.8 muestra un servlet que lee el mensaje y repite los parámetros de inicialización cuando se inicializa. La figura 2-5 muestra el resultado cuando el mensaje es Shibboleth , las repeticiones son 5 y el servlet se registra con el nombre ShowMsg . Recuerde que, aunque los servlets leen los parámetros de inicio de forma estándar, los desarrolladores establecen los parámetros de inicio de forma específica del servidor. Consulte la documentación de su servidor para obtener detalles autorizados. El Listado 2.9 muestra el archivo de configuración utilizado con Tomcat para obtener el resultado de la Figura 2-5, el Listado 2.10 muestra el archivo de configuración utilizado con el JSWDK, y las Figuras 2-6 y 2-7 muestran cómo configurar los parámetros de forma interactiva con el servidor web Java. El resultado es idéntico a la figura 2-5 en los tres casos.
+## 2.7. Un Ejemplo Usando Initialization Parameters
 
-Figura 2-5. El servlet ShowMessage con parámetros de inicialización específicos del servidor.
+El listado 2.8 muestra un servlet que lee los parámetros de inicialización **`message`** y **`repeats`** cuando se inicializa. La figura 2-5 muestra el resultado cuando el **`message`** es **`Shibboleth`**, las **`repeats`** son **`5`** y el servlet se registra con el nombre **`ShowMsg`**. Recuerde que, aunque los servlets leen los parámetros de inicio de forma estándar, los desarrolladores establecen los parámetros de inicio de forma específica del servidor. Consulte la documentación de su servidor para obtener detalles autorizados. El Listado 2.9 muestra el archivo de configuración utilizado con Tomcat para obtener el resultado de la Figura 2-5, el Listado 2.10 muestra el archivo de configuración utilizado con el JSWDK, y las Figuras 2-6 y 2-7 muestran cómo configurar los parámetros de forma interactiva con el servidor web Java. El resultado es idéntico a la figura 2-5 en los tres casos.
 
+**Figura 2-5. El servlet `ShowMessage` con parámetros de inicialización específicos del servidor.**
 
-
-Figura 2-6. Registrar un nombre para un servlet con Java Web Server. Los servlets que usan parámetros de inicialización primero deben registrarse de esta manera.
-
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e90be164-cbbd-494f-8d1e-80c707a7eab4)
 
 
-Figura 2-7. Especificación de parámetros de inicialización para un servlet con nombre con Java Web Server.
+**Figura 2-6. Registrar un nombre para un servlet con Java Web Server. Los servlets que usan parámetros de inicialización primero deben registrarse de esta manera.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/61a67f80-6db6-4bf9-b80d-0df510d714a0)
 
 
+**Figura 2-7. Especificación de parámetros de inicialización para un servlet con nombre con Java Web Server.**
 
-Debido a que el proceso de configuración de los parámetros de inicio es específico del servidor, es una buena idea minimizar el número de entradas de inicialización separadas que deben especificarse. Esto limitará el trabajo que debe realizar al mover servlets que usan parámetros de inicio de un servidor a otro. Si necesita leer una gran cantidad de datos, le recomiendo que el parámetro init solo proporcione la ubicación de un archivo de parámetros y que los datos reales vayan a ese archivo. Se proporciona un ejemplo de este enfoque en la Sección 4.5 (Restricción del acceso a las páginas web), donde el parámetro de inicialización no especifica nada más que la ubicación del archivo de contraseña.
-
-Enfoque central
-
-	
-Para inicializaciones complejas, almacene los datos en un archivo separado y use los parámetros init para dar la ubicación de ese archivo.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e2b7ecd6-50a9-4d04-a094-9397c78ed18c)
 
 
-Listado 2.8. MostrarMensaje.java
-paquete coreservlets;
+Debido a que el proceso de configuración de los parámetros de inicio es específico del servidor, es una buena idea minimizar el número de entradas de inicialización separadas que deben especificarse. Esto limitará el trabajo que debe realizar al mover servlets que usan parámetros de inicio de un servidor a otro. Si necesita leer una gran cantidad de datos, le recomiendo que el init parameter solo proporcione la ubicación de un archivo de parámetros y que los datos reales vayan a ese archivo. Se proporciona un ejemplo de este enfoque en la Sección 4.5 (Restricting Access to Web Pages), donde el parámetro de inicialización no especifica nada más que la ubicación del archivo de contraseña.
 
-importar java.io.*;
-importar javax.servlet.*;
-importar javax.servlet.http.*;
+**Core Approach**
 
-/** Ejemplo utilizando la inicialización de servlet. Aquí, el mensaje
- * para imprimir y el número de veces que el mensaje debe ser
- * repetido se toma de los parámetros de inicio.
+   :atom: Para inicializaciones complejas, almacene los datos en un archivo separado y use los init parameters para dar la ubicación de ese archivo.
+
+
+**Listado 2.8. `ShowMessage.java`**
+
+```java
+package coreservlets;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+/** Example using servlet initialization. Here, the message
+ *  to print and the number of times the message should be
+ *  repeated is taken from the init parameters.
  */
 
-La clase pública ShowMessage extiende HttpServlet {
-  mensaje de cadena privado;
-  private String defaultMessage = "Sin mensaje.";
-  repeticiones privadas int = 1;
+public class ShowMessage extends HttpServlet {
+  private String message;
+  private String defaultMessage = "No message.";
+  private int repeats = 1;
 
-  public void init(ServletConfig config) 
-						lanza ServletException { 
-						// Llamar siempre a super.init 
-						super.init(config); 
-						mensaje = config.getInitParameter("mensaje"); 
-						if (mensaje == nulo) { 
-						mensaje = mensaje predeterminado; 
-						} 
-						intente { 
-						String repetirCadena = config.getInitParameter("repeticiones"); 
-						repite = Integer.parseInt(repeatString); 
-						} catch(NumberFormatException nfe) { 
-						// NumberFormatException maneja el caso en que repeatString 
-						// es nulo *y* el caso en que es algo en un 
-						// formato ilegal. De cualquier manera, no haga nada en catch, 
-						// ya que el valor anterior (1) para el campo de repeticiones 
-						// seguirá siendo válido porque Integer.parseInt arroja
-						// la excepción *antes* del valor se asigna 
-						// a las repeticiones. 
-						} 
+  public void init(ServletConfig config)	throws ServletException {
+						// Always call super.init
+						super.init(config);
+						message = config.getInitParameter("message");
+						if (message == null) {
+						message = defaultMessage;
+						}
+						try {
+						String repeatString = config.getInitParameter("repeats");
+						repeats = Integer.parseInt(repeatString);
+						} catch(NumberFormatException nfe) {
+						// NumberFormatException handles case where repeatString
+						// is null *and* case where it is something in an
+						// illegal format. Either way, do nothing in catch,
+						// as the previous value (1) for the repeats field will
+						// remain valid because the Integer.parseInt throws
+						// the exception *before* the value gets assigned
+						// to repeats.
+						}
 						}
 
-    doGet public void (solicitud HttpServletRequest,
-                    respuesta HttpServletResponse)
-        lanza ServletException, IOException {
-      respuesta.setContentType("texto/html");
-      PrintWriter out = respuesta.getWriter();
-      String title = "El servlet ShowMessage";
-      out.println(ServletUtilities.headWithTitle(título) +
-                  "<CUERPO BGCOLOR=\"#FDF5E6\">\n" +
-                  "<H1 ALIGN=CENTER>" + título + "</H1>");
-      for(int i=0; i<repeticiones; i++) {
-        out.println(mensaje + "<BR>");
+    public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+        throws ServletException, IOException {
+      response.setContentType("text/html");
+      PrintWriter out = response.getWriter();
+      String title = "The ShowMessage Servlet";
+      out.println(ServletUtilities.headWithTitle(title) +
+                  "<BODY BGCOLOR=\"#FDF5E6\">\n" +
+                  "<H1 ALIGN=CENTER>" + title + "</H1>");
+      for(int i=0; i<repeats; i++) {
+        out.println(message + "<BR>");
       }
-      salida.println("</BODY></HTML>");
+      out.println("</BODY></HTML>");
     }
 }
+```
 
 El Listado 2.9 muestra el archivo de instalación que se usa para proporcionar parámetros de inicialización a los servlets que se usan con Tomcat 3.0. La idea es que primero asocie un nombre con el archivo de clase de servlet, luego asocie los parámetros de inicialización con ese nombre (no con el archivo de clase real). El archivo de instalación se encuentra en install_dir /webpages/WEB-INF . En lugar de recrear una versión similar a mano, es posible que desee descargar este archivo desde http://www.coreservlets.com/ , modificarlo y copiarlo en install_dir /webpages/WEB-INF .
 
