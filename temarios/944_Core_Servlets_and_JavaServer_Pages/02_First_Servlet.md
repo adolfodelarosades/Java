@@ -1027,3 +1027,100 @@ jsp.code=com.sun.jsp.runtime.JspServlet
 # Set this to keep servlet source code built from JSP
 jsp.initparams=keepgenerated=true
 ```
+
+## 2.8. Un Ejemplo Usando Fechas de Inicialización de Servlet y Modificación de Página
+
+El listado 2.11 muestra un servlet que usa **`init`** para hacer dos cosas. Primero, construye un array de 10 enteros. Dado que estos números se basan en cálculos complejos, no quiero repetir el cálculo para cada request. Así que hice que **`doGet`** busque los valores que calculó **`init`** en lugar de generarlos cada vez. Los resultados de esta técnica se muestran en la Figura 2-8 .
+
+**Figura 2-8. Salida del Servlet `LotteryNumbers`.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/be1f1298-5267-44a2-a914-9d1083765b62)
+
+Sin embargo, dado que todos los usuarios obtienen el mismo resultado, **`init`** también almacena una fecha de modificación de la página que utiliza el método **`getLastModified`**. Este método debería devolver un tiempo de modificación expresado en milisegundos desde 1970, como es estándar con las fechas de Java. La hora se convierte automáticamente a una fecha en GMT adecuada para el header **`Last-Modified`**. Más importante aún, si el servidor recibe una request **`GET`** condicional (una que especifica que el cliente solo quiere páginas marcadas como **`If-Modified-Since`** desde una fecha en particular), el sistema compara la fecha especificada con la devuelta por **`getLastModified`**, solo devolviendo la página si se ha cambiado después de la fecha especificada. Los navegadores realizan con frecuencia estas solicitudes condicionales para las páginas almacenadas en sus cachés, por lo que admitir solicitudes condicionales ayuda a sus usuarios y reduce la carga del servidor. Dado que los encabezados **`Last-Modified`** y **`If-Modified-Since`** usan solo segundos completos, el método **`getLastModified`** debe redondear los tiempos al segundo más cercano.
+
+Las figuras 2-9 y 2-10 muestran el resultado de requests para el mismo servlet con dos fechas ligeramente diferentes **`If-Modified-Since`**. Para establecer los request headers y ver los response headers, utilicé **`WebClient`**, una aplicación de Java que se muestra en la Sección 2.10 (WebClient: hablar con servidores web de forma interactiva) que le permite configurar HTTP requests de forma interactiva, enviarlas y ver los resultados.
+
+**Figura 2-9. Acceso al servlet `LotteryNumbers` con una request `GET` incondicional o con una request condicional que especifica una fecha antes de que la inicialización del servlet dé como resultado la página web normal.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/265c0ca9-1c7f-408a-9171-dbc4afbff78b)
+
+**Figura 2-10. Acceder al servlet `LotteryNumbers` con una request `GET` condicional que especifica una fecha en o después de la inicialización del servlet da como resultado una respuesta 304 ( no modificada )**.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/294e43c6-b306-47b6-8145-a654ce9ee34f)
+
+
+**Listado 2.11. `LotteryNumbers.java`**
+
+```java
+package coreservlets;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+/** Example using servlet initialization and the
+ *  getLastModified method.
+ */
+
+public class LotteryNumbers extends HttpServlet {
+  private long modTime;
+  private int[] numbers = new int[10];
+
+  /** The init method is called only when the servlet
+   *  is first loaded, before the first request
+   *  is processed.
+   */
+
+  public void init() throws ServletException {
+    // Round to nearest second (ie 1000 milliseconds)
+    modTime = System.currentTimeMillis()/1000*1000;
+    for(int i=0; i<numbers.length; i++) {
+      numbers[i] = randomNum();
+    }
+  }
+
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    String title = "Your Lottery Numbers";
+    out.println(ServletUtilities.headWithTitle(title) +
+                "<BODY BGCOLOR=\"#FDF5E6\">\n" +
+                "<H1 ALIGN=CENTER>" + title + "</H1>\n" +
+                "<B>Based upon extensive research of " +
+                "astro-illogical trends, psychic farces, " +
+                "and detailed statistical claptrap, " +
+                "we have chosen the " + numbers.length +
+                " best lottery numbers for you.</B>" +
+                "<OL>");
+    for(int i=0; i<numbers.length; i++) {
+      out.println("  <LI>" + numbers[i]);
+    }
+    out.println("</OL>" +
+                "</BODY></HTML>");
+  }
+
+  /** The standard service method compares this date
+   *  against any date specified in the If-Modified-Since
+   *  request header. If the getLastModified date is
+   *  later, or if there is no If-Modified-Since header,
+   *  the doGet method is called normally. But if the
+   *  getLastModified date is the same or earlier,
+   *  the service method sends back a 304 (Not Modified)
+   *  response, and does <B>not</B> call doGet.
+   *  The browser should use its cached version of
+   *  the page in such a case.
+   */
+
+  public long getLastModified(HttpServletRequest request) {
+    return(modTime);
+  }
+
+  // A random int from 0 to 99.
+
+  private int randomNum() {
+    return((int)(Math.random() * 100));
+  }
+}
+```
