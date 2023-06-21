@@ -1124,3 +1124,495 @@ public class LotteryNumbers extends HttpServlet {
   }
 }
 ```
+
+## 2.9. Depuración de servlets
+Naturalmente, cuando escribe servlets, nunca comete errores. Sin embargo, algunos de sus colegas pueden cometer un error ocasional y puede transmitirles este consejo. Sin embargo, en serio, la depuración de servlets puede ser complicada porque no los ejecuta directamente. En su lugar, desencadena su ejecución mediante una solicitud HTTP y el servidor web los ejecuta. Esta ejecución remota dificulta la inserción de puntos de interrupción o la lectura de mensajes de depuración y seguimientos de pila. Por lo tanto, los enfoques para la depuración de servlets difieren un poco de los que se utilizan en el desarrollo general. Aquí hay siete estrategias generales que pueden hacer su vida más fácil.
+
+Mira la fuente HTML.
+
+Si el resultado que ve en el navegador parece divertido, elija "Ver código fuente" en el menú del navegador. A veces, un pequeño error de HTML como <TABLE> en lugar de </TABLE> puede impedir que se vea gran parte de la página. Aún mejor, use un validador HTML formal en la salida del servlet. Vea la Sección 2.5 (Utilidades simples de construcción de HTML) para una discusión de este enfoque.
+
+Devuelve las páginas de error al cliente.
+
+A veces, el servlet puede anticipar ciertas clases de errores. En estos casos, el servlet debe construir información descriptiva sobre el problema y devolverla al cliente en una página normal o mediante el método sendError de HttpServletResponse . Consulte el Capítulo 6 (Generación de la respuesta del servidor: códigos de estado HTTP) para obtener detalles sobre sendError . Por ejemplo, debe planificar los casos en que el cliente olvide algunos de los datos del formulario requeridos y envíe una página de error detallando lo que falta. Sin embargo, las páginas de error no siempre son posibles. A veces, algo inesperado sale mal con su servlet y simplemente falla. Los enfoques restantes lo ayudan en esas situaciones.
+
+Inicie el servidor desde la línea de comandos.
+
+La mayoría de los servidores web se ejecutan desde un proceso en segundo plano, y este proceso a menudo se inicia automáticamente cuando se inicia el sistema. Si tiene problemas con su servlet, debería considerar apagar el servidor y reiniciarlo desde la línea de comando. Después de esto, System.out.printlno las llamadas System.err.println se pueden leer fácilmente desde la ventana en la que se inició el servidor. Cuando algo sale mal con su servlet, su primera tarea es descubrir exactamente qué tan lejos llegó el servlet antes de fallar y recopilar información sobre las estructuras de datos clave durante el período de tiempo justo antes de fallar. Las declaraciones println simples son sorprendentemente efectivas para este propósito. Si está ejecutando sus servlets en un servidor que no puede detener y reiniciar fácilmente, realice la depuración con JSWDK, Tomcat o Java Web Server en su máquina personal y guarde la implementación en el servidor real para más adelante.
+
+Utilice el archivo de registro.
+
+La clase HttpServlet tiene un método llamado registro que le permite escribir información en un archivo de registro en el servidor. Leer los mensajes de depuración del archivo de registro es un poco menos conveniente que verlos directamente desde una ventana como con el enfoque anterior, pero usar el archivo de registro no requiere detener y reiniciar el servidor. Hay dos variaciones de este método: una que toma un String y la otra que toma un String y un Throwable (una clase antecesora de Exception ). La ubicación exacta del archivo de registro es específica del servidor, pero generalmente está claramente documentada o se puede encontrar en subdirectorios del directorio de instalación del servidor.
+
+Mire los datos de la solicitud por separado.
+
+Los servlets leen datos de la solicitud HTTP, construyen una respuesta y la envían al cliente. Si algo en el proceso sale mal, querrá descubrir si es porque el cliente está enviando datos incorrectos o porque el servlet los está procesando incorrectamente. La clase EchoServer , que se muestra en la Sección 16.12 (Un servidor web de depuración), le permite enviar formularios HTML y obtener un resultado que le muestra exactamente cómo llegaron los datos al servidor.
+
+Mire los datos de respuesta por separado.
+
+Una vez que mire los datos de la solicitud por separado, querrá hacer lo mismo con los datos de la respuesta. El cliente webLa clase, que se presenta a continuación en la Sección 2.10 (WebClient: hablar con los servidores web de forma interactiva), le permite conectarse al servidor de forma interactiva, enviar datos de solicitud HTTP personalizados y ver todo lo que regresa, encabezados de respuesta HTTP y todo.
+
+Detenga y reinicie el servidor.
+
+La mayoría de los servidores web completos que admiten servlets tienen una ubicación designada para los servlets que están en desarrollo. Se supone que los servlets en esta ubicación (por ejemplo, el directorio de servlets para el servidor web de Java) se recargan automáticamente cuando cambia su archivo de clase asociado. A veces, sin embargo, algunos servidores pueden confundirse, especialmente cuando su único cambio es a una clase de nivel inferior, no a la clase de servlet de nivel superior. Por lo tanto, si parece que los cambios que realiza en sus servlets no se reflejan en el comportamiento del servlet, intente reiniciar el servidor. Con JSWDK y Tomcat, debe hacer esto cada vez que realice un cambio, ya que estos mini servidores no admiten la recarga automática de servlet.
+
+## 2.10. WebClient: hablar con servidores web de forma interactiva
+
+Esta sección presenta el código fuente para el programa WebClient discutido en la Sección 2.9 (Depuración de servlets) y utilizado en la Sección 2.8 (Un ejemplo usando fechas de inicialización de servlet y modificación de página) y extensamente a lo largo del Capítulo 16 (Uso de formularios HTML). Como siempre, el código fuente se puede descargar del archivo en línea en http://www.coreservlets.com/ y no hay restricciones en su uso.
+
+cliente web
+Esta clase es el programa de nivel superior que usaría. Inícielo desde la línea de comando, luego personalice la línea de solicitud HTTP y los encabezados de solicitud, luego presione "Enviar solicitud".
+
+Listado 2.12. WebClient.java
+importar java.awt.*;
+importar java.awt.event.*;
+importar java.util.*;
+
+/**
+ * Un cliente gráfico que le permite conectarse interactivamente a
+ * Servidores web y enviar líneas de solicitud personalizadas y
+ * solicitar encabezados.
+ */
+
+clase pública WebClient extiende CloseableFrame
+    implementa Runnable, Interruptible, ActionListener {
+  public static void main(String[] args) {
+    nuevo WebClient("Cliente Web");
+  }
+  campo de texto etiquetado privado campo de host, campo de puerto,
+          solicitarLineField;
+  área de texto privada requestHeadersArea, resultArea;
+  host de cadena privado, requestLine;
+  puerto internacional privado;
+  Private String[] requestHeaders = new String[30];
+  botón privado botón de envío, botón de interrupción;
+  booleano privado isInterrupted = false;
+
+  cliente web público (título de la cadena) {
+    súper (título);
+    setBackground(Color.lightGray);
+    setLayout(nuevo BorderLayout(5, 30));
+    int tamaño de fuente = 14;
+    Etiqueta de fuenteFuente =
+      nueva fuente ("Serif", Font.BOLD, fontSize);
+    Fuente headerFont =
+      nueva fuente ("SansSerif", Font.BOLD, fontSize+4);
+    Fuente textFont =
+      nueva Fuente ("Monoespaciado", Fuente.BOLD, tamaño de fuente-2);
+    Panel de entradaPanel = nuevo Panel();
+    inputPanel.setLayout(nuevo diseño de borde());
+    Etiqueta del panelPanel = new Panel();
+    labelPanel.setLayout(nuevo GridLayout(4,1));
+    hostField = new LabeledTextField("Host:", labelFont,
+                                     30, fuente de texto);
+    portField = new LabeledTextField("Puerto:", labelFont,
+                                     "80", 5, fuente de texto);
+    // Use HTTP 1.0 para compatibilidad con la mayoría de los servidores.
+    // Si cambia esto a 1.1, *debe* proporcionar un
+    // Anfitrión: encabezado de solicitud.
+    solicitarLineField =
+      nuevo LabeledTextField("Línea de solicitud:", labelFont,
+                           "GET / HTTP/1.0", 50, fuente de texto);
+    labelPanel.add(hostField);
+    labelPanel.add(portField);
+    labelPanel.add(requestLineField);
+    Etiqueta requestHeadersLabel =
+      nueva etiqueta ("Encabezados de solicitud:");
+    requestHeadersLabel.setFont(labelFont);
+    labelPanel.add(requestHeadersLabel);
+    inputPanel.add(labelPanel, BorderLayout.NORTE);
+    requestHeadersArea = new TextArea(5, 80);
+    requestHeadersArea.setFont(textFont);
+    inputPanel.add(requestHeadersArea, BorderLayout.CENTER);
+    Panel botonPanel = new Panel();
+    enviarBoton = new Button("Enviar Solicitud");
+    enviarButton.addActionListener(esto);
+    enviarBoton.setFont(labelFont);
+    buttonPanel.add(submitButton);
+    inputPanel.add(buttonPanel, BorderLayout.SOUTH);
+    agregar (panel de entrada, diseño de borde. NORTE);
+    Panel resultPanel = new Panel();
+    resultPanel.setLayout(nuevo BorderLayout());
+    Etiqueta resultadoEtiqueta =
+      nueva Etiqueta("Resultados", Etiqueta.CENTRO);
+    resultLabel.setFont(fuente del encabezado);
+    resultPanel.add(resultLabel, BorderLayout.NORTE);
+    área de resultado = nueva área de texto ();
+    resultArea.setFont(textFont);
+    resultPanel.add(resultArea, BorderLayout.CENTER);
+    Panel interruptPanel = new Panel();
+    interruptButton = new Button("Interrumpir descarga");
+    interruptButton.addActionListener(esto);
+    interruptButton.setFont(labelFont);
+    interruptPanel.add(interruptButton);
+    resultPanel.add(interruptPanel, BorderLayout.SOUTH);
+    agregar (panel de resultados, BorderLayout. CENTRO);
+    establecerTamaño(600, 700);
+    setVisible(verdadero);
+  }
+
+  public void actionPerformed(ActionEvent event) {
+    if (evento.getSource() == botón enviar) {
+      Descargador de subprocesos = nuevo subproceso (esto);
+      descargador.start();
+    } else if (event.getSource() == interruptButton) {
+      está interrumpido = verdadero;
+    }
+  }
+
+  ejecución de vacío público () {
+    está interrumpido = falso;
+    si (tieneArgsLegales())
+      nuevo HttpClient(host, puerto, requestLine,
+               requestHeaders, resultArea, esto);
+  }
+
+  booleano público está interrumpido () {
+    return(está interrumpido);
+  }
+
+  privado booleano hasLegalArgs() {
+    host = hostField.getTextField().getText();
+    if (anfitrión.longitud() == 0) {
+      report("Nombre de host faltante");
+      falso retorno);
+    }
+    Cadena portString =
+      portField.getTextField().getText();
+    if (cadenapuerto.longitud() == 0) {
+      informe ("Falta el número de puerto");
+      falso retorno);
+    }
+    intentar {
+      puerto = Integer.parseInt(portString);
+    } catch(NumberFormatException nfe) {
+      report("Número de puerto ilegal: " + portString);
+      falso retorno);
+    }
+    línea de solicitud =
+      solicitarLineField.getTextField().getText();
+    if (líneaSolicitud.longitud() == 0) {
+      report("Línea de solicitud faltante");
+      falso retorno);
+    }
+    getRequestHeaders();
+    retorno (verdadero);
+  }
+
+  informe anulado privado (String s) {
+    resultArea.setText(s);
+  }
+
+  getRequestHeaders vacío privado () {
+    for(int i=0; i<requestHeaders.length; i++)
+      encabezados de solicitud[i] = nulo;
+    int NúmEncabezado = 0;
+    Encabezado de cadena =
+      requestHeadersArea.getText();
+    Tok de StringTokenizer =
+      nuevo StringTokenizer(encabezado, "\r\n");
+    while (tok.hasMoreTokens())
+      requestHeaders[headerNum++] = tok.nextToken();
+  }
+}
+
+Cliente Http
+La clase HttpClient realiza la comunicación de red real. Simplemente envía la línea de solicitud designada y los encabezados de solicitud al servidor web, luego lee las líneas que regresan una a la vez, colocándolas en un TextArea hasta que el servidor cierra la conexión o HttpClientes interrumpido por medio de la bandera isInterrupted .
+
+Listado 2.13. HttpClient.java
+importar java.awt.*;
+importar java.net.*;
+importar java.io.*;
+
+/**
+ * El cliente de red subyacente utilizado por WebClient.
+ */
+
+clase pública HttpClient extiende NetworkClient {
+  línea de solicitud de cadena privada;
+  Cadena privada [] encabezados de solicitud;
+  área de salida de área de texto privada;
+  aplicación interrumpible privada;
+
+  public HttpClient(String host, puerto int,
+                    Línea de solicitud de cadena, encabezados de solicitud de cadena [],
+                    TextArea área de salida, aplicación interrumpible) {
+    super(anfitrión, puerto);
+    this.requestLine = requestLine;
+    this.requestHeaders = requestHeaders;
+    this.outputArea = salidaArea;
+    esta.aplicación = aplicación;
+    si (verificarHost(host))
+      conectar();
+  }
+
+  mango de vacío protegido Conexión (Socket uriSocket)
+      lanza IOException {
+    intentar {
+      PrintWriter out = SocketUtil.getWriter(uriSocket);
+      BufferedReader en = SocketUtil.getReader(uriSocket);
+      areadesalida.setText("");
+      out.println(solicitudLine);
+      for(int i=0; i<requestHeaders.length; i++) {
+        si (encabezados de solicitud [i] == nulo)
+          romper;
+        demás
+          out.println(requestHeaders[i]);
+      }
+      salida.println();
+      Línea de cuerda;
+      while ((línea = in.readLine()) != nulo &&
+             !app.está interrumpida())
+        áreadesalida.append(línea + "\n");
+      si (app.isInterrupted())
+        outputArea.append("---- Descarga interrumpida ----");
+    } catch(Excepción e) {
+      areadesalida.setText("Error: " + e);
+    }
+  }
+  booleano privado checkHost(String host) {
+    intentar {
+      InetAddress.getByName(host);
+      retorno (verdadero);
+    } catch(UnknownHostException uhe) {
+      outputArea.setText("Host falso: " + host);
+      falso retorno);
+    }
+  }
+}
+
+RedCliente
+La clase NetworkClient es un punto de partida genérico para clientes de red y HttpClient la amplía .
+
+Listado 2.14. NetworkClient.java
+importar java.net.*;
+importar java.io.*;
+
+/** Un punto de partida para clientes de red. tendrás que
+ * anular handleConnection, pero en muchos casos
+ * connect puede permanecer sin cambios. Usa
+ * SocketUtil para simplificar la creación del
+ * PrintWriter y BufferedReader.
+ *
+ * @ver SocketUtil
+ */
+
+cliente de red de clase pública {
+  host de cadena protegido;
+  puerto int protegido;
+
+  /** Registrar host y puerto. La conexión no
+   * en realidad se establecerá hasta que llame
+   * conectar.
+   *
+   * @ver #conectar
+   */
+
+  cliente de red pública (cadena host, puerto int) {
+    este.host = host;
+    este.puerto = puerto;
+  }
+  /** Establece la conexión, luego pasa el socket
+   * para manejar la conexión.
+   *
+   * @ver #manejarConexión
+   */
+
+  conexión de vacío público () {
+    intentar {
+      Cliente de socket = nuevo Socket (host, puerto);
+      manejarConexión(cliente);
+    } catch(UnknownHostException uhe) {
+      System.out.println("Host desconocido: " + host);
+      uhe.printStackTrace();
+    } catch(IOException ioe) {
+      System.out.println("IOException: " + ioe);
+      ioe.printStackTrace();
+    }
+  }
+
+  /** Este es el método que anulará cuando
+   * hacer un cliente de red para su tarea.
+   * La versión predeterminada envía una sola línea
+   * ("Cliente de red genérico") al servidor,
+   * lee una línea de respuesta, la imprime y luego sale.
+   */
+
+  mango de vacío protegido Conexión (cliente de socket)
+      lanza IOException {
+    ImprimirEscritor fuera =
+      SocketUtil.getWriter(cliente);
+    BufferedReader en =
+      SocketUtil.getReader(cliente);
+    out.println("Cliente de red genérico");
+    Sistema.fuera.println
+      ("Cliente de red genérico:\n" +
+       "Conexión establecida con" + anfitrión +
+       " y obtuve '" + in.readLine() + "' en respuesta");
+    cliente.cerrar();
+  }
+
+  /** El nombre de host del servidor que estamos contactando. */
+
+  cadena pública getHost() {
+    retorno (anfitrión);
+  }
+
+  /** La conexión del puerto se realizará en. */
+
+  público int getPuerto() {
+    retorno (puerto);
+  }
+}
+
+SocketUtil
+SocketUtil es una clase de utilidad simple que simplifica la creación de algunos de los flujos utilizados en la programación de redes. Es utilizado por NetworkClient y HttpClient .
+
+Listado 2.15. SocketUtil.java
+importar java.net.*;
+importar java.io.*;
+
+/** Una forma abreviada de crear BufferedReaders y
+ * PrintWriters asociados con un Socket.
+ */
+
+clase pública SocketUtil {
+  /** Hacer un BufferedReader para obtener datos entrantes. */
+
+  público estático BufferedReader getReader (Socket s)
+      lanza IOException {
+    return(nuevo BufferedReader(
+            nuevo InputStreamReader(s.getInputStream())));
+  }
+
+  /** Crea un PrintWriter para enviar datos salientes.
+   * Esta PrintWriter descargará automáticamente el flujo
+   * cuando se llama a println.
+   */
+
+  PrintWriter público estático getWriter (Socket s)
+      lanza IOException {
+    // segundo argumento de verdadero significa autodescarga
+    return(nuevo PrintWriter(s.getOutputStream(), true));
+  }
+}
+
+Marco cerrable
+CloseableFrame es una extensión de la clase Frame estándar , con la adición de que se respetan las solicitudes de los usuarios para salir del marco. Esta es la ventana de nivel superior en la que se construye WebClient .
+
+Listado 2.16. CloseableFrame.java
+importar java.awt.*;
+importar java.awt.event.*;
+
+/** Un marco que realmente puede salir. Usado como
+ * el punto de partida para la mayoría de gráficos de Java 1.1
+ * aplicaciones.
+ */
+
+Clase pública CloseableFrame extiende marco {
+  public CloseableFrame (título de la cadena) {
+    súper (título);
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+  }
+
+  /** Ya que estamos haciendo algo permanente, necesitamos
+   * para llamar a super.processWindowEvent <B>primero</B>.
+   */
+
+  public void processWindowEvent(evento WindowEvent) {
+    super.processWindowEvent(evento); // Manejar a los oyentes
+    if (evento.getID() == WindowEvent.WINDOW_CLOSING)
+      Sistema.salir(0);
+  }
+}
+
+LabeledTextField
+La clase LabeledTextField es una combinación simple de TextField y Label y se usa en WebClient .
+
+Listado 2.17. LabeledTextField.java
+importar java.awt.*;
+
+/** Un campo de texto con una etiqueta asociada.
+ */
+
+clase pública LabeledTextField extiende Panel {
+  etiqueta de etiqueta privada;
+  campo de texto privado campo de texto;
+
+  public LabeledTextField(String labelString,
+                          Etiqueta de fuenteFuente,
+                          int tamaño del campo de texto,
+                          Fuente textoFuente) {
+    setLayout(nuevo FlowLayout(FlowLayout.LEFT));
+    etiqueta = nueva Etiqueta(cadenaetiqueta, Etiqueta.DERECHA);
+    si (labelFont != nulo)
+      etiqueta.setFont(etiquetaFuente);
+    agregar (etiqueta);
+    campo de texto = nuevo campo de texto (tamaño del campo de texto);
+    si (fuente de texto! = nulo)
+      campo de texto.setFont(textFont);
+    agregar (campo de texto);
+  }
+
+  public LabeledTextField(String labelString,
+                          Cadena campo de texto Cadena) {
+    this(cadenaEtiqueta, nulo, cadenaCampoTexto,
+         textFieldString.longitud(), nulo);
+  }
+
+  public LabeledTextField(String labelString,
+                          int tamaño del campo de texto) {
+    this(labelString, null, textFieldSize, null);
+  }
+
+  public LabeledTextField(String labelString,
+                          Etiqueta de fuenteFuente,
+                          Cadena TextFieldString,
+                          int tamaño del campo de texto,
+                          Fuente textoFuente) {
+    this(CadenaEtiqueta, FuenteEtiqueta,
+         tamaño del campo de texto, fuente del texto);
+    campo de texto.setText(cadena de campo de texto);
+  }
+  /** La etiqueta en el lado izquierdo de LabeledTextField.
+   * Para manipular la etiqueta, haga:
+   * <PRE>
+   * LabeledTextField ltf = new LabeledTextField(...);
+   * ltf.getLabel().someLabelMethod(...);
+   * </PRE>
+   *
+   * @ver #getTextField
+   */
+
+  etiqueta pública getLabel() {
+    etiqueta de devolución);
+  }
+
+  /** El TextField en el lado derecho del
+   * Campo de texto etiquetado.
+   *
+   * @ver #getLabel
+   */
+
+  campo de texto público getTextField() {
+    retorno (campo de texto);
+  }
+}
+
+interrumpible
+Interruptible es una interfaz simple que se utiliza para identificar clases que tienen un método isInterrupted . HttpClient lo utiliza para sondear WebClient y ver si el usuario lo ha interrumpido.
+
+Listado 2.18. Interrumpible.java
+/**
+ * Una interfaz para clases que se puede sondear para ver
+ * si han sido interrumpidos. Utilizado por HttpClient
+ * y WebClient para permitir al usuario interrumpir una red
+ * descargar.
+ */
+
+interfaz pública interrumpible {
+  public boolean isInterrupted();
+}
+
+
+## 
