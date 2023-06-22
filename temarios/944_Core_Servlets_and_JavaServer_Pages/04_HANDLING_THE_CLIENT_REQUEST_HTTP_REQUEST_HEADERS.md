@@ -170,66 +170,66 @@ Tenga en cuenta que HTTP 1.1 admite un superconjunto de headers permitidos en HT
 
 ***Cache-Control***
 
-*El cliente puede usar este header para especificar una serie de opciones sobre cómo los servidores proxy deben almacenar en caché las páginas. Los servlets suelen ignorar el request header, pero el **`Cache-Control`** response header puede ser valioso para indicar que una página cambia constantemente y no debe almacenarse en caché. Consulte el Capítulo 7 (Generación de la respuesta del servidor: encabezados de respuesta HTTP) para obtener más información.*
+*El cliente puede usar este header para especificar una serie de opciones sobre cómo los servidores proxy deben almacenar en caché las páginas. Los servlets suelen ignorar el request header, pero el **`Cache-Control`** response header puede ser valioso para indicar que una página cambia constantemente y no debe almacenarse en caché. Consulte el Capítulo 7 (Generating the Server Response: HTTP Response Headers) para obtener más información.*
 
 ***Connection***
 
-*Este encabezado indica si el cliente puede o no manejar conexiones HTTP persistentes. Estos permiten que el cliente u otro navegador recupere varios archivos (por ejemplo, un archivo HTML y varias imágenes asociadas) con una sola conexión de socket, ahorrando la sobrecarga de negociar varias conexiones independientes. Con una solicitud HTTP 1.1, las conexiones persistentes son las predeterminadas y el cliente debe especificar un valor de cierre para que este encabezado use conexiones de estilo antiguo. En HTTP 1.0, un valor de keep-alive significa que se deben usar conexiones persistentes.*
+*Este encabezado indica si el cliente puede o no manejar conexiones HTTP persistentes. Estos permiten que el cliente u otro navegador recupere varios archivos (por ejemplo, un archivo HTML y varias imágenes asociadas) con una sola conexión de socket, ahorrando la sobrecarga de negociar varias conexiones independientes. Con una HTTP 1.1 request, las conexiones persistentes son las predeterminadas y el cliente debe especificar un valor **`close`** para que este encabezado use conexiones de estilo antiguo. En HTTP 1.0, un valor **`keep-alive`** significa que se deben usar conexiones persistentes.*
 
-*Cada solicitud HTTP da como resultado una nueva invocación de un servlet, independientemente de si la solicitud es una conexión separada. Es decir, el servidor invoca el servlet solo después de que el servidor ya haya leído la solicitud HTTP. Esto significa que los servlets necesitan ayuda del servidor para manejar conexiones persistentes. En consecuencia, el trabajo del servlet es solo hacer posible que el servidor use conexiones persistentes, lo que se hace enviando un encabezado de respuesta de longitud de contenido . La Sección 7.4 (Uso de conexiones HTTP persistentes) tiene un ejemplo detallado.*
+*Cada HTTP request da como resultado una nueva invocación de un servlet, independientemente de si la request es una conexión separada. Es decir, el servidor invoca el servlet solo después de que el servidor ya haya leído la  HTTP request. Esto significa que los servlets necesitan ayuda del servidor para manejar conexiones persistentes. En consecuencia, el trabajo del servlet es solo hacer posible que el servidor use conexiones persistentes, lo que se hace enviando un **`Content-Length`** response header. La Sección 7.4 (Using Persistent HTTP Connections) tiene un ejemplo detallado.*
 
 ***Content-Length***
 
-*Este encabezado solo se aplica a las solicitudes POST y proporciona el tamaño de los datos POST en bytes. En lugar de llamar a request.getIntHeader("Content-Length") , simplemente puede usar request.getContentLength() . Sin embargo, dado que los servlets se encargan de leer los datos del formulario por usted (consulte el Capítulo 3 , "Manejo de la solicitud del cliente: datos del formulario"), es poco probable que use este encabezado explícitamente.*
+*Este encabezado solo se aplica a las requests **`POST`** y proporciona el tamaño de los datos **`POST`** en bytes. En lugar de llamar a **`request.getIntHeader("Content-Length")`**, simplemente puede usar **`request.getContentLength()`**. Sin embargo, dado que los servlets se encargan de leer los datos del formulario por usted (consulte el Capítulo 3, "Handling the Client Request: Form Data"), es poco probable que use este header explícitamente.*
 
 ***Content-Type***
 
-*Aunque este encabezado generalmente se usa en las respuestas del servidor, también puede ser parte de las solicitudes del cliente cuando el cliente adjunta un documento como datos POST o cuando realiza solicitudes PUT . Puede acceder a este encabezado con el método abreviado getContentType de HttpServletRequest.*
+*Aunque este header generalmente se usa en las responses del servidor, también puede ser parte de las requests del cliente cuando el cliente adjunta un documento como datos **`POST`** o cuando realiza requests **`PUT`**. Puede acceder a este header con el método abreviado **`getContentType`** de **`HttpServletRequest`**.*
 
 ***Cookie***
 
-*Este encabezado se utiliza para devolver las cookies a los servidores que las enviaron previamente al navegador. Para obtener más información, consulte el Capítulo 8 (Manejo de cookies). Técnicamente, Cookie no es parte de HTTP 1.1. Originalmente era una extensión de Netscape, pero ahora es ampliamente compatible, tanto en Netscape como en Internet Explorer.*
+*Este header se utiliza para devolver las cookies a los servidores que las enviaron previamente al navegador. Para obtener más información, consulte el Capítulo 8 (Handling Cookies). Técnicamente, **`Cookie`** no es parte de HTTP 1.1. Originalmente era una extensión de Netscape, pero ahora es ampliamente compatible, tanto en Netscape como en Internet Explorer.*
 
 ***Expect***
 
-*Este encabezado que rara vez se usa le permite al cliente decirle al servidor qué tipo de comportamientos espera. El único valor estándar para este encabezado, 100-continuar , lo envía un navegador que enviará un documento adjunto y quiere saber si el servidor lo aceptará. El servidor debe enviar un código de estado de 100 ( Continuar ) o 417 ( Expectativa fallida ) en tal caso. Para obtener más detalles sobre los códigos de estado HTTP, consulte el Capítulo 6 (Generación de la respuesta del servidor: códigos de estado HTTP).*
+*Este header que rara vez se usa le permite al cliente decirle al servidor qué tipo de comportamientos espera. El único valor estándar para este header, **`100-continue`**, lo envía un navegador que enviará un documento adjunto y quiere saber si el servidor lo aceptará. El servidor debe enviar un código de estado de 100 ( **`Continue`** ) o 417 ( **`Expectation Failed`** ) en tal caso. Para obtener más detalles sobre los HTTP status codes, consulte el Capítulo 6 (Generating the Server Response: HTTP Status Codes).*
 
 ***From***
 
-*Este encabezado proporciona la dirección de correo electrónico de la persona responsable de la solicitud HTTP. Los navegadores no envían este encabezado, pero las arañas web (robots) a menudo lo configuran como cortesía para ayudar a identificar la fuente de la sobrecarga del servidor o de solicitudes incorrectas repetidas.*
+*Este header proporciona la dirección de correo electrónico de la persona responsable de la HTTP request. Los navegadores no envían este header, pero las Web spiders (robots) a menudo lo configuran como cortesía para ayudar a identificar la fuente de la sobrecarga del servidor o de requests incorrectas repetidas.*
 
 ***Host***
 
-*Los navegadores deben especificar este encabezado, que indica el host y el puerto tal como se indica en la URL original . Debido al reenvío de solicitudes y las máquinas que tienen varios nombres de host, es muy posible que el servidor no pueda determinar esta información de otra manera. Este encabezado no es nuevo en HTTP 1.1, pero en HTTP 1.0 era opcional, no obligatorio.*
+*Los navegadores deben especificar este header, que indica el host y el port(puerto) tal como se indica en la URL original. Debido al request forwarding(reenvío de solicitudes) y las máquinas que tienen varios nombres de host, es muy posible que el servidor no pueda determinar esta información de otra manera. Este header no es nuevo en HTTP 1.1, pero en HTTP 1.0 era opcional, no obligatorio.*
 
 ***If-Match***
 
-*Este encabezado de uso poco frecuente se aplica principalmente a las solicitudes PUT . El cliente puede proporcionar una lista de etiquetas de entidad tal como las devuelve el encabezado de respuesta de ETag , y la operación se realiza solo si una de ellas coincide.*
+*Este header de uso poco frecuente se aplica principalmente a las requests **`PUT`**. El cliente puede proporcionar una lista de etiquetas de entidad tal como las devuelve el response header **`ETag`**, y la operación se realiza solo si una de ellas coincide.*
 
 ***If-Modified-Since***
 
-*Este encabezado indica que el cliente quiere la página solo si se ha cambiado después de la fecha especificada. Esta opción es muy útil porque permite que los navegadores almacenen en caché los documentos y los vuelvan a cargar a través de la red solo cuando hayan cambiado. Sin embargo, los servlets no necesitan tratar directamente con este encabezado. En su lugar, deberían simplemente implementar el método getLastModified para que el sistema maneje las fechas de modificación automáticamente. Se proporciona una ilustración en la Sección 2.8 (Un ejemplo usando fechas de inicialización de servlet y modificación de página).*
+*Este header indica que el cliente quiere la página solo si se ha cambiado después de la fecha especificada. Esta opción es muy útil porque permite que los navegadores almacenen en caché los documentos y los vuelvan a cargar a través de la red solo cuando hayan cambiado. Sin embargo, los servlets no necesitan tratar directamente con este header. En su lugar, deberían simplemente implementar el método **`getLastModified`** para que el sistema maneje las fechas de modificación automáticamente. Se proporciona una ilustración en la Sección 2.8 (An Example Using Servlet Initialization and Page Modification Dates).*
 
 ***If-None-Match***
 
-*Este encabezado es como If-Match, excepto que la operación debe realizarse solo si ninguna etiqueta de entidad coincide.*
+*Este header es como **`If-Match`**, excepto que la operación debe realizarse solo si ninguna tags de entidad coincide.*
 
 ***If-Range***
 
-*Este encabezado, que rara vez se usa, permite que un cliente que tiene una copia parcial de un documento solicite las partes que faltan (si no se modificaron) o un documento nuevo completo (si se modificó desde una fecha específica).*
+*Este header, que rara vez se usa, permite que un cliente que tiene una copia parcial de un documento solicite las partes que faltan (si no se modificaron) o un documento nuevo completo (si se modificó desde una fecha específica).*
 
 ***If-Unmodified-Since***
 
-*Este encabezado es como If-Modified-Since al revés, lo que indica que la operación debería tener éxito solo si el documento es anterior a la fecha especificada. Típicamente, Si-Modificado-Desdese usa para solicitudes GET ("dame el documento solo si es más nuevo que mi versión en caché"), mientras que If-Unmodified-Since se usa para solicitudes PUT ("actualice este documento solo si nadie más lo ha cambiado desde que lo generé ”).*
+*Este header es como **`If-Modified-Since`** al revés, lo que indica que la operación debería tener éxito solo si el documento es anterior a la fecha especificada. Típicamente, **`If-Modified-Since`** se usa para requests **`GET`** ("dame el documento solo si es más nuevo que mi versión en caché"), mientras que **`If-Unmodified-Since`** se usa para requests **`PUT`** ("actualice este documento solo si nadie más lo ha cambiado desde que lo generé”).*
 
 ***Pragma***
 
-*Un encabezado de Pragma con un valor de no caché indica que un servlet que actúa como proxy debe reenviar la solicitud incluso si tiene una copia local. El único valor estándar para este encabezado es no-cache.*
+*Un header **`Pragma`** con un valor **`no-cache`** indica que un servlet que actúa como proxy debe reenviar la request incluso si tiene una copia local. El único valor estándar para este header es **`no-cache`**.*
 
 ***Proxy-Authorization***
 
-*Este encabezado permite que los clientes se identifiquen ante los proxies que lo requieran. Los servlets normalmente ignoran este encabezado y usan Autorización en su lugar.*
-
+*Este header permite que los clientes se identifiquen ante los proxies que lo requieran. Los servlets normalmente ignoran este header y usan **`Authorization`** en su lugar.*
+AQUIIIIIIIIIIIIIII
 ***Range***
 
 *Este encabezado de uso poco frecuente permite que un cliente que tiene una copia parcial de un documento solicite solo las partes que faltan.*
