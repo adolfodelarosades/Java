@@ -255,3 +255,26 @@ Tenga en cuenta que HTTP 1.1 admite un superconjunto de headers permitidos en HT
 ***Warning***
 
 *Este header general que rara vez se usa permite a los clientes advertir sobre errores de almacenamiento en caché o transformación de contenido.*
+
+## 4.4. Envío de Páginas Web Comprimidas
+
+Varios navegadores recientes saben cómo manejar el contenido comprimido con gzip, descomprimen automáticamente los documentos que están marcados con el header de **`Content-Encoding`** y luego tratan el resultado como si fuera el documento original. El envío de este tipo de contenido comprimido puede ser un verdadero ahorro de tiempo, ya que el tiempo necesario para comprimir el documento en el servidor y luego descomprimirlo en el cliente suele ser eclipsado por los ahorros en el tiempo de descarga, especialmente cuando se utilizan conexiones de acceso telefónico.
+
+Los navegadores que admiten la codificación de contenido incluyen la mayoría de las versiones de Netscape para Unix, la mayoría de las versiones de Internet Explorer para Windows y Netscape 4.7 y posteriores para Windows. Las versiones anteriores de Netscape en Windows e Internet Explorer en plataformas que no son de Windows generalmente no admiten la codificación de contenido. Afortunadamente, los navegadores que admiten esta función indican que lo hacen configurando el **`Accept-Encoding`** request header. El listado 4.2 muestra un servlet que verifica este header, enviando una página web comprimida a los clientes que admiten la codificación gzip y enviando una página web normal a aquellos que no la admiten. El resultado mostró una aceleración de diez veces de la página comprimida cuando se utilizó una conexión de acceso telefónico. En pruebas repetidas con Netscape 4.7 e Internet Explorer 5.0 en una conexión de módem de 28,8 K, ***la página comprimida promedió menos de 5 segundos para descargarse por completo, mientras que la página sin comprimir tardó más de 50 segundos***.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/150b4cce-cb7c-434d-ae50-98389b7d836b)
+
+**Core Tip**
+
+   :Atom: La compresión Gzip puede reducir drásticamente el tiempo de descarga de páginas de texto largas.
+
+
+La implementación de la compresión es sencilla, ya que el formato gzip está integrado en los lenguajes de programación Java a través de clases en java.util.zip . El servlet primero verifica el encabezado de codificación de aceptación para ver si contiene una entrada para gzip. Si es así, usa un GZIPOutputStream para generar la página, especificando gzip como el valor del encabezado de codificación de contenido . Debe llamar explícitamente a cerrar cuando use un GZIPOutputStream. Si no se admite gzip, el servlet utiliza el PrintWriter normal para enviar la página. Para facilitar la creación de puntos de referencia con un solo navegador, también agregué una función mediante la cual se podía suprimir la compresión al incluir ?encoding=none al final de la URL.
+
+**Listado 4.2. `EncodedPage.java`**
+
+```java
+```
+
+Figura 4-3. Dado que la versión de Windows de Internet Explorer 5.0 es compatible con gzip, esta página se envió con gzip a través de la red y el navegador la reconstituyó, lo que resultó en un gran ahorro en el tiempo de descarga.
+
