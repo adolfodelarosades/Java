@@ -111,28 +111,23 @@ public class ShowCGIVariables extends HttpServlet {
       throws ServletException, IOException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
-    String[][] variables =
-						{ { "AUTH_TYPE", request.getAuthType() },
-						{ "CONTENT_LENGTH",
-						String.valueOf(request.getContentLength()) },
-						{ "CONTENT_TYPE", request.getContentType() },
-						{ "DOCUMENT_ROOT",
-						getServletContext().getRealPath("/") },
-						{ "PATH_INFO", request.getPathInfo() },
-						{ "PATH_TRANSLATED", request.getPathTranslated() },
-						{ "QUERY_STRING", request.getQueryString() },
-						{ "REMOTE_ADDR", request.getRemoteAddr() },
-						{ "REMOTE_HOST", request.getRemoteHost() },
-						{ "REMOTE_USER", request.getRemoteUser() },
-						{ "REQUEST_METHOD", request.getMethod() },
-						{ "SCRIPT_NAME", request.getServletPath() },
-						{ "SERVER_NAME", request.getServerName() },
-						{ "SERVER_PORT",
-						String.valueOf(request.getServerPort()) },
-						{ "SERVER_PROTOCOL", request.getProtocol() },
-						{ "SERVER_SOFTWARE",
-						getServletContext().getServerInfo() }
-						};
+    String[][] variables = { { "AUTH_TYPE", request.getAuthType() },
+			     { "CONTENT_LENGTH", String.valueOf(request.getContentLength()) },
+			     { "CONTENT_TYPE", request.getContentType() },
+			     { "DOCUMENT_ROOT", getServletContext().getRealPath("/") },
+			     { "PATH_INFO", request.getPathInfo() },
+			     { "PATH_TRANSLATED", request.getPathTranslated() },
+			     { "QUERY_STRING", request.getQueryString() },
+			     { "REMOTE_ADDR", request.getRemoteAddr() },
+			     { "REMOTE_HOST", request.getRemoteHost() },
+			     { "REMOTE_USER", request.getRemoteUser() },
+			     { "REQUEST_METHOD", request.getMethod() },
+			     { "SCRIPT_NAME", request.getServletPath() },
+			     { "SERVER_NAME", request.getServerName() },
+			     { "SERVER_PORT", String.valueOf(request.getServerPort()) },
+			     { "SERVER_PROTOCOL", request.getProtocol() },
+			     { "SERVER_SOFTWARE", getServletContext().getServerInfo() }
+			   };
     String title = "Servlet Example: Showing CGI Variables";
     out.println(ServletUtilities.headWithTitle(title) +
                 "<BODY BGCOLOR=\"#FDF5E6\">\n" +
