@@ -266,15 +266,212 @@ Los navegadores que admiten la codificación de contenido incluyen la mayoría d
 
 **Core Tip**
 
-   :Atom: La compresión Gzip puede reducir drásticamente el tiempo de descarga de páginas de texto largas.
+   :atom: La compresión Gzip puede reducir drásticamente el tiempo de descarga de páginas de texto largas.
 
-
-La implementación de la compresión es sencilla, ya que el formato gzip está integrado en los lenguajes de programación Java a través de clases en java.util.zip . El servlet primero verifica el encabezado de codificación de aceptación para ver si contiene una entrada para gzip. Si es así, usa un GZIPOutputStream para generar la página, especificando gzip como el valor del encabezado de codificación de contenido . Debe llamar explícitamente a cerrar cuando use un GZIPOutputStream. Si no se admite gzip, el servlet utiliza el PrintWriter normal para enviar la página. Para facilitar la creación de puntos de referencia con un solo navegador, también agregué una función mediante la cual se podía suprimir la compresión al incluir ?encoding=none al final de la URL.
+La implementación de la compresión es sencilla, ya que el formato gzip está integrado en los lenguajes de programación Java a través de clases en **`java.util.zip`**. El servlet primero verifica el header **`Accept-Encoding`** para ver si contiene una entrada para gzip. Si es así, usa un **`GZIPOutputStream`** para generar la página, especificando gzip como el valor del header **`Content-Encoding`**. Debe llamar explícitamente a cerrar cuando use un **`GZIPOutputStream`**. Si no se admite gzip, el servlet utiliza el **`PrintWriter`** normal para enviar la página. Para facilitar la creación de puntos de referencia(benchmarks) con un solo navegador, también agregué una función mediante la cual se podía suprimir la compresión al incluir **`?encoding=none`** al final de la URL.
 
 **Listado 4.2. `EncodedPage.java`**
 
 ```java
+package coreservlets;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.zip.*;
+
+/** Example showing benefits of gzipping pages to browsers
+ *  that can handle gzip.
+ */
+
+public class EncodedPage extends HttpServlet {
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    String encodings = request.getHeader("Accept-Encoding");
+    String encodeFlag = request.getParameter("encoding");
+
+    PrintWriter out;
+    String title;
+    if ((encodings != null) &&
+        (encodings.indexOf("gzip") != -1) &&
+        !"none".equals(encodeFlag)) {
+      title = "Page Encoded with GZip";
+      OutputStream out1 = response.getOutputStream();
+      out = new PrintWriter(new GZIPOutputStream(out1), false);
+      response.setHeader("Content-Encoding", "gzip");
+   } else {
+      title = "Unencoded Page";
+      out = response.getWriter();
+   }
+   out.println(ServletUtilities.headWithTitle(title) +
+               "<BODY BGCOLOR=\"#FDF5E6\">\n" +
+               "<H1 ALIGN=CENTER>" + title + "</H1>\n");
+   String line = "Blah, blah, blah, blah, blah. " +
+                 "Yadda, yadda, yadda, yadda.";
+   for(int i=0; i<10000; i++) {
+      out.println(line);
+   }
+   out.println("</BODY></HTML>");
+   out.close();
+  }
+}
 ```
 
-Figura 4-3. Dado que la versión de Windows de Internet Explorer 5.0 es compatible con gzip, esta página se envió con gzip a través de la red y el navegador la reconstituyó, lo que resultó en un gran ahorro en el tiempo de descarga.
+**Figura 4-3. Dado que la versión de Windows de Internet Explorer 5.0 es compatible con gzip, esta página se envió con gzip a través de la red y el navegador la reconstituyó, lo que resultó en un gran ahorro en el tiempo de descarga.**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/29e32417-2e87-41e6-a44e-da1bb4a2bcfc)
+
+## 4.5. Restricción del Acceso a las Páginas Web
+
+Muchos servidores web admiten mecanismos estándar para limitar el acceso a páginas web designadas. Estos mecanismos pueden aplicarse tanto a páginas estáticas como a las generadas por servlets, por lo que muchos autores utilizan sus mecanismos específicos del servidor para restringir el acceso a los servlets. Además, la mayoría de los usuarios de los sitios de comercio electrónico prefieren utilizar formularios HTML normales para proporcionar información de autorización, ya que estos formularios son más familiares, pueden proporcionar más información explicativa y pueden solicitar información adicional además de un nombre de usuario y una contraseña. Una vez que un servlet que usa acceso basado en formularios otorga acceso inicial a un usuario, usaría el seguimiento de sesión para darle acceso al usuario a otras páginas que requieren el mismo nivel de autorización. Consulte el Capítulo 9 (Session Tracking - Seguimiento de sesión) para obtener más información.
+
+No obstante, el control de acceso basado en formularios requiere más esfuerzo por parte del desarrollador del servlet, y la autorización basada en HTTP es suficiente para muchas aplicaciones simples. Aquí hay un resumen de los pasos involucrados para la autorización "básica-basic". También hay una variación ligeramente mejor llamada autorización "digest-resumida", pero entre los principales navegadores, solo Internet Explorer la admite.
+
+1. Compruebe si hay un header **`Authorization`**. Si no hay tal header, vaya al Paso 2. Si lo hay, omita la palabra "basic" e invierta la codificación base64 de la parte restante. Esto da como resultado una cadena de la forma **`username:password`**. Verifique el username y la password con algún conjunto almacenado. Si coincide, devuelve la página. Si no, vaya al Paso 2.
+
+2. Devuelve un código de respuesta 401 ( **`Unauthorized`** ) y un header con el siguiente formato:
+
+   ```sh
+   WWW-Authenticate: BASIC realm="some-name"
+   ```
+
+   Esta response le indica al navegador que abra un cuadro de diálogo emergente que le indica al usuario que ingrese un name y password para **`some-name`**, luego que vuelva a conectarse con ese name y password incrustados en una single base64 string dentro del header **`Authorization`**.
+
+Si le interesan los detalles, la codificación base64 se explica en RFC 1521 (recuerde, para recuperar RFC, comience en http://www.rfc-editor.org/ para obtener una lista actualizada de los sitios de archivo de RFC). Sin embargo, probablemente solo hay dos cosas que debe saber al respecto. En primer lugar, no pretende proporcionar seguridad, ya que la codificación se puede revertir fácilmente. Por lo tanto, no elimina la necesidad de **SSL** para frustrar a los atacantes que podrían espiar su conexión de red (una tarea nada fácil a menos que estén en su subred local). **SSL**, o **Secure Sockets Layer**, ***es una variación de HTTP en la que se cifra todo el flujo***. Es compatible con muchos servidores comerciales y generalmente se invoca usando **`https`** en la URL en lugar de **`http`**. Los servlets pueden ejecutarse en **servidores SSL** con la misma facilidad que en servidores estándar, y el cifrado y el descifrado se gestionan de forma transparente antes de que se invoquen los servlets. El segundo punto que debe saber sobre la codificación en base64 es que **Sun** proporciona la clase **`sun.misc.BASE64Decoder`**, distribuida con JDK 1.1 y 1.2, para decodificar cadenas codificadas con base64. Solo tenga en cuenta que las clases en la jerarquía de paquetes de Sun no forman parte de la especificación oficial del lenguage y, por lo tanto, no se garantiza que aparezcan en todas las implementaciones. Por lo tanto, si usa esta clase de decodificador, asegúrese de incluir explícitamente el archivo de clase cuando distribuya su aplicación.
+
+El listado 4.3 presenta un servlet protegido por contraseña. Está registrado explícitamente con el servidor Web bajo el nombre **`SecretServlet`**. El proceso para registrar servlets varía de un servidor a otro, pero la Sección 2.7 (An Example Using Initialization Parameters) brinda detalles sobre el proceso para Tomcat, JSWDK y Java Web Server. La razón por la que se registra el servlet es para que los parámetros de inicialización puedan asociarse con él, ya que la mayoría de los servidores no le permiten establecer parámetros de inicialización para servlets que están disponibles simplemente por estar en el directorio de servlets (o equivalente ). El parámetro de inicialización da la ubicación de un archivo **`Properties`** que almacena nombres de usuario y contraseñas. Si la seguridad de la página fuera muy importante, desearía cifrar las contraseñas para que el acceso al archivo de propiedades no equivalga al conocimiento de las contraseñas.
+
+Además de leer el header **`Authorization`**, el servlet especifica un status code 401 y establece el header **`WWW-Authenticate`** saliente. Los status codes se analizan en detalle en el Capítulo 6 (Generating the Server Response: HTTP Status Codes), pero por ahora, solo tenga en cuenta que transmiten información de alto nivel al navegador y, por lo general, deben configurarse siempre que la response sea distinta de el documento solicitado. La forma más común de establecer status codes es mediante el uso del método **`setStatus`** de **`HttpServletResponse`** y, por lo general, proporciona una constante en lugar de un número entero explícito para que el código sea más claro y evitar errores tipográficos.
+
+**`WWW-Authenticate`** y otros HTTP response headers se analizan en el Capítulo 7 (Generating the Server Response: HTTP Response Headers), pero por ahora tenga en cuenta que transmiten información auxiliar para respaldar la response especificada por el status code, y se configuran comúnmente a través del uso del método **`setHeader`** de **`HttpServletResponse`**.
+
+Las Figuras 4-4 , 4-5 y 4-6 muestran el resultado cuando un usuario intenta acceder a la página por primera vez, después de que el usuario ingresa una contraseña desconocida y después de que el usuario ingresa una contraseña conocida. El listado 4.4 proporciona el programa que creó el archivo de contraseña simple.
+
+**Figura 4-4. Resultado inicial al acceder a `SecretServlet` (el nombre registrado para el servlet `ProtectedPage `).**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/28dfd97a-a3e4-4a74-a8f2-332af168c4e3)
+
+
+**Figura 4-5. Resultado después de ingresar un nombre o contraseña incorrectos.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/5827b8e6-a1e2-4645-a455-3ab3944a6272)
+
+
+**Figura 4-6. Resultado después de ingresar nombre y contraseña conocidos.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bb912f46-6aa1-416f-ab8e-2aa308a267b7)
+
+
+**Listado 4.3. `ProtectedPage.java`**
+
+```java
+package coreservlets;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Properties;
+import sun.misc.BASE64Decoder;
+
+/** Example of password-protected pages handled directly
+ *  by servlets.
+ */
+
+public class ProtectedPage extends HttpServlet {
+  private Properties passwords;
+  private String passwordFile;
+
+  /** Read the password file from the location specified
+   *  by the passwordFile initialization parameter.
+   */
+
+  public void init(ServletConfig config)
+      throws ServletException {
+    super.init(config);
+    try {
+      passwordFile = config.getInitParameter("passwordFile");
+      passwords = new Properties();
+      passwords.load(new FileInputStream(passwordFile));
+    } catch(IOException ioe) {}
+  }
+
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    String authorization = request.getHeader("Authorization");
+    if (authorization == null) {
+      askForPassword(response);
+    } else {
+      String userInfo = authorization.substring(6).trim();
+      BASE64Decoder decoder = new BASE64Decoder();
+      String nameAndPassword =
+        new String(decoder.decodeBuffer(userInfo));
+      int index = nameAndPassword.indexOf(":");
+      String user = nameAndPassword.substring(0, index);
+      String password = nameAndPassword.substring(index+1);
+      String realPassword = passwords.getProperty(user);
+      if ((realPassword != null) &&
+          (realPassword.equals(password))) {
+        String title = "Welcome to the Protected Page";
+        out.println(ServletUtilities.headWithTitle(title) +
+                    "<BODY BGCOLOR=\"#FDF5E6\">\n" +
+                    "<H1 ALIGN=CENTER>" + title + "</H1>\n" +
+                    "Congratulations. You have accessed a\n" +
+                    "highly proprietary company document.\n" +
+                    "Shred or eat all hardcopies before\n" +
+                    "going to bed tonight.\n" +
+                    "</BODY></HTML>");
+      } else {
+        askForPassword(response);
+      }
+    }
+  }
+
+  // If no Authorization header was supplied in the request.
+
+  private void askForPassword(HttpServletResponse response) {
+    response.setStatus(response.SC_UNAUTHORIZED); // Ie 401
+						response.setHeader("WWW-Authenticate",
+						"BASIC realm=\"privileged-few\"");
+  }
+
+  public void doPost(HttpServletRequest request,
+                     HttpServletResponse response)
+      throws ServletException, IOException {
+    doGet(request, response);
+  }
+}
+```
+
+**Listado 4.4. Generador de `PasswordBuilder.java`**
+
+```java
+import java.util.*;
+import java.io.*;
+
+/** Application that writes a simple Java properties file
+ *  containing usernames and associated passwords.
+ */
+
+public class PasswordBuilder {
+  public static void main(String[] args) throws Exception {
+    Properties passwords = new Properties();
+    passwords.put("marty", "martypw");
+    passwords.put("bj", "bjpw");
+    passwords.put("lindsay", "lindsaypw");
+    passwords.put("nathan", "nathanpw");
+    // This location should *not* be Web-accessible.
+    String passwordFile =
+      "C:\\JavaWebServer2.0\\data\\passwords.properties";
+    FileOutputStream out = new FileOutputStream(passwordFile);
+    // Using JDK 1.1 for portability among all servlet
+    // engines. In JDK 1.2, use "store" instead of "save"
+    // to avoid deprecation warnings.
+    passwords.save(out, "Passwords");
+  }
+}
+```
