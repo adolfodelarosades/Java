@@ -229,29 +229,29 @@ Tenga en cuenta que HTTP 1.1 admite un superconjunto de headers permitidos en HT
 ***Proxy-Authorization***
 
 *Este header permite que los clientes se identifiquen ante los proxies que lo requieran. Los servlets normalmente ignoran este header y usan **`Authorization`** en su lugar.*
-AQUIIIIIIIIIIIIIII
+
 ***Range***
 
-*Este encabezado de uso poco frecuente permite que un cliente que tiene una copia parcial de un documento solicite solo las partes que faltan.*
+*Este header de uso poco frecuente permite que un cliente que tiene una copia parcial de un documento solicite solo las partes que faltan.*
 
 ***Referer***
 
-*Este encabezado indica la URL de la página web de referencia. Por ejemplo, si está en la página web 1 y hace clic en un enlace a la página web 2, la URL de la página web 1 se incluye en el encabezado de referencia cuando el navegador solicita la página web 2. Todos los principales navegadores configuran este encabezado, por lo que es una forma útil de rastrear de dónde provienen las solicitudes. Esta capacidad es útil para realizar un seguimiento de los anunciantes que remiten a las personas a su sitio, para cambiar ligeramente el contenido según el sitio de referencia o simplemente para realizar un seguimiento de dónde proviene su tráfico. En el último caso, la mayoría de las personas simplemente confían en los archivos de registro del servidor web, ya que el Referer generalmente se registra allí. Aunque es útil, no confíe demasiado en el Recomendadorencabezado, ya que puede ser falsificado fácilmente por un cliente personalizado. Finalmente, tenga en cuenta que este encabezado es Referer , no el Referrer esperado , debido a un error de ortografía de uno de los autores originales de HTTP.*
+*Este header indica la URL de la página web de referencia. Por ejemplo, si está en la página web 1 y hace clic en un enlace a la página web 2, la URL de la página web 1 se incluye en el header **`Referer`** cuando el navegador solicita la página web 2. Todos los principales navegadores configuran este header, por lo que es una forma útil de rastrear de dónde provienen las requests. Esta capacidad es útil para realizar un seguimiento de los anunciantes que remiten a las personas a su sitio, para cambiar ligeramente el contenido según el sitio de referencia o simplemente para realizar un seguimiento de dónde proviene su tráfico. En el último caso, la mayoría de las personas simplemente confían en loslog files del servidor web, ya que **`Referer`** generalmente se registra allí. Aunque es útil, no confíe demasiado en el header **`Referer`**, ya que puede ser falsificado fácilmente por un cliente personalizado. Finalmente, tenga en cuenta que este header es **`Referer`**, no el **`Referrer`** esperado, debido a un error de ortografía de uno de los autores originales de HTTP.*
 
 ***Upgrade***
 
-*El encabezado Actualizar permite que el navegador u otro cliente especifique un protocolo de comunicación que prefiera sobre HTTP 1.1. Si el servidor también admite ese protocolo, tanto el cliente como el servidor pueden cambiar de protocolo. Este tipo de negociación de protocolo casi siempre se realiza antes de invocar el servlet. Por lo tanto, los servlets rara vez se preocupan por este encabezado.*
+*El header **`Upgrade`** permite que el navegador u otro cliente especifique un protocolo de comunicación que prefiera sobre HTTP 1.1. Si el servidor también admite ese protocolo, tanto el cliente como el servidor pueden cambiar de protocolo. Este tipo de negociación de protocolo casi siempre se realiza antes de invocar el servlet. Por lo tanto, los servlets rara vez se preocupan por este header.*
 
 ***User-Agent***
 
-*Este encabezado identifica el navegador u otro cliente que realiza la solicitud y se puede usar para devolver contenido diferente a diferentes tipos de navegadores. Sin embargo, tenga cuidado con este uso; Confiar en una lista codificada de versiones de navegador y funciones asociadas puede generar un código de servlet poco confiable y difícil de modificar. Siempre que sea posible, utilice algo específico en los encabezados HTTP. Por ejemplo, en lugar de tratar de recordar qué navegadores admiten gzip en qué plataformas, simplemente marque el encabezado Aceptar codificación . Es cierto que esto no siempre es posible, pero cuando no lo es, debe preguntarse si la función específica del navegador que está utilizando realmente agrega valor suficiente para que valga la pena el costo de mantenimiento.*
+*Este header identifica el navegador u otro cliente que realiza la request y se puede usar para devolver contenido diferente a diferentes tipos de navegadores. Sin embargo, tenga cuidado con este uso; Confiar en una lista codificada de versiones de navegador y funciones asociadas puede generar un código de servlet poco confiable y difícil de modificar. Siempre que sea posible, utilice algo específico en los encabezados HTTP. Por ejemplo, en lugar de tratar de recordar qué navegadores admiten gzip en qué plataformas, simplemente marque el header **`Accept-Encoding`**. Es cierto que esto no siempre es posible, pero cuando no lo es, debe preguntarse si la función específica del navegador que está utilizando realmente agrega valor suficiente para que valga la pena el costo de mantenimiento.*
 
-*La mayoría de las versiones de Internet Explorer enumeran una versión de "Mozilla" (Netscape) primero en su línea de agente de usuario , con la versión real del navegador entre paréntesis. Esto se hace por compatibilidad con JavaScript, donde el encabezado User-Agent a veces se usa para determinar qué características de JavaScript son compatibles. También tenga en cuenta que este encabezado puede falsificarse fácilmente, un hecho que pone en duda la confiabilidad de los sitios que usan este encabezado para "mostrar" la penetración en el mercado de varias versiones de navegador. Hmm, millones de dólares en dinero de marketing que se basan en estadísticas que podrían ser sesgadas por un cliente personalizado escrito en menos de una hora, ¿y debería tomar esos números como precisos?*
+*La mayoría de las versiones de Internet Explorer enumeran una versión de "Mozilla" (Netscape) primero en su línea de **`User-Agent`**, con la versión real del navegador entre paréntesis. Esto se hace por compatibilidad con JavaScript, donde el header **`User-Agent`** a veces se usa para determinar qué características de JavaScript son compatibles. También tenga en cuenta que este header puede falsificarse fácilmente, un hecho que pone en duda la confiabilidad de los sitios que usan este header para "mostrar" la penetración en el mercado de varias versiones de navegador. Hmm, millones de dólares en dinero de marketing que se basan en estadísticas que podrían ser sesgadas por un cliente personalizado escrito en menos de una hora, ¿y debería tomar esos números como precisos?*
 
 ***Via***
 
-*Este encabezado lo establecen las puertas de enlace y los proxies para mostrar los sitios intermedios por los que pasó la solicitud.*
+*Este header lo establecen los gateways y proxies para mostrar los sitios intermedios por los que pasó la request.*
 
 ***Warning***
 
-*Este encabezado general que rara vez se usa permite a los clientes advertir sobre errores de almacenamiento en caché o transformación de contenido.*
+*Este header general que rara vez se usa permite a los clientes advertir sobre errores de almacenamiento en caché o transformación de contenido.*
