@@ -18,97 +18,100 @@ Hello World
 
 La status line consta de la versión HTTP ( **`HTTP/1.1`** en el ejemplo anterior), un status code (un número entero; 200 en el ejemplo anterior) y un mensaje muy breve correspondiente al status code ( **`OK`** en el ejemplo). En la mayoría de los casos, todos los headers son opcionales, excepto **`Content-Type`**, que especifica el MIME type del documento que sigue. Aunque la mayoría de las responses contienen un documento, algunas no. Por ejemplo, las responses a las requests **`HEAD`** nunca deben incluir un documento, y hay una variedad de status code que esencialmente indican una falla y no incluyen un documento o incluyen solo un breve documento de mensaje de error.
 
-Los servlets pueden realizar una variedad de tareas importantes manipulando la status line y los response headers. Por ejemplo, pueden reenviar(forward) al usuario a otros sitios; indicar que el documento adjunto es una imagen, un archivo de Adobe Acrobat o un archivo HTML; decirle al usuario que se requiere una contraseña para acceder al documento; Etcétera. Este capítulo analiza los diversos status code y lo que se puede lograr con ellos, y el siguiente capítulo analiza los response headers.
+Los servlets pueden realizar una variedad de tareas importantes manipulando la status line y los response headers. Por ejemplo, pueden reenviar(forward) al usuario a otros sitios; indicar que el documento adjunto es una imagen, un archivo de Adobe Acrobat o un archivo HTML; decirle al usuario que se requiere una contraseña para acceder al documento; etc. Este capítulo analiza los diversos status code y lo que se puede lograr con ellos, y el siguiente capítulo analiza los response headers.
 
-## 6.1. Especificación de códigos de estado
+## 6.1. Especificación de Status Codes
 
-Como se acaba de describir, la línea de estado de respuesta HTTP consta de una versión HTTP, un código de estado y un mensaje asociado. Dado que el mensaje está directamente asociado con el código de estado y la versión HTTP está determinada por el servidor, todo lo que necesita hacer un servlet es establecer el código de estado. La forma de hacerlo es mediante el método setStatus de HttpServletResponse . Si su respuesta incluye un código de estado especial y un documento, asegúrese de llamar a setStatus antes de devolver el contenido a través de PrintWriter . Esto se debe a que una respuesta HTTP consta de la línea de estado, uno o más encabezados, una línea en blanco y el documento real, en ese orden.Los encabezados pueden aparecer en cualquier orden, y los servlets almacenan los encabezados y los envían todos a la vez, por lo que es legal configurar el código de estado (parte de la primera línea devuelta) incluso después de configurar los encabezados. Pero los servlets no necesariamente almacenan en búfer el documento en sí, ya que los usuarios pueden querer ver resultados parciales para páginas largas. En la versión 2.1 de la especificación del servlet, la salida de PrintWriter no se almacena en búfer, por lo que la primera vez que usa PrintWriter , es demasiado tarde para volver atrás y establecer encabezados. En la versión 2.2, los motores de servlet pueden almacenar en búfer parcialmente la salida, pero el tamaño del búfer no se especifica. Puede usar el método getBufferSize de HttpServletResponse para determinar el tamaño o usar setBufferSizepara especificarlo. En la versión 2.2 con el almacenamiento en búfer habilitado, puede establecer códigos de estado hasta que el búfer se llene y se envíe realmente al cliente. Si no está seguro de si se envió el búfer, puede usar el método isCommitted para verificar.
+Como se acaba de describir, la status line de HTTP response consta de una HTTP version, un status code y un mensaje asociado. Dado que el mensaje está directamente asociado con el status code y la HTTP version está determinada por el servidor, todo lo que necesita hacer un servlet es establecer el status code. La forma de hacerlo es mediante el método **`setStatus`** de **`HttpServletResponse`**. Si su respuesta incluye un status code especial y un documento, asegúrese de llamar a **`setStatus`** antes de devolver el contenido a través de **`PrintWriter`**. Esto se debe a que una HTTP response consta de la status line, uno o más headers, una línea en blanco y el documento actual, en ese orden. Los headers pueden aparecer en cualquier orden, y los servlets almacenan los headers y los envían todos a la vez, por lo que es legal configurar el status code (parte de la primera línea devuelta) incluso después de configurar los headers. Pero los servlets no necesariamente almacenan en búfer el documento en sí, ya que los usuarios pueden querer ver resultados parciales para páginas largas. En la versión 2.1 de la especificación del servlet, la salida de **`PrintWriter`** no se almacena en búfer, por lo que la primera vez que usa **`PrintWriter`**, es demasiado tarde para volver atrás y establecer headers. En la versión 2.2, los motores de servlet pueden almacenar en búfer parcialmente la salida, pero el tamaño del búfer no se especifica. Puede usar el método **`getBufferSize`** de **`HttpServletResponse`** para determinar el tamaño o usar **`setBufferSize`** para especificarlo. En la versión 2.2 con el almacenamiento en búfer habilitado, puede establecer status codes hasta que el búfer se llene y se envíe realmente al cliente. Si no está seguro de si se envió el búfer, puede usar el método **`isCommitted`** para verificar.
 
-Enfoque central
-
+**Core Approach**
 	
-Asegúrese de configurar los códigos de estado antes de enviar el contenido de cualquier documento al cliente.
+   :atom: Asegúrese de configurar los status codes antes de enviar el contenido de cualquier documento al cliente.
 
 
-El método setStatus toma un int (el código de estado) como argumento, pero en lugar de usar números explícitos, es más claro y confiable usar las constantes definidas en HttpServletResponse . El nombre de cada constante se deriva del mensaje HTTP 1.1 estándar para cada constante, todo en mayúsculas con un prefijo SC (para Código de estado ) y los espacios cambiados a guiones bajos. Por lo tanto, dado que el mensaje para 404 es "No encontrado", la constante equivalente en HttpServletResponse es SC_NOT_FOUND. En la versión 2.1 de la especificación del servlet, hay tres excepciones. La constante para el código 302 se deriva del mensaje HTTP 1.0 (Movido temporalmente), no del mensaje HTTP 1.1 (Encontrado), y las constantes para los códigos 307 (Redirección temporal) y 416 (Rango solicitado no satisfactorio) faltan por completo. La versión 2.2 agregó la constante para 416, pero las inconsistencias para 307 y 302 permanecen.
+El método **`setStatus`** toma un **`int`** (el status code) como argumento, pero en lugar de usar números explícitos, es más claro y confiable usar las constantes definidas en **`HttpServletResponse`**. El nombre de cada constante se deriva del mensaje HTTP 1.1 estándar para cada constante, todo en mayúsculas con un prefijo **`SC`** (para Status Code ) y los espacios cambiados a guiones bajos. Por lo tanto, dado que el mensaje para 404 es "Not Found", la constante equivalente en **`HttpServletResponse`** es **`SC_NOT_FOUND`**. En la versión 2.1 de la especificación del servlet, hay tres excepciones. La constante para el código 302 se deriva del mensaje HTTP 1.0 (Moved Temporarily), no del mensaje HTTP 1.1 (Found), y las constantes para los códigos 307 (Temporary Redirect) y 416 (Requested Range Not Satisfiable) faltan por completo. La versión 2.2 agregó la constante para 416, pero las inconsistencias para 307 y 302 permanecen.
 
-Aunque el método general para establecer códigos de estado es simplemente llamar a response.setStatus(int) , existen dos casos comunes en los que se proporciona un método abreviado en HttpServletResponse . Solo tenga en cuenta que ambos métodos arrojan IOException , mientras que setStatus no lo hace.
+Aunque el método general para establecer códigos de estado es simplemente llamar a **`response.setStatus(int)`**, existen dos casos comunes en los que se proporciona un método abreviado en **`HttpServletResponse`**. Solo tenga en cuenta que ambos métodos arrojan **`IOException`**, mientras que **`setStatus`** no lo hace.
 
-public void sendError (código int, mensaje de cadena)
+* **`public void sendError(int code, String message)`**
 
-El método sendError envía un código de estado (generalmente 404) junto con un mensaje corto que se formatea automáticamente dentro de un documento HTML y se envía al cliente.
+   El método **`sendError`** envía un status code (generalmente 404) junto con un mensaje corto que se formatea automáticamente dentro de un documento HTML y se envía al cliente.
 
-public void sendRedirect(String url)
+* **`public void sendRedirect(String url)`**
 
-El método sendRedirect genera una respuesta 302 junto con un encabezado de ubicación que proporciona la URL del nuevo documento. Con la versión 2.1 de los servlets, debe ser una URL absoluta. En la versión 2.2, se permite una URL absoluta o relativa y el sistema traduce automáticamente las URL relativas en absolutas antes de colocarlas en el encabezado Ubicación .
+   El método **`sendRedirect`** genera una respuesta 302 junto con un header **`Location`** que proporciona la URL del nuevo documento. Con la versión 2.1 de los servlets, debe ser una URL absoluta. En la versión 2.2, se permite una URL absoluta o relativa y el sistema traduce automáticamente las URL relativas en absolutas antes de colocarlas en el header **`Location`**.
 
-Establecer un código de estado no significa necesariamente que no necesite devolver un documento. Por ejemplo, aunque la mayoría de los servidores generan automáticamente un pequeño mensaje de "Archivo no encontrado" para las respuestas 404, es posible que un servlet desee personalizar esta respuesta. Recuerde que si envía una salida, primero debe llamar a setStatus o sendError .
+Establecer un código de estado no significa necesariamente que no necesite devolver un documento. Por ejemplo, aunque la mayoría de los servidores generan automáticamente un pequeño mensaje de "File Not Found" para las responses 404, es posible que un servlet desee personalizar esta respuesta. Recuerde que si envía una salida, primero debe llamar a **`setStatus`** o **`sendError`**.
 
-## 6.2. Códigos de estado HTTP 1.1 y su propósito
+## 6.2. HTTP 1.1 Status Codes y su Propósito
 
-Las siguientes secciones describen cada uno de los códigos de estado disponibles para usar en servlets que hablan con clientes HTTP 1.1, junto con el mensaje estándar asociado con cada código. Una buena comprensión de estos códigos puede aumentar drásticamente las capacidades de sus servlets, por lo que al menos debería hojear las descripciones para ver qué opciones tiene a su disposición. Puede volver para obtener detalles cuando esté listo para hacer uso de algunas de las capacidades. Tenga en cuenta que el Apéndice A (Referencia rápida de Servlet y JSP) presenta un breve resumen de estos códigos en formato tabular.
+Las siguientes secciones describen cada uno de los status codes disponibles para usar en servlets que hablan con clientes HTTP 1.1, junto con el mensaje estándar asociado con cada código. Una buena comprensión de estos códigos puede aumentar drásticamente las capacidades de sus servlets, por lo que al menos debería hojear las descripciones para ver qué opciones tiene a su disposición. Puede volver para obtener detalles cuando esté listo para hacer uso de algunas de las capacidades. Tenga en cuenta que el Apéndice A (Servlet and JSP Quick Reference) presenta un breve resumen de estos códigos en formato tabular.
 
-La especificación completa de HTTP 1.1 se proporciona en RFC 2616, a la que puede acceder en línea yendo a http://www.rfc-editor.org/ y siguiendo los enlaces a los últimos sitios de archivo de RFC. Se indican los códigos que son nuevos en HTTP 1.1, ya que muchos navegadores solo admiten HTTP 1.0. Solo debe enviar los nuevos códigos a clientes que admitan HTTP 1.1, como se verifica al verificar request.getRequestProtocol .
+La especificación completa de HTTP 1.1 se proporciona en RFC 2616, a la que puede acceder en línea yendo a http://www.rfc-editor.org/ y siguiendo los enlaces a los últimos sitios de archivo de RFC. Se indican los códigos que son nuevos en HTTP 1.1, ya que muchos navegadores solo admiten HTTP 1.0. Solo debe enviar los nuevos códigos a clientes que admitan HTTP 1.1, como se verifica al verificar **`request.getRequestProtocol`**.
 
 El resto de esta sección describe los códigos de estado específicos disponibles en HTTP 1.1. Estos códigos se dividen en cinco categorías generales:
 
-100-199
+* 100-199
 
-Los códigos entre 100 y 100 son informativos, lo que indica que el cliente debe responder con alguna otra acción.
+   Los códigos entre 100 y 100 son informativos, lo que indica que el cliente debe responder con alguna otra acción.
 
-200-299
+* 200-299
 
-Los valores en los 200 significan que la solicitud fue exitosa.
+   Los valores en los 200 significan que la request fue exitosa.
 
-300-399
+* 300-399
 
-Los valores en los 300 se usan para archivos que se han movido y generalmente incluyen un encabezado de ubicación que indica la nueva dirección.
+   Los valores en los 300 se usan para archivos que se han movido y generalmente incluyen un header **`Location`** que indica la nueva dirección.
 
-400-499
+* **`400-499`**
 
-Los valores en los 400 indican un error del cliente.
+   Los valores en los 400 indican un error del cliente.
 
-500-599
+* **`500-599`**
 
-Los códigos en los 500 significan un error del servidor.
+   Los códigos en los 500 significan un error del servidor.
 
-Las constantes en HttpServletResponse que representan los diversos códigos se derivan de los mensajes estándar asociados con los códigos. En los servlets, generalmente se hace referencia a los códigos de estado solo por medio de estas constantes. Por ejemplo, usaría response.setStatus(response.SC_NO_CONTENT) en lugar de response.setStatus(204) , ya que este último no es claro para los lectores y es propenso a errores tipográficos. Sin embargo, debe tener en cuenta que los servidores pueden variar ligeramente los mensajes y los clientes solo prestan atención al valor numérico. Entonces, por ejemplo, es posible que vea que un servidor devuelve una línea de estado de HTTP/1.1 200 Document Follows en lugar de HTTP/1.1 200 OK .
+Las constantes en **`HttpServletResponse`** que representan los diversos códigos se derivan de los mensajes estándar asociados con los códigos. En los servlets, generalmente se hace referencia a los códigos de estado solo por medio de estas constantes. Por ejemplo, usaría **`response.setStatus(response.SC_NO_CONTENT)`** en lugar de **`response.setStatus(204)`**, ya que este último no es claro para los lectores y es propenso a errores tipográficos. Sin embargo, debe tener en cuenta que los servidores pueden variar ligeramente los mensajes y los clientes solo prestan atención al valor numérico. Entonces, por ejemplo, es posible que vea que un servidor devuelve una status line de **`HTTP/1.1 200 Document Follows`** en lugar de **`HTTP/1.1 200 OK`**.
 
-100 (Continuar)
+***100 (Continue)***
 
-Si el servidor recibe un encabezado de solicitud Expect con un valor de 100-continuar , significa que el cliente pregunta si puede enviar un documento adjunto en una solicitud de seguimiento. En tal caso, el servidor debería responder con el estado 100 ( SC_CONTINUE ) para decirle al cliente que continúe o usar 417 ( Expectativa fallida ) para decirle al navegador que no aceptará el documento. Este código de estado es nuevo en HTTP 1.1.
+*Si el servidor recibe un request header **`Expect`** con un valor de **`100-continue`**, significa que el cliente pregunta si puede enviar un attached document en una follow-up request. En tal caso, el servidor debería responder con el status 100 (**`SC_CONTINUE`**) para decirle al cliente que continúe o usar 417 ( **`Expectation Failed`** ) para decirle al navegador que no aceptará el documento. Este código de estado es nuevo en HTTP 1.1.*
 
-101 (Protocolos de conmutación)
+***101 (Switching Protocols)***
 
-Un estado 101 ( SC_SWITCHING_PROTOCOLS ) indica que el servidor cumplirá con el encabezado de actualización y cambiará a un protocolo diferente. Este código de estado es nuevo en HTTP 1.1.
+*Un estado 101 (**`SC_SWITCHING_PROTOCOLS`**) indica que el servidor cumplirá con el header **`Upgrade`**  y cambiará a un protocolo diferente. Este status code es nuevo en HTTP 1.1.*
 
-200 (bien)
+***200 (OK)***
 
-Un valor de 200 ( SC_OK ) significa que todo está bien. El documento sigue para las solicitudes GET y POST . Este estado es el predeterminado para los servlets; si no usa setStatus , obtendrá 200.
+*Un valor de 200 ( **`SC_OK`** ) significa que todo está bien. El documento sigue para las requests **`GET`** y **`POST`**. Este estado es el predeterminado para los servlets; si no usa **`setStatus`**, obtendrá 200.*
 
-201 (Creado)
+***201 (Created)***
 
 Un código de estado de 201 ( SC_CREATED ) significa que el servidor creó un nuevo documento en respuesta a la solicitud; el encabezado de ubicación debe proporcionar su URL.
 
-202 (Aceptado)
+***202 (Accepted)***
 
 Un valor de 202 ( SC_ACCEPTED ) le dice al cliente que se está actuando sobre la solicitud, pero que el procesamiento aún no se ha completado.
 
-203 (Información no autorizada)
+***203 (Non-Authoritative Information)***
 
 Un estado 203 ( SC_NON_AUTHORITATIVE_INFORMATION ) significa que el documento se devuelve normalmente, pero algunos de los encabezados de respuesta pueden ser incorrectos ya que se está utilizando una copia del documento. Este código de estado es nuevo en HTTP 1.1.
 
-204 (sin contenido)
+***204 (No Content)***
 
 Un código de estado de 204 ( SC_NO_CONTENT ) estipula que el navegador debe continuar mostrando el documento anterior porque no hay ningún documento nuevo disponible. Este comportamiento es útil si el usuario recarga periódicamente una página presionando el botón "Recargar", y puede determinar que la página anterior ya está actualizada. Por ejemplo, un servlet podría hacer algo como esto:
 
+```java
 int pageVersion =
   Integer.parseInt(request.getParameter("pageVersion"));
 if (pageVersion >= currentVersion) {
-  respuesta.setStatus(respuesta.SC_NO_CONTENT);
-} demás {
-  // Crear una página regular
+  response.setStatus(response.SC_NO_CONTENT);
+} else {
+  // Create regular page
 }
+```
+
+
 Sin embargo, este enfoque no funciona para las páginas que se recargan automáticamente a través del encabezado de respuesta Actualizar o la entrada HTML <META HTTP-EQUIV="Refresh" ...> equivalente, ya que devolver un código de estado 204 detiene la recarga futura. Sin embargo, la recarga automática basada en JavaScript aún podría funcionar en tal caso. Consulte la discusión sobre Actualizar en la Sección 7.2 (Encabezados de respuesta HTTP 1.1 y su significado) para obtener más información.
 
 205 (Restablecer contenido)
