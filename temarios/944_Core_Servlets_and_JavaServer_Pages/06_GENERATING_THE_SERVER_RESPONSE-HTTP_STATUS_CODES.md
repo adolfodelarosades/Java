@@ -73,222 +73,225 @@ El resto de esta sección describe los códigos de estado específicos disponibl
 
 Las constantes en **`HttpServletResponse`** que representan los diversos códigos se derivan de los mensajes estándar asociados con los códigos. En los servlets, generalmente se hace referencia a los códigos de estado solo por medio de estas constantes. Por ejemplo, usaría **`response.setStatus(response.SC_NO_CONTENT)`** en lugar de **`response.setStatus(204)`**, ya que este último no es claro para los lectores y es propenso a errores tipográficos. Sin embargo, debe tener en cuenta que los servidores pueden variar ligeramente los mensajes y los clientes solo prestan atención al valor numérico. Entonces, por ejemplo, es posible que vea que un servidor devuelve una status line de **`HTTP/1.1 200 Document Follows`** en lugar de **`HTTP/1.1 200 OK`**.
 
-***100 (Continue)***
+* ***100 (Continue)***
 
-*Si el servidor recibe un request header **`Expect`** con un valor de **`100-continue`**, significa que el cliente pregunta si puede enviar un attached document en una follow-up request. En tal caso, el servidor debería responder con el status 100 (**`SC_CONTINUE`**) para decirle al cliente que continúe o usar 417 ( **`Expectation Failed`** ) para decirle al navegador que no aceptará el documento. Este código de estado es nuevo en HTTP 1.1.*
+   *Si el servidor recibe un request header **`Expect`** con un valor de **`100-continue`**, significa que el cliente pregunta si puede enviar un attached document en una follow-up request. En tal caso, el servidor debería responder con el status 100 (**`SC_CONTINUE`**) para decirle al cliente que continúe o usar 417 ( **`Expectation Failed`** ) para decirle al navegador que no aceptará el documento. Este código de estado es nuevo en HTTP 1.1.*
 
-***101 (Switching Protocols)***
+* ***101 (Switching Protocols)***
 
-*Un estado 101 (**`SC_SWITCHING_PROTOCOLS`**) indica que el servidor cumplirá con el header **`Upgrade`**  y cambiará a un protocolo diferente. Este status code es nuevo en HTTP 1.1.*
+   *Un estado 101 (**`SC_SWITCHING_PROTOCOLS`**) indica que el servidor cumplirá con el header **`Upgrade`**  y cambiará a un protocolo diferente. Este status code es nuevo en HTTP 1.1.*
 
-***200 (OK)***
+* ***200 (OK)***
 
-*Un valor de 200 ( **`SC_OK`** ) significa que todo está bien. El documento sigue para las requests **`GET`** y **`POST`**. Este estado es el predeterminado para los servlets; si no usa **`setStatus`**, obtendrá 200.*
+   *Un valor de 200 ( **`SC_OK`** ) significa que todo está bien. El documento sigue para las requests **`GET`** y **`POST`**. Este estado es el predeterminado para los servlets; si no usa **`setStatus`**, obtendrá 200.*
 
-***201 (Created)***
+* ***201 (Created)***
 
-Un código de estado de 201 ( SC_CREATED ) significa que el servidor creó un nuevo documento en respuesta a la solicitud; el encabezado de ubicación debe proporcionar su URL.
+   *Un  status code de 201 ( **`SC_CREATED`** ) significa que el servidor creó un nuevo documento en response a la request; el header **`Location`** debe proporcionar su URL.*
 
-***202 (Accepted)***
+* ***202 (Accepted)***
 
-Un valor de 202 ( SC_ACCEPTED ) le dice al cliente que se está actuando sobre la solicitud, pero que el procesamiento aún no se ha completado.
+   *Un valor de 202 ( **`SC_ACCEPTED`** ) le dice al cliente que se está actuando sobre la request, pero que el procesamiento aún no se ha completado.*
 
-***203 (Non-Authoritative Information)***
+* ***203 (Non-Authoritative Information)***
 
-Un estado 203 ( SC_NON_AUTHORITATIVE_INFORMATION ) significa que el documento se devuelve normalmente, pero algunos de los encabezados de respuesta pueden ser incorrectos ya que se está utilizando una copia del documento. Este código de estado es nuevo en HTTP 1.1.
+   *Un estado 203 ( **`SC_NON_AUTHORITATIVE_INFORMATION`** ) significa que el documento se devuelve normalmente, pero algunos de los headers de response pueden ser incorrectos ya que se está utilizando una copia del documento. Este status code es nuevo en HTTP 1.1.*
 
-***204 (No Content)***
+* ***204 (No Content)***
 
-Un código de estado de 204 ( SC_NO_CONTENT ) estipula que el navegador debe continuar mostrando el documento anterior porque no hay ningún documento nuevo disponible. Este comportamiento es útil si el usuario recarga periódicamente una página presionando el botón "Recargar", y puede determinar que la página anterior ya está actualizada. Por ejemplo, un servlet podría hacer algo como esto:
+   *Un status code 204 ( **`SC_NO_CONTENT`** ) estipula que el navegador debe continuar mostrando el documento anterior porque no hay ningún documento nuevo disponible. Este comportamiento es útil si el usuario recarga periódicamente una página presionando el botón "Reload", y puede determinar que la página anterior ya está actualizada. Por ejemplo, un servlet podría hacer algo como esto:*
 
-```java
-int pageVersion =
-  Integer.parseInt(request.getParameter("pageVersion"));
-if (pageVersion >= currentVersion) {
-  response.setStatus(response.SC_NO_CONTENT);
-} else {
-  // Create regular page
-}
-```
+   ```java
+   int pageVersion =
+     Integer.parseInt(request.getParameter("pageVersion"));
+   if (pageVersion >= currentVersion) {
+     response.setStatus(response.SC_NO_CONTENT);
+   } else {
+     // Create regular page
+   }
+   ```
 
 
-Sin embargo, este enfoque no funciona para las páginas que se recargan automáticamente a través del encabezado de respuesta Actualizar o la entrada HTML <META HTTP-EQUIV="Refresh" ...> equivalente, ya que devolver un código de estado 204 detiene la recarga futura. Sin embargo, la recarga automática basada en JavaScript aún podría funcionar en tal caso. Consulte la discusión sobre Actualizar en la Sección 7.2 (Encabezados de respuesta HTTP 1.1 y su significado) para obtener más información.
+   *Sin embargo, este enfoque no funciona para las páginas que se recargan automáticamente a través del **`Refresh`** response header o la entrada **`<META HTTP-EQUIV="Refresh" ...>`** equivalente, ya que devolver un status code 204 detiene la recarga futura. Sin embargo, la recarga automática basada en JavaScript aún podría funcionar en tal caso. Consulte la discusión sobre **`Refresh`** en la Sección 7.2 (HTTP 1.1 Response Headers and Their Meaning) para obtener más información.*
 
-205 (Restablecer contenido)
+* ***205 (Reset Content)***
 
-Un valor de 205 ( SC_RESET_CONTENT ) significa que no hay ningún documento nuevo, pero el navegador debería restablecer la vista del documento. Este código de estado se utiliza para obligar a los navegadores a borrar los campos del formulario. Es nuevo en HTTP 1.1.
+   *Un valor de 205 ( **`SC_RESET_CONTENT`** ) significa que no hay ningún documento nuevo, pero el navegador debería restablecer la vista del documento. Este código de estado se utiliza para obligar a los navegadores a borrar los campos del formulario. Es nuevo en HTTP 1.1.*
 
-206 (Contenido parcial)
+* ***206 (Partial Content)***
 
-Se envía un código de estado de 206 ( SC_PARTIAL_CONTENT ) cuando el servidor cumple con una solicitud parcial que incluye un encabezado de rango . Este valor es nuevo en HTTP 1.1.
+   *Se envía un status code de 206 ( **`SC_PARTIAL_CONTENT`** ) cuando el servidor cumple con una request parcial que incluye un header **`Range`**. Este valor es nuevo en HTTP 1.1.*
 
-300 (opciones múltiples)
+* ***300 (Multiple Choices)***
 
-Un valor de 300 ( SC_MULTIPLE_CHOICES ) significa que el documento solicitado se puede encontrar en varios lugares, que se enumerarán en el documento devuelto. Si el servidor tiene una opción preferida, debe aparecer en el encabezado de respuesta Ubicación .
+   *Un valor de 300 ( **`SC_MULTIPLE_CHOICES`** ) significa que el documento solicitado se puede encontrar en varios lugares, que se enumerarán en el documento devuelto. Si el servidor tiene una opción preferida, debe aparecer en el **`Location`** response header.*
 
-301 Movido Permanentemente)
+* ***301 (Moved Permanently)***
+  
+   *El estado 301 ( **`SC_MOVED_PERMANENTLY`** ) indica que el documento solicitado está en otro lugar; la nueva URL para el documento se proporciona en el **`Location`** response header. Los navegadores deben seguir automáticamente el enlace a la nueva URL.
 
-El estado 301 ( SC_MOVED_PERMANENTLY ) indica que el documento solicitado está en otro lugar; la nueva URL para el documento se proporciona en el encabezado de respuesta Ubicación . Los navegadores deben seguir automáticamente el enlace a la nueva URL.
+* ***302 (Found)***
 
-302 (Encontrado)
+   *Este valor es similar a 301, excepto que la URL proporcionada por el header **`Location`** debe interpretarse como un reemplazo temporal, no permanente. Nota: en HTTP 1.0, el mensaje se movió temporalmente en lugar de **`Found`** y la constante en **`HttpServletResponse`** es **`SC_MOVED_TEMPORARILY`**, no el **`SC_FOUND`** esperado .*
 
-Este valor es similar a 301, excepto que la URL proporcionada por el encabezado Ubicación debe interpretarse como un reemplazo temporal, no permanente. Nota: en HTTP 1.0, el mensaje se movió temporalmente en lugar de encontrarloy la constante en HttpServletResponse es SC_MOVED_TEMPORARILY , no el SC_FOUND esperado .
+   **Core Note**
 
-Nota central
+      :atom: La constante que representa 302 es **`SC_MOVED_TEMPORARILY`**, no **`SC_FOUND`** .
 
-	
-La constante que representa 302 es SC_MOVED_TEMPORARILY , no SC_FOUND .
 
+   *El código de estado 302 es muy útil porque los navegadores siguen automáticamente la referencia a la nueva URL proporcionada en el **`Location`** response header. Es tan útil, de hecho, que existe un método especial para ello, **`sendRedirect`**. El uso de **`response.sendRedirect(url)`** tiene un par de ventajas sobre el uso de **`response.setStatus(response.SC_MOVED_TEMPORARILY)`** y **`response.setHeader("Location", url)`**. En primer lugar, es más corto y más fácil. En segundo lugar, con **`sendRedirect`**, el servlet crea automáticamente una página que contiene el enlace para mostrar a los navegadores más antiguos que no siguen automáticamente los redireccionamientos. Finalmente, con la versión 2.2 de servlets (la versión en J2EE), **`sendRedirect`** puede manejar URL relativas, traduciéndolas automáticamente a absolutas. Sin embargo, debe usar una URL absoluta en la versión 2.1.*
 
-El código de estado 302 es muy útil porque los navegadores siguen automáticamente la referencia a la nueva URL proporcionada en el encabezado de respuesta de ubicación . Es tan útil, de hecho, que existe un método especial para ello, sendRedirect. El uso de response.sendRedirect(url) tiene un par de ventajas sobre el uso de response.setStatus(response.SC_MOVED_TEMPORARILY) y response.setHeader("Ubicación", url) . En primer lugar, es más corto y más fácil. En segundo lugar, con sendRedirect , el servlet crea automáticamente una página que contiene el enlace para mostrar a los navegadores más antiguos que no siguen automáticamente los redireccionamientos. Finalmente, con la versión 2.2 de servlets (la versión en J2EE), sendRedirect puede manejar URL relativas, traduciéndolas automáticamente a absolutas. Sin embargo, debe usar una URL absoluta en la versión 2.1.
+   *Si redirige al usuario a otra página dentro de su propio sitio, debe pasar la URL a través del método **`encodeURL`** de **`HttpServletResponse`**. Hacerlo es una simple precaución en caso de que alguna vez utilice el seguimiento de sesiones basado en la reescritura de URL. La reescritura de URL es una forma de rastrear a los usuarios que tienen las cookies deshabilitadas mientras están en su sitio. Se implementa agregando información de ruta adicional al final de cada URL, pero la API de seguimiento de sesiones de servlet se encarga de los detalles automáticamente. El seguimiento de sesiones se analiza en el Capítulo 9, y es una buena idea usar **`encodeURL`** de forma rutinaria para que pueda agregar el seguimiento de sesiones en un momento posterior con cambios mínimos en el código.*
 
-Si redirige al usuario a otra página dentro de su propio sitio, debe pasar la URL a través del método encodeURL de HttpServletResponse . Hacerlo es una simple precaución en caso de que alguna vez utilice el seguimiento de sesiones basado en la reescritura de URL. La reescritura de URL es una forma de rastrear a los usuarios que tienen las cookies deshabilitadas mientras están en su sitio. Se implementa agregando información de ruta adicional al final de cada URL, pero la API de seguimiento de sesiones de servlet se encarga de los detalles automáticamente. El seguimiento de sesiones se analiza en el Capítulo 9 , y es una buena idea usar encodeURL de forma rutinaria para que pueda agregar el seguimiento de sesiones en un momento posterior con cambios mínimos en el código.
+   **Core Approach**
 
-Enfoque central
+   * Si redirige a los usuarios a una página dentro de su sitio, planifique con anticipación el seguimiento de la sesión utilizando
 
-	
-Si redirige a los usuarios a una página dentro de su sitio, planifique con anticipación el seguimiento de la sesión utilizando
+   ```java
+   response.sendRedirect(response.encodeURL(url)),
+   ```
 
-respuesta.sendRedirect(respuesta.encodeURL(url)),
-en lugar de solo
+   en lugar de solo
 
-respuesta.sendRedirect(url).
+   ```java
+   response.sendRedirect(url).
+   ```
 
-Este código de estado a veces se usa indistintamente con 301. Por ejemplo, si solicita por error http://host/~user (falta la barra diagonal), algunos servidores responderán con un código 301 mientras que otros usarán 302.
+   *Este status code a veces se usa indistintamente con 301. Por ejemplo, si solicita por error **`http://host/~user`** (falta la barra diagonal), algunos servidores responderán con un código 301 mientras que otros usarán 302.*
 
-Técnicamente, se supone que los navegadores solo deben seguir automáticamente la redirección si la solicitud original fue GET . Para obtener más información, consulte la discusión sobre el código de estado 307.
+   *Técnicamente, se supone que los navegadores solo deben seguir automáticamente la redirección si la request original fue **`GET`** . Para obtener más información, consulte la discusión sobre el código de estado 307.*
 
-303 (Ver Otros)
+* ***303 (See Other)***
 
-El estado 303 ( SC_SEE_OTHER ) es similar a 301 y 302, excepto que si la solicitud original fue POST , el nuevo documento (dado en el encabezado Ubicación ) debe recuperarse con GET . Este código es nuevo en HTTP 1.1.
+   *El estado 303 ( **`SC_SEE_OTHER`** ) es similar a 301 y 302, excepto que si la request original fue **`POST`**, el nuevo documento (dado en el header **`Location`**) debe recuperarse con **`GET`**. Este código es nuevo en HTTP 1.1.*
 
-304 (no modificado)
+* ***304 (Not Modified)***
 
-Cuando un cliente tiene un documento en caché, puede realizar una solicitud condicional proporcionando un encabezado If-Modified-Since para indicar que solo quiere el documento si se ha cambiado desde la fecha especificada. Un valor de 304 ( SC_NOT_MODIFIED ) significa que la versión almacenada en caché está actualizada y el cliente debe usarla. De lo contrario, el servidor debe devolver el documento solicitado con el código de estado normal (200). Los servlets normalmente no deberían establecer este código de estado directamente. En su lugar, deben implementar el método getLastModified y dejar que el método de servicio predeterminado maneje las solicitudes condicionales en función de esta fecha de modificación. Un ejemplo de este enfoque se da en la Sección 2.8(Un ejemplo que usa la inicialización del servlet y las fechas de modificación de la página).
+   *Cuando un cliente tiene un documento en caché, puede realizar una request condicional proporcionando un header **`If-Modified-Since`** para indicar que solo quiere el documento si se ha cambiado desde la fecha especificada. Un valor de 304 ( **`SC_NOT_MODIFIED`** ) significa que la versión almacenada en caché está actualizada y el cliente debe usarla. De lo contrario, el servidor debe devolver el documento solicitado con el status code normal (200). Los servlets normalmente no deberían establecer este código de estado directamente. En su lugar, deben implementar el método **`getLastModified`** y dejar que el método **`service`** predeterminado maneje las requests condicionales en función de esta fecha de modificación. Un ejemplo de este enfoque se da en la Sección 2.8(An Example Using Servlet Initialization and Page Modification Dates).*
 
-305 (usar proxy)
+* ***305 (Use Proxy)***
 
-Un valor de 305 ( SC_USE_PROXY ) significa que el documento solicitado debe recuperarse a través del proxy que figura en el encabezado Ubicación . Este código de estado es nuevo en HTTP 1.1.
+   *Un valor de 305 ( **`SC_USE_PROXY`** ) significa que el documento solicitado debe recuperarse a través del proxy que figura en el header **`Location`**. Este código de estado es nuevo en HTTP 1.1.*
 
-307 (redireccionamiento temporal)
+* ***307 (Temporary Redirect)***
 
-Las reglas sobre cómo un navegador debe manejar un estado 307 son idénticas a las de 302. El valor 307 se agregó a HTTP 1.1 ya que muchos navegadores siguen erróneamente la redirección en una respuesta 302, incluso si el mensaje original es un POST .. Se supone que los navegadores deben seguir la redirección de una solicitud POST solo cuando reciben un estado de respuesta 303. Este nuevo estado pretende ser inequívocamente claro: siga las solicitudes GET y POST redirigidas en el caso de las respuestas 303; siga las solicitudes GET redirigidas pero no POST en el caso de las respuestas 307. Nota: Por alguna razón, no hay una constante en HttpServletResponse correspondiente a este código de estado. Este código de estado es nuevo en HTTP 1.1.
+   *Las reglas sobre cómo un navegador debe manejar un estado 307 son idénticas a las de 302. El valor 307 se agregó a HTTP 1.1 ya que muchos navegadores siguen erróneamente la redirección en una respuesta 302, incluso si el mensaje original es un **`POST`**. Se supone que los navegadores deben seguir la redirección de una request **`POST`** solo cuando reciben un estado de respuesta 303. Este nuevo estado pretende ser inequívocamente claro: siga las requests **`GET`** y **`POST`** redirigidas en el caso de las respuestas 303; siga las solicitudes **`GET`** redirigidas pero no **`POST`** en el caso de las responses 307. Nota: Por alguna razón, no hay una constante en **`HttpServletResponse`** correspondiente a este código de estado. Este código de estado es nuevo en HTTP 1.1.*
 
-Nota central
+**Core Note**
 
-	
-No hay una constante SC_TEMPORARY_REDIRECT en HttpServletResponse , por lo que debe usar 307 explícitamente.
+:atom: No hay una constante **`SC_TEMPORARY_REDIRECT`** en **`HttpServletResponse`**, por lo que debe usar 307 explícitamente.
 
 
-400 Petición Incorrecta)
+* ***400 (Bad Request)***
 
-Un estado 400 ( SC_BAD_REQUEST ) indica una sintaxis incorrecta en la solicitud del cliente.
+   *Un estado 400 ( **`SC_BAD_REQUEST`** ) indica una sintaxis incorrecta en la request del cliente.
 
-401 (no autorizado)
+* ***401 (Unauthorized)***
 
-Un valor de 401 ( SC_UNAUTHORIZED ) significa que el cliente intentó acceder a una página protegida con contraseña sin la información de identificación adecuada en el encabezado de Autorización . La respuesta debe incluir un WWW-Authenticateencabezamiento. Para ver un ejemplo, consulte la Sección 4.5 , “Restricción del acceso a las páginas web”.
+   *Un valor de 401 ( **`SC_UNAUTHORIZED`** ) significa que el cliente intentó acceder a una página protegida con contraseña sin la información de identificación adecuada en el header **`Authorization`**. La response debe incluir un header **`WWW-Authenticate`**. Para ver un ejemplo, consulte la Sección 4.5 , “Restricting Access to Web Pages”.*
 
-403 (prohibido)
+* ***403 (Forbidden)***
 
-Un código de estado de 403 ( SC_FORBIDDEN ) significa que el servidor se niega a suministrar el recurso, independientemente de la autorización. Este estado suele ser el resultado de permisos de archivo o directorio incorrectos en el servidor.
+   *Un código de estado de 403 ( **`SC_FORBIDDEN`** ) significa que el servidor se niega a suministrar el recurso, independientemente de la autorización. Este estado suele ser el resultado de permisos de archivo o directorio incorrectos en el servidor.*
 
-404 No encontrado)
+* ***404 (Not Found)***
 
-El infame estado 404 ( SC_NOT_FOUND ) le dice al cliente que no se pudo encontrar ningún recurso en esa dirección. Este valor es la respuesta estándar "no existe tal página". Es una respuesta tan común y útil que existe un método especial para ella en la clase HttpServletResponse : sendError("message"). La ventaja de sendError sobre setStatus es que, con sendError, el servidor genera automáticamente una página de error que muestra el mensaje de error. Desafortunadamente, sin embargo, el comportamiento predeterminado de Internet Explorer 5 es ignorar la página de error que envía y muestra la suya propia, aunque hacerlo contradiga la especificación HTTP. Para desactivar esta configuración, vaya al menú Herramientas, seleccione Opciones de Internet, elija la pestaña Avanzado y asegúrese de que la casilla "Mostrar mensajes de error HTTP amigables" no esté marcada. Desafortunadamente, sin embargo, pocos usuarios conocen esta configuración, por lo que esta "característica" evita que la mayoría de los usuarios de Internet Explorer versión 5 vean los mensajes informativos que usted devuelve. Otros navegadores principales y la versión 4 de Internet Explorer muestran correctamente las páginas de error generadas por el servidor. Consulte las Figuras 6-3 y 6-4 para ver un ejemplo.
+El infame estado 404 ( **`SC_NOT_FOUND`** ) le dice al cliente que no se pudo encontrar ningún recurso en esa dirección. Este valor es la response estándar "no existe tal página". Es una response tan común y útil que existe un método especial en la **`HttpServletResponse`** clase: **`sendError("message")`**. La ventaja de **`sendError`** sobre **`setStatus`** es que, con **`sendError`**, el servidor genera automáticamente una página de error que muestra el mensaje de error. Desafortunadamente, sin embargo, el comportamiento predeterminado de Internet Explorer 5 es ignorar la página de error que envía y muestra la suya propia, aunque hacerlo contradiga la especificación HTTP. Para desactivar esta configuración, vaya al menú Tools, seleccione Internet Options, elija la pestaña Advanced y asegúrese de que la casilla "Show friendly HTTP error messages" no esté marcada. Desafortunadamente, sin embargo, pocos usuarios conocen esta configuración, por lo que esta "característica" evita que la mayoría de los usuarios de Internet Explorer versión 5 vean los mensajes informativos que usted devuelve. Otros navegadores principales y la versión 4 de Internet Explorer muestran correctamente las páginas de error generadas por el servidor. Consulte las Figuras 6-3 y 6-4 para ver un ejemplo.
 
-Figura 6-3. Resultado del servlet de SearchEngines cuando no se especificó una cadena de búsqueda. Internet Explorer 5 muestra su propia página de error, aunque el servlet genera una.
+**Figura 6-3. Resultado del servlet `SearchEngines` cuando no se especificó una cadena de búsqueda. Internet Explorer 5 muestra su propia página de error, aunque el servlet genera una.**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1fb471da-22b8-4fb5-a8cb-da9a3fb75cf0)
 
-Figura 6-4. Resultado del servlet de SearchEngines cuando no se especificó una cadena de búsqueda. Netscape muestra correctamente la página de error generada por el servlet.
 
+**Figura 6-4. Resultado del servlet de `SearchEngines` cuando no se especificó una cadena de búsqueda. Netscape muestra correctamente la página de error generada por el servlet.**
 
-Advertencia de núcleo
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/8917eaeb-47ba-4d35-8d9c-677b0cde642d)
 
-	
-De forma predeterminada, la versión 5 de Internet Explorer ignora las páginas de error generadas por el servidor.
+**Core Warning**
 
+   :atom: De forma predeterminada, la versión 5 de Internet Explorer ignora las páginas de error generadas por el servidor.
 
-405 (método no permitido)
 
-Un valor 405 ( SC_METHOD_NOT_ALLOWED ) indica que el método de solicitud ( GET , POST , HEAD , PUT , DELETE , etc.) no estaba permitido para este recurso en particular. Este código de estado es nuevo en HTTP 1.1.
+* ***405 (Method Not Allowed)***
 
-406 (no aceptable)
+   *Un valor 405 ( **`SC_METHOD_NOT_ALLOWED`** ) indica que el método de request ( **`GET`**, **`POST`**, **`HEAD`**, **`PUT`**, **`DELETE`**, etc.) no estaba permitido para este recurso en particular. Este status code es nuevo en HTTP 1.1.*
 
-Un valor de 406 ( SC_NOT_ACCEPTABLE ) significa que el recurso solicitado tiene un tipo MIME incompatible con los tipos especificados por el cliente en su cabecera de aceptación . Consulte la Tabla 7.1 en la Sección 7.2 (Encabezados de respuesta HTTP 1.1 y su significado) para conocer los nombres y significados de los tipos MIME comunes. El valor 406 es nuevo en HTTP 1.1.
+* ***406 (Not Acceptable)***
 
-407 (se requiere autenticación de proxy)
+   *Un valor de 406 ( **`SC_NOT_ACCEPTABLE`** ) significa que el recurso solicitado tiene un MIME type incompatible con los tipos especificados por el cliente en su header **`Accept`**. Consulte la Tabla 7.1 en la Sección 7.2 (HTTP 1.1 Response Headers and Their Meaning) para conocer los nombres y significados de los MIME types comunes. El valor 406 es nuevo en HTTP 1.1.*
 
-El valor 407 ( SC_PROXY_AUTHENTICATION_REQUIRED ) es similar al 401, pero lo usan los servidores proxy. Indica que el cliente debe autenticarse con el servidor proxy. El servidor proxy devuelve un encabezado de respuesta de autenticación de proxy al cliente, lo que hace que el navegador se vuelva a conectar con un encabezado de solicitud de autorización de proxy . Este código de estado es nuevo en HTTP 1.1.
+* ***407 (Proxy Authentication Required)***
 
-408 (Tiempo de espera de solicitud)
+   *El valor 407 ( **`SC_PROXY_AUTHENTICATION_REQUIRED`** ) es similar al 401, pero lo usan los servidores proxy. Indica que el cliente debe autenticarse con el servidor proxy. El servidor proxy devuelve un **`Proxy-Authenticate`** response header al cliente, lo que hace que el navegador se vuelva a conectar con un **`Proxy-Authenticate`** request header.. Este código de estado es nuevo en HTTP 1.1.*
 
-El código 408 ( SC_REQUEST_TIMEOUT ) significa que el cliente tardó demasiado en terminar de enviar la solicitud. Es nuevo en HTTP 1.1.
+* ***408 (Request Timeout)***
 
-409 (Conflicto)
+   *El código 408 ( **`SC_REQUEST_TIMEOUT`** ) significa que el cliente tardó demasiado en terminar de enviar la request. Es nuevo en HTTP 1.1.*
 
-Generalmente asociado con solicitudes PUT , el estado 409 ( SC_CONFLICT ) se usa para situaciones como un intento de cargar una versión incorrecta de un archivo. Este código de estado es nuevo en HTTP 1.1.
+* ***409 (Conflict)***
 
-410 (Ido)
+   *Generalmente asociado con requests **`PUT`**, el estado 409 ( **`SC_CONFLICT`** ) se usa para situaciones como un intento de cargar una versión incorrecta de un archivo. Este código de estado es nuevo en HTTP 1.1.*
 
-Un valor de 410 ( SC_GONE ) le dice al cliente que el documento solicitado ya no está y no se conoce la dirección de reenvío. El estado 410 se diferencia del 404 en que se sabe que el documento ha desaparecido de forma permanente, no solo que no está disponible por motivos desconocidos, como ocurre con el 404. Este código de estado es nuevo en HTTP 1.1.
+* ***410 (Gone)***
 
-411 (longitud requerida)
+   *Un valor de 410 ( **`SC_GONE`** ) le dice al cliente que el documento solicitado ya no está y no se conoce la dirección de reenvío. El estado 410 se diferencia del 404 en que se sabe que el documento ha desaparecido de forma permanente, no solo que no está disponible por motivos desconocidos, como ocurre con el 404. Este status code es nuevo en HTTP 1.1.*
 
-Un estado de 411 ( SC_LENGTH_REQUIRED) significa que el servidor no puede procesar la solicitud (supuestamente una solicitud POST con un documento adjunto) a menos que el cliente envíe un encabezado de longitud de contenido que indique la cantidad de datos que se envían al servidor. Este valor es nuevo en HTTP 1.1.
+* ***411 (Length Required)***
 
-412 (Condición previa fallida)
+   *Un estado de 411 ( **`SC_LENGTH_REQUIRED`** ) significa que el servidor no puede procesar la request (supuestamente una request **`POST`** con un documento adjunto) a menos que el cliente envíe un header de **`Content-Length`** que indique la cantidad de datos que se envían al servidor. Este valor es nuevo en HTTP 1.1.*
 
-El estado 412 ( SC_PRECONDITION_FAILED ) indica que alguna condición previa especificada en los encabezados de la solicitud era falsa. Es nuevo en HTTP 1.1.
+* ***412 (Precondition Failed)***
 
-Solicitud de entidad 413 muy extensa)
+   *El estado 412 ( **`SC_PRECONDITION_FAILED`** ) indica que alguna condición previa especificada en los request headers era falsa. Es nuevo en HTTP 1.1.*
 
-Un código de estado de 413 ( SC_REQUEST_ENTITY_TOO_LARGE ) le dice al cliente que el documento solicitado es más grande de lo que el servidor quiere manejar ahora. Si el servidor cree que puede manejarlo más tarde, debe incluir un encabezado de respuesta Reintentar después . Este valor es nuevo en HTTP 1.1.
+* ***413 (Request Entity Too Large)***
 
-414 (URI de solicitud demasiado largo)
+  *Un código de estado de 413 ( **`SC_REQUEST_ENTITY_TOO_LARGE`** ) le dice al cliente que el documento solicitado es más grande de lo que el servidor quiere manejar ahora. Si el servidor cree que puede manejarlo más tarde, debe incluir un **`Retry-After`** response header. Este valor es nuevo en HTTP 1.1.
 
-El estado 414 ( SC_REQUEST_URI_TOO_LONG ) se usa cuando el URI es demasiado largo. En este contexto, "URI" significa la parte de la URL que viene después del host y el puerto en la URL. Por ejemplo, en http://www.y2k-disaster.com:8080/we/look/silly/now/, el URI es /we/look/tonto/ahora/ . Este código de estado es nuevo en HTTP 1.1.
+* ***414 (Request URI Too Long)***
 
-415 (Tipo de medio no compatible)
+   *El estado 414 ( **`SC_REQUEST_URI_TOO_LONG`** ) se usa cuando el URI es demasiado largo. En este contexto, "URI" significa la parte de la URL que viene después del host y el puerto en la URL. Por ejemplo, en http://www.y2k-disaster.com:8080/we/look/silly/now/, el URI es **`/we/look/silly/now/`**. Este código de estado es nuevo en HTTP 1.1.*
 
-Un valor de 415 ( SC_UNSUPPORTED_MEDIA_TYPE ) significa que la solicitud tenía un documento adjunto de un tipo que el servidor no sabe cómo manejar. Este código de estado es nuevo en HTTP 1.1.
+*  ***415 (Unsupported Media Type)***
 
-416 (Rango solicitado no satisfactorio)
+   *Un valor de 415 ( **`SC_UNSUPPORTED_MEDIA_TYPE`** ) significa que la request tenía un documento adjunto de un tipo que el servidor no sabe cómo manejar. Este código de estado es nuevo en HTTP 1.1.*
 
-Un código de estado de 416 significa que el cliente incluyó un encabezado de rango insatisfactorio en la solicitud. Este valor es nuevo en HTTP 1.1. Sorprendentemente, la constante que corresponde a este valor se omitió de HttpServletResponse en la versión 2.1 de la API de servlet.
+*  ***416 (Requested Range Not Satisfiable)***
 
-Nota central
+   *Un status code de 416 significa que el cliente incluyó un header **`Range`** insatisfactorio en la request. Este valor es nuevo en HTTP 1.1. Sorprendentemente, la constante que corresponde a este valor se omitió de **`HttpServletResponse`** en la versión 2.1 de la API de servlet.*
 
-	
-En la versión 2.1 de la especificación del servlet, no hay una constante SC_REQUESTED_RANGE_NOT_SATISFIABLE en HttpServletResponse , por lo que debe usar 416 explícitamente. La constante está disponible en la versión 2.2 y posteriores.
+**Core Note**
 
+   En la versión 2.1 de la especificación del servlet, no hay una constante **`SC_REQUESTED_RANGE_NOT_SATISFIABLE`** en **`HttpServletResponse`**, por lo que debe usar 416 explícitamente. La constante está disponible en la versión 2.2 y posteriores.
 
-417 (expectativa fallida)
 
-Si el servidor recibe un encabezado de solicitud Expect con un valor de 100-continuar , significa que el cliente pregunta si puede enviar un documento adjunto en una solicitud de seguimiento. En tal caso, el servidor debería responder con este estado (417) para decirle al navegador que no aceptará el documento o usar 100 ( SC_CONTINUE ) para decirle al cliente que continúe. Este código de estado es nuevo en HTTP 1.1.
+* ***417 (Expectation Failed)***
 
-Error interno de servidor 500)
+   *Si el servidor recibe un **`Expect`** request header con un valor de **`100-continue`**, significa que el cliente pregunta si puede enviar un documento adjunto en una request de seguimiento. En tal caso, el servidor debería responder con este estado (417) para decirle al navegador que no aceptará el documento o usar 100 ( **`SC_CONTINUE`** ) para decirle al cliente que continúe. Este status code es nuevo en HTTP 1.1.*
 
-500 ( SC_INTERNAL_SERVER_ERROR ) es el código de estado genérico "el servidor está confundido". A menudo es el resultado de programas CGI o (¡Dios no lo quiera!) servlets que fallan o devuelven encabezados con formato incorrecto.
+* ***500 (Internal Server Error)***
 
-501 (No implementado)
+   *500 ( **`SC_INTERNAL_SERVER_ERROR`** ) es el status code genérico "server is confused". A menudo es el resultado de programas CGI o (¡Dios no lo quiera!) servlets que fallan o devuelven headers con formato incorrecto.
 
-El estado 501 ( SC_NOT_IMPLEMENTED ) notifica al cliente que el servidor no admite la funcionalidad para cumplir con la solicitud. Se utiliza, por ejemplo, cuando el cliente emite un comando como PUT que el servidor no admite.
+* ***501 (Not Implemented)***
 
-502 Puerta de enlace no válida)
+   *El estado 501 ( **`SC_NOT_IMPLEMENTED`** ) notifica al cliente que el servidor no admite la funcionalidad para cumplir con la request. Se utiliza, por ejemplo, cuando el cliente emite un comando como **`PUT`** que el servidor no admite.*
 
-Los servidores que actúan como servidores proxy o puertas de enlace utilizan un valor de 502 ( SC_BAD_GATEWAY ); indica que el servidor inicial obtuvo una mala respuesta del servidor remoto.
+* ***502 (Bad Gateway)***
 
-503 Servicio no Disponible)
+   *Los servidores que actúan como servidores proxies o gateways; utilizan un valor de 502 ( **`SC_BAD_GATEWAY`** ); indica que el servidor inicial obtuvo una bad response del servidor remoto.
 
-Un código de estado de 503 ( SC_SERVICE_UNAVAILABLE ) significa que el servidor no puede responder debido a mantenimiento o sobrecarga. Por ejemplo, un servlet podría devolver este encabezado si algún subproceso o grupo de conexiones de base de datos está actualmente lleno. El servidor puede proporcionar un encabezado Reintentar después para indicarle al cliente cuándo volver a intentarlo.
+* ***503 (Service Unavailable)***
 
-504 (tiempo de espera de la puerta de enlace)
+   *Un  status code de 503 ( **`SC_SERVICE_UNAVAILABLE`** ) significa que el servidor no puede responder debido a mantenimiento o sobrecarga. Por ejemplo, un servlet podría devolver este header si algún subproceso o grupo de conexiones de base de datos está actualmente lleno. El servidor puede proporcionar un header **`Retry-After`** para indicarle al cliente cuándo volver a intentarlo.*
 
-Los servidores que actúan como servidores proxy o puertas de enlace utilizan un valor de 504 ( SC_GATEWAY_TIMEOUT ); indica que el servidor inicial no obtuvo una respuesta oportuna del servidor remoto. Este código de estado es nuevo en HTTP 1.1.
+* ***504 (Gateway Timeout)***
 
-505 (versión HTTP no compatible)
+   *Los servidores que actúan como servidores proxies o gateways; utilizan un valor de 504 ( **`SC_GATEWAY_TIMEOUT`** ); indica que el servidor inicial no obtuvo una respuesta oportuna del servidor remoto. Este código de estado es nuevo en HTTP 1.1.
 
-El código 505 ( SC_HTTP_VERSION_NOT_SUPPORTED ) significa que el servidor no admite la versión de HTTP mencionada en la línea de solicitud. Este código de estado es nuevo en HTTP 1.1.
+* ***505 (HTTP Version Not Supported)***
+
+El código 505 ( **`SC_HTTP_VERSION_NOT_SUPPORTED`** ) significa que el servidor no admite la versión de HTTP mencionada en la línea de request. Este status code es nuevo en HTTP 1.1.
 
 ## 6.3. Una interfaz para varios motores de búsqueda
 
