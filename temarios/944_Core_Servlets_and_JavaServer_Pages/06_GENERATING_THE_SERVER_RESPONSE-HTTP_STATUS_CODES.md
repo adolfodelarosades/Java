@@ -51,23 +51,23 @@ La especificación completa de HTTP 1.1 se proporciona en RFC 2616, a la que pue
 
 El resto de esta sección describe los códigos de estado específicos disponibles en HTTP 1.1. Estos códigos se dividen en cinco categorías generales:
 
-* 100-199
+* **100-199**
 
    Los códigos entre 100 y 100 son informativos, lo que indica que el cliente debe responder con alguna otra acción.
 
-* 200-299
+* **200-299**
 
    Los valores en los 200 significan que la request fue exitosa.
 
-* 300-399
+* **300-399**
 
    Los valores en los 300 se usan para archivos que se han movido y generalmente incluyen un header **`Location`** que indica la nueva dirección.
 
-* **`400-499`**
+* **400-499**
 
    Los valores en los 400 indican un error del cliente.
 
-* **`500-599`**
+* **500-599**
 
    Los códigos en los 500 significan un error del servidor.
 
