@@ -1,133 +1,135 @@
-# Capítulo 7. GENERACIÓN DE LA RESPUESTA DEL SERVIDOR: CABECERA DE RESPUESTA HTTP
+# Capítulo 7. Generación de la Respuesta del Servidor: HTTP Response Headers
+
 Temas de este capítulo
 
-Configuración de encabezados de respuesta de servlets
+* Configuración de response headers de servlets
+* El propósito de cada uno de los response headers HTTP 1.1
+* MIME types comunes
+* Un servlet que usa el header **`Refresh`** para acceder repetidamente a los cálculos en curso
+* Servlets que explotan conexiones HTTP persistentes (keep-alive)
+* Generación de imágenes GIF a partir de servlets
 
-El propósito de cada uno de los encabezados de respuesta HTTP 1.1
+Una response de un servidor web normalmente consta de una status line, uno o más response headers, una línea en blanco y el documento. Para aprovechar al máximo sus servlets, necesita saber cómo usar la status line y los response headers de manera efectiva, no solo cómo generar el documento.
 
-Tipos MIME comunes
+La configuración de los HTTP response headers a menudo va de la mano con la configuración de los status codes en la status line, como se explicó en el capítulo anterior. Por ejemplo, todos los status codes de "document moved" (del 300 al 307) tienen un header **`Location`** adjunto, y un código 401 ( **`Unauthorized`** ) siempre incluye un header **`WWW-Authenticate`** adjunto. Sin embargo, especificar headers también puede desempeñar un papel útil incluso cuando no se establece un status code inusual. Los response headers se pueden usar para especificar cookies, para proporcionar la fecha de modificación de la página (para el almacenamiento en caché del lado del cliente), para indicar al navegador que vuelva a cargar la página después de un intervalo designado, para dar el tamaño del archivo para que se puedan usar conexiones HTTP persistentes, para designar el tipo de documento que se genera y para realizar muchas otras tareas.
 
-Un servlet que usa el encabezado Actualizar para acceder repetidamente a los cálculos en curso
+## 7.1. Configuración de Response Headers de Servlets
 
-Servlets que explotan conexiones HTTP persistentes (keep-alive)
+La forma más general de especificar headers es usar el método **`setHeader`** de **`HttpServletResponse`**. Este método toma dos strings: el nombre del header y el valor del header. Al igual que con la configuración de status codes, debe especificar los headers antes de devolver el documento real. Con la versión 2.1 de los servlets, esto significa que debe configurar los headers antes del primer uso de **`PrintWriter`** o **`OutputStream`** sin formato que transmite el contenido del documento. Con los servlets versión 2.2 (la versión en J2EE), **`PrintWriter`** puede usar un búfer, por lo que puede establecer headers hasta la primera vez que se vacía el búfer. Consulte la Sección 6.1 (Specifying Status Codes) para obtener más detalles.
 
-Generación de imágenes GIF a partir de servlets
+**Core Approach**
 
-Una respuesta de un servidor web normalmente consta de una línea de estado, uno o más encabezados de respuesta, una línea en blanco y el documento. Para aprovechar al máximo sus servlets, necesita saber cómo usar la línea de estado y los encabezados de respuesta de manera efectiva, no solo cómo generar el documento.
-
-La configuración de los encabezados de respuesta HTTP a menudo va de la mano con la configuración de los códigos de estado en la línea de estado, como se explicó en el capítulo anterior. Por ejemplo, todos los códigos de estado de "documento movido" (del 300 al 307) tienen un encabezado de ubicación adjunto , y un código 401 ( no autorizado ) siempre incluye un WWW-Authenticate adjunto.encabezamiento. Sin embargo, especificar encabezados también puede desempeñar un papel útil incluso cuando no se establece un código de estado inusual. Los encabezados de respuesta se pueden usar para especificar cookies, para proporcionar la fecha de modificación de la página (para el almacenamiento en caché del lado del cliente), para indicar al navegador que vuelva a cargar la página después de un intervalo designado, para dar el tamaño del archivo para que se puedan usar conexiones HTTP persistentes, para designar el tipo de documento que se genera y para realizar muchas otras tareas.
-
-## 7.1. Configuración de encabezados de respuesta de servlets
-La forma más general de especificar encabezados es usar el método setHeader de HttpServletResponse . Este método toma dos cadenas: el nombre del encabezado y el valor del encabezado. Al igual que con la configuración de códigos de estado, debe especificar los encabezados antes de devolver el documento real. Con la versión 2.1 de los servlets, esto significa que debe configurar los encabezados antes del primer uso de PrintWriter o OutputStream sin formato que transmite el contenido del documento. Con los servlets versión 2.2 (la versión en J2EE), PrintWriter puede usar un búfer, por lo que puede establecer encabezados hasta la primera vez que se vacía el búfer. Consulte la Sección 6.1 (Especificación de códigos de estado) para obtener más detalles.
-
-Enfoque central
-
-	
-Asegúrese de establecer encabezados de respuesta antes de enviar el contenido de cualquier documento al cliente.
+   :atom: Asegúrese de establecer response headers antes de enviar el contenido de cualquier documento al cliente.
 
 
-Además del método setHeader de propósito general, HttpServletResponse también tiene dos métodos especializados para establecer encabezados que contienen fechas y números enteros:
+Además del método **`setHeader`** de propósito general, **`HttpServletResponse`** también tiene dos métodos especializados para establecer headers que contienen dates y integers:
 
-setDateHeader (Cabecera de cadena, milisegundos largos)
+* **`setDateHeader(String header, long milliseconds)`**
 
-Este método le ahorra la molestia de traducir una fecha de Java en milisegundos desde 1970 (como lo devuelve System.currentTimeMillis , Date.getTimeo Calendar.getTimeInMillis ) en una cadena de tiempo GMT.
+   Este método le ahorra la molestia de traducir una fecha de Java en milisegundos desde 1970 (como lo devuelve **`System.currentTimeMillis`**, **`Date.getTime`** o **`Calendar.getTimeInMillis`**) en una GMT time string.
 
-setIntHeader(String header, int headerValue)
+* **`setIntHeader(String header, int headerValue)`**
 
-Este método le ahorra el pequeño inconveniente de convertir un int en una cadena antes de insertarlo en un encabezado.
+   Este método le ahorra el pequeño inconveniente de convertir un **`int`** en una **`String`** antes de insertarlo en un header.
 
-HTTP permite varias apariciones del mismo nombre de encabezado y, a veces, desea agregar un nuevo encabezado en lugar de reemplazar cualquier encabezado existente con el mismo nombre. Por ejemplo, es bastante común tener varios encabezados Aceptar y Establecer cookies que especifican diferentes tipos de MIME admitidos y diferentes cookies, respectivamente. Con la versión 2.1 de los servlets, setHeader , setDateHeader y setIntHeader siempre agregan nuevos encabezados, por lo que no hay forma de "desarmar" los encabezados que se establecieron anteriormente (por ejemplo, mediante un método heredado). Con servlets versión 2.2, setHeader , setDateHeader y setIntHeader reemplazancualquier encabezado existente con el mismo nombre, mientras que addHeader , addDateHeader y addIntHeader agregan un encabezado independientemente de si ya existe un encabezado con ese nombre. Si le importa si ya se ha establecido un encabezado específico, use containsHeader para verificar.
+HTTP permite multiples apariciones del mismo nombre de header y, a veces, desea agregar un nuevo header en lugar de reemplazar cualquier header existente con el mismo nombre. Por ejemplo, es bastante común tener varios headers **`Accept`** y **`Set-Cookie`** que especifican diferentes MIME types admitidos y diferentes cookies, respectivamente. Con la versión 2.1 de los servlets, **`setHeader`**, **`setDateHeader`** y **`setIntHeader`** siempre agregan nuevos headers, por lo que no hay forma de "unset" los headers que se establecieron anteriormente (por ejemplo, mediante un método heredado). Con servlets versión 2.2, **`setHeader`**, **`setDateHeader`** y **`setIntHeader`** reemplazan cualquier headers existente con el mismo nombre, mientras que **`addHeader`**, **`addDateHeader`** y **`addIntHeader`** agregan un header independientemente de si ya existe un header con ese nombre. Si le importa si ya se ha establecido un header específico, use **`containsHeader`** para verificar.
 
-Finalmente, HttpServletResponse también proporciona varios métodos convenientes para especificar encabezados comunes. Estos métodos se resumen a continuación.
+Finalmente, **`HttpServletResponse`** también proporciona varios métodos convenientes para especificar headers comunes. Estos métodos se resumen a continuación.
 
-establecer tipo de contenido
+* **`setContentType`**
 
-Este método establece el encabezado Content-Type y lo utiliza la mayoría de los servlets. Consulte la Sección 7.5 (Uso de servlets para generar imágenes GIF) para ver un ejemplo de su uso.
+   Este método establece el header **`Content-Type`** y lo utiliza la mayoría de los servlets. Consulte la Sección 7.5 (Using Servlets to Generate GIF Images) para ver un ejemplo de su uso.
 
-establecerContentLength
+* **`setContentLength`**
 
-Este método establece el encabezado Content-Length , que es útil si el navegador admite conexiones HTTP persistentes (keep-alive). Consulte la Sección 7.4 para ver un ejemplo.
+   Este método establece el header **`Content-Length`**, que es útil si el navegador admite conexiones HTTP persistentes (keep-alive). Consulte la Sección 7.4 para ver un ejemplo.
 
-agregarCookie
+* **`addCookie`**
 
-Este método inserta una cookie en el encabezado Set-Cookie . No existe un método setCookie correspondiente , ya que es normal tener varias líneas Set-Cookie . Vea el Capítulo 8 para una discusión sobre las cookies.
+   Este método inserta una cookie en el header **`Set-Cookie`**. No existe un método **`setCookie`** correspondiente, ya que es normal tener varias líneas **`Set-Cookie`**. Vea el Capítulo 8 para una discusión sobre las cookies.
 
-enviarRedireccionar
+* **`sendRedirect`**
 
-Como se discutió en el capítulo anterior, el método sendRedirect establece el encabezado de ubicación y establece el código de estado en 302. Consulte la Sección 6.3 (Una interfaz para varios motores de búsqueda) para ver un ejemplo.
+   Como se discutió en el capítulo anterior, el método **`sendRedirect`** establece el header **`Location`** y establece el código de estado en 302. Consulte la Sección 6.3 (A Front End to Various Search Engines) para ver un ejemplo.
 
-## 7.2. Encabezados de respuesta HTTP 1.1 y su significado
-A continuación se muestra un resumen de los encabezados de respuesta HTTP 1.1. Una buena comprensión de estos encabezados puede aumentar la efectividad de sus servlets, por lo que al menos debe hojear las descripciones para ver qué opciones tiene a su disposición. Puede volver para obtener detalles cuando esté listo para hacer uso de las capacidades. Tenga en cuenta que el Apéndice A (Referencia rápida de Servlet y JSP) presenta un breve resumen de estos encabezados para usar como recordatorio.
+## 7.2. HTTP 1.1 Response Headers y su Significado
 
-Estos encabezados son un superconjunto de los permitidos en HTTP 1.0. Para obtener detalles adicionales sobre estos encabezados, consulte la especificación HTTP 1.1, proporcionada en RFC 2616. Hay varios lugares donde los RFC oficiales se archivan en línea; su mejor opción es comenzar en http://www.rfc-editor.org/ para obtener una lista actualizada de los sitios de archivo. Los nombres de los encabezados no distinguen entre mayúsculas y minúsculas, pero tradicionalmente se escriben con la primera letra de cada palabra en mayúscula.
+A continuación se muestra un resumen de los encabezados de respuesta HTTP 1.1. Una buena comprensión de estos encabezados puede aumentar la efectividad de sus servlets, por lo que al menos debe hojear las descripciones para ver qué opciones tiene a su disposición. Puede volver para obtener detalles cuando esté listo para hacer uso de las capacidades. Tenga en cuenta que el Apéndice A (Servlet and JSP Quick Reference) presenta un breve resumen de estos headers para usar como recordatorio.
 
-Tenga cuidado al escribir servlets cuyo comportamiento dependa de encabezados de respuesta que solo están disponibles en HTTP 1.1, especialmente si su servlet necesita ejecutarse en la WWW "en general", en lugar de en una intranet; muchos navegadores antiguos solo admiten HTTP 1.0. Es mejor verificar explícitamente la versión HTTP con request.getRequestProtocol antes de usar encabezados nuevos.
+Estos headers son un superconjunto de los permitidos en HTTP 1.0. Para obtener detalles adicionales sobre estos headers, consulte la especificación HTTP 1.1, proporcionada en RFC 2616. Hay varios lugares donde los RFC oficiales se archivan en línea; su mejor opción es comenzar en http://www.rfc-editor.org/ para obtener una lista actualizada de los sitios de archivo. Los nombres de los headers no distinguen entre mayúsculas y minúsculas, pero tradicionalmente se escriben con la primera letra de cada palabra en mayúscula.
 
-Rangos de aceptación
+Tenga cuidado al escribir servlets cuyo comportamiento dependa de headers de response que solo están disponibles en HTTP 1.1, especialmente si su servlet necesita ejecutarse en la WWW "en general", en lugar de en una intranet; muchos navegadores antiguos solo admiten HTTP 1.0. Es mejor verificar explícitamente la versión HTTP con **`request.getRequestProtocol`** antes de usar headers nuevos.
 
-Este encabezado, que es nuevo en HTTP 1.1, le dice al cliente si acepta o no los encabezados de solicitud de rango . Por lo general, especifica un valor de bytes para indicar que acepta solicitudes de rango y un valor de ninguno para indicar que no lo hace.
+* ***`Accept-Ranges`***
 
-Edad
+   Este header, que es nuevo en HTTP 1.1, le dice al cliente si acepta o no los **`Range`** request headers rango. Por lo general, especifica un valor de **`bytes`** para indicar que acepta **`Range`** requests y un valor **`none`** para indicar que no lo hace.
 
-Los proxies utilizan este encabezado para indicar cuánto tiempo hace que el servidor original generó el documento. Es nuevo en HTTP 1.1 y rara vez lo usan los servlets.
+* ***`Age`***
 
-Permitir
+   Los proxies utilizan este header para indicar cuánto tiempo hace que el servidor original generó el documento. Es nuevo en HTTP 1.1 y rara vez lo usan los servlets.
 
-El encabezado Permitir especifica los métodos de solicitud ( GET , POST , etc.) que admite el servidor. Es necesario para las respuestas 405 ( Método no permitido ). El método de servicio predeterminado de los servlets genera automáticamente este encabezado para las solicitudes de OPCIONES .
+* ***`Allow`***
 
-Control de caché
+   El header **`Allow`** especifica los request methods (**`GET`**, **`POST`**, etc.) que admite el servidor. Es necesario para las responses 405 ( **`Method Not Allowed`** ). El método **`service`** predeterminado de los servlets genera automáticamente este header para las requests **`OPTIONS`**.
 
-Este encabezado útil le dice al navegador u otro cliente las circunstancias en las que el documento de respuesta se puede almacenar en caché de manera segura. Tiene los siguientes valores posibles:
+* ***`Cache-Control`***
 
-public : el documento se puede almacenar en caché, incluso si las reglas normales (p. ej., para páginas protegidas con contraseña) indican que no debería ser así.
+   Este header útil le dice al navegador u otro cliente las circunstancias en las que el documento de respuesta se puede almacenar en caché de manera segura. Tiene los siguientes valores posibles:
 
-privado : el documento es para un solo usuario y solo se puede almacenar en cachés privados (no compartidos).
+   * ***`public`***: El documento se puede almacenar en caché, incluso si las reglas normales (p. ej., para páginas protegidas con contraseña) indican que no debería ser así.
 
-no-cache : el documento nunca debe almacenarse en caché (es decir, usarse para satisfacer una solicitud posterior). El servidor también puede especificar “ no-cache="header1,header2,...,header N " ” para indicar los encabezados que deben omitirse si se usa más tarde una respuesta almacenada en caché. Los navegadores normalmente no almacenan en caché los documentos que se recuperaron mediante solicitudes que incluyen datos de formulario. Sin embargo, si un servlet genera contenido diferente para diferentes solicitudes, incluso cuando las solicitudes no contienen datos de formulario, es fundamental decirle al navegador que no almacene en caché la respuesta. Dado que los navegadores más antiguos usan el encabezado Pragma para este propósito, el enfoque típico de servlet es establecer ambos encabezados, como en el siguiente ejemplo.
+   * ***`private`*** : El documento es para un solo usuario y solo se puede almacenar en cachés privados (no compartidos).
 
-respuesta.setHeader("Cache-Control", "no-cache");
-respuesta.setHeader("Pragma", "sin caché");
-no-store : el documento nunca debe almacenarse en caché y ni siquiera debe almacenarse en una ubicación temporal en el disco. Este encabezado está destinado a evitar copias inadvertidas de información confidencial.
+   * ***`no-cache`***: El documento nunca debe almacenarse en caché (es decir, usarse para satisfacer una request posterior). El servidor también puede especificar “**`no-cache="header1,header2,...,headerN"`**” para indicar los headers que deben omitirse si se usa más tarde una respuesta almacenada en caché. Los navegadores normalmente no almacenan en caché los documentos que se recuperaron mediante requests que incluyen datos de formulario. Sin embargo, si un servlet genera contenido diferente para diferentes requests, incluso cuando las requests no contienen datos de formulario, es fundamental decirle al navegador que no almacene en caché la response. Dado que los navegadores más antiguos usan el header **`Pragma`** para este propósito, el enfoque típico de servlet es establecer ambos headers, como en el siguiente ejemplo.
 
-must-revalidate : el cliente debe revalidar el documento con el servidor original (no solo los proxies intermedios) cada vez que se usa.
+   ```java
+   response.setHeader("Cache-Control", "no-cache");
+   response.setHeader("Pragma", "no-cache");
+   ```
 
-proxy-revalidate : esto es lo mismo que must-revalidate , excepto que se aplica solo a los cachés compartidos.
+   * ***`no-store`***: El documento nunca debe almacenarse en caché y ni siquiera debe almacenarse en una ubicación temporal en el disco. Este header está destinado a evitar copias inadvertidas de información confidencial.
 
-max-age= xxx : el documento debe considerarse obsoleto después de xxx segundos. Esta es una alternativa conveniente al encabezado Expires , pero solo funciona con clientes HTTP 1.1. Si tanto max-age como Expires están presentes en la respuesta, el valor de max-age tiene prioridad.
+   * ***`must-revalidate`***: El cliente debe revalidar el documento con el servidor original (no solo los proxies intermedios) cada vez que se usa.
 
-s-max-age= xxx : las cachés compartidas deberían considerar el documento obsoleto después de xxx segundos.
+   * ***`proxy-revalidate`***: Esto es lo mismo que **`must-revalidate`**, excepto que se aplica solo a los cachés compartidos.
 
-El encabezado Cache-Control es nuevo en HTTP 1.1.
+   * ***`max-age=xxx`***: El documento debe considerarse obsoleto después de xxx segundos. Esta es una alternativa conveniente al header **`Expires`**, pero solo funciona con clientes HTTP 1.1. Si tanto **`max-age`** como **`Expires`** están presentes en la respuesta, el valor de **`max-age`** tiene prioridad.
 
-Conexión
+   * ***`s-max-age=xxx`***: Las cachés compartidas deberían considerar el documento obsoleto después de xxx segundos.
 
-Un valor de cierre para este encabezado de respuesta le indica al navegador que no use conexiones HTTP persistentes. Técnicamente, las conexiones persistentes son las predeterminadas cuando el cliente admite HTTP 1.1 y no especifica un encabezado de solicitud " Conexión: cerrar " (o cuando un cliente HTTP 1.0 especifica " Conexión: mantener vivo "). Sin embargo, dado que las conexiones persistentes requieren un encabezado de respuesta de longitud de contenido , no hay razón para que un servlet use explícitamente la conexión.encabezamiento. Simplemente omita el encabezado Content-Length si no está utilizando conexiones persistentes. Consulte la Sección 7.4 (Uso de conexiones HTTP persistentes) para ver un ejemplo del uso de conexiones HTTP persistentes desde servlets.
+      El header **`Cache-Control`** es nuevo en HTTP 1.1.
 
-Codificación de contenido
+
+* ***`Connection`***
+  
+   Un valor de **`close`** para este header de response le indica al navegador que no use conexiones HTTP persistentes. Técnicamente, las conexiones persistentes son las predeterminadas cuando el cliente admite HTTP 1.1 y no especifica un request header "Connection: close" (o cuando un cliente HTTP 1.0 especifica "Connection: keep-alive"). Sin embargo, dado que las conexiones persistentes requieren un **`Content-Length`** response header, no hay razón para que un servlet use explícitamente el header **`Connection`**. Simplemente omita el header **`Content-Length`** si no está utilizando conexiones persistentes. Consulte la Sección 7.4 (Using Persistent HTTP Connections) para ver un ejemplo del uso de conexiones HTTP persistentes desde servlets.
+AQUIIIIIIIII
+
+* ***`Content-Encoding`***
 
 Este encabezado indica la forma en que se codificó la página durante la transmisión. El navegador debe invertir la codificación antes de decidir qué hacer con el documento. Comprimir el documento con gzip puede resultar en un gran ahorro en el tiempo de transmisión; para ver un ejemplo, consulte la Sección 4.4 (Envío de páginas web comprimidas).
 
-Contenido-Idioma
+* ***`Content-Language`***
 
 El encabezado Content-Language indica el idioma en el que está escrito el documento. El valor del encabezado debe ser uno de los códigos de idioma estándar, como en , en-us , da , etc. Consulte RFC 1766 para obtener detalles (puede acceder a los RFC en línea en uno de los sitios de archivo enumerados en http:// www.rfc-editor.org/ ).
 
-Largancia de contenido
+* ***`Content-Length`***
 
 Este encabezado indica el número de bytes en la respuesta. Esta información es necesaria solo si el navegador utiliza una conexión HTTP persistente (mantener activa). Consulte el encabezado Conexión para determinar cuándo el navegador admite conexiones persistentes. Si desea que su servlet aproveche las conexiones persistentes cuando el navegador lo admita, su servlet debe escribir el documento en un ByteArrayOutputStream , buscar su tamaño cuando haya terminado, colocarlo en el campo Content-Length con response.setContentLength y luego enviar el contenido a través de byteArrayStream.writeTo(response.getOutputStream()) . Para ver un ejemplo de este enfoque, consulte la Sección 7.4 .
 
-Ubicación del contenido
+* ***`Content-Location`***
 
 Este encabezado proporciona una dirección alternativa para el documento solicitado. Content-Location es informativo; las respuestas que incluyen este encabezado también incluyen el documento solicitado, a diferencia del caso del encabezado Ubicación . Este encabezado es nuevo en HTTP 1.1.
 
-Contenido-MD5
+* ***`Content-MD5`***
 
 El encabezado de respuesta Content-MD5 proporciona un resumen MD5 para el documento posterior. Este resumen proporciona una verificación de la integridad del mensaje para los clientes que desean confirmar que recibieron el documento completo e inalterado. Consulte RFC 1864 para obtener detalles sobre MD5. Este encabezado es nuevo en HTTP 1.1.
 
-Rango de contenido
+* ***`Content-Range`***
 
 Este nuevo encabezado HTTP 1.1 se envía con respuestas de documentos parciales y especifica cuánto se envió del documento total. Por ejemplo, un valor de " bytes 500-999/2345 " significa que la respuesta actual incluye los bytes 500 a 999 de un documento que contiene 2345 bytes en total.
 
-Tipo de contenido
+* ***`Content-Type`***
 
 El encabezado Content-Type brinda el tipo MIME (Extensión de correo de Internet multipropósito) del documento de respuesta. Establecer este encabezado es tan común que hay un método especial en HttpServletResponse para ello: setContentType . Los tipos MIME tienen la forma maintype/subtype para los tipos registrados oficialmente y la forma maintype/x-subtype para los tipos no registrados. El tipo MIME predeterminado para los servlets es text/plain , pero los servlets suelen especificar explícitamente text/html . Sin embargo, pueden especificar otros tipos en su lugar. Por ejemplo, la Sección 7.5(Uso de servlets para generar imágenes GIF) presenta un servlet que construye una imagen GIF basada en la entrada proporcionada al especificar el tipo de contenido de la imagen/gif , y la Sección 11.2 (El atributo contentType) muestra cómo los servlets y las páginas JSP pueden generar hojas de cálculo de Excel especificando un tipo de contenido de application/vnd.ms-excel .
 
@@ -164,15 +166,15 @@ imagen/x-xbitmap	Imagen de mapa de bits de X Window
 vídeo/mpeg	videoclip MPEG
 vídeo/tiempo rápido	Videoclip de QuickTime
 
-Fecha
+* ***`Date`***
 
 Este encabezado especifica la fecha actual en formato GMT. Si desea establecer la fecha de un servlet, use el método setDateHeader para especificarlo. Ese método le ahorra la molestia de formatear la cadena de fecha correctamente, como sería necesario con response.setHeader("Date", "...") . Sin embargo, la mayoría de los servidores configuran este encabezado automáticamente, por lo que los servlets no suelen necesitarlo.
 
-ETag
+* ***`ETag`***
 
 Este nuevo encabezado HTTP 1.1 da nombres a los documentos devueltos para que el cliente pueda hacer referencia a ellos más tarde (como con el encabezado de solicitud If-Match ).
 
-Caduca
+* ***`Expires`***
 
 Este encabezado estipula el momento en que el contenido debe considerarse obsoleto y, por lo tanto, ya no se almacenará en caché. Un servlet podría usar esto para un documento que cambia con relativa frecuencia, para evitar que el navegador muestre un valor almacenado en caché obsoleto. Por ejemplo, lo siguiente indicaría al navegador que no almacene en caché el documento durante más de 10 minutos
 
@@ -185,19 +187,19 @@ Este encabezado estipula el momento en que el contenido debe considerarse obsole
                          horaActual + diezMinutos);
 Consulte también la edad máximavalor del encabezado Cache-Control .
 
-Última modificación
+* ***`Last-Modified`***
 
 Este encabezado muy útil indica cuándo se modificó por última vez el documento. Luego, el cliente puede almacenar en caché el documento y proporcionar una fecha mediante un encabezado de solicitud If-Modified-Since en solicitudes posteriores. Esta solicitud se trata como un GET condicional , y el documento solo se devuelve si Last-Modifiedla fecha es posterior a la especificada para If-Modified-Since . De lo contrario, se devuelve una línea de estado 304 ( No modificado ) y el cliente usa el documento almacenado en caché. Si configura este encabezado explícitamente, use el método setDateHeader para ahorrarse la molestia de formatear las cadenas de fecha GMT. Sin embargo, en la mayoría de los casos, simplemente implementa el método getLastModified y deja que el método de servicio estándar maneje las solicitudes If-Modified-Since . Para ver un ejemplo, consulte la Sección 2.8 (Un ejemplo usando fechas de inicialización de servlet y modificación de página).
 
-Ubicación
+* ***`Location`***
 
 Este encabezado, que debe incluirse con todas las respuestas que tienen un código de estado en los 300, notifica al navegador la dirección del documento. El navegador se vuelve a conectar automáticamente a esta ubicación y recupera el nuevo documento. Este encabezado generalmente se establece indirectamente, junto con un código de estado 302, mediante el método sendRedirect de HttpServletResponse . Se da un ejemplo en la Sección 6.3 (Un front-end para varios motores de búsqueda).
 
-pragma
+* ***`Pragma`***
 
 Proporcionar este encabezado con un valor de no caché indica a los clientes HTTP 1.0 que no almacenen en caché el documento. Sin embargo, la compatibilidad con este encabezado no era compatible con los navegadores HTTP 1.0. En HTTP 1.1, " Cache-Control: no-cache " es un reemplazo más confiable.
 
-Actualizar
+* ***`Refresh`***
 
 Este encabezado indica qué tan pronto (en segundos) el navegador debe solicitar una página actualizada. Por ejemplo, para decirle al navegador que solicite una nueva copia en 30 segundos, especificaría un valor de 30 con
 
@@ -217,43 +219,43 @@ en la sección HEAD de la página HTML, en lugar de como un encabezado explícit
 
 Este encabezado no forma parte oficialmente de HTTP 1.1, pero es una extensión compatible con Netscape e Internet Explorer.
 
-Reintentar después
+* ***`Retry-After`***
 
 Este encabezado se puede usar junto con una respuesta 503 ( Servicio no disponible ) para decirle al cliente cuándo puede repetir su solicitud.
 
-Servidor
+* ***`Server`***
 
 Este encabezado identifica el servidor web. Los servlets no suelen establecer esto; el propio servidor Web lo hace.
 
-Establecer-Cookie
+* ***`Set-Cookie`***
 
 El encabezado Set-Cookie especifica una cookie asociada con la página. Cada cookie requiere un Set-Cookie por separadoencabezamiento. Los servlets no deben usar response.setHeader("Set-Cookie", ...) , sino que deben usar el método addCookie de propósito especial de HttpServletResponse . Para obtener más información, consulte el Capítulo 8 (Manejo de cookies). Técnicamente, Set-Cookie no es parte de HTTP 1.1. Originalmente era una extensión de Netscape, pero ahora es ampliamente compatible, tanto en Netscape como en Internet Explorer.
 
-Remolque
+* ***`Trailer`***
 
 Este encabezado HTTP 1.1 nuevo y poco utilizado identifica los campos de encabezado que están presentes en el tráiler de un mensaje que se envía con codificación de transferencia "fragmentada". Consulte la Sección 3.6 de la especificación HTTP 1.1 (RFC 2616) para obtener más información. Recuerde que http://www.rfc-editor.org/ mantiene una lista actualizada de sitios de archivos RFC.
 
-Codificación de transferencia
+* ***`Transfer-Encoding`***
 
 Proporcionar a este encabezado un valor de fragmentado indica una codificación de transferencia "fragmentada". Consulte la Sección 3.6 de la especificación HTTP 1.1 (RFC 2616) para obtener más información.
 
-Mejora
+* ***`Upgrade`***
 
 Este encabezado se usa cuando el cliente usa por primera vez el encabezado de solicitud de actualización para pedirle al servidor que cambie a uno de varios protocolos nuevos posibles. Si el servidor está de acuerdo, envía un código de estado 101 ( Protocolos de conmutación ) e incluye un encabezado de respuesta de actualización con el protocolo específico al que se está cambiando. Esta negociación de protocolo generalmente la lleva a cabo el propio servidor, no un servlet.
 
-Variar
+* ***`Vary`***
 
 Este nuevo encabezado HTTP 1.1 que rara vez se usa le dice al cliente qué encabezados se pueden usar para determinar si el documento de respuesta se puede almacenar en caché.
 
-A través de
+* ***`Via`***
 
 Las puertas de enlace y los proxies utilizan este encabezado para enumerar los sitios intermedios por los que pasó la solicitud. Es nuevo en HTTP 1.1.
 
-Advertencia
+* ***`Warning`***
 
 Este encabezado general nuevo y poco utilizado le permite advertir a los clientes sobre errores de almacenamiento en caché o transformación de contenido.
 
-WWW-Autenticar
+* ***`WWW-Authenticate`***
 
 Este encabezado siempre se incluye con un código de estado 401 ( no autorizado ). Le dice al navegador qué tipo de autorización y dominio debe proporcionar el cliente en su encabezado de Autorización . Con frecuencia, los servlets permiten que las páginas web protegidas con contraseña sean manejadas por los mecanismos especializados del servidor web (por ejemplo, .htaccess ) en lugar de manejarlas directamente. Para ver un ejemplo de servlets que tratan directamente con este encabezado, consulte la Sección 4.5 (Restricción del acceso a las páginas web).
 
