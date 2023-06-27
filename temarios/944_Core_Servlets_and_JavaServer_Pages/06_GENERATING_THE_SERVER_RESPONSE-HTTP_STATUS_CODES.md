@@ -295,32 +295,189 @@ El código 505 ( **`SC_HTTP_VERSION_NOT_SUPPORTED`** ) significa que el servidor
 
 ## 6.3. Una interfaz para varios motores de búsqueda
 
-El listado 6.1 presenta un ejemplo que utiliza los dos códigos de estado más comunes además de 200 (OK): 302 (Encontrado) y 404 (No encontrado). El código 302 lo establece el método abreviado sendRedirect de HttpServletResponse , y el 404 lo especifica sendError .
+El listado 6.1 presenta un ejemplo que utiliza los dos status codes más comunes además de 200 (OK): 302 (Found) y 404 (Not Found). El código 302 lo establece el método abreviado **`sendRedirect`** de **`HttpServletResponse`**, y el 404 lo especifica **`sendError`**.
 
-En esta aplicación, un formulario HTML (consulte la Figura 6-1 y el código fuente en el Listado 6.3 ) primero muestra una página que le permite al usuario elegir una cadena de búsqueda, la cantidad de resultados que se mostrarán por página y el motor de búsqueda que se usará. Cuando se envía el formulario, el servlet extrae esos tres parámetros, construye una URL con los parámetros incrustados de manera apropiada para el motor de búsqueda seleccionado (vea la clase SearchSpec del Listado 6.2 ) y redirige al usuario a esa URL (vea la Figura 6 -2 ). Si el usuario no elige un motor de búsqueda o no especifica los términos de búsqueda, una página de error informa al cliente de este hecho (ver Figuras 6-3 y 6-4 ).
+En esta aplicación, un formulario HTML (consulte la Figura 6-1 y el código fuente en el Listado 6.3 ) primero muestra una página que le permite al usuario elegir una cadena de búsqueda, la cantidad de resultados que se mostrarán por página y el motor de búsqueda que se usará. Cuando se envía el formulario, el servlet extrae esos tres parámetros, construye una URL con los parámetros incrustados de manera apropiada para el motor de búsqueda seleccionado (vea la clase **`SearchSpec`** del Listado 6.2 ) y redirige al usuario a esa URL (vea la Figura 6-2). Si el usuario no elige un motor de búsqueda o no especifica los términos de búsqueda, una página de error informa al cliente de este hecho (ver Figuras 6-3 y 6-4 ).
 
-Figura 6-1. Front-end del servlet de SearchEngines . Vea el Listado 6.3 para el código fuente HTML.
+**Figura 6-1. Front-end del servlet `SearchEngines`. Vea el Listado 6.3 para el código fuente HTML.**
 
-
-
-Figura 6-2. Resultado del servlet de SearchEngines cuando se envía el formulario de la Figura 6-1 .
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/25dbafb4-e847-4eb0-b624-fb8ffbfcce7f)
 
 
+**Figura 6-2. Resultado del servlet `SearchEngines` cuando se envía el formulario de la Figura 6-1.**
 
-Listado 6.1. Motoresdebúsqueda.java
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/5138424c-eb47-415a-9bdb-9a79b12c6036)
+
+
+**Listado 6.1. `SearchEngines.java`**
 
 ```java
+package coreservlets;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.net.*;
+
+/** Servlet that takes a search string, number of results per
+ *  page, and a search engine name, sending the query to
+ *  that search engine. Illustrates manipulating
+ *  the response status line. It sends a 302 response
+ *  (via sendRedirect) if it gets a known search engine,
+ *  and sends a 404 response (via sendError) otherwise.
+ */
+
+public class SearchEngines extends HttpServlet {
+   public void doGet(HttpServletRequest request,
+                     HttpServletResponse response)
+       throws ServletException, IOException {
+     String searchString = request.getParameter("searchString");
+     if ((searchString == null) ||
+         (searchString.length() == 0)) {
+       reportProblem(response, "Missing search string.");
+       return;
+
+     }
+     // The URLEncoder changes spaces to "+" signs and other
+     // non-alphanumeric characters to "%XY", where XY is the
+     // hex value of the ASCII (or ISO Latin-1) character.
+     // Browsers always URL-encode form values, so the
+     // getParameter method decodes automatically. But since
+     // we're just passing this on to another server, we need to
+     // re-encode it.
+     searchString = URLEncoder.encode(searchString);
+     String numResults =
+       request.getParameter("numResults");
+     if ((numResults == null) ||
+         (numResults.equals("0")) ||
+         (numResults.length() == 0)) {
+       numResults = "10";
+     }
+     String searchEngine =
+       request.getParameter("searchEngine");
+     if (searchEngine == null) {
+       reportProblem(response, "Missing search engine name.");
+       return;
+     }
+     SearchSpec[] commonSpecs = SearchSpec.getCommonSpecs();
+     for(int i=0; i<commonSpecs.length; i++) {
+       SearchSpec searchSpec = commonSpecs[i];
+       if (searchSpec.getName().equals(searchEngine)) {
+         String url =
+           searchSpec.makeURL(searchString, numResults);
+         response.sendRedirect(url);
+        return;
+       }
+     }
+     reportProblem(response, "Unrecognized search engine.");
+   }
+
+   private void reportProblem(HttpServletResponse response,
+                              String message)
+       throws IOException {
+     response.sendError(response.SC_NOT_FOUND,
+						"<H2>" + message + "</H2>");
+   }
+
+  public void doPost(HttpServletRequest request,
+                     HttpServletResponse response)
+      throws ServletException, IOException {
+    doGet(request, response);
+  }
+}
 ```
 
 
-Listado 6.2. SearchSpec.java
+**Listado 6.2. `SearchSpec.java`**
 
 ```java
+package coreservlets;
+
+/** Small class that encapsulates how to construct a
+ *  search string for a particular search engine.
+ */
+
+class SearchSpec {
+  private String name, baseURL, numResultsSuffix;
+
+  private static SearchSpec[] commonSpecs =
+    { new SearchSpec("google",
+                     "http://www.google.com/search?q=",
+                     "&num="),
+      new SearchSpec("infoseek",
+                     "http://infoseek.go.com/Titles?qt=",
+                     "&nh="),
+      new SearchSpec("lycos",
+                     "http://lycospro.lycos.com/cgi-bin/" +
+                        "pursuit?query=",
+                     "&maxhits="),
+      new SearchSpec("hotbot",
+                     "http://www.hotbot.com/?MT=",
+                     "&DC=")
+    };
+
+  public SearchSpec(String name,
+                    String baseURL,
+                    String numResultsSuffix) {
+    this.name = name;
+    this.baseURL = baseURL;
+    this.numResultsSuffix = numResultsSuffix;
+  }
+
+  public String makeURL(String searchString,
+                        String numResults) {
+    return(baseURL + searchString +
+           numResultsSuffix + numResults);
+  }
+
+  public String getName() {
+    return(name);
+  }
+
+  public static SearchSpec[] getCommonSpecs() {
+    return(commonSpecs);
+  }
+}
 ```
 
 
-Listado 6.3. Motoresdebúsqueda.html
+**Listado 6.3. `SearchEngines.html`**
 
 ```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+  <TITLE>Searching the Web</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FDF5E6">
+<H1 ALIGN="CENTER">Searching the Web</H1>
+
+<FORM ACTION="/servlet/coreservlets.SearchEngines">
+  <CENTER>
+    Search String:
+    <INPUT TYPE="TEXT" NAME="searchString"><BR>
+    Results to Show Per Page:
+    <INPUT TYPE="TEXT" NAME="numResults"
+                       VALUE=10 SIZE=3><BR>
+    <INPUT TYPE="RADIO" NAME="searchEngine"
+                        VALUE="google">
+    Google |
+    <INPUT TYPE="RADIO" NAME="searchEngine"
+                        VALUE="infoseek">
+    Infoseek |
+    <INPUT TYPE="RADIO" NAME="searchEngine"
+                        VALUE="lycos">
+    Lycos |
+    <INPUT TYPE="RADIO" NAME="searchEngine"
+                        VALUE="hotbot">
+    HotBot
+    <BR>
+    <INPUT TYPE="SUBMIT" VALUE="Search">
+  </CENTER>
+</FORM>
+
+</BODY>
+</HTML>
 ```
 
