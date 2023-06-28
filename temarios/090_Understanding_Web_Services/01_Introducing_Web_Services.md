@@ -1,209 +1,340 @@
-# Capítulo 1. Introducción a los servicios web
-Al igual que el efecto del transporte ferroviario en los sistemas económicos nacionales, los servicios web están cambiando fundamentalmente las reglas del comercio web. Conectan programas entre sí a través de puntos distantes en el mapa global, transportando grandes cantidades de datos de manera más eficiente y económica que nunca. El resultado es una comunicación más rápida, mejor y más productiva tanto para las empresas como para los consumidores.
+# Capítulo 1. Introducción a los Web Services
 
-NOTA
-Los servicios web lo están cambiando todo
+Al igual que el efecto del transporte ferroviario en los sistemas económicos nacionales, los web services están cambiando fundamentalmente las reglas del comercio web. Conectan programas entre sí a través de puntos distantes en el mapa global, transportando grandes cantidades de datos de manera más eficiente y económica que nunca. El resultado es una comunicación más rápida, mejor y más productiva tanto para las empresas como para los consumidores.
+
+<hr>
+
+**NOTA**
+
+   Los web services lo están cambiando todo
+
+<hr>   
 
 La Web comenzó apoyando las interacciones humanas con datos de texto y gráficos. La gente usa Internet todos los días para buscar cotizaciones de acciones, comprar bienes de consumo y leer las últimas noticias. Este nivel de interacción está bien para muchos propósitos. Pero la Web esencialmente basada en texto no admite muy bien las interacciones de software, especialmente las transferencias de grandes cantidades de datos. Se necesita un método más eficiente que permita que las aplicaciones interactúen directamente entre sí, ejecutando automáticamente instrucciones que, de lo contrario, tendrían que ingresarse manualmente a través de un navegador.
 
-Las personas y las empresas que hacen negocios en la web necesitan una forma de publicar enlaces a sus aplicaciones y datos, de la misma manera que publican enlaces a sus páginas web. Las aplicaciones basadas en Internet deben poder encontrar, acceder e interactuar automáticamente con otras aplicaciones basadas en Internet. Los servicios web mejoran el uso de Internet al permitir la comunicación entre programas. A través de la adopción generalizada de los servicios web, las aplicaciones en varias ubicaciones de Internet pueden integrarse e interconectarse directamente como si fueran parte de un solo gran sistema DE TI (tecnología de la información).
+Las personas y las empresas que hacen negocios en la web necesitan una forma de publicar enlaces a sus aplicaciones y datos, de la misma manera que publican enlaces a sus páginas web. Las aplicaciones basadas en Internet deben poder encontrar, acceder e interactuar automáticamente con otras aplicaciones basadas en Internet. Los web services mejoran el uso de Internet al permitir la comunicación entre programas. A través de la adopción generalizada de los web services, las aplicaciones en varias ubicaciones de Internet pueden integrarse e interconectarse directamente como si fueran parte de un solo gran sistema DE TI (Tecnología de la Información).
 
-NOTA
-La Web actual no soporta muy bien las interacciones orientadas al software
+<hr> 
 
-Los fundamentos de los servicios web
-Los servicios web son aplicaciones de lenguaje de marcado extensible ( XML ) asignadas a programas, objetos o bases de datos o funciones comerciales integrales. Utilizando un documento XML creado en forma de mensaje, un programa envía una solicitud a un servicio web a través de la red y, opcionalmente, recibe una respuesta, también en forma de documento XML . Los estándares de servicios web definen el formato del mensaje, especifican la interfaz a la que se envía un mensaje, describen convenciones para mapear el contenido del mensaje dentro y fuera de los programas que implementan el servicio y definen mecanismos para publicar y descubrir interfaces de servicios web. .
+**NOTA**
 
-NOTA
-Los servicios web transforman documentos XML dentro y fuera de los sistemas DE TI
+   La Web actual no soporta muy bien las interacciones orientadas al software
 
-Esta tecnología se puede utilizar de muchas maneras. Los servicios web pueden ejecutarse en clientes de escritorio y portátiles para acceder a aplicaciones de Internet tales como sistemas de reservas y sistemas de seguimiento de pedidos. Los servicios web también se pueden utilizar para la integración de empresa a empresa (B2B), conectando aplicaciones ejecutadas por varias organizaciones en la misma cadena de suministro. Los servicios web también pueden resolver el problema más amplio de la integración de aplicaciones empresariales ( EAI ), conectando múltiples aplicaciones de una sola organización a múltiples otras aplicaciones tanto dentro como fuera del firewall. En todos estos casos, las tecnologías de los servicios web proporcionan el pegamento estándar que conecta diversas piezas de software.
+<hr>    
 
-NOTA
-Los servicios web se pueden utilizar en muchas aplicaciones
+## Los Fundamentos de los Web Services
 
-Como se ilustra en la Figura 1-1 , los servicios web envuelven, presentando a la red una forma estándar de interactuar con los sistemas de software de back-end, como los sistemas de administración de bases de datos, .NET, J2EE (Java2 Platform, Enterprise Edition) o CORBA (común ) . arquitectura de intermediario de solicitudes de objetos), objetos, adaptadores a paquetes de planificación de recursos empresariales ( ERP ), intermediarios de integración y otros. Las interfaces de servicios web reciben un mensaje XML estándar del entorno de red, transforman el XMLdatos en un formato comprensible para un sistema de software back-end particular y, opcionalmente, devolver un mensaje de respuesta. Las implementaciones de software subyacentes de los servicios web se pueden crear utilizando cualquier lenguaje de programación, sistema operativo o sistema de software intermedio.
+Los web services son aplicaciones de **Extensible Markup Language (XML)** asignadas a programas, objetos o bases de datos o funciones comerciales integrales. Utilizando un documento XML creado en forma de mensaje, un programa envía una solicitud a un servicio web a través de la red y, opcionalmente, recibe una respuesta, también en forma de documento XML . Los estándares de web services definen el formato del mensaje, especifican la interfaz a la que se envía un mensaje, describen convenciones para mapear el contenido del mensaje dentro y fuera de los programas que implementan el servicio y definen mecanismos para publicar y descubrir interfaces de web services.
+
+<hr>
+
+**NOTA**
+
+   Los web services transforman documentos XML dentro y fuera de los sistemas IT
+
+<hr>
+
+Esta tecnología se puede utilizar de muchas maneras. Los web services pueden ejecutarse en clientes de escritorio y portátiles para acceder a aplicaciones de Internet tales como sistemas de reservas y sistemas de seguimiento de pedidos. Los web services también se pueden utilizar para la integración de empresa a empresa (B2B), conectando aplicaciones ejecutadas por varias organizaciones en la misma cadena de suministro. Los web services también pueden resolver el problema más amplio de la integración de aplicaciones empresariales - enterprise application integration (EAI), conectando múltiples aplicaciones de una sola organización a múltiples otras aplicaciones tanto dentro como fuera del firewall. En todos estos casos, las tecnologías de los web services proporcionan el pegamento estándar que conecta diversas piezas de software.
+
+<hr>
+
+**NOTA**
+
+   Los web services se pueden utilizar en muchas aplicaciones
+
+<hr>
+
+Como se ilustra en la Figura 1-1 , los web services envuelven, presentando a la red una forma estándar de interactuar con los sistemas de software de back-end, como los sistemas de administración de bases de datos, .NET, J2EE (Java2 Platform, Enterprise Edition) o CORBA (Common Object Request Broker Architecture), objetos, adaptadores a paquetes de planificación de recursos empresariales - enterprise resource planning ( ERP ), intermediarios de integración y otros. Las interfaces de web services reciben un mensaje XML estándar del entorno de red, transforman el XML data en un formato comprensible para un sistema de software back-end particular y, opcionalmente, devolver un mensaje de respuesta. Las implementaciones de software subyacentes de los web services se pueden crear utilizando cualquier lenguaje de programación, sistema operativo o sistema de software intermedio.
+
+**Figura 1-1. Interfaz de web services con sistemas back-end.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e56fc159-2744-4674-bbe0-6502423eabdb)
 
 
-Figura 1-1. Interfaz de servicios web con sistemas back-end.
+Los web services combinan las características de ejecución de las aplicaciones programáticas con las características de abstracción de Internet. Las tecnologías de Internet actuales tienen éxito en parte porque están definidas en un nivel de abstracción lo suficientemente alto como para permitir la compatibilidad con cualquier sistema operativo, hardware o software. La infraestructura de Internet basada en web services explota este nivel de abstracción e incluye información semántica asociada con los datos. Es decir, los web services definen no solo los datos, sino también cómo procesarlos y mapearlos dentro y fuera de las aplicaciones de software subyacentes.
 
-Los servicios web combinan las características de ejecución de las aplicaciones programáticas con las características de abstracción de Internet. Las tecnologías de Internet actuales tienen éxito en parte porque están definidas en un nivel de abstracción lo suficientemente alto como para permitir la compatibilidad con cualquier sistema operativo, hardware o software. La infraestructura de Internet basada en servicios web explota este nivel de abstracción e incluye información semántica asociada con los datos. Es decir, los servicios web definen no solo los datos, sino también cómo procesarlos y mapearlos dentro y fuera de las aplicaciones de software subyacentes.
+<hr>
 
-NOTA
-Los servicios web combinan programación y conceptos web
+**NOTA**
 
-Un ejemplo simple: búsqueda de información
-Hoy en día, la mayoría de los servicios se invocan a través de la Web ingresando datos en formularios de lenguaje de marcado de hipertexto ( HTML ) y enviando los datos al servicio, incrustados dentro de una cadena de localizador uniforme de recursos ( URL ):
+   Los web services combinan programación y conceptos web
 
+<hr> 
+
+### Un ejemplo simple: Búsqueda de Información
+
+Hoy en día, la mayoría de los servicios se invocan a través de la Web ingresando datos en formularios de **HyperText Markup Language (HTML)** y enviando los datos al servicio, incrustados(embedded) dentro de una cadena de **Uniform Resource Locator (URL)**:
+
+```sh
 http://www.google.com/search?q=Skate+boots&btnG=Google+Search
+```
 
-Este ejemplo ilustra cómo se accede a través de la Web a interacciones web sencillas, como una búsqueda, una compra de acciones o una solicitud de indicaciones para llegar en automóvil, incorporando parámetros y palabras clave en una URL . En este ejemplo, ingresar una solicitud de búsqueda simple Skate bootsen el motor de búsqueda de Google da como resultado la URL que se muestra. La searchpalabra clave representa el servicio que se solicita a través de la Web, mientras que las Skate+bootspalabras clave representan la cadena de búsqueda ingresada en el formulario HTML que muestra el sitio web de Google. Luego, el servicio de búsqueda de Google pasa la solicitud a una serie de otros motores de búsqueda, que devuelven listas de URL a páginas con texto que coincide con las palabras clave de búsqueda.Skate+boots. Esta forma ineficiente de buscar en la Web depende completamente de hacer coincidir las cadenas de texto dadas con las páginas HTML catalogadas .
+Este ejemplo ilustra cómo se accede a través de la Web a interacciones web sencillas, como una búsqueda, una compra de acciones o una solicitud de indicaciones para llegar en automóvil, incorporando parámetros y palabras clave en una URL. En este ejemplo, ingresar una solicitud de búsqueda simple **`Skate boots`** en el motor de búsqueda de Google da como resultado la URL que se muestra. La palabra clave **`search`** representa el servicio que se solicita a través de la Web, mientras que las palabras clave **`Skate+boots`** representan la cadena de búsqueda ingresada en el formulario HTML que muestra el sitio web de Google. Luego, el servicio de búsqueda de Google pasa la solicitud a una serie de otros motores de búsqueda, que devuelven listas de URL a páginas con texto que coincide con las palabras clave de búsqueda **`Skate+boots`**. Esta forma ineficiente de buscar en la Web depende completamente de hacer coincidir las cadenas de texto dadas con las páginas HTML catalogadas .
 
-XML proporciona muchas ventajas para la transmisión de datos a través de Internet. Ahora, la solicitud anterior puede estar contenida en un documento XML EN SU LUGAR:
+XML proporciona muchas ventajas para la transmisión de datos a través de Internet. Ahora, la solicitud anterior puede estar contenida en un documento XML en su lugar:
 
-<SOAP-ENV:Body> 
-  <s: Solicitud de búsqueda 
-  xmlns:s="www.xmlbus.com/SearchService"> 
-    <p1> Skate </p1> 
-    <p2> botas </p2> 
-    <p3> talla  7.5 </p3 > 
-  </s:Solicitud de búsqueda> 
-</SOAP-ENV:Cuerpo>
-NOTA
-XML es una mejor manera de enviar datos
+```xml
+SOAP-ENV:Body>
+  <s:SearchRequest
+  xmlns:s="www.xmlbus.com/SearchService">
+    <p1>Skate</p1>
+    <p2>boots</p2>
+    <p3>size 7.5</p3>
+  </s:SearchRequest>
+</SOAP-ENV:Body>
+```
 
-El envío de la solicitud dentro de un documento XML tiene muchas ventajas, como una estructura y un tipo de datos mejorados, una mayor flexibilidad y extensibilidad. XML puede representar datos estructurados y escritos (el sizecampo se puede escribir como una cadena decimal o como un punto flotante, por ejemplo) y puede contener una mayor cantidad de información de la que es posible dentro de una cadena URL .
+<hr>
 
-NOTA
-Los servicios web utilizan documentos XML
+**NOTA**
 
-Este ejemplo se muestra en forma de un mensaje de Protocolo simple de acceso a objetos ( SOAP ), una forma estándar de mensajería XML y una de las principales tecnologías habilitadoras en la base de los servicios web (consulte el Capítulo 4 ). En los mensajes SOAP , el nombre de la solicitud de servicio y los parámetros de entrada toman la forma de elementos XML . El ejemplo también ilustra el uso de espacios de nombres XML ( xmlns:), otro elemento fundamental de los servicios web (consulte el Capítulo 2 ). Dado que los documentos XML admiten tipos de datos, estructuras complejas y la asociación de XMLesquemas, la tecnología moderna de servicios web proporciona ventajas significativas sobre las capacidades URL y HTML existentes para acceder a las aplicaciones de software.
+   XML es una mejor manera de enviar datos
 
-La próxima generación de la Web
-NOTA
-La próxima generación de la Web se basará en interacciones orientadas al software
+<hr>
 
-Los servicios web están destinados a poner la vasta red global de la Web, establecida para la interacción humana, con un propósito completamente nuevo. Las interacciones orientadas al software realizarán automáticamente operaciones que antes requerían intervención manual, como
+El envío de la solicitud dentro de un documento XML tiene muchas ventajas, como una estructura y un tipo de datos mejorados, una mayor flexibilidad y extensibilidad. XML puede representar datos estructurados y escritos (el campo **`size`** se puede escribir como una cadena decimal o como un punto flotante, por ejemplo) y puede contener una mayor cantidad de información de la que es posible dentro de una URL string.
 
-Buscar y comprar bienes y servicios al mejor precio
+<hr>
 
-Coordinación de boletos de viaje y mesas de restaurante para una fecha determinada
+**NOTA**
 
-Optimización de las operaciones comerciales de adquisición, facturación y envío
+   Los web services utilizan documentos XML
+
+<hr>
+
+Este ejemplo se muestra en forma de un **Simple Object Access Protocol (SOAP)**, una forma estándar de mensajería XML y una de las principales tecnologías habilitadoras en la base de los Web services (consulte el Capítulo 4 ). En los mensajes SOAP, el nombre de la solicitud de servicio y los parámetros de entrada toman la forma de elementos XML. El ejemplo también ilustra el uso de espacios de nombres XML ( **`xmlns:`** ), otro elemento fundamental de los Web services (consulte el Capítulo 2 ). Dado que los documentos XML admiten tipos de datos, estructuras complejas y la asociación de XML schemas, la tecnología moderna de Web services proporciona ventajas significativas sobre las capacidades URL y HTML existentes para acceder a las aplicaciones de software.
+
+## La Próxima Generación de la Web
+
+<hr>
+
+**NOTA**
+
+   La próxima generación de la Web se basará en interacciones orientadas al software
+   
+<hr>
+
+Los web services están destinados a poner la vasta red global de la Web, establecida para la interacción humana, con un propósito completamente nuevo. Las interacciones orientadas al software realizarán automáticamente operaciones que antes requerían intervención manual, como
+
+* Buscar y comprar bienes y servicios al mejor precio
+* Coordinación de boletos de viaje y mesas de restaurante para una fecha determinada
+* Optimización de las operaciones comerciales de adquisición, facturación y envío
 
 La próxima generación de la Web utilizará servicios orientados al software para interoperar directamente con aplicaciones construidas utilizando cualquier combinación de objetos, programas y bases de datos.
 
-Pero los servicios web no son solo interfaces para objetos, programas, middleware y bases de datos para acceder a través de Internet. Al combinar una serie de servicios web en una interacción más amplia, los servicios web también proporcionan los medios para realizar nuevos tipos de interacciones.
+Pero los Web services no son solo interfaces para objetos, programas, middleware y bases de datos para acceder a través de Internet. Al combinar una serie de Web services en una interacción más amplia, los Web services también proporcionan los medios para realizar nuevos tipos de interacciones.
 
-Suponga, por ejemplo, que vive en San Francisco y desea reservar una mesa en su restaurante favorito de París y luego hacer los arreglos de viaje necesarios para estar allí a la hora acordada. Hoy, tendrías que llamar directamente al restaurante para obtener la reserva, teniendo en cuenta la diferencia horaria de 9 horas y la diferencia de idioma, y ​​luego llamar a un agente de viajes para encontrar un vuelo compatible y un hotel. Pero al utilizar los servicios web, puede programar la cena con el calendario de su asistente digital personal ( PDA ) y hacer clic en un botón para reservar automáticamente una mesa en un momento conveniente. Una vez realizada la reserva, el servicio web podría iniciar otros servicios que reservarían un vuelo barato y reservarían una habitación en un hotel de cuatro estrellas cercano.
+Suponga, por ejemplo, que vive en San Francisco y desea reservar una mesa en su restaurante favorito de París y luego hacer los arreglos de viaje necesarios para estar allí a la hora acordada. Hoy, tendrías que llamar directamente al restaurante para obtener la reserva, teniendo en cuenta la diferencia horaria de 9 horas y la diferencia de idioma, y ​​luego llamar a un agente de viajes para encontrar un vuelo compatible y un hotel. Pero al utilizar los Web services, puede programar la cena con el calendario de su asistente digital personal ( PDA ) y hacer clic en un botón para reservar automáticamente una mesa en un momento conveniente. Una vez realizada la reserva, el Web service podría iniciar otros servicios que reservarían un vuelo barato y reservarían una habitación en un hotel de cuatro estrellas cercano.
 
-NOTA
-Los servicios web permiten nuevos tipos de interacciones
+<hr>
 
-La figura 1-2 muestra cómo los servicios web pueden interactuar con una PDA conectada a un procesador de servicios web inalámbrico para hacer una reserva en un restaurante favorito, utilizando el servicio web del restaurante. [1] El procesador de servicios web acepta solicitudes de la función de calendario de la PDA y descubre servicios web relacionados con funciones de calendario extendidas, como reservar una mesa en un restaurante. Después de reservar con éxito una mesa, el procesador de servicios web se pone en contacto con los servicios web para reservas de hoteles y vuelos para completar la acción de programación solicitada.
+**NOTA**
 
+   Los Web services permiten nuevos tipos de interacciones
 
-Figura 1-2. Las aplicaciones pueden usar los servicios web para reservar una mesa en un restaurante y hacer reservas de hotel y vuelos.
+<hr>
 
-Los servicios web también son muy útiles para descubrir e interactuar con sitios de Internet que proporcionan sistemas de ingreso de pedidos en línea, como el de las botas de skate de moda de Skateboots Company, una bota con un patín de hielo retráctil incorporado, como las que usaron Batman y Robin en la película Batman y Robin.Los minoristas de artículos deportivos interesados ​​en almacenar las botas, el artículo nuevo de moda de este año, pueden usar los servicios web para realizar pedidos anticipados al por mayor en lote, verificar el estado de un pedido o realizar pedidos de reabastecimiento durante la temporada y ser notificados de inmediato de los pedidos pendientes. , si el fabricante no tiene stock. Los componentes básicos de los servicios web proporcionan componentes estándar de la aplicación para Skateboots Company, que no es lo suficientemente grande como para albergar toda su propia infraestructura de aplicaciones. Las empresas de alojamiento de servicios web brindan servicios de seguridad para garantizar que Skateboots acepte pedidos solo de minoristas aprobados y para brindar servicios de validación de crédito para aprobar pedidos anticipados masivos. Otras empresas ayudan a Skateboots proporcionando servicios de contabilidad y recaudación electrónica de fondos.
-
-NOTA
-Los servicios web se descubren e interactúan entre sí
-
-Todo el sistema de entrada de pedidos de Skateboots está expuesto a Internet como un servicio web, pero detrás del servicio web de nivel superior hay una serie de otros servicios web que trabajan juntos para proporcionar la funcionalidad necesaria. La figura 1-3 ilustra cómo los servicios web pueden cambiar la forma en que se construyen y utilizan las aplicaciones comerciales. El minorista interesado en almacenar botas de skate ingresa una solicitud a su servicio de administración de inventario local, que está expuesto a las computadoras de la tienda como un servicio web. Luego, el servicio de inventario local se comunica con el servicio web del fabricante a través de Internet y envía el pedido de la cantidad correcta de botas de skate, según el espacio disponible en los estantes y los tamaños más populares.
+La figura 1-2 muestra cómo los Web services pueden interactuar con una PDA conectada a un procesador de Web services inalámbrico para hacer una reserva en un restaurante favorito, utilizando el Web service del restaurante. [1] El procesador de Web services acepta solicitudes de la función de calendario de la PDA y descubre Web services relacionados con funciones de calendario extendidas, como reservar una mesa en un restaurante. Después de reservar con éxito una mesa, el procesador de Web services se pone en contacto con los Web services para reservas de hoteles y vuelos para completar la acción de programación solicitada.
 
 
-Figura 1-3. El servicio de entrada de pedidos de Skateboots comprende varios otros servicios web.
+**Figura 1-2. Las aplicaciones pueden usar los Web services para reservar una mesa en un restaurante y hacer reservas de hotel y vuelos.**
 
-El sistema de entrada de pedidos de Skateboots Company comprende múltiples servicios web, incluida una parte personalizada que se ocupa de los aspectos únicos de su producto y varias partes de productos básicos que se encargan de las funciones estándar, como la autenticación del usuario, la autorización de crédito y la contabilidad y facturación. , todo ello alojado por otras empresas especializadas en la prestación de dichos servicios a través de Internet.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/06db97f1-ddf5-4b05-900d-81f46393b7df)
 
-La creación de aplicaciones empresariales utilizando servicios web implica poner en relación adecuada una serie de otros servicios web, que se pueden implementar mediante el uso de cualquier combinación de lenguaje de programación, sistema operativo o software empaquetado, dentro o fuera del firewall. (Esta es también la forma en que los servicios web resuelven el difícil problema DE EAI ). Al establecer la relación adecuada, o el flujo, de los servicios web relacionados, también automatiza los procesos y procedimientos comerciales correspondientes.
 
-A través de la adopción generalizada de los servicios web, Internet se está volviendo más eficiente, especialmente para las interacciones comerciales. En la próxima generación de la Web, los componentes básicos de los servicios Web permitirán interacciones automáticas en Internet, combinando el acceso directo a aplicaciones de software y documentos comerciales, pasando por alto las páginas Web familiares basadas en texto para acceder directamente a datos basados ​​en software. Además, es muy probable que los componentes básicos de los servicios web fundamentales sean alojados y publicados por una variedad de empresas que se centren en un componente funcional específico, como la autenticación, la coordinación transaccional o la contabilidad y la facturación. Este cambio a la interacción directa de aplicación a aplicación a través de la Web se encuentra en el corazón de los servicios Web, lo que significan y cómo funcionan.
+Los Web service también son muy útiles para descubrir e interactuar con sitios de Internet que proporcionan sistemas de ingreso de pedidos en línea, como el de las botas de skate de moda de Skateboots Company, una bota con un patín de hielo retráctil incorporado, como las que usaron Batman y Robin en la película Batman y Robin. Los minoristas de artículos deportivos interesados ​​en almacenar las botas, el artículo nuevo de moda de este año, pueden usar los Web services para realizar pedidos anticipados al por mayor en lote, verificar el estado de un pedido o realizar pedidos de reabastecimiento durante la temporada y ser notificados de inmediato de los pedidos pendientes, si el fabricante no tiene stock. Los componentes básicos de los Web services proporcionan componentes estándar de la aplicación para Skateboots Company, que no es lo suficientemente grande como para albergar toda su propia infraestructura de aplicaciones. Las empresas de alojamiento de Web services brindan servicios de seguridad para garantizar que Skateboots acepte pedidos solo de minoristas aprobados y para brindar servicios de validación de crédito para aprobar pedidos anticipados masivos. Otras empresas ayudan a Skateboots proporcionando servicios de contabilidad y recaudación electrónica de fondos.
 
-NOTA
-Los servicios web crean mayores eficiencias comerciales
+<hr>
 
-HACIA UN ENTENDIMIENTO COMÚN
+**NOTA**
 
-La tecnología de servicios web existe en un nivel de abstracción lo suficientemente alto como para admitir múltiples definiciones simultáneas, que a veces son contradictorias. En el nivel más simple, los servicios web se pueden considerar como adaptadores de integración basados ​​en texto y orientados a Internet. Cualquier dato se puede mapear dentro y fuera del texto ASCII, y este tipo de mapeo ha sido durante mucho tiempo el mínimo común denominador para los sistemas de visualización gráfica y los sistemas de administración de bases de datos. Si todo lo demás falla, dice el refrán, asigne los datos a texto. Los sistemas basados ​​en texto también están detrás del éxito de la World Wide Web, en la que se basa la abstracción adicional de los servicios web. Cualquier computadora o sistema operativo es capaz de soportar HTMLy servidores web y navegadores, y cuando descargan archivos, no les importa o ni siquiera saben con qué tipo de sistemas de back-end están interactuando.
+   Los Web services se descubren e interactúan entre sí
 
-Lo mismo es cierto para los servicios web, lo que a menudo genera mucha confusión cuando los desarrolladores de entornos informáticos tradicionales o establecidos intentan comprender la tecnología de servicios web en referencia a un solo tipo de sistema de software distribuido, como CORBA, J2EE o .NETO. Debido a que los servicios web son mucho más abstractos, más como adaptadores que como interfaces, pasará algún tiempo antes de que la industria establezca definiciones y convenciones verdaderamente comunes para ellos.
+<hr>
 
-Interactuar con servicios web
-El nivel de abstracción en el que operan los servicios web abarca estilos de interacción tales como emulación RPC (llamada a procedimiento remoto), mensajería asíncrona, mensajería unidireccional, difusión y publicación/suscripción. La mayoría de los principales sistemas de administración de bases de datos, como Oracle, SQL Server y DB2, admiten servicios de análisis y transformación DE XML , LO QUE PERMITE LA INTERACCIÓN DIRECTA ENTRE LOS SERVICIOS WEB Y LOS SISTEMAS DE ADMINISTRACIÓN DE BASES DE DATOS. Los proveedores de middleware también suelen proporcionar una asignación de servicios web a sus sistemas de software, como servidores de aplicaciones y agentes de integración. Para el usuario, por lo tanto, las interacciones con los servicios web pueden aparecer como interacciones por lotes o en línea, que admiten patrones de comunicación sincrónicos o asincrónicos, y como interfaces de usuario escritas con programas Java.Programas VB (Visual Basic), aplicaciones de oficina, navegadores o clientes pesados ​​para sistemas de administración de bases de datos, por nombrar algunos, y pueden asignarse a cualquier tipo de sistema de software subyacente .
+Todo el sistema de entrada de pedidos de Skateboots está expuesto a Internet como un Web service, pero detrás del Web service de nivel superior hay una serie de otros Web services que trabajan juntos para proporcionar la funcionalidad necesaria. La figura 1-3 ilustra cómo los Web services pueden cambiar la forma en que se construyen y utilizan las aplicaciones comerciales. El minorista interesado en almacenar botas de skate ingresa una solicitud a su servicio de administración de inventario local, que está expuesto a las computadoras de la tienda como un Web service. Luego, el servicio de inventario local se comunica con el Web service del fabricante a través de Internet y envía el pedido de la cantidad correcta de botas de skate, según el espacio disponible en los estantes y los tamaños más populares.
 
-NOTA
-Los servicios web admiten múltiples paradigmas de mensajería
 
-Los estándares y tecnologías de servicios web generalmente abarcan dos tipos principales de patrones de interacción de aplicaciones:
+**Figura 1-3. El servicio de entrada de pedidos de Skateboots comprende varios otros Web services.**
 
-Llamada a trámite a distancia (online)
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/978811fe-f0b5-4d11-a5a0-fad7b403b49c)
 
-Orientado a documentos (lote)
+El sistema de entrada de pedidos de Skateboots Company comprende múltiples Web services, incluida una parte personalizada que se ocupa de los aspectos únicos de su producto y varias partes de productos básicos que se encargan de las funciones estándar, como la autenticación del usuario, la autorización de crédito y la contabilidad y facturación, todo ello alojado por otras empresas especializadas en la prestación de dichos servicios a través de Internet.
 
-NOTA
-Los servicios web abarcan RPC e interacciones orientadas a documentos
+La creación de aplicaciones empresariales utilizando Web services implica poner en relación adecuada una serie de otros Web services, que se pueden implementar mediante el uso de cualquier combinación de lenguaje de programación, sistema operativo o software empaquetado, dentro o fuera del firewall. (Esta es también la forma en que los Web services resuelven el difícil problema de EAI ). Al establecer la relación adecuada, o el flujo, de los Web services relacionados, también automatiza los procesos y procedimientos comerciales correspondientes.
+
+A través de la adopción generalizada de los Web services, Internet se está volviendo más eficiente, especialmente para las interacciones comerciales. En la próxima generación de la Web, los componentes básicos de los Web services permitirán interacciones automáticas en Internet, combinando el acceso directo a aplicaciones de software y documentos comerciales, pasando por alto las páginas Web familiares basadas en texto para acceder directamente a datos basados ​​en software. Además, es muy probable que los componentes básicos de los servicios web fundamentales sean alojados y publicados por una variedad de empresas que se centren en un componente funcional específico, como la autenticación, la coordinación transaccional o la contabilidad y la facturación. Este cambio a la interacción directa de aplicación a aplicación a través de la Web se encuentra en el corazón de los servicios Web, lo que significan y cómo funcionan.
+
+<hr>
+
+**NOTA**
+
+   Los Web services crean mayores eficiencias comerciales
+
+#### HACIA UN ENTENDIMIENTO COMÚN
+
+La tecnología de Web services existe en un nivel de abstracción lo suficientemente alto como para admitir múltiples definiciones simultáneas, que a veces son contradictorias. En el nivel más simple, los Web services se pueden considerar como adaptadores de integración basados ​​en texto y orientados a Internet. Cualquier dato se puede mapear dentro y fuera del texto ASCII, y este tipo de mapeo ha sido durante mucho tiempo el mínimo común denominador para los sistemas de visualización gráfica y los sistemas de administración de bases de datos. Si todo lo demás falla, dice el refrán, asigne los datos a texto. Los sistemas basados ​​en texto también están detrás del éxito de la World Wide Web, en la que se basa la abstracción adicional de los Web services. Cualquier computadora o sistema operativo es capaz de soportar HTMLy servidores web y navegadores, y cuando descargan archivos, no les importa o ni siquiera saben con qué tipo de sistemas de back-end están interactuando.
+
+Lo mismo es cierto para los Web services, lo que a menudo genera mucha confusión cuando los desarrolladores de entornos informáticos tradicionales o establecidos intentan comprender la tecnología de Web services en referencia a un solo tipo de sistema de software distribuido, como CORBA, J2EE o .NET. Debido a que los Web services son mucho más abstractos, más como adaptadores que como interfaces, pasará algún tiempo antes de que la industria establezca definiciones y convenciones verdaderamente comunes para ellos.
+
+## Interactuar con Web Services
+
+El nivel de abstracción en el que operan los Web services abarca estilos de interacción tales como emulación RPC (llamada a procedimiento remoto), mensajería asíncrona, mensajería unidireccional, difusión y publicación/suscripción. La mayoría de los principales sistemas de administración de bases de datos, como Oracle, SQL Server y DB2, admiten servicios de análisis y transformación DE XML, lo que permite la interacción directa entro los Web services y los sistemas de administración de base de datos. Los proveedores de middleware también suelen proporcionar una asignación de Web services a sus sistemas de software, como servidores de aplicaciones y agentes de integración. Para el usuario, por lo tanto, las interacciones con los Web services pueden aparecer como interacciones por lotes o en línea, que admiten patrones de comunicación sincrónicos o asincrónicos, y como interfaces de usuario escritas con programas Java, programas VB (Visual Basic), aplicaciones de oficina, navegadores o clientes pesados ​​para sistemas de administración de bases de datos, por nombrar algunos, y pueden asignarse a cualquier tipo de sistema de software subyacente.
+
+<hr>
+
+**NOTA**
+
+   Los Web services admiten múltiples paradigmas de mensajería
+
+<hr>
+
+Los estándares y tecnologías de Web services generalmente abarcan dos tipos principales de patrones de interacción de aplicaciones:
+
+* Llamada a remote procedure (online)
+* Orientado a documentos (batch)
+
+<hr>
+
+**NOTA**
+
+   Los Web services abarcan RPC e interacciones orientadas a documentos
+
+<hr>
 
 Estos dos tipos de interacciones se describen en las siguientes subsecciones.
 
-Interacciones orientadas A RPC
-En las interacciones orientadas a RPC , LA SOLICITUD DE SERVICIOS WEB TOMA LA FORMA DE UN MÉTODO O UNA LLAMADA DE PROCEDIMIENTO CON PARÁMETROS DE ENTRADA Y SALIDA ASOCIADOS. En contraste con la interacción orientada a documentos, la interacción orientada a RPC envía un documento formateado específicamente para ser mapeado a un solo programa lógico [2] o base de datos, como se muestra en la Figura 1-4 . Debido a que el pedido de botas de skate en “tiempo real” o en temporada depende del inventario disponible, por ejemplo, el programa accede a la base de datos para verificar el suministro disponible del artículo pedido. Si todo está bien, el programa devuelve un XMLdocumento al distribuidor en el formato de solicitud/respuesta para indicar que el pedido ha sido aceptado y será enviado. Si el suministro no está disponible, el mensaje de devolución indica un pedido pendiente o rechaza el pedido por completo. En contraste con el estilo de interacción orientado a documentos, la solicitud y la respuesta se modelan como mensajes sincrónicos. Es decir, la aplicación que envía el mensaje espera una respuesta.
+### Interacciones Orientadas a RPC
+
+En las interacciones orientadas a RPC, la solicitud de Web services toma la forma de un método o una llamada de procedimiento con parámetros de entrada y salida asociados. En contraste con la interacción orientada a documentos, la interacción orientada a RPC envía un documento formateado específicamente para ser mapeado a un solo programa lógico [2] o base de datos, como se muestra en la Figura 1-4. Debido a que el pedido de botas de skate en “tiempo real” o en temporada depende del inventario disponible, por ejemplo, el programa accede a la base de datos para verificar el suministro disponible del artículo pedido. Si todo está bien, el programa devuelve un documento XML al distribuidor en el formato de request/response para indicar que el pedido ha sido aceptado y será enviado. Si el suministro no está disponible, el mensaje de devolución indica un pedido pendiente o rechaza el pedido por completo. En contraste con el estilo de interacción orientado a documentos, la solicitud y la respuesta se modelan como ***mensajes sincrónicos***. Es decir, ***la aplicación que envía el mensaje espera una respuesta***.
 
 
-Figura 1-4. Este servicio web admite una solicitud/respuesta de pedido interactiva.
+**Figura 1-4. Este Web service admite una request/response de pedido interactiva.**
 
-NOTA
-LAS INTERACCIONES ORIENTADAS A RPC son buenas para intercambios breves de datos
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ea37c586-f71e-48a6-bc03-7be32d945c83)
 
-Interacciones orientadas a documentos
-En el estilo de interacción orientado a documentos, la solicitud del servicio web toma la forma de un documento XML completo que está destinado a ser procesado en su totalidad. Por ejemplo, un servicio web que envía un pedido de compra completo, como un pedido de pretemporada de botas de skate, enviaría el pedido al por mayor completo al fabricante de una sola vez, como se muestra en la figura 1-5.. Esto es como enviar un mensaje a una cola para su procesamiento asíncrono. Normalmente, el fabricante enviaría un correo electrónico u otra forma de acuse de recibo al minorista para indicar que se recibió el pedido y que se procesaría de acuerdo con un flujo de ejecución predefinido. El flujo puede incluir pasos como verificar la base de datos de pedidos anteriores del mismo minorista para asegurarse de que no exceda su límite de crédito o capacidad acordada o programar una fecha de envío para el pedido. En un flujo de proceso real, por supuesto, es probable que haya muchos más pasos antes de que se envíe el pedido y se envíe la factura, pero el ejemplo muestra solo el paso final: enviar la factura XML al distribuidor PARA el pago después de que se haya enviado el pedido y recibió.
+<hr>
+
+**NOTA**
+
+   Las interacciones orientadas a RPC son buenas para intercambios breves de datos
+
+<hr>   
+
+### Interacciones Orientadas a Documentos
+
+En el estilo de interacción orientado a documentos, la Web service request toma la forma de un documento XML completo que está destinado a ser procesado en su totalidad. Por ejemplo, un Web service que envía un pedido de compra completo, como un pedido de pretemporada de botas de skate, enviaría el pedido al por mayor completo al fabricante de una sola vez, como se muestra en la figura 1-5. Esto es como enviar un mensaje a una cola para su procesamiento asíncrono. Normalmente, el fabricante enviaría un correo electrónico u otra forma de acuse de recibo al minorista para indicar que se recibió el pedido y que se procesaría de acuerdo con un flujo de ejecución predefinido. El flujo puede incluir pasos como verificar la base de datos de pedidos anteriores del mismo minorista para asegurarse de que no exceda su límite de crédito o capacidad acordada o programar una fecha de envío para el pedido. En un flujo de proceso real, por supuesto, es probable que haya muchos más pasos antes de que se envíe el pedido y se envíe la factura, pero el ejemplo muestra solo el paso final: enviar la factura XML al distribuidor para el pago después de que se haya enviado el pedido y recibió.
 
 
-Figura 1-5. Este servicio web procesa una orden de compra completa.
+**Figura 1-5. Este Web service procesa una orden de compra completa.**
 
-NOTA
-El estilo orientado a documentos es bueno para intercambios masivos de datos.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/9639fbe9-1e78-4e37-8289-90ce057e7150)
+
+<hr>
+
+**NOTA**
+
+   El estilo orientado a documentos es bueno para intercambios masivos de datos.
+
+<hr>
 
 Las interacciones orientadas a documentos a menudo asumen que las partes de una conversación de servicios web han acordado compartir un documento comercial común, como una orden de compra, un conocimiento de embarque o una factura. Estas partes a menudo se identifican como socios comerciales o socios colaboradores. Los socios comerciales también suelen acordar un flujo de proceso común, o patrón de interacción, para intercambiar el documento compartido, como solicitar un acuse de recibo de una orden de compra, devolver información de estado específica en respuesta a una consulta de orden o enviar un correo electrónico. Alerta cuando un pedido ha sido enviado. Durante la ejecución del proceso comercial, se puede intercambiar un documento completo. Si el documento ya es común, los fragmentos de información necesarios para completar secciones específicas del documento compartido, como el precio de compra o la fecha de entrega prometida,
 
-NOTA
-Los acuerdos de socios comerciales determinan las interacciones requeridas
+<hr>
+
+**NOTA**
+
+   Los acuerdos de socios comerciales determinan las interacciones requeridas
+
+<hr>
 
 En el ejemplo de Skateboots Company, los pedidos al por mayor de pretemporada se manejan mediante el uso de pedidos de compra enviados en lotes de acuerdo con términos y condiciones predefinidos que ayudan al fabricante a planificar la capacidad. Durante la temporada, los pedidos de reabastecimiento inmediato son manejados por servicios más interactivos que dependen de completar los pedidos del inventario disponible y que pueden identificar de inmediato los pedidos pendientes. Por lo tanto, Skateboots.com proporciona servicios web compatibles con los dos tipos principales de interacción.
 
-NOTA
-Los dos estilos se corresponden bien con los paradigmas de mensajería sincrónica/asincrónica.
+<hr>
 
-La tecnología de los servicios web
-Los programas que interactúan entre sí a través de la Web deben poder encontrarse, descubrir información que les permita interconectarse, descubrir cuáles son los patrones de interacción esperados (¿una simple solicitud/respuesta o un flujo de proceso más complicado?) y negociar tales cualidades de servicio como seguridad, mensajería confiable y composición transaccional. Algunas de estas calidades de servicio están cubiertas por las tecnologías existentes y los estándares propuestos, pero otras no. En general, la comunidad de servicios web está trabajando para cumplir con todos estos requisitos, pero es un proceso evolutivo, como lo ha sido la propia web. La infraestructura y los estándares de los servicios web se están diseñando y desarrollando desde cero para que sean extensibles, como XML y HTML.antes que ellos, de modo que todo lo que se introduzca a corto plazo pueda seguir utilizándose a medida que surjan nuevos estándares y tecnologías.
+**NOTA**
 
-NOTA
-Los estándares definen cómo se describen, descubren y comunican entre sí los servicios web.
+   Los dos estilos se corresponden bien con los paradigmas de mensajería sincrónica/asincrónica - synchronous/asynchronous.
 
-¿LA NUEVA BALA DE PLATA?
+## La Tecnología de los Web Services
 
-Los servicios web a veces se presentan como soluciones "bala de plata" para los problemas informáticos contemporáneos, que cumplen el papel que antes desempeñaban la web original, las bases de datos relacionales, los lenguajes de cuarta generación y la inteligencia artificial. Desafortunadamente, los servicios web por sí solos no pueden resolver mucho. Los servicios web son una nueva capa, otra forma de hacer las cosas, pero no son un cambio fundamental que reemplace la necesidad de una infraestructura informática existente. Esta nueva capa de tecnología realiza una nueva función, una nueva forma de trabajar, pero, lo que es más importante, proporciona un mecanismo de integración definido en un nivel más alto de abstracción.
+Los programas que interactúan entre sí a través de la Web deben poder encontrarse, descubrir información que les permita interconectarse, descubrir cuáles son los patrones de interacción esperados (¿una simple solicitud/respuesta(request/reply) o un flujo de proceso más complicado?) y negociar tales cualidades de servicio como seguridad, mensajería confiable y composición transaccional. Algunas de estas calidades de servicio están cubiertas por las tecnologías existentes y los estándares propuestos, pero otras no. En general, la comunidad de Web services está trabajando para cumplir con todos estos requisitos, pero es un proceso evolutivo, como lo ha sido la propia web. La infraestructura y los estándares de los Web services se están diseñando y desarrollando desde cero para que sean extensibles, como XML y HTML, antes que ellos, de modo que todo lo que se introduzca a corto plazo pueda seguir utilizándose a medida que surjan nuevos estándares y tecnologías.
 
-Los servicios web son importantes porque son capaces de unir dominios tecnológicos, no porque reemplacen ninguna tecnología existente. Se podría decir que los lenguajes más nuevos, como Visual Basic, C#, C/C++ y Java, reemplazan a los lenguajes más antiguos, como COBOL y FORTRAN, aunque todavía existen muchos programas en esos lenguajes, al igual que las asignaciones de servicios web para ellos. . Los servicios web, como los servidores web, son complementarios y no están en conflicto con las aplicaciones, los programas y las bases de datos existentes. El desarrollo de aplicaciones sigue requiriendo Java, VB y C#. Todo lo que es nuevo es una forma de transformar datos dentro y fuera de programas y aplicaciones, utilizando formatos y protocolos de datos XML estándar para alcanzar un nuevo nivel de interoperabilidad e integración.
+<hr>
 
-Es posible que los desarrolladores deban tener en cuenta los servicios web al diseñar y desarrollar nuevos programas y bases de datos, pero esos programas y bases de datos seguirán siendo necesarios detrás de los envoltorios de servicios web. Los servicios web no son elementos ejecutables en sí mismos; se basan en programas ejecutables escritos con lenguajes de programación y scripts. Los servicios web definen una poderosa capa de abstracción que se puede usar para lograr la interacción de programa a programa, usando la infraestructura web existente, pero no son nada sin una infraestructura de soporte.
+**NOTA**
 
-Los servicios web requieren varias tecnologías relacionadas basadas en XML para transportar y transformar datos dentro y fuera de programas y bases de datos.
+   Los estándares definen cómo se describen, descubren y comunican entre sí los Web services.
 
-NOTA
-Los servicios web requieren el uso de varias tecnologías relacionadas basadas en XML
+<hr>
 
-XML (lenguaje de marcado extensible), . la base básica sobre la que se construyen los servicios web proporciona un lenguaje para definir datos y cómo procesarlos. XMLrepresenta una familia de especificaciones relacionadas publicadas y mantenidas por World Wide Web Consortium (W3C) y otros.
+#### ¿LA NUEVA BALA DE PLATA?
 
-WSDL (lenguaje de descripción de servicios web), . unaXML, define las interfaces de los servicios web, los tipos de datos y mensajes, los patrones de interacción y las asignaciones de protocolos.
+Los Web services a veces se presentan como soluciones "bala de plata" para los problemas informáticos contemporáneos, que cumplen el papel que antes desempeñaban la web original, las bases de datos relacionales, los lenguajes de cuarta generación y la inteligencia artificial. Desafortunadamente, los Web services por sí solos no pueden resolver mucho. Los Web services son una nueva capa, otra forma de hacer las cosas, pero no son un cambio fundamental que reemplace la necesidad de una infraestructura informática existente. Esta nueva capa de tecnología realiza una nueva función, una nueva forma de trabajar, pero, lo que es más importante, proporciona un mecanismo de integración definido en un nivel más alto de abstracción.
 
-SOAP (Protocolo simple de acceso a objetos), . una colección deXML, define un sobre para la comunicación de servicios web (asignable aHTTPy otros transportes) y proporciona un formato de serialización para transmitirdocumentosXMLRPC.
+Los Web services son importantes porque son capaces de unir dominios tecnológicos, no porque reemplacen ninguna tecnología existente. Se podría decir que los lenguajes más nuevos, como Visual Basic, C#, C/C++ y Java, reemplazan a los lenguajes más antiguos, como COBOL y FORTRAN, aunque todavía existen muchos programas en esos lenguajes, al igual que las asignaciones de Web services para ellos. Los Web services, como los servidores web, son complementarios y no están en conflicto con las aplicaciones, los programas y las bases de datos existentes. El desarrollo de aplicaciones sigue requiriendo Java, VB y C#. Todo lo que es nuevo es una forma de transformar datos dentro y fuera de programas y aplicaciones, utilizando formatos y protocolos de datos XML estándar para alcanzar un nuevo nivel de interoperabilidad e integración.
 
-UDDI (Descripción Universal, Descubrimiento e Integración), . un mecanismo de descubrimiento y registro de servicios web, se utiliza para almacenar y categorizar información comercial y para recuperar punteros a interfaces de servicios web.
+Es posible que los desarrolladores deban tener en cuenta los Web services al diseñar y desarrollar nuevos programas y bases de datos, pero esos programas y bases de datos seguirán siendo necesarios detrás de los envoltorios de servicios web. Los Web services no son elementos ejecutables en sí mismos; se basan en programas ejecutables escritos con lenguajes de programación y scripts. Los Web services definen una poderosa capa de abstracción que se puede usar para lograr la interacción de programa a programa, usando la infraestructura web existente, pero no son nada sin una infraestructura de soporte.
 
-Ejemplo de uso
-Los estándares de servicios web básicos se utilizan juntos. Una vez que se obtiene el WSDL DE UDDI u otra ubicación, se genera un mensaje SOAP para transmitirlo al sitio remoto.
+Los Web services requieren varias tecnologías relacionadas basadas en XML para transportar y transformar datos dentro y fuera de programas y bases de datos.
 
-NOTA
-Los estándares de servicios web generalmente se usan juntos
+<hr>
 
-Como se muestra en la Figura 1-6 , un programa que envía un documento a una dirección de servicio web utiliza un esquema XML de un tipo específico, como WSDL , para transformar los datos de su fuente de entrada (un archivo estructurado en este ejemplo) y producir un Instancia de documento XML en el formato consistente con lo que espera el servicio web de destino, como se describe en el mismo archivo WSDL . El archivo WSDL se utiliza para definir las transformaciones de datos de entrada y salida.
+**NOTA**
+
+   Los Web services requieren el uso de varias tecnologías relacionadas basadas en XML
+
+<hr>
+
+**XML (Extensible Markup Language)**, la base básica sobre la que se construyen los Web services proporciona un lenguaje para definir datos y cómo procesarlos. XML representa una familia de especificaciones relacionadas publicadas y mantenidas por World Wide Web Consortium (W3C) y otros.
+
+**WSDL (Web Services Description Language)**, una tecnología basada en XML, define las interfaces de los Web services, los tipos de datos y mensajes, los patrones de interacción y las asignaciones de protocolos.
+
+**SOAP (Simple Object Access Protocol)**, una tecnología basada en XML, define un sobre para la comunicación de Web services (asignable a HTTP y otros transportes) y proporciona un formato de serialización para transmitir documentos XML sobre una red y un convención para representar interacciones RPC.
+
+**UDDI (Universal Description, Discovery, and Integration)**, un mecanismo de descubrimiento y registro de Web services, se utiliza para almacenar y categorizar información comercial y para recuperar punteros a interfaces de Web services.
+
+### Ejemplo de uso
+
+Los estándares de Web services básicos se utilizan juntos. Una vez que se obtiene el WSDL desde un UDDI u otra ubicación, se genera un mensaje SOAP para transmitirlo al sitio remoto.
+
+<hr>
+
+**NOTA**
+
+   Los estándares de Web services generalmente se usan juntos
+
+<hr>
+
+Como se muestra en la Figura 1-6, un programa que envía un documento a una dirección de Web service utiliza un XML schema de un tipo específico, como WSDL, para transformar los datos de su fuente de entrada (un archivo estructurado en este ejemplo) y producir un Instancia de documento XML en el formato consistente con lo que espera el Web service de destino, como se describe en el mismo archivo WSDL. El archivo WSDL se utiliza para definir las transformaciones de datos de entrada y salida.
 
 
-Figura 1-6. Los servicios web utilizan documentos XML y los transforman dentro y fuera de los programas.
+**Figura 1-6. Los Web service utilizan documentos XML y los transforman dentro y fuera de los programas.**
 
-EL PROCESADOR SOAP de la computadora emisora ​​transforma los datos de su formato nativo en los tipos de datos de esquema XML PREDEFINIDOS CONTENIDOS EN EL ARCHIVO WSDL para texto, punto flotante y otros, utilizando tablas de mapeo. Las tablas de asignación asocian los tipos de datos nativos con los tipos de datos de esquema XML correspondientes . (Las asignaciones estándar están ampliamente disponibles para Java, Visual Basic, CORBA y otros sistemas de tipo de uso común. Muchas herramientas de asignación XML están disponibles para definir asignaciones personalizadas o especiales). El procesador SOAP de la computadora receptora realiza la transformación a la inversa, asignando desde el XMLtipos de datos de esquema a los tipos de datos nativos correspondientes.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1b5f071a-5c1d-413c-ae77-5d58a7a9856b)
 
-La URL , de uso generalizado en la Web, apunta a una dirección TCP (Protocolo de Control de Transmisión) que contiene un recurso Web. Los esquemas de servicios web son una forma de recurso web, contenidos en archivos accesibles a través de Internet y expuestos a la web utilizando el mismo mecanismo que para descargar archivos HTML . La principal diferencia entre la descarga de archivos HTML y el acceso a recursos de servicios web es que los servicios web utilizan XML en lugar de HTML.documentos y se basan en tecnologías asociadas, como esquemas, transformación y validación, para admitir la comunicación remota entre aplicaciones. Pero la forma en que se publican y descargan los esquemas de servicios web es la misma: una operación HTTP en una URL determinada .
 
-NOTA
-Los archivos de descripción del servicio web generalmente se publican mediante direcciones URL.
+El procesador SOAP de la computadora emisora ​​transforma los datos de su formato nativo en los tipos de datos de XML schema predefinidos contenidos en el archivo WSDL para texto, punto flotante y otros, utilizando tablas de mapeo. Las tablas de asignación asocian los tipos de datos nativos con los tipos de datos de XML schema correspondientes. (Las asignaciones estándar están ampliamente disponibles para Java, Visual Basic, CORBA y otros sistemas de tipo de uso común. Muchas herramientas de asignación XML están disponibles para definir asignaciones personalizadas o especiales). El procesador SOAP de la computadora receptora realiza la transformación a la inversa, asignando desde el XML tipos de datos de esquema a los tipos de datos nativos correspondientes.
 
-Cuando recibe un documento, la implementación de un servicio web primero debe analizar el mensaje XML y validar los datos, realizar cualquier verificación de calidad de servicio relevante, como hacer cumplir políticas de seguridad o acuerdos de socios comerciales, y ejecutar cualquier flujo de proceso comercial asociado con el documento. El servicio web del sitio web ficticio skateboots.com se encuentra en la skateboots.com/ordercarpeta, que es a lo que apunta la URL . [3]
+La URL, de uso generalizado en la Web, apunta a una dirección **TCP (Transmission Control Protocol)** que contiene un recurso Web. Los Web services schemas son una forma de recurso web, contenidos en archivos accesibles a través de Internet y expuestos a la web utilizando el mismo mecanismo que para descargar archivos HTML. La principal diferencia entre la descarga de archivos HTML y el acceso a recursos de Web services es que los Web services utilizan XML en lugar de documentos HTML y se basan en tecnologías asociadas, como schemas, transformación y validación, para admitir la comunicación remota entre aplicaciones. Pero la forma en que se publican y descargan los esquemas de Web services es la misma: una operación HTTP en una URL determinada.
 
-NOTA
-Los servicios web usan esquemas XML PARA VALIDAR MENSAJES
+<hr>
+
+**NOTA**
+
+   Los archivos de descripción del Web service generalmente se publican mediante direcciones URL.
+
+<hr>
+
+Cuando recibe un documento, la implementación de un Web service primero debe analizar el mensaje XML y validar los datos, realizar cualquier verificación de calidad de servicio relevante, como hacer cumplir políticas de seguridad o acuerdos de socios comerciales, y ejecutar cualquier flujo de proceso comercial asociado con el documento. El Web service del sitio web ficticio skateboots.com se encuentra en la **`skateboots.com/order`**, que es a lo que apunta la URL.[3]
+
+<hr>
+
+**NOTA**
+
+   Los servicios web usan XML schemas para validar mensajes
+
+<hr>
 
 Los servicios web disponibles en esta dirección de Internet se identifican dentro de un archivo WDSL público que se puede descargar a la computadora emisora ​​y se usa para generar el mensaje. The Skateboots Company también publicó una lista en el directorio público DE UDDI , apuntando al mismo archivo WSDL , para los clientes que podrían descubrir la empresa a través del servicio UDDI . En general, cualquier persona que desee interactuar con los servicios web que realizan o rastrean pedidos para Skateboots Company a través de la Web debe encontrar una manera de obtener y usar ese archivo WSDL EN PARTICULAR PARA GENERAR EL MENSAJE.
 
