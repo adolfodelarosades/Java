@@ -332,82 +332,114 @@ Cuando recibe un documento, la implementación de un Web service primero debe an
 
 **NOTA**
 
-   Los servicios web usan XML schemas para validar mensajes
+   Los Web services usan XML schemas para validar mensajes
 
 <hr>
 
-Los servicios web disponibles en esta dirección de Internet se identifican dentro de un archivo WDSL público que se puede descargar a la computadora emisora ​​y se usa para generar el mensaje. The Skateboots Company también publicó una lista en el directorio público DE UDDI , apuntando al mismo archivo WSDL , para los clientes que podrían descubrir la empresa a través del servicio UDDI . En general, cualquier persona que desee interactuar con los servicios web que realizan o rastrean pedidos para Skateboots Company a través de la Web debe encontrar una manera de obtener y usar ese archivo WSDL EN PARTICULAR PARA GENERAR EL MENSAJE.
+Los Web services disponibles en esta dirección de Internet se identifican dentro de un archivo WDSL público que se puede descargar a la computadora emisora ​​y se usa para generar el mensaje. The Skateboots Company también publicó una lista en el directorio público DE UDDI, apuntando al mismo archivo WSDL, para los clientes que podrían descubrir la empresa a través del servicio UDDI. En general, cualquier persona que desee interactuar con los Web services que realizan o rastrean pedidos para Skateboots Company a través de la Web debe encontrar una manera de obtener y usar ese archivo WSDL en particular para generar el mensaje.
 
-Los programas en la dirección skateboots.com proporcionan un oyente HTTP asociado con los servicios web para reconocer los mensajes XML enviados en el formato definido. Los programas incluyen analizadores y transformadores XML y asignan los datos del mensaje SOAP a los formatos requeridos por el sistema de entrada de pedidos de Skateboots Company.
+Los programas en la dirección skateboots.com proporcionan un HTTP listener asociado con los Web services para reconocer los mensajes XML enviados en el formato definido. Los programas incluyen analizadores y transformadores XML y asignan los datos del mensaje SOAP a los formatos requeridos por el sistema de entrada de pedidos de Skateboots Company.
 
-Estas tecnologías son suficientes para crear, implementar y publicar servicios web básicos. De hecho, incluso SOAP básico es suficiente. Otras tecnologías se agregan continuamente al marco de servicios web en expansión a medida que surgen. Sin embargo , estas tecnologías fundamentales son suficientes para respaldar el uso de Internet para la comunicación comercial básica y para unir dominios DE TI dispares ; y esta forma de interacción Web se está adoptando muy rápidamente.
+Estas tecnologías son suficientes para crear, implementar y publicar Web services básicos. De hecho, incluso SOAP básico es suficiente. Otras tecnologías se agregan continuamente al framework de Web services en expansión a medida que surgen. Sin embargo , estas tecnologías fundamentales son suficientes para respaldar el uso de Internet para la comunicación comercial básica y para unir dominios TI dispares; y esta forma de interacción Web se está adoptando muy rápidamente.
 
-NOTA
-Las tecnologías de servicios web están evolucionando desde un marco básico
+<hr>
 
-Con el tiempo, a medida que maduren los estándares para el registro, el descubrimiento y la calidad del servicio, la visión de una Web comercial dinámica y ad hoc comenzará a afianzarse, y los servicios Web comenzarán a operar más como la Web actual, lo que permitirá a las empresas encontrar y comerciar entre sí únicamente mediante el uso de comunicaciones al estilo de Internet. Mientras tanto, las tecnologías y los estándares de servicios web básicos que se tratan en este libro son suficientes para muchas soluciones, como la integración de dominios de software dispares (J2EE y .NET, por ejemplo), la conexión a aplicaciones empaquetadas, como SAP y PeopleSoft, y el envío de documentos. a flujos de procesos de negocio predefinidos.
+**NOTA**
 
-XML : la base
-En el contexto de los servicios web, XML se utiliza no solo como formato de mensaje, sino también como la forma en que se definen los servicios. Por lo tanto, es importante saber un poco sobre XML , especialmente en el contexto de cómo se usa para definir e implementar servicios web.
+   Las tecnologías de Web services están evolucionando desde un framework básico
 
-NOTA
-XML se utiliza para múltiples propósitos
+<hr>
 
-REINVENTANDO LA RUEDA
+Con el tiempo, a medida que maduren los estándares para el registro, el descubrimiento y la calidad del servicio, la visión de una Web comercial dinámica y ad hoc comenzará a afianzarse, y los Web services comenzarán a operar más como la Web actual, lo que permitirá a las empresas encontrar y comerciar entre sí únicamente mediante el uso de comunicaciones al estilo de Internet. Mientras tanto, las tecnologías y los estándares de Web services básicos que se tratan en este libro son suficientes para muchas soluciones, como la integración de dominios de software dispares (J2EE y .NET, por ejemplo), la conexión a aplicaciones empaquetadas, como SAP y PeopleSoft, y el envío de documentos a flujos de procesos de negocio predefinidos.
 
-Algunas personas dicen que los servicios web están reinventando la rueda porque comparten muchas características con otras arquitecturas informáticas distribuidas, como CORBA .o DCOM. Los servicios web comparten un terreno común considerable con estas y otras arquitecturas e implementaciones informáticas distribuidas, pero también hay una buena razón para inventar una nueva arquitectura. La Web está establecida y, para aprovechar esta tremenda red global, es necesario adaptar los conceptos de computación distribuida. Primero, la Web está básicamente desconectada; es decir, las conexiones son transitorias y temporales. Los servicios informáticos distribuidos, como la seguridad y las transacciones, tradicionalmente dependen de una conexión a nivel de transporte y deben rediseñarse para proporcionar una funcionalidad equivalente para la Web desconectada. En segundo lugar, la Web asume que las partes pueden conectarse sin conocimiento previo entre sí, siguiendo LA URLenlaces y observando algunas reglas básicas. Para los servicios web, esto significa que cualquier cliente puede acceder a los servicios web publicados por cualquier otra persona, siempre que la información sobre el servicio (el esquema) esté disponible y sea comprensible y los procesadores XML sean capaces de generar mensajes que se ajusten al esquema.
+### XML: la base
 
-Las tecnologías informáticas distribuidas tradicionales asumen una relación mucho más estrecha entre el cliente y el servidor y, por lo tanto, no pueden aprovechar inherentemente la World Wide Web existente. Debido a que los servicios web adoptan el modelo de publicación de la web, es posible encapsular y publicar un punto final u operación empresarial específica mediante una definición de interfaz de servicios web, sin necesidad de un tipo específico de cliente para ese punto final. El cambio de paradigma que los clientes pueden desarrollar e integrar posteriormente tiene muchas ventajas para resolver el problema de la integración empresarial.
+En el contexto de los Web services, XML se utiliza no solo como formato de mensaje, sino también como la forma en que se definen los servicios. Por lo tanto, es importante saber un poco sobre XML, especialmente en el contexto de cómo se usa para definir e implementar Web services.
 
-Propósitos de XML
-XML se desarrolló para superar las limitaciones de HTML , especialmente para admitir mejor la creación y administración de contenido dinámico. HTML está bien para definir y mantener contenido estático, pero a medida que la Web evoluciona hacia una plataforma habilitada por software, en la que los datos tienen un significado asociado, el contenido debe generarse y digerirse dinámicamente. Usando XML , puede definir cualquier número de elementos que asocien significado con datos; es decir, describe los datos y qué hacer con ellos utilizando uno o más elementos creados para tal fin. Por ejemplo:
+<hr>
 
-<Company> 
-  <CompanyName region="US"> 
-  Skateboots Manufacturing 
-  </CompanyName> 
-  <address> 
-    <line> 
-    200 High Street 
-    </line> 
-    <line> 
-    Springfield, MA 55555 
-    </line> 
-    <Country> 
-    USA 
-    </Country> 
-  < /dirección> 
-  <teléfono> 
-  +1 781 555 5000 < 
-  /teléfono> 
-</Empresa>
-NOTA
-XML permite definir cualquier número de elementos
+**NOTA**
 
-En este ejemplo, XML le permite definir no solo elementos que describen los datos, sino también estructuras que agrupan datos relacionados. Es fácil imaginar una búsqueda de elementos que coincidan con ciertos criterios, como <Country>y <phone>para una empresa determinada, o para todos <Company>los elementos y devolver una lista de esas entidades identificándose como empresas en la Web.
+   XML se utiliza para múltiples propósitos
+
+<hr>   
+
+#### REINVENTANDO LA RUEDA
+
+Algunas personas dicen que los Web services están reinventando la rueda porque comparten muchas características con otras arquitecturas informáticas distribuidas, como CORBA o DCOM. Los Web services comparten un terreno común considerable con estas y otras arquitecturas e implementaciones informáticas distribuidas, pero también hay una buena razón para inventar una nueva arquitectura. La Web está establecida y, para aprovechar esta tremenda red global, es necesario adaptar los conceptos de computación distribuida. Primero, la Web está básicamente desconectada; es decir, las conexiones son transitorias y temporales. Los servicios informáticos distribuidos, como la seguridad y las transacciones, tradicionalmente dependen de una conexión a nivel de transporte y deben rediseñarse para proporcionar una funcionalidad equivalente para la Web desconectada. En segundo lugar, la Web asume que las partes pueden conectarse sin conocimiento previo entre sí, siguiendo URL links y observando algunas reglas básicas. Para los Web services, esto significa que cualquier cliente puede acceder a los Web services publicados por cualquier otra persona, siempre que la información sobre el servicio (el esquema) esté disponible y sea comprensible y los procesadores XML sean capaces de generar mensajes que se ajusten al esquema.
+
+Las tecnologías informáticas distribuidas tradicionales asumen una relación mucho más estrecha entre el cliente y el servidor y, por lo tanto, no pueden aprovechar inherentemente la World Wide Web existente. Debido a que los Web services adoptan el modelo de publicación de la web, es posible encapsular y publicar un end point u operación empresarial específica mediante una definición de interfaz de Web services, sin necesidad de un tipo específico de cliente para ese end point. El cambio de paradigma que los clientes pueden desarrollar e integrar posteriormente tiene muchas ventajas para resolver el problema de la integración empresarial.
+
+### Propósitos de XML
+
+XML se desarrolló para superar las limitaciones de HTML, especialmente para admitir mejor la creación y administración de contenido dinámico. HTML está bien para definir y mantener contenido estático, pero a medida que la Web evoluciona hacia una plataforma habilitada por software, en la que los datos tienen un significado asociado, el contenido debe generarse y digerirse dinámicamente. Usando XML, puede definir cualquier número de elementos que asocien significado con datos; es decir, describe los datos y qué hacer con ellos utilizando uno o más elementos creados para tal fin. Por ejemplo:
+
+```xml
+<Company>
+  <CompanyName region="US">
+  Skateboots Manufacturing
+  </CompanyName>
+  <address>
+    <line>
+    200 High Street
+    </line>
+    <line>
+    Springfield, MA 55555
+    </line>
+    <Country>
+    USA
+    </Country>
+  </address>
+  <phone>
+  +1 781 555 5000
+  </phone>
+</Company>
+```
+
+<hr>
+
+**NOTA**
+
+   XML permite definir cualquier número de elementos
+
+<hr>
+
+En este ejemplo, XML le permite definir no solo elementos que describen los datos, sino también estructuras que agrupan datos relacionados. Es fácil imaginar una búsqueda de elementos que coincidan con ciertos criterios, como **`<Country>`** y **`<phone>`** para una empresa determinada, o para todos **`<Country>`** los elementos y devolver una lista de esas entidades identificándose como empresas en la Web.
 
 Además, como se mencionó anteriormente, XML permite que los esquemas asociados validen los datos por separado y describan otros atributos y cualidades de los datos, algo completamente imposible con HTML .
 
-Por supuesto, problemas significativos resultan de la gran flexibilidad de XML . Debido a que XML le permite definir sus propios elementos, es muy difícil asegurarse de que todos usen los mismos elementos de la misma manera para significar lo mismo. Ahí es donde entra la necesidad de modelos de contenido consistentes y acordados mutuamente.
+Por supuesto, problemas significativos resultan de la gran flexibilidad de XML. Debido a que XML le permite definir sus propios elementos, es muy difícil asegurarse de que todos usen los mismos elementos de la misma manera para significar lo mismo. Ahí es donde entra la necesidad de modelos de contenido consistentes y acordados mutuamente.
 
-NOTA
-LOS ESQUEMAS XML limitan la flexibilidad
+<hr>
 
-Dos partes que intercambian datos XML pueden comprender e interpretar elementos de la misma manera solo si comparten las mismas definiciones de lo que son. Si dos partes que comparten un documento XML también comparten el mismo esquema, pueden estar seguros de comprender el significado de las mismas etiquetas de elementos de la misma manera. Así es exactamente como funcionan los servicios web.
+**NOTA**
 
-Tecnologías
-XML es una familia de tecnologías: un lenguaje de marcado de datos, varios modelos de contenido, un modelo de enlace, un modelo de espacio de nombres y varios mecanismos de transformación. Los siguientes son miembros importantes de la familia XML que se utilizan como base de los servicios web:
+   Los esquemas XML limitan la flexibilidad
 
-XML v1.0:  las reglas para definir elementos, atributos y etiquetas encerrados dentro de un elemento raíz del documento, proporcionando un modelo de datos abstracto y un formato de serialización
+<hr>
 
-ESQUEMA XML :  DOCUMENTOS XMLque definen los tipos de datos, el contenido, la estructura y los elementos permitidos en unXML; también se usa para describir instrucciones de procesamiento semántico asociadas con elementos del documento
+Dos partes que intercambian datos XML pueden comprender e interpretar elementos de la misma manera solo si comparten las mismas definiciones de lo que son. Si dos partes que comparten un documento XML también comparten el mismo esquema, pueden estar seguros de comprender el significado de las mismas etiquetas de elementos de la misma manera. Así es exactamente como funcionan los Web services.
 
-ESPACIOS DE NOMBRES XML :  los nombres exclusivos calificados paraaplicaciones y elementos de documentosXML
+### Tecnologías
 
-NOTA
-Varios miembros de la familia XML se utilizan en los servicios web.
+XML es una familia de tecnologías: un data markup language, varios modelos de contenido, un modelo de enlace, un namespace de nombres y varios mecanismos de transformación. Los siguientes son miembros importantes de la familia XML que se utilizan como base de los Web services:
 
-EL FUTURO DE LA WEB
+* **`XML v1.0`**: Las reglas para definir elementos, atributos y etiquetas encerrados dentro de un elemento raíz del documento, proporcionando un modelo de datos abstracto y un formato de serialización
+
+* **`XML schema`**: Documentos XML que definen los tipos de datos, el contenido, la estructura y los elementos permitidos en un XML; también se usa para describir instrucciones de procesamiento semántico asociadas con elementos del documento
+
+* **`XML namespaces`**: Los nombres exclusivos calificados para aplicaciones y elementos de documentosXML
+
+<hr>
+
+**NOTA**
+
+   Varios miembros de la familia XML se utilizan en los servicios web.
+
+<hr>
+
+AQUIIIIIII
+#### EL FUTURO DE LA WEB
 
 El inventor de la World Wide Web, Tim Berners-Lee, ha dicho que la próxima generación de la Web se tratará de datos, no de texto; XML es a los datos lo que HTML es al texto. La próxima generación de la Web pretende abordar varias deficiencias de la Web existente, en particular la dificultad de buscar en la Web coincidencias exactas en las cadenas de texto incrustadas en las páginas Web. Sin embargo, debido a que la Web ha tenido tanto éxito, el futuro de la Web debe lograrse como una extensión, o una evolución, de la Web actual. ¡Es imposible reemplazar todo y empezar de nuevo! Las soluciones para la comunicación de aplicación a aplicación deben derivarse de las tecnologías de Internet existentes.
 
