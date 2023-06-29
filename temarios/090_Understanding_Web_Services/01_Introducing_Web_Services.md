@@ -513,7 +513,7 @@ Las interfaces WSDL son como las interfaces CORBA o DCOM
 <hr>
 
 Las definiciones de tipo de datos WSDL se basan en XML schemas, pero se puede sustituir por otro sistema de definición de tipo equivalente o similar. Por ejemplo, los tipos de datos del Interface Definition Language (IDL) de CORBA podrían usarse en lugar de los tipos de datos de XML schema. (Sin embargo, si se utiliza otro sistema de definición de tipos, ambas partes de una interacción de servicios web deben poder entenderlo).
-
+aaaa
 <hr>
 
 **NOTA**
