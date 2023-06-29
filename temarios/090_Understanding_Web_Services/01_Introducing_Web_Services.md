@@ -605,39 +605,66 @@ Solo son obligatorios el envelope y el body.
 Después de haber definido los datos en los mensajes ( XML ), descrito los servicios que recibirán y procesarán el mensaje ( WSDL ) e identificado los medios para enviar y recibir los mensajes ( SOAP ), necesita una forma de publicar el servicio que usted ofrece y para encontrar los servicios que otros ofrecen y que usted puede querer utilizar. Esta es la función que proporciona UDDI (universal distribution, discovery, and interoperability).
 
 #### DENTRO DE LA EMPRESA
-
+AQUIIIIII
 Muchas empresas están explorando las posibles ventajas de utilizar servicios web tanto dentro como fuera de la empresa. Esto es análogo al uso de navegadores y servidores web dentro de la empresa en redes internas. La infraestructura web interna existente se puede utilizar para dar soporte a las interacciones del estilo de los servicios web. Aunque es poco probable que reemplacen los entornos informáticos distribuidos existentes, como COM y CORBA , los servicios web pueden ser un complemento valioso para las tecnologías existentes. A veces, todo lo que tiene es una conexión HTTP o SMTP . Debido a que representan un formato completamente neutral que se puede usar para lograr un nuevo nivel de interoperabilidad, los servicios web también se pueden usar como puente entre COM, CORBA, EJB y entornos de colas de mensajes. Finalmente, debido a que los servicios web utilizan la infraestructura HTTP existente , el impacto en los administradores de sistemas es mínimo en comparación con la introducción de otras tecnologías informáticas distribuidas en un departamento DE TI . El rendimiento es sin duda un problema en comparación con los transportes y protocolos orientados a binarios más tradicionales, pero los beneficios potenciales superan los costos para muchas aplicaciones, y los problemas de rendimiento tienden a resolverse con el tiempo, como sucedió con la Web original.
 
 El marco UDDI define un modelo de datos en XML e interfaces de programación de aplicaciones (API) SOAP para registrar y descubrir información empresarial, incluidos los servicios web que publica una empresa . UDDI es producido por un consorcio independiente de proveedores, fundado por Microsoft, IBM y Ariba, para desarrollar un estándar de Internet para el registro y descubrimiento de descripciones de servicios web. Microsoft, IBM, Hewlett-Packard y SAP alojan la implementación inicial de un servicio UDDI público , que sigue el modelo conceptual de DNS , el servicio de nombres de dominio de Internet que traduce los nombres de host de Internet en direcciones TCP . En realidad, UDDIes mucho más como un servicio de base de datos replicado accesible a través de Internet.
 
-NOTA
+<hr>
+
+**NOTA**
+
 UDDI registra y publica definiciones de servicios web
+
+<hr>
 
 UDDI es similar en concepto a un directorio de páginas amarillas. Las empresas registran su información de contacto, incluidos detalles como números de teléfono y fax, dirección postal y sitio web. El registro incluye información de categoría para la búsqueda, como ubicación geográfica, código de tipo de industria, tipo de negocio, etc. Otras empresas pueden buscar la información registrada en UDDI para encontrar proveedores de repuestos, servicios de catering o subastas y mercados. Una empresa también puede descubrir información sobre servicios web específicos en el registro, normalmente encontrando una URL para un archivo WSDL que apunta al servicio web de un proveedor.
 
-NOTA
+<hr>
+
+**NOTA**
+
 UDDI es un directorio de servicios Web
+
+<hr>
 
 Las empresas utilizan SOAP para registrarse a sí mismos oa otros con UDDI ; luego, los clientes del registro utilizan las API de consulta para buscar información registrada y descubrir un socio comercial. Una consulta inicial puede devolver varias coincidencias de las que se elige una única entrada. Una vez que se elige la entrada de una empresa, se realiza una llamada API final para obtener la información de contacto específica de la empresa.
 
-NOTA
+<hr>
+
+**NOTA**
+
 UDDI usa SOAP para registrar y descubrir información
+
+<hr>
 
 La Figura 1-9 muestra cómo una empresa registraría la información del servicio web, junto con otra información de contacto más tradicional, con el registro UDDI . Una empresa primero genera un archivo WSDL para describir los servicios web compatibles con su procesador SOAP (1) y utiliza las API DE UDDI para registrar la información en el repositorio (2). Después de que una empresa envía sus datos al registro, junto con otra información de contacto, la entrada del registro contiene una URL que apunta al WSDL del sitio del servidor SOAP u otro archivo de esquema XML QUE DESCRIBE EL SERVICIO WEB. UNA VEZ QUE EL SOAP de otra empresaEl procesador consulta el registro (3) para obtener el WSDL u otro esquema (4), el cliente puede generar el mensaje apropiado (5) para enviar a la operación especificada sobre el protocolo identificado (6). Por supuesto, tanto el cliente como el servidor deben poder estar de acuerdo con el mismo protocolo (en este ejemplo, SOAP sobre HTTP ) y compartir la misma comprensión o definición semántica del servicio, que en este ejemplo se representa a través de WSDL . Sin embargo, con la adopción generalizada de estos estándares fundamentales, esta comprensión común de WSDL parece estar asegurada.
 
 
-Figura 1-9. El repositorio UDDI se puede utilizar para descubrir un servicio web.
+**Figura 1-9. El repositorio UDDI se puede utilizar para descubrir un servicio web.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/3ece91bc-7ede-4f1e-85a0-fddf31b747f0)
 
 XML para la colaboración empresarial: ebXML
 Se requieren varias tecnologías adicionales, más allá de lo que se proporciona en las tecnologías de servicios web básicos, para admitir una verdadera interacción de empresa a empresa a través de la web. El consorcio Electronic Business XML (ebXML), por ejemplo, ha definido un conjunto integral de especificaciones para un patrón de uso industrial para el intercambio de documentos XML entre socios comerciales. La especificación de mensajería ebXML se basa en SOAP con archivos adjuntos y no utiliza WSDL , pero agrega varias cualidades de servicio, como seguridad, mensajería garantizada y cumplimiento de patrones de interacción de procesos comerciales.
 
-NOTA
+<hr>
+
+**NOTA**
+
 La especificación ebXML proporciona más que tecnologías básicas de servicios web
+
+<hr>
 
 La iniciativa ebXML, cuya primera fase finalizó en mayo de 2001, fue patrocinada por un grupo internacional establecido por el Centro de las Naciones Unidas para la Facilitación del Comercio y el Comercio Electrónico (UN/CEFACT) y OASIS para investigar, desarrollar Y promover ESTÁNDARES globales PARA la uso de XML para facilitar el intercambio de datos comerciales electrónicos. [5] La arquitectura ebXML comienza con un proceso comercial y un modelo de información, asigna el modelo a esquemas XML y define los requisitos para las aplicaciones que procesan los documentos y los intercambian entre los socios comerciales.
 
-NOTA
+<hr>
+
+**NOTA**
+
 La especificación ebXML define el uso DE XML para procesos comerciales cooperativos
+
+<hr>
 
 SERVICIOS WEB Y EDI FRENTE A EBXML
 
@@ -657,18 +684,33 @@ Acuerdos de socios comerciales
 
 Una capa de transporte de mensajes uniforme asignada a SOAP con archivos adjuntos MIME DE VARIAS PARTES
 
-NOTA
+<hr>
+
+**NOTA**
+
 La arquitectura ebXML amplía los conceptos básicos de los servicios web
+
+<hr>
 
 De manera similar a la forma en que UDDI facilita la búsqueda de definiciones de servicios web, la arquitectura ebXML permite que las empresas se encuentren entre sí mediante un registro, para definir acuerdos de socios comerciales e intercambiar mensajes XML en apoyo de las operaciones comerciales. El objetivo es permitir que todas estas actividades se realicen automáticamente, sin intervención humana, a través de Internet. La arquitectura ebXML tiene muchas similitudes con SOAP / WSDL / UDDI , y ya se está produciendo cierto nivel de convergencia con la adopción de SOAP en la especificación de transporte ebXML. [6]RosettaNet también anunció su adopción del transporte ebXML, al igual que muchos otros consorcios verticales de la industria.
 
-NOTA
+<hr>
+
+**NOTA**
+
 El registro ebXML permite que las empresas se encuentren y colaboren entre sí
+
+<hr>
 
 La arquitectura ebXML claramente se centra en interacciones orientadas a documentos; a medida que ebXML gana aceptación, puede llegar a definir el paradigma para las interacciones de servicios web orientadas a B2B. Las empresas que ya han estado intercambiando información electrónicamente, quizás usando estándares EDI , encontrarán muchos paralelos en los objetivos de ebXML, aunque ebXML tiene como objetivo abordar este tipo de requisitos de manera más amplia y para Internet.
 
-NOTA
+<hr>
+
+**NOTA**
+
 La especificación ebXML se centra en las interacciones orientadas a documentos
+
+<hr>
 
 COMPARACIÓN DE EBXML Y SOAP
 
@@ -679,28 +721,53 @@ El grupo ebXML se formó principalmente para crear estándares de procesos comer
 Servicios web frente a otras tecnologías
 Los servicios web no se parecen tanto a las tecnologías informáticas distribuidas tradicionales como CORBA , DCOM y EJB, sino a los servidores web, HTML y HTTP , en los que se basan. Los servicios web son fundamentalmente mensajes asincrónicos unidireccionales asignados a programas de software ejecutables. Los servicios web definen un formato de datos independiente del lenguaje de programación, el sistema operativo, el transporte de red y el mecanismo de almacenamiento de datos; por lo tanto, los datos tienen que ser mapeados dentro y fuera del formato independiente. La tipificación y la estructura de los datos se extraen de las implementaciones subyacentes de los servicios.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los servicios web difieren de las tecnologías informáticas distribuidas tradicionales
+
+<hr>
 
 Los servicios web a menudo se comparan con invocaciones de llamadas a procedimientos remotos o componentes de software. Sin embargo, los servicios web se comparan más apropiadamente con los adaptadores de integración de aplicaciones empresariales. Los servicios web definen un formato de mensaje canónico, como lo hacen los sistemas de software EAI , como MQSeries, TIBCO, NEON, Vitria y Orbix E2A de IONA, y definen la forma en que el mensaje se dirige a una interfaz de servicio a través de la cual los datos se mapean o transformado en una aplicación subyacente. En otras palabras, la inteligencia para comprender cómo asignar un mensaje a un programa de software no está contenida dentro de la propia interfaz, como lo está en CORBA , J2EE y DCOM, todos los cuales están basados ​​en RPC .conceptos, que unen estrechamente el nombre del servicio con el programa que se invoca. Más bien, esa inteligencia está contenida dentro del procesador XML , que consume el mensaje y sigue las instrucciones asociadas sobre cómo analizar el mensaje y mapear los datos en cualquier programa que implemente el servicio web.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los servicios web son más como adaptadores
+
+<hr>
 
 Además, los servicios web no requieren ni asumen la existencia del mismo sistema de software en ambos extremos de una ruta de comunicación. LOS ADAPTADORES EAI aceptan de manera similar un formato de mensaje canónico y asignan la información del mensaje a una planificación de recursos empresariales ( ERP ) u otro tipo de aplicación empresarial. Los servicios web se definen en un nivel similar de abstracción, lo que permite asignar el mismo tipo de mensaje a múltiples aplicaciones, incluidos, entre otros, componentes basados ​​en RPC .
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los servicios web se asignan a cualquier software
+
+<hr>
 
 A diferencia del middleware orientado A RPC , como CORBA y DCOM, los servicios web utilizan mensajería asíncrona unidireccional, que se asigna de forma más natural a un sistema de colas de mensajes, como MQSeries o JMS , que a CORBA o DCOM; aunque, por supuesto, los servicios web también se asignan a menudo a productos basados ​​en CORBA , J2EE y DCOM. Los servicios web admiten un paradigma de solicitud/respuesta típico de las comunicaciones síncronas de estilo RPC A TRAVÉS DE LA EMULACIÓN; es decir, el procesador XML , en lugar del protocolo, correlaciona las solicitudes con las respuestas. El mapeo HTTP DE SOAP, por ejemplo, no admite la correlación de solicitud/respuesta a nivel de protocolo. [7] La ​​emulación de servicios web de un RPC se asigna fácilmente a sistemas tradicionales basados ​​en RPC COMO CORBA , EJB y DCOM, aunque es probable que las cualidades del servicio (por ejemplo, seguridad, transacciones y manejo de excepciones) sean muy diferentes. de los disponibles en las tecnologías informáticas distribuidas tradicionales, que a menudo están estrechamente vinculadas a la capa de transporte y son específicas de cada tecnología.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los servicios web son fundamentalmente sistemas de mensajería unidireccionales y asíncronos.
+
+<hr>
 
 Debido a que las interacciones con los servicios web se logran a través de los programas y bases de datos a los que se asignan los servicios web, es probable que la experiencia del usuario sea muy diferente de una experiencia típica basada en un navegador: los servicios web se parecen más a las aplicaciones tradicionales que a los navegadores, aunque, por supuesto, se pueden utilizar navegadores. (Como se mencionó anteriormente, los servicios web por sí mismos no son ejecutables, sino que deben asignarse a un programa, un objeto, un sistema de middleware o un sistema de administración de bases de datos).
 
-NOTA
+<hr>
+
+**NOTA**
+
 Interactuar con servicios web es como interactuar con aplicaciones tradicionales
+
+<hr>
 
 Tecnologías Adicionales
 Las tecnologías de servicios web centrales, como SOAP , WSDL y UDDI , son útiles para unir dominios tecnológicos dispares y enviar documentos a flujos de procesos comerciales. Sin embargo, para volverse útiles para más tipos de aplicaciones y cumplir con la visión completa de los servicios web que permiten el uso de bloques de construcción de aplicaciones a través de Internet, las tecnologías de servicios web deben ampliarse para abarcar características, funciones y calidades de servicio adicionales.
@@ -709,8 +776,13 @@ El trabajo en curso de evolución de los servicios web hacia un sustrato tecnol�
 
 En el mundo de los servicios web, los principales proveedores de software de la industria ya acordaron los estándares básicos, que es la verdadera prueba de estandarización. Microsoft, IBM, Sun Microsystems, BEA Systems, Oracle, IONA y otros acordaron implementar SOAP , WSDL y UDDI , aunque persisten algunas diferencias de opinión sobre el papel del registro ebXML. Sin embargo, aparte de los estándares fundamentales, las propuestas a menudo compiten, como la diferencia de opinión entre Microsoft e IBM sobre la definición de flujo de procesos comerciales, es decir, XLANG versus WSFL (Lenguaje de flujo de servicios web), y propuestas en competencia para manejar el contexto de seguridad.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Las tecnologías adicionales pueden o no convertirse en parte del estándar
+
+<hr>
 
 Las tecnologías adicionales se centran principalmente en las siguientes áreas clave:
 
@@ -726,8 +798,13 @@ Algunas de las tecnologías adicionales más importantes para los servicios web 
 
 La seguridad es importante para garantizar la confidencialidad e integridad de los datos de los servicios web. No se debe permitir que nadie más que el destinatario previsto de los datos examine o manipule el contenido del mensaje. La seguridad también es necesaria para controlar el acceso a los servicios web, especialmente cuando se usan varios servicios web juntos, de modo que solo aquellos a quienes están destinados los usen.
 
-NOTA
+<hr>
+
+**NOTA**
+
 La seguridad es lo más importante
+
+<hr>
 
 Existen estándares propuestos para la autenticación y la autorización ( SAML , o lenguaje de marcado de autorización de seguridad) y para la gestión de claves públicas para el cifrado ( XKMS , o especificación de gestión de claves XML ). Por supuesto, fundamental para toda la seguridad de Internet es Secure Socket Layer ( SSL ) y, para los protocolos basados ​​en HTTP , HTTPS ( HTTP seguro ) para la seguridad básica de nivel de cifrado.
 
@@ -735,25 +812,45 @@ Además de HTTPS, cortafuegos, SAML , XKMS , el uso de firmas digitales y cifrad
 
 El flujo de procesos es fundamental para automatizar las interacciones de los procesos comerciales en la Web y dentro de una empresa. El flujo de proceso también suele denominarse orquestación porque define la relación entre una serie de interacciones necesarias para lograr un propósito determinado, como completar una orden de compra, procesar una reserva de viaje o ejecutar un plan de fabricación. Un flujo se modela como una secuencia de pasos definidos para un proceso comercial determinado. La serie de pasos crea una agregación de funciones para las que se puede definir una interfaz de servicio web.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los flujos automatizan la ejecución de procesos comerciales
+
+<hr>
 
 En el mundo de las operaciones comerciales automatizadas, las transacciones han desempeñado durante mucho tiempo el papel de ejecutor, asegurando que las plataformas de ejecución produjeran resultados consistentes de una serie de operaciones relacionadas con los datos, a pesar de las fallas de software o hardware. Sin embargo, estos protocolos y técnicas tradicionales no son directamente aplicables a la Web, ya que están diseñados para un entorno estrechamente acoplado en el que es posible mantener bloqueos de bases de datos en espera de la notificación del resultado de la transacción y en el que está disponible un protocolo orientado a la conexión para detectar fallos de comunicación automáticamente. La propuesta de Business Transaction Protocol ( BTP ) de OASISestá diseñado para resolver este problema de los servicios web mediante la definición de un protocolo débilmente acoplado que garantiza que los resultados de múltiples interacciones de servicios web se propaguen y compartan correctamente.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Las transacciones se están redefiniendo para la Web
+
+<hr>
 
 Los protocolos de mensajería ejecutan los patrones de comunicación definidos para las interacciones de servicios web, como unidireccional asíncrono, solicitud/respuesta, difusión y conversacional o de igual a igual. Las tecnologías de servicios web adicionales también pueden depender de la capa de mensajería para ciertas calidades de servicio, como la entrega confiable o garantizada, la propagación de contextos de seguridad y transacciones, y el enrutamiento correcto de mensajes a lo largo de una ruta definida que incluye uno o más intermediarios. IBM ha propuesto HTTP confiable (HTTPR) para abordar los requisitos en esta área.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Se necesitan mecanismos para mensajería confiable
+
+<hr>
 
 IBM y Microsoft han colaborado en la propuesta de WS-Inspection para descubrir información sobre los servicios web disponibles en un destino de mensaje en particular. Microsoft también ha propuesto WS-Referral y WS-Routing para definir una ruta de mensajes específica para un servicio web, incluida cualquier cantidad de intermediarios, y cómo enrutar los mensajes hacia adelante y hacia atrás a lo largo de la ruta especificada.
 
 El protocolo de intercambio extensible de bloques ( BEEP ) de IETF define un protocolo de Internet orientado a la conexión. Se ha definido una asignación SOAP para BEEP Y, EN ESTE CASO, LOS MENSAJES SOAP heredan las cualidades de servicio adicionales de BEEP para mantener el contexto de la sesión en los nodos emisor y receptor. El contexto se puede utilizar para relacionar múltiples mensajes en una unidad de transferencia más grande y para relacionar múltiples mensajes como provenientes de la misma fuente o destinados al mismo destino. El contexto de seguridad y transacción también se puede asociar con una conexión.
 
-NOTA
+<hr>
+
+**NOTA**
+
 BEEP proporciona un protocolo orientado a la conexión
+
+<hr>
 
 Otros estándares y tecnologías relevantes incluyen muchos de los definidos por las siguientes organizaciones:
 
@@ -765,8 +862,13 @@ UserLand, desarrollador de XML - RPC , precursor de SOAP
 
 OAGI (Open Applications Group, Inc.), que define formatos de documentos XML canónicos para empresas e industrias
 
-NOTA
+<hr>
+
+**NOTA**
+
 Muchas otras tecnologías y estándares son relevantes para los servicios web.
+
+<hr>
 
 El trabajo de estos y otros grupos a menudo se centra en promover la adopción de XML para fines comerciales específicos, como construir sobre los estándares básicos para definir formatos de documentos y protocolos para las industrias electrónica, financiera, de atención médica y otras. Debido a que los servicios web se basan en XML , el trabajo de casi cualquier organismo o consorcio de estándares que promueva el uso de tecnologías relacionadas con XML para negocios en Internet es relevante. Algunos de los otros trabajos, como BTP y SAML , emergen como tecnología candidata para su adopción por parte del W3C dentro de su actividad de arquitectura de servicios web.
 
@@ -779,9 +881,13 @@ Los proveedores de software, tanto grandes como pequeños, ofrecen implementacio
 
 Los servicios web no cambian fundamentalmente los sistemas de software existentes, aunque pueden cambiar la forma en que se combinan los sistemas de software. Las diferencias en la implementación suelen seguir las diferencias en la filosofía o el enfoque de los proveedores: ¿Son los servicios web una tecnología habilitadora fundamental? ¿O son simplemente puntos de entrada y salida hacia y desde los sistemas de software existentes? En otras palabras, los proveedores varían en su enfoque de los servicios web, dependiendo de la medida en que ven los servicios web como un impacto en las arquitecturas de sistemas de software existentes. Por ejemplo, ¿los servicios web invalidan J2EE o son complementarios? Las respuestas a estas y otras preguntas similares se pueden descubrir en el enfoque de un proveedor.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los servicios web no cambian los sistemas de software subyacentes
 
+<hr>
 Los cinco enfoques básicos de los servicios web son mapearlos
 
 Dentro y fuera de un sistema de gestión de base de datos
@@ -800,18 +906,33 @@ En otras palabras, los implementadores de servicios web distinguen fundamentalme
 
 Entonces la pregunta es, ¿dónde está el valor? ¿Con los servidores de aplicaciones, los sistemas de gestión de bases de datos y los intermediarios de integración, dejando que los servicios web sean simplemente un medio para mapear datos dentro y fuera de los sistemas de software existentes? ¿O reside el valor en los propios servicios web, como fundamentales para una nueva categoría de sistemas de software?
 
-NOTA
+<hr>
+
+**NOTA**
+
 El valor está en el software subyacente o en la capa de servicios web
+
+<hr>
 
 Las implementaciones de proveedores tienden a dividirse entre estas distintas opiniones sobre el valor de los servicios web. No es sorprendente que Microsoft tenga su propia opinión, mientras que Sun Microsystems, IBM, BEA Systems, Oracle y otros están adoptando una visión alternativa. Hasta cierto punto, esta divergencia de puntos de vista o iniciativas de los proveedores representa una continuación de la batalla de los desarrolladores de Visual Basic/Java, pero Microsoft está adoptando una postura muy audaz y agresiva en los servicios web, incluso rompiendo las actuales aplicaciones de Visual Basic para garantizar que el futuro versión de VB apoyará los servicios web como tecnología habilitadora fundamental. La comunidad de Java está adoptando una visión menos radical, extendiendo las API de Java para servicios web en lugar de requerir una reescritura para incorporarlas.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Las opiniones de los proveedores varían, a menudo a lo largo de las líneas de Java/Visual Basic
+
+<hr>
 
 Los consorcios comerciales de la industria, como ebXML y OASIS , así como los productos de intermediarios de integración de proveedores como IBM, Microsoft, IONA y WebMethods, tienden a centrarse en el proceso comercial o en el tipo de aplicaciones orientadas a documentos para servicios web. Los productos de otros proveedores, como los juegos de herramientas de servicios web que se envían con WebLogic de BEA y J2EE Edition de IONA, tienden a centrarse en el estilo de interacción RPC . Las mismas tecnologías y estándares basados ​​EN XML generalmente se pueden usar para cualquiera, pero las iniciativas y los productos tienden a enfocarse en uno u otro porque los paradigmas son muy diferentes. En general, los servidores de aplicaciones tienden a admitir RPC.estilo de interacción, mientras que los intermediarios de integración tienden a admitir el estilo de interacción asíncrono orientado a documentos.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Los productos tienden a centrarse en el RPC o en el estilo asíncrono
+
+<hr>
 
 ¿PARA QUÉ SIRVEN LOS SERVICIOS WEB?
 
@@ -821,8 +942,13 @@ Los proveedores de intermediarios de integración, como WebMethods, Vitria, SeeB
 
 Por último, una serie de proveedores ven los servicios web como una tecnología interesante y potencialmente rentable por derecho propio y han desarrollado productos de servicios web de "juego puro". Estos productos, basados ​​completamente en tecnología de servicios web, generalmente requieren su uso con otras tecnologías y productos. Por ejemplo, Cape Clear comercializa un producto de servicios web destinado a unir J2EE y .NET. Shinka comercializa un producto que supone que los servicios web son un centro de diseño fundamental y que los programas se desarrollarán para mapearlos, en lugar de viceversa, que es lo que la mayoría de los otros proveedores parecen creer.
 
-NOTA
+<hr>
+
+**NOTA**
+
 Algunos proveedores se centran únicamente en los servicios web.
+
+<hr>
 
 Resumen
 Los servicios web se están convirtiendo rápidamente en una tecnología importante en la evolución de la web y la computación distribuida. Los servicios web aprovechan la independencia de datos de XML para resolver problemas de integración empresarial, tanto dentro como fuera del firewall. Las interfaces de servicios web son shells o contenedores que se asignan a cualquier tipo de programa de software, sistema de middleware, sistema de administración de base de datos o aplicación empaquetada.
