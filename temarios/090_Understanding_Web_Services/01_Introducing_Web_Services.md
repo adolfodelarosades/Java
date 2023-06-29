@@ -6,7 +6,7 @@ Al igual que el efecto del transporte ferroviario en los sistemas económicos na
 
 **NOTA**
 
-   Los web services lo están cambiando todo
+Los web services lo están cambiando todo
 
 <hr>   
 
@@ -18,7 +18,7 @@ Las personas y las empresas que hacen negocios en la web necesitan una forma de 
 
 **NOTA**
 
-   La Web actual no soporta muy bien las interacciones orientadas al software
+La Web actual no soporta muy bien las interacciones orientadas al software
 
 <hr>    
 
@@ -30,7 +30,7 @@ Los web services son aplicaciones de **Extensible Markup Language (XML)** asigna
 
 **NOTA**
 
-   Los web services transforman documentos XML dentro y fuera de los sistemas IT
+Los web services transforman documentos XML dentro y fuera de los sistemas IT
 
 <hr>
 
@@ -40,7 +40,7 @@ Esta tecnología se puede utilizar de muchas maneras. Los web services pueden ej
 
 **NOTA**
 
-   Los web services se pueden utilizar en muchas aplicaciones
+Los web services se pueden utilizar en muchas aplicaciones
 
 <hr>
 
@@ -57,7 +57,7 @@ Los web services combinan las características de ejecución de las aplicaciones
 
 **NOTA**
 
-   Los web services combinan programación y conceptos web
+Los web services combinan programación y conceptos web
 
 <hr> 
 
@@ -74,7 +74,7 @@ Este ejemplo ilustra cómo se accede a través de la Web a interacciones web sen
 XML proporciona muchas ventajas para la transmisión de datos a través de Internet. Ahora, la solicitud anterior puede estar contenida en un documento XML en su lugar:
 
 ```xml
-SOAP-ENV:Body>
+<SOAP-ENV:Body>
   <s:SearchRequest
   xmlns:s="www.xmlbus.com/SearchService">
     <p1>Skate</p1>
@@ -88,7 +88,7 @@ SOAP-ENV:Body>
 
 **NOTA**
 
-   XML es una mejor manera de enviar datos
+XML es una mejor manera de enviar datos
 
 <hr>
 
@@ -98,7 +98,7 @@ El envío de la solicitud dentro de un documento XML tiene muchas ventajas, como
 
 **NOTA**
 
-   Los web services utilizan documentos XML
+Los web services utilizan documentos XML
 
 <hr>
 
@@ -110,7 +110,7 @@ Este ejemplo se muestra en forma de un **Simple Object Access Protocol (SOAP)**,
 
 **NOTA**
 
-   La próxima generación de la Web se basará en interacciones orientadas al software
+La próxima generación de la Web se basará en interacciones orientadas al software
    
 <hr>
 
@@ -130,7 +130,7 @@ Suponga, por ejemplo, que vive en San Francisco y desea reservar una mesa en su 
 
 **NOTA**
 
-   Los Web services permiten nuevos tipos de interacciones
+Los Web services permiten nuevos tipos de interacciones
 
 <hr>
 
@@ -148,7 +148,7 @@ Los Web service también son muy útiles para descubrir e interactuar con sitios
 
 **NOTA**
 
-   Los Web services se descubren e interactúan entre sí
+Los Web services se descubren e interactúan entre sí
 
 <hr>
 
@@ -169,7 +169,9 @@ A través de la adopción generalizada de los Web services, Internet se está vo
 
 **NOTA**
 
-   Los Web services crean mayores eficiencias comerciales
+Los Web services crean mayores eficiencias comerciales
+
+<hr>
 
 #### HACIA UN ENTENDIMIENTO COMÚN
 
@@ -185,7 +187,7 @@ El nivel de abstracción en el que operan los Web services abarca estilos de int
 
 **NOTA**
 
-   Los Web services admiten múltiples paradigmas de mensajería
+Los Web services admiten múltiples paradigmas de mensajería
 
 <hr>
 
@@ -198,7 +200,7 @@ Los estándares y tecnologías de Web services generalmente abarcan dos tipos pr
 
 **NOTA**
 
-   Los Web services abarcan RPC e interacciones orientadas a documentos
+Los Web services abarcan RPC e interacciones orientadas a documentos
 
 <hr>
 
@@ -217,7 +219,7 @@ En las interacciones orientadas a RPC, la solicitud de Web services toma la form
 
 **NOTA**
 
-   Las interacciones orientadas a RPC son buenas para intercambios breves de datos
+Las interacciones orientadas a RPC son buenas para intercambios breves de datos
 
 <hr>   
 
@@ -234,7 +236,7 @@ En el estilo de interacción orientado a documentos, la Web service request toma
 
 **NOTA**
 
-   El estilo orientado a documentos es bueno para intercambios masivos de datos.
+El estilo orientado a documentos es bueno para intercambios masivos de datos.
 
 <hr>
 
@@ -244,7 +246,7 @@ Las interacciones orientadas a documentos a menudo asumen que las partes de una 
 
 **NOTA**
 
-   Los acuerdos de socios comerciales determinan las interacciones requeridas
+Los acuerdos de socios comerciales determinan las interacciones requeridas
 
 <hr>
 
@@ -254,7 +256,9 @@ En el ejemplo de Skateboots Company, los pedidos al por mayor de pretemporada se
 
 **NOTA**
 
-   Los dos estilos se corresponden bien con los paradigmas de mensajería sincrónica/asincrónica - synchronous/asynchronous.
+Los dos estilos se corresponden bien con los paradigmas de mensajería sincrónica/asincrónica - synchronous/asynchronous.
+
+<hr>
 
 ## La Tecnología de los Web Services
 
@@ -264,7 +268,7 @@ Los programas que interactúan entre sí a través de la Web deben poder encontr
 
 **NOTA**
 
-   Los estándares definen cómo se describen, descubren y comunican entre sí los Web services.
+Los estándares definen cómo se describen, descubren y comunican entre sí los Web services.
 
 <hr>
 
@@ -282,7 +286,7 @@ Los Web services requieren varias tecnologías relacionadas basadas en XML para 
 
 **NOTA**
 
-   Los Web services requieren el uso de varias tecnologías relacionadas basadas en XML
+Los Web services requieren el uso de varias tecnologías relacionadas basadas en XML
 
 <hr>
 
@@ -302,7 +306,7 @@ Los estándares de Web services básicos se utilizan juntos. Una vez que se obti
 
 **NOTA**
 
-   Los estándares de Web services generalmente se usan juntos
+Los estándares de Web services generalmente se usan juntos
 
 <hr>
 
@@ -322,7 +326,7 @@ La URL, de uso generalizado en la Web, apunta a una dirección **TCP (Transmissi
 
 **NOTA**
 
-   Los archivos de descripción del Web service generalmente se publican mediante direcciones URL.
+Los archivos de descripción del Web service generalmente se publican mediante direcciones URL.
 
 <hr>
 
@@ -332,7 +336,7 @@ Cuando recibe un documento, la implementación de un Web service primero debe an
 
 **NOTA**
 
-   Los Web services usan XML schemas para validar mensajes
+Los Web services usan XML schemas para validar mensajes
 
 <hr>
 
@@ -346,13 +350,13 @@ Estas tecnologías son suficientes para crear, implementar y publicar Web servic
 
 **NOTA**
 
-   Las tecnologías de Web services están evolucionando desde un framework básico
+Las tecnologías de Web services están evolucionando desde un framework básico
 
 <hr>
 
 Con el tiempo, a medida que maduren los estándares para el registro, el descubrimiento y la calidad del servicio, la visión de una Web comercial dinámica y ad hoc comenzará a afianzarse, y los Web services comenzarán a operar más como la Web actual, lo que permitirá a las empresas encontrar y comerciar entre sí únicamente mediante el uso de comunicaciones al estilo de Internet. Mientras tanto, las tecnologías y los estándares de Web services básicos que se tratan en este libro son suficientes para muchas soluciones, como la integración de dominios de software dispares (J2EE y .NET, por ejemplo), la conexión a aplicaciones empaquetadas, como SAP y PeopleSoft, y el envío de documentos a flujos de procesos de negocio predefinidos.
 
-### XML: la base
+### XML: la Base
 
 En el contexto de los Web services, XML se utiliza no solo como formato de mensaje, sino también como la forma en que se definen los servicios. Por lo tanto, es importante saber un poco sobre XML, especialmente en el contexto de cómo se usa para definir e implementar Web services.
 
@@ -360,7 +364,7 @@ En el contexto de los Web services, XML se utiliza no solo como formato de mensa
 
 **NOTA**
 
-   XML se utiliza para múltiples propósitos
+XML se utiliza para múltiples propósitos
 
 <hr>   
 
@@ -400,7 +404,7 @@ XML se desarrolló para superar las limitaciones de HTML, especialmente para adm
 
 **NOTA**
 
-   XML permite definir cualquier número de elementos
+XML permite definir cualquier número de elementos
 
 <hr>
 
@@ -414,7 +418,7 @@ Por supuesto, problemas significativos resultan de la gran flexibilidad de XML. 
 
 **NOTA**
 
-   Los esquemas XML limitan la flexibilidad
+Los esquemas XML limitan la flexibilidad
 
 <hr>
 
@@ -434,121 +438,173 @@ XML es una familia de tecnologías: un data markup language, varios modelos de c
 
 **NOTA**
 
-   Varios miembros de la familia XML se utilizan en los servicios web.
+Varios miembros de la familia XML se utilizan en los servicios web.
 
 <hr>
 
-AQUIIIIIII
 #### EL FUTURO DE LA WEB
 
 El inventor de la World Wide Web, Tim Berners-Lee, ha dicho que la próxima generación de la Web se tratará de datos, no de texto; XML es a los datos lo que HTML es al texto. La próxima generación de la Web pretende abordar varias deficiencias de la Web existente, en particular la dificultad de buscar en la Web coincidencias exactas en las cadenas de texto incrustadas en las páginas Web. Sin embargo, debido a que la Web ha tenido tanto éxito, el futuro de la Web debe lograrse como una extensión, o una evolución, de la Web actual. ¡Es imposible reemplazar todo y empezar de nuevo! Las soluciones para la comunicación de aplicación a aplicación deben derivarse de las tecnologías de Internet existentes.
 
-Si el futuro de la Web depende de su capacidad para respaldar las comunicaciones de datos con la misma eficacia y facilidad que las comunicaciones de texto, los servicios Web deben poder hacer referencia dinámicamente a los puntos finales de la Web, o direcciones (URL), y asignar datos a y de XML de forma transparente. Estos puntos finales, o direcciones, brindan los servicios que procesan los datos XML , de la misma manera que los navegadores procesan el texto HTML . Estas direcciones también se pueden incluir en cualquier programa capaz de reconocer una URL y analizar XML.. Así será posible comunicarse desde su hoja de cálculo a una fuente remota de datos o desde su programa de gestión de dinero a su aplicación de gestión de cuentas bancarias, concertar citas con compañeros para reuniones, etc.
+Si el futuro de la Web depende de su capacidad para respaldar las comunicaciones de datos con la misma eficacia y facilidad que las comunicaciones de texto, los Web services deben poder hacer referencia dinámicamente a los end points de la Web, o direcciones (URL), y asignar datos(map data) a y de XML de forma transparente. Estos end points, o direcciones, brindan los servicios que procesan los datos XML, de la misma manera que los navegadores procesan el texto HTML. Estas direcciones también se pueden incluir en cualquier programa capaz de reconocer una URL y analizar XML. Así será posible comunicarse desde su hoja de cálculo a una fuente remota de datos o desde su programa de gestión de dinero a su aplicación de gestión de cuentas bancarias, concertar citas con compañeros para reuniones, etc.
 
-Microsoft y otros ya están desarrollando este tipo de servicios estándar accesibles desde cualquier programa, y ​​una gran parte de la estrategia .NET de Microsoft se centra en herramientas de desarrollo para crear y unir aplicaciones que utilizan servicios Web predefinidos. Pero lograr que esto suceda requiere una estandarización significativa, comparable al esfuerzo que implica la estandarización de los componentes de la PC y, por lo tanto, es posible que no suceda durante varios años.
+Microsoft y otros ya están desarrollando este tipo de servicios estándar accesibles desde cualquier programa, y ​​una gran parte de la estrategia .NET de Microsoft se centra en herramientas de desarrollo para crear y unir aplicaciones que utilizan Web services predefinidos. Pero lograr que esto suceda requiere una estandarización significativa, comparable al esfuerzo que implica la estandarización de los componentes de la PC y, por lo tanto, es posible que no suceda durante varios años.
 
-CONJUNTO DE INFORMACIÓN XML :  una representación abstracta y coherente de las partes de undocumentoXML
-
-XPointer:  un puntero a una parte específica de un documento; XPath, expresiones para buscardocumentosXMLy XLink, para buscar múltiplesdocumentosXML
-
-Transformaciones de lenguaje de hoja de estilo extensible ( XSLT ):  transformación deXMLen otrosXMLo para exportar aformatosXML
-
-DOM (Document Object Model) y SAX (Simple API for XML ):  bibliotecas y modelos de programación para analizarXML, ya sea creando un árbol completo para recorrer o leyendo y respondiendo aXMLuno por uno
+* **XML Information Set**: Una representación abstracta y coherente de las partes de un documento XML
+* **XPointer**: Un puntero a una parte específica de un documento; **XPath**, expresiones para buscar documentos XML y **XLink**, para buscar múltiples documentos XML
+* **Extensible Stylesheet Language Transformations (XSLT)**: Transformación de XML en otros XML o para exportar a formatos XML
+* **DOM (Document Object Model) and SAX (Simple API for XML)**: Libraries y modelos de programación para analizar XML, ya sea creando un árbol completo para recorrer o leyendo y respondiendo a XML elements uno por uno
 
 Estas tecnologías y otras se describen con más detalle en el Capítulo 2 .
 
-WSDL : descripción de servicios web
-El lenguaje de descripción de servicios web ( WSDL ) es un formato de esquema XML que define un marco extensible para describir las interfaces de servicios web. WSDL fue desarrollado principalmente por Microsoft e IBM y fue presentado al W3C por 25 empresas. [4] WSDL está en el corazón del marco de los servicios web, proporcionando una forma común de representar los tipos de datos pasados ​​en los mensajes, las operaciones que se realizarán en los mensajes y el mapeo de los mensajes en los transportes de red.
+## WSDL: Descripción de Web Services
 
-WSDL , como el resto del marco de servicios web, está diseñado para usarse con interacciones tanto orientadas a procedimientos como orientadas a documentos. Al igual que con el resto de las tecnologías XML , WSDL es tan ampliable y tiene tantas opciones que puede resultar difícil garantizar la compatibilidad y la interoperabilidad entre distintas implementaciones. Sin embargo , si el remitente y el receptor de un mensaje pueden compartir y comprender el mismo archivo WSDL de la misma manera, se puede garantizar la interoperabilidad.
+El **Web Services Description Language (WSDL)** es un formato de XML schema que define un extensible framework para describir las Web services interfaces. WSDL fue desarrollado principalmente por Microsoft e IBM y fue presentado al W3C por 25 empresas. [4] WSDL está en el corazón del Web services framework, proporcionando una forma común de representar los tipos de datos pasados ​​en los mensajes, las operaciones que se realizarán en los mensajes y el mapeo de los mensajes en los transportes de red.
 
-NOTA
-WSDL es el formato XML que describe en qué consiste un servicio Web
+WSDL, como el resto del Web services framework, está diseñado para usarse con interacciones tanto orientadas a procedimientos como orientadas a documentos. Al igual que con el resto de las tecnologías XML, WSDL es tan ampliable y tiene tantas opciones que puede resultar difícil garantizar la compatibilidad y la interoperabilidad entre distintas implementaciones. Sin embargo, si el remitente y el receptor de un mensaje pueden compartir y comprender el mismo archivo WSDL de la misma manera, se puede garantizar la interoperabilidad.
+
+<hr>
+
+**NOTA**
+
+WSDL es el formato XML que describe en qué consiste un Web service
+
+<hr>
 
 WSDL se divide en tres elementos principales:
 
-Definiciones de tipos de datos
+* Definiciones de tipos de datos
+* Operaciones abstractas
+* Service bindings
 
-Operaciones abstractas
+<hr>
 
-Enlaces de servicio
+**NOTA**
 
-NOTA
 WSDL tiene tres elementos principales, según el nivel de abstracción
 
-Cada elemento principal puede especificarse en un documento XML separado e importarse en varias combinaciones para crear una descripción final de los servicios web, o pueden definirse todos juntos en un solo documento. Las definiciones de tipos de datos determinan la estructura y el contenido de los mensajes. Las operaciones abstractas determinan las operaciones realizadas en el contenido del mensaje y los enlaces de servicio determinan el transporte de red que llevará el mensaje a su destino.
+<hr>
 
-NOTA
-LOS ELEMENTOS WSDL se pueden definir en documentos separados
+Cada elemento principal puede especificarse en un documento XML separado e importarse en varias combinaciones para crear una descripción final de los Web services, o pueden definirse todos juntos en un solo documento. Las definiciones de tipos de datos determinan la estructura y el contenido de los mensajes. Las operaciones abstractas determinan las operaciones realizadas en el contenido del mensaje y los enlaces de servicio determinan el transporte de red que llevará el mensaje a su destino.
 
-La Figura 1-7 muestra los elementos de WSDL , en capas según sus niveles de abstracción, que se definen independientemente del transporte, específicamente para que se puedan usar múltiples transportes para el mismo servicio. Por ejemplo, se puede acceder al mismo servicio a través de SOAP sobre HTTP y SOAP sobre JMS . De manera similar, las definiciones de tipos de datos se colocan en una sección separada para que puedan ser utilizadas por múltiples servicios. Los elementos principales DE WSDL se dividen en subpartes.
+<hr>
 
+**NOTA**
 
-Figura 1-7. WSDL consta de tres elementos principales y siete partes.
+Los elementos WSDL se pueden definir en documentos separados
+
+<hr>
+
+La Figura 1-7 muestra los elementos de WSDL, en capas según sus niveles de abstracción, que se definen independientemente del transporte, específicamente para que se puedan usar múltiples transportes para el mismo servicio. Por ejemplo, se puede acceder al mismo servicio a través de SOAP sobre HTTP y SOAP sobre JMS. De manera similar, las definiciones de tipos de datos se colocan en una sección separada para que puedan ser utilizadas por múltiples servicios. Los elementos principales de WSDL se dividen en subpartes.
+
+**Figura 1-7. WSDL consta de tres elementos principales y siete partes.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a40bfaea-364f-45d0-a0b6-cc2d61a701f2)
+
 
 Las partes de definición incluyen definiciones de tipos de datos, mensajes y operaciones abstractas, que son similares a las definiciones de interfaz en CORBA o DCOM. Los mensajes pueden tener varias partes y se pueden definir para su uso con el estilo de interacción orientado a procedimientos, el estilo de interacción orientado a documentos o ambos. A través de las capas de abstracción, los mismos mensajes se pueden definir y utilizar para varios tipos de puertos. Al igual que las otras partes de WSDL , los mensajes también incluyen componentes de extensibilidad, por ejemplo, para incluir otros atributos de mensajes.
 
-NOTA
-LAS INTERFACES WSDL son como las interfaces CORBA o DCOM
+<hr>
 
-LAS DEFINICIONES DE TIPO DE DATOS WSDL se basan en esquemas XML , pero se puede sustituir por otro sistema de definición de tipo equivalente o similar. Por ejemplo, los tipos de datos del Lenguaje de definición de interfaz ( IDL ) DE CORBA podrían usarse en lugar de los tipos de datos de esquema XML . (Sin embargo, si se utiliza otro sistema de definición de tipos, ambas partes de una interacción de servicios web deben poder entenderlo).
+**NOTA**
 
-NOTA
-Los tipos de datos de servicios web se basan en esquemas XML , pero son extensibles a cualquier otro mecanismo
+Las interfaces WSDL son como las interfaces CORBA o DCOM
 
-Los enlaces de servicio asignan los mensajes abstractos y las operaciones a transportes específicos, como SOAP . Los componentes de extensibilidad de enlace se utilizan para incluir información específica de SOAP y otras asignaciones. Las definiciones abstractas se pueden asignar a una variedad de transportes físicos. La especificación WSDL incluye ejemplos de asignaciones unidireccionales DE SOAP PARA SMTP (Protocolo simple de transferencia de correo), asignaciones DE SOAP RPC para HTTP , asignaciones DE SOAP para HTTP GET y POST, y un ejemplo de asignación para el enlace multiparte MIME (extensiones de mensajería de Internet multipropósito) paraJABÓN .
+<hr>
 
-NOTA
-Los mensajes abstractos y las operaciones se asignan a transportes específicos.
+Las definiciones de tipo de datos WSDL se basan en XML schemas, pero se puede sustituir por otro sistema de definición de tipo equivalente o similar. Por ejemplo, los tipos de datos del Interface Definition Language (IDL) de CORBA podrían usarse en lugar de los tipos de datos de XML schema. (Sin embargo, si se utiliza otro sistema de definición de tipos, ambas partes de una interacción de servicios web deben poder entenderlo).
 
-LOS ESPACIOS DE NOMBRES XML se utilizan para garantizar la exclusividad de los nombres de elementos XML UTILIZADOS EN CADA UNO DE LOS TRES ELEMENTOS PRINCIPALES DE WSDL . Por supuesto, cuando los elementos WSDL se desarrollan por separado y se importan en un solo archivo completo, los espacios de nombres utilizados en los archivos separados no deben superponerse. Los esquemas asociados se utilizan para validar tanto el archivo WSDL como los mensajes y operaciones definidos en el archivo WSDL .
+<hr>
 
-NOTA
-Los espacios de nombres aseguran la unicidad de los nombres de los elementos WSDL
+**NOTA**
 
-Es seguro decir que es probable que WSDL incluya muchas extensiones, cambios y adiciones a medida que maduren los servicios web. Al igual que SOAP , WSDL ESTÁ DISEÑADO COMO UN MARCO XML extensible que se puede adaptar fácilmente a múltiples asignaciones de tipos de datos, definiciones de tipos de mensajes, operaciones y transportes. Por ejemplo, los grupos de trabajo DEL IETF (Grupo de trabajo de ingeniería de Internet) están proponiendo un nuevo estándar de protocolo, el Protocolo de intercambio extensible de bloques ( BEEP ), para definir un transporte útil orientado a la conexión. ( HTTP, POR EL CONTRARIO , es inherentemente sin conexión, lo que dificulta la resolución de problemas de calidad de servicio a nivel de transporte) . DCOM o IIOP (Internet Inter-Orb Protocol).
+Los tipos de datos de Web service se basan en XML schemas, pero son extensibles a cualquier otro mecanismo
 
-SOAP : acceso a servicios web
+<hr>
+
+Los service bindings map(asignan) los mensajes abstractos y las operaciones a transportes específicos, como SOAP. Los binding extensibility components se utilizan para incluir información específica de SOAP y otras mappings. Las definiciones abstractas se pueden asignar a una variedad de transportes físicos. La especificación WSDL incluye ejemplos de asignaciones unidireccionales DE SOAP para SMTP (Simple Mail Transfer Protocol), SOAP RPC mappings para HTTP, SOAP mappings para HTTP **`GET`** y **`POST`**, y un ejemplo mapping MIME (multipurpose Internet messaging extensions) multipart binding para SOAP.
+
+<hr>
+
+**NOTA**
+
+Los mensajes abstractos y las operaciones son mapped a transportes específicos.
+
+<hr>
+
+Los XML namespaces se utilizan para garantizar la exclusividad de los nombres de los XML element utilizados en cada uno de los tres elementos principales de WSDL elements. Por supuesto, cuando los WSDL elements se desarrollan por separado y se importan en un solo archivo completo, los espacios de nombres utilizados en los archivos separados no deben superponerse. Los esquemas asociados se utilizan para validar tanto el archivo WSDL como los mensajes y operaciones definidos en el archivo WSDL .
+
+<hr>
+
+**NOTA**
+
+Los namespaces aseguran la unicidad de los nombres de los WSDL element
+
+<hr>
+
+Es seguro decir que es probable que WSDL incluya muchas extensiones, cambios y adiciones a medida que maduren los Web services. Al igual que SOAP, WSDL está diseñado como un extensible XML framework que se puede adaptar fácilmente a múltiples asignaciones de tipos de datos, definiciones de tipos de mensajes, operaciones y transportes. Por ejemplo, IETF (Internet Engineering Task Force) están proponiendo un nuevo estándar de protocolo, el Blocks Extensible Exchange Protocol (BEEP), para definir un transporte útil orientado a la conexión. ( HTTP, por el contrario, es inherentemente sin conexión, lo que dificulta la resolución de problemas de calidad de servicio a nivel de transporte) tales como DCOM or IIOP (Internet Inter-Orb Protocol).
+
+### SOAP: Acceso a Web Services
+
 Hasta ahora, ha definido los datos ( XML ) y expresado la abstracción del servicio necesario para admitir la comunicación y el procesamiento del mensaje ( WSDL ). Ahora debe definir la forma en que el mensaje se enviará de una computadora a otra y así estará disponible para su procesamiento en la computadora de destino.
 
-La especificación SOAP define un marco de mensajería para intercambiar datos XML formateados a través de Internet. El marco de mensajería es simple, fácil de desarrollar y completamente neutral con respecto al sistema operativo, el lenguaje de programación o la plataforma informática distribuida. SOAP está destinado a proporcionar un nivel mínimo de transporte sobre el cual se pueden construir interacciones y protocolos más complicados.
+La especificación SOAP define un framework de mensajería para intercambiar datos XML formateados a través de Internet. El framework de mensajería es simple, fácil de desarrollar y completamente neutral con respecto al sistema operativo, el lenguaje de programación o la plataforma informática distribuida. SOAP está destinado a proporcionar un nivel mínimo de transporte sobre el cual se pueden construir interacciones y protocolos más complicados.
 
-NOTA
-SOAP proporciona el mecanismo de comunicación para conectar servicios Web
+<hr>
 
-SOAP es fundamentalmente un modelo de comunicación unidireccional que garantiza que se transfiera un mensaje coherente del remitente al receptor, lo que incluye potencialmente intermediarios que pueden procesar parte o agregar a la unidad de mensaje. La especificación SOAP contiene convenciones para adaptar su mensajería unidireccional para el paradigma de solicitud/respuesta popular en las comunicaciones de estilo RPC y también define cómo transmitir documentos XML COMPLETOS. SOAP define una regla de codificación opcional para los tipos de datos, pero los puntos finales en una comunicación SOAP PUEDEN DECIDIR SOBRE SUS PROPIAS REGLAS DE CODIFICACIÓN A TRAVÉS DE UN ACUERDO PRIVADO. La comunicación a menudo utiliza codificación XML nativa o literal .
+**NOTA**
 
-NOTA
+SOAP proporciona el mecanismo de comunicación para conectar Web services
+
+<hr>
+
+SOAP es fundamentalmente un modelo de comunicación unidireccional que garantiza que se transfiera un mensaje coherente del remitente al receptor, lo que incluye potencialmente intermediarios que pueden procesar parte o agregar a la unidad de mensaje. La especificación SOAP contiene convenciones para adaptar su mensajería unidireccional para el paradigma de request/response popular en las comunicaciones de estilo RPC y también define cómo transmitir documentos XML completos. SOAP define una regla de codificación opcional para los tipos de datos, pero los end points en una comunicación SOAP pueden decidir sobre sus propias reglas de códificación a través de un acuerdo privado. La comunicación a menudo utiliza codificación XML nativa o encoding.
+
+<hr>
+
+**NOTA**
+
 SOAP es la forma XML de definir qué información se envía y cómo
 
-Como se muestra en la Figura 1-8 , SOAP está diseñado para proporcionar un protocolo de comunicación abstracto e independiente capaz de unir o conectar dos o más empresas o dos o más sitios comerciales remotos. Los sistemas conectados se pueden construir utilizando cualquier combinación de hardware y software que admita el acceso a Internet a los sistemas existentes, como .NET y J2EE. Los sistemas existentes normalmente también representan múltiples infraestructuras y productos de software empaquetados. SOAP y el resto del marco XML proporcionan los medios para que dos o más sitios comerciales, mercados o socios comerciales acuerden un enfoque común para exponer los servicios en la Web.
+<hr>
+
+Como se muestra en la Figura 1-8, SOAP está diseñado para proporcionar un protocolo de comunicación abstracto e independiente capaz de unir o conectar dos o más empresas o dos o más sitios comerciales remotos. Los sistemas conectados se pueden construir utilizando cualquier combinación de hardware y software que admita el acceso a Internet a los sistemas existentes, como .NET y J2EE. Los sistemas existentes normalmente también representan múltiples infraestructuras y productos de software empaquetados. SOAP y el resto del framework XML proporcionan los medios para que dos o más sitios comerciales, marketplaces o socios comerciales acuerden un enfoque común para exponer los servicios en la Web.
 
 
-Figura 1-8. LOS MENSAJES SOAP conectan sitios remotos.
+**Figura 1-8. Los SOAP messages conectan sitios remotos.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/d391b69f-24b1-4c9c-933f-576f1846a9c8)
+
 
 SOAP tiene varias partes principales:
 
-Sobre:  ​​Define el inicio y el final del mensaje
+* **`Envelope`**: ​​Define el inicio y el final del mensaje
 
-Encabezado:  contiene cualquier atributo opcional del mensaje utilizado en el procesamiento del mensaje, ya sea en un punto intermedio o en el punto final final
+* **`Header`**: Contiene cualquier atributo opcional del mensaje utilizado en el procesamiento del mensaje, ya sea en un punto intermedio o en el último end point.
 
-Cuerpo:  contiene losXMLque componen el mensaje que se envía
+* **`Body`**: Contiene el XML data que componen el mensaje que se envía
 
-Adjunto:  Consiste en uno o más documentos adjuntos al mensaje principal (SOAPcon Adjuntos solamente)
+* **`Attachment`**: Consiste en uno o más documentos adjuntos al mensaje principal (SOAP con Adjuntos solamente)
 
-Interacción RPC  : define cómo modelarRPCconSOAP
+* **`RPC interaction`**: define cómo modelar RPC con SOAP
 
-Codificación:  define cómo representar datos simples y complejos que se transmiten en el mensaje
+* **`Encoding`**: Define cómo representar datos simples y complejos que se transmiten en el mensaje
 
-NOTA
-LOS MENSAJES SOAP contienen un sobre, un encabezado y un cuerpo.
+<hr>
 
-Solo se requiere el sobre y el cuerpo.
+**NOTA**
 
-UDDI : publicación y descubrimiento de servicios web
-Después de haber definido los datos en los mensajes ( XML ), descrito los servicios que recibirán y procesarán el mensaje ( WSDL ) e identificado los medios para enviar y recibir los mensajes ( SOAP ), necesita una forma de publicar el servicio que usted ofrece y para encontrar los servicios que otros ofrecen y que usted puede querer utilizar. Esta es la función que proporciona UDDI (distribución universal, descubrimiento e interoperabilidad).
+Los SOAP messages contienen un envelope, un header, y un body
 
-DENTRO DE LA EMPRESA
+<hr>
+
+Solo son obligatorios el envelope y el body.
+
+## UDDI: Publicación y Descubrimiento Web Services
+
+Después de haber definido los datos en los mensajes ( XML ), descrito los servicios que recibirán y procesarán el mensaje ( WSDL ) e identificado los medios para enviar y recibir los mensajes ( SOAP ), necesita una forma de publicar el servicio que usted ofrece y para encontrar los servicios que otros ofrecen y que usted puede querer utilizar. Esta es la función que proporciona UDDI (universal distribution, discovery, and interoperability).
+
+#### DENTRO DE LA EMPRESA
 
 Muchas empresas están explorando las posibles ventajas de utilizar servicios web tanto dentro como fuera de la empresa. Esto es análogo al uso de navegadores y servidores web dentro de la empresa en redes internas. La infraestructura web interna existente se puede utilizar para dar soporte a las interacciones del estilo de los servicios web. Aunque es poco probable que reemplacen los entornos informáticos distribuidos existentes, como COM y CORBA , los servicios web pueden ser un complemento valioso para las tecnologías existentes. A veces, todo lo que tiene es una conexión HTTP o SMTP . Debido a que representan un formato completamente neutral que se puede usar para lograr un nuevo nivel de interoperabilidad, los servicios web también se pueden usar como puente entre COM, CORBA, EJB y entornos de colas de mensajes. Finalmente, debido a que los servicios web utilizan la infraestructura HTTP existente , el impacto en los administradores de sistemas es mínimo en comparación con la introducción de otras tecnologías informáticas distribuidas en un departamento DE TI . El rendimiento es sin duda un problema en comparación con los transportes y protocolos orientados a binarios más tradicionales, pero los beneficios potenciales superan los costos para muchas aplicaciones, y los problemas de rendimiento tienden a resolverse con el tiempo, como sucedió con la Web original.
 
