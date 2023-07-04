@@ -186,16 +186,17 @@ Al recibir el SOAP request message, el service provider responds con una SOAP re
 
 Cuando no se espera una response a un request message de un web service (o service provider - proveedor de servicios), se conoce como un patrón de intercambio fire and forget message. Por ejemplo, si enviamos una request de ping a un web service, no esperamos un response message.
   
-AQUIIIIIIIII
-## Errores de SOAP
 
-Antes de concluir nuestra discusión sobre los web services y los conceptos asociados, debemos analizar el mecanismo de manejo de fallas de los web services. Los web services pueden devolver fallas debido a varias razones. Por ejemplo, si el mensaje de solicitud no se ajusta al esquema XML del web service, el servicio responde con un error de SOAP. El elemento de error de SOAP se utiliza para transportardichas fallas ocurrieron durante la comunicación del web service. Este elemento debe incluirse dentro del cuerpo de un mensaje SOAP. Un mensaje de error típico de SOAP 1.1 consta de los siguientes elementos secundarios:
+## SOAP Faults - Errores de SOAP
 
-faultcode: El faultcodeelemento se utiliza para definir el tipo de fallo. Por ejemplo, si el problemade la transmisión del mensaje se debe al servidor, el código de falla asociado es Server. Del mismo modo, podemos usar VersionMismatchy códigos de error según corresponda MustUnderstand.Client
-faultstring: El faultstringelementotiene la intención de proporcionar una explicación legible por humanos sobre la falla.
-faultactor: ElfaultactorEl elemento proporciona una indicación sobre la parte responsable que provocó la falla en la ruta del mensaje.
-detail: EldetailEl elemento se utiliza para transportar información de error específica de la aplicación relacionada con el elemento del cuerpo. Por ejemplo, si el web service no puede procesar la carga útil de la solicitud SOAP, la respuesta asociada debe incluir el elemento de detalle dentro de la falla SOAP.
-En el caso de la mensajería SOAP v1.2, faultcodese cambia el nombre a Codey faultstringse cambia el nombre a Reason. Además de eso, un mensaje de error de SOAP v1.2 puede incluir los elementos secundarios opcionales Node, Role,y Detail.Puede encontrar una explicación detallada de las fallas de SOAP 1.1 en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507 . Las fallas de SOAP 1.2 se explican en detalle en http://www.w3.org/TR/soap12-part1/#soapfault .
+Antes de concluir nuestra discusión sobre los web services y los conceptos asociados, debemos analizar el mecanismo de manejo de fallas de los web services. Los web services pueden devolver fallas debido a varias razones. Por ejemplo, si el request message no se ajusta al XML schema del web service, el servicio responde con un error de SOAP. El elemento de error de SOAP se utiliza para transportar dichas fallas ocurrieron durante la comunicación del web service. Este elemento debe incluirse dentro del cuerpo de un mensaje SOAP. Un mensaje de error típico de SOAP 1.1 consta de los siguientes elementos secundarios:
+
+* **`faultcode`**: El elemento **`faultcode`** se utiliza para definir el tipo de fallo. Por ejemplo, si el problema de la transmisión del mensaje se debe al servidor, el código de falla asociado es **`Server`**. Del mismo modo, podemos usar códigos de error **`VersionMismatch`**, **`MustUnderstand`** y **`Client`** según corresponda.
+* **`faultstring`**: El elemento **`faultstring`** tiene la intención de proporcionar una explicación legible por humanos sobre la falla.
+* **`faultactor`**: El elemento **`faultactor`** proporciona una indicación sobre la parte responsable que provocó la falla en la  message path.
+* **`detail`**: El elemento **`detail`** se utiliza para transportar información de error específica de la aplicación relacionada con el body element. Por ejemplo, si el web service no puede procesar la carga útil de la SOAP request, la respuesta asociada debe incluir el detail element dentro de SOAP Fault.
+
+En el caso de la mensajería SOAP v1.2, **`faultcode`** cambia el nombre a **`Code`** y **`faultstring`** se cambia el nombre a **`Reason`**. Además de eso, un mensaje de error de SOAP v1.2 puede incluir los optional child elements, **`Node`**, **`Role`** y **`Detail`**. Puede encontrar una explicación detallada de las fallas de SOAP 1.1 en http://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507 . Las fallas de SOAP 1.2 se explican en detalle en http://www.w3.org/TR/soap12-part1/#soapfault .
   
 ## Enfoques de prueba de web services
   
@@ -203,49 +204,59 @@ Discutimos un conjunto de conceptos más asociados con los web services. Ahora e
 
 Esto brinda a los probadores la capacidad de seguir una metodología de prueba a nivel de componente. Antes de pasar a varias integraciones, se puede probar un web service para verificar los requisitos funcionales y no funcionales. Una vez que el servicio se mejora con diferentes atributos, como políticas de seguridad, dicho servicio también se puede probar individualmente para garantizar que funcione correctamente antes de tener en cuenta los escenarios de integración. Esto brinda una gran flexibilidad para los evaluadores y brinda agilidad a los procesos de prueba.
 
-Podemos identificar un conjunto de enfoques comunes paraprobando los web services de la siguiente manera:
+Podemos identificar un conjunto de enfoques comunes para probando los web services de la siguiente manera:
 
 Examen de la unidad
 Pruebas funcionales de web services.
 Pruebas de integración de web services
 Pruebas de rendimiento
+
+* Unit testing(Pruebas unitarias) de web services
+* Functional testing(Pruebas funcionales) de web services
+* Integration testing(Pruebas de integración) de web services
+* Performance testing(Pruebas de rendimiento) de web services
+
 Analicemos cada uno de estos enfoques en detalle.
 
-Pruebas unitarias de web services
-Un web service es una unidad de lógica de negocio y consta de una o más operaciones. Estas operaciones deben probarse individualmente para asegurarse de que el web service aborde los problemas comerciales previstos. operaciones. Por lo tanto, al igual que los métodos individuales en un programa de computadora se prueban como unidades, las operaciones del web service también deben probarse como unidades. Las pruebas unitarias se pueden desarrollar utilizando el marco de pruebas unitarias asociado con el lenguaje de programación que se utiliza para implementar los web services. Por ejemplo, si los web services están escritos en Java, el marco JUnit se puede usar como marco de pruebas unitarias. Generalmente, es responsabilidad del autor del web service escribir una cantidad suficiente de pruebas unitarias para cubrir la lógica de las operaciones del web service.
+### Unit testing(Pruebas unitarias) de web services
 
-Pruebas funcionales
-Una vez que un web service se implementa en un contenedor de servicios, se somete a una verificación funcional integral. El propósito de La prueba funcional de un web service es para garantizar que el web service proporciona la funcionalidad comercial esperada. Hay muchos enfoques para realizar pruebas funcionales como se explica a continuación.
+Un web service es una unidad de lógica de negocio y consta de una o más operaciones. Estas operaciones deben probarse individualmente para asegurarse de que el web service aborde los problemas comerciales previstos. Por lo tanto, al igual que los métodos individuales en un programa de computadora se prueban como unidades, las operaciones del web service también deben probarse como unidades. Las pruebas unitarias se pueden desarrollar utilizando el marco de pruebas unitarias asociado con el lenguaje de programación que se utiliza para implementar los web services. Por ejemplo, si los web services están escritos en Java, el **framework JUnit** se puede usar como framework de pruebas unitarias. Generalmente, es responsabilidad del autor del web service escribir una cantidad suficiente de pruebas unitarias para cubrir la lógica de las operaciones del web service.
 
-Pruebas asistidas por herramientas
-El objetivo principal de usar herramientas para la prueba de web services es admitir la generación y el envío automáticos de solicitudes de web services. Como la interfaz del web service es un documento XML legible por máquina, No es una tarea fácil leer el WSDL y derivar pruebas manualmente. Por lo tanto, se pueden utilizar herramientas para apuntar al WSDL y generar automáticamente las solicitudes correspondientes, para que los probadores puedan enviarlas al servicio con o sin alteraciones. soapUI es un buen ejemplo de una herramienta de prueba de este tipo, que se puede utilizar en las pruebas funcionales de los web services.
+### Pruebas funcionales de web services
 
-Uso de las API de cliente proporcionadas por el middleware del contenedor de servicios
+Una vez que un web service se implementa en un contenedor de servicios, se somete a una verificación funcional integral. El propósito de la prueba funcional de un web service es para garantizar que el web service proporcione la funcionalidad comercial esperada. Hay muchos enfoques para realizar pruebas funcionales como se explica a continuación.
+
+#### Pruebas asistidas por herramientas
+
+El objetivo principal de usar herramientas para la prueba de web services es admitir la generación y el envío automático de solicitudes de web services. Como la interfaz del web service es un documento XML legible por máquina, no es una tarea fácil leer el WSDL y derivar pruebas manualmente. Por lo tanto, se pueden utilizar herramientas para apuntar al WSDL y generar automáticamente las requests correspondientes, para que los probadores puedan enviarlas al servicio con o sin alteraciones. soapUI es un buen ejemplo de una herramienta de prueba de este tipo, que se puede utilizar en las pruebas funcionales de los web services.
+
+#### Uso de las API de cliente proporcionadas por el middleware del contenedor de servicios
+
 La vida de un web service viene dada por el middleware del contenedor de servicios donde se aloja el servicio. Por lo general, los proveedores de middleware envían las bibliotecas de API de cliente asociadas que se pueden usar para invocar web services mediante programación sin usar ninguna herramienta de terceros.
 
-Pruebas de integración de web services
+### Integration testing(Pruebas de integración) de web services
   
-Los web services esencialmente no se ejecutan solos. En cambio, están integrados con múltiples componentes, como corredores o servicios.coordinadores Una vez que un servicio se integra o se une a otro componente, debemos realizar pruebas para asegurarnos de que dichas integraciones no rompan el sistema. Por ejemplo, en una solución orientada a servicios, si una aplicación de consumidor de servicios envía un mensaje a un web service pero el mensaje no se ajusta al esquema anunciado del web service. En este caso, el web service suele responder con un fallo de SOAP. Sin embargo, si queremos tomar dicha solicitud y transformar el mensaje SOAP de solicitud para que sea válido de acuerdo con el esquema, entonces no queremos pedir a los consumidores de nuestro web service que cambien las aplicaciones cliente a medida que se modifica el esquema del servicio. . Este tipo de transformación de mensajes se logra mediante el uso de un componente de intermediario, en otras palabras, bus de servicio empresarial ( ESB) software intermedio. Según las reglas de transformación definidas en el bus de servicios empresariales, la solicitud se convierte al formato correcto y se reenvía al web service. Este es un tipicoejemplo de integración de web services. Para probar este tipo de integración, el mensaje de solicitud debe reenviarse al componente ESB en lugar de enviarlo directamente al web service. Las herramientas como soapUI se pueden usar fácilmente para enviar los mensajes a las ubicaciones de destino deseadas de manera adecuada.
+Los web services esencialmente no se ejecutan solos. En cambio, están integrados con múltiples componentes, como brokers o service coordinators. Una vez que un servicio se integra o se une a otro componente, debemos realizar pruebas para asegurarnos de que dichas integraciones no rompan el sistema. Por ejemplo, en una solución orientada a servicios, si una aplicación de consumidor de servicios envía un mensaje a un web service pero el mensaje no se ajusta al esquema anunciado del web service. En este caso, el web service suele responder con un fallo de SOAP. Sin embargo, si queremos tomar dicha request y transformar el request SOAP message para que sea válido de acuerdo con el esquema, entonces no queremos pedir a los consumidores de nuestro web service que cambien las aplicaciones cliente a medida que se modifica el esquema del servicio. Este tipo de transformación de mensajes se logra mediante el uso de un broker component(componente intermediario), en otras palabras, enterprise service bus (ESB) middleware. Según las reglas de transformación definidas en el  enterprise service bus, la request se convierte al formato correcto y se reenvía al web service. Este es un tipico ejemplo de integración de web services. Para probar este tipo de integración, el request message debe reenviarse al componente ESB en lugar de enviarlo directamente al web service. Las herramientas como soapUI se pueden usar fácilmente para enviar los mensajes a las ubicaciones de destino deseadas de manera adecuada.
 
-Pruebas de rendimiento de los web services.
+### Performance testing(Pruebas de rendimiento) de web services.
   
-Una vez que estamos satisfechos con los aspectos funcionales del web service, debe probarse exhaustivamente el rendimiento. Esto incluye pruebas de carga y estrés del web service, así como la medición del rendimiento bajovarias condiciones Podemos utilizar varias herramientas comerciales o de código abierto en las pruebas de rendimiento de los web services. Apache JMeter(que se encuentra en http://jmeter.apache.org/ ) es un buen ejemplo de una herramienta de prueba de código abierto que se puede usar para probar web services. Las pruebas funcionales que creamos en soapUI se pueden ampliar fácilmente para probar el rendimiento de los web services. Discutiremos las capacidades de prueba de rendimiento de soapUI en detalle en el Capítulo 5 , Pruebas de carga y rendimiento con soapUI .
+Una vez que estamos satisfechos con los aspectos funcionales del web service, debe probarse exhaustivamente el rendimiento. Esto incluye pruebas de carga y estrés del web service, así como la medición del rendimiento bajo varias condiciones Podemos utilizar varias herramientas comerciales o de código abierto en las pruebas de rendimiento de los web services. **Apache JMeter**(que se encuentra en http://jmeter.apache.org/ ) es un buen ejemplo de una herramienta de prueba de código abierto que se puede usar para probar web services. Las pruebas funcionales que creamos en soapUI se pueden ampliar fácilmente para probar el rendimiento de los web services. Discutiremos las capacidades de prueba de rendimiento de soapUI en detalle en el Capítulo 5, ***Load and Performance Testing with soapUI.***
 
-Los desafíos comunes de las pruebas de web services
+### Los desafíos comunes de los Web services testing
   
-En comparación con los enfoques de prueba tradicionales, existen algunos desafíos únicos asociados con las pruebas de web services.
+En comparación con los enfoques de prueba tradicionales, existen algunos desafíos únicos asociados con las web services testing.
 
-Uso de web services externos
+#### Uso de web services externos
   
-La naturaleza autónoma y débilmente acoplada de los web services introduce un mayor nivel de escalabilidad y extensibilidad al sistema. Todos los servicios incluidos en un sistema no necesariamente se construyen internamente. Algunos web services pueden ser desarrollados y alojados por terceros. Estos servicios pueden serdescubierto y utilizado dinámicamente de acuerdo con los requisitos del negocio. Si bien esto acelera la entrega de soluciones, probar un sistema de este tipo se vuelve complejo porque la garantía de calidad y la disponibilidad de los servicios de terceros están fuera de su control.
+La naturaleza autónoma y débilmente acoplada de los web services introduce un mayor nivel de escalabilidad y extensibilidad al sistema. Todos los servicios incluidos en un sistema no necesariamente se construyen internamente. Algunos web services pueden ser desarrollados y alojados por terceros. Estos servicios pueden ser descubierto y utilizado dinámicamente de acuerdo con los requisitos del negocio. Si bien esto acelera la entrega de soluciones, probar un sistema de este tipo se vuelve complejo porque la garantía de calidad y la disponibilidad de los servicios de terceros están fuera de su control.
 
-Implicaciones del uso de estándares y protocolos complejos
+#### Implicaciones del uso de estándares y protocolos complejos
   
-Los web services, especialmente los servicios basados ​​en SOAP, pueden usar varias especificaciones WS-*. Cuando se prueban web services que se adhieren a especificaciones como WS-Security, el evaluador debe poseer una buena cantidad de conocimiento sobre los estándares y conceptos para llevar a cabo las pruebas de manera efectiva. Esto introduce una curva de aprendizaje más alta para que los evaluadores comiencen a probar los web services.
+Los web services, especialmente los servicios basados ​​en SOAP, pueden usar varias especificaciones **`WS-*`**. Cuando se prueban web services que se adhieren a especificaciones como **WS-Security**, el evaluador debe poseer una buena cantidad de conocimiento sobre los estándares y conceptos para llevar a cabo las pruebas de manera efectiva. Esto introduce una curva de aprendizaje más alta para que los evaluadores comiencen a probar los web services.
 
-Los web services también se pueden exponer a través de múltiples protocolos de transporte. Por lo tanto, las pruebas no se limitan a un transporte en particular, como HTTP. Se puede acceder al mismo web service a través de transportes como JMS o VFS, lo que requiere cambios en la configuración de la prueba, así como un conjunto diferente de escenarios de prueba.
+Los web services también se pueden exponer a través de múltiples protocolos de transporte. Por lo tanto, las pruebas no se limitan a un transporte en particular, como **HTTP**. Se puede acceder al mismo web service a través de transportes como **JMS** o **VFS**, lo que requiere cambios en la configuración de la prueba, así como un conjunto diferente de escenarios de prueba.
 
-Naturaleza sin cabeza de los web services
+#### Naturaleza Headless de los web services
   
 En las pruebas de aplicaciones web tradicionales, los escenarios de prueba se pueden identificar con bastante facilidad estudiando la GUI de los componentes. Como discutimos anteriormente, las operaciones de los web services están expuestas al mundo exterior a través de contratos de servicio legibles por máquina (como WSDL). Por lo tanto, durante las primeras etapas del desarrollo de web services, los evaluadores deben usar WSDL como referencia para la derivación de escenarios de prueba, lo que puede ser difícil en comparación con la exploración de una GUI.
 
@@ -255,11 +266,11 @@ Hemos discutido los fundamentos de SOA y las pruebas de web services. Ahora, est
   
 ## ¿Qué es SoapUI?
   
-El objetivo principal de diseñar herramientas de prueba es ayudar a las personas a probar el software reduciendo el tiempo que lleva la ejecución de la prueba.Hay diferentes tipos de herramientas que se pueden utilizar para pruebas funcionales y no funcionales. Algunas de las herramientas están diseñadas para automatizar las interacciones basadas en la interfaz de usuario y otras se utilizan para derivar automáticamente varios tipos de mensajes de solicitud y transmitirlos a las aplicaciones con o sin modificaciones. Algunas herramientas admiten ambos aspectos.
+El objetivo principal de diseñar herramientas de prueba es ayudar a las personas a probar el software reduciendo el tiempo que lleva la ejecución de la prueba. Hay diferentes tipos de herramientas que se pueden utilizar para pruebas funcionales y no funcionales. Algunas de las herramientas están diseñadas para automatizar las interacciones basadas en la interfaz de usuario y otras se utilizan para derivar automáticamente varios tipos de mensajes de solicitud y transmitirlos a las aplicaciones con o sin modificaciones. Algunas herramientas admiten ambos aspectos.
 
-soapUI es una herramienta que se puede utilizar tanto para pruebas funcionales como no funcionales. No se limita a los web services, aunque es la herramienta de facto utilizada en las pruebas de web services. En las pruebas de web services, soapUI es capaz de desempeñar el papel de cliente y servicio. Permite a los usuarios crear pruebas funcionales y no funcionales de forma rápida y eficiente mediante el uso de un único entorno.
+**SoapUI** es una herramienta que se puede utilizar tanto para pruebas funcionales como no funcionales. No se limita a los web services, aunque es la herramienta de facto utilizada en las pruebas de web services. En las pruebas de web services, soapUI es capaz de desempeñar el papel de cliente y servicio. Permite a los usuarios crear pruebas funcionales y no funcionales de forma rápida y eficiente mediante el uso de un único entorno.
 
-El primer lanzamiento de soapUI (v1.0) fue en octubre de 2005. Mientras trabajaba en un proyecto relacionado con SOA, Ole Lensmer sintió la necesidad de una herramienta de prueba para respaldar el desarrollo ágil. Por lo tanto, comenzó a desarrollar soapUI en su tiempo libre. Eventualmente, el proyecto fue de código abierto y la comunidad creció. Desde entonces, se han lanzado varias versiones con varias funciones y mejoras nuevas, y la versión más reciente de soapUI es la 4.0.1 al momento de escribir este libro.
+***El primer lanzamiento de soapUI (v1.0) fue en octubre de 2005***. *Mientras trabajaba en un proyecto relacionado con SOA, **Ole Lensmer** sintió la necesidad de una herramienta de prueba para respaldar el desarrollo ágil*. Por lo tanto, comenzó a desarrollar soapUI en su tiempo libre. Eventualmente, el proyecto fue de código abierto y la comunidad creció. Desde entonces, se han lanzado varias versiones con varias funciones y mejoras nuevas, y ***la versión más reciente de soapUI es la 4.0.1 al momento de escribir este libro***. (***A fecha del 04/07/2023 la versión es Version 5.7.0***).
 
 El creador de soapUI, Ole Lensmer, estuvo administrando los lanzamientos del proyecto a través de una empresa llamada Eviware durante los últimos años. En julio de 2011, SmartBear Software adquirió Eviware ( http://smartbear.com/ ) y ahora soapUI forma parte de SmartBear Software.
 
