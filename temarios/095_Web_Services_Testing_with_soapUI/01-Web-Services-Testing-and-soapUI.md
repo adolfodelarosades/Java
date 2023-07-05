@@ -272,161 +272,137 @@ El objetivo principal de diseñar herramientas de prueba es ayudar a las persona
 
 ***El primer lanzamiento de soapUI (v1.0) fue en octubre de 2005***. *Mientras trabajaba en un proyecto relacionado con SOA, **Ole Lensmer** sintió la necesidad de una herramienta de prueba para respaldar el desarrollo ágil*. Por lo tanto, comenzó a desarrollar soapUI en su tiempo libre. Eventualmente, el proyecto fue de código abierto y la comunidad creció. Desde entonces, se han lanzado varias versiones con varias funciones y mejoras nuevas, y ***la versión más reciente de soapUI es la 4.0.1 al momento de escribir este libro***. (***A fecha del 04/07/2023 la versión es Version 5.7.0***).
 
-El creador de soapUI, Ole Lensmer, estuvo administrando los lanzamientos del proyecto a través de una empresa llamada Eviware durante los últimos años. En julio de 2011, SmartBear Software adquirió Eviware ( http://smartbear.com/ ) y ahora soapUI forma parte de SmartBear Software.
+El creador de **soapUI**, **Ole Lensmer**, estuvo administrando los lanzamientos del proyecto a través de una empresa llamada **Eviware** durante los últimos años. En julio de 2011, SmartBear Software adquirió Eviware ( http://smartbear.com/ ) y ***ahora soapUI forma parte de SmartBear Software***.
 
-soapUI es una utilidad gratuita y de código abierto, lo que significa que puede utilizar las diversas funciones proporcionadas por la herramienta libremente tan bien como ustedpermite realizar modificaciones en el código fuente de soapUI y adaptarlo de acuerdo con sus requisitos. soapUI tiene licencia bajo los términos de GNU Licencia Pública General Menor ( LGPL ). Se ha implementado únicamente utilizando la plataforma Java, por lo que se ejecuta en la mayoría de los sistemas operativos listos para usar.
+**soapUI** es una utilidad gratuita y de código abierto, lo que significa que puede utilizar las diversas funciones proporcionadas por la herramienta libremente tan bien como usted permite realizar modificaciones en el código fuente de soapUI y adaptarlo de acuerdo con sus requisitos. soapUI tiene licencia bajo los términos de GNU **Lesser General Public License (LGPL)**. Se ha implementado únicamente utilizando la plataforma Java, por lo que se ejecuta en la mayoría de los sistemas operativos listos para usar.
 
-Cabe señalar que soapUI también se distribuye como una versión comercial no gratuita conocida como soapUI Pro, que básicamente brinda a los usuarios utilidades personalizadas y capacidades de prueba de nivel de producción mejoradas. Todas nuestras discusiones y ejemplos se basan en la versión gratuita de soapUI para su conveniencia.
+Cabe señalar que soapUI también se distribuye como una versión comercial no gratuita conocida como **soapUI Pro**, que básicamente brinda a los usuarios utilidades personalizadas y capacidades de prueba de nivel de producción mejoradas. Todas nuestras discusiones y ejemplos se basan en la versión gratuita de soapUI para su conveniencia.
 
 **NOTA**
+
 soapUI v4.0.1 era la versión más nueva en el momento de escribir el libro. Por lo tanto, se utiliza en todo el contexto de este libro. Sin embargo, no discutiremos ningún tema específico de la versión, por lo que las versiones anteriores 3.x de soapUI también se pueden usar para probar los proyectos de muestra y las demostraciones.
   
 ## Capacidades de soapUI
   
-El objetivo principal de los autores de soapUI es brindar a los usuarios una utilidad simple y fácil de usar que se pueda usar para crear y ejecutar pruebas funcionales y no funcionales a través de un solo entorno de prueba. Sobre la base de ese objetivo, soapUI se ha convertido en la herramienta de prueba de web services y SOA líder en el mundo. soapUI se puede instalar sin sobrecarga de configuración en la mayoría de lossistemas operativos que permiten a los usuarios comenzar a utilizar la herramienta sin perder tiempo configurando varios requisitos previos de instalación.
+El objetivo principal de los autores de soapUI es brindar a los usuarios una utilidad simple y fácil de usar que se pueda usar para crear y ejecutar pruebas funcionales y no funcionales a través de un solo entorno de prueba. Sobre la base de ese objetivo, soapUI se ha convertido en la herramienta de prueba de web services y SOA líder en el mundo. soapUI se puede instalar sin sobrecarga de configuración en la mayoría de los sistemas operativos que permiten a los usuarios comenzar a utilizar la herramienta sin perder tiempo configurando varios requisitos previos de instalación.
 
 Al usar la GUI basada en Java Swing fácil de usar, puede comenzar a crear pruebas funcionales sin codificación. Eventualmente, las mismas pruebas funcionales se pueden usar para las pruebas de carga y rendimiento a través del mismo entorno de prueba. Esto brinda a los usuarios una gran flexibilidad ya que todas las pruebas funcionales y no funcionales se pueden administrar a través de un único punto de acceso.
 
-Veamos algunas de las características importantes.de soapUI que estamos planeando discutir en los siguientes capítulos.
+Veamos algunas de las características importantes de soapUI que estamos planeando discutir en los siguientes capítulos.
 
-Cobertura completa de los aspectos funcionales de los web services y las aplicaciones web : soapUI admite la mayoría de los estándares utilizados en las aplicaciones web, como la transmisión de mensajes a través de HTTP, el transporte HTTPS y JMS. También admite pruebas de web services SOAP y RESTful. Específicamente, soapUI admite la mayoría de las especificaciones de web services, como WS-Security, WS-Addressing, entre otros.
-Simulación de servicios : con los servicios simulados de soapUI, puede simular los web services antes de que se implementen realmente. Esto le brinda la posibilidad de probar las aplicaciones de consumo de web services sin esperar hasta que se implementen los proveedores de web services.
-Secuencias de comandos : ya sea con Groovy o JavaScript, soapUI le permite realizar varias configuraciones de prueba previas o posteriores al procesamiento, como respuestas simuladas dinámicas, pruebas de inicialización o limpieza, envío de operaciones simuladas dinámicas, etc.
-Pruebas funcionales : soapUI le permite realizar verificaciones funcionales contra web services, aplicaciones web y fuentes de datos JDBC. Puedes validar las respuestas de tus pruebasutilizando varias aserciones integradas y personalizadas. También le permite agregar pasos de prueba condicionales para controlar el flujo de ejecución de la prueba.
-Pruebas de rendimiento : con solocon unos pocos clics, puede generar pruebas de rendimiento y carga rápidamente usando soapUI.
-Automatización de pruebas : soapUI se puede integrar en marcos de prueba automatizados como JUnit, y las pruebas también se pueden iniciar a través de los marcos de compilación Apache Maven y Apache Ant. También se puede integrar en herramientas de integración continua como Hudson o Bamboo.
-Además de las funciones anteriores, la versión propietaria de soapUI, soapUI Pro, brinda a los usuarios capacidades de prueba basadas en datos, grabación HTTP e informes de prueba que no están dentro del alcance de este libro.
+* **Cobertura completa de los aspectos funcionales de los web services y las aplicaciones web**: soapUI admite la mayoría de los estándares utilizados en las aplicaciones web, como la transmisión de mensajes a través de **HTTP**, el **transporte HTTPS** y **JMS**. También admite pruebas de web services **SOAP** y **RESTful**. Específicamente, soapUI admite la mayoría de las especificaciones de web services, como **WS-Security**, **WS-Addressing**, entre otros.
+
+* **Service mocking**: Con los servicios simulados de soapUI, puede simular los web services antes de que se implementen realmente. Esto le brinda la posibilidad de probar las aplicaciones de consumo de web services sin esperar hasta que se implementen los proveedores de web services.
+
+* **Scripting**: Ya sea con **Groovy** o **JavaScript**, soapUI le permite realizar varias configuraciones de prueba previas o posteriores al procesamiento, como respuestas simuladas dinámicas, pruebas de inicialización o limpieza, envío de operaciones simuladas dinámicas, etc.
+
+* **Functional testing(Pruebas funcionales)**: soapUI le permite realizar verificaciones funcionales contra web services, aplicaciones web y fuentes de datos JDBC. Puedes validar las respuestas de tus pruebas utilizando varias aserciones integradas y personalizadas. También le permite agregar pasos de prueba condicionales para controlar el flujo de ejecución de la prueba.
+  
+* **Performance testing(Pruebas de rendimiento)**: Con solo con unos pocos clics, puede generar pruebas de rendimiento y carga rápidamente usando soapUI.
+
+* **Test automation(Automatización de pruebas)**: soapUI se puede integrar en frameworks de prueba automatizados como **JUnit**, y las pruebas también se pueden iniciar a través de los frameworks de compilación **Apache Maven** y **Apache Ant**. También se puede integrar en *herramientas de integración continua como **Hudson** o **Bamboo***.
+
+Además de las funciones anteriores, la versión propietaria de **soapUI**, **soapUI Pro**, brinda a los usuarios capacidades de prueba basadas en datos, grabación HTTP e informes de prueba que no están dentro del alcance de este libro.
   
 ## Instalación de la interfaz de usuario de SOAP
   
 Examinamos las funciones principales proporcionadas por soapUI y discutimos la herramienta en general. Es hora de explorar la instalación fácil y sencilla de soapUI en algunos de los sistemas operativos populares.
 
-Requisitos del sistema
+### Requisitos del sistema
   
 Para poder ejecutar soapUI, debe tener Java Development Kit ( JDK ) v1.6 ejecutándose en su sistema. Como soapUI se implementa en Java, se ejecuta en muchos sistemas operativos, incluidos Windows XP, Windows Vista, Windows 7, Windows Server 2003, Windows Server 2008, varias versiones de Linux como Ubuntu, Red Hat, Fedora, SuSE y CentOS, y Mac OS X v10.4 o superior.
 
 Podemos resumir los requisitos del sistema para instalar y ejecutar soapUI de la siguiente manera:
 
-Sistema operativo
-
-versión Java
-
-Memoria
-
-Procesador
-
-Espacio del disco
-
-microsoft windows xp
-
-microsoft windows vista
-
-Servidor de Microsoft Windows 2003
-
-y
-
-Servidor de Microsoft Windows 2008
-
-JDK v1.6.x
-
-512 MB (mínimo)
-
-1 GHz o superior, procesador de 32 o 64 bits
-
-200 MB de espacio en disco duro (mínimo)
-
-Linux:
-
-ubuntu
-
-sombrero rojo
-
-Fedora
-
-CentOS
-
-y
-
-SuSE
-
-JDK v1.6.x
-
-512 MB (mínimo)
-
-1 GHz o superior, procesador de 32 o 64 bits
-
-240 MB de espacio en disco duro (mínimo)
-
-Mac OS:
-
-Mac OS X v10.4 o superior
-
-Mac OS X Server v10.4 o superior
-
-JDK v1.6.x
-
-512 MB (mínimo)
-
-1 GHz o superior, procesador de 32 o 64 bits
-
-140 MB de espacio en disco duro (mínimo)
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/92f77786-bb21-426e-afdd-345b439cf86a)
 
 Analicemos en detalle el procedimiento de instalación de soapUI en cada uno de los sistemas operativos anteriores.
 
-Instalación de soapUI en Linux
+### Instalación de soapUI en Linux
+
 soapUI se distribuye como dos instaladores diferentes para su conveniencia. Puede descargar el archivo binario (ZIP) del instalador o el script del instalador.
 
 Primero, veremos el procedimiento de instalación del archivo binario. Realice los siguientes pasos:
 
-Descargue la versión zip binaria de Linux (por ejemplo soapui-4.0.1-linux-bin.zip) de la última versión de soapUI de http://www.soapui.org .
-Extraiga la distribución binaria descargada en un directorio de su sistema de archivos local, por ejemplo /home/user/soapui.
-NOTA
-Nos referiremos al directorio extraído como SOAPUI_HOME.
+1. Descargue la versión zip binaria de Linux (por ejemplo **`soapui-4.0.1-linux-bin.zip`**) de la última versión de soapUI de http://www.soapui.org.
+2. Extraiga la distribución binaria descargada en un directorio de su sistema de archivos local, por ejemplo **`/home/user/soapui`**.
 
-Vaya a SOAPUI_HOME/biny ejecute el soapui.shscript de inicio de la siguiente manera: ./soapui.sh. Esto iniciará la interfaz gráfica de usuario de soapUI.
-CONSEJO
-Si encuentra un error de Permiso denegado al ejecutar el soapui.shscript, asegúrese de cambiar el modo de permiso del archivo otorgando privilegios ejecutables al usuario ejecutandoel chmodcomando como chmod 755 soapui.sh.
+   <hr>
+   
+   **NOTA**
+
+   Nos referiremos al directorio extraído como **`SOAPUI_HOME`**.
+
+   <hr>
+
+3. Vaya a **`SOAPUI_HOME/bin`** y ejecute el script **`soapui.sh`** de inicio de la siguiente manera: **`./soapui.sh`**. Esto iniciará la interfaz gráfica de usuario de soapUI.
+
+<hr>
+   
+**TIP**
+
+Si encuentra un error **Permission denied - Permiso denegado** al ejecutar el script **`soapui.sh`**, asegúrese de cambiar el modo de permiso del archivo otorgando privilegios ejecutables al usuario ejecutando el comando **`chmod`** como **`chmod 755 soapui.sh`**.
+
+<hr>
 
 También puede instalar soapUI utilizando el instalador de Linux realizando los siguientes pasos:
 
-Descargue un instalador Linux de soapUI (por ejemplo soapUI-x32-4_0_1.sh) desde http://www.soapui.org .
-Después de descargar el archivo, otorgue permisos ejecutables ejecutando el comando, chmod 755 soapUI-x32-4_0_1.sh.
-Ejecute el instalador de la siguiente manera: ./soapUI-x32-4_0_1.sh.
-Esto iniciará la interfaz de usuario del instalador como se muestra en la siguiente captura de pantalla:
+1. Descargue un instalador Linux de soapUI (por ejemplo **`soapUI-x32-4_0_1.sh`**) desde http://www.soapui.org.
+2. Después de descargar el archivo, otorgue permisos ejecutables ejecutando el comando, **`chmod 755 soapUI-x32-4_0_1.sh`**.
+3. Ejecute el instalador de la siguiente manera: **`./soapUI-x32-4_0_1.sh`**.
+4. Esto iniciará la interfaz de usuario del instalador como se muestra en la siguiente captura de pantalla:
 
-Ahora, puede continuar con el asistente de instalación. Se le pedirá que acepte el contrato de licencia en el siguiente paso del asistente. Simplemente haga clic en la opción Acepto el acuerdo y haga clic en Siguiente . Se le pedirá que especifique un directorio de destino para la instalación de soapUI.
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/30029cce-2cad-46d2-a236-02112b18a1f8)
 
-En el siguiente paso del asistente de instalación, puede seleccionar qué componentes necesita incluir en soapUI, como; Hermes JMS, archivos fuente de soapUI y tutoriales. Simplemente acepte todas las opciones y haga clic en Siguiente . Se le solicitará el acuerdo de licencia para los componentes de Hermes en el siguiente paso. Acepte el acuerdo de licencia y haga clic en Siguiente para continuar con el asistente. Luego, se le pedirá que especifique un directorio para los tutoriales de soapUI. Ingrese una ubicación que esté en su sistema de archivos y haga clic en Siguiente . Se le pedirá un directorio donde se crean enlaces simbólicos de soapUI para ejecutables como el soapui.sharchivo. Introduzca un directorio y haga clic en Siguiente . Puede marcar la casilla de verificación Crear un icono de escritorio para crear un icono en el escritorio para que pueda iniciar fácilmente soapUI. Finalmente, haga clic en Siguientebotón para iniciar la instalación.
+
+Ahora, puede continuar con el asistente de instalación. Se le pedirá que acepte el contrato de licencia en el siguiente paso del asistente. Simplemente haga clic en **I accept the agreement** y haga clic en **Next**. Se le pedirá que especifique un directorio de destino para la instalación de soapUI.
+
+En el siguiente paso del asistente de instalación, puede seleccionar qué componentes necesita incluir en soapUI, como; **Hermes JMS**, archivos fuente de soapUI y tutoriales. Simplemente acepte todas las opciones y haga clic en Siguiente . Se le solicitará el acuerdo de licencia para los componentes de Hermes en el siguiente paso. Acepte el acuerdo de licencia y haga clic en **Next** para continuar con el asistente. Luego, se le pedirá que especifique un directorio para los tutoriales de soapUI. Ingrese una ubicación que esté en su sistema de archivos y haga clic en **Next**. Se le pedirá un directorio donde se crean enlaces simbólicos de soapUI para ejecutables como el archivo **`soapui.sh`**. Introduzca un directorio y haga clic en **Next**. Puede marcar la casilla de verificación **Create a desktop icon** para crear un icono en el escritorio para que pueda iniciar fácilmente soapUI. Finalmente, haga clic en **Next** botón para iniciar la instalación.
 
 La pantalla de instalación de soapUI se verá como la siguiente captura de pantalla:
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/46187bb6-f4a7-4234-95df-9bea2870fad9)
 
-instalación de soapUI en Windows
+### Instalación de soapUI en Windows
+
 Similar al procedimiento de instalación anterior en Linux, soapUI se puede instalar en un sistema operativo Windows usando Instalador de Windows o archivo binario de Windows.
 
 Veamos los pasos de instalación del archivo binario de Windows. Son los siguientes:
 
-Descargue la versión zip binaria de Windows (por ejemplo soapui-4.0.1-windows-bin.zip) de la última versión de soapUI de http://www.soapui.org .
-Extraiga la distribución binaria descargada en un directorio de su sistema de archivos local, por ejemplo C:/soapui.
-NOTA
-Nos referiremos al directorio extraído como SOAPUI_HOME. Esto iniciará la interfaz gráfica de usuario de soapUI.
+1. Descargue la versión zip binaria de Windows (por ejemplo **`soapui-4.0.1-windows-bin.zip`**) de la última versión de soapUI de http://www.soapui.org.
+2. Extraiga la distribución binaria descargada en un directorio de su sistema de archivos local, por ejemplo **`C:/soapui`**.
 
-Vaya SOAPUI_HOME/biny ejecute el soapui.batscript de inicio ejecutando el comando: soapui.bat.
-Los pasos para la instalación de soapUI usando el El instalador de Windows son casi los mismos que los pasos dados en el instalador de Linux. Solo necesita hacer doble clic en el instalador ( soapUI-x32-4_0_1.exe) y se iniciará el asistente de instalación de soapUI.
+   <hr>
+   
+   **NOTA**
 
-Instalación de soapUI en MacOS
+   Nos referiremos al directorio extraído como **`SOAPUI_HOME`**. Esto iniciará la interfaz gráfica de usuario de soapUI.
+
+  <hr>
+
+3. Vaya a **`SOAPUI_HOME/bin`** y ejecute el script de inicio **`soapui.bat`** ejecutando el comando: **`soapui.bat`**.
+
+Los pasos para la instalación de soapUI usando el instalador de Windows son casi los mismos que los pasos dados en el instalador de Linux. Solo necesita hacer doble clic en el instalador ( **`soapUI-x32-4_0_1.exe`** ) y se iniciará el asistente de instalación de soapUI.
+
+### Instalación de soapUI en MacOS
+
 La instalación de soapUI en Mac OS es sencillo y similar a los pasos anteriores que describimos para los instaladores de Linux y Windows.
   
 ## Un vistazo a la interfaz de usuario de soapUI
-soapUI es una herramienta de prueba que se explica por sí misma. La interfaz de usuario fácil de usar simplifica el trabajo con soapUI para cualquier tipo de usuario. Con unos pocos clics, puede comenzar a probar un web service o una aplicación web con el mínimo esfuerzo.Esta interfaz de usuario altamente usable y flexible ayudó a soapUI a convertirse en la herramienta de prueba de SOA y web services más fácil de usar y más fácil entre la comunidad de prueba.
+
+soapUI es una herramienta de prueba que se explica por sí misma. La interfaz de usuario fácil de usar simplifica el trabajo con soapUI para cualquier tipo de usuario. Con unos pocos clics, puede comenzar a probar un web service o una aplicación web con el mínimo esfuerzo. Esta interfaz de usuario altamente usable y flexible ayudó a soapUI a convertirse en la herramienta de prueba de SOA y web services más fácil de usar y más fácil entre la comunidad de prueba.
 
 Una vez que se inicie soapUI, se le mostrará la interfaz de usuario de inicio como se muestra en la siguiente captura de pantalla:
 
-Un vistazo a la interfaz de usuario de soapUI
-En soapUI, todas las pruebas están organizadas bajo un elemento central, conocido como Proyectos . Simplemente haciendo clic derecho en el nodo Proyectos en el panel lateral izquierdo en la GUI de soapUI, se puede crear un nuevo proyecto de soapUI como se muestra en la siguiente captura de pantalla:
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/55accd9b-12f7-4800-bc49-d7691f9d81d8)
 
-Un vistazo a la interfaz de usuario de soapUI
-Dejaré que usted navegue por el resto de los elementos de la interfaz de usuario por su cuenta antes de comenzar con los proyectos de muestra. Encontrarás un montón demateriales en el sitio web oficial de soapUI relacionados con estas características. Exploraremos a través de la interfaz de usuario de soapUI a medida que avancemos a través de las demostraciones y ejemplos en el resto de los capítulos.
+
+En soapUI, todas las pruebas están organizadas bajo un elemento central, conocido como **Projects**. Simplemente haciendo clic derecho en el nodo **Projects** en el panel lateral izquierdo en la GUI de soapUI, se puede crear un nuevo proyecto de soapUI como se muestra en la siguiente captura de pantalla:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/f46208a8-229e-43c8-b63b-f81d6afeacad)
+
+
+Dejaré que usted navegue por el resto de los elementos de la interfaz de usuario por su cuenta antes de comenzar con los proyectos de muestra. Encontrarás un montón de materiales en el sitio web oficial de soapUI relacionados con estas características. Exploraremos a través de la interfaz de usuario de soapUI a medida que avancemos a través de las demostraciones y ejemplos en el resto de los capítulos.
   
   
 ## Resumen
