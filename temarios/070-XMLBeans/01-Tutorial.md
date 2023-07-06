@@ -89,7 +89,6 @@ Si no sabe nada sobre el schema, aquí hay algunos conceptos básicos para este:
 
 Ahora eche un vistazo a un documento XML basado en este esquema. Copie el siguiente XML de esta página en un nuevo archivo XML llamado **`easypo.xml`**, luego coloque el archivo en el directorio **`tutorials\gettingstarted\instances`** que creó al comienzo de este tutorial.
 
-
 ```xml
 <purchase-order xmlns="http://openuri.org/easypo">
     <customer>
@@ -132,7 +131,7 @@ Si usa Ant en su compilación, puede usar la tarea Ant de XMLBean en lugar de **
 
 ## Resultados de compilar el Schema
 
-***Esta sección describe las interfaces generadas por el compilador de Schemas. Si está familiarizado con esto, desea pasar a escribir código Java, vaya a Writing Code that Uses Generated Types.
+***Esta sección describe las interfaces generadas por el compilador de Schemas. Si está familiarizado con esto, desea pasar a escribir código Java, vaya a Writing Code that Uses Generated Types.***
 
 La salida del compilador del schema está diseñada no solo para proporcionar una vista de su schema orientada a JavaBeans, sino también para anticipar los accesos directos(shortcuts) que es probable que desee. Si compara el contenido de **`easypo.xsd`** con los Java types generados al compilarlo, verá paralelismos obvios. Para cada uno de los elements y schema types definidos en el schema, el compilador del schema ha generado Java types. El package name corresponde al URI del namespace del schema.
 
@@ -177,7 +176,7 @@ public abstract void xsetDate( org.apache.xmlbeans.XmlDateTime )
 
 Para los tres elementos cuyos tipos están definidos dentro del schema, el compilador genera separados Java types y los usa en los descriptores de acceso, como se muestra a continuación para el tipo **`customer`** del elemento **`<customer>`**.
 
-````java
+```java
 public abstract org.openuri.easypo.Customer getCustomer()
 public abstract void setCustomer( org.openuri.easypo.Customer )
 ```
@@ -186,7 +185,7 @@ En otras palabras, puede llamar a **`getCustomer`** para recuperar su instancia 
 
 Del mismo modo, obtiene un método de conveniencia para tipos complejos como customer , así:
 
-````java
+```java
 public abstract org.openuri.easypo.Customer addNewCustomer()
 ```
 
@@ -194,7 +193,7 @@ A través de un método **`add*`** como este, puede agregar un nuevo elemento **
 
 Se proporcionan otros métodos convenientes para elementos y atributos que el esquema define como opcionales. El elemento **`<shipper>`** es opcional porque el esquema especifica el valor de su atributo **`minOccurs`** como **`0`** (el valor predeterminado para este atributo es **`1`** ). Como resultado, no es necesario que el elemento exista en el XML para que la instancia sea válida. Para averiguar si está allí y eliminarlo si lo está, obtiene estos métodos:
 
-````java
+```java
 public boolean isSetShipper ( )
 public abstract void unsetShipper ( )
 ```
@@ -390,17 +389,157 @@ private static String addLineItemWithCursor(File purchaseOrder, String itemDescr
 }
 ```
 
-A continuación, deberá agregar algo a través del cual pueda verificar el orden alfabético. Para esto, puede usar una clase que implemente java.text.Collator . Resulta que java.text.RuleBasedCollator hace justo lo que necesita comparando palabras para averiguar si una debe preceder a la otra. Creará una instancia de RuleBasedCollator con el siguiente código:
+A continuación, deberá agregar algo a través del cual pueda verificar el orden alfabético. Para esto, puede usar una clase que implemente **`java.text.Collator`**. Resulta que **`java.text.RuleBasedCollator`** hace justo lo que necesita comparando palabras para averiguar si una debe preceder a la otra. Creará una instancia de **`RuleBasedCollator`** con el siguiente código:
 
 ```java
 RuleBasedCollator intercalador =
         (RuleBasedCollator)Collator.getInstance(new Locale("en", "US", ""));
 ```
 
-Ahora es el momento de comenzar con el cursor. Puede agregar un nuevo cursor a cualquier tipo de XMLBeans que amplíe XmlObject , incluidos los tipos generados que representan su esquema. Cuando agrega un cursor con el método newCursor , el cursor se crea al comienzo del XML representado por el tipo en el que está llamando al método. Por ejemplo, la siguiente línea de código creará un cursor que precede inmediatamente al XML representado por Pedido de compra :
+Ahora es el momento de comenzar con el cursor. Puede agregar un nuevo cursor a cualquier tipo de XMLBeans que amplíe **`XmlObject`**, incluidos los tipos generados que representan su esquema. Cuando agrega un cursor con el método **`newCursor`**, el cursor se crea al comienzo del XML representado por el tipo en el que está llamando al método. Por ejemplo, la siguiente línea de código creará un cursor que precede inmediatamente al XML representado por **`PurchaseOrder`**:
 
 ```java
 Cursor XmlCursor = po.newCursor();
 ```
 
-En otras palabras, después de este código, el cursor precederá inmediatamente al elemento <orden de compra> : estará en el token INICIO de ese elemento . El elemento <purchase-order> tiene un atributo xmlns , por lo que si llamó a cursor.toNextToken() , movería el cursor a un token ATTR que representa el atributo, como se ilustra aquí.
+En otras palabras, después de este código, el cursor precederá inmediatamente al elemento **`<purchase-order>`**: estará en el token **`START`** de ese elemento. El elemento **`<purchase-order>`** tiene un atributo **`xmlns `**, por lo que si llamó a **`cursor.toNextToken()`**, movería el cursor a un token **`ATTR`** que representa el atributo, como se ilustra aquí.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/8ffa50b8-b62d-4b52-901d-ddf645952e93)
+
+Pero por el momento, el código dejará el cursor donde está. En su lugar, llamará a otro método para obtener el URI para el namespace predeterminado; lo necesitará al agregar nuevos elementos, como verá.
+
+````java
+String namespaceUri = cursor.namespaceForPrefix("");
+```
+
+Para hacer el trabajo real, escribirá código para obtener, al estilo de JavaBeans, el array que representa los elementos **`<line-item>`** y recorrerá  el array para encontrar el primer elemento line cuya descripción pertenezca después de la que desea insertar. Luego, su código insertará la nueva línea de pedido antes de la que encontró.
+
+En particular, reasignará la instancia de cursor existente a un nuevo cursor en el elemento **`<line-item>`** antes del cual desea insertar.
+
+````java
+cursor = lineItem.newCursor();
+```
+
+Luego comenzará un nuevo elemento allí; darle al nuevo elemento el URI de namespace predeterminado garantizará que el elemento pertenezca al mismo namespace que el XML que lo rodea.
+
+````java
+cursor.beginElement("line-item", namespaceUri);
+```
+
+El método **`beginElement`** crea un nuevo elemento donde está el cursor (si hacerlo resultará en un XML bien formado) y deja el cursor entre los tokens **`START`** y **`END`** del nuevo elemento.
+
+Finalmente, su código llenará el nuevo elemento **`<line-item>`** con elementos child a través de más llamadas a **`beginElement`** e insertando texto para los valores de los elementos. Aquí hay un fragmento para mostrar cómo funciona esto:
+
+````java
+cursor.beginElement("description", namespaceUri);
+cursor.insertChars(itemDescription);
+cursor.toNextToken();
+cursor.beginElement("per-unit-ounces", namespaceUri);
+// ... and so on for the other children...
+```
+
+A continuación, se ilustra el cambio y movimiento de tokens que se produce entre la inserción de un nuevo cursor y el comienzo de un nuevo elemento.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/16ae5371-1a4b-4d20-a294-4b3be9aed7c4)
+
+Las operaciones del cursor son así. Mueve el cursor de un token a otro token como si fuera de un vagón de tren a otro. Copiar, mover o eliminar elementos shifts tokens para dejar espacio a otros o para cerrar un espacio dejado atrás.
+
+**Nota**
+
+Los nombres de los tipos de tokens ( **`START`**, **`END`**, **`ATTR`**, etc.) lo tentarán a equiparar los tokens con partes reales del XML markup; resista la tentación. Los tokens son abstracciones, no tags. Por ejemplo, un elemento expresado en un documento de instancia como **`<foo bar="baz"/>`** tendrá un token **`START`** , **`ATTR`** y **`END`** aunque no tenga una tag final. Puede obtener más información sobre los tipos de tokens en Understanding XML Tokens.
+
+Aquí está el código completo del método:
+
+```java
+private static String addLineItemWithCursor(File purchaseOrder, String itemDescription,
+    String perUnitOunces, String itemPrice, String itemQuantity)
+{
+    PurchaseOrderDocument poDoc = null;
+    try
+    {
+        poDoc = PurchaseOrderDocument.Factory.parse(purchaseOrder);
+    } catch (XmlException e)
+    {
+        e.printStackTrace();
+    } catch (IOException e)
+    {
+        e.printStackTrace();
+    }
+    PurchaseOrderDocument.PurchaseOrder po = poDoc.getPurchaseOrder();
+    // Set up the collator for alphabetizing.
+    RuleBasedCollator collator =
+        (RuleBasedCollator)Collator.getInstance(new Locale("en", "US", ""));
+    XmlCursor cursor = po.newCursor();
+    // Get the document's URI so you can use it to insert.
+    String namespaceUri = cursor.namespaceForPrefix("");
+    // Get the array of <line-item> elements.
+    LineItem[] lineItems = po.getLineItemArray();
+    // Loop through the element array to discover where to insert the new one.
+    for (int i = 0; i < lineItems.length; i++)
+    {
+        LineItem lineItem = lineItems[i];
+        // Find out if the new line item's description belongs before the
+        // current line item's.
+        int comparison = collator.compare(itemDescription, lineItem.getDescription());
+        // If the comparison returns -1, then insert the new line item (and
+        // its children) before the current one.
+        if (comparison < 0)
+        {
+            cursor = lineItem.newCursor();
+            // Begin the new <line-item> element.
+            cursor.beginElement("line-item", namespaceUri);
+            // Begin the new <description> element and insert its text value.
+            cursor.beginElement("description", namespaceUri);
+            cursor.insertChars(itemDescription);
+            // Move on and do the same for the other elements.
+            cursor.toNextToken();
+            cursor.beginElement("per-unit-ounces", namespaceUri);
+            cursor.insertChars(perUnitOunces);
+            cursor.toNextToken();
+            cursor.beginElement("prices", namespaceUri);
+            cursor.insertChars(itemPrice);
+            cursor.toNextToken();
+            cursor.beginElement("quantity", namespaceUri);
+            cursor.insertChars(itemQuantity);
+            break;
+        }
+    }
+    // Speed the cursor's garbage collection and return the updated XML.
+    cursor.dispose();
+    return poDoc.toString();
+}
+```
+
+Antes de realizar la prueba, querrá actualizar su método **`main`** para que llame al método **`addLineItemCursor`** en lugar del método **`addLineItem`** que usó anteriormente.
+
+```java
+public static void main(String[] args)
+{
+    File poXmlFile = new File(args[0]);
+    // String updatedPoXml = addLineItem(poXmlFile, args[1], args[2],
+    //     args[3], args[4]);
+    String updatedPoXml = addLineItemWithCursor(poXmlFile, args[1], args[2],
+        args[3], args[4]);
+    System.out.println(updatedPoXml);
+} 
+```
+
+Finalmente, antes de compilar, deberá agregar dos declaraciones de importación más para admitir el código de alfabetización:
+
+```java
+import java.text.*;
+import java.util.*;
+```
+
+Pruebe la clase **`POUpdater`** tal como lo hizo antes. Esta vez, debería ver el nuevo elemento **`<line-item>`** agregado como el primero en el conjunto, en lugar de al final.
+
+Antes de continuar, debe reflexionar sobre otro aspecto del trabajo con cursores. El soporte del cursor para cambiar el XML fuera de las restricciones del schema también significa que, sin cuidado, puede desviarse mucho de la validez del schema. Si la validez importa, asegúrese de considerar llamar al método **`validate`** antes de pasar el XML editado.
+
+**Nota**
+
+Para obtener más información sobre el uso de la interfaz **`XmlCursor`**, consulte Navigating XML with Cursors.
+
+### A dónde ir desde aquí
+
+Asegúrese de consultar la [XMLBeans documentation](https://xmlbeans.apache.org/documentation/index.html).
+La página [XMLBeans Resources](https://xmlbeans.apache.org/resources/index.html) proporciona enlaces a muchos artículos.
