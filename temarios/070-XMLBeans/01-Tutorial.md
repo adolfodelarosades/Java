@@ -157,4 +157,75 @@ Este fragmento define el elemento **`<purchase-order>`** con un "local" complex 
 
 Para representar al elemento **`<purchase-order>`**, el compilador del esquema ha generado una interfaz **`PurchaseOrder`** que extends **`java.lang.Object`** y **`org.apache.xmlbeans.XmlObject`**. Sin embargo, encontrará que esta interfaz en realidad está contenida dentro de una interfaz de **`PurchaseOrderDocument`**. XMLBeans hace esto para el elemento "**`global`**" y atributos: los definidos en el nivel superior del schema. Esto es para proporcionarle una forma de obtener y configurar el elemento **`global`** como una pieza completa, lo que sería difícil de hacer si no estuviera contenido por nada. En otras palabras, necesita un tipo en el que usar métodos como **`getPurchaseOrder`** y **`setPurchaseOrder`** y esta interfaz de "**`Document`**" cumple esa función.
 
-Para cada uno de los cuatro elementos child de **`<purchase-order>`**, la interfaz de PurchaseOrder expone los accesores de acuerdo con las convenciones de JavaBeans. Por ejemplo, para el elemento <date> tienes lo siguiente:
+Para cada uno de los cuatro elementos child de **`<purchase-order>`**, la interfaz de **`PurchaseOrder`** expone los accesores de acuerdo con las convenciones de JavaBeans. Por ejemplo, para el elemento **`<date>`** tienes lo siguiente:
+
+```java
+public abstract java.util.Calendar getDate()
+public abstract void setDate ( java.util.Calendar )
+```
+
+Esta es una de las dos formas en que el compilador de esquema proporciona acceso al elemento **`<date>`**, una forma nativa de Java más conveniente, se podría decir. Estos accesores son una especie de par de conveniencia (es probable que desee una instancia **`Calendar`** cuando trabaje con una **`date`**). Sin embargo, debido a que el tipo del elemento **`<date>`**, **`xs:dateTime`**, es un tipo de esquema integrado, el compilador de esquema proporciona accesores que obtienen y establecen su valor con otro tipo de Java que define XMLBeans:
+
+```java
+public abstract org.apache.xmlbeans.XmlDateTime xgetDate()
+public abstract void xsetDate( org.apache.xmlbeans.XmlDateTime )
+```
+
+**`XmlDateTime`** se puede ver como una Rosetta Stone. Con él, puede obtener y establecer el valor del elemento mediante **`java.util.Calendar`**, **`java.util.Date`** y **`org.apache.xmlbeans.GDate`**. (Para obtener una lista completa de cómo schema types son mapped a Java types por el compilador, consulte XMLBeans Support for Built-In Schema Types).
+
+#### Acceso para Elements de User-Defined Schema Types
+
+Para los tres elementos cuyos tipos están definidos dentro del schema, el compilador genera separados Java types y los usa en los descriptores de acceso, como se muestra a continuación para el tipo **`customer`** del elemento **`<customer>`**.
+
+````java
+public abstract org.openuri.easypo.Customer getCustomer()
+public abstract void setCustomer( org.openuri.easypo.Customer )
+```
+
+En otras palabras, puede llamar a **`getCustomer`** para recuperar su instancia **`Customer`** y luego actualizar el contenido de la instancia, que es como actualiza el contenido del elemento **`<customer>`** que representa.
+
+Del mismo modo, obtiene un método de conveniencia para tipos complejos como customer , así:
+
+````java
+public abstract org.openuri.easypo.Customer addNewCustomer()
+```
+
+A través de un método **`add*`** como este, puede agregar un nuevo elemento **`<customer>`** al elemento **`<purchase-order>`**. El método devuelve una instancia de **`Customer`** para que pueda actualizar el contenido del nuevo elemento.
+
+Se proporcionan otros métodos convenientes para elementos y atributos que el esquema define como opcionales. El elemento **`<shipper>`** es opcional porque el esquema especifica el valor de su atributo **`minOccurs`** como **`0`** (el valor predeterminado para este atributo es **`1`** ). Como resultado, no es necesario que el elemento exista en el XML para que la instancia sea válida. Para averiguar si está allí y eliminarlo si lo está, obtiene estos métodos:
+
+````java
+public boolean isSetShipper ( )
+public abstract void unsetShipper ( )
+```
+
+#### Arrays para acceder a elementos que pueden aparecer más de una vez
+
+Otro elemento opcional definido por el esquema es **`<line-item>`**. Sin embargo, hay una diferencia importante para **`<line-item>`**: el valor de su atributo **`maxOccurs`** es "unbounded", lo que significa que puede ocurrir varias veces como child de **`<purchase-order>`** (como **`minOccurs`**, el valor predeterminado de **`maxOccurs`** es **`1`** ). Una forma común de Java de manejar múltiples instancias del mismo tipo es a través de un array de ese tipo, y eso es exactamente lo que le brinda el compilador de schemas:
+
+```java
+// Get or set the whole array.(Obtener o establecer todo el array)
+public abstract org.openuri.easypo.LineItem[] getLineItemArray ( )
+public abstract void setLineItemArray ( org.openuri.easypo.LineItem[] )
+
+// Get or set a single item.(Obtener o establecer un solo elemento)
+public abstract org.openuri.easypo.LineItem getLineItemArray ( int )
+public abstract void setLineItemArray( int, org.openuri.easypo.LineItem )
+
+// Add or remove an item.(Agregar o eliminar un item.)
+public abstract org.openuri.easypo.LineItem insertNewLineItem( int )
+public abstract void removeLineItem( int )
+
+// Get the array's size (without having to get the array, then call .length).
+// Obtener el tamaño del array (sin tener que obtener el array y luego llamar a .length).
+public abstract int sizeOfLineItemArray()
+```
+
+Finalmente, notará que el compilador del schema ha generado un campo :
+
+```java
+public static final org.apache.xmlbeans.SchemaType type
+```
+
+Puede usar este campo para acceder a una instancia de **`SchemaType`** que representa el propio schema type subyacente. Esto se tratará en la última parte de este tutorial.
+
