@@ -1,37 +1,37 @@
-# Tutorial: Primeros Pasos con XMLBeans
+# Tutorial: Primeros Pasos con **XMLBeans**
 
 ## Introducción
 
-Este tutorial presenta los conceptos básicos de XMLBeans. A través de él, obtendrá una vista práctica de dos de las tres tecnologías que componen la versión 5.0.0 de XMLBeans: acceso fuertemente tipado a XML a través de un esquema compilado y acceso agnóstico de tipo a XML a través del cursor XML. Este tutorial describe qué es XMLBeans y presenta algunas de las herramientas que vienen con una instalación de XMLBeans.
+Este tutorial presenta los conceptos básicos de ****XMLBeans****. A través de él, obtendrá una vista práctica de dos de las tres tecnologías que componen la versión 5.0.0 de **XMLBeans**: ***acceso fuertemente tipado(strongly-typed access) a XML a través de un schema compilado*** y ***type-agnostic access (acceso agnóstico de tipo) a XML a través del XML cursor***. Este tutorial describe qué es **XMLBeans** y presenta algunas de las herramientas que vienen con una instalación de **XMLBeans**.
 
 Para comenzar, necesitará lo siguiente:
 
-* JDK 1.8 para XMLBeans 5.0.0.
-* Una instalación de XMLBeans 5.0.0. Si aún no tiene esto, encontrará instrucciones de instalación en Installing XMLBeans.
-* Un entorno configurado de acuerdo con lo que se describe en Installing XMLBeans.
+* JDK 1.8 para **XMLBeans** 5.0.0.
+* Una instalación de **XMLBeans** 5.0.0. Si aún no tiene esto, encontrará instrucciones de instalación en Installing **XMLBeans**.
+* Un entorno configurado de acuerdo con lo que se describe en Installing **XMLBeans**.
 * Un editor para escribir código Java. Esto podría ser un editor de texto o su IDE de Java favorito.
 
-Creará algunos archivos como parte de este tutorial. Comience creando un nuevo directorio **`tutorials`** justo debajo de su directorio **`XMLBEANS_HOME`**. Esto contendrá los archivos que cree en el curso de este tutorial. Mientras lo hace, cree los siguientes subdirectorios en el directorio de tutoriales: **`classes`**, **`instances`**, **`src`**, **`lib`**. Si está trabajando con XMLBeans versión 1.0.3, su jerarquía debería verse así:
+Creará algunos archivos como parte de este tutorial. Comience creando un nuevo directorio **`tutorials`** justo debajo de su directorio **`**XMLBeans**_HOME`**. Esto contendrá los archivos que cree en el curso de este tutorial. Mientras lo hace, cree los siguientes subdirectorios en el directorio de tutoriales: **`classes`**, **`instances`**, **`src`**, **`lib`**. Si está trabajando con **XMLBeans** versión 1.0.3, su jerarquía debería verse así:
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/86a08883-9e48-4f9c-b3e0-b475aaf03464)
 
 ## Familiarícese con los conceptos básicos
 
-XMLBeans 5.0.0 incluye múltiples tecnologías relacionadas para manejar XML. En pocas palabras, XMLBeans ofrece tres tecnologías complementarias:
+**XMLBeans** 5.0.0 incluye múltiples tecnologías relacionadas para manejar XML. En pocas palabras, **XMLBeans** ofrece tres tecnologías complementarias:
 
 * Un schema-oriented way para ver instancias XML a través de Java types basados ​​en schema.
 * Un schema-agnostic way para recorrer el conjunto de información XML completo.
-* Un schema object model a través del cual, en código Java, puede examinar un XML schema compilado. (Nota: este aspecto de XMLBeans no se trata en este tutorial. Para obtener más información, consulte [Introduction to the Schema Type System](https://xmlbeans.apache.org/guide/IntroSchemaType.html).
+* Un schema object model a través del cual, en código Java, puede examinar un XML schema compilado. (Nota: este aspecto de **XMLBeans** no se trata en este tutorial. Para obtener más información, consulte [Introduction to the Schema Type System](https://**XMLBeans**.apache.org/guide/IntroSchemaType.html).
 
 Hay mucho más, pero es un comienzo. Cada una de estas tres piezas es útil para diferentes objetivos, y es posible que se encuentre escribiendo código que use las tres en la misma aplicación. El resto de este tutorial le presentará estas tecnologías.
 
 ## Primeros pasos con el manejo de XML a través del Schema
 
-Una de las cosas que XMLBeans hace mejor es proporcionarle una forma de manejar XML mediante el uso de un schema al que se ajusta el XML. Con XMLBeans puede compilar uno o más archivos de esquema (XSD) para generar tipos Java. Al vincular documentos de instancias XML a estos tipos de Java, se proporciona una forma de acceder a las instancias en Java de forma orientada a esquemas.
+Una de las cosas que **XMLBeans** hace mejor es proporcionarle una forma de manejar XML mediante el uso de un schema al que se ajusta el XML. Con **XMLBeans** puede compilar uno o más archivos de schema (XSD) para generar tipos Java. Al vincular documentos de instancias XML a estos tipos de Java, se proporciona una forma de acceder a las instancias en Java de forma orientada a schemas.
 
-Pruebe esto ahora con XML que obtuvo cuando instaló XMLBeans. Para comenzar, abra un símbolo del sistema y cd al directorio que contiene su instalación de XMLBeans.
+Pruebe esto ahora con XML que obtuvo cuando instaló **XMLBeans**. Para comenzar, abra un símbolo del sistema y cd al directorio que contiene su instalación de **XMLBeans**.
 
-Si siguió las instrucciones de instalación en Instalación de XMLBeans, debería poder ejecutar los scripts que obtuvo en el directorio **`\bin`**. Use uno de estos ahora, **`xpretty`**, para echar un vistazo al ** easypo schema** contenido en **`easypo.xsd`**, así (si está usando un sistema operativo UNIX, este script no está disponible, por lo que deberá abrir el archivo en un editor):
+Si siguió las instrucciones de instalación en Instalación de **XMLBeans**, debería poder ejecutar los scripts que obtuvo en el directorio **`\bin`**. Use uno de estos ahora, **`xpretty`**, para echar un vistazo al ** easypo schema** contenido en **`easypo.xsd`**, así (si está usando un sistema operativo UNIX, este script no está disponible, por lo que deberá abrir el archivo en un editor):
 
 ```sh
 xpretty schemas\easypo\easypo.xsd
@@ -85,9 +85,9 @@ Si no sabe nada sobre el schema, aquí hay algunos conceptos básicos para este:
 
 * Este schema es un blueprint que define las reglas para crear una determinada "forma" de XML para purchase orders(órdenes de compra).
 * El purchase order XML definido aquí tendría un elemento **`<purchase-order>`** que tiene cuatro elementos secundarios inmediatos: **`<customer>`**, **`<date>`**, **`<line-item>`**, y **`<shipper>`**, en esa secuencia.
-* Tres de los cuatro child elements tienen sus propios children en una estructura particular, como se define en los elementos **`<complexType>`** respectivos del esquema.
+* Tres de los cuatro child elements tienen sus propios children en una estructura particular, como se define en los elementos **`<complexType>`** respectivos del schema.
 
-Ahora eche un vistazo a un documento XML basado en este esquema. Copie el siguiente XML de esta página en un nuevo archivo XML llamado **`easypo.xml`**, luego coloque el archivo en el directorio **`tutorials\gettingstarted\instances`** que creó al comienzo de este tutorial.
+Ahora eche un vistazo a un documento XML basado en este schema. Copie el siguiente XML de esta página en un nuevo archivo XML llamado **`easypo.xml`**, luego coloque el archivo en el directorio **`tutorials\gettingstarted\instances`** que creó al comienzo de este tutorial.
 
 ```xml
 <purchase-order xmlns="http://openuri.org/easypo">
@@ -117,7 +117,7 @@ Ahora eche un vistazo a un documento XML basado en este esquema. Copie el siguie
 
 Este XML representa una orden de compra(purchase order) a través de la cual Gladys, una astrónoma aficionada, compra dos libros para usarlos como referencia en su observación de estrellas (junto con una copia adicional de cada uno para su sobrina). Dado que este XML es una instancia del schema, reconocerá el elemento <purchase-order> y sus children, **`<customer>`**, **`<date>`**, **`<line-item>`** y **`<shipper>`**.
 
-Ahora, pruebe estos ejemplos con XMLBeans. Entre las herramientas incluidas con XMLBeans se encuentra **`scomp`**, un script que ejecuta el compilador de esquemas (parte de la API de XMLBeans) para compilar un esquema o directorio de esquemas. Use **`scomp`** para compilar el schema easypo. En Windows, use el siguiente comando (este script también está disponible en UNIX):
+Ahora, pruebe estos ejemplos con **XMLBeans**. Entre las herramientas incluidas con **XMLBeans** se encuentra **`scomp`**, un script que ejecuta el compilador de schemas (parte de la API de **XMLBeans**) para compilar un schema o directorio de schemas. Use **`scomp`** para compilar el schema easypo. En Windows, use el siguiente comando (este script también está disponible en UNIX):
 
 ```sh
 scomp -out tutorials\gettingstarted\lib\easypo.jar schemas\easypo\easypo.xsd
@@ -135,7 +135,7 @@ Si usa Ant en su compilación, puede usar la tarea Ant de XMLBean en lugar de **
 
 La salida del compilador del schema está diseñada no solo para proporcionar una vista de su schema orientada a JavaBeans, sino también para anticipar los accesos directos(shortcuts) que es probable que desee. Si compara el contenido de **`easypo.xsd`** con los Java types generados al compilarlo, verá paralelismos obvios. Para cada uno de los elements y schema types definidos en el schema, el compilador del schema ha generado Java types. El package name corresponde al URI del namespace del schema.
 
-Por ejemplo, observe de nuevo el elemento **`<purchase-order>`** definido en el esquema:
+Por ejemplo, observe de nuevo el elemento **`<purchase-order>`** definido en el schema:
 
 ```xml
 <xs:element name="purchase-order">
@@ -150,11 +150,11 @@ Por ejemplo, observe de nuevo el elemento **`<purchase-order>`** definido en el 
 </xs:element>
 ```
 
-Este fragmento define el elemento **`<purchase-order>`** con un "local" complex type (también conocido como "anonymous" complex type). Este tipo incluye una secuencia de child elements (en el mundo del schema, **`<sequence>`** es un "compositor" y cada **`<element>`** es una "particle"). El elemento **`<date>`** se especifica como **`xs:dateTime`**, un tipo integrado definido por la especificación de tipo de datos de esquema del W3C; los otros tres elementos son tipos complejos definidos en otra parte de este esquema.
+Este fragmento define el elemento **`<purchase-order>`** con un "local" complex type (también conocido como "anonymous" complex type). Este tipo incluye una secuencia de child elements (en el mundo del schema, **`<sequence>`** es un "compositor" y cada **`<element>`** es una "particle"). El elemento **`<date>`** se especifica como **`xs:dateTime`**, un tipo integrado definido por la especificación de tipo de datos de schema del W3C; los otros tres elementos son tipos complejos definidos en otra parte de este schema.
 
 #### Opciones para acceder a Elements de Built-In Schema Types
 
-Para representar al elemento **`<purchase-order>`**, el compilador del esquema ha generado una interfaz **`PurchaseOrder`** que extends **`java.lang.Object`** y **`org.apache.xmlbeans.XmlObject`**. Sin embargo, encontrará que esta interfaz en realidad está contenida dentro de una interfaz de **`PurchaseOrderDocument`**. XMLBeans hace esto para el elemento "**`global`**" y atributos: los definidos en el nivel superior del schema. Esto es para proporcionarle una forma de obtener y configurar el elemento **`global`** como una pieza completa, lo que sería difícil de hacer si no estuviera contenido por nada. En otras palabras, necesita un tipo en el que usar métodos como **`getPurchaseOrder`** y **`setPurchaseOrder`** y esta interfaz de "**`Document`**" cumple esa función.
+Para representar al elemento **`<purchase-order>`**, el compilador del schema ha generado una interfaz **`PurchaseOrder`** que extends **`java.lang.Object`** y **`org.apache.**XMLBeans**.XmlObject`**. Sin embargo, encontrará que esta interfaz en realidad está contenida dentro de una interfaz de **`PurchaseOrderDocument`**. **XMLBeans** hace esto para el elemento "**`global`**" y atributos: los definidos en el nivel superior del schema. Esto es para proporcionarle una forma de obtener y configurar el elemento **`global`** como una pieza completa, lo que sería difícil de hacer si no estuviera contenido por nada. En otras palabras, necesita un tipo en el que usar métodos como **`getPurchaseOrder`** y **`setPurchaseOrder`** y esta interfaz de "**`Document`**" cumple esa función.
 
 Para cada uno de los cuatro elementos child de **`<purchase-order>`**, la interfaz de **`PurchaseOrder`** expone los accesores de acuerdo con las convenciones de JavaBeans. Por ejemplo, para el elemento **`<date>`** tienes lo siguiente:
 
@@ -163,14 +163,14 @@ public abstract java.util.Calendar getDate()
 public abstract void setDate ( java.util.Calendar )
 ```
 
-Esta es una de las dos formas en que el compilador de esquema proporciona acceso al elemento **`<date>`**, una forma nativa de Java más conveniente, se podría decir. Estos accesores son una especie de par de conveniencia (es probable que desee una instancia **`Calendar`** cuando trabaje con una **`date`**). Sin embargo, debido a que el tipo del elemento **`<date>`**, **`xs:dateTime`**, es un tipo de esquema integrado, el compilador de esquema proporciona accesores que obtienen y establecen su valor con otro tipo de Java que define XMLBeans:
+Esta es una de las dos formas en que el compilador de schema proporciona acceso al elemento **`<date>`**, una forma nativa de Java más conveniente, se podría decir. Estos accesores son una especie de par de conveniencia (es probable que desee una instancia **`Calendar`** cuando trabaje con una **`date`**). Sin embargo, debido a que el tipo del elemento **`<date>`**, **`xs:dateTime`**, es un tipo de schema integrado, el compilador de schema proporciona accesores que obtienen y establecen su valor con otro tipo de Java que define **XMLBeans**:
 
 ```java
-public abstract org.apache.xmlbeans.XmlDateTime xgetDate()
-public abstract void xsetDate( org.apache.xmlbeans.XmlDateTime )
+public abstract org.apache.**XMLBeans**.XmlDateTime xgetDate()
+public abstract void xsetDate( org.apache.**XMLBeans**.XmlDateTime )
 ```
 
-**`XmlDateTime`** se puede ver como una Rosetta Stone. Con él, puede obtener y establecer el valor del elemento mediante **`java.util.Calendar`**, **`java.util.Date`** y **`org.apache.xmlbeans.GDate`**. (Para obtener una lista completa de cómo schema types son mapped a Java types por el compilador, consulte XMLBeans Support for Built-In Schema Types).
+**`XmlDateTime`** se puede ver como una Rosetta Stone. Con él, puede obtener y establecer el valor del elemento mediante **`java.util.Calendar`**, **`java.util.Date`** y **`org.apache.**XMLBeans**.GDate`**. (Para obtener una lista completa de cómo schema types son mapped a Java types por el compilador, consulte **XMLBeans** Support for Built-In Schema Types).
 
 #### Acceso para Elements de User-Defined Schema Types
 
@@ -191,7 +191,7 @@ public abstract org.openuri.easypo.Customer addNewCustomer()
 
 A través de un método **`add*`** como este, puede agregar un nuevo elemento **`<customer>`** al elemento **`<purchase-order>`**. El método devuelve una instancia de **`Customer`** para que pueda actualizar el contenido del nuevo elemento.
 
-Se proporcionan otros métodos convenientes para elementos y atributos que el esquema define como opcionales. El elemento **`<shipper>`** es opcional porque el esquema especifica el valor de su atributo **`minOccurs`** como **`0`** (el valor predeterminado para este atributo es **`1`** ). Como resultado, no es necesario que el elemento exista en el XML para que la instancia sea válida. Para averiguar si está allí y eliminarlo si lo está, obtiene estos métodos:
+Se proporcionan otros métodos convenientes para elementos y atributos que el schema define como opcionales. El elemento **`<shipper>`** es opcional porque el schema especifica el valor de su atributo **`minOccurs`** como **`0`** (el valor predeterminado para este atributo es **`1`** ). Como resultado, no es necesario que el elemento exista en el XML para que la instancia sea válida. Para averiguar si está allí y eliminarlo si lo está, obtiene estos métodos:
 
 ```java
 public boolean isSetShipper ( )
@@ -200,7 +200,7 @@ public abstract void unsetShipper ( )
 
 #### Arrays para acceder a elementos que pueden aparecer más de una vez
 
-Otro elemento opcional definido por el esquema es **`<line-item>`**. Sin embargo, hay una diferencia importante para **`<line-item>`**: el valor de su atributo **`maxOccurs`** es "unbounded", lo que significa que puede ocurrir varias veces como child de **`<purchase-order>`** (como **`minOccurs`**, el valor predeterminado de **`maxOccurs`** es **`1`** ). Una forma común de Java de manejar múltiples instancias del mismo tipo es a través de un array de ese tipo, y eso es exactamente lo que le brinda el compilador de schemas:
+Otro elemento opcional definido por el schema es **`<line-item>`**. Sin embargo, hay una diferencia importante para **`<line-item>`**: el valor de su atributo **`maxOccurs`** es "unbounded", lo que significa que puede ocurrir varias veces como child de **`<purchase-order>`** (como **`minOccurs`**, el valor predeterminado de **`maxOccurs`** es **`1`** ). Una forma común de Java de manejar múltiples instancias del mismo tipo es a través de un array de ese tipo, y eso es exactamente lo que le brinda el compilador de schemas:
 
 ```java
 // Get or set the whole array.(Obtener o establecer todo el array)
@@ -223,14 +223,14 @@ public abstract int sizeOfLineItemArray()
 Finalmente, notará que el compilador del schema ha generado un campo :
 
 ```java
-public static final org.apache.xmlbeans.SchemaType type
+public static final org.apache.**XMLBeans**.SchemaType type
 ```
 
 Puede usar este campo para acceder a una instancia de **`SchemaType`** que representa el propio schema type subyacente. Esto se tratará en la última parte de este tutorial.
 
 **Nota**
 
-Para obtener más información sobre los tipos generados a partir del schema, consulte  Java Types Generated from User-Derived Schema Types. Para obtener más información sobre los métodos generados, consulte Methods for Types Generated from Schema. Además, XMLBeans proporciona sus propios Java types para schema data types integrados, como **`xs:dateTime`**, **`xs:decimal`**, etc. Para obtener más información sobre estos, consulte  XMLBeans Support for Built-In Schema Types.
+Para obtener más información sobre los tipos generados a partir del schema, consulte  Java Types Generated from User-Derived Schema Types. Para obtener más información sobre los métodos generados, consulte Methods for Types Generated from Schema. Además, **XMLBeans** proporciona sus propios Java types para schema data types integrados, como **`xs:dateTime`**, **`xs:decimal`**, etc. Para obtener más información sobre estos, consulte  **XMLBeans** Support for Built-In Schema Types.
 
 ## Escribir código que usa tipos generados
 
@@ -241,7 +241,7 @@ Comience creando un archivo **`POUpdater.java`** en el directorio **`tutorials\g
 ```java
 import java.io.*;
 import java.math.*;
-import org.apache.xmlbeans.*;
+import org.apache.**XMLBeans**.*;
 import org.openuri.easypo.*;
 public class POUpdater
 {
@@ -249,7 +249,7 @@ public class POUpdater
                                       String perUnitOuncesString,
                                       String itemPriceString, String itemQuantityString)
     {
-        // Bind the incoming XML to an XMLBeans type.
+        // Bind the incoming XML to an **XMLBeans** type.
         PurchaseOrderDocument poDoc = null;
         try
         {
@@ -266,9 +266,9 @@ public class POUpdater
 }
 ```
 
-Hasta ahora, el método **`addLineItem`** vincula el XML entrante a un tipo XMLBeans generado al compilar el schema. Este fragmento crea un método que recibe una instancia de **`File`** que representa el XML de la purchase order(orden de compra), así como strings que contienen los datos sin procesar(raw data) que comprenderán el nuevo item agregado. Vincule el *documento* XML (el root element y sus children ) a la interfaz **`PurchaseOrderDocument`**. Esta interfaz, como todos los tipos que extienden **`XmlObject`** (incluidos todos los tipos generados a partir del schema), proporciona una clase **`Factory`** con la que crear nuevas instancias. La clase **`Factory`** proporciona varias versiones del método **`parse`**, cada una de las cuales recibe el código fuente XML como un  Java type diferente.
+Hasta ahora, el método **`addLineItem`** vincula el XML entrante a un tipo **XMLBeans** generado al compilar el schema. Este fragmento crea un método que recibe una instancia de **`File`** que representa el XML de la purchase order(orden de compra), así como strings que contienen los datos sin procesar(raw data) que comprenderán el nuevo item agregado. Vincule el *documento* XML (el root element y sus children ) a la interfaz **`PurchaseOrderDocument`**. Esta interfaz, como todos los tipos que extienden **`XmlObject`** (incluidos todos los tipos generados a partir del schema), proporciona una clase **`Factory`** con la que crear nuevas instancias. La clase **`Factory`** proporciona varias versiones del método **`parse`**, cada una de las cuales recibe el código fuente XML como un  Java type diferente.
 
-El siguiente fragmento de código del método, que se muestra a continuación, convierte los datos sin procesar entrantes en tipos que se pueden usar al crear el nuevo elemento **`<line-item>`**. Luego agrega el nuevo elemento y establece los valores children de ese elemento. Recuerde que, en XMLBeans, obtiene el tipo que representa un elemento global pasando por el tipo "**`Document`**" que lo contiene, aquí, con el método **`getPurchaseOrder`**.
+El siguiente fragmento de código del método, que se muestra a continuación, convierte los datos sin procesar entrantes en tipos que se pueden usar al crear el nuevo elemento **`<line-item>`**. Luego agrega el nuevo elemento y establece los valores children de ese elemento. Recuerde que, en **XMLBeans**, obtiene el tipo que representa un elemento global pasando por el tipo "**`Document`**" que lo contiene, aquí, con el método **`getPurchaseOrder`**.
 
 ```java
 BigDecimal perUnitOunces = new BigDecimal(perUnitOuncesString);
@@ -289,7 +289,7 @@ Aquí hay una versión completa de la clase **`POUpdater`**, con el método **`a
 ```java
 import java.io.*;
 import java.math.*;
-import org.apache.xmlbeans.*;
+import org.apache.**XMLBeans**.*;
 import org.apache.easypo.*;
 public class POUpdater
 {
@@ -307,7 +307,7 @@ public class POUpdater
         PurchaseOrderDocument poDoc = null;
         try
         {
-            // Bind the incoming XML to an XMLBeans type.
+            // Bind the incoming XML to an **XMLBeans** type.
             poDoc = PurchaseOrderDocument.Factory.parse(purchaseOrder);
         } catch (XmlException e)
         {
@@ -334,14 +334,14 @@ public class POUpdater
 Ahora, compile la nueva clase con un comando como el siguiente (la línea está partida para facilitar la lectura):
 
 ```sh
-javac -classpath %XMLBEANS_HOME%\lib\xbean.jar;tutorials\gettingstarted\lib\easypo.jar
+javac -classpath %**XMLBeans**_HOME%\lib\xbean.jar;tutorials\gettingstarted\lib\easypo.jar
     -d tutorials\gettingstarted\classes tutorials\gettingstarted\src\POUpdater.java
 ```
 
 Después de compilar, puede probar la clase con el siguiente comando (nuevamente, roto para facilitar la lectura):
 
 ```sh
-java -cp tutorials\gettingstarted\classes;%XMLBEANS_HOME%\lib\xbean.jar;tutorials\gettingstarted\lib\easypo.jar
+java -cp tutorials\gettingstarted\classes;%**XMLBeans**_HOME%\lib\xbean.jar;tutorials\gettingstarted\lib\easypo.jar
     POUpdater tutorials\gettingstarted\instances\easypo.xml "a new item" 5.0 20.00 6
 ```
 
@@ -356,13 +356,13 @@ El resultado debería verse como el resultado de la instancia anterior, pero con
 </line-item>
 ```
 
-Obviamente, necesita un schema para usar este aspecto de XMLBeans. Pero puede encontrarse creando un schema en el que solo tiene instancias para que pueda compilarlo para generar esos Java types, solo para facilitarle un poco la vida.
+Obviamente, necesita un schema para usar este aspecto de **XMLBeans**. Pero puede encontrarse creando un schema en el que solo tiene instancias para que pueda compilarlo para generar esos Java types, solo para facilitarle un poco la vida.
 
 ## Primeros pasos con el XML Cursor
 
-El XML Cursor, representado en la API por la interfaz **`org.apache.xmlbeans.XmlCursor`**, está diseñado para (entre otras cosas) complementar el acceso estilo JavaBeans que obtiene de los tipos generados al compilar el schema. El cursor brinda la capacidad de moverse sobre el XML de una manera más detallada. Por ejemplo, en el código anterior agregó un nuevo elemento **`<line-item>`**, pero no tenía control sobre dónde iba el nuevo elemento. XMLBeans acaba de insertarlo como el último **`<line-item>`**. La simplicidad que brindan los pares get/set es claramente una ventaja con los Java types que obtiene del esquema, pero cuando se preocupa por un control más preciso, como el orden de los elementos, recurra a **`XmlCursor`**.
+El XML Cursor, representado en la API por la interfaz **`org.apache.**XMLBeans**.XmlCursor`**, está diseñado para (entre otras cosas) complementar el acceso estilo JavaBeans que obtiene de los tipos generados al compilar el schema. El cursor brinda la capacidad de moverse sobre el XML de una manera más detallada. Por ejemplo, en el código anterior agregó un nuevo elemento **`<line-item>`**, pero no tenía control sobre dónde iba el nuevo elemento. **XMLBeans** acaba de insertarlo como el último **`<line-item>`**. La simplicidad que brindan los pares get/set es claramente una ventaja con los Java types que obtiene del schema, pero cuando se preocupa por un control más preciso, como el orden de los elementos, recurra a **`XmlCursor`**.
 
-Se podría decir que **`XmlCursor`** proporciona una vista del XML independiente del schema. Desde la perspectiva de un cursor, el XML es una serie de *tokens*. Estos tokens se dividen en categorías llamadas ***token types*** representados por constantes de **`org.apache.xmlbeans.XmlCursor.TokenType`**. Los Token types incluyen **`START`** (para el comienzo de un elemento), **`END`** (para su final), **`ATTR`** (para un atributo) y **`TEXT`** (para el contenido de texto de un elemento). Con un cursor, navega a través de XML moviendo el cursor de un token a otro.
+Se podría decir que **`XmlCursor`** proporciona una vista del XML independiente del schema. Desde la perspectiva de un cursor, el XML es una serie de *tokens*. Estos tokens se dividen en categorías llamadas ***token types*** representados por constantes de **`org.apache.**XMLBeans**.XmlCursor.TokenType`**. Los Token types incluyen **`START`** (para el comienzo de un elemento), **`END`** (para su final), **`ATTR`** (para un atributo) y **`TEXT`** (para el contenido de texto de un elemento). Con un cursor, navega a través de XML moviendo el cursor de un token a otro.
 
 ## Adición de un nuevo elemento **`<line-item>`**, Cursor-Style
 
@@ -396,10 +396,10 @@ RuleBasedCollator intercalador =
         (RuleBasedCollator)Collator.getInstance(new Locale("en", "US", ""));
 ```
 
-Ahora es el momento de comenzar con el cursor. Puede agregar un nuevo cursor a cualquier tipo de XMLBeans que amplíe **`XmlObject`**, incluidos los tipos generados que representan su esquema. Cuando agrega un cursor con el método **`newCursor`**, el cursor se crea al comienzo del XML representado por el tipo en el que está llamando al método. Por ejemplo, la siguiente línea de código creará un cursor que precede inmediatamente al XML representado por **`PurchaseOrder`**:
+Ahora es el momento de comenzar con el cursor. Puede agregar un nuevo cursor a cualquier tipo de **XMLBeans** que amplíe **`XmlObject`**, incluidos los tipos generados que representan su schema. Cuando agrega un cursor con el método **`newCursor`**, el cursor se crea al comienzo del XML representado por el tipo en el que está llamando al método. Por ejemplo, la siguiente línea de código creará un cursor que precede inmediatamente al XML representado por **`PurchaseOrder`**:
 
 ```java
-Cursor XmlCursor = po.newCursor();
+XML cursorCursor = po.newCursor();
 ```
 
 En otras palabras, después de este código, el cursor precederá inmediatamente al elemento **`<purchase-order>`**: estará en el token **`START`** de ese elemento. El elemento **`<purchase-order>`** tiene un atributo **`xmlns `**, por lo que si llamó a **`cursor.toNextToken()`**, movería el cursor a un token **`ATTR`** que representa el atributo, como se ilustra aquí.
@@ -541,5 +541,5 @@ Para obtener más información sobre el uso de la interfaz **`XmlCursor`**, cons
 
 ### A dónde ir desde aquí
 
-Asegúrese de consultar la [XMLBeans documentation](https://xmlbeans.apache.org/documentation/index.html).
-La página [XMLBeans Resources](https://xmlbeans.apache.org/resources/index.html) proporciona enlaces a muchos artículos.
+Asegúrese de consultar la [**XMLBeans** documentation](https://**XMLBeans**.apache.org/documentation/index.html).
+La página [**XMLBeans** Resources](https://**XMLBeans**.apache.org/resources/index.html) proporciona enlaces a muchos artículos.
