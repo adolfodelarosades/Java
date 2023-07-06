@@ -229,3 +229,178 @@ public static final org.apache.xmlbeans.SchemaType type
 
 Puede usar este campo para acceder a una instancia de **`SchemaType`** que representa el propio schema type subyacente. Esto se tratará en la última parte de este tutorial.
 
+**Nota**
+
+Para obtener más información sobre los tipos generados a partir del schema, consulte  Java Types Generated from User-Derived Schema Types. Para obtener más información sobre los métodos generados, consulte Methods for Types Generated from Schema. Además, XMLBeans proporciona sus propios Java types para schema data types integrados, como **`xs:dateTime`**, **`xs:decimal`**, etc. Para obtener más información sobre estos, consulte  XMLBeans Support for Built-In Schema Types.
+
+## Escribir código que usa tipos generados
+
+Vas a escribir un poco de código para agregar una nueva línea de pedido a la purchase order. Resulta que Gladys quiere agregar otro libro a su pedido. Su código aceptará el pedido existente junto con los datos sin procesar para el nuevo artículo, luego agregará el artículo y devolverá el XML actualizado.
+
+Comience creando un archivo **`POUpdater.java`** en el directorio **`tutorials\gettingstarted\src`**. Agregue el siguiente código a ese archivo:
+
+```java
+import java.io.*;
+import java.math.*;
+import org.apache.xmlbeans.*;
+import org.openuri.easypo.*;
+public class POUpdater
+{
+    private static String addLineItem(File purchaseOrder, String itemDescription,
+                                      String perUnitOuncesString,
+                                      String itemPriceString, String itemQuantityString)
+    {
+        // Bind the incoming XML to an XMLBeans type.
+        PurchaseOrderDocument poDoc = null;
+        try
+        {
+            poDoc = PurchaseOrderDocument.Factory.parse(purchaseOrder);
+        } catch (XmlException e)
+        {
+            e.printStackTrace();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return poDoc.toString();
+    }
+}
+```
+
+Hasta ahora, el método **`addLineItem`** vincula el XML entrante a un tipo XMLBeans generado al compilar el schema. Este fragmento crea un método que recibe una instancia de **`File`** que representa el XML de la purchase order(orden de compra), así como strings que contienen los datos sin procesar(raw data) que comprenderán el nuevo item agregado. Vincule el *documento* XML (el root element y sus children ) a la interfaz **`PurchaseOrderDocument`**. Esta interfaz, como todos los tipos que extienden **`XmlObject`** (incluidos todos los tipos generados a partir del schema), proporciona una clase **`Factory`** con la que crear nuevas instancias. La clase **`Factory`** proporciona varias versiones del método **`parse`**, cada una de las cuales recibe el código fuente XML como un  Java type diferente.
+
+El siguiente fragmento de código del método, que se muestra a continuación, convierte los datos sin procesar entrantes en tipos que se pueden usar al crear el nuevo elemento **`<line-item>`**. Luego agrega el nuevo elemento y establece los valores children de ese elemento. Recuerde que, en XMLBeans, obtiene el tipo que representa un elemento global pasando por el tipo "**`Document`**" que lo contiene, aquí, con el método **`getPurchaseOrder`**.
+
+```java
+BigDecimal perUnitOunces = new BigDecimal(perUnitOuncesString);
+BigDecimal itemPrice = new BigDecimal(itemPriceString);
+BigInteger itemQuantity = new BigInteger(itemQuantityString);
+
+LineItem newItem = poDoc.getPurchaseOrder().addNewLineItem();
+newItem.setDescription(itemDescription);
+newItem.setPerUnitOunces(perUnitOunces);
+newItem.setPrice(itemPrice);
+newItem.setQuantity(itemQuantity);
+```
+
+Eso es prácticamente todo lo que hay que hacer. El acceso estilo JavaBeans proporcionado al compilar su schema simplifica enormemente su acceso a instancias XML basadas en el schema.
+
+Aquí hay una versión completa de la clase **`POUpdater`**, con el método **`addLineItem`** accesible a través de un método **`main `**.
+
+```java
+import java.io.*;
+import java.math.*;
+import org.apache.xmlbeans.*;
+import org.apache.easypo.*;
+public class POUpdater
+{
+    public static void main(String[] args)
+    {
+        File poXmlFile = new File(args[0]);
+        String updatedPoXml = addLineItem(poXmlFile, args[1], args[2],
+            args[3], args[4]);
+        System.out.println(updatedPoXml);
+    }
+    private static String addLineItem(File purchaseOrder, String itemDescription,
+                                      String perUnitOuncesString,
+                                      String itemPriceString, String itemQuantityString)
+    {
+        PurchaseOrderDocument poDoc = null;
+        try
+        {
+            // Bind the incoming XML to an XMLBeans type.
+            poDoc = PurchaseOrderDocument.Factory.parse(purchaseOrder);
+        } catch (XmlException e)
+        {
+            e.printStackTrace();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        // Convert incoming data to types that can be used in accessors.
+        BigDecimal perUnitOunces = new BigDecimal(perUnitOuncesString);
+        BigDecimal itemPrice = new BigDecimal(itemPriceString);
+        BigInteger itemQuantity = new BigInteger(itemQuantityString);
+        // Add the new <line-item> element.
+        LineItem newItem = poDoc.getPurchaseOrder().addNewLineItem();
+        newItem.setDescription(itemDescription);
+        newItem.setPerUnitOunces(perUnitOunces);
+        newItem.setPrice(itemPrice);
+        newItem.setQuantity(itemQuantity);
+        return poDoc.toString();
+    }
+}
+```
+
+Ahora, compile la nueva clase con un comando como el siguiente (la línea está partida para facilitar la lectura):
+
+```sh
+javac -classpath %XMLBEANS_HOME%\lib\xbean.jar;tutorials\gettingstarted\lib\easypo.jar
+    -d tutorials\gettingstarted\classes tutorials\gettingstarted\src\POUpdater.java
+```
+
+Después de compilar, puede probar la clase con el siguiente comando (nuevamente, roto para facilitar la lectura):
+
+```sh
+java -cp tutorials\gettingstarted\classes;%XMLBEANS_HOME%\lib\xbean.jar;tutorials\gettingstarted\lib\easypo.jar
+    POUpdater tutorials\gettingstarted\instances\easypo.xml "a new item" 5.0 20.00 6
+```
+
+El resultado debería verse como el resultado de la instancia anterior, pero con lo siguiente agregado como el último elemento **`<line-item>`**, inmediatamente antes del elemento **`<shipper>`**.
+
+```xml
+<line-item>
+    <description>Backyard Astronomer's Guide, The</description>
+    <per-unit-ounces>5.0</per-unit-ounces>
+    <price>49.95</price>
+    <quantity>2</quantity>
+</line-item>
+```
+
+Obviamente, necesita un schema para usar este aspecto de XMLBeans. Pero puede encontrarse creando un schema en el que solo tiene instancias para que pueda compilarlo para generar esos Java types, solo para facilitarle un poco la vida.
+
+## Primeros pasos con el XML Cursor
+
+El XML Cursor, representado en la API por la interfaz **`org.apache.xmlbeans.XmlCursor`**, está diseñado para (entre otras cosas) complementar el acceso estilo JavaBeans que obtiene de los tipos generados al compilar el schema. El cursor brinda la capacidad de moverse sobre el XML de una manera más detallada. Por ejemplo, en el código anterior agregó un nuevo elemento **`<line-item>`**, pero no tenía control sobre dónde iba el nuevo elemento. XMLBeans acaba de insertarlo como el último **`<line-item>`**. La simplicidad que brindan los pares get/set es claramente una ventaja con los Java types que obtiene del esquema, pero cuando se preocupa por un control más preciso, como el orden de los elementos, recurra a **`XmlCursor`**.
+
+Se podría decir que **`XmlCursor`** proporciona una vista del XML independiente del schema. Desde la perspectiva de un cursor, el XML es una serie de *tokens*. Estos tokens se dividen en categorías llamadas ***token types*** representados por constantes de **`org.apache.xmlbeans.XmlCursor.TokenType`**. Los Token types incluyen **`START`** (para el comienzo de un elemento), **`END`** (para su final), **`ATTR`** (para un atributo) y **`TEXT`** (para el contenido de texto de un elemento). Con un cursor, navega a través de XML moviendo el cursor de un token a otro.
+
+## Adición de un nuevo elemento **`<line-item>`**, Cursor-Style
+
+En esta sección, insertará el mismo elemento nuevo **`<line-item>`**, pero esta vez con cuidado para asegurarse de que esté en el lugar correcto de la lista, en orden alfabético. En aras de la simplicidad, asuma que los elementos **`<line-item>`** en el documento que recibe ya están en orden alfabético (lo cual sucede que lo están). Solo necesita asegurarse de que la adición siga su ejemplo.
+
+Cree un nuevo método llamado **`addLineItemWithCursor`**. Usarás esto como una alternativa al método anterior. Al igual que en el método **`addLineItem`**, deberá analizar el XML entrante en los tipos que generó, por lo que su nuevo método debería comenzar con este aspecto:
+
+```java
+private static String addLineItemWithCursor(File purchaseOrder, String itemDescription,
+    String perUnitOunces, String itemPrice, String itemQuantity)
+{
+    PurchaseOrderDocument poDoc = null;
+    try
+    {
+        poDoc = PurchaseOrderDocument.Factory.parse(purchaseOrder);
+    } catch (XmlException e)
+    {
+        e.printStackTrace();
+    } catch (IOException e)
+    {
+        e.printStackTrace();
+    }
+    PurchaseOrderDocument.PurchaseOrder po = poDoc.getPurchaseOrder();
+}
+```
+
+A continuación, deberá agregar algo a través del cual pueda verificar el orden alfabético. Para esto, puede usar una clase que implemente java.text.Collator . Resulta que java.text.RuleBasedCollator hace justo lo que necesita comparando palabras para averiguar si una debe preceder a la otra. Creará una instancia de RuleBasedCollator con el siguiente código:
+
+```java
+RuleBasedCollator intercalador =
+        (RuleBasedCollator)Collator.getInstance(new Locale("en", "US", ""));
+```
+
+Ahora es el momento de comenzar con el cursor. Puede agregar un nuevo cursor a cualquier tipo de XMLBeans que amplíe XmlObject , incluidos los tipos generados que representan su esquema. Cuando agrega un cursor con el método newCursor , el cursor se crea al comienzo del XML representado por el tipo en el que está llamando al método. Por ejemplo, la siguiente línea de código creará un cursor que precede inmediatamente al XML representado por Pedido de compra :
+
+```java
+Cursor XmlCursor = po.newCursor();
+```
+
+En otras palabras, después de este código, el cursor precederá inmediatamente al elemento <orden de compra> : estará en el token INICIO de ese elemento . El elemento <purchase-order> tiene un atributo xmlns , por lo que si llamó a cursor.toNextToken() , movería el cursor a un token ATTR que representa el atributo, como se ilustra aquí.
