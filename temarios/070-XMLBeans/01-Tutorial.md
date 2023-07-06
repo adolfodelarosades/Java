@@ -408,7 +408,7 @@ En otras palabras, después de este código, el cursor precederá inmediatamente
 
 Pero por el momento, el código dejará el cursor donde está. En su lugar, llamará a otro método para obtener el URI para el namespace predeterminado; lo necesitará al agregar nuevos elementos, como verá.
 
-````java
+```java
 String namespaceUri = cursor.namespaceForPrefix("");
 ```
 
@@ -416,13 +416,13 @@ Para hacer el trabajo real, escribirá código para obtener, al estilo de JavaBe
 
 En particular, reasignará la instancia de cursor existente a un nuevo cursor en el elemento **`<line-item>`** antes del cual desea insertar.
 
-````java
+```java
 cursor = lineItem.newCursor();
 ```
 
 Luego comenzará un nuevo elemento allí; darle al nuevo elemento el URI de namespace predeterminado garantizará que el elemento pertenezca al mismo namespace que el XML que lo rodea.
 
-````java
+```java
 cursor.beginElement("line-item", namespaceUri);
 ```
 
@@ -430,7 +430,7 @@ El método **`beginElement`** crea un nuevo elemento donde está el cursor (si h
 
 Finalmente, su código llenará el nuevo elemento **`<line-item>`** con elementos child a través de más llamadas a **`beginElement`** e insertando texto para los valores de los elementos. Aquí hay un fragmento para mostrar cómo funciona esto:
 
-````java
+```java
 cursor.beginElement("description", namespaceUri);
 cursor.insertChars(itemDescription);
 cursor.toNextToken();
