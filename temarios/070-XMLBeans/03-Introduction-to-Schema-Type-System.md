@@ -1,25 +1,25 @@
-# ntroducción al sistema de tipo de esquema
-Firmas de tipo de esquema
-Cuando compila el esquema, la API generada a partir de su esquema se integra con el sistema de tipos XMLBeans que representa el esquema XML subyacente. Todos juntos, estos tipos conforman el sistema de tipo de esquema al que tiene acceso su código. Cuando maneja XML basado en el esquema, normalmente llama a los métodos de la API generados cuando compiló el esquema. Sin embargo, para los casos en los que desea obtener información sobre el esquema en sí, utilice la API del sistema de tipo de esquema.
+# Introducción al Schema Type System
 
-En la API de XMLBeans, tiene acceso al propio sistema a través de SchemaTypeSystem y clases relacionadas. Estos constituyen una especie de "meta-API" o una vista del esquema. Puede utilizar la API del sistema de tipos de esquema para descubrir el sistema de tipos en tiempo de ejecución. Consulte el tema de referencia en esa interfaz para obtener una descripción general del sistema de tipo de esquema.
+## Schema Type Signatures - Firmas de Schema Type
 
-Un esquema se compone de componentes de esquema. Los componentes del esquema son las partes de un esquema, como una definición de tipo, una declaración de elemento, una declaración de atributo, etc. Para reflejarlos en el sistema de tipo de esquema, una instancia de SchemaComponent representa un componente en el esquema subyacente; los componentes separados tienen tipos correspondientes. Por ejemplo, tendría un objeto SchemaType para un CustomerType definido por su esquema, o un objeto SchemaGlobalElement para un elemento de orden de compra global . También tendría un SchemaType para tipos de esquema integrados, como xs:string o xs:datetime . XMLBean proporciona una "firma" para describir cada tipo. Puede recuperar esta firma llamando al método toString de la clase SchemaType .
+Cuando compila el schema, la API generada a partir de su schema se integra con el sistema de tipos XMLBeans que representa el schema XML subyacente. Todos juntos, estos tipos conforman el ***schema type system*** al que tiene acceso su código. Cuando maneja XML basado en el schema, normalmente llama a los métodos de la API generados cuando compiló el schema. Sin embargo, para los casos en los que desea obtener información sobre el schema en sí, utilice la schema type system API.
 
-El método toString devuelve la versión de XMLBeans de una firma única para un tipo de esquema. Esta cadena es útil para la depuración porque describe un tipo dado incluso cuando el tipo no tiene nombre.
+En la API de XMLBeans, tiene acceso al propio sistema a través de [SchemaTypeSystem](https://xmlbeans.apache.org/docs/5.0.0/org/apache/xmlbeans/SchemaTypeSystem.html) y clases relacionadas. Estos constituyen una especie de "meta-API" o una vista del schema. Puede utilizar la API del sistema de tipos de schema para descubrir el sistema de tipos en tiempo de ejecución. Consulte el tema de referencia en esa interfaz para obtener una descripción general del sistema de tipo de schema.
 
-Nota: es importante recordar que esta firma es una convención de XMLBeans, en lugar de un estándar del grupo de trabajo de esquema. El grupo de trabajo aún no ha estandarizado una firma para los tipos de esquema XML. Como resultado, la firma que verá de XMLBeans está sujeta a cambios; cualquier cosa que el grupo de trabajo de esquema presente al final (si es que algo) es probablemente lo que usará esta API. En otras palabras, no escriba un programa para decodificar la firma.
+Un schema se compone de componentes de schema. Los componentes del schema son las partes de un schema, como una definición de tipo, una declaración de elemento, una declaración de atributo, etc. Para reflejarlos en el sistema de tipo de schema, una instancia de [SchemaComponent](https://xmlbeans.apache.org/docs/5.0.0/org/apache/xmlbeans/SchemaComponent.html) representa un componente en el schema subyacente; los componentes separados tienen tipos correspondientes. Por ejemplo, tendría un objeto **SchemaType** para un **CustomerType** definido por su schema, o un objeto **SchemaGlobalElement** para un elemento de orden de compra global. También tendría un **SchemaType** para tipos de schema integrados, como **`xs:string`** o **`xs:datetime`**. XMLBean proporciona una "signature" para describir cada tipo. Puede recuperar esta firma llamando al método **`toString`** de la clase **`SchemaType`**.
+
+El método **`toString`** devuelve la versión de XMLBeans de una firma única para un tipo de schema. Esta cadena es útil para la depuración porque describe un tipo dado incluso cuando el tipo no tiene nombre.
+
+**Nota**: es importante recordar que esta firma es una convención de XMLBeans, en lugar de un estándar del grupo de trabajo de schema. El grupo de trabajo aún no ha estandarizado una firma para los tipos de schema XML. Como resultado, la firma que verá de XMLBeans está sujeta a cambios; cualquier cosa que el grupo de trabajo de schema presente al final (si es que algo) es probablemente lo que usará esta API. En otras palabras, no escriba un programa para decodificar la firma.
 
 Puede usar la siguiente descripción para comprender cómo se construye una firma.
 
-Tipos globales. Si el tipo tiene un nombre, es un tipo global. Se utiliza el siguiente formulario:
-
-T=<nombre local>@<espacio de nombre de destino>
-
-La "T" es para "tipo", por supuesto. "localname" es una convención utilizada por qnames (nombres calificados), que incluyen un nombre local y el URI del espacio de nombres (si lo hay). Así que un ejemplo podría ser:
-
-T=cliente@openuri.org
-Tipos de documentos y tipos de atributos globales. Estos corresponden a un tipo anónimo especial que contiene un elemento o atributo global. XMLBeans genera estos tipos especiales para representar tipos globales declarados con la etiqueta <element> o <attribute> en el esquema. Dado que tales tipos son tipos, pero se declaran como elementos o atributos, requieren un tratamiento especial. Se utiliza el siguiente formulario de firma:
+* **Global types**. Si el tipo tiene un nombre, es un tipo global. Se utiliza el siguiente formulario:
+   `T=<localname>@<targetNamespace>`
+   La "T" es para "tipo", por supuesto. "localname" es una convención utilizada por qnames (nombres calificados), que incluyen un nombre local y el URI del espacio de nombres (si lo hay). Así que un ejemplo podría ser:
+   `T=customer@openuri.org`
+  AQUIIIIIII
+* **Document types and global attribute types**. Estos corresponden a un tipo anónimo especial que contiene un elemento o atributo global. XMLBeans genera estos tipos especiales para representar tipos globales declarados con la etiqueta <element> o <attribute> en el schema. Dado que tales tipos son tipos, pero se declaran como elementos o atributos, requieren un tratamiento especial. Se utiliza el siguiente formulario de firma:
 
 D=<nombre-elemento-documento>@<espacioNombredestino>
 R=<nombre-tipo-atributo>@<espacio de nombre de destino>
@@ -47,7 +47,7 @@ Un ejemplo
 Entonces, por ejemplo, si tiene un tipo que describe los elementos de la lista dentro de un atributo de una instancia que se ve así:
 
 <raíz mylist="432 999 143 123">
-El esquema, si se hace con muchos tipos anidados, podría verse así:
+El schema, si se hace con muchos tipos anidados, podría verse así:
 
 <schema targetNamespace="myNamespace" elementFormDefault="calificado">
     <nombre del elemento="raíz">
@@ -67,7 +67,7 @@ Podrías leer esto como:
 
 "El tipo del elemento de la lista | dentro del tipo del tipo de atributo mylist | dentro del tipo del elemento raíz | dentro del tipo de documento para documentos <raíz> | en el espacio de nombres myNamespace".
 
-Tenga en cuenta que la estructura de la firma refleja la estructura de la clase Java generada por XMLBeans al compilar el esquema. En otras palabras, si tuviera que compilar un esquema que incluyera el fragmento anterior, podría acceder a una instancia del esquema con código Java como el siguiente:
+Tenga en cuenta que la estructura de la firma refleja la estructura de la clase Java generada por XMLBeans al compilar el schema. En otras palabras, si tuviera que compilar un schema que incluyera el fragmento anterior, podría acceder a una instancia del schema con código Java como el siguiente:
 
 SchemaType sType = RootDocument.Root.MyList.Item.type;
 
