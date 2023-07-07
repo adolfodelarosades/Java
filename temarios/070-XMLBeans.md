@@ -1,5 +1,33 @@
 # Bienvenido a XMLBeans
 
+## Documentación
+
+* Installing XMLBeans
+* [Tutorial: First Steps](https://github.com/adolfodelarosades/Java/edit/master/temarios/070-XMLBeans/01-Tutorial.md)
+* User Guide
+   * [Getting Started II](https://github.com/adolfodelarosades/Java/blob/master/temarios/070-XMLBeans/02-Getting-Started-II.md)
+   * Schema Type System
+   * Generated Types
+   * Generated Methods
+   * Validation
+   * Cursor Navigation
+   * XPath / XQuery
+   * XmlTokens
+   * Bookmarks
+   * Builtin Types
+   * Handling xs:any
+   * JPMS / Jigsaw support
+   * Maven plugin
+   * Tools
+   * Ant Task
+* Sample Code
+* FAQ
+* Javadocs
+* Wiki Pages
+  
+
+## En esta sección
+
 * Home
 * Welcome
 * What is XMLBeans?
@@ -98,6 +126,4 @@ No se olvide de [XMLBeans Wiki](https://cwiki.apache.org/confluence/display/xmlb
 Muchas de las características de XMLBeans se ilustran en nuestros [ejemplos](https://xmlbeans.apache.org/samples/index.html).
 
 
-## Contenido
 
-* [Tutorial](https://github.com/adolfodelarosades/Java/edit/master/temarios/070-XMLBeans/01-Tutorial.md)
