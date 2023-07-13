@@ -1,7 +1,8 @@
 # Prefacio
+
 ¡Bienvenido a la tercera edición de **Beginner Java Objects (BJO)!** Desde que se publicó la primera edición de BJO en noviembre de 2000 y la segunda edición en 2005, me han encantado los muchos correos electrónicos y críticas positivas que he recibido de lectores que consideraron que mi libro era un "buen comienzo" perfecto. en Java y programación orientada a objetos (OO) . Muchos libros de Java para principiantes se sumergen en una discusión del lenguaje en sí sin fundamentar adecuadamente a los lectores sobre cómo "pensar" y estructurar una aplicación desde cero para aprovechar al máximo los principios orientados a objetos; Estoy encantado de que haya elegido BJO para comenzar su viaje a Java.
 
-Mi libro se basa en principios atemporales que son independientes de la versión del lenguaje, lo que significa que no es necesario revisarlo cada vez que se lanza una nueva versión de Java. Lo que sí cambia, a veces aparentemente en un abrir y cerrar de ojos, son las tecnologías de terceros que se utilizan junto con el lenguaje central de Java, por lo que hemos reemplazado el material que detallaba las tecnologías obsoletas con un solo capítulo (Capítulo 15 ) que explica conceptualmente cómo avanzar en la creación de una aplicación que logre una separación adecuada entre el modelo , la capa de datos y la capa de presentación.
+Mi libro se basa en principios atemporales que son independientes de la versión del lenguaje, lo que significa que no es necesario revisarlo cada vez que se lanza una nueva versión de Java. Lo que sí cambia, a veces aparentemente en un abrir y cerrar de ojos, son las tecnologías de terceros que se utilizan junto con el lenguaje central de Java, por lo que hemos reemplazado el material que detallaba las tecnologías obsoletas con un solo capítulo (Capítulo 15 ) que explica conceptualmente cómo avanzar en la creación de una aplicación que logre una separación adecuada entre el modelo, la capa de datos y la capa de presentación.
 
 También hemos incluido una mención de algunas de las mejoras significativas del lenguaje Java a partir de las versiones 8 a 17 (la versión más reciente saldrá al momento de escribir la tercera edición).
 
@@ -11,7 +12,8 @@ Atentamente,
 
 jaquie
 
-Introducción
+# Introducción
+
 Este es un libro, ante todo, sobre objetos de software: qué son, por qué son tan "mágicos" y, sin embargo, tan sencillos, y cómo se estructura una aplicación de software para usar los objetos de manera adecuada.
 
 Este es también un libro sobre Java: no es un libro de "todo lo que hay que saber sobre Java", sino más bien una introducción suave pero completa al lenguaje, con énfasis especial en cómo hacer la transición de un modelo de objeto a un modelo de trabajo. Aplicación Java: algo que pocos libros, si es que hay alguno, ofrecen.
