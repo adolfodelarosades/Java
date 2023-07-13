@@ -14,6 +14,7 @@ Serie de varios cursos Java.
 
 # JAVA
 
+* [019 Beginning Java Objects: From Concepts to Code](https://github.com/adolfodelarosades/Java/blob/master/temarios/019_Beginning_Java_Objects.md)
 * [020 Head First Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/020_Head_First_Java.md)
 * [021 Effective Java, 3rd Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/021_Effective_Java.md)
 
