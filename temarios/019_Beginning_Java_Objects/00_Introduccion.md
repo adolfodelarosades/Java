@@ -10,7 +10,7 @@ Como siempre, agradezco los comentarios de los lectores y espero saber de usted 
 
 Atentamente,
 
-jaquie
+Jaquie
 
 # Introducción
 
