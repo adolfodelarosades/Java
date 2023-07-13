@@ -19,22 +19,22 @@ El libro se puede utilizar para el autoaprendizaje individual o como libro de te
 
 
 
-Lo que vas a aprender
+### Lo que vas a aprender
 
-Conocer los principios básicos de la orientación a objetos, desde la noción más simple de clases y objetos hasta el poder de la encapsulación, las clases abstractas y el polimorfismo.
-Abordar los requisitos de una aplicación para estructurarla adecuadamente en torno a objetos
-Renderice el modelo de objeto resultante en código Java, creando una capa de modelo completamente funcional para el estudio de caso del Sistema de registro de estudiantes
-Redondee conceptualmente una capa de objeto agregando capas de presentación y datos 
+* Conocer los principios básicos de la orientación a objetos, desde la noción más simple de clases y objetos hasta el poder de la encapsulación, las clases abstractas y el polimorfismo.
+* Abordar los requisitos de una aplicación para estructurarla adecuadamente en torno a objetos
+* Renderice el modelo de objeto resultante en código Java, creando una capa de modelo completamente funcional para el estudio de caso del Sistema de registro de estudiantes
+* Redondee conceptualmente una capa de objeto agregando capas de presentación y datos 
 
-Para quien es este libro
+### Para quien es este libro
 
 Desarrolladores de software que nunca han abordado Java como lenguaje de programación, así como aquellos que ya han usado Java pero quieren asegurarse de aprovechar al máximo la naturaleza orientada a objetos del lenguaje.
 
-Sobre el editor
+### Sobre el editor
 Apress, una empresa de Springer Nature, es una editorial dedicada a satisfacer las necesidades de información de desarrolladores, profesionales de TI y comunidades tecnológicas de todo el mundo. Nuestro contenido práctico y de alta calidad ayuda a los profesionales de la tecnología en todos los niveles a aumentar las habilidades que necesitan para avanzar en su trabajo diario. Los temas clave en nuestra lista de más de 2500 títulos incluyen big data, bases de datos, código abierto, desarrollo web, Java, Python, Apple y Swift, y la conocida línea de títulos de Microsoft y .NET de Apress.
 
-Más sobre Apress
-Recursos
-Contenido suplementario
-Enlace de compra
-Sitio web del editor
+### Recursos
+
+[Contenido suplementario](https://github.com/Apress/Beginning-Java-Objects-3rd-ed.)
+[Enlace de compra](https://link.springer.com/book/10.1007/978-1-4842-9060-6?wt_mc=ThirdParty.Safari.3.EPR653.ProductPagePurchase&utm_medium=referral&utm_source=safari&utm_campaign=3_pier05_product_page&utm_content=11232017)
+[Sitio web del editor](https://www.apress.com/gp)
