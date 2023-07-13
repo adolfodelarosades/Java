@@ -118,46 +118,51 @@ El proceso de definición de reglas con fines de categorización implica selecci
 ### La abstracción como base para el desarrollo de software
 
 Cuando determinamos los requisitos para un proyecto de desarrollo de sistemas de información, generalmente comenzamos recopilando detalles sobre la situación del mundo real en la que se basará el sistema. Estos detalles suelen ser una combinación de
-Aquellos que se nos ofrecen explícitamente cuando entrevistamos a los usuarios previstos del sistema.
 
-Los que de otra manera observamos
+* Aquellos que se nos ofrecen explícitamente cuando entrevistamos a los usuarios previstos del sistema.
+* Los que de otra manera observamos
 
 Debemos juzgar cuál de estos detalles es relevante para el propósito final del sistema. Esto es esencial, ya que no podemos automatizarlos todos. Incluir demasiados detalles es complicar demasiado el sistema resultante, haciéndolo mucho más difícil de diseñar, programar, probar, depurar, documentar, mantener y ampliar en el futuro.
 
-Al igual que con todas las abstracciones, todas nuestras decisiones de inclusión frente a eliminación al construir un sistema de software deben tomarse dentro del contexto del propósito general y el dominio , o el enfoque de la materia, del futuro sistema. Al representar a una persona en un sistema de software , por ejemplo, ¿es importante el color de sus ojos? ¿Qué hay de su perfil genético? ¿Salario? ¿Aficiones? La respuesta es que cualquiera de estas características de una persona puede ser relevante o irrelevante, dependiendo de si el sistema a desarrollar es un
-Sistema de nómina
+Al igual que con todas las abstracciones, todas nuestras decisiones de inclusión frente a eliminación al construir un sistema de software deben tomarse dentro del contexto del propósito general y el dominio, o el enfoque de la materia, del futuro sistema. Al representar a una persona en un sistema de software, por ejemplo, ¿es importante el color de sus ojos? ¿Qué hay de su perfil genético? ¿Salario? ¿Aficiones? La respuesta es que cualquiera de estas características de una persona puede ser relevante o irrelevante, dependiendo de si el sistema a desarrollar es un
 
-Sistema de datos demográficos de marketing
+* Sistema de nómina
+* Sistema de datos demográficos de marketing
+* Base de datos de pacientes del optometrista
+* El sistema de seguimiento de los "más buscados" del FBI
 
-Base de datos de pacientes del optometrista
+Una vez que hayamos determinado los aspectos esenciales de una situación, algo que exploraremos en la Parte 2 de este libro, podemos preparar un **modelo** de esa situación. El **modelado** es el proceso mediante el cual desarrollamos un patrón para hacer algo. Un plano para una casa personalizada, un diagrama esquemático de un circuito impreso y un cortador de galletas son ejemplos de tales patrones. Como veremos en las Partes 2 y 3, un **modelo de objeto** de un sistema de software es un patrón de este tipo. El modelado y la abstracción van de la mano, porque un modelo es esencialmente una representación física o gráfica de una abstracción; antes de que podamos modelar algo de manera efectiva, debemos haber determinado los detalles esenciales del tema a modelar.
 
-El sistema de seguimiento de los "más buscados" del FBI
+### Reutilización de abstracciones
 
-Una vez que hayamos determinado los aspectos esenciales de una situación, algo que exploraremos en la Parte 2 de este libro, podemos preparar un modelo de esa situación. El modelado es el proceso mediante el cual desarrollamos un patrón para hacer algo. Un plano para una casa personalizada, un diagrama esquemático de un circuito impreso y un cortador de galletas son ejemplos de tales patrones. Como veremos en las Partes 2 y 3, un modelo de objeto de un sistema de software es un patrón de este tipo. El modelado y la abstracción van de la mano, porque un modelo es esencialmente una representación física o gráfica de una abstracción; antes de que podamos modelar algo de manera efectiva, debemos haber determinado los detalles esenciales del tema a modelar.
+Cuando aprendemos sobre algo nuevo, buscamos automáticamente en nuestro archivo mental otras abstracciones/modelos que hemos construido y dominado previamente, para buscar similitudes sobre las que podamos construir. Al aprender a andar en bicicleta de dos ruedas por primera vez, por ejemplo, es posible que haya recurrido a las lecciones que aprendió sobre andar en triciclo cuando era niño (vea la Figura 1-7). Ambos tienen manubrios que se usan para conducir; ambos tienen pedales que se utilizan para impulsar la bicicleta hacia adelante. Aunque las abstracciones no encajaban a la perfección: se presentó una bicicleta de dos ruedas el nuevo desafío de tener que mantener el equilibrio: había suficiente similitud para permitirle aprovechar la experiencia de dirección y pedaleo que ya dominaba y concentrarse en aprender la nueva habilidad de cómo mantener el equilibrio sobre dos ruedas.
 
-Reutilización de abstracciones
-Cuando aprendemos sobre algo nuevo, buscamos automáticamente en nuestro archivo mental otras abstracciones/modelos que hemos construido y dominado previamente, para buscar similitudes sobre las que podamos construir. Al aprender a andar en bicicleta de dos ruedas por primera vez, por ejemplo, es posible que haya recurrido a las lecciones que aprendió sobre andar en triciclo cuando era niño (vea la Figura 1-7 ) . Ambos tienen manubrios que se usan para conducir; ambos tienen pedales que se utilizan para impulsar la bicicleta hacia adelante. Aunque las abstracciones no encajaban a la perfección: se presentó una bicicleta de dos ruedasel nuevo desafío de tener que mantener el equilibrio: había suficiente similitud para permitirle aprovechar la experiencia de dirección y pedaleo que ya dominaba y concentrarse en aprender la nueva habilidad de cómo mantener el equilibrio sobre dos ruedas.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/757a9987-bf43-44d4-a067-f347ac9d75f4)
 
-Figura 1-7El cerebro humano es experto en aprender basándose en abstracciones ya establecidas.
-Esta técnica de comparar características para encontrar una abstracción que sea lo suficientemente similar para ser reutilizada con éxito se conoce como coincidencia de patrones y reutilización . Como veremos más adelante en el libro, la reutilización de patrones también es una técnica importante para el desarrollo de software orientado a objetos, porque nos evita tener que reinventar la rueda con cada nuevo proyecto. Si podemos reutilizar una abstracción o un modelo de un proyecto anterior, podemos centrarnos en aquellos aspectos del nuevo proyecto que difieren del anterior, ganando una enorme cantidad de productividad en el proceso.
+**Figura 1-7 El cerebro humano es experto en aprender basándose en abstracciones ya establecidas.**
 
-Desafíos inherentes
+Esta técnica de comparar características para encontrar una abstracción que sea lo suficientemente similar para ser reutilizada con éxito se conoce como coincidencia de patrones y reutilización. Como veremos más adelante en el libro, la reutilización de patrones también es una técnica importante para el desarrollo de software orientado a objetos, porque nos evita tener que reinventar la rueda con cada nuevo proyecto. Si podemos reutilizar una abstracción o un modelo de un proyecto anterior, podemos centrarnos en aquellos aspectos del nuevo proyecto que difieren del anterior, ganando una enorme cantidad de productividad en el proceso.
+
+### Desafíos inherentes
+
 A pesar de que la abstracción es un proceso tan natural para los seres humanos, desarrollar un modelo apropiado para un sistema de software es quizás el aspecto más difícil de la ingeniería de software , porque
-Hay un número ilimitado de posibilidades. La abstracción está, hasta cierto punto, en el ojo del espectador: casi se garantiza que varios observadores diferentes que trabajan de forma independiente lleguen a modelos diferentes. ¿De quién es el mejor? ¡Se han producido discusiones apasionadas !
 
-Para complicar aún más las cosas, prácticamente nunca hay un solo modelo "mejor" o "correcto" , solo modelos "mejores" o "peores" en relación con el problema a resolver. La misma situación se puede modelar en una variedad de formas igualmente válidas. Cuando comencemos a hacer algunos modelos en la Parte 2 de este libro, veremos una serie de abstracciones alternativas válidas para nuestro estudio de caso del Sistema de registro de estudiantes (SRS) que se presentó al final de la Introducción.
+* Hay un número ilimitado de posibilidades. La abstracción está, hasta cierto punto, en el ojo del espectador: casi se garantiza que varios observadores diferentes que trabajan de forma independiente lleguen a modelos diferentes. ¿De quién es el mejor? ¡Se han producido discusiones **apasionadas**!
 
-Tenga en cuenta, sin embargo, que existe un modelo incorrecto: es decir, uno que tergiversa la situación del mundo real (por ejemplo, modelar a una persona con dos tipos de sangre diferentes).
+* Para complicar aún más las cosas, prácticamente nunca hay un solo modelo "mejor" o "correcto", solo modelos "mejores" o "peores" en relación con el problema a resolver. La misma situación se puede modelar en una variedad de formas igualmente válidas. Cuando comencemos a hacer algunos modelos en la Parte 2 de este libro, veremos una serie de abstracciones alternativas válidas para nuestro estudio de caso del ***Sistema de registro de estudiantes - Student Registration System (SRS)*** que se presentó al final de la Introducción.
 
-No existe una prueba de fuego para determinar si un modelo ha capturado adecuadamente todos los requisitos de un usuario. La evidencia final de si una abstracción fue apropiada o no está en cuán exitoso resulta ser el sistema de software resultante. Debido a esto, es fundamental que aprendamos formas de comunicar nuestro modelo de manera concisa y sin ambigüedades con frecuencia a lo largo del ciclo de vida del desarrollo Agile para
+* Tenga en cuenta, sin embargo, que existe un modelo incorrecto: es decir, uno que tergiversa la situación del mundo real (por ejemplo, modelar a una persona con dos tipos de sangre diferentes).
 
-Los futuros usuarios previstos de nuestra aplicación, para que puedan proporcionar una verificación de cordura para nuestra comprensión del problema a resolver antes de embarcarnos en el desarrollo de software.
+* No existe una prueba de fuego para determinar si un modelo ha capturado adecuadamente todos los requisitos de un usuario. La evidencia final de si una abstracción fue apropiada o no está en cuán exitoso resulta ser el sistema de software resultante. Debido a esto, es fundamental que aprendamos formas de comunicar nuestro modelo de manera concisa y sin ambigüedades con frecuencia a lo largo del ciclo de vida del desarrollo Agile para
 
-Nuestros colegas ingenieros de software, para que los miembros del equipo puedan compartir una visión común de lo que debemos construir en colaboración.
+* Los futuros usuarios previstos de nuestra aplicación, para que puedan proporcionar una verificación de cordura para nuestra comprensión del problema a resolver antes de embarcarnos en el desarrollo de software.
+
+* Nuestros colegas ingenieros de software, para que los miembros del equipo puedan compartir una visión común de lo que debemos construir en colaboración.
 
 A pesar de todos estos desafíos, es fundamental obtener la abstracción inicial "correcta" antes de comenzar a construir un sistema. Cuanto más tarde en el ciclo de vida del software se detecta un error de modelado, más costoso es corregirlo por órdenes de magnitud. Esto no quiere decir que una abstracción deba ser rígida, ¡todo lo contrario! El arte y la ciencia del modelado de objetos, cuando se aplica correctamente, produce un modelo que es lo suficientemente flexible para soportar una amplia variedad de cambios funcionales. Además, las propiedades especiales de los objetos de software se prestan aún más a soluciones de software flexibles, como aprenderá a lo largo del resto del libro.
 
-¿Qué se necesita para ser un modelador de objetos exitoso?
+### ¿Qué se necesita para ser un modelador de objetos exitoso?
+AQUIIIIII
 Llegar a una abstracción adecuada como base para un modelo de sistema de software requiere
 Información sobre el dominio del problema : idealmente, podremos aprovechar nuestras propias experiencias del mundo real, como la experiencia anterior o actual como estudiante, que será útil al determinar los requisitos para el Sistema de registro de estudiantes (SRS ) , la base de nuestros esfuerzos de modelado y codificación en las Partes 2 y 3 del libro.
 
