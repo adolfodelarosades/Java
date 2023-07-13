@@ -9,98 +9,115 @@
 * What Does It Take to Be a Successful Object Modeler?
 * Summary
 
-## Como seres humanos, estamos inundados de información todos los días de nuestras vidas. Incluso si pudiéramos apagar temporalmente todas las fuentes de "información electrónica" que nos bombardean constantemente (correos electrónicos, mensajes de voz, podcasts, tweets y similares), solo nuestros cinco sentidos recopilan millones de bits de información por día solo de nuestro alrededores. Sin embargo, logramos dar sentido a toda esta información, por lo general sin abrumarnos. Nuestros cerebros simplifican naturalmente los detalles de todo lo que observamos para que estos detalles sean manejables a través de un proceso conocido como abstracción .
+Como seres humanos, estamos inundados de información todos los días de nuestras vidas. Incluso si pudiéramos apagar temporalmente todas las fuentes de "información electrónica" que nos bombardean constantemente (correos electrónicos, mensajes de voz, podcasts, tweets y similares), solo nuestros cinco sentidos recopilan millones de bits de información por día solo de nuestro alrededores. Sin embargo, logramos dar sentido a toda esta información, por lo general sin abrumarnos. Nuestros cerebros simplifican naturalmente los detalles de todo lo que observamos para que estos detalles sean manejables a través de un proceso conocido como **abstracción**.
 
 En este capítulo, aprenderá
-Cómo la abstracción sirve para simplificar nuestra visión del mundo
 
-Cómo organizamos nuestro conocimiento jerárquicamente para minimizar la cantidad de información que tenemos que hacer malabarismos mentalmente en un momento dado
+* Cómo la abstracción sirve para simplificar nuestra visión del mundo
+* Cómo organizamos nuestro conocimiento jerárquicamente para minimizar la cantidad de información que tenemos que hacer malabarismos mentalmente en un momento dado
+* La relevancia de la abstracción para el desarrollo de software
+* Los desafíos inherentes que enfrentamos como desarrolladores de software cuando intentamos modelar una situación real en el software
 
-La relevancia de la abstracción para el desarrollo de software
+## Simplificación a través de la abstracción
 
-Los desafíos inherentes que enfrentamos como desarrolladores de software cuando intentamos modelar una situación real en el software
-
-Simplificación a través de la abstracción
 Tómate un momento para mirar alrededor de la habitación en la que estás leyendo este libro. Al principio, puede pensar que realmente no hay muchas cosas para observar: algunos muebles, lámparas, tal vez algunas plantas, obras de arte, incluso algunas otras personas o mascotas. Tal vez hay una ventana por la que mirar que abre el mundo exterior a la observación.
 
-Ahora mira de nuevo. Para cada cosa que ves, hay una miríada de detalles para observar: su tamaño, su color, su propósito, los componentes a partir de los cuales está ensamblado (las patas de una mesa, las bombillas de una lámpara), etc. Además , cada uno de estos componentes a su vez tiene detalles asociados: el tipo de material utilizado para hacer las patas de la mesa (madera o metal), la potencia de las bombillas, etc. Ahora tenga en cuenta sus otros sentidos: el sonido de alguien roncando (¡esperemos que no mientras lee este libro!), el olor a palomitas de maíz que sale del horno de microondas al final del pasillo, etc. Finalmente, piensa en todos los detalles ocultos de estos objetos: quién los fabricó o cuál es su composición química, molecular o genética.
+Ahora mira de nuevo. Para cada cosa que ves, hay una miríada de detalles para observar: su tamaño, su color, su propósito, los componentes a partir de los cuales está ensamblado (las patas de una mesa, las bombillas de una lámpara), etc. Además, cada uno de estos componentes a su vez tiene detalles asociados: el tipo de material utilizado para hacer las patas de la mesa (madera o metal), la potencia de las bombillas, etc. Ahora tenga en cuenta sus otros sentidos: el sonido de alguien roncando (¡esperemos que no mientras lee este libro!), el olor a palomitas de maíz que sale del horno de microondas al final del pasillo, etc. Finalmente, piensa en todos los detalles ocultos de estos objetos: quién los fabricó o cuál es su composición química, molecular o genética.
 
-Está claro que la cantidad de información que debe procesar nuestro cerebro es realmente abrumadora. Sin embargo, para la gran mayoría de las personas, esto no representa un problema, porque tenemos una habilidad innata para la abstracción , un proceso que implica reconocer y enfocarse en las características importantes de una situación u objeto y filtrar o ignorar todas las detalles no esenciales.
+Está claro que la cantidad de información que debe procesar nuestro cerebro es realmente abrumadora. Sin embargo, para la gran mayoría de las personas, esto no representa un problema, porque tenemos una habilidad innata para la **abstracción**, un proceso que implica reconocer y enfocarse en las características importantes de una situación u objeto y filtrar o ignorar todas las detalles no esenciales.
 
-Un ejemplo familiar de una abstracción es un mapa de carreteras . Como abstracción, un mapa de carreteras representa aquellas características de un área geográfica dada que son relevantes para alguien que intenta navegar con el mapa, quizás en automóvil: carreteras principales y lugares de interés, obstáculos tales como grandes masas de agua, etc. Por necesidad, un El mapa de carreteras no puede incluir todos los edificios, árboles, letreros de calles, vallas publicitarias, semáforos, restaurantes de comida rápida, etc. que existen físicamente en el mundo real. Si lo hiciera, entonces estaría tan desordenado que sería prácticamente inutilizable; ninguna de las características importantes se destacaría. Comparar un mapa de carreterasa un mapa topográfico, un mapa climatológico y un mapa de densidad de población de la misma región: cada uno abstrae diferentes características del mundo real, es decir, aquellas relevantes para el usuario previsto del mapa en cuestión.
+Un ejemplo familiar de una abstracción es un mapa de carreteras. Como abstracción, un mapa de carreteras representa aquellas características de un área geográfica dada que son relevantes para alguien que intenta navegar con el mapa, quizás en automóvil: carreteras principales y lugares de interés, obstáculos tales como grandes masas de agua, etc. Por necesidad, el mapa de carreteras no puede incluir todos los edificios, árboles, letreros de calles, vallas publicitarias, semáforos, restaurantes de comida rápida, etc. que existen físicamente en el mundo real. Si lo hiciera, entonces estaría tan desordenado que sería prácticamente inutilizable; ninguna de las características importantes se destacaría. Comparar un mapa de carreteras a un mapa topográfico, un mapa climatológico y un mapa de densidad de población de la misma región: cada uno abstrae diferentes características del mundo real, es decir, aquellas relevantes para el usuario previsto del mapa en cuestión.
 
-Como otro ejemplo, considere un paisaje. Un artista puede mirar el paisaje desde la perspectiva de los colores, las texturas y las formas como posible tema para una pintura. Un constructor de viviendas puede mirar el mismo paisaje desde la perspectiva de dónde puede estar el mejor sitio de construcción en la propiedad, evaluando cuántos árboles deberán talarse para dar paso a un proyecto de construcción. Un ecologista puede estudiar de cerca las especies individuales de árboles y otra vida vegetal/animal en busca de su biodiversidad, con miras a preservarlos y protegerlos, mientras que un niño puede simplemente estar mirando todos los árboles en busca del mejor sitio para un árbol. casa. Algunos elementos son comunes a las abstracciones del paisaje de los cuatro observadores (los tipos, tamaños y ubicaciones de los árboles, por ejemplo), mientras que otros no son relevantes para todas las abstracciones.
+Como otro ejemplo, considere un paisaje. Un artista puede mirar el paisaje desde la perspectiva de los colores, las texturas y las formas como posible tema para una pintura. Un constructor de viviendas puede mirar el mismo paisaje desde la perspectiva de dónde puede estar el mejor sitio de construcción en la propiedad, evaluando cuántos árboles deberán talarse para dar paso a un proyecto de construcción. Un ecologista puede estudiar de cerca las especies individuales de árboles y otra vida vegetal/animal en busca de su biodiversidad, con miras a preservarlos y protegerlos, mientras que un niño puede simplemente estar mirando todos los árboles en busca del mejor sitio para un árbol. Algunos elementos son comunes a las abstracciones del paisaje de los cuatro observadores (los tipos, tamaños y ubicaciones de los árboles, por ejemplo), mientras que otros no son relevantes para todas las abstracciones.
 
-Generalización a través de la abstracción
+## Generalización a través de la abstracción
+
 Si eliminamos suficientes detalles de una abstracción, se vuelve lo suficientemente genérico como para aplicarlo a una amplia gama de situaciones o instancias específicas. Tales abstracciones genéricas a menudo pueden ser muy útiles. Por ejemplo, un diagrama de una célula genérica en el cuerpo humano, como el de la Figura 1-1 , podría incluir solo algunas características de las estructuras que se encuentran en una célula real.
 
-Figura 1-1Una abstracción genérica de una celda.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/5b07c608-2933-425d-b52f-19cacf3df1cf)
+
+**Figura 1-1 Una abstracción genérica de una celda.**
+
 Este diagrama demasiado simplificado no parece una célula nerviosa real, una célula muscular real o una célula sanguínea real; y, sin embargo, todavía se puede usar en un entorno educativo para describir ciertos aspectos de la estructura y función de todos estos tipos de células, es decir, aquellas características que los diversos tipos de células tienen en común.
 
 Cuanto más simple es una abstracción, es decir, cuantas menos características presenta, más general es y más versátil es para describir una variedad de situaciones del mundo real. Cuanto más compleja es una abstracción, más restrictiva es y, por lo tanto, menos situaciones es útil para describir.
 
-Organización de abstracciones en jerarquías de clasificación
-Aunque nuestros cerebros son expertos en abstraer conceptos como mapas de carreteras y paisajes, eso nos deja millones de abstracciones separadas con las que lidiar a lo largo de nuestras vidas. Para hacer frente a este aspecto de la complejidad, los seres humanos organizan sistemáticamente la información en categorías de acuerdo con criterios establecidos; este proceso se conoce como clasificación.
+### Organización de abstracciones en jerarquías de clasificación
+
+Aunque nuestros cerebros son expertos en abstraer conceptos como mapas de carreteras y paisajes, eso nos deja millones de abstracciones separadas con las que lidiar a lo largo de nuestras vidas. Para hacer frente a este aspecto de la complejidad, los seres humanos organizan sistemáticamente la información en categorías de acuerdo con criterios establecidos; este proceso se conoce como **clasificación**.
 
 Por ejemplo, la ciencia clasifica todos los objetos naturales como pertenecientes al reino animal, vegetal o mineral. Para que un objeto natural sea clasificado como animal, debe cumplir con las siguientes reglas:
-Debe ser (o haber sido alguna vez) un ser vivo.
 
-Debe ser capaz de movimiento espontáneo.
-
-Debe ser capaz de una respuesta motora rápida a la estimulación.
+* Debe ser (o haber sido alguna vez) un ser vivo.
+* Debe ser capaz de movimiento espontáneo.
+* Debe ser capaz de una respuesta motora rápida a la estimulación.
 
 Las reglas de lo que constituye una planta, por otro lado, son diferentes:
-Debe ser un ser vivo (lo mismo que para un animal).
 
-Debe carecer de un sistema nervioso evidente.
-
-Debe poseer paredes celulares de celulosa.
+* Debe ser un ser vivo (lo mismo que para un animal).
+* Debe carecer de un sistema nervioso evidente.
+* Debe poseer paredes celulares de celulosa.
 
 Dadas reglas claras como estas, colocar un objeto en la categoría o clase apropiada es bastante sencillo. Luego podemos "profundizar", especificando reglas adicionales que diferencian varios tipos de animales, por ejemplo, hasta que hayamos construido una jerarquía de abstracciones cada vez más complejas de arriba a abajo. En la Figura 1-2 se muestra un ejemplo simple de una jerarquía de abstracción de este tipo .
 
-Figura 1-2Una simple jerarquía de abstracción de objetos naturales.
-Cuando pensamos en una jerarquía de abstracción como la que se muestra en la Figura 1-2 , mentalmente subimos y bajamos la jerarquía, concentrándonos automáticamente en solo la capa o subconjunto de la jerarquía (conocido como subárbol ) que es importante para nosotros. en un momento dado. Por ejemplo, es posible que solo nos interesen los mamíferos y, por lo tanto, podemos centrarnos en el subárbol de mamíferos, que se muestra en la Figura 1-3 , ignorando temporalmente el resto de la jerarquía.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/6009fa50-e122-49a7-9fca-597b7c6262da)
 
-Figura 1-3Centrarse en un pequeño subconjunto de la jerarquía es menos abrumador
+**Figura 1-2 Una simple jerarquía de abstracción de objetos naturales.**
+
+Cuando pensamos en una jerarquía de abstracción como la que se muestra en la Figura 1-2 , mentalmente subimos y bajamos la jerarquía, concentrándonos automáticamente en solo la capa o subconjunto de la jerarquía (conocido como **subárbol**) que es importante para nosotros. en un momento dado. Por ejemplo, es posible que solo nos interesen los mamíferos y, por lo tanto, podemos centrarnos en el subárbol de mamíferos, que se muestra en la Figura 1-3 , ignorando temporalmente el resto de la jerarquía.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7ff7b158-6f2f-4763-a63c-51f5ca803a9c)
+
+**Figura 1-3 Centrarse en un pequeño subconjunto de la jerarquía es menos abrumador**
+
 Al hacerlo, reducimos automáticamente la cantidad de conceptos que necesitamos mentalmente para hacer malabarismos en un momento dado a un subconjunto manejable de la jerarquía de abstracción general; en nuestro ejemplo simplista, ahora estamos tratando con solo cuatro conceptos en lugar de los 13 originales. No importa cuán compleja se vuelva una jerarquía de abstracción, no tiene por qué abrumarnos si está organizada correctamente.
 
 Determinar con precisión qué reglas son necesarias para clasificar correctamente un objeto dentro de una jerarquía de abstracción no siempre es fácil. Tomemos, por ejemplo, las reglas que podríamos definir para lo que constituye un pájaro: a saber, algo que
-tiene plumas
 
-tiene alas
-
-Pone huevos
-
-es capaz de volar
+* Tiene plumas
+* Tiene alas
+* Pone huevos
+* Es capaz de volar
 
 Dadas estas reglas, ni un avestruz ni un pingüino podrían clasificarse como aves (aunque ambos deberían serlo), porque ninguno puede volar (ver Figura 1-4 ).
 
-Figura 1-4Derivar las reglas de clasificación correctas puede ser difícil
-Si intentamos hacer que el conjunto de reglas sea menos restrictivo eliminando la regla "es capaz de volar", nos quedamos con
-tiene plumas
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/de0109b6-d3ac-4e70-8404-53e0fbeb7dbb)
 
-tiene alas
+**Figura 1-4 Derivar las reglas de clasificación correctas puede ser difícil**
 
-Pone huevos
+Si intentamos hacer que el conjunto de reglas sea menos restrictivo eliminando la regla "Es capaz de volar", nos quedamos con
+
+* Tiene plumas
+* Tiene alas
+* Pone huevos
 
 De acuerdo con este conjunto de reglas, ahora podemos clasificar correctamente tanto al avestruz como al pingüino como aves, como se muestra en la figura 1-5 .
 
-Figura 1-5Se han establecido reglas de clasificación adecuadas.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/eab284bd-7d81-49bf-827e-c18e128cd0d3)
+
+**Figura 1-5 Se han establecido reglas de clasificación adecuadas.**
+
 Este conjunto de reglas sigue siendo innecesariamente complicado, porque resulta que la regla de "pone huevos" es redundante: ya sea que la mantengamos o la eliminemos, no cambia nuestra decisión de lo que constituye un ave frente a una no ave. Por lo tanto, simplificamos el conjunto de reglas una vez más:
-tiene plumas
 
-tiene alas
+* Tiene plumas
+* Tiene alas
 
-Sintiéndonos particularmente atrevidos (!), tratamos de llevar nuestro proceso de simplificación un paso más allá eliminando otra regla más, definiendo un pájaro como algo que
-tiene alas
+Sintiéndonos particularmente atrevidos(!), tratamos de llevar nuestro proceso de simplificación un paso más allá eliminando otra regla más, definiendo un pájaro como algo que
+
+* Tiene alas
 
 Como muestra la Figura 1-6 , hemos ido demasiado lejos esta vez: ¡la abstracción de un pájaro ahora es tan general que incluiríamos aviones, insectos y todo tipo de otras cosas que no son pájaros en la mezcla!
 
-Figura 1-6Un conjunto de reglas demasiado relajado es tan problemático como un conjunto de reglas demasiado restrictivo.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/9fa9fbd3-45be-421a-86ad-43b5980d78a0)
+
+**Figura 1-6 Un conjunto de reglas demasiado relajado es tan problemático como un conjunto de reglas demasiado restrictivo.**
+
 El proceso de definición de reglas con fines de categorización implica seleccionar el conjunto correcto de reglas (no demasiado generales, no demasiado restrictivas y que no contengan redundancias) para definir la pertenencia correcta a una clase en particular.
 
-La abstracción como base para el desarrollo de software
-Cuando determinamos los requisitos para un proyecto de desarrollo de sistemas de información , generalmente comenzamos recopilando detalles sobre la situación del mundo real en la que se basará el sistema. Estos detalles suelen ser una combinación de
+### La abstracción como base para el desarrollo de software
+
+Cuando determinamos los requisitos para un proyecto de desarrollo de sistemas de información, generalmente comenzamos recopilando detalles sobre la situación del mundo real en la que se basará el sistema. Estos detalles suelen ser una combinación de
 Aquellos que se nos ofrecen explícitamente cuando entrevistamos a los usuarios previstos del sistema.
 
 Los que de otra manera observamos
