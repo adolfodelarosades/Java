@@ -35,6 +35,6 @@ Apress, una empresa de Springer Nature, es una editorial dedicada a satisfacer l
 
 ### Recursos
 
-[Contenido suplementario](https://github.com/Apress/Beginning-Java-Objects-3rd-ed.)
-[Enlace de compra](https://link.springer.com/book/10.1007/978-1-4842-9060-6?wt_mc=ThirdParty.Safari.3.EPR653.ProductPagePurchase&utm_medium=referral&utm_source=safari&utm_campaign=3_pier05_product_page&utm_content=11232017)
-[Sitio web del editor](https://www.apress.com/gp)
+* [Contenido suplementario](https://github.com/Apress/Beginning-Java-Objects-3rd-ed.)
+* [Enlace de compra](https://link.springer.com/book/10.1007/978-1-4842-9060-6?wt_mc=ThirdParty.Safari.3.EPR653.ProductPagePurchase&utm_medium=referral&utm_source=safari&utm_campaign=3_pier05_product_page&utm_content=11232017)
+* [Sitio web del editor](https://www.apress.com/gp)
