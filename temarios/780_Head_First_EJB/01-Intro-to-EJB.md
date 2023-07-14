@@ -264,3 +264,309 @@ Mire la descripción del problema a la izquierda y coloque una marca de verifica
 * Los beans de sesión son... todo lo demás .
 * Los beans de sesión pueden ser con estado o sin estado.
 * Los beans con estado pueden recordar el "estado conversacional" con un cliente, mientras que los beans sin estado no pueden.
+
+
+## Ejemplo: The Advice Guy bean - El Chico de los Consejos bean
+
+Antes de adentrarnos en las entrañas de EJB, veamos cómo desarrollar, implementar y probar un bean de principio a fin. Si aún no está familiarizado con EJB, no entenderá todo aquí. No te preocupes por eso ahora; lo resolveremos todo en capítulos posteriores. Esto es solo para darle una idea de lo que es poner en marcha un bean.
+
+Nuestro primer bean es para el servicio Advice Guy, un servicio remoto que devuelve una cadena de consejos cada vez que el cliente realiza una solicitud. Pasaremos las próximas páginas analizando el proceso, y luego haremos este bean, como un tutorial.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/37df4815-6bb0-48dd-9e1f-9affa801ccc6)
+
+**El Chico de los Consejos [ 1 ]**
+
+Nuestro primer bean es para el servicio Advice Guy. Cada vez que el cliente hace una solicitud(request), el servicio Advice Guy (un enterprise javabean) devuelve un consejo increíblemente útil (y sobrenaturalmente apropiado).
+
+
+[ 1 ] En Head First Java, implementamos el servicio Advice Guy usando sockets TCP directos. Ahora, por solo cinco veces la cantidad de código y esfuerzo, podemos tener el mismo servicio en EJB. Por supuesto, si uno quisiera, podría argumentar que Advice Guy realmente no necesita todos esos servicios EJB, pero no estamos de acuerdo. Ya estamos planeando la oferta pública inicial para este bebé.
+
+## Cinco cosas que haces para construir un bean:
+
+1. Codifique la **bean class - clase de bean** con todos los business methods.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a1db7663-fd33-492d-beac-3eb5ff1fd097)
+
+
+2. Codifique dos **interfaces** para el bean: ***home*** y ***component***.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ec2ba89e-2891-42b1-92e7-fa8cf3f4a378)
+
+
+3. Cree un XML **deployment descriptor** que le diga al servidor qué es su bean y cómo debe administrarse. Debe nombrarlo **ejb-jar.xml**.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/656a9d13-5b69-4809-aea4-c8ecdca9827e)
+
+
+4. Coloque el bean, las interfaces y el deployment descriptor en un archivo **ejb-jar**. (Puede haber más de un bean en el **ejb-jar**, pero siempre habrá un solo deployment descriptor).
+   
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1eb5f659-1df3-402d-965a-0893bd7293eb)
+
+5. Implemente(Deploy) el bean en el servidor, utilizando las herramientas proporcionadas por el proveedor del servidor.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/20044c2a-f2da-4f45-b4ac-07ba213e98a5)
+
+
+<hr>
+
+**RELAX**
+
+**No es necesario ser un experto en XML.**
+
+De hecho, no tiene que saber nada sobre cómo funciona XML. Necesita conocer muchas de las tags del deployment descriptor, pero no necesita conocer XML para aprender las etiquetas. Si piensa en las tags como simples etiquetas en un documento, con requisitos muy específicos para lo que puede escribir dentro de esas tags, entonces todo lo que necesita saber para el examen es el nombre y los requisitos, para algunos de los más etiquetas importantes (tags). Veremos esas etiquetas cruciales en varios capítulos.
+
+<hr>
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a96208e5-ef79-471e-a024-dea35430eef7)
+
+
+1. bean class
+
+2. interfaces
+
+3. XMLDD
+
+4. ejb-jar
+
+5. deploy
+
+
+AQUIIII
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/88ce36b9-65f9-4933-b976-1337a7ec51ed)
+
+1. Escriba la clase de bean con los métodos de negocios reales que llama el cliente.
+
+   Aquí es donde todo sucede. La implementación de sus métodos de negocios definidos en la interfaz del componente. En otras palabras, escribe su lógica comercial en la clase de bean.
+
+   Hay tres tipos de beans para elegir, de sesión, de entidad y controlados por mensajes, y cubriremos cada uno en detalle en capítulos posteriores del libro. Sin embargo, antes de crear un bean, debe decidir qué tipo necesita porque su clase de bean debe implementar una de las tres interfaces, según el tipo que elija.
+
+   Hemos elegido un bean de sesión aquí porque es perfecto para la aplicación Advice Guy. Advice Guy devuelve una cadena de consejos cuando invocas el método getAdvice() de nombre sorprendente. Así que nuestra clase de bean (en la página siguiente) implementa la interfaz SessionBean. Y SessionBean no es solo una interfaz de marcador [ 2 ] , tiene métodos que su clase de bean debe implementar.
+
+Los métodos que implementa desde la interfaz de SessionBean se conocen como devoluciones de llamada del contenedor, porque el contenedor los usa para notificarle los hitos importantes en la vida del bean.
+
+
+¡MÍRALO!
+Debe saber cómo escribir todo el código a mano, sin usar una herramienta de desarrollo preparada para EJB.
+
+Se espera que sepa cómo escribir las dos interfaces y la clase de bean (o, para beans controlados por mensajes, solo la clase de bean). Eso significa que NO debe usar una herramienta de desarrollo compatible con EJB que cree parte del código de la interfaz o del bean para usted, hasta que esté seguro de que sabe exactamente qué código está creando la herramienta para usted.
+
+Hay un montón de reglas que debes saber para el examen, y en los próximos capítulos entraremos en detalles sangrientos. Por ahora, no se preocupe por memorizar nada del código de este ejercicio. Solo sepa que NECESITARÁ aprenderlo todo antes de que terminemos.
+
+Sin embargo, hay buenas noticias: PUEDE usar una herramienta para crear el descriptor de implementación XML. ¡El examen no espera que memorice todas las etiquetas XML! (Aunque necesitará conocer algunos elementos; los cubriremos más adelante).
+
+clase de frijol
+
+
+AdviceBean implementa la interfaz SessionBean, por lo que debe implementar los métodos declarados en javax.ejb.SessionBean. Te interrogaremos sobre todo un poco más tarde, por ahora, solo recuerda que la clase de bean es donde va tu lógica comercial real. En otras palabras, la razón por la que tu bean existe en primer lugar. Para el chico de los consejos, eso significa el método getAdvice().
+
+
+1 frijol
+
+2 interfaces
+
+3 DD XML
+
+4 ejb-tarro
+
+5 desplegar
+
+
+Escriba dos interfaces para el bean.
+
+Estas son las interfaces que ve el cliente . Tenemos un capítulo completo dedicado a estas interfaces, por lo que no es necesario que lo entienda todo ahora.
+
+interfaz COMPONENTE
+
+Aquí es donde se declaran todos los métodos comerciales . En otras palabras, es donde pones los métodos que el cliente quiere llamar.
+
+
+interfaz de componentes: métodos comerciales
+
+
+Interfaz de INICIO
+
+El cliente utiliza la interfaz de inicio para solicitar una referencia a la interfaz del componente . El hogar es el punto de partida del cliente para obtener una referencia a un bean (o al menos lo que el cliente cree que es el bean, pero hablaremos de eso más adelante). Por ahora, piense en el hogar como una especie de fábrica que elabora y distribuye referencias de frijol a los clientes.
+
+
+interfaz de inicio: una fábrica de referencias de frijoles
+
+
+
+Hmmm... dos buenas preguntas. En un mundo Java sin beans, la forma en que estamos haciendo las cosas aquí no tendría mucho sentido. Pero el mundo del frijol tiene reglas y prácticas diferentes. Podríamos escribir las interfaces primero, y algunos desarrolladores lo hacen. A veces, la elección de cuál desarrollar primero depende de las herramientas de desarrollo que esté utilizando para construir sus beans. Algunas herramientas, por ejemplo, esperan que primero construya su bean (codificando la lógica comercial real), y luego la herramienta construirá las interfaces para que coincidan. Y algunas herramientas hacen todo lo contrario, observan las interfaces y crean una clase de bean "su código va aquí", con todos los métodos de la interfaz. Para aprender EJB, nos gusta comenzar con el bean, centrándonos en la lógica empresarial, antes de descubrir las interfaces. Más adelante en el libro, lo haremos al revés.
+
+En cuanto al bean que no implementa la interfaz del componente, podría hacerlo de esa manera, pero esta vez le recomendamos encarecidamente que no lo haga. En la página siguiente, veremos esto con más detalle.
+
+
+NO HAY PREGUNTAS TONTAS
+
+P:
+
+P: Entonces, ¿por qué la clase de bean (AdviceBean) no implementa la interfaz del componente (Advice) si tiene que implementar los mismos métodos? Las clases de Java pueden implementar más de una interfaz, entonces, ¿cuál es el problema de decir:
+
+class AdviceBean implements Advice, SessionBean
+
+A:
+
+R: Legalmente, la clase bean puede implementar la interfaz del componente, pero la especificación no lo recomienda. Recuerde, aunque para el cliente parezca que AdviceBean es el objeto en el que invoca los métodos del cliente (el objeto que implementa, en el verdadero sentido de Java, la interfaz del componente), el cliente realmente invoca métodos en algo llamado EJBObject, que está implementado por el servidor en tiempo de implementación. El cliente nunca interactúa directamente con el bean. Nunca, nunca, nunca. Más adelante en el libro, verá que si el bean implementa la interfaz del componente, podría colar cosas más allá del compilador que explotarían en tiempo de ejecución. Por lo tanto, le recomendamos encarecidamente que no haga que su bean implemente la interfaz del componente.
+
+Pero también hay otro problema: la interfaz del componente amplía otra interfaz. En nuestro ejemplo, Advice amplía EJBObject y EJBObject no es una interfaz de marcador. ¡Tiene métodos! Esto significa que cualquier clase que implemente Advice también debe implementar los métodos de EJBObject!
+
+Entonces, su bean terminaría implementando un montón de métodos que nunca debería tener (como getHandle(), getEJBHome()...)
+
+P:
+
+P: Pero hay una solución fácil para ESE problema: puede hacer que el bean amplíe una clase que tenga todas las implementaciones que necesita para satisfacer al compilador, pero que realmente no necesita implementar en su código. Como las clases de escucha de eventos del adaptador en AWT. ¿Por qué no hacer algo así aquí y crear una superclase para su bean que implemente los métodos?
+
+A:
+
+R: Sí, podrías hacer eso y sería legal. Pero aún significa que su bean es capaz de invocar métodos que el bean nunca debería conocer. Los métodos de EJBObject son métodos para que el cliente llame al bean, pero NO para que el bean los implemente realmente. Así que no es la mejor práctica de OO.
+
+Y todavía hay otra razón por la que no es una buena práctica que el bean implemente la interfaz del componente: si la interfaz es remota (y EJBObject lo es, ya que amplía la interfaz java.rmi.Remote), eso haría que la clase del bean fuera una clase remota. , y eso nunca debe ser! El bean está protegido por el servidor, y nunca se debe acceder a él de ninguna otra forma, excepto por el servidor. Es el servidor el que crea el EJBObject (implementando la interfaz Advice), que ES remoto y que intercepta todas las llamadas de métodos comerciales al bean.
+
+P:
+
+P: Pero si no tiene el bean implementando la interfaz, en otras palabras, si AdviceBean no implementa Advice, ¿no significa esto que el compilador no lo atrapará si el bean falla y no coincide? los métodos de la interfaz?
+
+A:
+
+R: Sí, eso es exactamente lo que significa. Y sí, eso hace que la mayoría de los desarrolladores de Java se sientan un poco mareados solo de pensarlo. Después de todo, ese es uno de los beneficios de las interfaces en Java: que el compilador garantiza que tiene todos los métodos de interfaz implementados correctamente.
+
+¡Pero no entres en pánico! En nuestro desarrollo en este libro, debemos tener cuidado ya que el compilador no se asegura de que hayamos implementado los métodos comerciales desde la interfaz del componente. En el mundo real, sin embargo, es casi seguro que utilizará un entorno de desarrollo listo para EJB que se asegurará de proporcionar los métodos, ya sea poniendo una versión del método "su código va aquí" en su clase de bean, o haciendo lo contrario: encontrar el método comercial en la clase de bean y colocarlo en la interfaz del componente. Como mínimo, la mayoría de los servidores verificarán (antes o en el momento en que implemente el bean) que la interfaz de su componente y la clase de bean tengan métodos coincidentes.
+
+Sin embargo, si esto aún le molesta, tenemos una técnica para evitarlo que veremos un poco más adelante. Lo más probable es que no necesite usarlo.
+
+PODER CEREBRAL
+Viste cómo el bean no implementa la interfaz del componente, aunque el bean debe tener los mismos métodos. Haga una lluvia de ideas sobre una forma (puede haber más de una) en la que podría manejar estos requisitos para el bean Advice Guy:
+
+La interfaz del componente (Advice) debe extender EJBObject.
+
+El bean debe implementar la interfaz SessionBean. El bean no debe implementar la interfaz del componente (Consejo).
+
+Queremos que el compilador verifique que el bean (AdviceBean) tenga los mismos métodos que los de la interfaz del componente.
+
+(Sugerencia: “los mismos métodos que los de la interfaz del componente” no significa lo mismo que “los mismos métodos que los declarados en la interfaz del componente”).
+
+(Sugerencia: esto requiere solo conocimiento de Java, no conocimiento de EJB).
+
+NOTA
+La convención de nomenclatura para beans NO forma parte de la especificación EJB.
+
+Consejo, ConsejoInicio, ConsejoBean...
+
+¡No está obligado a utilizar estos nombres para beans de empresa! (Sin embargo, es una muy, muy, muy buena idea). Asegúrese de que no se deje engañar por el nombre de una clase o interfaz: es legal tener una interfaz de componente llamada AdviceHome y una interfaz de componente llamada AdviceBean, por ejemplo. En el examen, vaya siempre por la declaración de clase o interfaz en lugar del nombre de la clase.
+
+FUERA DEL CAMINO
+Herramientas de desarrollo compatibles con beans
+
+Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo expertas en EJB. En otras palabras, un IDE compatible con beans que sabe cómo se relacionan entre sí las tres piezas ( interfaz de inicio , interfaz de componentes y clase de bean ). Muchas de estas herramientas también saben cómo comunicarse directamente con uno o más servidores de aplicaciones, por lo que puede usar la herramienta para desarrollar e implementar su bean, en lugar de cambiar de un entorno de desarrollo al propio del servidor (y, a menudo, menos amigable) herramientas de despliegue. Una de las ventajas de una herramienta de desarrollo EJB es que es posible que no tenga que preocuparse por hacer coincidir los métodos comerciales en la interfaz del componente con la clase de bean real, o viceversa. Un buen IDE compatible con EJB se asegurará de que todo esté sincronizado.
+
+1 frijol
+
+2 interfaces
+
+3 DD XML
+
+4 ejb-tarro
+
+5 desplegar
+
+
+Cree un descriptor de implementación XML que le diga al servidor qué es su bean y cómo debe administrarse.
+
+NOTA
+(En este libro, no escribiremos esto nosotros mismos; dejaremos que las herramientas de implementación lo construyan por nosotros).
+
+El descriptor de implementación (DD) describe la estructura de su bean, incluida la forma en que los tres archivos (interfaz de componente, interfaz de inicio y clase de bean) se relacionan entre sí. El servidor no mirará su convención de nomenclatura y averiguará cuál es el hogar, cuál es el bean, etc. Tiene que decirle al servidor, a través del DD, qué clase es cuál y cómo están conectados. Pero el DD hace mucho más que eso. ¡Y para algunos frijoles, el DD puede tener varias páginas!
+
+Para este frijol simple, el DD es corto. Recuerde, no necesita memorizar la sintaxis del XML en el DD. Más adelante en el libro (en varios capítulos diferentes), repasaremos los aspectos del DD que necesita saber .
+
+No es necesario que escriba el XML a mano si utiliza una herramienta que pueda ayudarlo a crear un descriptor de implementación.
+
+Puede usar el asistente de bean J2EE RI para que lo haga por usted, ¡y el XML que escupe funcionará en cualquier contenedor EJB 2.0!
+
+<?versión xml="1.0" codificación="UTF-8"?>
+
+<!DOCTYPE ejb-jar PÚBLICO '-//Sun Microsystems,
+Inc.//DTD Enterprise JavaBeans 2.0//EN' 'http://
+java.sun.com/dtd/ejb-jar_2_0.dtd'>
+
+<ejb-jar>
+  <nombre-display>Ejb1</nombre-display>
+  <enterprise-beans>
+
+    <sesión>
+      <display-name>AdviceBean</display-name>
+      <ejb-name>AdviceBean</ejb-name>
+      <home>headfirst.AdviceHome</home> 
+      <remote>headfirst.Advice</remote> 
+      <ejb-class>headfirst.AdviceBean</ejb-class> 
+      <session-type>Stateless</session-type>
+      <tipo-de-transacción>Bean</tipo-de-transacción>
+      <identidad-de-seguridad>
+        <descripción></descripción>
+        <usar-identidad-de-la-llamada></usar-identidad-de-la-llamada>
+      </identidad-de-seguridad>
+    </sesión>
+
+ </enterprise-beans>
+</ejb-jar>
+NOTA
+Por ahora, sepa que cada bean en una aplicación debe tener un elemento en el DD que describa la estructura y el tipo del bean.
+
+1 frijol
+
+2 interfaces
+
+3 DD XML
+
+4 ejb-tarro
+
+5 desplegar
+
+
+Coloque el bean, las interfaces y el descriptor de implementación en un archivo ejb-jar .
+
+NOTA
+(en este libro, no usaremos la herramienta JAR para hacer la barra ejb nosotros mismos; dejaremos que las herramientas de implementación lo hagan)
+
+Como desarrollador de beans (oficialmente llamado proveedor de beans), siempre colocará sus beans en un JAR. La especificación dice que un ejb-jar es un archivo JAR que contiene las cosas de las que depende el bean (clases e interfaces, junto con el descriptor de implementación).
+
+¡No tiene que hacer esto a mano ya que usaremos el RI! En lugar de escribir el DD XML y usar lajarherramienta para empaquetarlo, usaremos eldeploytoolasistente de RI para hacerlo más fácil (y menos propenso a errores). En otras palabras, vamos a combinar los pasos 4 y 5 en uno. Por ahora, necesita saber que un bean no es un bean hasta que crea un archivo JAR con la clase y las interfaces compiladas, y el DD.
+
+
+¡MÍRALO!
+El examen espera que sepa lo que se supone que debe estar en el archivo ejb-jar y también lo que no debe estar allí. ¡Las clases e interfaces generadas por el contenedor (aprenderá cuáles son un poco más adelante) no deben estar en el archivo ejb-jar! Piense en el ejb-jar como algo que usted crea, como un desarrollador de beans. ¡Es tu entrega ! El contenedor/servidor tiene sus propios entregables, y esos entregables no van al ejbjar. Imagina que trabajas para Beans-R-Us y ni siquiera tienesun servidor compatible con EJB. Esa es toda la idea del ejb-jar: es donde el desarrollador de beans coloca sus componentes básicos (es decir, beans), que algún otro desarrollador puede usar para ensamblar una aplicación. Puede usar una herramienta de servidor para ayudar a crear el DD XML, pero el DD sigue siendo su entrega, independientemente de quién (o qué) lo cree.
+
+1 frijol
+
+2 interfaces
+
+3 DD XML
+
+4 ejb-tarro
+
+5 desplegar
+
+
+Implemente el bean en el servidor, utilizando las herramientas proporcionadas por el proveedor del servidor.
+
+Tarde o temprano, tus frijoles tienen que hacer algo. Deben ensamblarse en una aplicación e implementarse en un servidor, esperando que los clientes llamen.
+
+Este es un gran paso. De hecho, hicimos un poco de trampa, porque en realidad son dos pasos: Ensamblaje e implementación de la aplicación.
+
+Ensamblaje de aplicaciones
+
+Esto significa llevar el bean de la etapa de componente reutilizable a ser parte de una aplicación. Para beans simples, eso podría significar simplemente escribir un cliente que pueda acceder al bean (es decir, llamar a los métodos comerciales del bean). En otras palabras, un solo bean podría ser la aplicación completa del lado del servidor. Pero este también podría ser el paso en el que integra múltiples beans (y otras clases de Java) en una aplicación personalizada, y eso generalmente significa tomar diferentes beans (cada uno en su propio ejb-jar con su propio DD) y ponerlos en un nuevo, solo ejb-jar, con un solo DD que podría describir cómo se relacionan dos o más beans entre sí.
+
+Durante el ensamblaje, también puede agregar nueva información al DD, para cosas que el desarrollador del bean no conocía. Por ejemplo, el desarrollador del bean podría escribir un código que use una "propiedad" especial específica del bean (llamada entrada de entorno , que abordaremos en un capítulo posterior) para el monto del impuesto utilizado por esta aplicación. Pero el desarrollador del frijol no tiene idea de qué valor darle a la propiedad del monto del impuesto, por lo que deja el valor en blanco en el DD. Luego aparece el ensamblador de la aplicación, ve (al leer el DD) que el bean usa una propiedad, determina cuál debería ser el valor y lo agrega al DD.
+
+Para el bean Advice, colocar el bean en el ejb-jar, construir el DD e implementarlo será un gran paso.
+
+Despliegue
+
+Aquí es donde la goma se encuentra con el camino, el bean se encuentra con el servidor, el desarrollador se encuentra con el administrador del sistema. Las dos partes cruciales de la implementación son nombrar el bean (para que el cliente sepa cómo encontrarlo) y poner el bean en el control del contenedor .
+
+La especificación no dice nada sobre la forma en que implementa sus beans; todo depende del servidor/contenedor EJB que esté utilizando.
+
+
+[ 2 ] Una interfaz de marcador (también llamada interfaz de etiqueta) no tiene métodos para implementar y existe para que pueda anunciar al mundo que "Sí, puedo hacer esto".
