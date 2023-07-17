@@ -320,84 +320,95 @@ De hecho, no tiene que saber nada sobre cómo funciona XML. Necesita conocer muc
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/a96208e5-ef79-471e-a024-dea35430eef7)
 
 
-1. bean class
-
+1. **bean class**
 2. interfaces
-
 3. XMLDD
-
 4. ejb-jar
-
 5. deploy
 
-
-AQUIIII
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/88ce36b9-65f9-4933-b976-1337a7ec51ed)
 
-1. Escriba la clase de bean con los métodos de negocios reales que llama el cliente.
+1. Escriba la **bean class - clase de bean** con los métodos de negocios reales que llama el cliente.
 
    Aquí es donde todo sucede. La implementación de sus métodos de negocios definidos en la interfaz del componente. En otras palabras, escribe su lógica comercial en la clase de bean.
 
-   Hay tres tipos de beans para elegir, de sesión, de entidad y controlados por mensajes, y cubriremos cada uno en detalle en capítulos posteriores del libro. Sin embargo, antes de crear un bean, debe decidir qué tipo necesita porque su clase de bean debe implementar una de las tres interfaces, según el tipo que elija.
+   Hay tres tipos de beans para elegir, **Session**, **Entity**, y **Message-driven**, y cubriremos cada uno en detalle en capítulos posteriores del libro. Sin embargo, antes de crear un bean, debe decidir qué tipo necesita porque su clase de bean debe implementar una de las tres interfaces, según el tipo que elija.
 
-   Hemos elegido un bean de sesión aquí porque es perfecto para la aplicación Advice Guy. Advice Guy devuelve una cadena de consejos cuando invocas el método getAdvice() de nombre sorprendente. Así que nuestra clase de bean (en la página siguiente) implementa la interfaz SessionBean. Y SessionBean no es solo una interfaz de marcador [ 2 ] , tiene métodos que su clase de bean debe implementar.
+   Hemos elegido un **Session bean - bean de sesión** aquí porque es perfecto para la aplicación **Advice Guy**. **Advice Guy** devuelve un String de consejos cuando invocas el método de nombre sorprendente **`getAdvice()`**. Así que nuestra bean class (en la página siguiente) implementa la **SessionBean interface**. Y **SessionBean** no es solo una interfaz de marcador[ 2 ], tiene métodos que su bean class debe implementar.
 
-Los métodos que implementa desde la interfaz de SessionBean se conocen como devoluciones de llamada del contenedor, porque el contenedor los usa para notificarle los hitos importantes en la vida del bean.
+   Los métodos que implementa desde la **interfaz SessionBean** se conocen como **container-callbacks**, porque el contenedor los usa para notificarle los hitos importantes en la vida del bean.
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/997bd7db-4e58-4e60-9ddc-bc33bfdae4c4)
 
-¡MÍRALO!
-Debe saber cómo escribir todo el código a mano, sin usar una herramienta de desarrollo preparada para EJB.
+<hr>
 
-Se espera que sepa cómo escribir las dos interfaces y la clase de bean (o, para beans controlados por mensajes, solo la clase de bean). Eso significa que NO debe usar una herramienta de desarrollo compatible con EJB que cree parte del código de la interfaz o del bean para usted, hasta que esté seguro de que sabe exactamente qué código está creando la herramienta para usted.
+**WATCH IT!**
 
-Hay un montón de reglas que debes saber para el examen, y en los próximos capítulos entraremos en detalles sangrientos. Por ahora, no se preocupe por memorizar nada del código de este ejercicio. Solo sepa que NECESITARÁ aprenderlo todo antes de que terminemos.
+**Debe saber cómo escribir todo el código a mano, sin usar una herramienta de desarrollo preparada para EJB.**
 
-Sin embargo, hay buenas noticias: PUEDE usar una herramienta para crear el descriptor de implementación XML. ¡El examen no espera que memorice todas las etiquetas XML! (Aunque necesitará conocer algunos elementos; los cubriremos más adelante).
+*Se espera que sepa cómo escribir las dos interfaces y la bean class (o, para message-driven beans, solo la bean class). Eso significa que NO debe usar una herramienta de desarrollo compatible con EJB que cree parte del código de la interfaz o del bean para usted, hasta que esté seguro de que sabe exactamente qué código está creando la herramienta para usted.*
 
-clase de frijol
+*Hay un montón de reglas que debes saber para el examen, y en los próximos capítulos entraremos en detalles sangrientos. Por ahora, no se preocupe por memorizar nada del código de este ejercicio. Solo sepa que NECESITARÁ aprenderlo todo antes de que terminemos.*
 
+*Sin embargo, hay buenas noticias: PUEDE usar una herramienta para crear el descriptor de implementación XML. ¡El examen no espera que memorice todas las etiquetas XML! (Aunque necesitará conocer algunos elementos; los cubriremos más adelante).*
 
-AdviceBean implementa la interfaz SessionBean, por lo que debe implementar los métodos declarados en javax.ejb.SessionBean. Te interrogaremos sobre todo un poco más tarde, por ahora, solo recuerda que la clase de bean es donde va tu lógica comercial real. En otras palabras, la razón por la que tu bean existe en primer lugar. Para el chico de los consejos, eso significa el método getAdvice().
+<hr>
 
+#### Bean class
 
-1 frijol
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/6d96c100-f3d8-431d-ab1a-f885298af71e)
 
-2 interfaces
+**AdviceBean** implementa la **interfaz SessionBean**, por lo que debe implementar los métodos declarados en **`javax.ejb.SessionBean`**. Te interrogaremos sobre todo un poco más tarde, por ahora, solo recuerda que la clase bean es donde va tu lógica comercial real. En otras palabras, la razón por la que tu bean existe en primer lugar. Para el Advice Guy(chico de los consejos), eso significa el método **`getAdvice()`**.
 
-3 DD XML
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/6105f7ac-9538-4191-a453-1e0899720100)
 
-4 ejb-tarro
+1. bean class
+2. **interfaces**
+3. XMLDD
+4. ejb-jar
+5. deploy
 
-5 desplegar
-
-
-Escriba dos interfaces para el bean.
-
-Estas son las interfaces que ve el cliente . Tenemos un capítulo completo dedicado a estas interfaces, por lo que no es necesario que lo entienda todo ahora.
-
-interfaz COMPONENTE
-
-Aquí es donde se declaran todos los métodos comerciales . En otras palabras, es donde pones los métodos que el cliente quiere llamar.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/8c8a220c-1c38-4567-9a4d-81760013790f)
 
 
-interfaz de componentes: métodos comerciales
+2. Escriba las dos **interfaces** para el bean.
+
+   *Estas son las interfaces que ve el cliente. Tenemos un capítulo completo dedicado a estas interfaces, por lo que no es necesario que lo entienda todo ahora.*
+
+   **COMPONENT interface**
+
+   *Aquí es donde se declaran todos los **métodos de negocio**. En otras palabras, es donde pones los métodos que el cliente quiere llamar.*
+
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/e165d7e4-7dc3-40b0-ab4d-8e6f8cf2d488)
 
 
-Interfaz de INICIO
+   **component interface: business methods**
 
-El cliente utiliza la interfaz de inicio para solicitar una referencia a la interfaz del componente . El hogar es el punto de partida del cliente para obtener una referencia a un bean (o al menos lo que el cliente cree que es el bean, pero hablaremos de eso más adelante). Por ahora, piense en el hogar como una especie de fábrica que elabora y distribuye referencias de frijol a los clientes.
-
-
-interfaz de inicio: una fábrica de referencias de frijoles
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/540e7f29-de0e-4f95-bf63-bb29619c6aa0)
 
 
 
-Hmmm... dos buenas preguntas. En un mundo Java sin beans, la forma en que estamos haciendo las cosas aquí no tendría mucho sentido. Pero el mundo del frijol tiene reglas y prácticas diferentes. Podríamos escribir las interfaces primero, y algunos desarrolladores lo hacen. A veces, la elección de cuál desarrollar primero depende de las herramientas de desarrollo que esté utilizando para construir sus beans. Algunas herramientas, por ejemplo, esperan que primero construya su bean (codificando la lógica comercial real), y luego la herramienta construirá las interfaces para que coincidan. Y algunas herramientas hacen todo lo contrario, observan las interfaces y crean una clase de bean "su código va aquí", con todos los métodos de la interfaz. Para aprender EJB, nos gusta comenzar con el bean, centrándonos en la lógica empresarial, antes de descubrir las interfaces. Más adelante en el libro, lo haremos al revés.
+   **HOME interface**
 
-En cuanto al bean que no implementa la interfaz del componente, podría hacerlo de esa manera, pero esta vez le recomendamos encarecidamente que no lo haga. En la página siguiente, veremos esto con más detalle.
+   El cliente utiliza la ***home* interface** para solicitar una referencia a la ***component* interface**. El home es el punto de partida del cliente para obtener una referencia a un bean (o al menos lo que el cliente cree que es el bean, pero hablaremos de eso más adelante). Por ahora, piense en el home como una especie de *factory* que elabora y distribuye bean references a los clientes.
+
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/3e16a1c0-2ea8-459f-8b6e-191a91c12829)
 
 
-NO HAY PREGUNTAS TONTAS
+   **home interface: *a factory for bean references***
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/986ada2e-b2a6-4bf4-8a6a-81e45c1daafd)
+
+
+
+   Hmmm... dos buenas preguntas. En un mundo Java sin beans, la forma en que estamos haciendo las cosas aquí no tendría mucho sentido. Pero el mundo bean tiene reglas y prácticas diferentes. *Podríamos* escribir las interfaces primero, y algunos desarrolladores lo hacen. A veces, la elección de cuál desarrollar primero depende de las herramientas de desarrollo que esté utilizando para construir sus beans. Algunas herramientas, por ejemplo, esperan que primero construya su bean (codificando la lógica comercial real(business logic)), y luego la herramienta construirá las interfaces para que coincidan. Y algunas herramientas hacen todo lo contrario, observan las interfaces y crean una clase bean "su código va aquí", con todos los métodos de la interfaz. Para aprender EJB, nos gusta comenzar con el bean, centrándonos en la lógica de negocio, antes de descubrir las interfaces. Más adelante en el libro, lo haremos al revés.
+
+   En cuanto al bean que no implementa la interfaz del componente, podría hacerlo de esa manera, pero esta vez le recomendamos encarecidamente que no lo haga. En la página siguiente, veremos esto con más detalle.
+
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/78c7102e-4955-4016-b787-23738763d05a)
+
+<hr>
+
+**THERE ARE NO DUMB QUESTIONS**
 
 P:
 
