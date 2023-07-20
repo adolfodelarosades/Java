@@ -278,7 +278,6 @@ Nuestro primer bean es para el servicio Advice Guy, un servicio remoto que devue
 
 Nuestro primer bean es para el servicio Advice Guy. Cada vez que el cliente hace una solicitud(request), el servicio Advice Guy (un enterprise javabean) devuelve un consejo increíblemente útil (y sobrenaturalmente apropiado).
 
-
 [ 1 ] En Head First Java, implementamos el servicio Advice Guy usando sockets TCP directos. Ahora, por solo cinco veces la cantidad de código y esfuerzo, podemos tener el mismo servicio en EJB. Por supuesto, si uno quisiera, podría argumentar que Advice Guy realmente no necesita todos esos servicios EJB, pero no estamos de acuerdo. Ya estamos planeando la oferta pública inicial para este bebé.
 
 ## Cinco cosas que haces para construir un bean:
@@ -408,79 +407,85 @@ De hecho, no tiene que saber nada sobre cómo funciona XML. Necesita conocer muc
 
 <hr>
 
-**THERE ARE NO DUMB QUESTIONS**
+#### NO HAY PREGUNTAS TONTAS
 
-P:
+**P: Entonces, ¿por qué la clase bean(AdviceBean) no implementa la component interface (Advice) si tiene que implementar los mismos métodos? Las clases de Java pueden implementar más de una interfaz, entonces, ¿cuál es el problema de decir:**
 
-P: Entonces, ¿por qué la clase de bean (AdviceBean) no implementa la interfaz del componente (Advice) si tiene que implementar los mismos métodos? Las clases de Java pueden implementar más de una interfaz, entonces, ¿cuál es el problema de decir:
-
+```java
 class AdviceBean implements Advice, SessionBean
+```
 
-A:
+*R: Legalmente, la clase bean puede implementar la interfaz del componente, pero la especificación no lo recomienda. Recuerde, aunque para el cliente parezca que **`AdviceBean`** es el objeto en el que invoca los métodos del cliente (el objeto que implementa, en el verdadero sentido de Java, la interfaz del componente), el cliente realmente invoca métodos en algo llamado **`EJBObject`**, que está implementado por el servidor en tiempo de implementación. El cliente nunca interactúa directamente con el bean. Nunca, nunca, nunca. Más adelante en el libro, verá que si el bean implementa la interfaz del componente, podría colar cosas más allá del compilador que explotarían en tiempo de ejecución. Por lo tanto, **le recomendamos encarecidamente que no haga que su bean implemente la interfaz del componente**.*
 
-R: Legalmente, la clase bean puede implementar la interfaz del componente, pero la especificación no lo recomienda. Recuerde, aunque para el cliente parezca que AdviceBean es el objeto en el que invoca los métodos del cliente (el objeto que implementa, en el verdadero sentido de Java, la interfaz del componente), el cliente realmente invoca métodos en algo llamado EJBObject, que está implementado por el servidor en tiempo de implementación. El cliente nunca interactúa directamente con el bean. Nunca, nunca, nunca. Más adelante en el libro, verá que si el bean implementa la interfaz del componente, podría colar cosas más allá del compilador que explotarían en tiempo de ejecución. Por lo tanto, le recomendamos encarecidamente que no haga que su bean implemente la interfaz del componente.
+*Pero también hay otro problema: la interfaz del componente amplía otra interfaz. En nuestro ejemplo, **`Advice`** amplía **`EJBObject`** y **`EJBObject`** no es una  marker interface. ¡Tiene métodos! Esto significa que cualquier clase que implemente **`Advice`** también debe implementar los métodos de **`EJBObject`**!*
 
-Pero también hay otro problema: la interfaz del componente amplía otra interfaz. En nuestro ejemplo, Advice amplía EJBObject y EJBObject no es una interfaz de marcador. ¡Tiene métodos! Esto significa que cualquier clase que implemente Advice también debe implementar los métodos de EJBObject!
+Entonces, su bean terminaría implementando un montón de métodos que nunca debería tener (como **`getHandle()`**, **`getEJBHome()`**...)
 
-Entonces, su bean terminaría implementando un montón de métodos que nunca debería tener (como getHandle(), getEJBHome()...)
+**P: Pero hay una solución fácil para ESE problema: puede hacer que el bean amplíe una clase que tenga todas las implementaciones que necesita para satisfacer al compilador, pero que realmente no necesita implementar en su código. Como las clases de escucha de eventos del adaptador en AWT. ¿Por qué no hacer algo así aquí y crear una superclase para su bean que implemente los métodos?**
 
-P:
+*R: Sí, podrías hacer eso y sería legal. Pero aún significa que su bean es capaz de invocar métodos que el bean nunca debería conocer. Los métodos de **`EJBObject`** son métodos para que el cliente llame al bean, pero NO para que el bean los implemente realmente. Así que no es la mejor práctica de OO.*
 
-P: Pero hay una solución fácil para ESE problema: puede hacer que el bean amplíe una clase que tenga todas las implementaciones que necesita para satisfacer al compilador, pero que realmente no necesita implementar en su código. Como las clases de escucha de eventos del adaptador en AWT. ¿Por qué no hacer algo así aquí y crear una superclase para su bean que implemente los métodos?
+*Y todavía hay otra razón por la que no es una buena práctica que el bean implemente la interfaz del componente: si la interfaz es remota (y **`EJBObject`** lo es, ya que amplía la interfaz **`java.rmi.Remote`**), eso haría que la clase del bean fuera una clase remota, y eso nunca debe ser! El bean está protegido por el servidor, y nunca se debe acceder a él de ninguna otra forma, excepto por el servidor. Es el servidor el que crea el **`EJBObject`** (implementando la interfaz **`Advice`**), que ES remoto y que intercepta todas las llamadas de métodos de negocio al bean.*
 
-A:
+**P: Pero si no tiene el bean implementando la interfaz, en otras palabras, si `AdviceBean` no implementa `Advice`, ¿no significa esto que el compilador no lo atrapará(catch ) si el bean falla y no coincide(match ) los métodos de la interfaz?**
 
-R: Sí, podrías hacer eso y sería legal. Pero aún significa que su bean es capaz de invocar métodos que el bean nunca debería conocer. Los métodos de EJBObject son métodos para que el cliente llame al bean, pero NO para que el bean los implemente realmente. Así que no es la mejor práctica de OO.
+*R: Sí, eso es exactamente lo que significa. Y sí, eso hace que la mayoría de los desarrolladores de Java se sientan un poco mareados solo de pensarlo. Después de todo, ese es uno de los beneficios de las interfaces en Java: que el compilador garantiza que tiene todos los métodos de interfaz implementados correctamente.*
 
-Y todavía hay otra razón por la que no es una buena práctica que el bean implemente la interfaz del componente: si la interfaz es remota (y EJBObject lo es, ya que amplía la interfaz java.rmi.Remote), eso haría que la clase del bean fuera una clase remota. , y eso nunca debe ser! El bean está protegido por el servidor, y nunca se debe acceder a él de ninguna otra forma, excepto por el servidor. Es el servidor el que crea el EJBObject (implementando la interfaz Advice), que ES remoto y que intercepta todas las llamadas de métodos comerciales al bean.
+*¡Pero no entres en pánico! En nuestro desarrollo en este libro, debemos tener cuidado ya que el compilador no se asegura de que hayamos implementado los métodos de negocio desde la interfaz del componente(component interface). En el mundo real, sin embargo, es casi seguro que utilizará un entorno de desarrollo listo para EJB que se asegurará de proporcionar los métodos, ya sea poniendo una versión del método "su código va aquí" en su clase de bean, o haciendo lo contrario: encontrar el método de negocio en la clase de bean y colocarlo en la interfaz del componente. Como mínimo, la mayoría de los servidores verificarán (antes o en el momento en que implemente el bean) que la interfaz de su componente y la clase de bean tengan métodos coincidentes.*
 
-P:
+*Sin embargo, si esto aún le molesta, tenemos una técnica para evitarlo que veremos un poco más adelante. Lo más probable es que no necesite usarlo.*
 
-P: Pero si no tiene el bean implementando la interfaz, en otras palabras, si AdviceBean no implementa Advice, ¿no significa esto que el compilador no lo atrapará si el bean falla y no coincide? los métodos de la interfaz?
+<hr>
 
-A:
+<hr>
 
-R: Sí, eso es exactamente lo que significa. Y sí, eso hace que la mayoría de los desarrolladores de Java se sientan un poco mareados solo de pensarlo. Después de todo, ese es uno de los beneficios de las interfaces en Java: que el compilador garantiza que tiene todos los métodos de interfaz implementados correctamente.
+**BRAIN POWER**
 
-¡Pero no entres en pánico! En nuestro desarrollo en este libro, debemos tener cuidado ya que el compilador no se asegura de que hayamos implementado los métodos comerciales desde la interfaz del componente. En el mundo real, sin embargo, es casi seguro que utilizará un entorno de desarrollo listo para EJB que se asegurará de proporcionar los métodos, ya sea poniendo una versión del método "su código va aquí" en su clase de bean, o haciendo lo contrario: encontrar el método comercial en la clase de bean y colocarlo en la interfaz del componente. Como mínimo, la mayoría de los servidores verificarán (antes o en el momento en que implemente el bean) que la interfaz de su componente y la clase de bean tengan métodos coincidentes.
+Viste cómo el bean no implementa la interfaz del componente, aunque el bean debe tener los mismos métodos. Haga una lluvia de ideas sobre una forma (puede haber más de una) en la que podría manejar estos requisitos para el Advice Guy bean:
 
-Sin embargo, si esto aún le molesta, tenemos una técnica para evitarlo que veremos un poco más adelante. Lo más probable es que no necesite usarlo.
+1. La interfaz del componente (**`Advice`**) debe extender **`EJBObject`**.
 
-PODER CEREBRAL
-Viste cómo el bean no implementa la interfaz del componente, aunque el bean debe tener los mismos métodos. Haga una lluvia de ideas sobre una forma (puede haber más de una) en la que podría manejar estos requisitos para el bean Advice Guy:
+2. El bean debe implementar la interfaz **`SessionBean`**. El bean no debe implementar la interfaz del componente (**`Advice`**).
 
-La interfaz del componente (Advice) debe extender EJBObject.
-
-El bean debe implementar la interfaz SessionBean. El bean no debe implementar la interfaz del componente (Consejo).
-
-Queremos que el compilador verifique que el bean (AdviceBean) tenga los mismos métodos que los de la interfaz del componente.
+3. Queremos que el compilador verifique que el bean (**`AdviceBean`**) tenga los mismos métodos que los de la interfaz del componente.
 
 (Sugerencia: “los mismos métodos que los de la interfaz del componente” no significa lo mismo que “los mismos métodos que los declarados en la interfaz del componente”).
 
 (Sugerencia: esto requiere solo conocimiento de Java, no conocimiento de EJB).
 
-NOTA
+<hr>
+
+<hr>
+
+**NOTA**
+
 La convención de nomenclatura para beans NO forma parte de la especificación EJB.
 
-Consejo, ConsejoInicio, ConsejoBean...
+**Advice, AdviceHome, AdviceBean...**
 
-¡No está obligado a utilizar estos nombres para beans de empresa! (Sin embargo, es una muy, muy, muy buena idea). Asegúrese de que no se deje engañar por el nombre de una clase o interfaz: es legal tener una interfaz de componente llamada AdviceHome y una interfaz de componente llamada AdviceBean, por ejemplo. En el examen, vaya siempre por la declaración de clase o interfaz en lugar del nombre de la clase.
+¡No está obligado a utilizar estos nombres para enterprise beans! (Sin embargo, es una muy, muy, muy buena idea). Asegúrese de que no se deje engañar por el nombre de una clase o interfaz: es legal tener una interfaz de componente llamada **`AdviceHome`** y una interfaz de componente llamada **`AdviceBean`**, por ejemplo. En el examen, vaya siempre por la declaración de clase o interfaz en lugar del nombre de la clase.
 
-FUERA DEL CAMINO
+<hr>
+
+<hr>
+
+**OFF THE PATH**
+
 Herramientas de desarrollo compatibles con beans
 
-Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo expertas en EJB. En otras palabras, un IDE compatible con beans que sabe cómo se relacionan entre sí las tres piezas ( interfaz de inicio , interfaz de componentes y clase de bean ). Muchas de estas herramientas también saben cómo comunicarse directamente con uno o más servidores de aplicaciones, por lo que puede usar la herramienta para desarrollar e implementar su bean, en lugar de cambiar de un entorno de desarrollo al propio del servidor (y, a menudo, menos amigable) herramientas de despliegue. Una de las ventajas de una herramienta de desarrollo EJB es que es posible que no tenga que preocuparse por hacer coincidir los métodos comerciales en la interfaz del componente con la clase de bean real, o viceversa. Un buen IDE compatible con EJB se asegurará de que todo esté sincronizado.
+Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo expertas en EJB. En otras palabras, un IDE compatible con beans que sabe cómo se relacionan entre sí las tres piezas ( home interface, component interface y bean class ). Muchas de estas herramientas también saben cómo comunicarse directamente con uno o más servidores de aplicaciones, por lo que puede usar la herramienta para desarrollar e implementar su bean, en lugar de cambiar de un entorno de desarrollo al propio del servidor (y, a menudo, menos amigable) herramientas de despliegue. Una de las ventajas de una herramienta de desarrollo EJB es que es posible que no tenga que preocuparse por hacer coincidir los métodos de negocio en la interfaz del componente con la clase de bean real, o viceversa. Un buen IDE compatible con EJB se asegurará de que todo esté sincronizado.
 
-1 frijol
+<hr>
 
-2 interfaces
+1. bean class
+2. interfaces
+3. **XMLDD**
+4. ejb-jar
+5. deploy
 
-3 DD XML
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/995629e5-881e-40ec-b076-31008ce3d74a)
 
-4 ejb-tarro
-
-5 desplegar
-
+AQUIIIIIIII!!!!
 
 Cree un descriptor de implementación XML que le diga al servidor qué es su bean y cómo debe administrarse.
 
