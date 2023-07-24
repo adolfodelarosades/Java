@@ -612,3 +612,46 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 <hr>
 
 [ 2 ] Una marker interface (también llamada  tag interface) no tiene métodos para implementar y existe para que pueda anunciar al mundo que "Sí, puedo hacer esto".
+
+## EJB Roles y Responsibilities
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/c058e648-4925-4eba-9e78-4c54ae66f775)
+
+**EJB Role**: *Bean Provider*
+
+**Deliverable**: archivos **ejb-jar** *(que incluyen uno o más beans y un XML deployment descriptor)*
+
+**Primary responsibility**: *Diseñar y programar  enterprise javabeans.  En otras palabras, **escribe el código del bean***.
+
+**Characteristics**: *Conoce la **lógica de negocio** que debe haber en un determinado tipo de componente, para un determinado dominio.*
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/61d9fc1c-f0fe-47b6-a225-4152d3c4b6c7)
+
+**EJB Role**: *Application Assembler*
+
+**Deliverable**: archivos **ejb-jar** *(que incluyen uno o más beans y un XML deployment descriptor así como información del Bean Provider, así como **application assembly info**). También puede crear clientes o definir la interacción entre otros componentes (como JSP).*
+
+**Primary responsibility**: **combinar uno o más enterprise beans** en una aplicación más grande. A veces puede usar Bean Provider hat, mezclando beans nuevos y existentes para construir una aplicación. Define el comportamiento de seguridad y transacción para la aplicación.
+
+**Characteristics**: **Definitivamente un experto en el dominio**. *Puede que no haga tanta codificación como el Bean Provider*.
+
+
+<hr>
+
+**WATCH IT!**
+
+El examen cubre diferencias sutiles entre roles.
+
+Preste mucha atención a cualquier mención de roles EJB en este libro, especialmente cuando cubrimos más detalles del deployment descriptor. Cuente con ser probado sobre quién hace qué, y cuente con que esas preguntas sean sutiles. App Assembler y Bean Provider se superponen en varias áreas, al igual que Deployer y App Assembler. Para el examen, debe saber qué función tiene la responsabilidad principal de una tarea en particular (que generalmente tiene que ver con la información del deployment descriptor). El contenido de esta página y la siguiente son solo un comienzo...
+
+<hr>
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/38a897a1-aa57-4787-9331-3d9b6cef8a07)
+
+**EJB Role**: Deployer
+
+**Deliverable**: Enterprise beans that have been customized for a specific operational environment, and deployed into the server.
+
+**Primary responsibility**: Take the Application Assembler’s deliverable, study the deployment descriptor, and resolve any external dependencies. For example, if the bean relies on a particular resource, the deployer must map the logical name from the Bean Provider to the actual name of the resource on the server. Remember, when Bill wrote the bean code he didn’t know it would end up on Dick’s server. Bill had to make up a ‘fake’ name for the database, and Dick has to bind the fake name to something real.
+
+**Characteristics**: An expert in a specific operational domain. Knows the security users and roles for this system, knows what’s configured into the server, and understands how to interpret the deployment descriptor info from the Bean Provider and App Assembler.
