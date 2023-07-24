@@ -485,69 +485,89 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/995629e5-881e-40ec-b076-31008ce3d74a)
 
-AQUIIIIIIII!!!!
+1. Cree un **deployment descriptor** XML que le diga al servidor qué es su bean y cómo debe administrarse.
 
-Cree un descriptor de implementación XML que le diga al servidor qué es su bean y cómo debe administrarse.
+   <hr>
+   
+   **NOTA**
+   
+   (En este libro, no escribiremos esto nosotros mismos; dejaremos que las herramientas de implementación lo construyan por nosotros).
 
-NOTA
-(En este libro, no escribiremos esto nosotros mismos; dejaremos que las herramientas de implementación lo construyan por nosotros).
+   <hr>
 
-El descriptor de implementación (DD) describe la estructura de su bean, incluida la forma en que los tres archivos (interfaz de componente, interfaz de inicio y clase de bean) se relacionan entre sí. El servidor no mirará su convención de nomenclatura y averiguará cuál es el hogar, cuál es el bean, etc. Tiene que decirle al servidor, a través del DD, qué clase es cuál y cómo están conectados. Pero el DD hace mucho más que eso. ¡Y para algunos frijoles, el DD puede tener varias páginas!
+   El  deployment descriptor (DD) describe la estructura de su bean, incluida la forma en que los tres archivos (component interface, home interface, y bean class) se relacionan entre sí. El servidor no mirará su convención de nomenclatura y averiguará cuál es el home, cuál es el bean, etc. Tiene que decirle al servidor, a través del DD, qué clase es cuál y cómo están conectados. Pero el DD hace mucho más que eso. ¡Y para algunos beans, el DD puede tener varias páginas!
 
-Para este frijol simple, el DD es corto. Recuerde, no necesita memorizar la sintaxis del XML en el DD. Más adelante en el libro (en varios capítulos diferentes), repasaremos los aspectos del DD que necesita saber .
+   Para este bean simple, el DD es corto. Recuerde, no necesita memorizar la sintaxis del XML en el DD. Más adelante en el libro (en varios capítulos diferentes), repasaremos los aspectos del DD que necesita saber .
 
-No es necesario que escriba el XML a mano si utiliza una herramienta que pueda ayudarlo a crear un descriptor de implementación.
+   **No es necesario que escriba el XML a mano si utiliza una herramienta que pueda ayudarlo a crear un deployment descriptor.**
 
-Puede usar el asistente de bean J2EE RI para que lo haga por usted, ¡y el XML que escupe funcionará en cualquier contenedor EJB 2.0!
+   **Puede usar el J2EE RI bean wizard para que lo haga por usted, ¡y el XML que escupe funcionará en cualquier contenedor EJB 2.0!**
 
-<?versión xml="1.0" codificación="UTF-8"?>
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE ejb-jar PÚBLICO '-//Sun Microsystems,
-Inc.//DTD Enterprise JavaBeans 2.0//EN' 'http://
-java.sun.com/dtd/ejb-jar_2_0.dtd'>
+   <!DOCTYPE ejb-jar PUBLIC '-//Sun Microsystems,
+   Inc.//DTD Enterprise JavaBeans 2.0//EN' 'http://
+   java.sun.com/dtd/ejb-jar_2_0.dtd'>
 
-<ejb-jar>
-  <nombre-display>Ejb1</nombre-display>
-  <enterprise-beans>
+   <ejb-jar>
+     <display-name>Ejb1</display-name>
+     <enterprise-beans>
 
-    <sesión>
-      <display-name>AdviceBean</display-name>
-      <ejb-name>AdviceBean</ejb-name>
-      <home>headfirst.AdviceHome</home> 
-      <remote>headfirst.Advice</remote> 
-      <ejb-class>headfirst.AdviceBean</ejb-class> 
-      <session-type>Stateless</session-type>
-      <tipo-de-transacción>Bean</tipo-de-transacción>
-      <identidad-de-seguridad>
-        <descripción></descripción>
-        <usar-identidad-de-la-llamada></usar-identidad-de-la-llamada>
-      </identidad-de-seguridad>
-    </sesión>
+       <session>
+         <display-name>AdviceBean</display-name>
+         <ejb-name>AdviceBean</ejb-name>
+         <home>headfirst.AdviceHome</home>
+         <remote>headfirst.Advice</remote>
+         <ejb-class>headfirst.AdviceBean</ejb-class>
+         <session-type>Stateless</session-type>
+         <transaction-type>Bean</transaction-type>
+         <security-identity>
+           <description></description>
+           <use-caller-identity></use-caller-identity>
+         </security-identity>
+       </session>
 
- </enterprise-beans>
-</ejb-jar>
-NOTA
-Por ahora, sepa que cada bean en una aplicación debe tener un elemento en el DD que describa la estructura y el tipo del bean.
+    </enterprise-beans>
+   </ejb-jar>
+   ```
 
-1 frijol
-
-2 interfaces
-
-3 DD XML
-
-4 ejb-tarro
-
-5 desplegar
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/9e29fc16-b0fd-4f5a-9989-71538cfe0a16)
 
 
-Coloque el bean, las interfaces y el descriptor de implementación en un archivo ejb-jar .
+   <hr>
+   
+   **NOTA**
+   
+   Por ahora, sepa que cada bean en una aplicación debe tener un elemento en el DD que describa la estructura y el tipo del bean.
 
-NOTA
-(en este libro, no usaremos la herramienta JAR para hacer la barra ejb nosotros mismos; dejaremos que las herramientas de implementación lo hagan)
+   <hr>
 
-Como desarrollador de beans (oficialmente llamado proveedor de beans), siempre colocará sus beans en un JAR. La especificación dice que un ejb-jar es un archivo JAR que contiene las cosas de las que depende el bean (clases e interfaces, junto con el descriptor de implementación).
+1. bean class
+2. interfaces
+3. XMLDD
+4. **ejb-jar**
+5. deploy
 
-¡No tiene que hacer esto a mano ya que usaremos el RI! En lugar de escribir el DD XML y usar lajarherramienta para empaquetarlo, usaremos eldeploytoolasistente de RI para hacerlo más fácil (y menos propenso a errores). En otras palabras, vamos a combinar los pasos 4 y 5 en uno. Por ahora, necesita saber que un bean no es un bean hasta que crea un archivo JAR con la clase y las interfaces compiladas, y el DD.
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1efe60c1-7c8f-4ca1-8c4d-9cb471f51c51)
+
+
+2. Coloque el bean, las interfaces y el deployment descriptor en un archivo **ejb-jar**.
+
+   <hr>
+   
+   **NOTA**
+
+   (en este libro, no usaremos la JAR tool para hacer ejb-bar nosotros mismos; dejaremos que las herramientas de implementación lo hagan)
+
+   <hr>
+   
+   Como desarrollador de beans (oficialmente llamado  Bean Provider), siempre colocará sus beans en un JAR. La especificación dice que un **ejb-jar** es un archivo JAR que contiene las cosas de las que depende el bean (clases e interfaces, junto con el deployment descriptor).
+
+   **¡No tiene que hacer esto a mano ya que usaremos el RI!** En lugar de escribir el DD XML y usar la **jar tool** para empaquetarlo, usaremos el RI **deploytool** para hacerlo más fácil (y menos propenso a errores). En otras palabras, vamos a combinar los pasos 4 y 5 en uno. Por ahora, necesita saber que un bean no es un bean hasta que crea un archivo JAR con la clase y las interfaces compiladas, y el DD.
+
+   ![image](https://github.com/adolfodelarosades/Java/assets/23094588/8cac687a-39fd-4c0e-8dde-ac308c393e91)
+
 
 
 ¡MÍRALO!
