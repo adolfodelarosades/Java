@@ -569,40 +569,46 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
    ![image](https://github.com/adolfodelarosades/Java/assets/23094588/8cac687a-39fd-4c0e-8dde-ac308c393e91)
 
 
+   <hr>
 
-¡MÍRALO!
-El examen espera que sepa lo que se supone que debe estar en el archivo ejb-jar y también lo que no debe estar allí. ¡Las clases e interfaces generadas por el contenedor (aprenderá cuáles son un poco más adelante) no deben estar en el archivo ejb-jar! Piense en el ejb-jar como algo que usted crea, como un desarrollador de beans. ¡Es tu entrega ! El contenedor/servidor tiene sus propios entregables, y esos entregables no van al ejbjar. Imagina que trabajas para Beans-R-Us y ni siquiera tienesun servidor compatible con EJB. Esa es toda la idea del ejb-jar: es donde el desarrollador de beans coloca sus componentes básicos (es decir, beans), que algún otro desarrollador puede usar para ensamblar una aplicación. Puede usar una herramienta de servidor para ayudar a crear el DD XML, pero el DD sigue siendo su entrega, independientemente de quién (o qué) lo cree.
+   **WATCH IT!**
 
-1 frijol
+   El examen espera que sepa lo que se supone que debe estar en el archivo **ejb-jar** y también lo que no debe estar allí. ¡Las clases e interfaces generadas por el contenedor (aprenderá cuáles son un poco más adelante) no deben estar en el archivo **ejb-jar**! Piense en el **ejb-jar** como algo que usted crea, como un desarrollador de beans. ¡Es tu entrega! El contenedor/servidor tiene sus propios entregables, y esos entregables no van al **ejbjar**. Imagina que trabajas para **Beans-R-Us** y ni siquiera tienes un servidor compatible con EJB. Esa es toda la idea del **ejb-jar**: es donde el desarrollador de beans coloca sus componentes básicos (es decir, beans), que algún otro desarrollador puede usar para ensamblar una aplicación. Puede usar una herramienta de servidor para ayudar a crear el DD XML, pero el DD sigue siendo su entrega, independientemente de quién (o qué) lo cree.
 
-2 interfaces
+   <hr>
 
-3 DD XML
+1. bean class
+2. interfaces
+3. XMLDD
+4. ejb-jar
+5. **deploy**
+ 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/54a1731e-78c5-42a5-8dba-969f1733c995)
 
-4 ejb-tarro
+3. **Deploy** el bean en el servidor, utilizando las herramientas proporcionadas por el proveedor del servidor.
 
-5 desplegar
+   Tarde o temprano, tus beans tienen que hacer algo. Deben ensamblarse en una aplicación e implementarse(deployed) en un servidor, esperando que los clientes llamen.
 
+   Este es un gran paso. De hecho, hicimos un poco de trampa, porque en realidad son dos pasos: Ensamblaje y Desplegar la aplicación.
 
-Implemente el bean en el servidor, utilizando las herramientas proporcionadas por el proveedor del servidor.
+   1. **Application Assembly**
 
-Tarde o temprano, tus frijoles tienen que hacer algo. Deben ensamblarse en una aplicación e implementarse en un servidor, esperando que los clientes llamen.
+   Esto significa llevar el bean de la etapa de componente reutilizable a ser parte de una aplicación. Para beans simples, eso podría significar simplemente escribir un cliente que pueda acceder al bean (es decir, llamar a los métodos de negocio del bean). En otras palabras, un solo bean podría ser la aplicación completa del lado del servidor. Pero este también podría ser el paso en el que integra múltiples beans (y otras clases de Java) en una aplicación personalizada, y eso generalmente significa tomar diferentes beans (cada uno en su propio **ejb-jar** con su propio DD) y ponerlos en un nuevo, solo **ejb-jar**, con un solo DD que podría describir cómo se relacionan dos o más beans entre sí.
 
-Este es un gran paso. De hecho, hicimos un poco de trampa, porque en realidad son dos pasos: Ensamblaje e implementación de la aplicación.
+   Durante el ensamblaje, también puede agregar nueva información al DD, para cosas que el desarrollador del bean no conocía. Por ejemplo, el desarrollador del bean podría escribir un código que use una "propiedad" especial específica del bean (llamada *entrada de entorno - environment entry*, que abordaremos en un capítulo posterior) para el monto del impuesto utilizado por esta aplicación. Pero el desarrollador del bean no tiene idea de qué *value* darle a la propiedad del monto del impuesto(tax amount), por lo que deja el valor en blanco en el DD. Luego aparece el ensamblador de la aplicación, ve (al leer el DD) que el bean usa una propiedad, determina cuál debería ser el valor y lo agrega al DD.
 
-Ensamblaje de aplicaciones
+   Para el bean Advice, colocar el bean en el **ejb-jar**, construir el DD e implementarlo será un gran paso.
 
-Esto significa llevar el bean de la etapa de componente reutilizable a ser parte de una aplicación. Para beans simples, eso podría significar simplemente escribir un cliente que pueda acceder al bean (es decir, llamar a los métodos comerciales del bean). En otras palabras, un solo bean podría ser la aplicación completa del lado del servidor. Pero este también podría ser el paso en el que integra múltiples beans (y otras clases de Java) en una aplicación personalizada, y eso generalmente significa tomar diferentes beans (cada uno en su propio ejb-jar con su propio DD) y ponerlos en un nuevo, solo ejb-jar, con un solo DD que podría describir cómo se relacionan dos o más beans entre sí.
+   2. **Deployment - Despliegue**
 
-Durante el ensamblaje, también puede agregar nueva información al DD, para cosas que el desarrollador del bean no conocía. Por ejemplo, el desarrollador del bean podría escribir un código que use una "propiedad" especial específica del bean (llamada entrada de entorno , que abordaremos en un capítulo posterior) para el monto del impuesto utilizado por esta aplicación. Pero el desarrollador del frijol no tiene idea de qué valor darle a la propiedad del monto del impuesto, por lo que deja el valor en blanco en el DD. Luego aparece el ensamblador de la aplicación, ve (al leer el DD) que el bean usa una propiedad, determina cuál debería ser el valor y lo agrega al DD.
+   Aquí es donde la goma se encuentra con el camino, el bean se encuentra con el servidor, el desarrollador se encuentra con el administrador del sistema. Las dos partes cruciales de la implementación son nombrar el bean (para que el cliente sepa cómo encontrarlo) y poner el bean en el control del contenedor.
 
-Para el bean Advice, colocar el bean en el ejb-jar, construir el DD e implementarlo será un gran paso.
+   La especificación no dice nada sobre la forma en que implementa sus beans; todo depende del servidor/contenedor EJB que esté utilizando.
 
-Despliegue
+<hr>
 
-Aquí es donde la goma se encuentra con el camino, el bean se encuentra con el servidor, el desarrollador se encuentra con el administrador del sistema. Las dos partes cruciales de la implementación son nombrar el bean (para que el cliente sepa cómo encontrarlo) y poner el bean en el control del contenedor .
+<hr>
 
-La especificación no dice nada sobre la forma en que implementa sus beans; todo depende del servidor/contenedor EJB que esté utilizando.
+<hr>
 
-
-[ 2 ] Una interfaz de marcador (también llamada interfaz de etiqueta) no tiene métodos para implementar y existe para que pueda anunciar al mundo que "Sí, puedo hacer esto".
+[ 2 ] Una marker interface (también llamada  tag interface) no tiene métodos para implementar y existe para que pueda anunciar al mundo que "Sí, puedo hacer esto".
