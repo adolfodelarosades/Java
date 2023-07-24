@@ -485,7 +485,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/995629e5-881e-40ec-b076-31008ce3d74a)
 
-1. Cree un **deployment descriptor** XML que le diga al servidor qué es su bean y cómo debe administrarse.
+   1. Cree un **deployment descriptor** XML que le diga al servidor qué es su bean y cómo debe administrarse.
 
    <hr>
    
@@ -552,7 +552,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/1efe60c1-7c8f-4ca1-8c4d-9cb471f51c51)
 
 
-2. Coloque el bean, las interfaces y el deployment descriptor en un archivo **ejb-jar**.
+   2. Coloque el bean, las interfaces y el deployment descriptor en un archivo **ejb-jar**.
 
    <hr>
    
@@ -585,13 +585,13 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
  
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/54a1731e-78c5-42a5-8dba-969f1733c995)
 
-3. **Deploy** el bean en el servidor, utilizando las herramientas proporcionadas por el proveedor del servidor.
+   3. **Deploy** el bean en el servidor, utilizando las herramientas proporcionadas por el proveedor del servidor.
 
    Tarde o temprano, tus beans tienen que hacer algo. Deben ensamblarse en una aplicación e implementarse(deployed) en un servidor, esperando que los clientes llamen.
 
    Este es un gran paso. De hecho, hicimos un poco de trampa, porque en realidad son dos pasos: Ensamblaje y Desplegar la aplicación.
 
-   1. **Application Assembly**
+      1. **Application Assembly**
 
    Esto significa llevar el bean de la etapa de componente reutilizable a ser parte de una aplicación. Para beans simples, eso podría significar simplemente escribir un cliente que pueda acceder al bean (es decir, llamar a los métodos de negocio del bean). En otras palabras, un solo bean podría ser la aplicación completa del lado del servidor. Pero este también podría ser el paso en el que integra múltiples beans (y otras clases de Java) en una aplicación personalizada, y eso generalmente significa tomar diferentes beans (cada uno en su propio **ejb-jar** con su propio DD) y ponerlos en un nuevo, solo **ejb-jar**, con un solo DD que podría describir cómo se relacionan dos o más beans entre sí.
 
@@ -599,7 +599,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
    Para el bean Advice, colocar el bean en el **ejb-jar**, construir el DD e implementarlo será un gran paso.
 
-   2. **Deployment - Despliegue**
+      2. **Deployment - Despliegue**
 
    Aquí es donde la goma se encuentra con el camino, el bean se encuentra con el servidor, el desarrollador se encuentra con el administrador del sistema. Las dos partes cruciales de la implementación son nombrar el bean (para que el cliente sepa cómo encontrarlo) y poner el bean en el control del contenedor.
 
