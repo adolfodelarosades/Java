@@ -591,7 +591,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
    Este es un gran paso. De hecho, hicimos un poco de trampa, porque en realidad son dos pasos: Ensamblaje y Desplegar la aplicación.
 
-      1. **Application Assembly**
+   1. **Application Assembly**
 
    Esto significa llevar el bean de la etapa de componente reutilizable a ser parte de una aplicación. Para beans simples, eso podría significar simplemente escribir un cliente que pueda acceder al bean (es decir, llamar a los métodos de negocio del bean). En otras palabras, un solo bean podría ser la aplicación completa del lado del servidor. Pero este también podría ser el paso en el que integra múltiples beans (y otras clases de Java) en una aplicación personalizada, y eso generalmente significa tomar diferentes beans (cada uno en su propio **ejb-jar** con su propio DD) y ponerlos en un nuevo, solo **ejb-jar**, con un solo DD que podría describir cómo se relacionan dos o más beans entre sí.
 
@@ -599,7 +599,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
    Para el bean Advice, colocar el bean en el **ejb-jar**, construir el DD e implementarlo será un gran paso.
 
-      2. **Deployment - Despliegue**
+   2. **Deployment - Despliegue**
 
    Aquí es donde la goma se encuentra con el camino, el bean se encuentra con el servidor, el desarrollador se encuentra con el administrador del sistema. Las dos partes cruciales de la implementación son nombrar el bean (para que el cliente sepa cómo encontrarlo) y poner el bean en el control del contenedor.
 
