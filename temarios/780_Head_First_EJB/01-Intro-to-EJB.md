@@ -886,4 +886,52 @@ Haga clic en el menú desplegable **Enterprise Bean Class**
 
 Seleccione **headfirst.AdviceBean**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/0dbe9bb3-667c-461a-afab-35b2d90ab37a)
+
+<hr>
+<hr>
+<hr>
+[ 3 ] Hay algunas herramientas de proveedores que pueden usar su convención de nomenclatura, entre otras cosas, para averiguar cuál es el hogar, cuál es el bean, etc. Pero el RI no hace esto, y el soporte de la herramienta de desarrollo no es parte de la especificación EJB. Las únicas herramientas requeridas por la especificación son para el **Deployer**, no para el **Bean Provider** o **App Assembler**.
+
+### Dígale cuál es la Home interface y cuál es la Component interface
+
+Ahora, debe hacer lo mismo que hizo con la clase bean, pero con las dos interfaces. Notará que hay dos lugares diferentes donde puede seleccionar interfaces: Local y Remote. Este bean es remoto (lo que significa que es un Java RMI remote service, pero lo abordaremos en el próximo capítulo), por lo que estamos usando solo la sección inferior, para las  Remote interfaces. Simplemente deje la sección Local interfaces en paz.
+
+Lo extraño es que esta pantalla utiliza el término Remote Interface en lugar de Remote Component Interface. Eso es solo un mal diseño de interfaz en la deploytool. (En realidad, es un artefacto de la versión anterior de EJB, cuando solo había remote interfaces. Las Local interfaces son nuevas en EJB 2.0), pero tenemos que vivir con eso.
+
+Haga clic en el menú desplegable en **Remote Home Interface**
+
+Seleccione **headfirst.AdviceHome**
+
+Haga clic en el menú desplegable **Remote Interface**
+
+Seleccione **headfirst.Advice**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/c5428ba9-c944-4e2b-a36e-366b952ab50f)
+
+### ¡Verifique todo en esta pantalla!
+
+¡Elegir la bean class, la home interface y la component interface es una decisión permanente! Una vez que haya terminado con el resto del asistente de bean y se haya creado el deployment descriptor, estará atascado con él. Si mezcla accidentalmente las interfaces de home y component, su bean no funcionará. En el RI, ni siquiera se implementará (algunos servidores le permiten implementar beans estructuralmente defectuosos, lo que significa que explotan en tiempo de ejecución, pero el RI ni siquiera le permitirá ingresar a la puerta del servidor).
+
+Asegúrese de tener la siguiente configuración:
+
+Enterprise Bean Class: **headfirst.AdviceBean**
+
+Remote Home Interface: **headfirst.AdviceHome**
+
+Remote Interface: **headfirst.Advice**
+
+Click **NEXT**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7a9b095f-1e29-4389-b754-b525eedca98e)
+
+¡Asegúrese de que su pantalla se vea así antes de presionar el botón **Next >**!
+
+### Has terminado, haz clic en Finish
+
+Debido a que este bean es tan simple y no nos importan las transacciones, la seguridad, las entradas del entorno y el acceso a la base de datos, hemos hecho todo lo necesario para crear el deployment descriptor y colocarlo en un JAR con los archivos de clase.
+
+Por lo tanto, puede ignorar la pantalla de Administración de transacciones, aunque se familiarizará con ella más adelante en el libro.
+
+Haga clic en Finalizar
 
