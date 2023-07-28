@@ -617,7 +617,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/c058e648-4925-4eba-9e78-4c54ae66f775)
 
-**EJB Role**: *Bean Provider*
+**EJB Role**: ***Bean Provider***
 
 **Deliverable**: archivos **ejb-jar** *(que incluyen uno o más beans y un XML deployment descriptor)*
 
@@ -627,7 +627,7 @@ Hoy en día, muchos programadores de EJB utilizan herramientas de desarrollo exp
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/61d9fc1c-f0fe-47b6-a225-4152d3c4b6c7)
 
-**EJB Role**: *Application Assembler*
+**EJB Role**: ***Application Assembler***
 
 **Deliverable**: archivos **ejb-jar** *(que incluyen uno o más beans y un XML deployment descriptor así como información del Bean Provider, así como **application assembly info**). También puede crear clientes o definir la interacción entre otros componentes (como JSP).*
 
@@ -648,10 +648,242 @@ Preste mucha atención a cualquier mención de roles EJB en este libro, especial
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/38a897a1-aa57-4787-9331-3d9b6cef8a07)
 
-**EJB Role**: Deployer
+**EJB Role**: ***Deployer***
 
-**Deliverable**: Enterprise beans that have been customized for a specific operational environment, and deployed into the server.
+**Deliverable**: *Enterprise beans que se han personalizado para un **entorno operativo específico** y se han implementado en el servidor.*
 
-**Primary responsibility**: Take the Application Assembler’s deliverable, study the deployment descriptor, and resolve any external dependencies. For example, if the bean relies on a particular resource, the deployer must map the logical name from the Bean Provider to the actual name of the resource on the server. Remember, when Bill wrote the bean code he didn’t know it would end up on Dick’s server. Bill had to make up a ‘fake’ name for the database, and Dick has to bind the fake name to something real.
+**Primary responsibility**: *tomar el entregable del ensamblador de aplicaciones(Application Assembler’s deliverable,), estudiar el deployment descriptor y **resolver las dependencias externas**. Por ejemplo, si el bean se basa en un recurso en particular, el implementador debe asignar el nombre lógico del proveedor de Bean al nombre real del recurso en el servidor. Recuerde, cuando Bill escribió el código del bean, no sabía que terminaría en el servidor de Dick. Bill tuvo que inventar un nombre 'falso' para la base de datos y Dick tuvo que relacionar el nombre falso con algo real.*
 
-**Characteristics**: An expert in a specific operational domain. Knows the security users and roles for this system, knows what’s configured into the server, and understands how to interpret the deployment descriptor info from the Bean Provider and App Assembler.
+**Characteristics**: *Un **experto en un dominio operativo específico**. Conoce los usuarios y roles de seguridad para este sistema, sabe lo que está configurado en el servidor y comprende cómo interpretar la información del deployment descriptor del proveedor de Bean y el ensamblador de aplicaciones.*
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/fef024bc-1dab-43f2-92a0-e2bd0b3d28ce)
+
+
+**EJB Role**: ***Container and Server Provider***
+
+**Deliverable**: EJB 2.0-compliant server, deployment tools, runtime environment para enterprise beans.
+
+**Primary responsibility**: *Implementar la especificación*.
+
+**Characteristics**: *Expertos en objetos y transacciones distribuidas, y otros **servicios del sistema de bajo nivel**.*
+
+## Tutorial:
+
+Vamos alla, deployemos y testemos **AdviceBean**
+
+Escribiremos el código, lo compilaremos, iniciaremos el servidor, iniciaremos deploytool(la herramienta de implementación), usaremos la deploytool (herramienta de implementación) para hacer el DD y el ejb-jar, implementaremos el bean, crearemos un cliente y probaremos el bean usando el cliente. Lo único que no haremos será instalar y configurar el servidor. Asumimos que ya lo hiciste.
+
+Si aún no tiene **J2EE 1.3 RI** funcionando, vaya a http://java.sun.com/j2ee/ y descargue la versión 1.3 de J2EE (incluye instrucciones de configuración), luego regrese y descargue la documentación de la API de J2EE.
+
+<hr>
+
+**NOTA**
+
+¡Recuerde, el examen es para J2EE 1.3, NO 1.4! Hagas lo que hagas, NO estudies para el examen usando la especificación 1.4. Consulte la introducción para obtener más detalles sobre por qué el examen usa 1.3 y no 1.4; la versión corta es: no queremos certificar a la gente en algo que casi nadie usa. La certificación NO se trata de "Conozco el último y mejor lanzamiento". Se trata de “Conozco la tecnología que la gente está usando ahora. Lo he estado usando durante al menos seis meses”.
+
+<hr>
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bf0aef61-4d16-4d2f-b60c-c1097b50a0cb)
+
+¿Qué servidor usaríamos? Usamos el RI para aprender y practicar porque no sabemos qué servidor necesitará usar, y el RI es el más simple de todos los servidores disponibles gratuitamente. Queremos que le resulte lo más fácil posible concentrarse en la tecnología EJB e ignorar las tareas específicas de la herramienta.
+
+Los productos de código abierto como **JBoss** siguen siendo servidores de producción reales, por lo que tienden a tener que hacer frente a muchas más tareas de configuración y administración. El uso de RI le permite pasar más tiempo haciendo las cosas que tendrá que hacer, independientemente del servidor, con la menor cantidad de tiempo dedicado a aprender un enfoque específico del servidor para esas cosas.
+
+<hr>
+
+**RELAX**
+
+**No hay nada en el examen sobre J2EE RI.**
+
+O cualquier otro servidor de aplicaciones. No es necesario que conozca las herramientas de ningún proveedor (incluidas las de Sun) para el desarrollo o la implementación. Necesita saber qué capacidades tendrá cada servidor compatible con EJB, pero no necesita conocer ninguna característica o detalles de configuración específicos del proveedor.
+
+<hr>
+
+### Organice su directorio de proyectos
+
+Todos los beans de este libro están organizados en paquetes, lo que significa que debe ser un poco más cuidadoso con la compilación y la ejecución. Cada instrucción en este capítulo asume que ha organizado su proyecto exactamente como se muestra aquí. Si se desvía de esta estructura, está solo para asignar nuestras fórmulas de implementación y línea de comando a su propia estructura.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/11cd4264-52f7-4f92-9bbf-574646d4ce50)
+
+#### Organizando tu terminal/línea de comandos
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/df18a165-94ea-4e3d-bbd9-06c5030453e7)
+
+**compilar** desde el directorio **`src`**
+
+**ejecutar** clientes desde el directorio del proyecto específico
+
+### Compile las dos interfaces y la clase de bean
+
+Hasta ahora, hemos escrito las dos interfaces y la clase de bean, pero todavía tenemos que compilarlas. Después de eso, crearemos el **ejb-jar** (que contiene archivos *class*, no archivos *source*).
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e71c29c5-214f-4935-bc3c-859651427f61)
+
+Estamos usando el **`-d`** compiler flag, por lo que la línea de comando anterior dice: "Compila todos los archivos .java en el directorio 'headfirst' y luego coloca los archivos .class compilados en el directorio 'classes', que encontrarás subiendo un nivel desde el directorio actual (src). Ah, sí, casi lo olvido, asegúrese de poner las clases en su directorio PACKAGE correcto. Busque la estructura del paquete dentro del directorio 'classes', lo que significa que debería ver un directorio llamado 'headfirst', y AQUÍ es donde deben ir los archivos class ... y si NO encuentra el directorio 'headfirst' allí, haga uno para mí. Gracias."
+
+**En este momento, así es como debería verse la estructura de directorios de sus proyectos:**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7dffdb7c-cbc4-416b-ac0e-8a4b7fa96864)
+
+### Inicie el servidor
+
+**Abra una nueva terminal para el servidor**. Lo dejará en ejecución, y queremos ver el resultado, mientras se ejecuta, así que no use este terminal para nada más. Haga del directorio de consejos su directorio de trabajo.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ff6b6320-9992-4e6c-8d45-787bbf706224)
+
+### Verás algo como esto
+
+El flag **`-verbose`** (que no es obligatorio, pero nos gusta) imprime un montón de cosas en la terminal.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/8090759d-672f-45d4-a50b-1684f4b9f8ce)
+
+### Iniciar deploytool
+
+**Abra una nueva terminal** para la deploytool. Esta herramienta es parte de **J2EE RI** y tiene todo lo que necesita para crear el **ejb-jar**, el DD y hacer la implementación(deployment) final en el servidor RI.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ec755119-f4fa-45e7-b2b0-25f598d915a7)
+
+### verás algo como esto
+
+Aparece una hermosa pantalla de inicio y se sienta mientras se carga la aplicación. Si hace clic en la pantalla de inicio, desaparece, así que no se asuste si parece que no pasa nada. Paciencia.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/8ffc5936-6d58-464d-af76-2a4e06420398)
+
+### Hacer una nueva aplicación
+
+El **RI** es un *servidor* J2EE, recuerde, no solo un *contenedor* EJB. Así que tenemos que hacer un poco de J2EEish antes de que podamos hacer el ejb-jar e implementar(deploy) la aplicación. Este paso es donde creamos una nueva aplicación J2EE y, por ahora, puede pensar en la aplicación J2EE como algo que envuelve los beans y agrega un poco más de información para el servidor. La principal diferencia entre una aplicación J2EE y una aplicación EJB es que una aplicación J2EE puede incluir componentes web (servlets y JSP), así como componentes EJB, todos integrados como parte de una sola aplicación.
+
+Elija **File ▸ New ▸ Application**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/3bd64e53-b8a5-4aa6-98b6-f5d9708dd1e4)
+
+<hr>
+
+**NO HAY PREGUNTAS TONTAS**
+
+P: **¿Significa esto que DEBO tener un servidor J2EE si quiero usar servlets y EJB juntos?**
+
+R: *No. Con un servidor J2EE, los componentes web y los componentes EJB están más estrechamente integrados, lo que significa que puede hacer que todos los componentes respeten las transacciones y la seguridad de los demás. Pero siempre puede usar un servlet como cliente de un enterprise bean, incluso si ese bean no se está ejecutando en el mismo servidor de aplicaciones (o incluso en la misma máquina física). Otra ventaja de un servidor J2EE es la facilidad con la que puede implementar ambos tipos de componentes como parte de una aplicación empresarial.*
+
+*Habiendo dicho todo esto, las posibilidades son extremadamente altas de que si está haciendo aplicaciones EJB 2.0, las esté ejecutando en un servidor J2EE. Recuerde, hoy en día hay muy pocos contenedores EJB independientes. Prácticamente todos los proveedores importantes ejecutan sus contenedores EJB dentro de un servidor J2EE.*
+
+<hr>
+
+<hr>
+
+**OFF THE PATH**
+
+Un proveedor de servidores J2EE debe pasar una gran cantidad de pruebas de compatibilidad antes de que el servidor pueda llamarse "compatible con J2EE". Un servidor J2EE 1.3, por ejemplo, *debe* incluir un contenedor EJB 2.0 y ese contenedor *debe* implementar la especificación EJB 2.0.
+
+<hr>
+
+### Asigne un nombre y guarde la nueva aplicación
+
+Esta parte es un poco incómoda. Puede usar el botón Examinar para navegar a través de su propio árbol de directorios, pero la forma más fácil de nombrar y guardar la aplicación es escribir la ruta completa al archivo que está a punto de crear. Lo que estamos haciendo no es el bean en sí mismo; puede pensar en él más como un documento que contiene toda la información sobre la aplicación. Como convención, guardamos la aplicación en el directorio de proyectos/[lo que sea], el directorio correspondiente a ese proyecto en particular. Para el bean Advice, eso significa el directorio **`projects/advice`**. Si inició el servidor desde el directorio **`projects/advice`** (en otras palabras, si advice es su directorio de trabajo actual), obtendrá el nombre y la ubicación correctos de forma predeterminada.
+
+Nombra la aplicación **AdviceApp**
+
+Si es necesario, incluya la ruta completa a **`projects/advice/AdviceApp`**
+
+Haga clic en **OK**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/6e9f7649-598c-4259-bef5-84f2bc3327a5)
+
+No se preocupe por el campo **Application Display Name**; la herramienta lo completará automáticamente con el nombre del archivo del campo **Application File Name**.
+
+### Lo que verá después de crear y nombrar la aplicación
+
+Ahora, estás de vuelta en la pantalla principal de la deploytool. Es posible que deba hacer clic en los íconos de **Files** o **Applications** para expandirlos, pero verá que la herramienta ha creado un directorio **Applications** con algo llamado **AdviceApp** dentro. Haga clic en el icono de **AdviceApp** y verá información sobre la aplicación, incluido el nombre, la ubicación y los contenidos actuales. En este punto, no hay nada más que un directorio **`META-INF`** (que contiene más información sobre la aplicación, que nunca necesitaremos mirar).
+
+Haga clic en el icono de **`AdviceApp`**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/6bbb1cd5-251f-4aae-9d98-fa02d7d980bd)
+
+### Ahora hagamos el nuevo enterprise bean (el ejb-jar y el DD)
+
+Esto es lo que realmente buscamos: el bean actual. Los pasos anteriores (crear la aplicación J2EE) fueron para satisfacer la RI de J2EE porque tenemos que implementar el bean dentro de una aplicación J2EE.
+
+Seleccione **File ▸ New ▸ Enterprise Bean...**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bfbc97dd-ff5b-44f8-b0da-87fae76142a3)
+
+### Ahora estamos en el genial New Enterprise Bean Wizard
+
+¡Esta parte de la herramienta de implementación es donde sucede casi todo! Las cosas clave que haremos son:
+
+* Crear el ejb-jar
+
+* Coloque la clase de bean y las dos interfaces en el ejb-jar
+
+* Cree el deployment descriptor que describe el bean
+
+Click **Next >**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/17e096df-6d68-4068-9f9a-ed9b3f51d199)
+
+### Crear el nuevo ejb-jar
+
+Por ahora, solo acepte los valores predeterminados. El radio button en la parte superior izquierda de la pantalla muestra que está creando un nuevo JAR dentro de la aplicación **AdviceApp**. Tenga en cuenta que **AdviceApp** es parte de una lista desplegable: si ya hubiera otros **ejb-jars** en la aplicación, podríamos haber optado por colocar el nuevo bean en un JAR preexistente.
+
+La herramienta elige un nombre para mostrar especialmente útil, "Ejb1", y lo verá nuevamente en la pantalla principal de la deploytool cuando hayamos terminado. Ese nombre no se usa en ninguna parte de su aplicación real, por lo que no es gran cosa, pero si tiene más de un JAR en una aplicación, es posible que desee darle un nombre más descriptivo (Cart JAR, Account JAR, etc).
+
+Click **Edit...**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/b59f1044-2a6a-4c24-bf63-7f33d69f3eb9)
+
+
+### Agregue los tres class files (incluido su package directory) al JAR
+
+¡Esta es la parte más importante de todo el proceso! En otras palabras, no lo arruines. La clave es obtener las clases correctas en el JAR en su estructura de directorios de paquetes, y solo en su estructura de directorios de paquetes. En otras palabras, si coloca los tres archivos de clase en el JAR sin el directorio **headfirst**, su bean no se implementará. O, si incluye el directorio de clases además del directorio **headfirst**, sus beans no se implementarán. Recuerde, **ejb-jar** sigue siendo un archivo JAR, por lo que aquí se aplican las reglas habituales de JAR sobre estructuras de paquetes.
+
+Navegue al directorio **Advice**
+
+Expanda el directorio **classes** para ver el directorio **headfirst**
+
+Seleccione el directorio **headfirst**
+
+Click **Add**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/514cbca9-d892-431e-8b59-f04592d029d4)
+
+Use los controles de navegación aquí para llegar a su directorio **Advice**, donde puede ver sus classes y directorios src. A continuación, seleccione el directorio **headfirst**. No tienes que expandirlo... lo hicimos para que pudieras ver lo que hay ahí.
+
+### Confirme que agregó SOLO el package directory y los class files
+
+Tienes que hacer bien esta parte. Mire la ventana inferior que dice "Contents of Ejb1" y verifique que lo único en el JAR además del directorio META-INF es el directorio **headfirst** (incluido el contenido del directorio). El error clásico que vemos todo el tiempo (no es que lo hagas alguna vez) es agregar solo los *class* files, pero no el *package* directory. Asegúrese de tener el directorio **headfirst** (y no el **classes** directory) con los tres archivos de clase. Otro error común es agregar los source files en lugar de los class files. Así que no te sientas mal si te pasa.
+
+Verifique que tiene las clases correctas (y el package directory)
+
+Si no lo hace, selecciónelos en la ventana inferior, haga clic en Remove y comience de nuevo.
+
+Haga clic en **OK** cuando haya terminado, luego haga clic en **NEXT**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e53394ba-c1ee-4570-86ec-ec5d5ae61425)
+
+### Conviértalo en un Stateless Session bean
+
+Ahora, estamos en el lugar donde le damos a la herramienta la información 'estructural' del bean. Qué tipo de bean es, qué class file es la home interface, etc. Recuerde, la herramienta usa esto para crear el deployment descriptor. Y el contenedor EJB usa el deployment descriptor para descubrir cómo implementar(deploy) y administrar el bean.
+
+El bean **Advice** es simple: el cliente llama a un método en el objeto remoto, el objeto remoto devuelve un valor, luego el objeto remoto olvida todo lo que sucedió. Fin de la historia. Ese escenario es perfecto para una solución de bean de sesión sin estado(stateless session bean). Si el bean **Advice** necesitara *recordar* el consejo(advice) que le dio al cliente y usarlo de alguna manera en futuras invocaciones de ese mismo cliente, entonces lo haríamos con estado(stateful). Pero no lo hacemos, así que no lo haremos.
+
+Y como aprenderá más adelante, no tendría sentido que el bean **Advice** sea una entity o un bean controlado por mensajes(message-driven bean). Pero es demasiado tarde para convertirlo en algo más que un bean de sesión de todos modos: su clase de bean implementa la interfaz **SessionBean**. Así que ya estás comprometido con un tipo de bean. Pero si el bean de sesión es sin estado o con estado(stateless or stateful) puede ser un poco más sutil. Por ahora, solo hazlo sin estado(stateless).
+
+Seleccione el radio button **Session**
+
+Seleccione el radio button **Stateless**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/655dbc49-a740-4b0f-b783-972469c9e74c)
+
+¡No haga clic en el botón **Next**! Tenemos mucho más que hacer en esta pantalla.
+
+### Dígale cuál de los tres class files en el JAR es la BEAN class
+
+Tiene tres class files en el JAR: la home interface (**AdviceHome**), la component interface (**Advice**) y el bean (**AdviceBean**). Pero el EJB container necesita saber cuál es cuál. ¡Recuerde, la convención de nombres no significa nada para nadie más que para usted! El contenedor no mirará las tres classes en el JAR y reconocerá que **AdviceHome** debe ser la home interface, y así sucesivamente [ 3 ]. No, la convención de nomenclatura es para usted y cualquier otra persona que use sus componentes de bean.
+
+Entonces, ahora tiene que decirle a la herramienta cuál de los archivos es la bean class (haremos las dos interfaces en la página siguiente). La herramienta, entonces, pondrá esta información en el deployment descriptor.
+
+Haga clic en el menú desplegable **Enterprise Bean Class**
+
+Seleccione **headfirst.AdviceBean**
+
+
