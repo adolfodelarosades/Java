@@ -933,5 +933,13 @@ Debido a que este bean es tan simple y no nos importan las transacciones, la seg
 
 Por lo tanto, puede ignorar la pantalla de Administración de transacciones, aunque se familiarizará con ella más adelante en el libro.
 
-Haga clic en Finalizar
+Haga clic en **Finish**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bfb77492-560b-423b-bbfc-f92b15f9dbd6)
+
+### Mientras tanto, de vuelta en la pantalla principal de deploytool...
+
+¡Las cosas han cambiado! El ícono de **AdviceApp** se expande para mostrar su **ejb-jar** (llamado "**Ejb1**"), y el **ejb-jar** se expande para mostrar el lindo ícono de frijol llamado "AdviceBean". Si selecciona AdviceBean, verá un montón de paneles con pestañas que le mostrarán las elecciones que hizo en el asistente de bean. Algunas de las cosas que eliges se pueden cambiar, pero otras no. En el panel General, por ejemplo, no puede cambiar las designaciones del archivo de clase para el inicio, el componente y el bean. De hecho, puede ver que las listas desplegables para estos están atenuadas aquí. Pero caramba, todavía puedes cambiarlo de sin estado a con estado.
+
+admira tu trabajo
 
