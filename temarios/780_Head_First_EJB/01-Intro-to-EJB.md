@@ -939,7 +939,153 @@ Haga clic en **Finish**
 
 ### Mientras tanto, de vuelta en la pantalla principal de deploytool...
 
-¡Las cosas han cambiado! El ícono de **AdviceApp** se expande para mostrar su **ejb-jar** (llamado "**Ejb1**"), y el **ejb-jar** se expande para mostrar el lindo ícono de frijol llamado "AdviceBean". Si selecciona AdviceBean, verá un montón de paneles con pestañas que le mostrarán las elecciones que hizo en el asistente de bean. Algunas de las cosas que eliges se pueden cambiar, pero otras no. En el panel General, por ejemplo, no puede cambiar las designaciones del archivo de clase para el inicio, el componente y el bean. De hecho, puede ver que las listas desplegables para estos están atenuadas aquí. Pero caramba, todavía puedes cambiarlo de sin estado a con estado.
+¡Las cosas han cambiado! El ícono de **AdviceApp** se expande para mostrar su **ejb-jar** (llamado "**Ejb1**"), y el **ejb-jar** se expande para mostrar el lindo ícono de bean llamado "**AdviceBean**". Si selecciona **AdviceBean**, verá un montón de paneles con pestañas que le mostrarán las elecciones que hizo en el asistente de bean. Algunas de las cosas que eliges se pueden cambiar, pero otras no. En el panel General, por ejemplo, no puede cambiar las designaciones del archivo de clase para el home, component, y bean. De hecho, puede ver que las listas desplegables(drop-down) para estos están atenuadas aquí. Pero caramba, todavía puedes cambiarlo de sin estado a con estado(Stateless to Stateful.).
 
-admira tu trabajo
+Admira tu trabajo.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ea20d727-e6bd-4579-99b5-49bbf6ee5123)
+
+### Ejecute su bean a través del verificador de deploytool
+
+Ya sabe que sus clases de bean se compilan, pero solo porque compila no significa que sigue la *ley de bean*. El verificador toma su jar y lo ejecuta a través de un montón de pruebas para ver si cumple con los requisitos mínimos para la implementación(deployment). A medida que aprenda más sobre la especificación EJB, verá que el verificador está probando el código de su bean (y el deployment descriptor) para ver si cumple con la especificación. Por ejemplo, la interfaz de inicio de un bean de sesión sin estado(stateless session bean’s home interface) debe tener declarado un método **`create()`** sin argumentos, y nada más. Y la clase de bean debe tener métodos que coincidan con los declarados en la component interface. Y si la interfaz del componente es remota, debe declarar que cada método dispara RemoteException(throws RemoteException). No se preocupe por recordar estos ejemplos; es solo para darle una idea del tipo de cosas que hace el verificador.
+
+Haga clic en el icono Ejb1 (el tarro pequeño) para resaltarlo
+
+Elija **Tools ▸ Verifier...**
+
+Cruza tus dedos
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/720dcfdd-c383-4936-b3e3-ae40053b26b3)
+
+### Cierra los ojos y haz clic en OK
+
+La pantalla del verificador le muestra el nombre del JAR como **ejb-jar-ic.jar**, en un directorio **tmp**, pero así es como la RI guarda su **ejb-jar** hasta que esté listo para implementar. El archivo **tmp** (y el **JAR**) desaparecerán cuando implemente o elimine el bean de su aplicación.
+
+(Al menos se supone que debe hacerlo. A veces es posible que tenga que encontrar ese directorio y eliminarlo usted mismo. Repita conmigo: la deploytool es *gratuita*. La deploytool no es una herramienta de producción. No pagué dinero por esta herramienta. Aprenderé para apreciar sus fortalezas y mirar más allá de las 101 formas en que es un dolor en el culo.)
+
+Elija el **Failures Only** radio button
+
+Haga clic en OK
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/d33d6619-7e8d-4de7-9399-13b0c5417cba)
+
+### ¡Uf! Sin pruebas fallidas
+
+Si todo se verifica, verá un pequeño mensaje agradable en el cuadro Details en la parte inferior de la ventana del verificador. Si hay errores, los verá en el cuadro Results. Puede hacer clic en un mensaje de 'failure' para obtener más detalles sobre lo que salió mal. No entre en pánico si ve un millón de fallas; por lo general, puede arreglar una cosa y todas desaparecen. A diferencia de los mensajes de error del compilador, que a veces son tan útiles como las instrucciones de VCR, los mensajes de falla del verificador son bastante explícitos. Por lo general, puede averiguar exactamente dónde se equivocó.
+
+A veces, puede solucionar el problema en la ventana principal de la deploytool haciendo clic en uno de los paneles con pestañas y cambiando algo. Por ejemplo, si olvidó especificar un atributo de transacción para un método de bean de entidad, puede ir al panel con pestañas Transactions en la ventana de la herramienta de implementación y establecer el atributo, sin comenzar de nuevo en el asistente de bean.
+
+Pero si tiene problemas con sus class files, tendrá que modificarlos, recompilarlos y luego actualizar su ejb-jar [ 4 ]. O bien, si el problema es que realizó una configuración en el asistente de bean que no se puede cambiar (como seleccionar la clase de bean cuando la herramienta solicita la interfaz home), tendrá que eliminar el **ejb-jar** y start over el bean wizard.
+
+Sé feliz con el maravilloso mensaje en la parte inferior.
+
+Haga clic en **Close**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/82673b6b-e2ae-4b1b-860e-a78f79f93b5a)
+
+Haga clic en Close para guardar la ventana. Si hace clic en OK, volverá a ejecutar el verificador.
+<hr>
+<hr>
+<hr>
+[ 4 ] Para actualizar su archivo ejb-jar, elija las opciones de menú 'Tools' y luego 'Update Files'.
+
+### Hora de Deploy
+
+Una vez que haya verificado, estará listo para implementar(deploy). No hay mucho que pueda salir mal a menos que suceda algo malo en el servidor. En este punto, casi cualquier cosa que salga mal se puede solucionar apagando el servidor y la deploytool y volviéndolas a iniciar. Drástico, sí, pero suele funcionar. A veces, debe tomar medidas aún más duras, al devolver el servidor a su estado recién instalado, pero afortunadamente hay un comando que puede hacer eso. Cuando todo lo demás falla, abra una nueva terminal y escriba **`cleanup`**. Este script apaga el servidor J2EE, pero también limpia todos los registros, directorios y archivos que se han creado en esa máquina. Después de eso, puede intentar iniciar el servidor, luego la herramienta de implementación y la implementación nuevamente. Y si alguna vez abre la deploytool y no ve su aplicación, ¡no entre en pánico! Simplemente vaya al menú File y elija Open, tal como lo haría para abrir un documento en cualquier otra aplicación. Piense en la aplicación J2EE como un documento en lo que respecta a la deploytool.
+
+Elija **Tools ▸ Deploy...**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/536913a9-a3ed-4e85-b1fe-f7245cdc0f49)
+
+### Haz que devuelva un Client Jar
+
+Una vez que se inicia, el servidor hará un montón de cosas para preparar su bean. Uno de ellos es generar los archivos de clase que implementan sus dos interfaces (la home y la component). Y dado que son interfaces remotas, el servidor también creará las clases de código auxiliar(stubs) remoto para esas interfaces. (Mucho más sobre esto más adelante.) Bueno, el cliente necesita las dos interfaces y los dos stubs. Podría haberle dado al cliente las interfaces, ya que las creó. Pero solo el servidor puede crear las clases stub, y el cliente nunca funcionará sin ellas. Por lo tanto, su aplicación cliente podría estar allí, toda agradable y compilada, y solo esperando que le proporcione las clases de código auxiliar para que realmente pueda ejecutarse.
+
+Afortunadamente, puede pedirle a la herramienta de implementación de RI que le proporcione un jar de cliente que tenga todo lo que el cliente necesita (y mucho más, resulta, pero como este no es un entorno de producción real, lo dejaremos pasar).
+
+Prácticamente todos los servidores de aplicaciones EJB deben crear las stub classes(clases de código auxiliar), por lo que tendrá que averiguar dónde las coloca su servidor para poder dárselas al cliente.
+
+Seleccione el checkbox **Return Client Jar**(colóquelo en el directorio projects/advice)
+
+Haga clic en **Next >**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/15d434c3-7b04-4116-ae83-a5742393e800)
+
+### Dale un nombre, para que los clientes puedan buscarlo
+
+Ahora estamos peligrosamente cerca de la implementación(deployment), y el último paso es darle al bean un nombre **JNDI**. Ese es el nombre que usan los clientes para obtener una referencia al bean. (Bueno, a lo que el cliente cree que es el bean, pero dejaremos los detalles sangrientos para el próximo capítulo).
+
+El nombre **JNDI** del bean es simplemente el nombre lógico que elija (o, en el mundo real, quien implemente el bean). No tiene que coincidir con nada del propio bean. Podríamos, por ejemplo, nombrar este bean Homer, lo que de hecho lo haría aún más divertido y desafiante para los clientes de lo que ya sería con un nombre significativo.
+
+Escriba el nombre JNDI **Advisor**
+
+Haga clic en **Finish**
+
+Tome una respiración profunda y manténgala presionada hasta que se complete el proceso de implementación(deploy).
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/fb7cecc7-e003-4974-b7dd-fc903e6c3953)
+
+### Mira cómo suben las barras de progreso y luego celebra
+
+Espéralo... espéralo... espéralo...
+
+Cuando el bean se implemente(deployed) con éxito, verá la línea "Deployment of AdviceApp is complete" en la ventana. En ese momento, los clientes pueden acceder al bean.
+
+¡Lo hiciste!
+
+Haga clic en **OK**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1dbebc6c-e925-4ec4-acc0-f597d94bf722)
+
+### Ahora verá AdviceApp dentro del servidor
+
+Debajo del ícono **Servers**, verá el ícono **localhost** que representa el servidor J2EE que inició antes de iniciar deploytool. Y bajo el ícono de **localhost, ahora puede ver que su **AdviceApp** está implementada(deployed). También verá el botón **Undeploy** que puede usar para, bueno, *undeploy*(anular la implementación).
+
+Expanda los íconos de **Servers > localhost** para ver **AdviceApp**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/09819140-3682-4e5c-bc44-1ac0b3aea25c)
+
+### Ahora todo lo que necesitamos es un cliente...
+
+Tenemos un bean recién implementado-deployed (en un servidor J2EE), pero no podemos probarlo hasta que tengamos un cliente. El cliente tiene que hacer cinco cosas:
+
+1. Obtenga una referencia a un **contexto inicial JNDI - JNDI InitialContext** (aprenderemos sobre eso en el capítulo Client View).
+
+2. Use InitialContext para realizar una **lookup(búsqueda)** en la home interface del bean (que llamamos "Advisor" cuando deployed).
+
+3. **Limite(Narrow)** y **emita(cast)** lo que obtenemos de la búsqueda. (Eso es *algo* que implementa la AdviceHome interface.) Aprenderemos acerca de la reducción(narrowing) en el capítulo Client View.
+
+4. Llame a **create** en la home interface para obtener una referencia a la component interface.
+
+5. Llame a **`getAdvice()`** (el business method, la razón por la que estamos aquí, ¿recuerda?) en la component interface e imprima el resultado.
+
+<hr>
+
+**NOTA**
+
+Estamos utilizando un programa Java independiente como cliente.
+
+En el mundo real, sus clientes probablemente serán servlets u otros beans.
+
+Las cinco cosas que el cliente debe hacer son las mismas independientemente del tipo de cliente.
+
+Por lo tanto, usar un programa Java independiente le enseña a hacer las mismas cosas que necesitará hacer con un cliente servlet.
+
+Si su cliente es otro  enterprise bean, el código será ligeramente diferente, pero aún debe realizar los cinco pasos.
+
+<hr>
+
+<hr>
+
+**RELAX**
+
+**No hay nada en el examen sobre servlets o JSP.**
+
+El examen espera que sepa cómo el cliente obtiene y usa un bean (los pasos anteriores), pero el tipo de cliente no importa. El código del cliente para obtener una referencia a un bean y, en última instancia, llamar a los métodos en el bean, es prácticamente el mismo si el cliente es un servlet o una aplicación Java independiente. Y todo lo que le importa al examen es la parte del código donde el cliente intenta obtener y usar un bean.
+
+El único conocimiento de servlets y JSP que necesita para el examen es saber que la especificación EJB NO garantiza soporte para ellos. Los servlets y los JSP están garantizados por la especificación J2EE, pero no por la especificación EJB.
+
+<hr>
+
+
 
