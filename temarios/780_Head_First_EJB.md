@@ -327,4 +327,5 @@ Los exámenes de Sun están destinados a certificar a aquellos candidatos con un
 
 ## Contenido
 
-1. Intro to EJB
+1. [Intro to EJB](https://github.com/adolfodelarosades/Java/blob/master/temarios/780_Head_First_EJB/01-Intro-to-EJB.md)
+2. [Architectural Overview: EJB Architecture](https://github.com/adolfodelarosades/Java/blob/master/temarios/780_Head_First_EJB/02-Architectural-Overview.md)
