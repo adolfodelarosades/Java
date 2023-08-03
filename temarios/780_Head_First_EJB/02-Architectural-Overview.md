@@ -46,41 +46,42 @@ Entonces, ¿cómo un objeto en un *heap/JVM* llama directamente a un método en 
 
 ### También hay un "helper" en el servidor...
 
-El objeto remoto tiene el método que el cliente desea llamar. Pero cuando el stub establece una conexión de red con el servidor, algo en el servidor tiene que tomar la información del flujo entrante y convertirla en una llamada de método en el objeto remoto. Podría poner el código de red en su objeto Remoto, pero eso anula el objetivo de RMI: hacer que sea tan fácil para su cliente llamar a un método en un objeto a través de la red como llamar a un método en un objeto en el mismo montón. El objetivo de RMI es promover la transparencia de la red . En otras palabras, el hecho de que los objetos estén en diferentes máquinas debería ser casi transparente para el desarrollador. Lo que significa para usted... menos código, código más simple.
+El objeto remoto tiene el método que el cliente desea llamar. Pero cuando el stub establece una conexión de red con el servidor, *algo* en el servidor tiene que tomar la información del stream entrante y convertirla en una llamada de método en el objeto Remote. *Podría* poner el código de red en su objeto Remote, pero eso anula el objetivo de RMI: hacer que sea tan fácil para su cliente llamar a un método en un objeto a través de la red como llamar a un método en un objeto en el mismo heap. El objetivo de RMI es promover la *transparencia de la red*. En otras palabras, el hecho de que los objetos estén en diferentes máquinas debería ser casi transparente para el desarrollador. Lo que significa para usted... menos código, código más simple.
 
-Entonces, con ese objetivo, RMI también se ocupa del lado del servidor de la llamada al método. La cosa en el lado del servidor que acepta la conexión del socket se llama esqueleto . Es la contraparte del stub del cliente. En las primeras versiones de RMI, para cada código auxiliar había un objeto esqueleto coincidente. Hoy, sin embargo, eso no siempre es cierto. La funcionalidad del esqueleto tiene que suceder de alguna manera en el lado del servidor, pero un objeto de esqueleto real es opcional. No entraremos en ninguno de los detalles porque no hace ninguna diferencia para nosotros con EJB. La forma en que el contenedor elige implementar su comportamiento esquelético depende del proveedor.
+Entonces, con ese objetivo, RMI también se ocupa del lado del servidor de la llamada al método. La cosa en el lado del servidor que acepta la conexión del socket se llama **skeleton**. Es la contraparte del stub del cliente. En las primeras versiones de RMI, para cada código auxiliar(stub) había un objeto skeleton coincidente. Hoy, sin embargo, eso no siempre es cierto. La *funcionalidad* del skeleton tiene que suceder de alguna manera en el lado del servidor, pero un *objeto* skeleton es opcional. No entraremos en ninguno de los detalles porque no hace ninguna diferencia para nosotros con EJB. La forma en que el contenedor elige implementar su comportamiento skeleton depende del proveedor.
 
-Todo lo que nos importa es que haya algo en el servidor con el que el stub sepa cómo comunicarse, y que algo sepa cómo interpretar el mensaje del stub e invocar un método en el objeto remoto.
+Todo lo que nos importa es que haya *algo* en el servidor con el que el stub sepa cómo comunicarse, y que *algo* sepa cómo interpretar el mensaje del stub e invocar un método en el objeto Remote.
 
-NO HAY PREGUNTAS TONTAS
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/af368741-66c4-4fae-9513-269b84104bd5)
 
-P:
+<hr>
 
-P: ¿Cómo se puede tener “transparencia de red”? ¿Qué sucede si la red o el servidor no funcionan cuando el cliente llama al método remoto? Parece que hay MUCHO más que puede salir mal que si el objeto del cliente simplemente está haciendo una simple llamada de método antiguo a otro objeto en el montón.
+**NO HAY PREGUNTAS TONTAS**
 
-A:
+**P: ¿Cómo se puede tener “network transparency - transparencia de red”? ¿Qué sucede si la red o el servidor no funcionan cuando el cliente llama al método remoto? Parece que hay MUCHO más que puede salir mal que si el objeto del cliente simplemente está haciendo una simple llamada de método antiguo a otro objeto en el heap.**
 
 R: Sí, sí. Obviamente entiende que la "transparencia de la red" no es solo un mito, es una mala idea. Por supuesto, la llamada al método remoto puede fallar de maneras que no lo haría una llamada al método local, ¡y el cliente debe estar preparado para eso!
 
-Por eso, en Java RMI, todos los métodos remotos deben declarar una java.rmi.RemoteException, que es una excepción comprobada. Eso significa que el cliente tiene que manejar o declarar la excepción. En otras palabras, el cliente realmente no puede fingir que la llamada al método no es remota.
+Por eso, en Java RMI, todos los métodos remotos deben declarar una **`java.rmi.RemoteException`**, que es una excepción comprobada. Eso significa que el cliente tiene que manejar o declarar la excepción. En otras palabras, el cliente realmente no puede fingir que la llamada al método no es remota.
 
-Pero espera, hay más: el cliente tiene que hacer algo especial para obtener la referencia al objeto Remoto en primer lugar. ¿Y cuál es exactamente esa referencia? Es realmente una referencia al proxy del objeto Remoto : el stub.
+Pero espera, hay más: el cliente tiene que hacer algo especial para obtener la referencia al objeto Remote en primer lugar. ¿Y cuál es exactamente esa referencia? Es realmente una referencia al proxy del objeto Remote: el stub.
 
-Entonces no, RMI no le brinda una verdadera transparencia de red. Los diseñadores de RMI quieren que el cliente reconozca que las cosas pueden salir terriblemente mal con la invocación de un método remoto .
+Entonces no, RMI no le brinda una verdadera transparencia de red. Los diseñadores de RMI quieren que el cliente reconozca que las cosas pueden salir terriblemente mal con la invocación de un método remoto.
 
-Aún así, cuando observa todo lo que debe suceder para realizar una llamada de método remoto (conexión de socket de red, flujos, empaquetar argumentos, etc.), el cliente solo tiene que hacer un par de cosas: usar un proceso de búsqueda especial para obtener la referencia al objeto remoto y envuelva las llamadas a métodos remotos en un try/catch. Eso es bastante trivial si se considera lo que se necesitaría si el cliente tuviera que gestionar todo el proceso.
+Aún así, cuando observa todo lo que debe suceder para realizar una llamada de método remoto (conexión de socket de red, flujos, empaquetar argumentos, etc.), el cliente solo tiene que hacer un par de cosas: usar un proceso de búsqueda especial para obtener la referencia al objeto Remote y envuelva(wrap) las llamadas a métodos remotos en un try/catch. Eso es bastante trivial si se considera lo que se necesitaría si el cliente tuviera que gestionar todo el proceso.
 
 (Y hay incluso una forma de hacerlo más fácil para el cliente, utilizando un patrón de diseño EJB que veremos en el último capítulo).
 
-P:
+**P: ¿Soy responsable de construir el stub y el skeleton? ¿Cómo sabe el stub qué métodos tiene mi objeto Remote? De hecho, ¿cómo sabe el cliente qué métodos tiene mi objeto Remote?**
 
-P: ¿Soy responsable de construir el trozo y el esqueleto? ¿Cómo sabe el stub qué métodos tiene mi objeto remoto? De hecho, ¿cómo sabe el cliente qué métodos tiene mi objeto remoto?
+R: No, no es necesario que hagas los stubs y los skeletons. Con *plain old RMI, utiliza el compilador RMI (rmic) para generarlos*. Pero para las otras dos preguntas... le dejaremos pensar por un minuto antes de ver los detalles.
 
-A:
+<hr>
 
-R: No, no es necesario que hagas los talones y los esqueletos. Con RMI simple y antiguo, utiliza el compilador RMI (rmic) para generarlos. Pero para las otras dos preguntas... le dejaremos pensar por un minuto antes de ver los detalles.
+<hr>
+AQUIIIII
+**BRAIN POWER**
 
-PODER CEREBRAL
 En Java, ¿cuál es la mejor manera de decirle al cliente qué métodos puede llamar? En otras palabras, ¿cómo expone sus métodos públicos a los demás?
 
 Piense en la relación entre el código auxiliar y el objeto Remoto real. ¿Qué deben tener ambos en común?
