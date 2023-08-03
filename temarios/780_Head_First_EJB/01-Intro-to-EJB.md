@@ -1087,5 +1087,46 @@ El único conocimiento de servlets y JSP que necesita para el examen es saber qu
 
 <hr>
 
+### Organizar el directorio de su proyecto para el cliente
+
+Este es el aspecto que debería tener su directorio **projects/advice** después de escribir y compilar el código del cliente.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bab8a1a6-9c65-45b6-992e-2c01aabee25b)
+
+**El código de cliente (AdviceClient.java)**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/0807be86-5019-45bd-9bcd-d466d82600a7)
+
+
+**Compilar el cliente:**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/79998fdf-6f16-4f5c-9d50-d2da3173ac23)
+
+El cliente necesita acceso a las dos interfaces (**Advice**, **AdviceHome**) y las dos clases de código auxiliar(stub classes) que implementan esas interfaces. Ambos están en el JAR del cliente que creó el servidor, pero no podemos compilar el cliente sin ellos. La forma más limpia es agregarlos al classpath en tiempo de compilación, usando el flag **`-classpath`** del compilador.
+
+**¡Ejecuta el cliente!**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ddbc8dcf-3d9d-45c0-97f1-fda7b195e67f)
+
+En tiempo de ejecución(runtime), el cliente aún necesita acceso a las dos interfaces (**Advice**, **AdviceHome**) y las dos clases de código auxiliar(stub classes) que implementan esas interfaces. Ambos están en el JAR del cliente que creó el servidor, tenemos que agregarlos al classpath. La mejor manera es usar el flag **`-cp`** del compilador.
+
+**Nota**: Por ahora, el cliente debe estar en la misma máquina física que el servidor. Más tarde, veremos cómo cambiar esto y ejecutar el cliente contra un servidor J2EE en una máquina diferente.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7f02ad10-d1e2-4346-b41a-dc24ab46ea5c)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/4ea1525f-54ae-4cd7-82c7-a59f7fa199d0)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/1e25b559-75b4-4773-a28d-465893c78b72)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bf10c3cb-a6fd-4fe7-9615-6bfb762fe13f)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/96031824-8f53-408c-a6da-da168b41b75b)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/56405ef8-6f24-4f8c-9028-46f1932f8797)
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/70e48e89-68d3-408d-a8ae-1f0ee6f1e9e5)
+
+
+
 
 
