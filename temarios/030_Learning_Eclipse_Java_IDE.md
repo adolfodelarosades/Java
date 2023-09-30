@@ -21,6 +21,10 @@ Para aumentar la retención y brindar una experiencia de aprendizaje intuitiva, 
 
 El énfasis en todos los productos de Infinite Skills es brindar capacitación asequible y de alta calidad en un formato que permita a los usuarios aprender habilidades prácticas de la vida real que son tan importantes en los entornos comerciales actuales.  
 
+## Resources
+
+[Supplemental Content](https://resources.oreilly.com/examples/0636920035879/?_gl=1%2a1wq2ev5%2a_ga%2aOTcwNTgzODk3LjE2NjY1NjY0NTM.%2a_ga_4WZYL59WMV%2aMTY5NjEwNjMyMi4xMjMuMS4xNjk2MTExNTAyLjQ1LjAuMA..)
+
 ## Contenido
 
 ### [01 Getting Started](https://github.com/adolfodelarosades/Java/blob/master/temarios/030_Learning_Eclipse_Java_IDE/01_Getting_Started.md)
