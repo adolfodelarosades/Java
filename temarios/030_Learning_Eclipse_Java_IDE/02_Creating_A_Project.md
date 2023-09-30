@@ -144,5 +144,58 @@ Ya sea haciendo clic derecho en la carpeta de origen, seleccionando nuevo y agre
 Y eso concluye nuestra mirada a la creación de paquetes en nuestros proyectos.
 
 ## Creating Classes 4m 17s
+
+En esta lección, analizaremos las múltiples formas en que podemos agregar clases a nuestro proyecto. Con esto, para poder completar el código de este proyecto, vamos a tener dos archivos que debemos tener a mano. Estos deberían incluirse en los recursos de nuestro curso. El primero será **programcode.txt** y el siguiente será **passwordmanagercode.txt**. Ahora esos son resguardos de código que vamos a colocar directamente en nuestra clase para que nuestro código se ejecute al final de este video. 
+
+Primero, antes de comenzar, quiero crear un nuevo paquete. Así que seleccionaré **src** allí haciendo clic en ella y seleccionaré **Alt-Shift-N** y un New Package. 
+
+<img width="415" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ddeaa002-d155-4a38-ae1c-8bb060de568d">
+
+Y lo llamaremos **`com.infiniteskills.gui`**. Seguiremos adelante y terminaremos eso. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8c4681ae-1bd0-49e5-a59c-dcc71b46627f">
+
+<img width="229" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a3757e50-2647-4242-b3eb-b0bfbeb807be">
+
+Y ahora debemos tener en cuenta que hay varias formas de agregar clases. Por supuesto, la forma más sencilla sería hacer clic en el paquete que estamos buscando, presionar **Alt-Shift-N** y luego seleccionar clase. 
+
+<img width="477" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2f760370-8107-4255-949c-a6304b21203e">
+
+Ahora esto abrirá el cuadro de diálogo para agregar una nueva clase. Puede ver que el paquete ya está preseleccionado porque hice clic en él de antemano. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/bc6e304c-fc71-4534-a5b8-22f08fd7226f">
+
+Si no desea colocarlo en un paquete específico, puede seleccionar **src**. 
+
+<img width="305" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/de5f4a7c-5c4d-4405-b3b8-889a0d22b7cb">
+
+Y nuevamente, otra forma de agregar una clase para decir **File, New, Class**. 
+
+<img width="1505" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e5c522b5-e42a-445c-99bf-fc51eab60e41">
+
+Y aquí puede ver que abre nuevamente el cuadro de diálogo de creación de clases y tenga en cuenta que está en el paquete predeterminado si no nombramos nada. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/14087510-a7e5-473a-9cc2-cbf6caf4da64">
+
+Entonces definitivamente queremos nuestra clase dentro de nuestros paquetes para los propósitos de nuestro código. Entonces, una vez más, haré clic derecho aquí en ese paquete y seleccionaré New Class. 
+
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ddf08103-1c07-4618-9226-8b1f0f6f5698">
+
+AQUIIIIII
+Estas son las tres formas diferentes que puede ver para abrir el cuadro de diálogo de nueva clase: **Alt-Shift-N**, **Shift-clic derecho** en el paquete seleccionado o seleccione **File, New Class** en el menú. Y por supuesto, también importa dónde hayas seleccionado previamente ese **File, New Class**. 
+
+
+Ahora el nombre de nuestra clase será **`passwordManager`**. Y esa clase va a ser pública. No es un paquete. No será abstracto ni definitivo. Heredará del objeto de superclase. No se implementa ninguna interfaz. No vamos a insertar ningún código. Y podemos generar nuestros comentarios Java, si así lo deseamos, así que sigamos adelante, hagamos eso y seleccionemos Finalizar. 
+
+Y lo que veremos aquí es que cuando se completa este cuadro de diálogo de creación, obtenemos una clase Java. Y ese código se insertará en **`passwordManager`**. Y puede ver que ya está en el paquete correcto y que el autor y la información se completan desde **`java.comments`**. 
+
+Sigamos adelante y vayamos con nuestro **PasswordManagerCode.txt** y simplemente seleccionemos todo eso y péguelo. Ahora eso nos da la información que estamos buscando para crear nuestra GUI para nuestro **`passwordManager`**. Ahora, por supuesto, no tenemos ese código implementado. Entonces necesitamos un programa. Nuevamente, seleccionaré el paquete que estoy buscando, o podría comenzar en la **src** y buscarlo manualmente. Vamos a hacer eso. Entonces digamos que estoy en la fuente aquí y presionaré **Alt-Shift-N**. Y diré que quiero una New Class, y luego dirá que está en la configuración predeterminada. Pero no lo quiero por defecto. De hecho, quiero que esto esté en el programa. Así que voy a seleccionarlo aquí. Nuevamente, podríamos agregar tipos adjuntos, si quisiéramos. Podemos convertirlo en un paquete, abstracto o final, agregarlo en cualquier interfaz, insertarlo en un archivo principal vacío. Entonces podemos hacer eso ya que este será nuestro archivo de programa. Y el nombre de este será simplemente programa. Y entonces puedes ver que eso nos introduce en el método principal vacío sin que tengamos que escribir nada en absoluto. Y ya tenemos nuestro programa de clases creado. Entonces todo está bien para ir allí. 
+
+Y tenemos una clase más que vamos a crear, que será un cifrador. Así que llamemos a este cifrador y seguiremos adelante y lo dejaremos así. Todo lo demás estará predeterminado allí. Y eso nos da cifrado. Ahora el cifrador no tendrá nada en este momento. Nuestro código de programa debe corregirse para tener el código de programa real. Y puedes notar que nombré esto con una **`p`** minúscula. Entonces necesito arreglar eso en mi nombre, lo que nos dará la oportunidad de verlo. Y como pueden ver aquí, mi código ya me está ladrando y diciéndome que el programa no tiene el nombre correcto. Así que aquí puedo hacer clic con el botón derecho y seleccionar refactorizar y cambiar el nombre, pero notarás que hay algunas teclas de mayúsculas y podemos verlas. Y continuaremos y actualizaremos cualquier referencia al mismo, que no debería estar en este momento. 
+
+Ahora deberíamos ver que el **`passwordManager`** se ha compilado completamente, como se requiere. El error ha desaparecido de las referencias al archivo del programa. 
+
+Esto completa nuestra visión de la creación de clases y la adición de clases a nuestros proyectos en el IDE de Java Eclipse.
+
 ## Running The Program 1m 37s
 ## Project Folder Structure 1m 40s
