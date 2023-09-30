@@ -177,25 +177,159 @@ Y aquí puede ver que abre nuevamente el cuadro de diálogo de creación de clas
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/14087510-a7e5-473a-9cc2-cbf6caf4da64">
 
-Entonces definitivamente queremos nuestra clase dentro de nuestros paquetes para los propósitos de nuestro código. Entonces, una vez más, haré clic derecho aquí en ese paquete y seleccionaré New Class. 
+Entonces definitivamente queremos nuestra clase dentro de nuestros paquetes para los propósitos de nuestro código. Entonces, una vez más, haré clic derecho aquí en ese paquete y seleccionaré **New - Class**. 
 
 <img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ddf08103-1c07-4618-9226-8b1f0f6f5698">
 
-AQUIIIIII
-Estas son las tres formas diferentes que puede ver para abrir el cuadro de diálogo de nueva clase: **Alt-Shift-N**, **Shift-clic derecho** en el paquete seleccionado o seleccione **File, New Class** en el menú. Y por supuesto, también importa dónde hayas seleccionado previamente ese **File, New Class**. 
+Estas son las tres formas diferentes que puede ver para abrir el cuadro de diálogo de nueva clase: **Alt-Shift-N**, **Shift-clic derecho** en el paquete seleccionado o seleccione **File, New, Class** en el menú. Y por supuesto, también importa dónde hayas seleccionado previamente ese **File, New, Class**. 
 
+Ahora el nombre de nuestra clase será **`PasswordManager`**. Y esa clase va a ser **public**. No es un **package**. No será **abstract** ni **final**. Heredará de la superclase **`Object`**. No se implementa ninguna interfaz. No vamos a insertar ningún código. Y podemos generar nuestros comentarios Java **Generate comments**, si así lo deseamos, así que sigamos adelante, hagamos eso y seleccionemos Finalizar. 
 
-Ahora el nombre de nuestra clase será **`passwordManager`**. Y esa clase va a ser pública. No es un paquete. No será abstracto ni definitivo. Heredará del objeto de superclase. No se implementa ninguna interfaz. No vamos a insertar ningún código. Y podemos generar nuestros comentarios Java, si así lo deseamos, así que sigamos adelante, hagamos eso y seleccionemos Finalizar. 
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/27266bc2-6ec6-40bd-b35a-942c5c3cb6b3">
 
-Y lo que veremos aquí es que cuando se completa este cuadro de diálogo de creación, obtenemos una clase Java. Y ese código se insertará en **`passwordManager`**. Y puede ver que ya está en el paquete correcto y que el autor y la información se completan desde **`java.comments`**. 
+Y lo que veremos aquí es que cuando se completa este cuadro de diálogo de creación, obtenemos una clase Java. Y ese código se insertará en **`PasswordManager`**. Y puede ver que ya está en el paquete correcto y que el autor y la información se completan desde **`java.comments`**.
 
-Sigamos adelante y vayamos con nuestro **PasswordManagerCode.txt** y simplemente seleccionemos todo eso y péguelo. Ahora eso nos da la información que estamos buscando para crear nuestra GUI para nuestro **`passwordManager`**. Ahora, por supuesto, no tenemos ese código implementado. Entonces necesitamos un programa. Nuevamente, seleccionaré el paquete que estoy buscando, o podría comenzar en la **src** y buscarlo manualmente. Vamos a hacer eso. Entonces digamos que estoy en la fuente aquí y presionaré **Alt-Shift-N**. Y diré que quiero una New Class, y luego dirá que está en la configuración predeterminada. Pero no lo quiero por defecto. De hecho, quiero que esto esté en el programa. Así que voy a seleccionarlo aquí. Nuevamente, podríamos agregar tipos adjuntos, si quisiéramos. Podemos convertirlo en un paquete, abstracto o final, agregarlo en cualquier interfaz, insertarlo en un archivo principal vacío. Entonces podemos hacer eso ya que este será nuestro archivo de programa. Y el nombre de este será simplemente programa. Y entonces puedes ver que eso nos introduce en el método principal vacío sin que tengamos que escribir nada en absoluto. Y ya tenemos nuestro programa de clases creado. Entonces todo está bien para ir allí. 
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5bdb9f4d-1dd2-4f86-84a5-453f32e66518">
 
-Y tenemos una clase más que vamos a crear, que será un cifrador. Así que llamemos a este cifrador y seguiremos adelante y lo dejaremos así. Todo lo demás estará predeterminado allí. Y eso nos da cifrado. Ahora el cifrador no tendrá nada en este momento. Nuestro código de programa debe corregirse para tener el código de programa real. Y puedes notar que nombré esto con una **`p`** minúscula. Entonces necesito arreglar eso en mi nombre, lo que nos dará la oportunidad de verlo. Y como pueden ver aquí, mi código ya me está ladrando y diciéndome que el programa no tiene el nombre correcto. Así que aquí puedo hacer clic con el botón derecho y seleccionar refactorizar y cambiar el nombre, pero notarás que hay algunas teclas de mayúsculas y podemos verlas. Y continuaremos y actualizaremos cualquier referencia al mismo, que no debería estar en este momento. 
+Sigamos adelante y vayamos con nuestro **PasswordManagerCode.txt** y simplemente seleccionemos todo eso y péguelo.
 
-Ahora deberíamos ver que el **`passwordManager`** se ha compilado completamente, como se requiere. El error ha desaparecido de las referencias al archivo del programa. 
+<img width="1505" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3985767b-fd7d-4c51-90ea-2106607a7904">
+
+Ahora eso nos da la información que estamos buscando para crear nuestra GUI para nuestro **`PasswordManager`**. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c3fdd052-4871-4f6f-a438-51254966a0b4">
+
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/89b39eb4-9384-47c7-a736-d837cf7c4ab2">
+
+Ahora, por supuesto, no tenemos ese código implementado. Entonces necesitamos un programa. Nuevamente, seleccionaré el paquete que estoy buscando, o podría comenzar en la **src** y buscarlo manualmente. Vamos a hacer eso. Entonces digamos que estoy en la **src** aquí y presionaré **Alt-Shift-N**. Y diré que quiero una **New Class**,
+
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6e65b91b-bbd7-4e0d-b247-b1710e5ac846">
+
+y luego dirá que está en la configuración **default**. Pero no lo quiero por defecto. De hecho, quiero que esto esté en **program**. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f39ba96b-fe48-492c-bde4-225ac229d140">
+
+Así que voy a seleccionarlo aquí.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c05a159c-798f-4581-b468-1eb0def23e61">
+
+Nuevamente, podríamos agregar **Enclosing types**, si quisiéramos. Podemos convertirlo en un Modifiers **package**, **abstract** o **final**, agregarlo en cualquier interfaz, insertarlo en un archivo principal vacío. Entonces podemos hacer eso ya que este será nuestro **program file**. Y el nombre de este será simplemente **program**. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d3a16cae-308b-491f-bdbd-eb5a20563353">
+
+Y entonces puedes ver que eso nos introduce en el método Main vacío sin que tengamos que escribir nada en absoluto. Y ya tenemos nuestro programa de clases creado. Entonces todo está bien para ir allí. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5b904f18-0260-417b-b596-e60d804d2e73">
+
+Y tenemos una clase más que vamos a crear, 
+
+<img width="1507" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ed45f019-d566-45f2-923d-a222018e3ea9">
+
+que será un **`Encriptor`** (cifrador). Así que llamemos a este cifrador y seguiremos adelante y lo dejaremos así. Todo lo demás estará predeterminado allí. 
+
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/1faf08f1-4dd0-487b-9df6-0183df2dae54">
+
+Y eso nos da **`Encriptor`**. Ahora el cifrador no tendrá nada en este momento. 
+
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cb7bf99c-bee3-4688-a646-15e5093832d9">
+
+Nuestro código de **program** debe corregirse para tener el código de programa real. Y puedes notar que nombré esto con una **`p`** minúscula. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b8b45635-da90-45d2-86e4-a3340f72f165">
+
+Entonces necesito arreglar eso en mi nombre, lo que nos dará la oportunidad de verlo. Y como pueden ver aquí, mi código ya me está ladrando y diciéndome que el programa no tiene el nombre correcto. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6684d7ae-04d3-4613-8862-e201332f3771">
+
+Así que aquí puedo hacer clic con el botón derecho y seleccionar **Refactor** y **Rename**, 
+
+<img width="1506" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7201a002-01f4-4aa6-85a6-d9cf44041700">
+
+<img width="931" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/646764a1-a00a-44b7-b540-b97bcf79a991">
+
+pero notarás que hay algunas teclas de mayúsculas y podemos verlas. Y continuaremos y actualizaremos cualquier referencia al mismo, que no debería estar en este momento.
+
+<img width="944" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a1155bf8-cb13-4ec1-bae3-70bc715f9311">
+
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fff46f9d-5748-43ad-8d2e-4554fb5a91e0">
+
+Ahora deberíamos ver que el **`PasswordManager`** se ha compilado completamente, como se requiere. El error ha desaparecido de las referencias al archivo de **program**. 
+
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/4ca304e0-4cd6-484e-9f05-1dd5f38a4131">
 
 Esto completa nuestra visión de la creación de clases y la adición de clases a nuestros proyectos en el IDE de Java Eclipse.
 
 ## Running The Program 1m 37s
+
+En esta lección, exploraremos cómo podemos ejecutar nuestros programas mientras continuamos trabajando con nuestro código. 
+
+Hay dos formas en que podemos ejecutar nuestro código. El primero sería encontrar el archivo que contiene el método Main. Una vez que estemos allí, haga clic derecho en ese archivo y seleccione Ejecutar como, aplicación Java, en este caso. 
+
+<img width="1507" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7fc77b08-c570-4741-ba66-52e94c039780">
+
+Ahora llevará algún tiempo ejecutarlo la primera vez allí. Pero puedes ver que nuestro menú apareció, tenemos todo allí, podemos continuar y seleccionar si queremos salir o no. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/85e1d382-fa4f-41b5-985d-5a0c2792e231">
+
+<img width="803" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ad27dfe3-ea4d-4799-866b-eac104d1fa2c">
+
+
+Sigamos adelante y salgamos. 
+
+<img width="1509" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6441aa1f-633e-46d9-841e-ec69f01eb5be">
+
+Y la otra forma de ejecutar el programa sería simplemente subir a la parte superior y encontrar este botón de reproducción. Y pueden ver que mientras lo resalto, selecciona y dice, como información sobre herramientas, ejecutar programa. 
+
+<img width="1503" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d715eb80-d89c-4b8c-904d-dde179c56e45">
+
+Puede observar que hay un menú desplegable y podemos cambiar la configuración de cómo se ejecuta si, por alguna razón, se va a ejecutar en un servidor en lugar de solo como una aplicación. Por supuesto, esto es sólo una aplicación, por lo que podemos continuar Ejecutando como allí, o simplemente podemos seleccionar el botón Reproducir.
+
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/35c3ae70-61cc-4f31-9262-4bc05c053e48">
+
+Ahora que está construido, por supuesto, esta vez funciona un poco más rápido. Pero esencialmente esas son dos formas muy fáciles y rápidas de ejecutar el programa. 
+
+Ahora también dice que puedes ejecutar como usando **Alt Shift X y luego R** para servidor o **J para aplicación**. Si estoy en el archivo aquí y presiono **Alt Shift X y luego J**, puedes ver que se ejecutará. 
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/12688d6c-e213-46a7-af60-ffec2694703a">
+
+Y habrás notado que cuando presiono **Alt Shift X**, también aparece un menú aquí. 
+
+<img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/da5fdf7f-1b41-4c01-9a55-44722032e7e0">
+
+Entonces, si quiero ejecutar esto como una aplicación Java, puedo presionar **J** o seleccionar eso. Haga doble clic en él y se ejecutará. 
+
+<img width="1505" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f3c5f969-7fed-49f5-8397-0a58f558b932">
+
+Y esto concluye nuestro análisis de las diferentes formas de ejecutar nuestro programa.
+
 ## Project Folder Structure 1m 40s
+
+En esta lección, repasaremos la estructura de carpetas del proyecto tal como existe en nuestro disco y en la computadora. 
+
+<img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d4517e18-071b-49ab-bb5a-e2638f1f6800">
+
+Puede haber casos en los que debamos ser conscientes de esto. Por ejemplo, si estuviéramos entregando código en un entorno académico, o si íbamos a copiar algunos de los archivos y usarlos en un proyecto diferente en algún momento. 
+
+Sólo quiero echar un vistazo rápido a eso fuera del IDE de Eclipse. Pero notarás que el IDE de Eclipse configura nuestra carpeta fuente y tiene diferentes paquetes con los archivos debajo de ellos. 
+
+Ahora, cuando vayamos a la ubicación de nuestra unidad física, notaremos que tenemos el nombre de nuestro proyecto. Y dentro de allí tenemos una carpeta settings de configuración que nos permitirá ver algunas preferencias tal como están configuradas para ese proyecto. 
+
+<img width="867" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b0071c56-760e-4a12-86d3-aeac5986b3ea">
+
+<img width="874" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/411c7342-f9e1-4bfb-9011-7b3af2b543c0">
+
+Nuestra carpeta binaria o carpeta **bin** contiene las clases compiladas después de haber ejecutado el código. Verás que estos son archivos **`.class`**. Esos son los ejecutables reales. 
+
+<img width="878" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6a1223a4-8300-4fe5-97f7-724e1e7feb27">
+
+Y dentro de nuestras carpetas aquí tenemos nuestra **src**. Ahora solo quiero señalar también que, si seleccionó no incluir la estructura de carpetas para los archivos fuente específicos, es posible que no vea un contenedor ni una source. Puede ver todos sus archivos directamente aquí. Debido a que seleccioné usar esas carpetas específicas, verás que de hecho se agregan nuestros archivos de código en sus propias carpetas específicas, lo cual es muy bueno, especialmente si solo necesitamos administrar dónde están nuestros archivos fuente o dónde está nuestra clase. Verás que cada paquete crea su propia carpeta. Aquí tenemos el programa gui y las utilidades.
+
+<img width="873" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e6d9e585-5848-48d4-9e2f-9586c424a82b">
+
+Y, por supuesto, el archivo fuente directo estará en la carpeta del paquete correspondiente. 
+
+<img width="871" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/4331729f-5862-4115-ae34-8dc407316d27">
+
+A medida que continuamos agregando más clases a nuestros paquetes y más clases a nuestro proyecto, verá que esta estructura de directorios de carpetas continúa expandiéndose como se esperaba. 
+
+Y esto concluye nuestro vistazo rápido a la estructura de directorios físicos real de cómo se almacenan nuestros proyectos a medida que los usamos y los construimos en nuestro IDE de Eclipse.
