@@ -47,7 +47,7 @@ El énfasis en todos los productos de Infinite Skills es brindar capacitación a
 * Running The Program 1m 37s
 * Project Folder Structure 1m 40s
 
-### 03 Advanced Project Operations
+### [03 Advanced Project Operations](https://github.com/adolfodelarosades/Java/blob/master/temarios/030_Learning_Eclipse_Java_IDE/03_Advanced_Project_Operations.md)
 
 * Adding JUnit Tests 4m 11s
 * Import A JAR File 1m 35s
