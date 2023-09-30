@@ -23,7 +23,7 @@ El énfasis en todos los productos de Infinite Skills es brindar capacitación a
 
 ## Contenido
 
-### 01 Getting Started
+### [01 Getting Started](https://github.com/adolfodelarosades/Java/blob/master/temarios/030_Learning_Eclipse_Java_IDE/01_Getting_Started.md)
 
 * Overview 3m 4s
 * About The Author 1m 41s
