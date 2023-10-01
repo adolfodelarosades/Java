@@ -10,7 +10,7 @@
 
 ## Setting Preferences 1m 33s
 
-En esta lección, antes de comenzar, quiero configurar algunas preferencias en nuestro IDE de Eclipse. Entonces lo que voy a hacer es ir a Ventana, Preferencias. 
+En esta lección, antes de comenzar, quiero configurar algunas preferencias en nuestro IDE de Eclipse. Entonces lo que voy a hacer es ir a **Windows, Preferencs**. 
 
 <img width="1505" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/632500a3-b083-426c-9d4d-a6d7e82c4340">
 
