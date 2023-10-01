@@ -408,9 +408,184 @@ Aquí podemos ver los paquetes creados.
 
 ### Incorporar Código
 
-**PasswordManager**
+Incorparemos el código en nuestras clases de acuerdo a los archivos de recursos.
 
 **Program**
 
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cef1bd52-ebb4-41e9-9dc0-9f1ab5a9bd1b">
+
+En esta clase tenemos varios errores para empezar el **package** lo escribí con una **`S`** mayúscula lo voy a refactorizar.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fa05f2d9-b6a5-4661-a3cd-5c016090a262">
+
+Otro error es que la clase la escribi como **`Program`** pero el código la maneja como **`program`** por lo que también lo voy a refactorizar.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8cb3f1cb-e0e4-4a9f-b089-11677fe11f53">
+
+Hemos solucionado algunos fallos pero seguimos con otros.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/72a938e6-d8da-466d-bb07-ef14c9db0dc5">
+
+Voy a cambiar la versión de Java de 17 a 1.7.
+
+**Nota:** Los módulos no se usan en 1.7 por lo que eliminamos el código insertado asociado al módulo.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/13d3f485-effa-441d-8cb8-301bb80ba034">
+
+Con esto desaparecen todos los errores en **program**.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/38207f61-7496-4af6-af0f-3313f57062c8">
+
+**PasswordManager**
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/59560606-e420-46c6-a669-8fcda640c381">
+
+También han desapacecido los errores en **PasswordManager** al cambiar la versión de Java.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/391f976e-54f8-491a-9e8c-f28b36031337">
+
+
 **Encriptor**
+
+Ahora el **Encriptor** no tendrá nada en este momento.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f1f62a30-89bd-4c5e-80da-8d999e08a1d6">
+
+
+### Ejecutar la APP
+
+<img width="688" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ee48a0bb-040d-47d1-9f70-d77a28fcae94">
+
+<img width="681" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/498a3f70-7060-4b85-9409-9aef8452780c">
+
+<img width="675" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/88fedf58-ddbe-44cf-bc61-91c4c504f6dc">
+
+### Código
+
+**Program**
+
+```java
+package com.infiniteskills.program;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.infiniteskills.gui.*;
+
+/**
+ * Program to run the password manager application.
+ * @author adulfodelarosa
+ *
+ */
+public class program {
+
+	public static final int WIDTH = 650;
+	public static final int HEIGHT = 500;
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PasswordManager pm = new PasswordManager();
+					pm.setLocation(150,25);
+					pm.setSize(WIDTH +20,HEIGHT+60);
+					pm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					
+					JPanel panel = new JPanel();
+					panel.setBounds(0, 0, 600, 600);
+					pm.getContentPane().add(panel);
+					pm.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+}
+```
+
+**PasswordManager**
+
+```java
+package com.infiniteskills.gui;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import com.infiniteskills.program.*;
+
+public class PasswordManager extends JFrame {
+	private static final long serialVersionUID = 1L;
+	JPanel contentPane = null;
+	JDesktopPane desktopPane = null;
+
+	/**
+	 * Create the frame.
+	 */
+	public PasswordManager() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		desktopPane = new JDesktopPane();
+		desktopPane.setBounds(0, 0, program.WIDTH, program.HEIGHT);
+		getContentPane().add(desktopPane);
+		
+		JMenuBar mb = new JMenuBar();
+		setJMenuBar(mb);
+		
+		JMenu mnFile = new JMenu("File");
+		mb.add(mnFile);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//exit
+				int close = JOptionPane.showConfirmDialog(null
+									, "Are you sure you want to exit?"
+									, "End Application?"
+									, JOptionPane.YES_NO_OPTION
+									, JOptionPane.INFORMATION_MESSAGE);
+				if (close == 1) return;
+				System.exit(0);
+			}
+		});
+		mnFile.add(mntmExit);
+		
+		JMenu mnPasswords = new JMenu("Passwords");
+		mb.add(mnPasswords);
+		
+		JMenuItem mntmPwdItems = new JMenuItem("Get");
+		mntmPwdItems.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				//do something
+			}
+		});
+		mnPasswords.add(mntmPwdItems);
+	}
+}
+```
+
+**Encriptor**
+
+```java
+/**
+ * 
+ */
+package com.infiniteskills.utilities;
+
+/**
+ * @author adulfodelarosa
+ *
+ */
+public class Encriptor {
+
+}
+```
 
