@@ -119,11 +119,11 @@ Esto concluye nuestra visión completa de la creación de proyectos en Java Ecli
 
 ## Creating Packages 1m 39s
 
-En esta lección, veremos cómo crear paquetes en nuestros proyectos en Eclipse IDE. Una vez más, hemos creado el proyecto **InfiniteSkillsPasswordManager**, y debajo tenemos una carpeta de origen y nuestras libraries que están actualmente incluidas en nuestra compilación. Por supuesto, hay dos formas de agregar paquetes. De una manera, podemos hacer clic derecho en **src** y seleccionar un **New Package**. 
+En esta lección, veremos cómo crear **Packages** en nuestros proyectos en Eclipse IDE. Una vez más, hemos creado el proyecto **InfiniteSkillsPasswordManager**, y debajo tenemos una carpeta **src** y nuestras **Libraries** que están actualmente incluidas en nuestra compilación. Por supuesto, hay dos formas de agregar paquetes. De una manera, podemos hacer clic derecho en **src** y seleccionar un **New Package**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/36237f76-9fa5-439f-8c81-4206b7d0a744">
 
-Y aquí, una vez que tengamos esto en marcha, podemos decir que queremos que el nombre de nuestro paquete sea **`com.infiteSkills.program`**, y usted puede seleccionar si desea o no crear paquete-**`info.java`** y seleccionar finalizar. 
+Y aquí, una vez que tengamos esto en marcha, podemos decir que queremos que el nombre de nuestro paquete sea **`com.infiteSkills.program`**, y usted puede seleccionar si desea o no crear el **package-info.java`** y seleccionar **Finish**. 
 
 <img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c050ffd8-e619-4795-b9a6-f50d9d77f6e3">
 
@@ -131,13 +131,13 @@ Y puedes ver que ahora tenemos nuestro paquete **`com.infiniteSkills.program`**.
 
 <img width="308" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e3880e53-54de-4da0-9fbb-7b0e4a5628b9">
 
-La otra forma, por supuesto, es seleccionar del menú File un New Package, tal como lo hicimos antes. 
+La otra forma, por supuesto, es seleccionar del menú **File, New, Package**, tal como lo hicimos antes. 
 
-Y podríamos presionar **Alt Shift N**, y eso abre el nuevo menú justo donde estamos, como si lo hubiéramos seleccionado aquí. 
+Y podríamos presionar **Alt Shift N**, y eso abre el nuevo menú justo donde estamos, como si lo hubiéramos seleccionado desde el menú. 
 
 <img width="1507" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/73e9994e-f048-4eb3-8fcb-55c243015945">
 
-De cualquier manera funciona bien, pero si estás tratando de acostumbrarte a no usar el mouse, lo cual es una muy buena práctica, **Alt Shift N**, por supuesto, nos dará la posibilidad de hacer algo nuevo que queramos. De nuevo aquí podríamos hacer otro paquete. Aquí hagamos **`com.infiteSkills.utilities`**. Y nuevamente puede decidir si desea o no crear también **`package-info.java`**. 
+De cualquier manera funciona bien, pero si estás tratando de acostumbrarte a no usar el mouse, lo cual es una muy buena práctica, **Alt Shift N**, por supuesto, nos dará la posibilidad de hacer algo nuevo que queramos. De nuevo aquí podríamos hacer otro paquete. Aquí hagamos **`com.infiteSkills.utilities`**. Y nuevamente puede decidir si desea o no crear también **package-info.java**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/edd7eec0-459b-4644-9351-5798471739d9">
 
@@ -145,25 +145,25 @@ Ahora puede ver que hemos creado con éxito ambos paquetes dentro de nuestro pro
 
 <img width="309" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b7975396-9224-4745-a3a3-d95941accee5">
 
-Ya sea haciendo clic derecho en la carpeta de origen, seleccionando nuevo y agregando el paquete o seleccionando la carpeta, presionando **Alt Shift N** y seleccionando paquete o archivo, nuevo, paquete con el mouse. 
+Ya sea haciendo clic derecho en la carpeta **src**, seleccionando **New** y agregando el **Package** o seleccionando la carpeta, presionando **Alt Shift N** y seleccionando paquete o archivo, nuevo, paquete con el mouse. 
 
 Y eso concluye nuestra mirada a la creación de paquetes en nuestros proyectos.
 
 ## Creating Classes 4m 17s
 
-En esta lección, analizaremos las múltiples formas en que podemos agregar clases a nuestro proyecto. Con esto, para poder completar el código de este proyecto, vamos a tener dos archivos que debemos tener a mano. Estos deberían incluirse en los recursos de nuestro curso. El primero será **programcode.txt** y el siguiente será **passwordmanagercode.txt**. Ahora esos son resguardos de código que vamos a colocar directamente en nuestra clase para que nuestro código se ejecute al final de este video. 
+En esta lección, analizaremos las múltiples formas en que podemos agregar **clases** a nuestro proyecto. Con esto, para poder completar el código de este proyecto, vamos a tener dos archivos que debemos tener a mano. Estos deberían incluirse en los recursos de nuestro curso. El primero será **programcode.txt** y el siguiente será **passwordmanagercode.txt**. Ahora esos son resguardos de código que vamos a colocar directamente en nuestra clase para que nuestro código se ejecute al final de este video. 
 
-Primero, antes de comenzar, quiero crear un nuevo paquete. Así que seleccionaré **src** allí haciendo clic en ella y seleccionaré **Alt-Shift-N** y un New Package. 
+Primero, antes de comenzar, quiero crear un nuevo **Package**. Así que seleccionaré **src** allí haciendo clic en ella y seleccionaré **Alt-Shift-N** y un **New Package**. 
 
 <img width="415" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ddeaa002-d155-4a38-ae1c-8bb060de568d">
 
-Y lo llamaremos **`com.infiniteskills.gui`**. Seguiremos adelante y terminaremos eso. 
+Y lo llamaremos **`com.infiniteskills.gui`**. Seguiremos adelante y presionamos **Finish**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/8c4681ae-1bd0-49e5-a59c-dcc71b46627f">
 
 <img width="229" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a3757e50-2647-4242-b3eb-b0bfbeb807be">
 
-Y ahora debemos tener en cuenta que hay varias formas de agregar clases. Por supuesto, la forma más sencilla sería hacer clic en el paquete que estamos buscando, presionar **Alt-Shift-N** y luego seleccionar clase. 
+Y ahora debemos tener en cuenta que hay varias formas de agregar clases. Por supuesto, la forma más sencilla sería hacer **clic** en el paquete que estamos buscando, presionar **Alt-Shift-N** y luego seleccionar clase. 
 
 <img width="477" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2f760370-8107-4255-949c-a6304b21203e">
 
@@ -179,11 +179,11 @@ Y nuevamente, otra forma de agregar una clase para decir **File, New, Class**.
 
 <img width="1505" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e5c522b5-e42a-445c-99bf-fc51eab60e41">
 
-Y aquí puede ver que abre nuevamente el cuadro de diálogo de creación de clases y tenga en cuenta que está en el paquete predeterminado si no nombramos nada. 
+Y aquí puede ver que abre nuevamente el cuadro de diálogo de creación de clases y tenga en cuenta que está en el paquete **default** si no nombramos nada. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/14087510-a7e5-473a-9cc2-cbf6caf4da64">
 
-Entonces definitivamente queremos nuestra clase dentro de nuestros paquetes para los propósitos de nuestro código. Entonces, una vez más, haré clic derecho aquí en ese paquete y seleccionaré **New - Class**. 
+Entonces definitivamente queremos nuestra clase dentro de nuestros paquetes para los propósitos de nuestro código. Entonces, una vez más, haré clic derecho aquí en ese paquete y seleccionaré **New, Class**. 
 
 <img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ddf08103-1c07-4618-9226-8b1f0f6f5698">
 
@@ -197,7 +197,7 @@ Y lo que veremos aquí es que cuando se completa este cuadro de diálogo de crea
 
 <img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5bdb9f4d-1dd2-4f86-84a5-453f32e66518">
 
-Sigamos adelante y vayamos con nuestro **PasswordManagerCode.txt** y simplemente seleccionemos todo eso y péguelo.
+Sigamos adelante y vayamos a nuestro **PasswordManagerCode.txt** y simplemente seleccionemos todo eso y péguelo.
 
 <img width="1505" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3985767b-fd7d-4c51-90ea-2106607a7904">
 
@@ -211,39 +211,39 @@ Ahora, por supuesto, no tenemos ese código implementado. Entonces necesitamos u
 
 <img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6e65b91b-bbd7-4e0d-b247-b1710e5ac846">
 
-y luego dirá que está en la configuración **default**. Pero no lo quiero por defecto. De hecho, quiero que esto esté en **program**. 
+y luego dirá que está en la configuración **default**. Pero no lo quiero por defecto. De hecho, quiero que esto esté en el paquete **program**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f39ba96b-fe48-492c-bde4-225ac229d140">
 
-Así que voy a seleccionarlo aquí.
+Así que voy a seleccionarlo presionando **Browse**.
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c05a159c-798f-4581-b468-1eb0def23e61">
 
-Nuevamente, podríamos agregar **Enclosing types**, si quisiéramos. Podemos convertirlo en un Modifiers **package**, **abstract** o **final**, agregarlo en cualquier interfaz, insertarlo en un archivo principal vacío. Entonces podemos hacer eso ya que este será nuestro **program file**. Y el nombre de este será simplemente **program**. 
+Nuevamente, podríamos agregar **Enclosing types**, si quisiéramos. Podemos convertirlo en un Modifiers **package**, **abstract** o **final**, agregarlo en cualquier interfaz, insertarlo en un archivo Main vacío. Entonces podemos hacer eso ya que este será nuestro **program file**. Y el nombre de este será simplemente **program**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d3a16cae-308b-491f-bdbd-eb5a20563353">
 
-Y entonces puedes ver que eso nos introduce en el método Main vacío sin que tengamos que escribir nada en absoluto. Y ya tenemos nuestro programa de clases creado. Entonces todo está bien para ir allí. 
+Y entonces puedes ver que eso nos introduce el método **Main** vacío sin que tengamos que escribir nada en absoluto. Y ya tenemos nuestra clase **Program**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5b904f18-0260-417b-b596-e60d804d2e73">
 
-Y tenemos una clase más que vamos a crear, 
+Y hay una clase más que vamos a crear, 
 
 <img width="1507" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ed45f019-d566-45f2-923d-a222018e3ea9">
 
-que será un **`Encriptor`** (cifrador). Así que llamemos a este cifrador y seguiremos adelante y lo dejaremos así. Todo lo demás estará predeterminado allí. 
+que será un **`Encriptor`** (cifrador). Así que introduzcamos la siguiente información y presionemos **Finish**. 
 
 <img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/1faf08f1-4dd0-487b-9df6-0183df2dae54">
 
-Y eso nos da **`Encriptor`**. Ahora el cifrador no tendrá nada en este momento. 
+Y ya tenemos la clase **`Encriptor`**. Ahora el **`Encriptor`** no tendrá nada en este momento. 
 
 <img width="1511" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cb7bf99c-bee3-4688-a646-15e5093832d9">
 
-Nuestro código de **program** debe corregirse para tener el código de programa real. Y puedes notar que nombré esto con una **`p`** minúscula. 
+Nuestro código de **program** debe corregirse para tener el código de programa real. Y puedes notar que nombré esto con una **`p`** minúscula en wl archivo **ProgramCode.txt** que copiaremos en la clase **Program.java**. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b8b45635-da90-45d2-86e4-a3340f72f165">
 
-Entonces necesito arreglar eso en mi nombre, lo que nos dará la oportunidad de verlo. Y como pueden ver aquí, mi código ya me está ladrando y diciéndome que el programa no tiene el nombre correcto. 
+Entonces necesito arreglar eso en el nombre de la clase, lo que nos dará la oportunidad de verlo. Y como pueden ver aquí, mi código ya me está ladrando y diciéndome que **Program** no tiene el nombre correcto. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6684d7ae-04d3-4613-8862-e201332f3771">
 
@@ -251,9 +251,11 @@ Así que aquí puedo hacer clic con el botón derecho y seleccionar **Refactor**
 
 <img width="1506" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7201a002-01f4-4aa6-85a6-d9cf44041700">
 
+el nombre actual de la clase es **Program**.
+
 <img width="931" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/646764a1-a00a-44b7-b540-b97bcf79a991">
 
-pero notarás que hay algunas teclas de mayúsculas y podemos verlas. Y continuaremos y actualizaremos cualquier referencia al mismo, que no debería estar en este momento.
+lo cambiaremos por **program**.
 
 <img width="944" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a1155bf8-cb13-4ec1-bae3-70bc715f9311">
 
@@ -269,26 +271,25 @@ Esto completa nuestra visión de la creación de clases y la adición de clases 
 
 En esta lección, exploraremos cómo podemos ejecutar nuestros programas mientras continuamos trabajando con nuestro código. 
 
-Hay dos formas en que podemos ejecutar nuestro código. El primero sería encontrar el archivo que contiene el método Main. Una vez que estemos allí, haga clic derecho en ese archivo y seleccione Ejecutar como, aplicación Java, en este caso. 
+Hay dos formas en que podemos ejecutar nuestro código. El primero sería encontrar el archivo que contiene el método **Main**. Una vez que estemos allí, haga clic derecho en ese archivo y seleccione **Run As, Java Application**, en este caso. 
 
 <img width="1507" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7fc77b08-c570-4741-ba66-52e94c039780">
 
-Ahora llevará algún tiempo ejecutarlo la primera vez allí. Pero puedes ver que nuestro menú apareció, tenemos todo allí, podemos continuar y seleccionar si queremos salir o no. 
+Ahora llevará algún tiempo ejecutarlo la primera vez. Pero puedes ver que nuestro menú apareció, tenemos todo allí, podemos continuar y seleccionar si queremos salir o no. 
 
 <img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/85e1d382-fa4f-41b5-985d-5a0c2792e231">
 
 <img width="803" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ad27dfe3-ea4d-4799-866b-eac104d1fa2c">
 
-
 Sigamos adelante y salgamos. 
 
 <img width="1509" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6441aa1f-633e-46d9-841e-ec69f01eb5be">
 
-Y la otra forma de ejecutar el programa sería simplemente subir a la parte superior y encontrar este botón de reproducción. Y pueden ver que mientras lo resalto, selecciona y dice, como información sobre herramientas, ejecutar programa. 
+Y la otra forma de ejecutar el programa sería simplemente subir a la parte superior y encontrar este botón de reproducción. Y pueden ver que mientras lo resalto, selecciona y dice, como información sobre herramientas, **Run program**. 
 
 <img width="1503" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d715eb80-d89c-4b8c-904d-dde179c56e45">
 
-Puede observar que hay un menú desplegable y podemos cambiar la configuración de cómo se ejecuta si, por alguna razón, se va a ejecutar en un servidor en lugar de solo como una aplicación. Por supuesto, esto es sólo una aplicación, por lo que podemos continuar Ejecutando como allí, o simplemente podemos seleccionar el botón Reproducir.
+Puede observar que hay un menú desplegable y podemos cambiar la configuración de cómo se ejecuta si, por alguna razón, se va a ejecutar en un servidor en lugar de solo como una aplicación. Por supuesto, esto es sólo una aplicación, por lo que podemos seleccionar  **Run As, Java Application**, o simplemente podemos seleccionar el botón **Run program**.
 
 <img width="1510" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/35c3ae70-61cc-4f31-9262-4bc05c053e48">
 
@@ -318,7 +319,7 @@ Puede haber casos en los que debamos ser conscientes de esto. Por ejemplo, si es
 
 Sólo quiero echar un vistazo rápido a eso fuera del IDE de Eclipse. Pero notarás que el IDE de Eclipse configura nuestra carpeta fuente y tiene diferentes paquetes con los archivos debajo de ellos. 
 
-Ahora, cuando vayamos a la ubicación de nuestra unidad física, notaremos que tenemos el nombre de nuestro proyecto. Y dentro de allí tenemos una carpeta settings de configuración que nos permitirá ver algunas preferencias tal como están configuradas para ese proyecto. 
+Ahora, cuando vayamos a la ubicación de nuestra unidad física, notaremos que tenemos el nombre de nuestro proyecto. Y dentro de allí tenemos una carpeta **.settings** de configuración que nos permitirá ver algunas preferencias tal como están configuradas para ese proyecto. 
 
 <img width="867" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b0071c56-760e-4a12-86d3-aeac5986b3ea">
 
@@ -328,7 +329,7 @@ Nuestra carpeta binaria o carpeta **bin** contiene las clases compiladas despué
 
 <img width="878" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/6a1223a4-8300-4fe5-97f7-724e1e7feb27">
 
-Y dentro de nuestras carpetas aquí tenemos nuestra **src**. Ahora solo quiero señalar también que, si seleccionó no incluir la estructura de carpetas para los archivos fuente específicos, es posible que no vea un contenedor ni una source. Puede ver todos sus archivos directamente aquí. Debido a que seleccioné usar esas carpetas específicas, verás que de hecho se agregan nuestros archivos de código en sus propias carpetas específicas, lo cual es muy bueno, especialmente si solo necesitamos administrar dónde están nuestros archivos fuente o dónde está nuestra clase. Verás que cada paquete crea su propia carpeta. Aquí tenemos el programa gui y las utilidades.
+Y dentro de nuestras carpetas aquí tenemos nuestra carpeta **src**. Ahora solo quiero señalar también que, si seleccionó no incluir la estructura de carpetas para los archivos fuente específicos, es posible que no vea un contenedor ni una **src**. Puede ver todos sus archivos directamente aquí. Debido a que seleccioné usar esas carpetas específicas, verás que de hecho se agregan nuestros archivos de código en sus propias carpetas específicas, lo cual es muy bueno, especialmente si solo necesitamos administrar dónde están nuestros archivos fuente o dónde está nuestra clase. Verás que cada paquete crea su propia carpeta. Aquí tenemos el **gui, program y utilities**.
 
 <img width="873" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e6d9e585-5848-48d4-9e2f-9586c424a82b">
 
