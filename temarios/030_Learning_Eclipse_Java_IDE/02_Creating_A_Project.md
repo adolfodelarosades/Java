@@ -340,3 +340,77 @@ Y, por supuesto, el archivo fuente directo estará en la carpeta del paquete cor
 A medida que continuamos agregando más clases a nuestros paquetes y más clases a nuestro proyecto, verá que esta estructura de directorios de carpetas continúa expandiéndose como se esperaba. 
 
 Y esto concluye nuestro vistazo rápido a la estructura de directorios físicos real de cómo se almacenan nuestros proyectos a medida que los usamos y los construimos en nuestro IDE de Eclipse.
+
+## 💻 Proyecto InfiniteSkillsPasswordManager
+
+### Crear el Proyecto InfiniteSkillsPasswordManager
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f82f25ff-525a-46db-a0b2-ca2f865da1ee">
+
+Presionamos **Next**
+
+Y tenemos las siguientes pestañas.
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/671b8130-1de0-4b0d-a069-3d56bde974cf">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/777b5859-2f1d-424c-b035-734852e25d4c">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3f3adf55-d638-43dd-aa7a-bd8230295327">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0bc1f2e2-5150-4394-be7d-fd56248ad7b2">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a6c31480-359e-4d03-a99a-df09ec6ba342">
+
+Presionamos **Finish**
+
+y ya tenemos nuestro proyecto.
+
+<img width="380" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/73cadaaa-1e43-4ee3-843f-28f5a4e460c4">
+
+### Creación de Packages
+
+**com.infiteSkills.program**
+
+<img width="732" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7e736921-fec9-43c2-9c6d-858f1e5e9289">
+
+**com.infiteSkills.utilities**
+
+<img width="730" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/89968fb3-6284-4c9f-b7eb-b1bbbcd51e95">
+
+**com.infiniteskills.gui**
+
+<img width="731" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/b9b87cd6-a70e-4967-89d2-a4692e4f2b35">
+
+Aquí podemos ver los paquetes creados.
+
+<img width="379" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5a3a66dd-2b4c-489f-a400-0670de1d4949">
+
+### Creación de Classes
+
+**PasswordManager** en el paquete **gui**.
+
+<img width="730" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/415553f3-5ad8-4742-960f-85ea6b8f1efe">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d597bff0-bd78-4914-adb1-3df7330588ad">
+
+**Program** en el paquete **program**.
+
+<img width="731" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/16ce7fec-6da2-4f9e-a3bf-3b4ea98257e7">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e205ca5a-a5a6-43a4-8f52-97757f89e414">
+
+**Encriptor** en el paquete **utilities**.
+
+<img width="728" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e22bf43b-350f-4a5b-92bc-006b5a7f54f2">
+
+<img width="1512" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/262ae8d6-db36-436e-9615-13317cb9df60">
+
+
+### Incorporar Código
+
+**PasswordManager**
+
+**Program**
+
+**Encriptor**
+
