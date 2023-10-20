@@ -8,7 +8,7 @@ En Java EE Web Application Primer, aprenderá los conceptos básicos del desarro
 
 ## El software
 
-Nuestros estudiantes toman nuestros cursos para aprender a programar para grandes empresas. Hemos descubierto que estas son las habilidades más solicitadas por las empresas que contratan a nuestros estudiantes. Elegimos utilizar Java 8, Oracle 12c y Eclipse para desarrollar la aplicación. De manera similar, elegimos utilizar JPA (Java Persistence API) en lugar de Hibernate. Elegimos JSTL (Biblioteca de etiquetas estándar de Java) sobre otras opciones disponibles. Nuevamente, estas tecnologías enseñan habilidades básicas sin ocultar todos los detalles de implementación al estudiante. Nuestra aplicación está diseñada para enseñar. Proporcionamos el código fuente completo. Aprenderá mucho simplemente revisando y modificando el código fuente. Este libro responde a las preguntas que pueda tener después de trabajar con el código fuente, y el código fuente ayuda a explicar cómo se han implementado los conceptos de este libro.
+Nuestros estudiantes toman nuestros cursos para aprender a programar para grandes empresas. Hemos descubierto que estas son las habilidades más solicitadas por las empresas que contratan a nuestros estudiantes. Elegimos utilizar **Java 8**, **Oracle 12c** y **Eclipse** para desarrollar la aplicación. De manera similar, elegimos utilizar **JPA** (**Java Persistence API**) en lugar de **Hibernate**. Elegimos **JSTL** (**Java Standard Tag Library-Biblioteca de etiquetas estándar de Java**) sobre otras opciones disponibles. Nuevamente, estas tecnologías enseñan habilidades básicas sin ocultar todos los detalles de implementación al estudiante. Nuestra aplicación está diseñada para enseñar. Proporcionamos el código fuente completo. Aprenderá mucho simplemente revisando y modificando el código fuente. Este libro responde a las preguntas que pueda tener después de trabajar con el código fuente, y el código fuente ayuda a explicar cómo se han implementado los conceptos de este libro.
 
 ## Como usar este libro
 
@@ -30,15 +30,15 @@ Escribimos este libro basándonos en nuestra experiencia enseñando bootcamps de
 
 ### Sobre los autores
 
-Dave Wolf es un profesional certificado en gestión de proyectos (PMP) con más de 20 años de experiencia como desarrollador, analista y formador de software. Sus últimos proyectos incluyen el desarrollo colaborativo de materiales de capacitación y campamentos de programación para Java y Python.
+**Dave Wolf** es un profesional certificado en gestión de proyectos (PMP) con más de 20 años de experiencia como desarrollador, analista y formador de software. Sus últimos proyectos incluyen el desarrollo colaborativo de materiales de capacitación y campamentos de programación para Java y Python.
 
 
-A. J. Henley es un educador tecnológico con más de 20 años de experiencia como desarrollador, diseñador e ingeniero de sistemas. Es instructor en la Universidad de Howard y en el Montgomery College.
+**A. J. Henley** es un educador tecnológico con más de 20 años de experiencia como desarrollador, diseñador e ingeniero de sistemas. Es instructor en la Universidad de Howard y en el Montgomery College.
 
 ### Acerca del revisor técnico
 
-Manuel Jordan Elera es un desarrollador e investigador autodidacta que disfruta aprendiendo nuevas tecnologías para sus propios experimentos y para crear nuevas integraciones.
+**Manuel Jordan Elera** es un desarrollador e investigador autodidacta que disfruta aprendiendo nuevas tecnologías para sus propios experimentos y para crear nuevas integraciones.
 
-Manuel ganó el Premio Springy Award—Community Champion 2010 y Spring Champion 2013. En su poco tiempo libre, lee la Biblia y compone música con su guitarra. Manuel es conocido en línea como dr_pompeii. Ha realizado reseñas técnicas de numerosos libros para Apress, incluidos Pro Spring Messaging (2017), Pro Spring, cuarta edición (2014), Practical Spring LDAP (2013), Pro JPA 2, segunda edición (2013) y Pro Spring Security (2013). .
+Manuel ganó el Premio Springy Award—Community Champion 2010 y Spring Champion 2013. En su poco tiempo libre, lee la Biblia y compone música con su guitarra. Manuel es conocido en línea como dr_pompeii. Ha realizado reseñas técnicas de numerosos libros para Apress, incluidos Pro Spring Messaging (2017), Pro Spring, cuarta edición (2014), Practical Spring LDAP (2013), Pro JPA 2, segunda edición (2013) y Pro Spring Security (2013).
 
 Lea sus 13 tutoriales detallados sobre muchas tecnologías Spring o contáctelo a través de su blog en http://www.manueljordanelera.blogspot.com. También puedes seguirlo en su cuenta de Twitter, @dr_pompeii.
