@@ -19,6 +19,11 @@ Serie de varios cursos Java.
 * [021 Effective Java, 3rd Edition](https://github.com/adolfodelarosades/Java/blob/master/temarios/021_Effective_Java.md)
 
 * [030 Learning Eclipse Java IDE](https://github.com/adolfodelarosades/Java/blob/master/temarios/030_Learning_Eclipse_Java_IDE.md)
+
+# JAVA WEB
+
+* [050 Java EE Web Application Primer](https://github.com/adolfodelarosades/Java/blob/master/temarios/050_Java_EE_Web_Application_Primer.md)
+
 # UML
 
 * Building Web Applications with UML
