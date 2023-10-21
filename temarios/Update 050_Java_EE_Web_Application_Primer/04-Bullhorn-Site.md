@@ -18,7 +18,7 @@ El diagrama de la Figura 4-1 ilustra cómo encaja el sitio. Sólo se muestran lo
 
 * **User objects** La información del usuario se almacena en una clase que se almacenará en la sesión y estará disponible para todas las páginas del usuario actual.
 
-* ****JSP** (**Java Server Pages**) Páginas web que contienen HTML y tags de la **JSP Standard Tag Library** para agregar funcionalidad. Debido a que contienen código, pueden representar dinámicamente la request(solicitud) de cada usuario. La JSP Standard Tag Library permite que cada persona vea su propia versión de la página.
+* **JSP** (**Java Server Pages**) Páginas web que contienen HTML y tags de la **JSP Standard Tag Library** para agregar funcionalidad. Debido a que contienen código, pueden representar dinámicamente la request(solicitud) de cada usuario. La JSP Standard Tag Library permite que cada persona vea su propia versión de la página.
 
 * **Páginas HTML** (**Hypertext Markup Language**). HTML es un sistema para etiquetar archivos de texto para controlar fuentes, colores e imágenes en sus páginas web.
 
