@@ -16,4 +16,4 @@ Esto es todo lo que necesita saber sobre **HTML**:
 
 * El navegador procesa el documento **HTML**, que contiene contenido y tags, para mostrar la versión formateada de la página web.
 
-* La última versión de HTML se llama HTML5.
+* La última versión de **HTML** se llama **HTML5**.
