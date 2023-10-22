@@ -105,6 +105,8 @@ El Listado 7-6 muestra el archivo `persistence.xml` completo.
 
 **Listado 7-6 Ejemplo de archivo `persistence.xml` que detalla todas las configuraciones JPA**
 
+<img width="623" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3bf055ac-eda9-47e8-9ce1-38fcbc370807">
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns:=
