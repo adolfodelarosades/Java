@@ -1,0 +1,14 @@
+# 9. El controlador
+
+La capa de controlador de nuestra aplicación contiene código para manejar la lógica específica de la aplicación. Esto incluye preocupaciones como recibir datos de páginas web, enviar datos a las clases en la capa de servicio y enviar al usuario el siguiente servlet o JSP, según corresponda. El controlador no accede directamente a la base de datos. El controlador descubre lo que hay que hacer, luego encuentra la clase correcta en la capa de servicio o en la capa de presentación y llama a esa clase para que haga su trabajo. En nuestra aplicación, la mayor parte del código del controlador reside en servlets Java.
+
+¿Qué es un servlet?
+Los servlets son clases de Java que responden a solicitudes HTTP entrantes. La solicitud la envía el navegador cada vez que navega a una URL o envía un formulario. Los servlets residen dentro del servidor web (Tomcat) y escuchan las solicitudes. Luego, entran en acción y procesan la solicitud. Piense en "¡los operadores están esperando!" Cuando crea un servlet, en realidad está ampliando la funcionalidad del contenedor de servlet, Tomcat. Piense en Tomcat como un servidor web que sabe cómo trabajar con servlets y archivos JSP además de HTML.
+
+La URL (dirección web) de su servlet se verá algo así como http://localhost:8080/webTest/SimpleServlet, donde localhost es el nombre que representa su computadora, 8080 es el número de puerto, webTest es el nombre de la aplicación (o proyecto). y SimpleServlet es la URL del servlet como se indica en la anotación @WebServlet del servlet.
+
+El código de servlet en el Listado 9-1 presenta un servlet que se puede encontrar en la URL de SimpleServlet como se especifica en el atributo @WebServlet. No contiene ningún código para procesar una solicitud, solo muestra la estructura. Un servlet contiene dos métodos, doGet y doPost. Cada uno corresponde al método get o post de un formulario. Cuando se envía el formulario, el atributo de método de la etiqueta del formulario debe establecerse en GET si solo está utilizando los valores del formulario para recuperar datos de solo lectura, como otra página web. Si el formulario web utiliza GET, los datos se transfieren dentro de la URL. Puede ver el parámetro y sus valores en la URL después de ? símbolo. Esto permite al usuario copiar y pegar un enlace y obtener los mismos resultados nuevamente.
+
+Al enviar datos al servidor para ingresarlos a la base de datos, debe utilizar el método POST. POST no utiliza la URL para enviar datos. Los parámetros y valores se transfieren al servidor en un paquete de datos. Esto tiene varias ventajas, incluido el hecho de que el formulario y los datos enviados no se pueden marcar como favoritos. El uso de POST también permite que un formulario envíe mayores cantidades de datos.
+
+Listado 9-1 Un servlet web simple (excluyendo declaraciones de importación)
