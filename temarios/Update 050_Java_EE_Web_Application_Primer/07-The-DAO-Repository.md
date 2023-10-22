@@ -95,14 +95,198 @@ Coloque los siguientes archivos **JAR** en la carpeta **`WEB-INF\lib`**: **`ecli
 
 ## El archivo `Persistencia.xml`
 
-Para configurar JPA, necesitamos crear el archivo persistence.xml. En Eclipse, hay algunas formas de crear dicho archivo, pero lo crearemos en el directorio src llamado META-INF. Esta ubicación particular es requerida por la especificación JPA. Puede ser cualquier archivo de texto, que completará con los valores que se muestran en la Tabla 7-1. ¿No tienes ganas de escribirlo todo? Puede copiar el archivo desde la descarga que acompaña a este libro. Los valores que necesita cambiar se detallan en la tabla. Es posible que deba modificarlos como se muestra.
+Para configurar JPA, necesitamos crear el archivo **`persistence.xml`**. En Eclipse, hay algunas formas de crear dicho archivo, pero lo crearemos en el directorio **`src`** llamado **`META-INF`**. Esta ubicación particular es requerida por la especificación JPA. Puede ser cualquier archivo de texto, que completará con los valores que se muestran en la Tabla 7-1. ¿No tienes ganas de escribirlo todo? Puede copiar el archivo desde la descarga que acompaña a este libro. Los valores que necesita cambiar se detallan en la tabla. Es posible que deba modificarlos como se muestra.
 
-Tabla 7-1 Configuración de los elementos del archivo Bullhorn persistence.xml
+**Tabla 7-1 Configuración de los elementos del archivo Bullhorn `persistence.xml`**
 
+<img width="629" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e1316055-caa3-4b27-b25f-6f45b1302a39">
 
-```sql
+El Listado 7-6 muestra el archivo `persistence.xml` completo.
+
+**Listado 7-6 Ejemplo de archivo `persistence.xml` que detalla todas las configuraciones JPA**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns:=
+"http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi=
+"http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=
+"http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/
+persistence_2_1.xsd">
+
+<persistence-unit name="Bullhorn" transaction-type="RESOURCE_LOCAL">
+<provider>
+org.eclipse.persistence.jpa.PersistenceProvider                
+</provider>
+<class>model.Bhpost</class>
+<class>model.Bhuser</class>
+<exclude-unlisted-classes>
+False                
+</exclude-unlisted-classes>
+
+<properties>
+<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:ora1"/>
+
+<property name="javax.persistence.jdbc.user" value="system"/>
+
+<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+
+<property name="javax.persistence.jdbc.password" value="password"/>
+</properties>
+</persistence-unit>
+</persistence>
 ```
 
-```sql
+<hr>
+
+**Recordar**
+
+El archivo **`peristence.xml`** pertenece al directorio **`META-INF`** que se encuentra debajo del directorio **`src`**. Esta ubicación es obligatoria.
+
+<hr>
+
+Una vez que haya configurado su archivo **`persistence.xml`**, estará listo para permitir que Eclipse genere automáticamente las entidades a partir de las tablas de su base de datos. Para hacer esto, haga clic derecho en el nombre del proyecto y seleccione "New". Luego, navegue hasta el menú JPA para **JPA Entities from Tables**. El cuadro de diálogo resultante utilizará la información de su archivo **`persistence .xml`** para conectarse a la base de datos y generar una clase Java para cada tabla. Su programa utilizará estas clases de Java (y el archivo **`persistence .xml`**) para buscar, agregar, editar y eliminar registros en la base de datos.
+
+## Las JPA Entities
+
+```java
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@NamedQuery(name="Bhuser.findAll", query="SELECT b FROM Bhuser b")
+public class Bhuser implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        @Id
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        private long bhuserid;
+
+        @Temporal(TemporalType.DATE)
+        private Date joindate;
+
+        private String motto;
+        private String useremail;
+        private String username;
+        private String userpassword;
+
+        //bi-directional many-to-one association to Bhpost
+        @OneToMany(mappedBy="bhuser")
+        private List<Bhpost> bhposts;
+
+        public Bhuser() {
+        }
+        public long getBhuserid() {
+                return this.bhuserid;
+        }
+        public void setBhuserid(long bhuserid) {
+                this.bhuserid = bhuserid;                                                          
+        }
+        public Date getJoindate() {
+                return this.joindate;
+        }
+        public void setJoindate(Date joindate) {
+                this.joindate = joindate;
+        }
+        public String getMotto() {
+                return this.motto;
+        }
+        public void setMotto(String motto) {
+                this.motto = motto;
+        }
+        public String getUseremail() {
+                return this.useremail;
+        }
+        public void setUseremail(String useremail) {
+                this.useremail = useremail;
+        }
+        public String getUsername() {
+                return this.username;
+        }
+        public void setUsername(String username) {
+                this.username = username;
+        }
+        public String getUserpassword() {
+                return this.userpassword;
+        }
+        public void setUserpassword(String userpassword) {
+                this.userpassword = userpassword;
+        }
+        public List<Bhpost> getBhposts() {
+                return this.bhposts;                                                          
+        }
+        public void setBhposts(List<Bhpost> bhposts) {
+                this.bhposts = bhposts;
+        }
+        public Bhpost addBhpost(Bhpost bhpost) {
+                getBhposts().add(bhpost);
+                bhpost.setBhuser(this);
+
+                return bhpost;
+        }
+        public Bhpost removeBhpost(Bhpost bhpost) {
+                getBhposts().remove(bhpost);
+                bhpost.setBhuser(null);
+                return bhpost;
+        }
+}
 ```
 
+```java
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Entity
+@NamedQuery(name="Bhpost.findAll",
+     query="SELECT b FROM Bhpost b")
+public class Bhpost implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        @Id
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        private long postid;
+        @Temporal(TemporalType.DATE)
+        private Date postdate;
+        private String posttext;
+
+        //bi-directional many-to-one association to Bhuser
+        @ManyToOne
+        @JoinColumn(name="BHUSERID")
+        private Bhuser bhuser;
+        public Bhpost() {
+        }
+
+        public long getPostid() {
+                return this.postid;
+        }
+        public void setPostid(long postid) {
+                this.postid = postid;
+        }
+        public Date getPostdate() {
+                return this.postdate;
+        }
+        public void setPostdate(Date postdate) {
+                this.postdate = postdate;
+        }
+        public String getPosttext() {
+                return this.posttext;
+        }
+        public void setPosttext(String posttext) {
+                this.posttext = posttext;
+        }
+        public Bhuser getBhuser() {
+                return this.bhuser;
+        }
+
+        public void setBhuser(Bhuser bhuser) {
+                this.bhuser = bhuser;                                                           
+        }
+}
+```
