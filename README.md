@@ -62,6 +62,8 @@ Serie de varios cursos Java.
 
 * [170 Curso de Introducción a pruebas automáticas con JUnit 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/170_Curso_de_Introduccion_a_pruebas_automaticas_con_JUnit_5.md)
 
+* [180 Curso de Proyectos Java con Apache Maven](https://github.com/adolfodelarosades/Java/blob/master/temarios/180_Curso_de_Proyectos_Java_con_Apache_Maven.md)
+
 # AEPI
 
 * [201 CURSO PROGRAMADOR – ANALISTA JAVA DE APLICACIONES EMPRESARIALES](https://github.com/adolfodelarosades/Java/blob/master/temarios/201_CURSO_PROGRAMADOR%E2%80%93ANALISTA_JAVA_DE_APLICACIONES_EMPRESARIALES.md)
