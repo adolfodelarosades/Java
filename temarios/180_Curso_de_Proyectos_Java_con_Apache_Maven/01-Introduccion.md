@@ -35,13 +35,23 @@
 <img width="950" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0afeaa27-ea84-4451-8f41-e348f9ef868a">
 
 
-
-
-
-
-
-
-
 ## Instalación y configuración 8M
+
+<img width="958" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9b909356-73d8-4ffb-bec0-d022c50d1ae1">
+
+<img width="952" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/55b4d754-2b56-4db7-8519-986a81636f07">
+
+<img width="955" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/816ff4fa-4c73-459c-9979-8bf4ac8fb124">
+
+<img width="950" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e3d554e0-bc10-4e99-85a7-ec16ae1b96ac">
+
+<img width="950" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7c208d0d-9e96-4ec6-96c5-ff05ab796c5d">
+
+<img width="951" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/e1a63dfa-d931-40d2-94d6-3167feb60980">
+
+<img width="953" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5034f6f8-a460-43f5-af9d-58d8010bfdd0">
+
+<img width="951" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/c8dd0804-37b6-4f41-aaef-fd9e0d95583d">
+
 
 ## Conceptos básicos de Apache Maven 7M
