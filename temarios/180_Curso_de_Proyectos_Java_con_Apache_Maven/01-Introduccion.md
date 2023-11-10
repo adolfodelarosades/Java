@@ -18,6 +18,12 @@
 
 ## Introducción a Apache Maven 8M
 
+* Estructura de un proyecto
+* Sistema de plugins
+* Mecanismo de dependencias
+* Integración con IDEs: IntelliJ IDEA, Eclipse, Visual Studio Code…
+* Mantenimiento y documentación
+
 <img width="955" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/529b6377-ef2b-462d-a8a6-d5ae031f35d5">
 
 <img width="949" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/036bb798-9c76-4e1f-bfb4-9ae10c546981">
