@@ -1,8 +1,8 @@
 # Curso de Proyectos Java con Apache Maven
-
-*  **Tiempo**: 2 horas y 57 minutos
   
 En este curso aprenderás a gestionar el ciclo de vida de los proyectos Java, las dependencias y su despliegue con Apache Maven.
+
+*  **Tiempo**: 2 horas y 57 minutos
 
 ### Requisitos del Curso
 
