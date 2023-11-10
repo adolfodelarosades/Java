@@ -35,7 +35,42 @@
 <img width="950" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0afeaa27-ea84-4451-8f41-e348f9ef868a">
 
 
-## Instalación y configuración 8M
+## Instalación y configuración Apache Maven 8M
+
+### Descarga
+
+Descargar el archivo comprimido:
+
+http://maven.apache.org/download.cgi
+
+http://maven.apache.org/install.html
+
+### Instalación Windows
+
+Descomprimir el archivo y mover la carpeta dentro del sistema en la ruta de archivos de programa.
+
+Añadir la ruta de la carpeta bin a la variable Path del sistema.
+
+Ejemplo de la ruta:
+
+**`C:\Program Files\apache-maven\apache-maven-3.8.1\bin`**
+
+Para que todo funcione correctamente debe estar Java en el Path y creada la variable
+de entorno JAVA_HOME.
+
+### Instalación Linux
+
+Descomprimir el archivo en la carpeta deseada, por ejemplo en el directorio opt.
+
+Añadir la ruta a la carpeta bin al path del sistema:
+
+**`export PATH=/opt/apache-maven-3.8.1/bin:$PATH`**
+
+### Comprobar instalación
+
+**`mvn -v`**
+
+**`mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`**
 
 <img width="958" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9b909356-73d8-4ffb-bec0-d022c50d1ae1">
 
