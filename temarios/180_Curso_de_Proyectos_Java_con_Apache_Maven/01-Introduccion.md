@@ -96,3 +96,26 @@ Añadir la ruta a la carpeta bin al path del sistema:
 
 
 ## Conceptos básicos de Apache Maven 7M
+
+* Características y funcionalidades de Apache maven
+* Ciclos de vida
+* Sistema de plugins
+* Mecanismo de dependencias
+* Sistema de arquetipos
+
+<img width="957" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7d7f32e6-00d1-40cb-8ad7-289af9ef1c86">
+
+<img width="956" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/928b6b46-9cdd-43e1-94db-1bd202926e9e">
+
+<img width="955" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/da080919-dc24-489d-890d-f1d228a21b59">
+
+<img width="956" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f8dfcd19-8448-42cc-a484-72b29dda9d90">
+
+<img width="954" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/891086af-0d58-4fa6-a309-2991aa49b569">
+
+<img width="957" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/290e8248-645a-40e8-83e6-510cb3a71e3a">
+
+<img width="956" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0730e4d3-d680-40b6-8cd2-9071d092d1b7">
+
+<img width="951" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/3964072d-9cc5-4af5-81b7-76e9c386b45c">
+
