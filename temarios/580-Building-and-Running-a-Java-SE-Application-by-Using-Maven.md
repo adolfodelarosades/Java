@@ -31,7 +31,7 @@ Maven contiene tres tipos de repositorios para almacenar JARs, complementos y ot
 
 * **Central Repository**: el repositorio propiedad de la comunidad Maven que contiene bibliotecas de uso común.
 
-* **Remote Repository:**: un repositorio personalizado propiedad del desarrollador que contiene bibliotecas y archivos JAR relacionados con el proyecto.
+* **Remote Repository**: un repositorio personalizado propiedad del desarrollador que contiene bibliotecas y archivos JAR relacionados con el proyecto.
 
 ### ¿Qué necesitas?
 
@@ -41,37 +41,48 @@ Maven contiene tres tipos de repositorios para almacenar JARs, complementos y ot
 ## Configurando el entorno Maven
 
 En esta sección, extrae el archivo descargado e instala la última versión de Maven en el directorio que elija. Usted verifica la instalación de Java, configura el entorno de Maven y verifica la instalación de Maven.
-Verifique la instalación de Java:
-java -version
 
-descripción alternativa aquí
-El resultado muestra la versión de Java que instaló.
+1. Verifique la instalación de Java:
 
-Extraiga el archivo Maven xxx descargado a un directorio local.
+   ```sh
+   java -version
+   ```
 
-Los nombres de los archivos son:
+   <img width="830" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f4fca1f2-b9ee-462c-bf2a-19cd389d8b53">
 
-Sistema operativo Windows: apache-maven-3.2.2-bin.zip
+   El resultado muestra la versión de Java que instaló.
 
-Sistema operativo Linux: apache-maven-3.2.2-bin.tar.gz
+2. Extraiga el archivo Maven x.x.x descargado a un directorio local.
 
-Mac OS: apache-maven-3.2.2-bin.tar.gz
+   Los nombres de los archivos son:
 
-Nota: Este OBE le muestra cómo instalar y crear una aplicación Java SE usando Maven en un sistema operativo Windows.
+   * **Windows OS**: apache-maven-3.2.2-bin.zip
 
-Haga clic en Inicio, haga clic con el botón derecho en Computadora y seleccione Propiedades.
-descripción alternativa aquí
-En la página de inicio del Panel de control , haga clic en Configuración avanzada del sistema.
+   * **Linux OS**: apache-maven-3.2.2-bin.tar.gz
 
-descripción alternativa aquí
-En el cuadro de diálogo Propiedades del sistema , haga clic en la pestaña Avanzado y luego haga clic en Variables de entorno.
-descripción alternativa aquí
-Se muestra el cuadro de diálogo Variables de entorno .
+   * **Mac OS**: apache-maven-3.2.2-bin.tar.gz
 
-Haga clic en Nuevo, agregue M2, M2_HOME,y MAVEN_OPTS a las variables de entorno y haga clic en Aceptar.
+   **Nota**: Este OBE le muestra cómo instalar y crear una aplicación Java SE usando Maven en un sistema operativo Windows.
 
-descripción alternativa aquí
-En Variables del sistema, haga clic en Nuevo, ingrese los siguientes valores en el cuadro de diálogo Editar variable del sistema y haga clic en Aceptar:
+3. Haga clic en **Start**, haga clic con el botón derecho en **Computer** y seleccione **Properties**.
+
+   <img width="869" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/ce3293f2-4c91-484a-ad04-b5e7cf4cd255">
+
+4. En la página de inicio del **Control Panel**, haga clic en **Advanced system settings**.
+
+   <img width="624" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/de96e593-8b91-4dc7-bda1-a862ee3d08bc">
+
+5. En el cuadro de diálogo **System Properties**, haga clic en la pestaña **Advanced** y luego haga clic en **Environment Variables**.
+
+   <img width="669" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/36e5dd62-03ab-4ee3-8470-99fd5febedff">
+
+   Se muestra el cuadro de diálogo **Environment Variables**.
+
+6. Haga clic en **New**, agregue M2, M2_HOME,y MAVEN_OPTS a las variables de entorno y haga clic en **OK**.
+
+   <img width="623" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/26d16b8a-c676-4858-84d6-dfe6901b0922">
+
+7. En **System variables**, haga clic en Nuevo, ingrese los siguientes valores en el cuadro de diálogo Editar variable del sistema y haga clic en Aceptar:
 
 Nombre de la variable:Path
 
