@@ -143,39 +143,56 @@ En esta sección, extrae el archivo descargado e instala la última versión de 
    <img width="972" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a517e554-38fd-4d26-90d9-1ac53e15021f">
 
  
-Crear y modificar archivos fuente de Java
-En esta sección, calculará el interés simple creando el SimpleInterest.java archivo fuente y modificándolo App.java .
-Navegue hasta el directorio donde creó su proyecto Maven y luego abra la ubicación especificada:
+## Crear y Modificar Java Source Files
 
-\**\Maven_app\OracleBanking\src\main\java\com\example\bank
+En esta sección, calculará el interés simple creando el archivo fuente **`SimpleInterest.java`** y modificándolo **`App.java`**.
 
-Cree un archivo fuente Java llamadoSimpleInterest.java.
+1. Navegue hasta el directorio donde creó su proyecto Maven y luego abra la ubicación especificada:
 
+   ```sh
+   \**\Maven_app\OracleBanking\src\main\java\com\example\bank
+   ```
 
-Edite el SimpleInterest.javaarchivo con el siguiente código:
+2. Cree un archivo fuente Java llamado **`SimpleInterest.java`**.
 
-package com.example.bank;                                                                                                   public class SimpleInterest{                                                                                                     public static double calculateSimpleInterest(double amount,
-             double years,
-             double rate_of_interest) {
-    double simple_interest;
-    simple_interest = amount * years * rate_of_interest;
-    return simple_interest;
-     }                                                                                                                       }                                                         
-El calculateSimpleInterest método calcula la tasa de interés sobre el monto del préstamo, la duración del préstamo y la tasa de interés anual.
+   <img width="626" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/07c2af2a-e150-497a-bb70-a750b0608720">
 
-Presione Ctrl+S y cierre el archivo.
+3. Edite el archivo **`SimpleInterest.java`** con el siguiente código:
 
-Modificar App.javacon el siguiente código:
+   ```java
+   package com.example.bank;
 
-double result = SimpleInterest.calculateSimpleInterest(10000, 5, 7);
-System.out.println("The simple interest is:" + result);                                                                                                                                                                                                 public static double calculateSimpleInterest(double amount,
-        double years,
-        double rate_of_interest) {
-    double simple_interest;
-    simple_interest = amount * years * rate_of_interest;
-    return simple_interest;
-} 
-Revisa el código. Debería verse como el siguiente:
+   public class SimpleInterest{
+      public static double calculateSimpleInterest(double amount,
+                                                   double years,
+                                                   double rate_of_interest) {
+         double simple_interest;
+         simple_interest = amount * years * rate_of_interest;
+         return simple_interest;
+      }
+   }                                                         
+   ```                                                      
+
+   El método **`calculateSimpleInterest`** calcula la tasa de interés sobre el monto del préstamo, la duración del préstamo y la tasa de interés anual.
+
+4. Presione **Ctrl+S** y cierre el archivo.
+
+5. Modificar **`App.java`** con el siguiente código:
+
+   ```java
+   double result = SimpleInterest.calculateSimpleInterest(10000, 5, 7);
+   System.out.println("The simple interest is:" + result);
+
+   public static double calculateSimpleInterest(double amount,
+                                                double years,
+                                                double rate_of_interest) {
+      double simple_interest;
+      simple_interest = amount * years * rate_of_interest;
+      return simple_interest;
+   } 
+   ```
+
+6. Revisa el código. Debería verse como el siguiente:
 
 
 Presione Ctrl+S y cierre el archivo.
