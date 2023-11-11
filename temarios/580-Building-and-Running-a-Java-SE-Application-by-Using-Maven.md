@@ -82,67 +82,66 @@ En esta sección, extrae el archivo descargado e instala la última versión de 
 
    <img width="623" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/26d16b8a-c676-4858-84d6-dfe6901b0922">
 
-7. En **System variables**, haga clic en Nuevo, ingrese los siguientes valores en el cuadro de diálogo Editar variable del sistema y haga clic en Aceptar:
+7. En **System variables**, haga clic en **New**, ingrese los siguientes valores en el cuadro de diálogo **Edit System variable** y haga clic en **OK**:
 
-Nombre de la variable:Path
+   * Variable name: **`Path`**
 
-Valor de la variable: %M2%(Ingrese el valor después binen la ruta del sistema)
+   * Variable value: **`%M2%`** (Ingrese el valor después de **`bin`** en la ruta del sistema)
 
-descripción alternativa aquí
-Verifique la instalación de Maven:
+   <img width="616" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/fe96868d-2dca-410d-80e1-3e14b34fa0de">
 
-mvn -version
+8. Verifique la instalación de Maven:
 
-El resultado muestra la versión de Maven instalada, la versión de Java, el inicio de Java, la configuración regional predeterminada y el nombre del sistema operativo.
+   ```sh
+   mvn -version
+   ```
+
+   <img width="843" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7c32741e-2ddd-48fa-9313-fec80f5020a7">
+
+   El resultado muestra la versión de Maven instalada, la versión de Java, el inicio de Java, la configuración regional predeterminada y el nombre del sistema operativo.
 
  
-Crear un proyecto Java SE a partir de una plantilla Maven
-Abra el símbolo del sistema, navegue hasta el directorio donde instaló Maven y cree Maven_app,una carpeta de aplicación Java basada en Maven:
+## Crear un Java SE Project desde un Maven Template
 
-mvn archetype:generate -DgroupId=com.example.bank
+1. Abra el command prompt, navegue hasta el directorio donde instaló Maven y cree **`Maven_app`**, una carpeta de aplicación Java basada en Maven:
+
+   ```sh
+   mvn archetype:generate -DgroupId=com.example.bank
    -DartifactId=OracleBanking
    -DarchetypeArtifactId=maven-archetype-quickstart
    -DinteractiveMode=false
-Un arquetipo es un patrón/modelo original para crear proyectos similares. En Maven, un arquetipo es una plantilla de un proyecto que se combina con la entrada del usuario para producir un proyecto Maven funcional. La siguiente tabla describe lo que hace la plantilla:
+   ```
+   
+   Un arquetipo es un pattern/model original para crear proyectos similares. En Maven, un arquetipo es una plantilla de un proyecto que se combina con la entrada del usuario para producir un proyecto Maven funcional. La siguiente tabla describe lo que hace la plantilla:
 
-ID de artefactos de arquetipo	Descripción
-mvn archetype:generate	Crea un proyecto
--DgroupId=com.example.bank	Crea la com.example.bank estructura del paquete de dependencia.
-maven-archetype-quickstart	Crea un proyecto Java
--DinteractiveMode=false	Establece el modo interactivo enfalse
-OracleBanking Se crea el proyecto Java nombrado . La siguiente tabla presenta los detalles del proyecto:
+   <img width="980" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/0c465e4d-d254-41ed-8e6a-1d2440d8df56">
 
-Estructura del proyecto	Descripción
-OracleBanking	Contiene srccarpeta ypom.xml
-src/main/java	Contiene archivos de código Java bajo la estructura del paquete
-( com.example/bank)
-src/test	Contiene archivos de código de prueba bajo la estructura del paquete
-( com.example/bank)
-pom.xml	Contiene información sobre el proyecto y detalles de varias configuraciones utilizadas por Maven para construir el proyecto.
-Abra el OracleBankingproyecto y verifique el archivo fuente de Java:
+   Se crea el Java project llamado **`OracleBanking`**. La siguiente tabla presenta los detalles del proyecto:
 
-App.java
+   <img width="1264" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/cf51c03b-1d52-41ac-b491-709245e9c6d3">
 
-Verifique el archivo de prueba de Java:
-AppTest.java
+2. Abra el proyecto **`OracleBanking`** y verifique el archivo fuente de Java:
 
+   **`App.java`**
 
-De forma predeterminada, Maven agrega el App.java archivo fuente y el AppTest.java archivo de prueba a la estructura de directorio predeterminada.
+   <img width="725" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d3fce2d8-4e68-4ef8-863e-ebae5490097d">
 
-Abra el pom.xmlarchivo y revise el código.
+3. Verifique el Java test file:
 
+   **`AppTest.java`**
 
-Cada proyecto tiene un único pom.xml archivo, y cada pom.xmlarchivo tiene un elemento de proyecto y tres campos obligatorios: groupId, artifactId,y version. Observe que Maven ya ha agregado JUnit como marco de prueba. La siguiente tabla describe lo que hace cada nodo:
+   <img width="604" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/614c5722-819a-41a7-9525-538ea33bacf3">
 
-Nodo	Descripción
-project	Elemento de nivel superior en todos pom.xml los archivos Maven
-modelVersion	Versión del modelo de objetos que utiliza este POM
-groupId	ID del grupo del proyecto (por ejemplo, com.example.bank)
-artifactId	ID del proyecto (por ejemplo, OracleBanking)
-packaging	Archivos de proyecto convertidos en un archivo JAR
-version	Versión del proyecto utilizada en el repositorio del artefacto para separar cada versión (por ejemplo, 1.0-SNAPSHOT)
-name	Nombre para mostrar del proyecto
-url	Ubicación del sitio del proyecto. 
+   De forma predeterminada, Maven agrega el archivo fuente **`App.java`** y el archivo de prueba **`AppTest.java`** a la estructura de directorio predeterminada.
+
+4. Abra el archivo **`pom.xml`** y revise el código.
+
+   <img width="673" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2c5af054-cb39-4428-a6c0-a9837911a448">
+
+   Cada proyecto tiene un único archivo **`pom.xml`**, y cada archivo **`pom.xml`** tiene un project element y tres mandatory fields(campos obligatorios): **`groupId`**, **`artifactId`** y **`version`**. Observe que Maven ya ha agregado **JUnit** como test framework. La siguiente tabla describe lo que hace cada nodo:
+
+   <img width="972" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/a517e554-38fd-4d26-90d9-1ac53e15021f">
+
  
 Crear y modificar archivos fuente de Java
 En esta sección, calculará el interés simple creando el SimpleInterest.java archivo fuente y modificándolo App.java .
