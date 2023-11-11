@@ -194,18 +194,26 @@ En esta sección, calculará el interés simple creando el archivo fuente **`Sim
 
 6. Revisa el código. Debería verse como el siguiente:
 
+   <img width="773" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/57a753d0-72ee-4c97-967c-72c8f133872f">
 
-Presione Ctrl+S y cierre el archivo.
+
+7. Presione **Ctrl+S** y cierre el archivo.
 
  
-Creando un manifiesto con Maven
-En esta sección, aprenderá a utilizar maven-jar-plugin para crear un archivo de manifiesto y empaquetarlo agregándolo al archivo JAR.
+## Creando un Manifest con Maven 
 
-El archivo de manifiesto realiza las siguientes tareas:
-Define el punto de entrada del proyecto y crea un archivo JAR ejecutable.
-Agrega la ruta de clase de las dependencias del proyecto.
-Edite el pom.xmlarchivo:
-<build>
+En esta sección, aprenderá a utilizar **`maven-jar-plugin`** para crear un archivo de manifiesto y empaquetarlo agregándolo al archivo JAR.
+
+El manifest file realiza las siguientes tareas:
+
+* Define el punto de entrada del proyecto y crea un archivo JAR ejecutable.
+
+* Agrega la ruta de clase de las dependencias del proyecto.
+
+1. Edite el archivo **`pom.xml`**:
+
+   ```xml
+   <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -220,34 +228,46 @@ Edite el pom.xmlarchivo:
                 </configuration>
             </plugin>
         </plugins>
-    </build>                     
-Lo definiste maven-jar-pluginy pom.xml, configuraste dentro de la etiqueta de configuración.
+   </build>  
+   ```
 
-Revisa el código. Debería verse como el siguiente:
+   Definiste **`maven-jar-plugin`** en **`pom.xml`**, configuraste dentro de la tag **`configuration`**.
 
+2. Revisa el código. Debería verse como el siguiente:
 
-En el proyecto Maven, usted especifica los detalles de la clase principal actualizando el pom.xml archivo. La com.example.bank.App clase en el proyecto es la clase principal que se ejecutará cuando ejecute el archivo JAR.
+   <img width="678" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/55a89d46-96cb-46d4-ac6f-96d9d7e057aa">
 
-Presione Ctrl+S y cierre el archivo.
+   En el proyecto Maven, usted especifica los detalles de la clase principal actualizando el archivo **`pom.xml`**. La clase **`com.example.bank.App`** en el proyecto es la clase principal que se ejecutará cuando ejecute el archivo JAR.
 
-Actualizaste exitosamente tu pom.xml archivo.
+3. Presione **Ctrl+S** y cierre el archivo.
+
+   Actualizaste exitosamente tu archivo **`pom.xml`**.
 
  
-Probar, crear y ejecutar la aplicación con Maven
+## Testing, Crear y Ejecutar la aplicación con Maven
  
-Probar la aplicación
-En esta sección, aprenderá cómo probar su aplicación utilizando AppTest.java la interfaz de línea de comandos (CLI) de Maven.
+### Testing la Application
 
-Importar el paquete aAppTest.java:
+En esta sección, aprenderá cómo probar su aplicación **`AppTest.java`** utilizando la interfaz de línea de comandos (CLI) de Maven.
 
-import junit.framework.Assert;
-Edite el AppTestmétodo:
+1. Importar el package en **`AppTest.java`**:
 
- double result=App.calculateSimpleInterest(10000,5,7);
- Assert.assertEquals("Test failed. ",35000.0,result);   
-Revisa el código. Debería verse como el siguiente:
+   ```java
+   import junit.framework.Assert;
+   ```
 
-descripción alternativa aquí
+2. Edite el método **`AppTest`**:
+
+   ```java
+   double result=App.calculateSimpleInterest(10000,5,7);
+   Assert.assertEquals("Test failed. ",35000.0,result);   
+   ```  
+
+3. Revisa el código. Debería verse como el siguiente:
+
+   <img width="606" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/19b606c3-c49d-458a-8e0f-f5ee8f9e3a7a">
+
+AQUIIIIIIIIIIII
 Modificó el valor de interés simple y luego verificó el valor mediante declaraciones de afirmación en el caso de prueba JUnit.
 
 Presione Ctrl+S y luego ejecute los casos de prueba dentro AppTest.javadel OracleBanking proyecto.
@@ -275,9 +295,10 @@ Construyendo la aplicación
  
 Empaquetar y ejecutar la aplicación
  
-¿Querer aprender más?
+## ¿Querer aprender más?
+
 Guía rápida de Maven
 Guía de introducción a Maven
 Instalación y configuración de Maven para la automatización de compilaciones y la gestión de dependencias en Oracle Fusion Middleware Desarrollo de aplicaciones mediante integración continua
  
-Créditos
+## Créditos
