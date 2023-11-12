@@ -267,38 +267,111 @@ En esta sección, aprenderá cómo probar su aplicación **`AppTest.java`** util
 
    <img width="606" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/19b606c3-c49d-458a-8e0f-f5ee8f9e3a7a">
 
-AQUIIIIIIIIIIII
-Modificó el valor de interés simple y luego verificó el valor mediante declaraciones de afirmación en el caso de prueba JUnit.
+   Modificó el valor de interés simple y luego verificó el valor mediante declaraciones de afirmación en el caso de prueba JUnit.
 
-Presione Ctrl+S y luego ejecute los casos de prueba dentro AppTest.javadel OracleBanking proyecto.
+4. Presione **Ctrl+S** y luego ejecute los casos de prueba dentro de **`AppTest.java`** del proyecto **OracleBanking**.
 
-mvn test
-Revise el resultado.
+   ```sh
+   mvn test
+   ```
+   
+5. Revise el resultado.
 
-descripción alternativa aquí
-El caso de prueba falló y se muestra el mensaje de error de afirmación.
+   <img width="517" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9a893491-1d98-4da6-8da9-947954ebbf27">
 
-ModificarAppTest.java:
+   El caso de prueba falló y se muestra el mensaje de error de assert.
 
- Assert.assertEquals("Test failed. ", 350000.0, result);  
-descripción alternativa aquí
-Modificó el valor de interés simple y luego verificó el valor mediante declaraciones de afirmación en el caso de prueba JUnit.
+6. Modificar **`AppTest.java`**:
 
-Presione Ctrl+S y luego ejecute los casos de prueba en AppTest.java:
+   ```java
+   Assert.assertEquals("Test failed. ", 350000.0, result);
+   ```
 
-mvn test
-descripción alternativa aquí
-El caso de prueba se ejecutó correctamente y se muestra un mensaje de compilación exitosa.
+   <img width="613" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5d07334f-3a4b-4351-8c14-41a1786361da">
+
+   Modificó el valor de interés simple y luego verificó el valor mediante declaraciones assert en el caso de prueba JUnit.
+
+7. Presione **Ctrl+S** y luego ejecute los casos de prueba en **`AppTest.java`**:
+
+   ```java
+   mvn test
+   ```
+
+   <img width="654" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/2301df4b-4272-40bd-a7ae-04fef5288794">
+
+   El caso de prueba se ejecutó correctamente y se muestra un mensaje de compilación exitosa.
 
  
-Construyendo la aplicación
+## Construyendo la aplicación
+
+En esta sección, aprenderá cómo limpiar y crear su aplicación utilizando la CLI de Maven.
+
+1. Clean y build su proyecto Maven y revise el resultado:
+
+   ```sh
+   mvn clean package
+   ```
+
+   <img width="697" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/66d02219-6a30-4af4-8348-880c8805f7c6">
+
+   Construyó exitosamente la aplicación **OracleBanking** Java SE usando Maven.
+
+2. Navegue hasta el directorio donde creó **OracleBanking** y observe que se creó una carpeta **`target`**.
+
+   <img width="463" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/5c6a35c1-4dc4-4d8c-88c1-ea5c97573fa7">
+
+3. Abra la carpeta **`target`** y revise la estructura de la carpeta.
+
+   <img width="1088" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/599d602a-8f8e-4cfa-a829-a34fbcd0a7f0">
+
  
-Empaquetar y ejecutar la aplicación
+## Empaquetar y ejecutar la aplicación
+
+En esta sección, aprenderá cómo empaquetar y ejecutar el proyecto Java SE utilizando la CLI de Maven.
+
+1. Navegue hasta el directorio donde instaló Maven y abra el archivo **`settings.xml`**.
+
+   <img width="683" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/28754c1c-5889-4e90-ac23-c5967c0112aa">
+
+   El tag **`<localRepository>`** especifica la ubicación del repositorio local en su máquina. De forma predeterminada, el repositorio local se crea en el directorio **`%USER_HOME%`**. Puede especificar otra ubicación actualizándola en el archivo **`settings.xml`**. Si necesita configurar detalles de proxy para la aplicación, actualícelos en el archivo **`settings.xml`**.
+
+2. Clean y package los archivos, plug-ins y libraries antes de ejecutar la aplicación:
+
+   ```sh
+   mvn clean package
+   ```
+
+3. Utilice el repositorio local de Maven para ejecutar su aplicación Java SE Maven:
+
+   ```sh
+   mvn exec:java -Dexec.mainClass="com.example.bank.App" -s "*****location of settings.xml file.********"
+   ```
+
+4. Revise el resultado.
+
+   <img width="684" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/f548b8c8-869a-4f06-a2e6-6257afbedf23">
+
+   Ejecutó con éxito la aplicación Java SE **OracleBanking** usando Maven. El interés simple se calcula y se muestra en Maven CLI.
+
+5. Ejecute el archivo JAR con los siguientes comandos:
+
+   ```sh
+   cd target
+   java -jar OracleBanking-1.0-SNAPSHOT.jar
+   ```
+
+6. Revise el resultado.
+
+   <img width="690" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/d088d684-223c-4d50-9b9f-fa791f15ee7b">
+
+   Ejecutó con éxito la aplicación Java SE **OracleBanking** utilizando Maven. El interés simple se calcula y se muestra en Maven CLI.
  
 ## ¿Querer aprender más?
 
-Guía rápida de Maven
-Guía de introducción a Maven
-Instalación y configuración de Maven para la automatización de compilaciones y la gestión de dependencias en Oracle Fusion Middleware Desarrollo de aplicaciones mediante integración continua
+* [Maven Quick Guide](https://www.tutorialspoint.com/maven/maven_quick_guide.htm)
+* [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/)
+* Installing and Configuring [Maven for Build Automation and Dependency Management](https://docs.oracle.com/middleware/1212/core/MAVEN/config_maven.htm#MAVEN8853) in Oracle Fusion Middleware Developing Applications Using Continuous Integration
  
 ## Créditos
+
+Curriculum Developer: Shilpa Chetan
