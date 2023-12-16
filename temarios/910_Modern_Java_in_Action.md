@@ -2,15 +2,15 @@
 
 by Raoul-Gabriel Urma, Alan Mycroft, Mario Fusco
 
-Publisher: Manning Publications
+* **Publisher:** Manning Publications
 
-Release Date: October 2018
+* **Release Date:** October 2018
 
-Pages 592 
+* **Pages:** 592 
 
-ISBN: 9781617293566
+* **ISBN:** 9781617293566
 
-Topic: Java
+* **Topic:** Java
 
 ![portada](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/images/910-portada.png)
 
