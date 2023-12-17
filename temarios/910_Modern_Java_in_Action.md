@@ -37,7 +37,7 @@ Modern Java in Action conecta las nuevas características del lenguaje Java con 
 
 #### [About the authors](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/000_About-the-authors.md) 👍
 
-#### About the cover illustration
+#### [About the cover illustration](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/000_illustration.md) 👍
 
 #### Parte 1. Fundamentos
 
