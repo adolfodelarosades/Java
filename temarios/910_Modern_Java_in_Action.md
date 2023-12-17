@@ -25,9 +25,9 @@ Modern Java in Action conecta las nuevas características del lenguaje Java con 
 
 #### Brief Table of Contents
 
-#### [Table of Contents](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/000_TableOfContents.md)👍
+#### [Table of Contents](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/000_TableOfContents.md) 👍
 
-#### Praise for the previous edition, Java 8 in Action, by Raoul-Gabriel Urma, Mario Fusco, and Alan Mycroft.
+#### [Praise for the previous edition, Java 8 in Action, by Raoul-Gabriel Urma, Mario Fusco, and Alan Mycroft.](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action/000_Praise.md) 👍
 
 #### Preface
 
