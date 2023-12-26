@@ -199,7 +199,11 @@ Tenga en cuenta que en el ejemplo anterior, el único código que importa es la 
 
 ![02-02](images/02-02.png)
 
-AQUIIIIIII
+#### Multiple behaviors, one parameter (Múltiples comportamientos, un parámetro)
+
+Como explicamos anteriormente, la ***parametrización del comportamiento*** es excelente porque le permite separar la lógica de iterar la colección para filtrar y el comportamiento para aplicar en cada elemento de esa colección. Como consecuencia, puedes reutilizar el mismo método y darle diferentes comportamientos para lograr cosas diferentes, como se ilustra en la **figura 2.3**. Es por eso que la ***parametrización del comportamiento*** es un concepto útil que debe tener en su conjunto de herramientas para crear API flexibles.
+
+**Figura 2.3.Parametrizar el comportamiento `filterApples` y pasar diferentes estrategias de filtrado.**
 
 ![02-03](images/02-03.png)
 
