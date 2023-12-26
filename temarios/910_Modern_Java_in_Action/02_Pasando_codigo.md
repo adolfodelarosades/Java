@@ -152,18 +152,18 @@ public class AppleGreenColorPredicate implements ApplePredicate {    2
 }
 ```
 
-1. Selecciona solo manzanas pesadas
-2. Selecciona solo manzanas verdes
+**1. Selecciona solo manzanas pesadas**
+**2. Selecciona solo manzanas verdes**
 
-Puede ver estos criterios como comportamientos diferentes para el método `filter`. Lo que acaba de hacer está relacionado con el patrón de diseño de la estrategia (strategy design pattern) (consulte http://en.wikipedia.org/wiki/Strategy_pattern), que le permite definir una familia de algoritmos, encapsular cada algoritmo (llamado estrategia) y seleccionar un algoritmo en tiempo de ejecución. En este caso la familia de algoritmos es `ApplePredicate` y las diferentes estrategias son `AppleHeavyWeightPredicate` y `AppleGreenColorPredicate`.
+Puede ver estos criterios como comportamientos diferentes para el método **`filter`**. Lo que acaba de hacer está relacionado con el **Patrón de Diseño de la Estrategia (strategy design pattern)** (consulte http://en.wikipedia.org/wiki/Strategy_pattern), ***que le permite definir una familia de algoritmos, encapsular cada algoritmo (llamado estrategia) y seleccionar un algoritmo en tiempo de ejecución***. ***En este caso la familia de algoritmos es*** **`ApplePredicate`** ***y las diferentes estrategias son*** **`AppleHeavyWeightPredicate`** ***y*** **`AppleGreenColorPredicate`**.
 
-Pero, ¿cómo se pueden utilizar las diferentes implementaciones de `ApplePredicate`? Necesita su método `filterApples` para aceptar objetos `ApplePredicate` para probar una condición en un `Apple`. Esto es lo que significa la ***parametrización del comportamiento (behavior parameterization)***: **la capacidad de decirle a un método que tome múltiples comportamientos (o estrategias) como parámetros y los use internamente para lograr diferentes comportamientos**.
+Pero, ¿cómo se pueden utilizar las diferentes implementaciones de **`ApplePredicate`**? Necesita su método **`filterApples`** para aceptar objetos **`ApplePredicate`** para probar una condición en un **`Apple`**. Esto es lo que significa la ***parametrización del comportamiento (behavior parameterization)***: **la capacidad de decirle a un método que tome múltiples comportamientos (o estrategias) como parámetros y los use internamente para lograr diferentes comportamientos**.
 
-Para lograr esto en el ejemplo en ejecución, agrega un parámetro al método `filterApples` para tomar un objeto `ApplePredicate`. Esto tiene un gran beneficio de ingeniería de software: ahora puede separar la lógica de iterar la colección dentro del método `filter-Apples` con el comportamiento que desea aplicar a cada elemento de la colección (en este caso, un predicado).
+Para lograr esto en el ejemplo en ejecución, agrega un parámetro al método **`filterApples`** para tomar un objeto **`ApplePredicate`**. Esto tiene un gran beneficio de ingeniería de software: ahora puede separar la lógica de iterar la colección dentro del método **`filter-Apples`** con el comportamiento que desea aplicar a cada elemento de la colección (en este caso, un predicado).
 
-### 2.2.1. Cuarto intento: filtrado por criterios abstractos
+### 2.2.1. Cuarto intento: Filtrado por criterios abstractos
 
-Nuestro método de filtro modificado, que utiliza un `ApplePredicate`, se ve así:
+Nuestro método de filtro modificado, que utiliza un **`ApplePredicate`**, se ve así:
 
 ```java
 public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
@@ -177,10 +177,11 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) 
 }
 ```
 
-1. El predicado `p` encapsula la condición para probar en una manzana.
-   Passing code/behavior
+**1. El predicado `p` encapsula la condición para probar en una manzana.**
    
-Vale la pena detenerse un momento para una pequeña celebración. Este código es mucho más flexible que nuestro primer intento, pero al mismo tiempo es fácil de leer y usar. Ahora puede crear diferentes objetos `ApplePredicate` y pasarlos al método `filterApples`. ¡Flexibilidad libre! Por ejemplo, si el agricultor le pide que busque todas las manzanas rojas que pesen más de 150 g, todo lo que necesita hacer es crear una clase que implemente `ApplePredicate` en consecuencia. Su código ahora es lo suficientemente flexible para cualquier cambio de requisitos que involucre los atributos de `Apple`:
+#### Passing code/behavior (Pasar código/comportamiento)
+   
+Vale la pena detenerse un momento para una pequeña celebración. Este código es mucho más flexible que nuestro primer intento, pero al mismo tiempo es fácil de leer y usar. Ahora puede crear diferentes objetos **`ApplePredicate`** y pasarlos al método **`filterApples`**. ¡Flexibilidad libre! Por ejemplo, si el agricultor le pide que busque todas las ***manzanas rojas que pesen más de 150 g***, todo lo que necesita hacer es crear una clase que implemente **`ApplePredicate`** en consecuencia. Su código ahora es lo suficientemente flexible para cualquier cambio de requisitos que involucre los atributos de **`Apple`**:
 
 ```java
 public class AppleRedAndHeavyPredicate implements ApplePredicate {
@@ -192,9 +193,9 @@ public class AppleRedAndHeavyPredicate implements ApplePredicate {
 List<Apple> redAndHeavyApples = filterApples(inventory, new AppleRedAndHeavyPredicate());
 ```
 
-Has logrado algo genial; el comportamiento del método `filterApples` depende del código que le pase a través del objeto `ApplePredicate`. ¡Ha parametrizado el comportamiento del método `filterApples`!
+Has logrado algo genial; el comportamiento del método **`filterApples`** depende del código que le pase a través del objeto **`ApplePredicate`**. ***¡Ha parametrizado el comportamiento del método*** **`filterApples`**!
 
-Tenga en cuenta que en el ejemplo anterior, el único código que importa es la implementación del método `test`, como se ilustra en la figura 2.2; esto es lo que define los nuevos comportamientos para el método `filterApples`. Desafortunadamente, debido a que el método `filterApples` solo puede tomar objetos, debe envolver ese código dentro de un objeto `ApplePredicate`. Lo que está haciendo es similar a pasar código en línea, porque está pasando una expresión `boolean` a través de un objeto que implementa el método `test`. Verá en la sección 2.3 (y con más detalle en el capítulo 3) que al usar lambdas, puede pasar directamente la expresión `RED.equals(apple.getColor()) && apple.getWeight() > 150` al método `filterApples` sin tener que definir varias clases `ApplePredicate`. Esto elimina la verbosidad innecesaria.
+Tenga en cuenta que en el ejemplo anterior, el único código que importa es la implementación del método **`test`**, como se ilustra en la **figura 2.2**; esto es lo que define los nuevos comportamientos para el método **`filterApples`**. Desafortunadamente, debido a que el método **`filterApples`** solo puede tomar objetos, debe envolver ese código dentro de un objeto **`ApplePredicate`**. Lo que está haciendo es similar a pasar código en línea, porque está pasando una expresión **`boolean`** a través de un objeto que implementa el método **`test`**. Verá en la sección 2.3 (y con más detalle en el capítulo 3) que al usar lambdas, puede pasar directamente la expresión **`RED.equals(apple.getColor()) && apple.getWeight() > 150`** al método **`filterApples`** sin tener que definir varias clases **`ApplePredicate`**. ***Esto elimina la verbosidad innecesaria***.
 
 ![02-02](images/02-02.png)
 
