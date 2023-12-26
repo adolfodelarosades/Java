@@ -135,7 +135,7 @@ public interface ApplePredicate{
 }
 ```
 
-Ahora puede declarar múltiples implementaciones de **`ApplePredicate`** para representar diferentes criterios de selección, como se muestra a continuación (y se ilustra en la figura 2.1):
+Ahora puede declarar múltiples implementaciones de **`ApplePredicate`** para representar diferentes criterios de selección, como se muestra a continuación (y se ilustra en la **figura 2.1**):
 
 ![02-01](images/02-01.png)
 
@@ -197,13 +197,11 @@ Has logrado algo genial; el comportamiento del método **`filterApples`** depend
 
 Tenga en cuenta que en el ejemplo anterior, el único código que importa es la implementación del método **`test`**, como se ilustra en la **figura 2.2**; esto es lo que define los nuevos comportamientos para el método **`filterApples`**. Desafortunadamente, debido a que el método **`filterApples`** solo puede tomar objetos, debe envolver ese código dentro de un objeto **`ApplePredicate`**. Lo que está haciendo es similar a pasar código en línea, porque está pasando una expresión **`boolean`** a través de un objeto que implementa el método **`test`**. Verá en la sección 2.3 (y con más detalle en el capítulo 3) que al usar lambdas, puede pasar directamente la expresión **`RED.equals(apple.getColor()) && apple.getWeight() > 150`** al método **`filterApples`** sin tener que definir varias clases **`ApplePredicate`**. ***Esto elimina la verbosidad innecesaria***.
 
-![02-02](images/02-02.png)
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/93a930a5-3142-4e5a-8a65-8a3e75d92797)
 
 #### Multiple behaviors, one parameter (Múltiples comportamientos, un parámetro)
 
 Como explicamos anteriormente, la ***parametrización del comportamiento*** es excelente porque le permite separar la lógica de iterar la colección para filtrar y el comportamiento para aplicar en cada elemento de esa colección. Como consecuencia, puedes reutilizar el mismo método y darle diferentes comportamientos para lograr cosas diferentes, como se ilustra en la **figura 2.3**. Es por eso que la ***parametrización del comportamiento*** es un concepto útil que debe tener en su conjunto de herramientas para crear API flexibles.
-
-**Figura 2.3.Parametrizar el comportamiento `filterApples` y pasar diferentes estrategias de filtrado.**
 
 ![02-03](images/02-03.png)
 
