@@ -19,15 +19,15 @@ La ***parametrización del comportamiento*** (***Behavior parameterization***) e
 
 A esto se refiere la ***parametrización del comportamiento***. He aquí una analogía: tu compañero de cuarto sabe cómo conducir hasta el supermercado y volver a casa. Puede decirle que compre una lista de cosas como pan, queso y vino. Esto es equivalente a llamar a un método **`goAndBuy`** pasando una lista de productos como argumento. Pero un día estás en la oficina y necesitas que él haga algo que nunca había hecho antes: recoger un paquete de la oficina de correos. Debe pasarle una lista de instrucciones: vaya a la oficina de correos, use este número de referencia, hable con el gerente y recoja el paquete. Puede pasarle la lista de instrucciones por correo electrónico, y cuando la reciba, podrá seguir las instrucciones. Ahora ha hecho algo un poco más avanzado que es equivalente a un método **`goAndDo`**, que puede ejecutar varios comportamientos nuevos como argumentos.
 
-Comenzaremos este capítulo con un ejemplo de ***cómo puede evolucionar su código para que sea más flexible para los requisitos cambiantes***. Basándonos en este conocimiento, ***mostramos cómo utilizar la parametrización del comportamiento para varios ejemplos del mundo real***. Por ejemplo, es posible que ya haya usado el patrón de parametrización de comportamiento, usando clases e interfaces existentes en la API de Java para ordenar una lista, filtrar nombres de archivos o decirle a un subproceso que ejecute un bloque de código o incluso realice el manejo de eventos de GUI . Pronto se dará cuenta de que este patrón ha sido históricamente detallado en Java. Las expresiones lambda en Java 8 en adelante abordan el problema de la verbosidad. En el capítulo 3 mostraremos cómo construir expresiones lambda, dónde usarlas y cómo puede hacer que su código sea más conciso al adoptarlas.
+Comenzaremos este capítulo con un ejemplo de ***cómo puede evolucionar su código para que sea más flexible para los requisitos cambiantes***. Basándonos en este conocimiento, ***mostramos cómo utilizar la parametrización del comportamiento para varios ejemplos del mundo real***. Por ejemplo, es posible que ya haya usado el patrón de parametrización de comportamiento, usando clases e interfaces existentes en la API de Java para ordenar una lista, filtrar nombres de archivos o decirle a **`Thread`** que ejecute un bloque de código o incluso realice el manejo de eventos de GUI . Pronto se dará cuenta de que este patrón ha sido históricamente detallado en Java. Las expresiones lambda en Java 8 en adelante abordan el **problema de la verbosidad**. En el capítulo 3 mostraremos cómo construir expresiones lambda, dónde usarlas y cómo puede hacer que su código sea más conciso al adoptarlas.
 
 ## 2.1. HACER FRENTE A LOS REQUISITOS CAMBIANTES
 
-Escribir código que pueda hacer frente a los requisitos cambiantes es difícil. Veamos un ejemplo que mejoraremos gradualmente, mostrando algunas prácticas recomendadas para hacer que su código sea más flexible. En el contexto de una aplicación de inventario agrícola, debe implementar una funcionalidad para filtrar manzanas verdes de una lista. Suena fácil, ¿verdad?
+Escribir código que pueda hacer frente a los requisitos cambiantes es difícil. Veamos un ejemplo que mejoraremos gradualmente, mostrando algunas prácticas recomendadas para hacer que su código sea más flexible. En el contexto de una aplicación de inventario agrícola, debe implementar una funcionalidad para filtrar manzanas ***verdes*** de una lista. Suena fácil, ¿verdad?
 
-### 2.1.1. Primer intento: filtrar manzanas verdes
+### 2.1.1. Primer intento: Filtrar manzanas verdes
 
-Suponga, como en el capítulo 1, que tiene una enumeración `Color` disponible para representar diferentes colores de una manzana:
+Suponga, como en el capítulo 1, que tiene una enumeración **`Color`** disponible para representar diferentes colores de una manzana:
 
 ```java
 enum Color { RED, GREEN }
@@ -47,14 +47,14 @@ public static List<Apple> filterGreenApples(List<Apple> inventory) {
 }
 ```
 
-1. Una lista acumulativa para manzanas
-2. Selecciona solo manzanas verdes
+**1. Una lista acumulativa para manzanas**
+**2. Selecciona solo manzanas verdes**
 
-La línea resaltada (2) muestra la condición requerida para seleccionar manzanas verdes. Puede suponer que tiene una enumeración `Color` con un conjunto de colores, como `GREEN`, disponible. Pero ahora el agricultor cambia de opinión y quiere filtrar también manzanas *rojas*. ¿Qué puedes hacer? Una solución ingenua sería duplicar su método, renombrarlo como `filterRedApples` y cambiar la condición if para que coincida con las manzanas rojas. Sin embargo, este enfoque no se adapta bien a los cambios si el agricultor quiere varios colores. ***Un buen principio es este: cuando se encuentre escribiendo código casi repetido, intente abstraerlo***.
+La línea resaltada (2) muestra la condición requerida para seleccionar manzanas verdes. Puede suponer que tiene una enumeración **`Color`** con un conjunto de colores, como **`GREEN`**, disponible. Pero ahora el agricultor cambia de opinión y quiere filtrar también manzanas *rojas*. ¿Qué puedes hacer? Una solución ingenua sería duplicar su método, renombrarlo como **`filterRedApples`** y cambiar la condición **`if`** para que coincida con las manzanas rojas. Sin embargo, este enfoque no se adapta bien a los cambios si el agricultor quiere varios colores. ***Un buen principio es este: cuando se encuentre escribiendo código casi repetido, intente abstraerlo***.
 
-### 2.1.2. Segundo intento: parametrizar el color
+### 2.1.2. Segundo intento: Parametrizar el color
 
-¿Cómo evitamos duplicar la mayor parte del código en `filterGreenApples` para hacer `filterRedApples`? Para parametrizar el color y ser más flexible a tales cambios, lo que podría hacer es agregar un parámetro a su método:
+¿Cómo evitamos duplicar la mayor parte del código en **`filterGreenApples`** para hacer **`filterRedApples`**? Para parametrizar el color y ser más flexible a tales cambios, lo que podría hacer es agregar un parámetro a su método:
 
 ```java
 public static List<Apple> filterApplesByColor(List<Apple> inventory, Color color) {
@@ -92,9 +92,9 @@ public static List<Apple> filterApplesByWeight(List<Apple> inventory, int weight
 }
 ```
 
-Ésta es una buena solución, pero observe cómo debe duplicar la mayor parte de la implementación para recorrer el inventario y aplicar los criterios de filtrado en cada manzana. Esto es algo decepcionante porque rompe el ***principio DRY(don’t repeat yourself)*** de la ingeniería de software. ¿Qué sucede si desea modificar el desplazamiento del filtro para mejorar el rendimiento? Ahora tiene que modificar la implementación de *todos* sus métodos en lugar de solo uno. Esto es caro desde la perspectiva del esfuerzo de ingeniería.
+Ésta es una buena solución, pero observe cómo debe duplicar la mayor parte de la implementación para recorrer el inventario y aplicar los criterios de filtrado en cada manzana. Esto es algo decepcionante porque rompe el ***principio DRY(don’t repeat yourself)*** de la ingeniería de software. ¿Qué sucede si desea modificar el desplazamiento del filtro para mejorar el rendimiento? Ahora tiene que modificar la implementación de ***todos*** sus métodos en lugar de solo uno. Esto es caro desde la perspectiva del esfuerzo de ingeniería.
 
-Puede combinar el color y el peso en un método, llamado `filter`. Pero, de todos modos, necesitaría una forma de diferenciar el atributo por el que desea filtrar. Puede agregar una bandera para diferenciar entre consultas de color y peso. (¡Pero nunca hagas esto! Explicaremos por qué en breve).
+Puede combinar el color y el peso en un método, llamado **`filter`**. Pero, de todos modos, necesitaría una forma de diferenciar el atributo por el que desea filtrar. Puede agregar una bandera para diferenciar entre consultas de color y peso. (¡Pero nunca hagas esto! Explicaremos por qué en breve).
 
 ### 2.1.3. Tercer intento: filtrar con todos los atributos que se te ocurran
 
@@ -113,7 +113,7 @@ public static List<Apple> filterApples(List<Apple> inventory, Color color, int w
 }
 ```
 
-1. Una forma fea de seleccionar color o peso
+**1. Una forma fea de seleccionar color o peso**
 
 Podrías usar esto de la siguiente manera (pero es feo):
 
@@ -123,11 +123,11 @@ List<Apple> heavyApples = filterApples(inventory, null, 150, false);
 ...
 ```
 
-Esta solución es extremadamente mala. Primero, el código del cliente se ve terrible. ¿Qué significan verdadero y falso? Además, esta solución no se adapta bien a los requisitos cambiantes. ¿Qué pasa si el agricultor le pide que filtre con diferentes atributos de una manzana, por ejemplo, su tamaño, su forma, su origen, etc.? Además, ¿qué pasa si el agricultor le pide consultas más complicadas que combinan atributos, como manzanas verdes que también son pesadas? O tendría varios métodos `filter` duplicados o un método enormemente complejo. Hasta ahora, ha parametrizado el método `filterApples` *con valores* como `String`, `Integer`, `enum` type o `boolean`. Esto puede estar bien para ciertos problemas bien definidos. Pero en este caso, lo que necesita es una mejor manera de decirle a su método `filterApples` los criterios de selección para las manzanas. En la siguiente sección, describimos cómo hacer uso de la parametrización del comportamiento para lograr esa flexibilidad.
+Esta solución es extremadamente mala. Primero, el código del cliente se ve terrible. ¿Qué significan **`true`** y **`false`**? Además, esta solución no se adapta bien a los requisitos cambiantes. ¿Qué pasa si el agricultor le pide que filtre con diferentes atributos de una manzana, por ejemplo, su tamaño, su forma, su origen, etc.? Además, ¿qué pasa si el agricultor le pide consultas más complicadas que combinan atributos, como manzanas verdes que también son pesadas? O tendría varios métodos **`filter`** duplicados o un método enormemente complejo. Hasta ahora, ha parametrizado el método **`filterApples`** *con valores* como **`String`**, **`Integer`**, un tipo **`enum`** o **`boolean`**. Esto puede estar bien para ciertos problemas bien definidos. Pero en este caso, lo que necesita es una mejor manera de decirle a su método **`filterApples`** los criterios de selección para las manzanas. En la siguiente sección, describimos cómo hacer uso de la parametrización del comportamiento para lograr esa flexibilidad.
 
 ## 2.2. PARAMETRIZACIÓN DE COMPORTAMIENTO
 
-En la sección anterior vio que necesita una mejor manera que agregar muchos parámetros para hacer frente a los requisitos cambiantes. Retrocedamos y encontremos un mejor nivel de abstracción. Una posible solución es modelar sus criterios de selección: está trabajando con manzanas y devuelve un booleano basado en algunos atributos de Apple. Por ejemplo, ¿es verde? ¿Pesa más de 150 g? A esto lo llamamos ***predicado*** (una función que devuelve un `booleano`). Por lo tanto, definamos una interfaz *para modelar los criterios de selección*:
+En la sección anterior vio que necesita una mejor manera que agregar muchos parámetros para hacer frente a los requisitos cambiantes. Retrocedamos y encontremos un mejor nivel de abstracción. Una posible solución es modelar sus criterios de selección: está trabajando con manzanas y devuelve un **`boolean`** basado en algunos atributos de **`Apple`**. Por ejemplo, ¿es verde? ¿Pesa más de 150 g? A esto lo llamamos **Predicado** (***una función que devuelve un `booleano`***). Por lo tanto, definamos una interfaz ***para modelar los criterios de selección***:
 
 ```java
 public interface ApplePredicate{
@@ -135,7 +135,7 @@ public interface ApplePredicate{
 }
 ```
 
-Ahora puede declarar múltiples implementaciones de `ApplePredicate` para representar diferentes criterios de selección, como se muestra a continuación (y se ilustra en la figura 2.1):
+Ahora puede declarar múltiples implementaciones de **`ApplePredicate`** para representar diferentes criterios de selección, como se muestra a continuación (y se ilustra en la figura 2.1):
 
 ![02-01](images/02-01.png)
 
