@@ -205,6 +205,24 @@ Como explicamos anteriormente, la ***parametrización del comportamiento*** es e
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/758b4756-6832-4bfe-b97c-98708891097f)
 
+Para asegurarse de que se siente cómodo con la idea de la ***parametrización del comportamiento***, intente realizar el cuestionario 2.1.
+
+**Prueba 2.1: Escribe un método `prettyPrintApple` flexible**
+
+Escriba un método **`prettyPrintApple`** que tome una **`List`** de **`Apples`** y que pueda parametrizarse con múltiples formas de generar una salida **`String`** a partir de un **`apple`**(un poco como múltiples métodos **`toString`** personalizados). Por ejemplo, podría indicarle a su método **`prettyPrintApple`** que imprima solo el peso de cada manzana. Además, podrías indicar a tu método **`prettyPrintApple`** para imprimir cada manzana individualmente y mencionar si es pesada o liviana. La solución es similar a los ejemplos de filtrado que hemos explorado hasta ahora. Para ayudarle a empezar, le proporcionamos un esquema aproximado del método **`prettyPrintApple`**:
+
+```java
+public static void prettyPrintApple(List<Apple> inventory, ???) {
+    for(Apple apple: inventory) {
+        String output = ???.???(apple);
+        System.out.println(output);
+    }
+}
+```
+
+**Respuesta:**
+
+Primero, necesita una forma de representar un comportamiento que tome un **`Apple`** y devuelva un **`String`** formateado como resultado. Hiciste algo similar cuando creaste una interfaz **`ApplePredicate`**:
 
 ![02-04](images/02-04.png)
 
