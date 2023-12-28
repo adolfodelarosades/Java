@@ -47,9 +47,9 @@ Apress, una empresa de Springer Nature, es una editorial dedicada a satisfacer l
 ## Parte 1 El ABC de los Objetos
 
 * Capítulo [01 Abstración y Modelado](/temarios/019_Beginning_Java_Objects/01-Abstraction-and-Modeling.md)
-* Capítulo [02 Java Básico](019_Beginning_Java_Objects/02_Java_Basico.md)
-* Capítulo [03 Objectos y Clases](019_Beginning_Java_Objects/03_Objectos_y_Clases.md)
-* Capítulo [04 Interacciones entre Objetos](019_Beginning_Java_Objects/04_Object_Iteractions.md)
+* Capítulo [02 Java Básico](/temarios/019_Beginning_Java_Objects/02_Java_Basico.md)
+* Capítulo [03 Objectos y Clases](/temarios/019_Beginning_Java_Objects/03_Objectos_y_Clases.md)
+* Capítulo [04 Interacciones entre Objetos](/temarios/019_Beginning_Java_Objects/04_Object_Iteractions.md)
 * Capítulo 05 Relaciones entre Objetos
 * Capítulo 06 Colecciones de Objetos
 * Capítulo 07 Algunos conceptos finales sobre Objetos
