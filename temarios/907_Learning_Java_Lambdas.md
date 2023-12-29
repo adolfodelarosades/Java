@@ -80,70 +80,70 @@ Después de leer este libro, comprenderá las lambdas en profundidad, sus antece
 
 1. Introduction
 
-* The road to modern Java
-   * Modern Java features
+   * The road to modern Java
+      * Modern Java features
 2. Lambdas Introduction
-* λs in functional programming
-   1930s and the lambda calculus
-   1950s and LISP
-   What is a lambda
-* Functions vs classes
-   Lambdas in modern Java
-   Some theoretical differences
-   Functions vs classes
-   Some concrete differences
-      Capture semantics
-      Shadowed variables
-   Summary
-* λ basic syntax
-   Syntax breakdown
-   Summary
+   * λs in functional programming
+      * 1930s and the lambda calculus
+      * 1950s and LISP
+      * What is a lambda
+   * Functions vs classes
+      * Lambdas in modern Java
+      * Some theoretical differences
+      * Functions vs classes
+      * Some concrete differences
+         * Capture semantics
+         * Shadowed variables
+      * Summary
+   * λ basic syntax
+      * Syntax breakdown
+      * Summary
 3. Lambdas in Depth
-Functional interfaces
-@FunctionalInterface
-Extension
-Other interface improvements
-Summary
-Type inference improvements
-Java type inference
-Target-typing for lambdas
-Type parameters in method calls
-Type parameters in chained method calls
-Method references
-Example
-Method reference types
-Constructor reference
-Static method reference
-Instance method reference of particular object (in this case, a closure)
-Instance method reference of a arbitrary object whose instance is supplied later (lambda)
-Summary
-Scoping
-Effectively final
-Circumventing final
-Exception handling
-Using a callback
-Dealing with exceptions when writing lambdas
-As a caller (dealing with exceptions when calling lambdas)
-Lambdas vs closures
-Basic differences
-Other differences
-Summary
-Bytecode recap
-Descriptors
-Converting a method signature
-Code examples
-Example 1
-Example 2
-Example 3
-Example 4
-Example 4 (with method reference)
-Example 5
-Summary
+   * Functional interfaces
+      * @FunctionalInterface
+      * Extension
+      * Other interface improvements
+      * Summary
+   * Type inference improvements
+   * Java type inference
+   * Target-typing for lambdas
+      * Type parameters in method calls
+      * Type parameters in chained method calls
+   * Method references
+      * Example
+      * Method reference types
+      * Constructor reference
+      * Static method reference
+      * Instance method reference of particular object (in this case, a closure)
+      * Instance method reference of a arbitrary object whose instance is supplied later (lambda)
+      * Summary
+   * Scoping
+      * Effectively final
+         * Circumventing final
+   * Exception handling
+      * Using a callback
+      * Dealing with exceptions when writing lambdas
+      * As a caller (dealing with exceptions when calling lambdas)
+   * Lambdas vs closures
+      * Basic differences
+      * Other differences
+      * Summary
+   * Bytecode recap
+   * Descriptors
+   * Converting a method signature
+   * Code examples
+   * Example 1
+   * Example 2
+   * Example 3
+   * Example 4
+   * Example 4 (with method reference)
+   * Example 5
+   * Summary
 A. Bytecode
-WaitFor
-Example 1
-Example 2
-Example 3
-Example 4
-Example 4 (with Method Reference)
-Example 5
+   * WaitFor
+   * Example 1
+   * Example 2
+   * Example 3
+   * Example 4
+   * Example 4 (with Method Reference)
+   * Example 5
