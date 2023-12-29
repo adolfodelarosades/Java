@@ -138,10 +138,8 @@ Después de leer este libro, comprenderá las lambdas en profundidad, sus antece
    * Example 4
    * Example 4 (with method reference)
    * Example 5
-   * Summary
-     
-A. Bytecode
-   
+   * Summary   
+4. A. Bytecode
    * WaitFor
    * Example 1
    * Example 2
