@@ -56,7 +56,7 @@ Después de leer este libro, comprenderá las lambdas en profundidad, sus antece
 
 * Customer Feedback
 
-* Preface
+* [Preface](https://github.com/adolfodelarosades/Java/blob/master/temarios/907_Learning_Java_Lambdas/Preface.md)
 
    * What this book covers
    
