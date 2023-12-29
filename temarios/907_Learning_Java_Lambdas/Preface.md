@@ -50,3 +50,7 @@ Las advertencias o notas importantes aparecen en un cuadro como este.
 Los consejos y trucos aparecen así.
 
 <hr>
+
+## Descargando las imágenes en color de este libro
+
+También le proporcionamos un archivo PDF que tiene imágenes en color de las capturas de pantalla/diagramas utilizados en este libro. Las imágenes en color le ayudarán a comprender mejor los cambios en la salida. Puede descargar este archivo desde https://www.packtpub.com/sites/default/files/downloads/LearningJavaLambdas_ColorImages.pdf 
