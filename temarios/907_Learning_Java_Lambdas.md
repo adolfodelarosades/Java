@@ -78,7 +78,7 @@ Después de leer este libro, comprenderá las lambdas en profundidad, sus antece
       
       * Questions
 
-1. Introduction
+1. [Introduction](https://github.com/adolfodelarosades/Java/blob/master/temarios/907_Learning_Java_Lambdas/01-Introduccion.md)
 
    * The road to modern Java
       * Modern Java features
