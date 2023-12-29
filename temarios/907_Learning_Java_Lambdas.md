@@ -44,26 +44,26 @@ Después de leer este libro, comprenderá las lambdas en profundidad, sus antece
 
 ## Table of Contents
 
-Learning Java Lambdas
-Credits
-About the Author
-www.PacktPub.com
-   Why subscribe?
-Customer Feedback
-Preface
-   What this book covers
-   What you need for this book
-   Who this book is for
-   Conventions
-   Reader feedback
-   Customer support
-      Downloading the color images of this book
-      Errata
-      Piracy
-      Questions
+* Learning Java Lambdas
+* Credits
+* About the Author
+* www.PacktPub.com
+   * Why subscribe?
+* Customer Feedback
+* Preface
+   * What this book covers
+   * What you need for this book
+   * Who this book is for
+   * Conventions
+   * Reader feedback
+   * Customer support
+      * Downloading the color images of this book
+      * Errata
+      * Piracy
+      * Questions
 1. Introduction
 * The road to modern Java
-   Modern Java features
+   * Modern Java features
 2. Lambdas Introduction
 * λs in functional programming
    1930s and the lambda calculus
