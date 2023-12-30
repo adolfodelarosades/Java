@@ -112,106 +112,122 @@ Como es una copia, debe declararse final para garantizar que no se pueda cambiar
 Por otro lado, una lambda no necesita copiar su entorno ni capturar ningún término. Esto significa que puede tratarse como una función genuina y no como una instancia de una clase. ¿Cual es la diferencia? Infinidad.
 
 ### Funciones vs Clases
-AQUIIIIII
+
 Para empezar, funciones; funciones genuinas, no es necesario crear instancias muchas veces. No estoy seguro de si creación de instancias es siquiera la palabra correcta cuando se habla de asignar memoria y cargar un fragmento de código de máquina como una función. El punto es que, una vez que esté disponible, se puede reutilizar, es de naturaleza idempotente ya que no retiene ningún estado. Los métodos de clases estáticas son lo más parecido que tiene Java a las funciones.
 
 Para Java, esto significa que no es necesario crear una instancia de una lambda cada vez que se evalúa, lo cual es un gran problema. A diferencia de la creación de instancias de una clase anónima, el impacto en la memoria debería ser mínimo.
 
 En términos de algunas diferencias conceptuales entonces:
 
-Se deben crear instancias de las clases, mientras que las funciones no.
-Cuando se actualizan las clases, se asigna memoria para el objeto.
-La memoria sólo necesita asignarse una vez para las funciones. Se almacenan en el área permanente del montón.
-Los objetos actúan sobre sus propios datos, las funciones actúan sobre datos no relacionados.
-Los métodos de clases estáticas en Java son aproximadamente equivalentes a funciones.
-Algunas diferencias concretas
+* Se deben crear instancias de las clases, mientras que las funciones no.
+* Cuando se actualizan las clases, se asigna memoria para el objeto.
+* La memoria sólo necesita asignarse una vez para las funciones. Se almacenan en el área permanente del montón.
+* Los objetos actúan sobre sus propios datos, las funciones actúan sobre datos no relacionados.
+* Los métodos de clases estáticas en Java son aproximadamente equivalentes a funciones.
+
+### Algunas diferencias concretas
+
 Algunas diferencias concretas entre funciones y clases incluyen su semántica de captura y cómo ocultan las variables.
 
-Capturar semántica
-Otra diferencia tiene que ver con la semántica de captura para esto. En una clase anónima, esto se refiere a la instancia de la clase anónima. Por ejemplo, Foo$InnerClassy no Foo. Es por eso que tiene una sintaxis ligeramente extraña, como Foo.this.xcuando se refiere al ámbito adjunto de la clase anónima.
+#### Capturar semántica
 
-Por otro lado, en lambdas, esto se refiere al alcance adjunto (Foo directamente en nuestro ejemplo). De hecho, las lambdas tienen un alcance completamente léxico , lo que significa que no heredan ningún nombre de un supertipo ni introducen un nuevo nivel de alcance; puede acceder directamente a campos, métodos y variables locales desde el ámbito adjunto.
+Otra diferencia tiene que ver con la semántica de captura para esto. En una clase anónima, esto se refiere a la instancia de la clase anónima. Por ejemplo, **`Foo$InnerClass`** y no **`Foo`**. Es por eso que tiene una sintaxis ligeramente extraña, como **`Foo.this.x`** cuando se refiere al ámbito adjunto de la clase anónima.
 
-Por ejemplo, esta clase muestra que lambda puede hacer referencia a la firstNamevariable directamente.
+Por otro lado, en lambdas, esto se refiere al alcance adjunto (Foo directamente en nuestro ejemplo). De hecho, las lambdas tienen un alcance completamente léxico, lo que significa que no heredan ningún nombre de un supertipo ni introducen un nuevo nivel de alcance; puede acceder directamente a campos, métodos y variables locales desde el ámbito adjunto.
 
-ejemplo de clase pública {
-    cadena privada nombre = "Jack";
+Por ejemplo, esta clase muestra que lambda puede hacer referencia a la variable **`firstName`** directamente.
 
-    ejemplo de vacío público() {
-        Función<Cadena, Cadena> agregarApellido = apellido -> {
-            // equivalente a this.firstName
-            devolver nombre + " " + apellido; // o incluso,   
-            este.primerNombre
+```java
+public class Example {
+    private String firstName = "Jack";
+
+    public void example() {
+        Function<String, String> addSurname = surname -> {
+            // equivalent to this.firstName
+            return firstName + " " + surname;  // or even, this.firstName
         };
     }
 }
-Aquí, firstNamees una abreviatura de this.firstNamey debido a que se refiere al ámbito adjunto (la clase Example), su valor será "Jack".
+```
 
-La clase anónima equivalente tendría que hacer referencia explícita firstNamedesde el ámbito adjunto. No puedes usar esto como en este contexto, esto significa la instancia anónima y no existe firstNameallí. Entonces, se compilará lo siguiente:
+Aquí, **`firstName`** es una abreviatura de **`this.firstName`** y debido a que se refiere al ámbito adjunto (la clase **`Example`**), su valor será **"Jack"**.
 
-ejemplo de clase pública {
-    cadena privada nombre = "Charlie";
+La clase anónima equivalente tendría que hacer referencia explícita a **`firstName`** desde el ámbito adjunto. No puedes usar esto como en este contexto, esto significa la instancia anónima y no existe **`firstName`** allí. Entonces, se compilará lo siguiente:
 
-    public void otro ejemplo() {
-        Función<Cadena, Cadena> agregarApellido = nueva Función<Cadena,  
-        Cadena>() {
-            @Anular
-            aplicación de cadena pública (apellido de cadena) {
-                return Ejemplo.este.primerNombre + " " + apellido;   
-                // DE ACUERDO
+```java
+public class Example {
+    private String firstName = "Charlie";
+
+    public void anotherExample() {
+        Function<String, String> addSurname = new Function<String, String>() {
+            @Override
+            public String apply(String surname) {
+                return Example.this.firstName + " " + surname;   
+                // OK
             }
         };
     }
 }
+```
+
 pero esto no lo hará.
 
-ejemplo de clase pública {
-    cadena privada nombre = "Charlie";
+```java
+public class Example {
+    private String firstName = "Charlie";
 
-  public void otro ejemplo() {
-    Función<Cadena, Cadena> agregarApellido = nueva Función<Cadena,   
-    Cadena>() {
-      @Anular
-      aplicación de cadena pública (apellido de cadena) {
-        devuelve this.firstName + " " + apellido; // error del compilador
+  public void anotherExample() {
+    Function<String, String> addSurname = new Function<String, String>() {
+      @Override
+      public String apply(String surname) {
+        return this.firstName + " " + surname;   // compiler error
       }
     };
   }
 }
-Aún puedes acceder al campo directamente (es decir, simplemente llamando a return firstName + " " + surname) pero no puedes hacerlo usando esto. El punto aquí es demostrar la diferencia en los esquemas de captura para esto cuando se usa en instancias lambdas frente a instancias anónimas.
+```
 
-Variables sombreadas
-Hacer referencia a variables sombreadas se vuelve mucho más sencillo de razonar con la thissemántica simplificada. Por ejemplo,
+Aún puedes acceder al campo directamente (es decir, simplemente llamando a **`return firstName + " " + surname`**) pero no puedes hacerlo usando esto. El punto aquí es demostrar la diferencia en los esquemas de captura para esto cuando se usa en instancias lambdas frente a instancias anónimas.
 
-clase pública Ejemplo de sombreado {
+#### Variables sombreadas
 
-    cadena privada nombre = "Charlie";
+Hacer referencia a variables sombreadas se vuelve mucho más sencillo de razonar con la semántica **`this`** simplificada. Por ejemplo,
 
-    ejemplo de sombreado público vacío (nombre de cadena) {
-        Función<Cadena, Cadena> agregarApellido = apellido -> {
-            devuelve this.firstName + " " + apellido;
+```java
+public class ShadowingExample {
+
+    private String firstName = "Charlie";
+
+    public void shadowingExample(String firstName) {
+        Function<String, String> addSurname = surname -> {
+            return this.firstName + " " + surname;
         };
     }
 }
-Aquí, debido a que thisestá dentro de lambda, se refiere al ámbito circundante. Entonces this.firstNametendrá el valor "Charlie"y no el parámetro del método del mismo nombre. La semántica de captura lo deja más claro. Si usa firstName(y suelta this), se referirá al parámetro.
+```
 
-En el siguiente ejemplo, utilizando una instancia anónima, firstNamesimplemente se hace referencia al parámetro. Si desea hacer referencia a la versión adjunta, usaría Example.this.firstName:
+Aquí, debido a que **`this`** está dentro de lambda, se refiere al ámbito circundante. Entonces **`this.firstName`** tendrá el valor "**`Charlie`**" y no el parámetro del método del mismo nombre. La semántica de captura lo deja más claro. Si usa **`firstName`** (y suelta **`this`**), se referirá al parámetro.
 
-clase pública Ejemplo de sombreado {
+En el siguiente ejemplo, utilizando una instancia anónima, **`firstName`** simplemente se hace referencia al parámetro. Si desea hacer referencia a la versión adjunta, usaría **`Example.this.firstName`**:
 
-    cadena privada nombre = "Charlie";
+```java
+public class ShadowingExample {
+
+    private String firstName = "Charlie";
 
     public void anotherShadowingExample(String firstName) {
-        Función<Cadena, Cadena> agregarApellido = nueva Función<Cadena,  
-        Cadena>() {
-            @Anular
-            aplicación de cadena pública (apellido de cadena) {
-                devolver nombre + " " + apellido;
+        Function<String, String> addSurname = new Function<String, String>() {
+            @Override
+            public String apply(String surname) {
+                return firstName + " " + surname;
             }
         };
     }
 }
-Resumen
+```
+
+## Resumen
+
 Las funciones en el sentido académico son cosas muy diferentes de las clases anónimas (que a menudo tratamos como funciones en Java anterior a 8). Es útil comprender las distinciones para poder justificar el uso de lambdas por algo más que solo su sintaxis concisa. Por supuesto, hay muchas ventajas adicionales en el uso de lambdas (entre ellas la actualización del JDK para utilizarlas en gran medida).
 
 Cuando echemos un vistazo a la nueva sintaxis lambda a continuación, recuerde que aunque las lambdas se usan de manera muy similar a las clases anónimas en Java, son técnicamente diferentes. No es necesario crear una instancia de Lambdas en Java cada vez que se evalúan, a diferencia de una instancia de una clase anónima.
