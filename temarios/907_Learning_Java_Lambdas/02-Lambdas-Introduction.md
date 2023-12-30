@@ -226,10 +226,166 @@ public class ShadowingExample {
 }
 ```
 
-## Resumen
+### Resumen
 
 Las funciones en el sentido académico son cosas muy diferentes de las clases anónimas (que a menudo tratamos como funciones en Java anterior a 8). Es útil comprender las distinciones para poder justificar el uso de lambdas por algo más que solo su sintaxis concisa. Por supuesto, hay muchas ventajas adicionales en el uso de lambdas (entre ellas la actualización del JDK para utilizarlas en gran medida).
 
 Cuando echemos un vistazo a la nueva sintaxis lambda a continuación, recuerde que aunque las lambdas se usan de manera muy similar a las clases anónimas en Java, son técnicamente diferentes. No es necesario crear una instancia de Lambdas en Java cada vez que se evalúan, a diferencia de una instancia de una clase anónima.
 
 Esto debería servirle para recordarle que las lambdas en Java no son sólo azúcar sintáctico.
+
+## λ sintaxis básica
+
+Echemos un vistazo a la sintaxis lambda básica.
+
+Una lambda es básicamente un bloque de funcionalidad anónimo. Es muy parecido a usar una instancia de clase anónima. Por ejemplo, si queremos ordenar una matriz en Java, podemos usar el método **`Arrays.sort`** que toma una instancia de la interfaz **`Comparator`**.
+
+Se vería algo como esto:
+
+```java
+Arrays.sort(numbers, new Comparator<Integer>() {
+    @Override
+    public int compare(Integer first, Integer second) {
+        return first.compareTo(second);
+    }
+});
+```
+
+La instancia **`Comparator`** aquí es una parte abstracta de la funcionalidad; no significa nada por sí solo; sólo cuando se utiliza mediante el método **`sort`** tiene un propósito.
+
+Usando la nueva sintaxis de Java, puedes reemplazar esto con una lambda que se ve así:
+
+```java
+Arrays.sort(numbers, (first, second) -> first.compareTo(second));
+```
+
+Es una forma más sucinta de lograr lo mismo. De hecho, Java trata esto como si fuera una instancia de la clase **`Comparator`**. Si tuviéramos que extraer una variable para lambda (el segundo parámetro), su tipo sería **`Comparator<Integer>`** como la instancia anónima anterior.
+
+```java
+Comparator<Integer> ascending = (first, second) -> first.compareTo(second);
+Arrays.sort(numbers, ascending);
+```
+
+Porque **`Comparator`** tiene un solo método abstracto; **`compareTo`**, el compilador puede entender que cuando tenemos un bloque anónimo como este, en realidad nos referimos a una instancia de **`Comparator`**. Puede hacer esto gracias a un par de otras características nuevas de las que hablaremos más adelante; Interfaces funcionales y mejoras en la inferencia de tipos.
+
+### Desglose de sintaxis
+
+Siempre puedes pasar de usar un único método abstracto a usar lambda.
+
+Digamos que tenemos una interfaz **`Example`** con un método **`apply`**, que devuelve algún tipo y toma algún argumento:
+
+```java
+interface Example {
+     R apply(A arg);
+}
+```
+
+Podríamos crear una instancia con algo como esto:
+
+```java
+new Example() {
+    @Override
+    public R apply(A args) {
+        body
+    }
+};
+```
+
+Y para convertirlo a lambda, básicamente recortamos la grasa. Eliminamos la creación de instancias y la anotación, eliminamos los detalles del método, lo que deja solo la lista de argumentos y el cuerpo.
+
+```java
+(args) {
+    body
+}
+```
+
+Luego introducimos el nuevo símbolo de flecha para indicar que todo es una lambda y que lo que sigue es el cuerpo y esa es nuestra sintaxis lambda básica:
+
+```java
+(args) -> {
+    body
+}
+```
+
+Tomemos el ejemplo de clasificación anterior y sigamos estos pasos. Empezamos con la instancia anónima:
+
+```java
+Arrays.sort(numbers, new Comparator<Integer>() {
+    @Override
+    public int compare(Integer first, Integer second) {
+        return first.compareTo(second);
+    }
+});
+```
+
+y recortar la creación de instancias y la firma del método:
+
+```java
+Arrays.sort(numbers, (Integer first, Integer second) {
+    return first.compareTo(second);
+});
+```
+
+introducir la lambda
+
+```java
+Arrays.sort(numbers, (Integer first, Integer second) -> {
+    return first.compareTo(second);
+});
+```
+
+y terminamos. Sin embargo, hay un par de optimizaciones que podemos hacer. Puede eliminar los tipos si el compilador sabe lo suficiente como para inferirlos.
+
+```java
+Arrays.sort(numbers, (first, second) -> {
+    return first.compareTo(second);
+});
+```
+
+y para expresiones simples, puede quitar las llaves para producir una expresión lambda:
+
+```java
+Arrays.sort(numbers, (first, second) -> first.compareTo(second));
+```
+
+En este caso, el compilador puede inferir lo suficiente como para saber a qué se refiere. La declaración única devuelve un valor consistente con la interfaz, por lo que dice: "no es necesario que me digas que vas a devolver algo, puedo verlo por mí mismo".
+
+Para métodos de interfaz de un solo argumento, incluso puede eliminar los primeros corchetes. Por ejemplo, la lambda toma un argumento **`x`** y lo devuelve **`x + 1`**;
+
+```java
+(x) -> x + 1
+```
+
+se puede escribir sin paréntesis
+
+```java
+x -> x + 1
+```
+
+### Resumen
+
+Recapitulemos con un resumen de las opciones de sintaxis.
+
+Resumen de sintaxis:
+
+```java
+(int x, int y) -> { return x + y; }
+(x, y) -> { return x + y; }
+(x, y) -> x + y; x -> x * 2
+() -> System.out.println("Hey there!");
+System.out::println;
+```
+
+El primer ejemplo (**`(int x, int y) -> { return x + y; }`**) es la forma más detallada de crear una lambda. Los argumentos de la función junto con sus tipos están entre paréntesis, seguidos de la nueva sintaxis de flecha y luego el cuerpo; el bloque de código que se va a ejecutar.
+
+A menudo puedes eliminar los tipos de la lista de argumentos, como **`(x, y) -> { return x + y; }`**. El compilador utilizará aquí la inferencia de tipos para intentar adivinar los tipos. Lo hace en función del contexto en el que intenta utilizar la lambda.
+
+Si su bloque de código devuelve algo o es una expresión de una sola línea, puede quitar las llaves y la declaración de retorno, por ejemplo **`(x, y) -> x + y;`**.
+
+En el caso de un solo argumento, puede eliminar los paréntesis **`x -> x * 2`**.
+
+Si no tiene ningún argumento, se necesita el símbolo de "hamburguesa", **`() -> System.out.println("Hey there!");`**.
+
+En aras de la exhaustividad, existe otra variación; una especie de atajo a una lambda llamada referencia de método. Un ejemplo es algo así como **`System.out::println;`**, que es básicamente un atajo hacia la lambda **`(value) -> System.out.prinltn(value)`**.
+
+Hablaremos sobre las referencias de métodos con más detalle más adelante, así que por ahora, tenga en cuenta que existen y que pueden usarse en cualquier lugar donde pueda usar una lambda.
