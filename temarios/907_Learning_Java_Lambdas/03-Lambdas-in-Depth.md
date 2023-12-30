@@ -348,430 +348,516 @@ Puede considerarlos como la transformación de un método normal en una interfaz
 
 La sintaxis básica se ve así:
 
-Clase::método
+```java
+Class::method
+```
+
 o, un ejemplo más concreto:
 
-Cadena::valorDe
+```java
+String::valueOf
+```
+
 La parte que precede a los dos puntos es la referencia de destino y después, el nombre del método. Entonces, en este caso, nos dirigimos a la Stringclase y buscamos un método llamado valueOf; Nos referimos al staticmétodo de String.
 
-valor de cadena estática pública de (objeto obj) {...}
+```java
+public static String valueOf(Object obj) { ... }
+```
+
 Los dos puntos dobles se llaman delimitador . Cuando lo usamos, no invocamos el método, solo hacemos referencia a él. Así que recuerda no agregar corchetes al final.
 
-Cadena::valorDe(); // <-- error
+```java
+String::valueOf(); // <-- error
+```
+
 No puede invocar referencias de métodos directamente, solo se pueden usar en lugar de una lambda. Entonces, en cualquier lugar donde se use una lambda, puede usar una referencia de método.
 
-Ejemplo
+### Ejemplo
+
 Esta declaración por sí sola no se compilará.
 
-público estático vacío principal (cadena... argumentos) {
-    Cadena::valorDe;
+```java
+public static void main(String... args) {
+    String::valueOf;
 }
+```
+
 Esto se debe a que la referencia del método no se puede transformar en una lambda ya que no hay contexto para que el compilador infiera qué tipo de lambda crear.
 
 Sabemos que esta referencia equivale a
 
-(x) -> Cadena.valorDe(x)
+```java
+(x) -> String.valueOf(x)
+```
+
 pero el compilador aún no lo sabe. Aunque puede decir algunas cosas. Sabe que, como lambda, el valor de retorno debe ser de tipo Stringporque todos los métodos llamados valueOfdevuelven Stringuna cadena. Pero no tiene idea de qué argumento ofrecer. Necesitamos darle un poco de ayuda y darle más contexto.
 
 Crearemos una interfaz funcional llamada Conversionque toma un número entero y devuelve una cadena. Este será el tipo de destino de nuestra lambda.
 
-@Interfaz funcional
-Conversión de interfaz {
-    Conversión de cadena (número entero);
+```java
+@FunctionalInterface
+interface Conversion {
+    String convert(Integer number);
 }
+```
+
 A continuación, necesitamos crear un escenario en el que usemos esto como lambda. Entonces creamos un pequeño método para tomar una interfaz funcional y aplicarle un número entero.
 
-conversión de cadena estática pública (número entero, función de conversión) {
-    función de retorno.convert(número);
+```java
+public static String convert(Integer number, Conversion function) {
+    return function.convert(number);
 }
+```
+
 Ahora, aquí está la cuestión. Acabamos de darle al compilador suficiente información para transformar una referencia de método en la lambda equivalente.
 
 Cuando llamamos a convertun método, podemos hacerlo pasando una lambda.
 
-convert(100, (número) -> String.valueOf(número));
+```java
+convert(100, (number) -> String.valueOf(number));
+```
+
 Y podemos reemplazar la lambda con una referencia al valueOfmétodo. El compilador ahora sabe que necesitamos una lambda que devuelva una cadena y tome un número entero. Ahora sabe que el valueOfmétodo "se ajusta" y puede sustituir el argumento del número entero.
 
-convertir(100, Cadena::valorDe);
+```java
+convert(100, String::valueOf);
+```
+
 Otra forma de darle al compilador la información que necesita es simplemente asignar la referencia a un tipo.
 
-Conversión b = (número) -> String.valueOf(número);
+```java
+Conversion b = (number) -> String.valueOf(number);
+```
+
 y como referencia del método
 
-Conversión a = String::valueOf;
+```java
+Conversion a = String::valueOf;
+```
+
 las "formas" encajan, por lo que se pueden asignar.
 
 Curiosamente, podemos asignar la misma lambda a cualquier interfaz que requiera la misma "forma". Por ejemplo, si tenemos otra interfaz funcional con la misma "forma",
 
 Aquí, Exampledevuelve a Stringy toma an Objectpara que tenga la misma forma de firma que valueOf.
 
-Ejemplo de interfaz {
-    String theNameIsUnimportant(Objeto objeto);
+```java
+interface Example {
+    String theNameIsUnimportant(Object object);
 }
+```
+
 aún podemos asignarle la referencia del método (o lambda).
 
-Ejemplo a = Cadena::valorDe;
-Tipos de referencia de métodos
+```java
+Example a = String::valueOf;
+```
+
+### Tipos de referencia de métodos
+
 Hay cuatro tipos de referencia de método:
 
-Referencias de constructores
-Referencias de métodos estáticos
-Y dos tipos de referencias a métodos de instancia.
+* Referencias de constructores
+* Referencias de métodos estáticos
+* Y dos tipos de referencias a métodos de instancia.
+
 Los dos últimos son un poco confusos. La primera es una referencia de método de un objeto particular y la segunda es una referencia de método de un objeto arbitrario pero de un tipo particular. La diferencia está en cómo desea utilizar el método y si tiene la instancia con anticipación o no.
 
 Entonces, en primer lugar, echemos un vistazo a las referencias del constructor.
 
-Referencia del constructor
+### Constructor reference - Referencia del constructor
+
 La sintaxis básica se ve así:
 
-Cadena::nueva
+```java
+String::new
+```
+
 Un tipo de destino seguido de dos puntos y luego la newpalabra clave. Creará una lambda que llamará al constructor de argumento cero de la Stringclase.
 
 Es equivalente a esta lambda
 
-() -> nueva cadena()
+```java
+() -> new String()
+```
+
 Recuerde que las referencias a métodos nunca tienen paréntesis; no están invocando métodos, solo hacen referencia a uno. Este ejemplo hace referencia al constructor de la Stringclase pero no crea una instancia de una cadena.
 
 Echemos un vistazo a cómo podríamos usar realmente una referencia de constructor.
 
 Si creamos una lista de objetos, es posible que queramos completar esa lista, digamos diez elementos. Entonces podríamos crear un bucle y agregar un nuevo objeto diez veces.
 
-uso público vacío() {
-    Lista<Objeto> lista = nueva ArrayList<>();
-    para (int i = 0; i < 10; i++) {
-        lista.add(nuevo objeto());
+```java
+public void usage() {
+    List<Object> list = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+        list.add(new Object());
   }
 }
+```
+
 pero si queremos poder reutilizar esa función de inicialización, podríamos extraer el código a un nuevo método llamado initialisey luego usar una fábrica para crear el objeto.
 
-uso público vacío() {
-    Lista<Objeto> lista = nueva ArrayList<>();
-    inicializar(lista, ...);
+```java
+public void usage() {
+    List<Object> list = new ArrayList<>();
+    initialise(list, ...);
 }
 
-inicialización de vacío privado (Lista <Objeto> lista, Fábrica <Objeto> fábrica) {
-    para (int i = 0; i < 10; i++) {
-        lista.add(factory.create());
+private void initialise(List<Object> list, Factory<Object> factory){
+    for (int i = 0; i < 10; i++) {
+        list.add(factory.create());
     }
  }
+```
+
 La Factoryclase es solo una interfaz funcional con un método llamado createque devuelve algún objeto. Luego podemos agregar el objeto que creó a la lista. Debido a que es una interfaz funcional, podemos usar una lambda para implementar la fábrica para inicializar la lista:
 
-uso público vacío() {
-    Lista<Objeto> lista = nueva ArrayList<>();
-    inicializar(lista, () -> nuevo Objeto());
+```java
+public void usage() {
+    List<Object> list = new ArrayList<>();
+    initialise(list, () -> new Object());
 }
+```
+
 O podríamos intercambiar una referencia de constructor.
 
-uso público vacío() {
-    Lista<Objeto> lista = nueva ArrayList<>();
-    inicializar(lista, Objeto::nuevo);
+```java
+public void usage() {
+    List<Object> list = new ArrayList<>();
+    initialise(list, Object::new);
 }
+```
+
 Hay un par de cosas más que podríamos hacer aquí. Si agregamos algunos genéricos al initialisemétodo podemos reutilizarlo al inicializar listas de cualquier tipo. Por ejemplo, podemos regresar y cambiar el tipo de lista Stringy usar una referencia de constructor para inicializarla.
 
-uso público vacío() {
-    Lista<Cadena> lista = nueva ArrayList<>();
-    inicializar(lista, Cadena::nueva);
+```java
+public void usage() {
+    List<String> list = new ArrayList<>();
+    initialise(list, String::new);
 }
 
-privado <T> void inicializar (Lista<T> lista, Fábrica<T> fábrica) {
-    para (int i = 0; i < 10; i++) {
-        lista.add(factory.create());
+private <T> void initialise(List<T> list, Factory<T> factory) {
+    for (int i = 0; i < 10; i++) {
+        list.add(factory.create());
     }
 }
+```
+
 Hemos visto cómo funciona para constructores sin argumentos, pero ¿qué pasa en el caso en que las clases tienen constructores con múltiples argumentos?
 
 Cuando hay varios constructores, se utiliza la misma sintaxis, pero el compilador determina qué constructor sería el mejor. Lo hace basándose en el tipo de destino e infiriendo interfaces funcionales que puede utilizar para crear ese tipo.
 
 Tomemos el ejemplo de una Personclase, se ve así y puedes ver que el constructor toma varios argumentos.
 
-clase Persona {
-    Persona pública (cadena de nombre, cadena de apellido, fecha local)    
-    cumpleaños, sexo, cadena de dirección de correo electrónico, int edad) {
-      //...
+```java
+class Person {
+    public Person(String forename, String surname, LocalDate    
+    birthday, Sex gender, String emailAddress, int age) {
+      // ...
     }
 }
+```
+
 Volviendo a nuestro ejemplo anterior y observando el initialisemétodo de propósito general, podríamos usar una lambda como esta:
 
-inicializar(personas, () -> nueva Persona(nombre, apellido, fecha de nacimiento,
-                                    sexo, correo electrónico, edad));
+```java
+initialise(people, () -> new Person(forename, surname, birthday, gender, email, age));
+```
+
 pero para poder usar una referencia de constructor, necesitaríamos una lambda con argumentos variables y se vería así:
 
-(a, b, c, d, e, f) -> nueva Persona (a, b, c, d, e, f);
+```java
+(a, b, c, d, e, f) -> new Person(a, b, c, d, e, f);
+```
+
 pero esto no se traduce directamente en una referencia de constructor. Si intentáramos usar
 
-Persona::nueva
+```java
+Person::new
+```
+
 no se compilará porque no sabe nada sobre los parámetros. Si intenta compilarlo, el error dice que ha creado una referencia de constructor no válida que no se puede aplicar a los tipos dados; no encontró argumentos.
 
 En cambio, tenemos que introducir alguna dirección indirecta para darle al compilador suficiente información para encontrar un constructor apropiado. Podemos crear algo que pueda usarse como una interfaz funcional y que tenga los tipos correctos para insertarse en el constructor apropiado.
 
 Creemos una nueva interfaz funcional llamada PersonFactory.
 
-@Interfaz funcional
-interfaz PersonFactory {
-    Persona crear (cadena nombre, cadena apellido, fecha local 
-    cumpleaños, sexo, cadena de dirección de correo electrónico, int edad);
+```java
+@FunctionalInterface
+interface PersonFactory {
+    Person create(String forename, String surname, LocalDate 
+    birthday, Sex gender, String emailAddress, int age);
 }
+```
+
 Aquí, los argumentos de PersonFactorycoinciden con el constructor disponible en Person. Mágicamente, esto significa que podemos volver atrás y usarlo con una referencia de constructor de Person.
 
-ejemplo de vacío público() {
-    Lista<Persona> lista = nueva ArrayList<>();
-    PersonFactory fábrica = Persona::nueva;
-    //...
+```java
+public void example() {
+    List<Person> list = new ArrayList<>();
+    PersonFactory factory = Person::new;
+    // ...
 }
+```
+
 Observe que estoy usando la referencia del constructor de Person. Lo que hay que tener en cuenta aquí es que se puede asignar una referencia de constructor a una interfaz funcional de destino aunque todavía no conozcamos los argumentos.
 
 Puede parecer un poco extraño que el tipo de referencia del método sea PersonFactoryy no Person. Esta información adicional sobre el tipo de destino ayuda al compilador a saber que debe pasar PersonFactorypara crear un archivo Person. Con esta sugerencia adicional, el compilador puede crear una lambda basada en la interfaz de fábrica que luego creará un archivo Person.
 
 Al escribirlo a mano, el compilador generaría esto.
 
-ejemplo de vacío público() {
-    PersonFactory fábrica = (a, b, c, d, e, f) -> nueva Persona (a, b,   
+```java
+public void example() {
+    PersonFactory factory = (a, b, c, d, e, f) -> new Person(a, b,   
     c, d, e, f);
 }
+```
+
 que podría usarse más adelante así:
 
-ejemplo de vacío público() {
-    PersonFactory fábrica = (a, b, c, d, e, f) -> nueva Persona (a, b,  
+```java
+public void example() {
+    PersonFactory factory = (a, b, c, d, e, f) -> new Person(a, b,  
     c, d, e, f);
-    Persona persona = factory.create(nombre, apellido, fecha de nacimiento,
-                                sexo, correo electrónico, edad);
+    Person person = factory.create(forename, surname, birthday,
+                                gender, email, age);
 }
+```
+
 Afortunadamente, el compilador puede hacer esto por nosotros una vez que hayamos introducido la dirección indirecta.
 
 Entiende cuál es el tipo de destino a usar PersonFactoryy comprende que su abstractmétodo único se puede usar en lugar de un constructor. Es como un proceso de dos pasos, en primer lugar, determinar que el abstractmétodo tiene la misma lista de argumentos que un constructor y que devuelve el tipo correcto, luego aplicarlo con la nueva sintaxis de dos puntos y dos puntos.
 
 Para finalizar el ejemplo, necesitamos modificar nuestro initialisemétodo para agregar la información de tipo (reemplazar los genéricos), agregar parámetros para representar los detalles de la persona y, de hecho, invocar la fábrica.
 
-inicialización de vacío privado (lista Lista <Persona>, fábrica PersonFactory, 
-                       Nombre de cadena, Apellido de cadena,                           
-                       LocalDate cumpleaños, Sexo género,
-                       Cadena de dirección de correo electrónico, int edad) {
-                         para (int i = 0; i < 10; i++) {
-                           list.add(factory.create(nombre,  
-                           apellido, fecha de nacimiento, sexo,        
-                           dirección de correo electrónico, edad));
+```java
+private void initialise(List<Person> list, PersonFactory factory, 
+                       String forename, String surname,                           
+                       LocalDate birthday, Sex gender,
+                       String emailAddress, int age) {
+                         for (int i = 0; i < 10; i++) {
+                           list.add(factory.create(forename,  
+                           surname, birthday, gender,        
+                           emailAddress, age));
                          }
                        }
+```
+
 y luego podemos usarlo así:
 
-ejemplo de vacío público() {
-    Lista<Persona> lista = nueva ArrayList<>();
-    PersonFactory fábrica = Persona::nueva;
-    inicializar (personas, fábrica, a, b, c, d, e, f);
+```java
+public void example() {
+    List<Person> list = new ArrayList<>();
+    PersonFactory factory = Person::new;
+    initialise(people, factory, a, b, c, d, e, f);
 }
+```
+
 o en línea, así:
 
-ejemplo de vacío público() {
-    Lista<Persona> lista = nueva ArrayList<>();
-    inicializar(personas, Persona::nuevo, a, b, c, d, e, f);
+```java
+public void example() {
+    List<Person> list = new ArrayList<>();
+    initialise(people, Person::new, a, b, c, d, e, f);
 }
-Referencia del método estático
+```
+
+### Static method reference - Referencia del método estático
+
 Una referencia de método puede apuntar directamente a un método estático. Por ejemplo,
 
-Cadena::valorDe
+```java
+String::valueOf
+```
+
 Esta vez, el lado izquierdo se refiere al tipo donde valueOfse puede encontrar un método estático, en este caso. Es equivalente a esta lambda
 
-x -> Cadena.valorDe(x))
+```java
+x -> String.valueOf(x))
+```
+
 Un ejemplo más extendido sería cuando ordenamos una colección usando una referencia a un método estático en la clase Comparators.
 
-Collections.sort(Arrays.asList(5, 12, 4), Comparadores::ascendente);
+```java
+Collections.sort(Arrays.asList(5, 12, 4), Comparators::ascending);
 
-// equivalente a
+// equivalent to
 Collections.sort(Arrays.asList(5, 12, 4), (a, b) -> Comparators.ascending(a, b));
+```
+
 donde, el método estático ascendingpodría definirse así:
 
-Comparadores públicos de clases estáticas {
-    Entero estático público ascendente (entero primero, entero segundo)   
+```java
+public static class Comparators {
+    public static Integer ascending(Integer first, Integer second)   
     {
-        devolver primero.compareTo(segundo);
+        return first.compareTo(second);
      }
 }
-Referencia del método de instancia de un objeto particular (en este caso, un cierre)
+```
+
+### Instance method reference of particular object (in this case, a closure) - Referencia del método de instancia de un objeto particular (en este caso, un cierre)
+
 A continuación se muestra un ejemplo de una referencia de método de instancia de una instancia específica:
 
-x::aCadena
+```java
+x::toString
+```
+
 Es xun caso específico al que queremos llegar. Su equivalente lambda se ve así:
 
+```java
 () -> x.toString()
+```
+
 La capacidad de hacer referencia al método de una instancia específica también nos brinda una manera conveniente de convertir entre diferentes tipos de interfaces funcionales. Por ejemplo:
 
-Invocable<String> c = () -> "Hola";
+```java
+Callable<String> c = () -> "Hello";
+```
+
 El método funcional de Callable es call. Cuando se invoque, la lambda regresará "Hello".
 
 Si tenemos otra interfaz funcional, Factorypodemos convertirla Callableusando una referencia de método.
 
-Fábrica<Cadena> f = c::call;
+```java
+Factory<String> f = c::call;
+```
+
 Podríamos haber recreado la lambda, pero este truco es una forma útil de reutilizar lambda predefinida. Asígnalos a variables y reutilízalos para evitar duplicaciones.
 
 Aquí hay un ejemplo de su uso:
 
-ejemplo de vacío público() {
-    Cadena x = "hola";
-    función(x::toString);
+```java
+public void example() {
+    String x = "hello";
+    function(x::toString);
 }
+```
+
 Este es un ejemplo en el que la referencia del método utiliza un cierre. Crea una lambda que llamará al toStringmétodo en la instancia x.
 
 La firma e implementación de la función anterior se ve así:
 
-Función de cadena estática pública (proveedor <cadena> proveedor) {
-    devolver proveedor.get();
+```java
+public static String function(Supplier<String> supplier) {
+    return supplier.get();
 }
+```
+
 La Supplier interfaz es una interfaz funcional que se ve así:
 
-@Interfaz funcional
-interfaz pública Proveedor<T> {
-  T obtener();
+```java
+@FunctionalInterface
+public interface Supplier<T> {
+  T get();
 }
+```
+
 Cuando se usa en nuestra función, proporciona un valor de cadena (a través de la llamada a get) y la única manera de hacerlo es si el valor se le ha proporcionado en la construcción. Es equivalente a:
 
-ejemplo de vacío público() {
-  Cadena x = "";
-  función(() -> x.toString());
+```java
+public void example() {
+  String x = "";
+  function(() -> x.toString());
 }
+```
+
 Observe aquí que la lambda no tiene argumentos (usa el símbolo de "hamburguesa"). Esto muestra que el valor de xno está disponible en el alcance local de lambda y, por lo tanto, solo puede estar disponible desde fuera de su alcance. Es un cierre porque debe cerrarse x(capturará ) x .
 
 Si está interesado en ver el equivalente de clase anónimo y escrito a mano, se verá así. Observe nuevamente cómo xse debe pasar:
 
-ejemplo de vacío público() {
-    Cadena x = "";
-    function(nuevo Proveedor<String>() {
-        @Anular
-        cadena pública obtener() {
-            devolver x.toString(); // <- se cierra sobre 'x'
+```java
+public void example() {
+    String x = "";
+    function(new Supplier<String>() {
+        @Override
+        public String get() {
+            return x.toString(); // <- closes over 'x'
         }
     });
 }
+```
+
 Los tres son equivalentes. Compare esto con la variación lambda de una referencia de método de instancia donde no tiene su argumento pasado explícitamente desde un ámbito externo.
 
-Referencia del método de instancia de un objeto arbitrario cuya instancia se proporciona más adelante (lambda)
+### Instance method reference of a arbitrary object whose instance is supplied later (lambda) - Referencia del método de instancia de un objeto arbitrario cuya instancia se proporciona más adelante (lambda)
+
 El último caso es para una referencia de método que apunta a un objeto arbitrario al que se hace referencia por su tipo:
 
-Objeto::toString
+```java
+Object::toString
+```
+
 Entonces, en este caso, aunque parece que el lado izquierdo apunta a una clase (como la staticreferencia del método), en realidad apunta a una instancia. El toStringmétodo es un método de instancia Object, no un staticmétodo. La razón por la que es posible que no utilice la sintaxis del método de instancia normal es porque es posible que aún no tenga una instancia a la que hacer referencia.
 
 Entonces, antes, cuando llamamos xdos puntos dos puntos toString, conocemos el valor de x. Hay algunas situaciones en las que no tienes un valor de xy en estos casos, aún puedes pasar una referencia al método pero proporcionar un valor más adelante usando esta sintaxis.
 
 Por ejemplo, el equivalente lambda no tiene un valor enlazado para x.
 
+```java
 (x) -> x.toString()
+```
+
 La diferencia entre los dos tipos de referencia de métodos de instancia es básicamente académica. A veces, necesitará pasar algo, otras veces, el uso de lambda se lo proporcionará.
 
 El ejemplo es similar a la referencia del método habitual; solo llama al toStringmétodo de una cadena esta vez, la cadena se suministra a la función que utiliza lambda y no se pasa desde un ámbito externo.
 
-ejemplo lambda vacío público() {
-    función("valor", Cadena::toString);
+```java
+public void lambdaExample() {
+    function("value", String::toString);
 }
+```
+
 Parece que la Stringparte hace referencia a una clase, pero en realidad hace referencia a una instancia. Es confuso, lo sé, pero para ver las cosas más claramente, necesitamos ver la función que utiliza lambda. Se parece a esto.
 
-Función de cadena estática pública (valor de cadena, función <cadena, cadena>) {
-    función de retorno.aplicar (valor);
+```java
+public static String function(String value, Function<String, String> function) {
+    return function.apply(value);
 }
+```
+
 Entonces, el valor de la cadena se pasa directamente a la función, se vería así como una lambda completamente calificada.
 
-ejemplo lambda vacío público() {
-    función("valor", x -> x.toString());
+```java
+public void lambdaExample() {
+    function("value", x -> x.toString());
 }
+```
+
 qué atajo puede tener Java para que se vea String::toString; dice "proporcionar la instancia del objeto" en tiempo de ejecución.
 
 Si lo expandes completamente a una interfaz anónima, se ve así. El xparámetro se pone a disposición y no se cierra. Por lo tanto, es una lambda en lugar de un cierre.
 
-ejemplo lambda vacío público() {
-    función("valor", nueva Función<Cadena, Cadena>() {
-      @Anular
-      // toma el argumento como parámetro, no necesita cerrar 
-      encima de eso
-      aplicar cadena pública (cadena x) {
-        devolver x.toString();
+```java
+public void lambdaExample() {
+    function("value", new Function<String, String>() {
+      @Override
+      // takes the argument as a parameter, doesn't need to close 
+      over it
+      public String apply(String x) {
+        return x.toString();
       }
     });
 }
-Resumen
+```
+
+### Resumen
+
 Oracle describe los cuatro tipos de referencia de métodos ( http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html ) de la siguiente manera:
 
-Amable
-
-Ejemplo
-
-Referencia a un método estático
-
-ContainingClass::staticMethodName
-
-Referencia a un método de instancia de un objeto particular.
-
-ContainingObject::instanceMethodName
-
-Referencia a un método de instancia de un objeto arbitrario de un tipo particular
-
-ContainingType::methodName
-
-Referencia a un constructor.
-
-ClassName::new
+<img width="1082" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/9c23f22d-24c2-4a92-98ba-907bc407e8ed">
 
 Pero las descripciones de los métodos de instancia son simplemente confusas. ¿Qué diablos es un método de instancia de un objeto arbitrario de un tipo particular? ¿ No son todos los objetos de un tipo particular? ¿Por qué es importante que el objeto sea arbitrario ?
 
 Prefiero pensar en el primero como un método de instancia de un objeto específico conocido de antemano y en el segundo como un método de instancia de un objeto arbitrario que se proporcionará más adelante. Curiosamente, esto significa que el primero es un cierre y el segundo es una lambda . Uno está atado y el otro desatado . La distinción entre una referencia de método que cierra algo (un cierre) y otra que no (una lambda) puede ser un poco académica, pero al menos es una definición más formal que la inútil descripción de Oracle.
 
-Amable
-
-Sintaxis
-
-Ejemplo
-
-Referencia a un método estático
-
-Class::staticMethodName
-
-String::valueOf
-
-Referencia a un método de instancia de un objeto específico.
-
-object::instanceMethodName
-
-x::toString
-
-Referencia a un método de instancia de un objeto arbitrario proporcionado más adelante
-
-Class::instanceMethodName
-
-String::toString
-
-Referencia a un constructor.
-
-ClassName::new
-
-String::new
+<img width="847" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/424857d7-1432-4927-8120-2360c7956402">
 
 o como lambdas equivalentes:
 
-Amable
-
-Sintaxis
-
-como lambda
-
-Referencia a un método estático
-
-Class::staticMethodName
-
-(s) -> String.valueOf(s)
-
-Referencia a un método de instancia de un objeto específico.
-
-object::instanceMethodName
-
-() -> "hello".toString()
-
-Referencia a un método de instancia de un objeto arbitrario proporcionado más adelante
-
-Class::instanceMethodName
-
-(s) -> s.toString()
-
-Referencia a un constructor.
-
-ClassName::new
-
-() -> new String()
+<img width="858" alt="image" src="https://github.com/adolfodelarosades/Java/assets/23094588/7aa4cf36-47bd-4115-9ba6-f8f447cf0a7a">
 
 Tenga en cuenta que la sintaxis de una staticreferencia de método es muy similar a una referencia a un método de instancia de una clase. El compilador determina cuál usar revisando cada método estático aplicable y cada método de instancia aplicable. Si encontrara una coincidencia para ambos, el resultado sería un error de compilación.
 
