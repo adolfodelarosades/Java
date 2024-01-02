@@ -1110,3 +1110,203 @@ forEach(allPeople, x -> sum[0] += x);
 ```
 
 De hecho, la referencia de la matriz es final  aquí, pero podemos modificar el contenido de la matriz sin reasignar la referencia. Sin embargo, esto generalmente es de mala educación, ya que abre la puerta a todos los problemas de seguridad de los que hablamos anteriormente. Lo menciono con fines ilustrativos, pero no recomiendo que hagas este tipo de cosas con frecuencia. Generalmente es mejor no crear funciones con efectos secundarios y puedes evitar los problemas por completo si utilizas un enfoque más funcional. Una forma más idiomática de hacer este tipo de suma es usar lo que se llama ***fold-plegar*** o en la lengua vernácula de Java ***reduce-reducir***.
+
+## Exception handling - Manejo de excepciones
+
+No hay una sintaxis nueva para el manejo de excepciones en lambdas. Las excepciones lanzadas en una lambda se propagan a la persona que llama, tal como se esperaría de una llamada a un método normal. No hay nada especial en llamar a lambdas o manejar sus excepciones.
+
+Sin embargo, hay algunas sutilezas que debes tener en cuenta. En primer lugar, como autor de una lambda, es posible que no sepa qué excepciones se podrían generar, si corresponde, y en segundo lugar, como autor de una lambda, es posible que no sepa en qué contexto se ejecutará su lambda.
+
+Cuando crea una lambda, normalmente cede la responsabilidad de cómo se ejecutará esa lambda al método al que se la pasa. Por lo que usted sabe, su lambda puede ejecutarse en paralelo o en algún momento en el futuro, por lo que es posible que cualquier excepción que lance no se maneje como cabría esperar. No puede confiar en el manejo de excepciones como una forma de controlar el flujo de su programa.
+
+Para demostrar esto, escribamos un código para llamar a dos cosas, una tras otra. Lo usaremos Runnablecomo un tipo lambda conveniente.
+
+```java
+```
+
+Si la primera llamada a ejecutar arrojara una excepción, el método terminaría y nunca se llamaría al segundo método. La persona que llama debe encargarse de la excepción. Si utilizamos este método para transferir dinero entre dos cuentas bancarias, podríamos escribir dos lambdas. Uno para la acción de débito y otro para la de crédito.
+
+```java
+```
+
+Entonces podríamos llamar a nuestro runInSequencemétodo así:
+
+```java
+```
+
+cualquier excepción podría detectarse y solucionarse utilizando un try/ catchcomo este:
+
+```java
+```
+
+Aquí está la cosa. Como autor de lambdas, potencialmente no tengo idea de cómo runInSequencese implementa. Es muy posible que se implemente para ejecutarse de forma asincrónica de esta manera:
+
+```java
+```
+
+En cuyo caso, cualquier excepción en la primera llamada terminaría el hilo, la excepción desaparecería en el controlador de excepciones predeterminado y nuestro código de cliente original no tendría la oportunidad de lidiar con la excepción.
+
+Usando una devolución de llamada
+Por cierto, una forma de solucionar el problema específico de generar una excepción en un hilo diferente al de la persona que llama se puede solucionar con una función de devolución de llamada. En primer lugar, te defenderías de las excepciones en el runInSequencemétodo:
+
+```java
+```
+
+Luego introduzca un controlador de excepciones al que se pueda llamar en caso de una excepción:
+
+```java
+```
+
+El consumidor es una interfaz funcional (nueva en Java 8) que en este caso toma la excepción como argumento de su acceptmétodo.
+
+Cuando conectamos esto al cliente, podemos pasar una función lambda de devolución de llamada para manejar cualquier excepción.
+
+```java
+```
+
+Este es un buen ejemplo de ejecución diferida y también tiene sus propias debilidades. El método del controlador de excepciones puede (o no) ejecutarse en algún momento posterior. El nonBlockingTransferproceso habrá finalizado y las propias cuentas bancarias pueden estar en algún otro estado cuando se active. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted; Hemos abierto toda una lata de gusanos de concurrencia.
+
+Tratar con excepciones al escribir lambdas
+Veamos cómo manejar las excepciones desde la perspectiva de un autor de lambda, alguien que escribe lambda. Después de esto, veremos cómo lidiar con las excepciones al llamar a lambdas.
+
+Veámoslo como si quisiéramos implementar el transfermétodo usando lambdas pero esta vez quisiéramos reutilizar una biblioteca existente que proporciona el runInSequencemétodo.
+
+Antes de comenzar, echemos un vistazo a la BankAccountclase. Notarás que esta vez, los métodos debity creditarrojan una excepción marcada; InsufficientFundsException.
+
+```java
+```
+
+
+clase InsufficientFundsException extiende la excepción {}
+Recreemos el transfermétodo. Intentaremos crear las lambdas de débito y crédito y pasarlas al runInSequencemétodo. Recuerde que el runInSequencemétodo fue escrito por algún autor de la biblioteca y no podemos ver ni modificar su implementación.
+
+```java
+```
+
+Tanto el débito como el crédito arrojan una excepción marcada, por lo que esta vez puede ver un error del compilador. No hay diferencia si agregamos esto a la firma del método; la excepción ocurriría dentro de la lambda. ¿Recuerda que dije que las excepciones en lambdas se propagan a la persona que llama? En nuestro caso, este será el runInSequencemétodo y no el punto en el que definimos la lambda. Los dos no se comunican entre sí sobre la posibilidad de que se plantee una excepción.
+
+```java
+```
+
+Entonces, si no podemos forzar que una excepción marcada sea transparente entre lambda y la persona que llama, una opción es envolver la excepción marcada como una excepción de tiempo de ejecución como esta:
+
+```java
+```
+
+Eso nos saca del error de compilación pero aún no es la historia completa. Es muy detallado y todavía tenemos que detectar y solucionar lo que ahora es una excepción de tiempo de ejecución en torno a la llamada a runInSequence.
+
+```java
+```
+
+Sin embargo, todavía hay uno o dos inconvenientes; Estamos lanzando y cogiendo un RuntimeExceptionque quizás esté un poco flojo. Realmente no sabemos qué otras excepciones, si las hay, podrían generarse en el runInSequencemétodo. Quizás sea mejor ser más explícito. Creemos un nuevo subtipo de RuntimeExceptiony usémoslo en su lugar.
+
+```java
+```
+
+Después de haber modificado la lambda original para generar la nueva excepción, podemos restringir la captura para que se ocupe únicamente de las excepciones que conocemos; es decir, el InsufficientFundsRuntimeException.
+
+Ahora podemos implementar algún tipo de funcionalidad de verificación y reversión de saldo, con la confianza de que entendemos todos los escenarios que pueden causarlo.
+
+```java
+```
+
+El problema con todo esto es que el código tiene más texto estándar para el manejo de excepciones que lógica empresarial real. Se supone que las lambdas hacen que las cosas sean menos detalladas, pero esto está lleno de ruido. Podemos mejorar las cosas si generalizamos el ajuste de las excepciones marcadas a equivalentes en tiempo de ejecución. Podríamos crear una interfaz funcional que capture un tipo de excepción en la firma usando genéricos.
+
+Llamémoslo Callabley su método único; call. No confunda esto con la clase del mismo nombre en el JDK; Estamos creando una nueva clase para ilustrar el manejo de excepciones.
+
+```java
+```
+
+Cambiaremos la implementación anterior de transferencia y crearemos lambdas para que coincidan con la "forma" de la nueva interfaz funcional. He dejado el tipo por un momento.
+
+```java
+```
+
+Recuerde de la sección de inferencia de tipos que Java podría ver esto como un tipo de Callableya que no tiene parámetros como Callable, tiene el mismo tipo de retorno (ninguno) y arroja una excepción del mismo tipo que la interfaz. Solo necesitamos darle una pista al compilador, para que podamos asignar esto a una instancia de Callable.
+
+```java
+```
+
+Crear lambdas de esta manera no causa un error de compilación ya que la interfaz funcional declara que podría generarse. No es necesario que nos advierta en el momento en que creamos la lambda, ya que la firma del método funcional provocará un error en el compilador si es necesario cuando realmente intentemos llamarlo. Como un método normal.
+
+Sin embargo , si intentamos pasarlos al runInSequencemétodo, obtendremos un error del compilador.
+
+```java
+```
+
+Las lambdas son del tipo incorrecto. Todavía necesitamos una lambda de tipo Runnable. Tendremos que escribir un método que pueda convertir de a Callablea Runnable. Al mismo tiempo, ajustaremos la excepción marcada a una de tiempo de ejecución. Algo como esto:
+
+```java
+```
+
+Todo lo que queda por hacer es conectarlo a nuestras lambdas:
+
+```java
+```
+
+Una vez que volvemos a implementar el manejo de excepciones, volvemos a un cuerpo de método más conciso y hemos tratado las posibles excepciones de la misma manera que antes.
+
+```java
+```
+
+La desventaja es que ésta no es una solución totalmente generalizada; Todavía tendríamos que crear variaciones del método no marcado para diferentes funciones. También acabamos de ocultar la sintaxis detallada. La verbosidad sigue ahí, acaba de ser movida. Sí, podemos reutilizarlo, pero si el manejo de excepciones fuera transparente o no hubiéramos verificado las excepciones, no necesitaríamos esconder el problema bajo la alfombra tanto.
+
+Vale la pena señalar que probablemente terminaríamos haciendo algo similar si estuviéramos en Java 7 y usáramos clases anónimas en lugar de lambdas. Muchas de estas cosas todavía se pueden hacer antes de Java 8 y terminarás creando métodos auxiliares para dejar la verbosidad a un lado.
+
+Ciertamente, las lambdas ofrecen representaciones más concisas para pequeñas piezas anónimas de funcionalidad, pero debido al modelo de excepción verificado de Java, manejar excepciones en lambdas a menudo causará los mismos problemas de detalle que teníamos antes.
+
+Como persona que llama (tratando con excepciones al llamar a lambdas)
+Hemos visto cosas desde la perspectiva de escribir lambdas, ahora echemos un vistazo a las llamadas lambdas.
+
+Imaginemos que ahora estamos escribiendo la biblioteca que ofrece el runInSequencemétodo. Esta vez tenemos más control y no estamos limitados a usarlo Runnablecomo tipo lambda. Debido a que no queremos obligar a nuestros clientes a pasar por obstáculos relacionados con excepciones en sus lambdas (o envolverlas como excepciones de tiempo de ejecución), proporcionaremos una interfaz funcional que declara que se puede generar una excepción marcada.
+
+Lo llamaremos FinancialTransfercon un transfermétodo:
+
+```java
+```
+
+Estamos diciendo que cada vez que ocurre una transacción bancaria, existe la posibilidad de que no haya fondos suficientes disponibles. Luego, cuando implementamos nuestro runInSequencemétodo, aceptamos lambdas de este tipo.
+
+```java
+```
+
+Esto significa que cuando los clientes usan el método, no están obligados a lidiar con excepciones dentro de sus lambdas. Por ejemplo, escribir un método como este.
+
+```java
+```
+
+Esta vez no hay ningún error del compilador al crear las lambdas. No es necesario incluir las excepciones de BankAccountlos métodos como excepciones de tiempo de ejecución; la interfaz funcional ya ha declarado la excepción. Sin embargo, runInSequenceahora arrojaría una excepción marcada, por lo que es explícito que el cliente tiene que lidiar con la posibilidad y verá un error del compilador.
+
+```java
+```
+
+Entonces necesitamos envolver la llamada en un try/ catchpara que el compilador esté contento:
+
+```java
+```
+
+El resultado final es algo parecido a lo que vimos anteriormente pero sin la necesidad del método no verificado. Como desarrollador de bibliotecas, hemos facilitado a los clientes la integración con nuestro código.
+
+Pero ¿qué tal si probamos algo más exótico? Hagamos que el runInSequencemétodo sea asincrónico nuevamente. No es necesario lanzar la excepción desde la firma del método, ya que no se propagaría a la persona que llama si se lanzara desde un hilo diferente. Entonces, esta versión del runInSequencemétodo no incluye la cláusula throws y el transfermétodo ya no está obligado a lidiar con ella. Sin embargo, las llamadas a .transferseguirán generando una excepción.
+
+```java
+```
+
+Con los errores del compilador todavía en el runInSequencemétodo, necesitamos otra forma de manejar la excepción. Una técnica consiste en pasar una función que se llamará en caso de una excepción. Podemos usar esta lambda para conectar el código que se ejecuta de forma asincrónica con la persona que llama.
+
+Para empezar, volveremos a agregar el catchbloque y pasaremos una interfaz funcional para usar como controlador de excepciones. Usaré la Consumerinterfaz aquí, es nueva en Java 8 y forma parte del java.util.functionpaquete. Luego llamamos al método de interfaz en el bloque catch y le pasamos la causa.
+
+```java
+```
+
+Para llamarlo, necesitamos actualizar el transfermétodo para pasar una lambda para la devolución de llamada. El parámetro, excepción a continuación, será lo que se pase al acceptmétodo en runInSequence. Será una instancia InsufficientFundsExceptiony el cliente podrá manejarlo como quiera.
+
+```java
+```
+
+Ahí estamos. Le hemos proporcionado al cliente de nuestra biblioteca un mecanismo de manejo de excepciones alternativo en lugar de obligarlo a detectar excepciones.
+
+Hemos internalizado el manejo de excepciones en el código de la biblioteca. Es un buen ejemplo de ejecución diferida; Si hubiera una excepción, el cliente no necesariamente sabe cuándo se invocaría su controlador de excepciones. Por ejemplo, mientras ejecutamos otro hilo, es posible que las cuentas bancarias mismas hayan sido alteradas en el momento en que se ejecuta. Nuevamente resalta que usar excepciones para controlar el flujo de su programa es un enfoque defectuoso. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted.
+
+
+
