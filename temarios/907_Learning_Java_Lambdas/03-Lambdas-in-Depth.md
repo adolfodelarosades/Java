@@ -862,3 +862,251 @@ o como lambdas equivalentes:
 Tenga en cuenta que la sintaxis de una staticreferencia de método es muy similar a una referencia a un método de instancia de una clase. El compilador determina cuál usar revisando cada método estático aplicable y cada método de instancia aplicable. Si encontrara una coincidencia para ambos, el resultado sería un error de compilación.
 
 Puedes pensar en todo como una transformación de una referencia de método a una lambda. El compilador proporciona la función de transformación que toma una referencia de método y un tipo de destino y puede derivar una lambda.
+
+## Scoping
+
+La buena noticia con las lambdas es que no introducen ningún alcance nuevo. El uso de variables dentro de una lambda se referirá a las variables que residen en el entorno circundante.
+
+Esto es lo que se llama **lexical scoping - alcance léxico**. Significa que las lambdas no introducen ningún nuevo nivel de alcance; Puede acceder directamente a campos, métodos y variables desde el ámbito adjunto. También es el caso de las palabras clave **`this`** y **`super`**. Por lo tanto, no tenemos que preocuparnos por la loca sintaxis de clases anidadas para resolver el alcance.
+
+Echemos un vistazo a un ejemplo. Tenemos una clase de ejemplo aquí, con una variable miembro **`i`** establecida en el valor de **`5`**.
+
+```java
+public static class Example {
+    int i = 5;
+
+    public Integer example() {
+        Supplier<Integer> function = () -> i * 2;
+        return function.get();
+    }
+}
+```
+
+En el método **`example`**, una lambda usa una variable llamada **`i`** y la multiplica por dos.
+
+Debido a que las lambdas tienen un alcance léxico, **`i`** simplemente se refieren a la variable de las clases adjuntas. Su valor en tiempo de ejecución será **`5`**. El uso de esto lleva al punto; esto dentro de una lambda es lo mismo que sin ella.
+
+```java
+public static class Example {
+    int i = 5;
+    public Integer example() {
+        Supplier<Integer> function = () -> this.i * 2;
+        return function.get();
+    }
+}
+```
+
+En el método **`anotherExample`** siguiente, se utiliza un parámetro de método que también se llama **`i`**. Las reglas habituales de sombreado(*shadowing*) entran en vigor aquí y **`i`** se referirán al parámetro del método y no a la variable miembro de la clase. La variable de método *oculta* la variable de clase. Su valor será lo que se pase al método.
+
+```java
+public static class Example {
+    int i = 5;
+
+    public Integer anotherExample(int i) {
+        Supplier<Integer> function = () -> i * 2;
+        return function.get();
+    }
+}
+```
+
+Si desea hacer referencia a la variable de clase **`i`** y no al parámetro **`i`** dentro del cuerpo, puede hacer que la variable sea explícita con esto. Por ejemplo, **`Supplier<Integer> function = () -> i * 2;`**.
+
+El siguiente ejemplo tiene una variable de ámbito local definida dentro del método **`yetAnotherExample`**. Recuerde que las lambdas usan su alcance adjunto como propio, por lo que en este caso, **`i`** dentro de la lambda se refiere a la variable del método; **`i`** será **`15`** y no **`5`**.
+
+```java
+public static class Example {
+    int i = 5;
+
+    public Integer yetAnotherExample() {
+        int i = 15;
+        Supplier<Integer> function = () -> i * 2;
+        return function.get();
+    }
+}
+```
+
+Si desea ver esto usted mismo, puede utilizar un método como el siguiente para imprimir los valores:
+
+```java
+public static void main(String... args) {
+    Example scoping = new Example();
+    System.out.println("class scope        = " +    
+    scoping.example());
+    System.out.println("method param scope = " +  
+    scoping.anotherExample(10));
+    System.out.println("method scope       = " +   
+    scoping.yetAnotherExample());
+}
+```
+
+La salida se vería así:
+
+```sh
+class scope        = 10
+method param scope = 20
+method scope       = 30
+```
+
+Entonces, el primer método imprime **`10`**; 5 de la variable de clase multiplicada por dos. El segundo método imprime **`20`** cuando el valor del parámetro era 10 y se multiplicó por dos y el método final imprime **`30`** cuando la variable del método local se configuró en 15 y nuevamente se multiplicó por dos.
+
+El alcance léxico significa ceder al entorno circundante. Cada ejemplo tenía un entorno o alcance diferente. Viste una variable definida como miembro de una clase, un parámetro de método y localmente desde dentro de un método. En todos los casos, lambda se comportó de manera consistente y hizo referencia a la variable desde estos ámbitos adjuntos.
+
+El alcance de Lambda debería ser intuitivo si ya está familiarizado con el alcance básico de Java; realmente no hay nada nuevo aquí.
+
+### Effectively final - Efectivamente final
+
+En Java 7, cualquier variable pasada a una instancia de clase anónima debería ser final.
+
+Esto se debe a que el compilador en realidad copia todo el contexto o entorno que necesita en la instancia de la clase anónima. Si esos valores cambiaran, podrían ocurrir efectos secundarios inesperados. Entonces Java insiste en que la variable sea final para garantizar que no cambie y que la clase interna pueda operar con ellas de forma segura. Por seguridad me refiero a sin condiciones de carrera ni problemas de visibilidad entre hilos.
+
+Echemos un vistazo a un ejemplo. Para empezar, usaremos Java 7 y crearemos un método llamado **`filter`** que toma una lista de personas y un predicado. Crearemos una lista temporal para contener las coincidencias que encontremos y luego enumeraremos cada elemento probando para ver si el predicado es verdadero para cada persona. Si la prueba es positiva, los agregaremos a la lista temporal antes de devolver todas las coincidencias.
+
+```java
+// java 7
+private List<Person> filter(List<Person> people, Predicate<Person> predicate) {
+    ArrayList<Person> matches = new ArrayList<>();
+    for (Person person : people)
+        if (predicate.test(person))
+            matches.add(person);
+    return matches;
+}
+```
+
+Luego crearemos un método que utilice esto para encontrar todas las personas en una lista que sean elegibles para la jubilación. Establecemos una variable de edad de jubilación y luego llamamos al método **`filter`** con una lista arbitraria de personas y una nueva instancia anónima de una interfaz **`Predicate`**.
+
+Implementaremos esto para que sea verdadero si la edad de una persona es mayor o igual a la variable de edad de jubilación.
+
+```java
+public void findRetirees() {
+     int retirementAge = 55;
+     List<Person> retirees = filter(allPeople, new 
+     Predicate<Person>   
+     () {
+         @Override
+         public boolean test(Person person) {
+             return person.getAge() >= retirementAge; // <-- 
+             compilation error
+         }
+     });
+ }
+```
+
+Si intenta compilar esto, obtendrá un error del compilador al acceder a la variable. Esto se debe a que la variable no es definitiva. Necesitaríamos agregar **`final`** para compilarlo.
+
+```java
+final int retirementAge = 55;
+```
+
+<hr>
+
+**NOTA**
+
+Pasar el entorno a una clase interna anónima como esta es un ejemplo de closure. El medio ambiente es aquello sobre lo que "closes" un closure; tiene que capturar las variables que necesita para hacer su trabajo. El compilador de Java logra esto usando el truco de copiar en lugar de intentar administrar múltiples cambios en la misma variable. En el contexto de los closures, esto se llama ***variable capture - captura de variables***. 
+
+Java 8 introdujo la idea de "effectively final - efectivamente final", lo que significa que si el compilador puede determinar que una variable en particular nunca cambia, se puede usar donde alguna vez se hubiera usado una variable final. Lo interpreta como "efectivamente" definitivo.
+
+En nuestro ejemplo, si cambiamos a Java 8 y eliminamos la palabra clave **`final`**. Las cosas todavía se compilan. No es necesario hacer que la variable sea final. Java sabe que la variable no cambia, por lo que la hace efectivamente final.
+
+```java
+int retirementAge = 55;
+```
+
+Por supuesto, aún se compila si lo hicieras **`final`**.
+
+Pero ¿qué tal si intentamos modificar la variable después de haberla inicializado?
+
+```java
+int retirementAge = 55;
+// ...
+retirementAge = 65;
+```
+
+El compilador detecta el cambio y ya no puede tratar la variable como effectively final. Recibimos el error de compilación original pidiéndonos que lo hagamos definitivo. Por el contrario, si agregar la palabra clave **`final`** a una declaración de variable no causa un error del compilador, entonces la variable es efectivamente final.
+
+He estado demostrando el punto aquí con ejemplos de clases anónimas porque la idea de effectively final no es algo específico de lambdas. Por supuesto, es aplicable a lambdas. Puede convertir esta clase anónima anterior en una lambda y nada cambia. Todavía no es necesario que la variable sea final.
+
+### Circumventing final - Eludiendo la final
+
+Aún puede sortear la red de seguridad pasando objetos o matrices finales y luego cambiar sus partes internas en su lambda.
+
+Por ejemplo, tomando nuestra lista de personas, digamos que queremos sumar todas sus edades. Podríamos crear un método para realizar un bucle y sumar así:
+
+```java
+private static int sumAllAges(List<Person> people) {
+    int sum = 0;
+    for (Person person : people) {
+        sum += person.getAge();
+    }
+    return sum;
+}
+```
+
+donde el recuento de la suma se mantiene a medida que se enumera la lista. Como alternativa, podríamos intentar abstraer el comportamiento del bucle y pasar una función para aplicarla a cada elemento. Como esto:
+
+```java
+public final static Integer forEach(List<Person> people, Function<Integer, Integer> function) {
+  Integer result = null;
+  for (Person t : people) {
+    result = function.apply(t.getAge());
+  }
+  return result;
+}
+```
+
+y para lograr el comportamiento de suma, todo lo que tendríamos que hacer es crear una función que pueda sumar. Podrías hacer esto usando una clase anónima como esta:
+
+```java
+private static void badExample() {
+    Function<Integer, Integer> sum = new Function<Integer, Integer>   
+   () {
+        private Integer sum = 0;
+
+        @Override
+        public Integer apply(Integer amount) {
+            sum += amount;
+            return sum;
+        }
+   };
+}
+```
+
+Donde el método de funciones toma un número entero y devuelve un número entero. En la implementación, la variable de suma es una variable miembro de la clase y muta cada vez que se aplica la función. Este tipo de mutación es generalmente de mala educación cuando se trata de programación funcional.
+
+Sin embargo, podemos pasar esto a nuestro método **`forEach`** de esta manera:
+
+```java
+forEach(allPeople, sum);
+```
+
+y obtendríamos la suma de las edades de todas las personas. Esto funciona porque usamos la misma instancia de la función, por lo que la variable **`sum`** se reutiliza y muta durante cada iteración.
+
+La mala noticia es que no podemos convertir esto en lambda directamente; no hay ningún equivalente a una variable miembro con lambdas, por lo que no hay ningún otro lugar para colocar la variable **`sum`** que no sea fuera de la lambda.
+
+```java
+double sum = 0;
+forEach(allPeople, x -> {
+    return sum += x;
+});
+```
+
+pero esto resalta que la variable no es efectivamente final (ha cambiado en el cuerpo de la lambda) y por lo tanto debe ser final.
+
+Pero si lo hacemos definitivo
+
+```java
+final double sum = 0;
+forEach(allPeople, x -> {
+    return sum += x;
+});
+```
+
+¡Ya no podemos modificarlo en el cuerpo! Es la situación del huevo y la gallina.
+
+El truco para solucionar esto es utilizar un objeto o una matriz; Su referencia puede seguir siendo final pero sus partes internas pueden modificarse.
+
+```java
+int[] sum = {0};
+forEach(allPeople, x -> sum[0] += x);
+```
+
+De hecho, la referencia de la matriz es final  aquí, pero podemos modificar el contenido de la matriz sin reasignar la referencia. Sin embargo, esto generalmente es de mala educación, ya que abre la puerta a todos los problemas de seguridad de los que hablamos anteriormente. Lo menciono con fines ilustrativos, pero no recomiendo que hagas este tipo de cosas con frecuencia. Generalmente es mejor no crear funciones con efectos secundarios y puedes evitar los problemas por completo si utilizas un enfoque más funcional. Una forma más idiomática de hacer este tipo de suma es usar lo que se llama ***fold-plegar*** o en la lengua vernácula de Java ***reduce-reducir***.
