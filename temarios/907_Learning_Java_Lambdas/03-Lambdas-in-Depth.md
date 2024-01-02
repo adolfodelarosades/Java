@@ -1752,3 +1752,63 @@ La creación de objetos y los métodos de acceso utilizan códigos como **`new`*
 
 El último grupo trata sobre aritmética, lógica y conversión de tipos e incluye códigos como **`iadd`**, comparación flotante larga ( **`fcmpl`**) y entero a byte (**`i2b`**).
 
+## Descriptors - Descriptores
+
+Los códigos de operación a menudo usan parámetros, estos parecen un poco crípticos en el código de bytes, ya que generalmente se hace referencia a ellos a través de tablas de búsqueda. Internamente, Java utiliza lo que se llama descriptores para describir estos parámetros.
+
+Describen tipos y firmas utilizando una gramática específica que verá en todo el código de bytes. A menudo verás la misma gramática utilizada en el compilador o en la salida de depuración, por lo que es útil recapitularla aquí.
+
+A continuación se muestra un ejemplo de un descriptor de firma de método.
+
+```sh
+Example$1."<init>":(Lcom/foo/Example;Lcom/foo/Server;)V
+```
+
+Describe el constructor de una clase llamada **`$1`**, que sabemos que es el nombre de la JVM para la primera instancia de clase anónima dentro de otra clase. En este caso **`Example`**. Entonces tenemos un constructor de una clase anónima que toma dos parámetros, una instancia de la clase externa **`com.foo.Example`** y una instancia de **`com.foo.Server`**.
+
+Al ser constructor, el método no devuelve nada. El símbolo **`V`** representa el vacío.
+
+Eche un vistazo al desglose de la sintaxis del descriptor a continuación. Si ve una **`Z`** mayúscula en un descriptor, se refiere a un booleano, una **`B`** mayúscula a un byte, etc.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/9ea824fa-5085-40de-87ee-8c52bc12648f)
+
+
+Un par de ellos para mencionar:
+
+* Las clases se describen con **`L`** mayúsculas seguidas del nombre de clase completo, seguido de un punto y coma. El nombre de la clase está separado con barras en lugar de puntos.
+
+* Y las matrices se describen utilizando un corchete de apertura seguido de un tipo de la lista. Sin corchete de cierre.
+
+## Convertir la firma de un método
+
+Tomemos la siguiente firma del método y convirtámosla en un descriptor de método:
+
+```java
+long f (int n, String s, int[] array);
+```
+
+El método devuelve a **`long`**, por lo que describimos el hecho de que es un método entre paréntesis y que devuelve a **`long`** con **`J`** mayúsculas .
+
+```java
+()J
+```
+
+El primer argumento es de tipo **`int`**, por lo que usamos **`I`** mayúsculas .
+
+```java
+(I)J
+```
+
+El siguiente argumento es un objeto, por lo que lo usamos **`L`** para describirlo, calificamos completamente el nombre y lo cerramos con un punto y coma.
+
+```java
+(ILString;)J
+```
+
+El último argumento es una matriz de números enteros, por lo que colocamos la sintaxis de la matriz seguida del tipo **`int`**:
+
+```java
+(ILString;[I)J
+```
+
+y terminamos. Un descriptor de método JVM.
