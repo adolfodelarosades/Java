@@ -1119,134 +1119,315 @@ Sin embargo, hay algunas sutilezas que debes tener en cuenta. En primer lugar, c
 
 Cuando crea una lambda, normalmente cede la responsabilidad de cómo se ejecutará esa lambda al método al que se la pasa. Por lo que usted sabe, su lambda puede ejecutarse en paralelo o en algún momento en el futuro, por lo que es posible que cualquier excepción que lance no se maneje como cabría esperar. No puede confiar en el manejo de excepciones como una forma de controlar el flujo de su programa.
 
-Para demostrar esto, escribamos un código para llamar a dos cosas, una tras otra. Lo usaremos Runnablecomo un tipo lambda conveniente.
+Para demostrar esto, escribamos un código para llamar a dos cosas, una tras otra. Lo usaremos **`Runnable`** como un tipo lambda conveniente.
 
 ```java
+public static void runInSequence(Runnable first, Runnable second) {
+    first.run();
+    second.run();
+}
 ```
 
 Si la primera llamada a ejecutar arrojara una excepción, el método terminaría y nunca se llamaría al segundo método. La persona que llama debe encargarse de la excepción. Si utilizamos este método para transferir dinero entre dos cuentas bancarias, podríamos escribir dos lambdas. Uno para la acción de débito y otro para la de crédito.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> a.debit(amount);
+    Runnable credit = () -> b.credit(amount);
+ }
 ```
 
-Entonces podríamos llamar a nuestro runInSequencemétodo así:
+Entonces podríamos llamar a nuestro método **`runInSequence`** así:
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> a.debit(amount);
+    Runnable credit = () -> b.credit(amount);
+    runInSequence(debit, credit);
+ }
 ```
 
-cualquier excepción podría detectarse y solucionarse utilizando un try/ catchcomo este:
+cualquier excepción podría detectarse y solucionarse utilizando un **`try`**/**`catch`** como este:
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> a.debit(amount);
+    Runnable credit = () -> b.credit(amount);
+    try {
+        runInSequence(debit, credit);
+    } catch (Exception e) {
+        // check account balances and rollback
+    }
+  }
 ```
 
-Aquí está la cosa. Como autor de lambdas, potencialmente no tengo idea de cómo runInSequencese implementa. Es muy posible que se implemente para ejecutarse de forma asincrónica de esta manera:
+Aquí está la cosa. Como autor de lambdas, potencialmente no tengo idea de cómo se implementa **`runInSequence`**. Es muy posible que se implemente para ejecutarse de forma asincrónica de esta manera:
 
 ```java
+public static void runInSequence(Runnable first, Runnable second) {
+    new Thread(() -> {
+        first.run();
+        second.run();
+    }).start();
+}
 ```
 
 En cuyo caso, cualquier excepción en la primera llamada terminaría el hilo, la excepción desaparecería en el controlador de excepciones predeterminado y nuestro código de cliente original no tendría la oportunidad de lidiar con la excepción.
 
-Usando una devolución de llamada
-Por cierto, una forma de solucionar el problema específico de generar una excepción en un hilo diferente al de la persona que llama se puede solucionar con una función de devolución de llamada. En primer lugar, te defenderías de las excepciones en el runInSequencemétodo:
+### Usando un callback
+
+Por cierto, una forma de solucionar el problema específico de generar una excepción en un hilo diferente al de la persona que llama se puede solucionar con una función de devolución de llamada. En primer lugar, te defenderías de las excepciones en el método **`runInSequence`**:
 
 ```java
+public static void runInSequence(Runnable first, Runnable second) {
+    new Thread(() -> {
+        try {
+            first.run();
+            second.run();
+        } catch (Exception e) {
+            // ...
+        }
+    }).start();
+}
 ```
 
 Luego introduzca un controlador de excepciones al que se pueda llamar en caso de una excepción:
 
 ```java
+public static void runInSequence(Runnable first, Runnable second,
+        Consumer<Throwable> exceptionHandler) {
+    new Thread(() -> {
+        try {
+            first.run();
+            second.run();
+        } catch (Exception e) {
+            exceptionHandler.accept(e);
+        }
+    }).start();
+}
 ```
 
-El consumidor es una interfaz funcional (nueva en Java 8) que en este caso toma la excepción como argumento de su acceptmétodo.
+El consumidor es una interfaz funcional (nueva en Java 8) que en este caso toma la excepción como argumento de su método **`accept`**.
 
 Cuando conectamos esto al cliente, podemos pasar una función lambda de devolución de llamada para manejar cualquier excepción.
 
 ```java
+public void nonBlockingTransfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> a.debit(amount);
+    Runnable credit = () -> b.credit(amount);
+    runInSequence(debit, credit, (exception) -> {
+      /* check account balances and rollback */
+    });
+}
 ```
 
-Este es un buen ejemplo de ejecución diferida y también tiene sus propias debilidades. El método del controlador de excepciones puede (o no) ejecutarse en algún momento posterior. El nonBlockingTransferproceso habrá finalizado y las propias cuentas bancarias pueden estar en algún otro estado cuando se active. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted; Hemos abierto toda una lata de gusanos de concurrencia.
+Este es un buen ejemplo de ejecución diferida y también tiene sus propias debilidades. El método del controlador de excepciones puede (o no) ejecutarse en algún momento posterior. El proceso **`nonBlockingTransfer`** habrá finalizado y las propias cuentas bancarias pueden estar en algún otro estado cuando se active. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted; Hemos abierto toda una lata de gusanos de concurrencia.
 
-Tratar con excepciones al escribir lambdas
+### Tratar con excepciones al escribir lambdas
+
 Veamos cómo manejar las excepciones desde la perspectiva de un autor de lambda, alguien que escribe lambda. Después de esto, veremos cómo lidiar con las excepciones al llamar a lambdas.
 
-Veámoslo como si quisiéramos implementar el transfermétodo usando lambdas pero esta vez quisiéramos reutilizar una biblioteca existente que proporciona el runInSequencemétodo.
+Veámoslo como si quisiéramos implementar el método **`transfer`** usando lambdas pero esta vez quisiéramos reutilizar una biblioteca existente que proporciona el método **`runInSequence`**.
 
-Antes de comenzar, echemos un vistazo a la BankAccountclase. Notarás que esta vez, los métodos debity creditarrojan una excepción marcada; InsufficientFundsException.
-
-```java
-```
-
-
-clase InsufficientFundsException extiende la excepción {}
-Recreemos el transfermétodo. Intentaremos crear las lambdas de débito y crédito y pasarlas al runInSequencemétodo. Recuerde que el runInSequencemétodo fue escrito por algún autor de la biblioteca y no podemos ver ni modificar su implementación.
+Antes de comenzar, echemos un vistazo a la clase **`BankAccount`**. Notarás que esta vez, los métodos **`debit`** y **`credit`** arrojan una excepción marcada; **`InsufficientFundsException`**.
 
 ```java
+class BankAccount {
+    public void debit(int amount) throws InsufficientFundsException    
+    {
+        // ...
+     }
+
+     public void credit(int amount) throws 
+     InsufficientFundsException   
+     {
+         // ...
+      }
+}
+
+class InsufficientFundsException extends Exception { }
 ```
 
-Tanto el débito como el crédito arrojan una excepción marcada, por lo que esta vez puede ver un error del compilador. No hay diferencia si agregamos esto a la firma del método; la excepción ocurriría dentro de la lambda. ¿Recuerda que dije que las excepciones en lambdas se propagan a la persona que llama? En nuestro caso, este será el runInSequencemétodo y no el punto en el que definimos la lambda. Los dos no se comunican entre sí sobre la posibilidad de que se plantee una excepción.
+Recreemos el método **`transfer`**. Intentaremos crear las lambdas de débito y crédito y pasarlas al método **`runInSequence`**. Recuerde que el método **`runInSequence`** fue escrito por algún autor de la biblioteca y no podemos ver ni modificar su implementación.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> a.debit(amount);   <- compiler error
+    Runnable credit = () -> b.credit(amount); <- compiler error
+    runInSequence(debit, credit);
+ }
 ```
 
-Entonces, si no podemos forzar que una excepción marcada sea transparente entre lambda y la persona que llama, una opción es envolver la excepción marcada como una excepción de tiempo de ejecución como esta:
+Tanto el débito como el crédito arrojan una excepción marcada, por lo que esta vez puede ver un error del compilador. No hay diferencia si agregamos esto a la firma del método; la excepción ocurriría dentro de la lambda. ¿Recuerda que dije que las excepciones en lambdas se propagan a la persona que llama? En nuestro caso, este será el método **`runInSequence`** y no el punto en el que definimos la lambda. Los dos no se comunican entre sí sobre la posibilidad de que se plantee una excepción.
 
 ```java
+// still doesn't compile
+public void transfer(BankAccount a, BankAccount b, Integer amount)
+       throws InsufficientFundsException {
+    Runnable debit = () -> a.debit(amount);
+    Runnable credit = () -> b.credit(amount);
+    runInSequence(debit, credit);
+}
 ```
 
-Eso nos saca del error de compilación pero aún no es la historia completa. Es muy detallado y todavía tenemos que detectar y solucionar lo que ahora es una excepción de tiempo de ejecución en torno a la llamada a runInSequence.
+Entonces, si no podemos forzar que una excepción marcada sea *transparente* entre lambda y la persona que llama, una opción es envolver la excepción marcada como una excepción de tiempo de ejecución como esta:
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> {
+        try {
+            a.debit(amount);
+        } catch (InsufficientFundsException e) {
+            throw new RuntimeException(e);
+        }
+   };
+   Runnable credit = () -> {
+       try {
+           b.credit(amount);
+       } catch (InsufficientFundsException e) {
+           throw new RuntimeException(e);
+       }
+   };
+   runInSequence(debit, credit);
+ }
 ```
 
-Sin embargo, todavía hay uno o dos inconvenientes; Estamos lanzando y cogiendo un RuntimeExceptionque quizás esté un poco flojo. Realmente no sabemos qué otras excepciones, si las hay, podrían generarse en el runInSequencemétodo. Quizás sea mejor ser más explícito. Creemos un nuevo subtipo de RuntimeExceptiony usémoslo en su lugar.
+Eso nos saca del error de compilación pero aún no es la historia completa. Es muy detallado y todavía tenemos que detectar y solucionar lo que ahora es una excepción de tiempo de ejecución en torno a la llamada a **`runInSequence`**.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount){
+    Runnable debit = () -> { ... };
+    };
+    Runnable credit = () -> { ... };
+    try {
+        runInSequence(debit, credit);
+    } catch (RuntimeException e) {
+        // check balances and rollback
+    }
+}
 ```
 
-Después de haber modificado la lambda original para generar la nueva excepción, podemos restringir la captura para que se ocupe únicamente de las excepciones que conocemos; es decir, el InsufficientFundsRuntimeException.
+Sin embargo, todavía hay uno o dos inconvenientes; Estamos lanzando y cogiendo un **`RuntimeException`** que quizás esté un poco flojo. Realmente no sabemos qué otras excepciones, si las hay, podrían generarse en el método **`runInSequence`**. Quizás sea mejor ser más explícito. Creemos un nuevo subtipo de **`RuntimeException`** y usémoslo en su lugar.
+
+```java
+class InsufficientFundsRuntimeException extends RuntimeException {
+    public   
+    InsufficientFundsRuntimeException(InsufficientFundsException   
+    cause) {
+        super(cause);
+    }
+}
+```
+
+Después de haber modificado la lambda original para generar la nueva excepción, podemos restringir la captura para que se ocupe únicamente de las excepciones que conocemos; es decir, el **`InsufficientFundsRuntimeException`**.
 
 Ahora podemos implementar algún tipo de funcionalidad de verificación y reversión de saldo, con la confianza de que entendemos todos los escenarios que pueden causarlo.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = () -> {
+        try {
+            a.debit(amount);
+        } catch (InsufficientFundsException e) {
+            throw new InsufficientFundsRuntimeException(e);
+        }
+   };
+   Runnable credit = () -> {
+       try {
+           b.credit(amount);
+       } catch (InsufficientFundsException e) {
+           throw new InsufficientFundsRuntimeException(e);
+       }
+   };
+   try {
+       runInSequence(debit, credit);
+   } catch (InsufficientFundsRuntimeException e) {
+       // check balances and rollback
+   }
+ }
 ```
 
 El problema con todo esto es que el código tiene más texto estándar para el manejo de excepciones que lógica empresarial real. Se supone que las lambdas hacen que las cosas sean menos detalladas, pero esto está lleno de ruido. Podemos mejorar las cosas si generalizamos el ajuste de las excepciones marcadas a equivalentes en tiempo de ejecución. Podríamos crear una interfaz funcional que capture un tipo de excepción en la firma usando genéricos.
 
-Llamémoslo Callabley su método único; call. No confunda esto con la clase del mismo nombre en el JDK; Estamos creando una nueva clase para ilustrar el manejo de excepciones.
+Llamémoslo **`Callable`** y su método único; **`call`**. No confunda esto con la clase del mismo nombre en el JDK; Estamos creando una nueva clase para ilustrar el manejo de excepciones.
 
 ```java
+@FunctionalInterface
+interface Callable<E extends Exception> {
+    void call() throws E;
+}
 ```
 
 Cambiaremos la implementación anterior de transferencia y crearemos lambdas para que coincidan con la "forma" de la nueva interfaz funcional. He dejado el tipo por un momento.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    ??? debit = () -> a.debit(amount);
+    ??? credit = () -> b.credit(amount);
+ }
 ```
 
-Recuerde de la sección de inferencia de tipos que Java podría ver esto como un tipo de Callableya que no tiene parámetros como Callable, tiene el mismo tipo de retorno (ninguno) y arroja una excepción del mismo tipo que la interfaz. Solo necesitamos darle una pista al compilador, para que podamos asignar esto a una instancia de Callable.
+Recuerde de la sección de inferencia de tipos que Java podría ver esto como un tipo de **`Callable`** ya que no tiene parámetros como **`Callable`**, tiene el mismo tipo de retorno (ninguno) y arroja una excepción del mismo tipo que la interfaz. Solo necesitamos darle una pista al compilador, para que podamos asignar esto a una instancia de **`Callable`**.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Callable<InsufficientFundsException> debit = () ->   
+    a.debit(amount);
+    Callable<InsufficientFundsException> credit = () -> 
+    b.credit(amount);
+ }
 ```
 
 Crear lambdas de esta manera no causa un error de compilación ya que la interfaz funcional declara que podría generarse. No es necesario que nos advierta en el momento en que creamos la lambda, ya que la firma del método funcional provocará un error en el compilador si es necesario cuando realmente intentemos llamarlo. Como un método normal.
 
-Sin embargo , si intentamos pasarlos al runInSequencemétodo, obtendremos un error del compilador.
+Sin embargo , si intentamos pasarlos al método **`runInSequence`**, obtendremos un error del compilador.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Callable<InsufficientFundsException> debit = () -> 
+    a.debit(amount);
+    Callable<InsufficientFundsException> credit = () -> 
+    b.credit(amount);
+    runInSequence(debit, credit); <- doesn't compile
+ }
 ```
 
-Las lambdas son del tipo incorrecto. Todavía necesitamos una lambda de tipo Runnable. Tendremos que escribir un método que pueda convertir de a Callablea Runnable. Al mismo tiempo, ajustaremos la excepción marcada a una de tiempo de ejecución. Algo como esto:
+Las lambdas son del tipo incorrecto. Todavía necesitamos una lambda de tipo **`Runnable`**. Tendremos que escribir un método que pueda convertir de a **`Callable`** a **`Runnable`**. Al mismo tiempo, ajustaremos la excepción marcada a una de tiempo de ejecución. Algo como esto:
 
 ```java
+public static Runnable unchecked(Callable<InsufficientFundsException> function) {
+    return () -> {
+        try {
+            function.call();
+        } catch (InsufficientFundsException e) {
+            throw new InsufficientFundsRuntimeException(e);
+        }
+    };
+}
 ```
 
 Todo lo que queda por hacer es conectarlo a nuestras lambdas:
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = unchecked(() -> a.debit(amount));
+    Runnable credit = unchecked(() -> b.credit(amount));
+    runInSequence(debit, credit);
+ }
 ```
 
 Una vez que volvemos a implementar el manejo de excepciones, volvemos a un cuerpo de método más conciso y hemos tratado las posibles excepciones de la misma manera que antes.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    Runnable debit = unchecked(() -> a.debit(amount));
+    Runnable credit = unchecked(() -> b.credit(amount));
+    try {
+         runInSequence(debit, credit);
+    } catch (InsufficientFundsRuntimeException e) {
+        // check balances and rollback
+    }
+ }
 ```
 
 La desventaja es que ésta no es una solución totalmente generalizada; Todavía tendríamos que crear variaciones del método no marcado para diferentes funciones. También acabamos de ocultar la sintaxis detallada. La verbosidad sigue ahí, acaba de ser movida. Sí, podemos reutilizarlo, pero si el manejo de excepciones fuera transparente o no hubiéramos verificado las excepciones, no necesitaríamos esconder el problema bajo la alfombra tanto.
@@ -1255,58 +1436,121 @@ Vale la pena señalar que probablemente terminaríamos haciendo algo similar si 
 
 Ciertamente, las lambdas ofrecen representaciones más concisas para pequeñas piezas anónimas de funcionalidad, pero debido al modelo de excepción verificado de Java, manejar excepciones en lambdas a menudo causará los mismos problemas de detalle que teníamos antes.
 
-Como persona que llama (tratando con excepciones al llamar a lambdas)
+### As a caller (tratando con excepciones al llamar a lambdas)
+
 Hemos visto cosas desde la perspectiva de escribir lambdas, ahora echemos un vistazo a las llamadas lambdas.
 
-Imaginemos que ahora estamos escribiendo la biblioteca que ofrece el runInSequencemétodo. Esta vez tenemos más control y no estamos limitados a usarlo Runnablecomo tipo lambda. Debido a que no queremos obligar a nuestros clientes a pasar por obstáculos relacionados con excepciones en sus lambdas (o envolverlas como excepciones de tiempo de ejecución), proporcionaremos una interfaz funcional que declara que se puede generar una excepción marcada.
+Imaginemos que ahora estamos escribiendo la library que ofrece el método **`runInSequence`**. Esta vez tenemos más control y no estamos limitados a usarlo **`Runnable`** como tipo lambda. Debido a que no queremos obligar a nuestros clientes a pasar por obstáculos relacionados con excepciones en sus lambdas (o envolverlas como excepciones de tiempo de ejecución), proporcionaremos una interfaz funcional que declara que se puede generar una excepción marcada.
 
-Lo llamaremos FinancialTransfercon un transfermétodo:
+Lo llamaremos **`FinancialTransfer`** con un método **`transfer`**:
 
 ```java
+@FunctionalInterface
+interface FinancialTransfer {
+    void transfer() throws InsufficientFundsException;
+}
 ```
 
-Estamos diciendo que cada vez que ocurre una transacción bancaria, existe la posibilidad de que no haya fondos suficientes disponibles. Luego, cuando implementamos nuestro runInSequencemétodo, aceptamos lambdas de este tipo.
+Estamos diciendo que cada vez que ocurre una transacción bancaria, existe la posibilidad de que no haya fondos suficientes disponibles. Luego, cuando implementamos nuestro método **`runInSequence`**, aceptamos lambdas de este tipo.
 
 ```java
+public static void runInSequence(FinancialTransfer first,
+        FinancialTransfer second) throws InsufficientFundsException      
+{
+    first.transfer();
+    second.transfer();
+ }
 ```
 
 Esto significa que cuando los clientes usan el método, no están obligados a lidiar con excepciones dentro de sus lambdas. Por ejemplo, escribir un método como este.
 
 ```java
+// example client usage
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    FinancialTransfer debit = () -> a.debit(amount);
+    FinancialTransfer credit = () -> b.credit(amount);
+ }
 ```
 
-Esta vez no hay ningún error del compilador al crear las lambdas. No es necesario incluir las excepciones de BankAccountlos métodos como excepciones de tiempo de ejecución; la interfaz funcional ya ha declarado la excepción. Sin embargo, runInSequenceahora arrojaría una excepción marcada, por lo que es explícito que el cliente tiene que lidiar con la posibilidad y verá un error del compilador.
+Esta vez no hay ningún error del compilador al crear las lambdas. No es necesario incluir las excepciones de **`BankAccount`** los métodos como excepciones de tiempo de ejecución; la interfaz funcional ya ha declarado la excepción. Sin embargo, **`runInSequence`** ahora arrojaría una excepción marcada, por lo que es explícito que el cliente tiene que lidiar con la posibilidad y verá un error del compilador.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    FinancialTransfer debit = () -> a.debit(amount);
+    FinancialTransfer credit = () -> b.credit(amount);
+    runInSequence(debit, credit);  <- compiler error
+ }
 ```
 
-Entonces necesitamos envolver la llamada en un try/ catchpara que el compilador esté contento:
+Entonces necesitamos envolver la llamada en un **`try`**/**`catch`** para que el compilador esté contento:
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    FinancialTransfer debit = () -> a.debit(amount);
+    FinancialTransfer credit = () -> b.credit(amount);
+    try {
+        runInSequence(debit, credit);  <- compiler error
+    } catch (InsufficientFundsException e) {
+        // whatever
+    }
+ }
 ```
 
 El resultado final es algo parecido a lo que vimos anteriormente pero sin la necesidad del método no verificado. Como desarrollador de bibliotecas, hemos facilitado a los clientes la integración con nuestro código.
 
-Pero ¿qué tal si probamos algo más exótico? Hagamos que el runInSequencemétodo sea asincrónico nuevamente. No es necesario lanzar la excepción desde la firma del método, ya que no se propagaría a la persona que llama si se lanzara desde un hilo diferente. Entonces, esta versión del runInSequencemétodo no incluye la cláusula throws y el transfermétodo ya no está obligado a lidiar con ella. Sin embargo, las llamadas a .transferseguirán generando una excepción.
+Pero ¿qué tal si probamos algo más exótico? Hagamos que el método **`runInSequence`** sea asincrónico nuevamente. No es necesario lanzar la excepción desde la firma del método, ya que no se propagaría a la persona que llama si se lanzara desde un hilo diferente. Entonces, esta versión del método **`runInSequence`** no incluye la cláusula 
+**`throws`** y el método **`transfer`** ya no está obligado a lidiar con ella. Sin embargo, las llamadas a **`.transfer`** seguirán generando una excepción.
 
 ```java
+public static void runInSequence(Runnable first, Runnable second) {
+    new Thread(() -> {
+        first.transfer();   <- compiler error
+        second.transfer();  <- compiler error
+    }).start();
+}
+
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    FinancialTransfer debit = () -> a.debit(amount);
+    FinancialTransfer credit = () -> b.credit(amount);
+    runInSequence(debit, credit);  <- compiler error
+ }
 ```
 
-Con los errores del compilador todavía en el runInSequencemétodo, necesitamos otra forma de manejar la excepción. Una técnica consiste en pasar una función que se llamará en caso de una excepción. Podemos usar esta lambda para conectar el código que se ejecuta de forma asincrónica con la persona que llama.
+Con los errores del compilador todavía en el método **`runInSequence`**, necesitamos otra forma de manejar la excepción. Una técnica consiste en pasar una función que se llamará en caso de una excepción. Podemos usar esta lambda para conectar el código que se ejecuta de forma asincrónica con la persona que llama.
 
-Para empezar, volveremos a agregar el catchbloque y pasaremos una interfaz funcional para usar como controlador de excepciones. Usaré la Consumerinterfaz aquí, es nueva en Java 8 y forma parte del java.util.functionpaquete. Luego llamamos al método de interfaz en el bloque catch y le pasamos la causa.
+Para empezar, volveremos a agregar el bloque **`catch`** y pasaremos una interfaz funcional para usar como controlador de excepciones. Usaré la interfaz **`Consumer`** aquí, es nueva en Java 8 y forma parte del paquete **`java.util.function`**. Luego llamamos al método de interfaz en el bloque **`catch`** y le pasamos la causa.
 
 ```java
+public void runInSequence(FinancialTransfer first,     
+       FinancialTransfer second,
+       Consumer<InsufficientFundsException> exceptionHandler) {
+    new Thread(() -> {
+        try {
+            first.transfer();
+            second.transfer();
+        } catch (InsufficientFundsException e) {
+            exceptionHandler.accept(e);
+        }
+    }).start();
+}
 ```
 
-Para llamarlo, necesitamos actualizar el transfermétodo para pasar una lambda para la devolución de llamada. El parámetro, excepción a continuación, será lo que se pase al acceptmétodo en runInSequence. Será una instancia InsufficientFundsExceptiony el cliente podrá manejarlo como quiera.
+Para llamarlo, necesitamos actualizar el método **`transfer`** para pasar una lambda para la devolución de llamada. El parámetro, excepción a continuación, será lo que se pase al método **`accept`** en **`runInSequence`**. Será una instancia **`InsufficientFundsException`** y el cliente podrá manejarlo como quiera.
 
 ```java
+public void transfer(BankAccount a, BankAccount b, Integer amount) {
+    FinancialTransfer debit = () -> a.debit(amount);
+    FinancialTransfer credit = () -> b.credit(amount);
+    Consumer<InsufficientFundsException> handler = (exception) -> {
+        /* check account balances and rollback */
+   };
+   runInSequenceNonBlocking(debit, credit, handler);
+}
 ```
 
-Ahí estamos. Le hemos proporcionado al cliente de nuestra biblioteca un mecanismo de manejo de excepciones alternativo en lugar de obligarlo a detectar excepciones.
+Ahí estamos. Le hemos proporcionado al cliente de nuestra library un mecanismo de manejo de excepciones alternativo en lugar de obligarlo a detectar excepciones.
 
-Hemos internalizado el manejo de excepciones en el código de la biblioteca. Es un buen ejemplo de ejecución diferida; Si hubiera una excepción, el cliente no necesariamente sabe cuándo se invocaría su controlador de excepciones. Por ejemplo, mientras ejecutamos otro hilo, es posible que las cuentas bancarias mismas hayan sido alteradas en el momento en que se ejecuta. Nuevamente resalta que usar excepciones para controlar el flujo de su programa es un enfoque defectuoso. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted.
+Hemos internalizado el manejo de excepciones en el código de la library. Es un buen ejemplo de ejecución diferida; Si hubiera una excepción, el cliente no necesariamente sabe cuándo se invocaría su controlador de excepciones. Por ejemplo, mientras ejecutamos otro hilo, es posible que las cuentas bancarias mismas hayan sido alteradas en el momento en que se ejecuta. Nuevamente resalta que usar excepciones para controlar el flujo de su programa es un enfoque defectuoso. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted.
 
 
 
