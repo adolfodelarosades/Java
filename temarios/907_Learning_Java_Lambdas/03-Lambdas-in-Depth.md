@@ -1648,28 +1648,38 @@ Hemos visto el uso de un closure para proporcionar un bloque anónimo de funcion
 
 ### Otras diferencias
 
-Una función anónima es una función literal sin nombre, mientras que un cierre es una instancia de una función. Por definición, una lambda no tiene variables de instancia; no es una instancia. Sus variables se proporcionan como argumentos. Sin embargo, un cierre tiene variables de instancia que se proporcionan cuando se crea la instancia.
+Una función anónima es una función literal sin nombre, mientras que un closure es una instancia de una función. Por definición, una lambda no tiene variables de instancia; no es una instancia. Sus variables se proporcionan como argumentos. Sin embargo, un closure tiene variables de instancia que se proporcionan cuando se crea la instancia.
 
-Teniendo esto en cuenta, una lambda generalmente será más eficiente que un cierre, ya que solo necesita evaluarse una vez. Una vez que tengas la función, podrás reutilizarla. Cuando un cierre se cierra sobre algo que no está en su entorno local, debe evaluarse cada vez que se llama. Una instancia debe actualizarse cada vez que se utiliza.
+Teniendo esto en cuenta, una lambda generalmente será más eficiente que un closure, ya que solo necesita evaluarse una vez. Una vez que tengas la función, podrás reutilizarla. Cuando un closure se cierra sobre algo que no está en su entorno local, debe evaluarse cada vez que se llama. Una instancia debe actualizarse cada vez que se utiliza.
 
-Todas las cuestiones que analizamos en la sección funciones versus clases también son relevantes aquí. Puede haber consideraciones de memoria al usar cierres sobre lambdas.
+Todas las cuestiones que analizamos en la sección functions vs classes también son relevantes aquí. Puede haber consideraciones de memoria al usar closures sobre lambdas.
 
-Resumen
+### Resumen
 
 Hemos hablado mucho aquí, así que resumamos brevemente las diferencias.
 
-Lambdas son simplemente funciones anónimas, similares a los métodos estáticos en Java. Al igual que los métodos estáticos, no pueden hacer referencia a variables fuera de su alcance excepto sus argumentos. Un tipo especial de lambda, llamado cierre, puede capturar variables fuera de su alcance (o cerrarlas) para que puedan usar variables externas o sus argumentos. Entonces, la regla simple es que si una lambda usa una variable fuera de su alcance, también es un cierre.
+Lambdas son simplemente funciones anónimas, similares a los métodos estáticos en Java. Al igual que los métodos estáticos, no pueden hacer referencia a variables fuera de su alcance excepto sus argumentos. Un tipo especial de lambda, llamado closure, puede capturar variables fuera de su alcance (o cerrarlas) para que puedan usar variables externas o sus argumentos. Entonces, la regla simple es que si una lambda usa una variable fuera de su alcance, también es un closure.
 
-Los cierres pueden verse como instancias de funciones. Lo cual es un concepto un tanto extraño para los desarrolladores de Java.
+Los closures pueden verse como instancias de funciones. Lo cual es un concepto un tanto extraño para los desarrolladores de Java.
 
-Un gran ejemplo es la clase anónima convencional que pasaríamos si no tuviéramos la nueva sintaxis lambda. Estos pueden "cerrar" variables y, por lo tanto, son en sí mismos cierres. Hemos tenido soporte de cierre en Java desde 1.1.
+Un gran ejemplo es la clase anónima convencional que pasaríamos si no tuviéramos la nueva sintaxis lambda. Estos pueden "cerrar" variables y, por lo tanto, son en sí mismos closures. Hemos tenido soporte de closure en Java desde 1.1.
 
-Echale un vistazo a éste ejemplo. El compilador debe cerrar la variable del servidor para utilizarla en la instancia anónima de la Conditioninterfaz. Esta es a la vez una instancia de clase anónima y un cierre.
+Echale un vistazo a éste ejemplo. El compilador debe cerrar la variable del servidor para utilizarla en la instancia anónima de la interfaz **`Condition`**. Esta es a la vez una instancia de clase anónima y un closure.
 
 ```java
+@since Java 1.1!
+void anonymousClassClosure() {
+    Server server = new HttpServer();
+    waitFor(new Condition() {
+        @Override
+        public Boolean isSatisfied() {
+            return !server.isRunning();
+        }
+    });
+}
 ```
 
-Las lambda no siempre son cierres, pero los cierres siempre son lambdas.
+Las lambda no siempre son closures, pero los closures siempre son lambdas.
 
-En esta sección exploraremos cómo la salida del compilador difiere cuando compila clases anónimas y cuando compila lambdas. Primero, recordaremos el código de bytes de Java y cómo leerlo. Luego veremos tanto las clases anónimas como las lambdas cuando capturan variables y cuando no. Compararemos cierres anteriores a Java 8 con lambdas y exploraremos cómo las lambdas no son solo azúcar sintáctico sino que producen códigos de bytes muy diferentes a los enfoques tradicionales.
+En esta sección exploraremos cómo la salida del compilador difiere cuando compila clases anónimas y cuando compila lambdas. Primero, recordaremos el código de bytes de Java y cómo leerlo. Luego veremos tanto las clases anónimas como las lambdas cuando capturan variables y cuando no. Compararemos closures anteriores a Java 8 con lambdas y exploraremos cómo las lambdas no son solo azúcar sintáctico sino que producen códigos de bytes muy diferentes a los enfoques tradicionales.
 
