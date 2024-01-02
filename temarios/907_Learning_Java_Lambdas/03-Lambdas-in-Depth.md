@@ -1552,5 +1552,124 @@ Ahí estamos. Le hemos proporcionado al cliente de nuestra library un mecanismo 
 
 Hemos internalizado el manejo de excepciones en el código de la library. Es un buen ejemplo de ejecución diferida; Si hubiera una excepción, el cliente no necesariamente sabe cuándo se invocaría su controlador de excepciones. Por ejemplo, mientras ejecutamos otro hilo, es posible que las cuentas bancarias mismas hayan sido alteradas en el momento en que se ejecuta. Nuevamente resalta que usar excepciones para controlar el flujo de su programa es un enfoque defectuoso. No puede confiar en que se llame al controlador de excepciones cuando sea conveniente para usted.
 
+## Lambdas vs closures
 
+Los términos ***closure*** y ***lambda*** a menudo se usan indistintamente pero en realidad son distintos. En esta sección veremos las diferencias para que puedas tener claro cuál es cuál.
+
+A continuación se muestra una tabla que muestra las fechas de lanzamiento de cada versión principal de Java. Java 5.0 apareció en 2004 e incluyó los primeros cambios importantes en el lenguaje, incluidos aspectos como compatibilidad con genéricos:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/2cd931a1-4502-4c7e-8a71-528db546ba1f)
+
+Entre 2008 y 2010 se trabajó mucho para introducir closures en Java. Debía pasar a Java 7 pero no llegó a tiempo. En cambio, evolucionó hacia el soporte lambda en Java 8. Desafortunadamente, en esa época, la gente usaba el término "closure" y "lambdas" indistintamente, por lo que desde entonces ha sido un poco confuso para la comunidad Java. De hecho, todavía hay una página de proyecto en el sitio OpenJDK para closures y otra para lambdas .
+
+Desde la perspectiva del proyecto OpenJDK, realmente deberían haber usado "lambda" de manera consistente desde el principio. De hecho, OpenJDK se equivocó tanto que ignoraron el hecho de que Java ha tenido soporte de closure desde la versión 1.1.
+
+Estoy siendo un poco pedante aquí ya que, aunque existen diferencias técnicas entre closures y lambdas, los objetivos de los dos proyectos eran lograr lo mismo, incluso si usaron la terminología de manera inconsistente.
+
+Entonces, ¿cuál es la diferencia entre lambdas y closures? Básicamente, un closure es un tipo de lambda, pero una lambda no es necesariamente un closure.
+
+### Diferencias básicas
+
+Al igual que una lambda, un closure es efectivamente un bloque anónimo de funcionalidad, pero existen algunas distinciones importantes. Un closure depende de valores externos (no solo de sus argumentos), mientras que una lambda depende solo de sus argumentos. Se dice que un closure "cierra sobre" el entorno que requiere.
+
+Por ejemplo, lo siguiente:
+
+```java
+(server) -> server.isRunning();
+```
+
+es una lambda, pero esto
+
+```java
+() -> server.isRunning();
+```
+
+es un closure.
+
+Ambos devuelven un valor booleano que indica si algún servidor está activo, pero uno usa su argumento y el otro debe obtener la variable de otro lugar. Ambos son lambdas; en el sentido general, ambos son bloques anónimos de funcionalidad y, en el sentido del lenguaje Java, ambos utilizan la nueva sintaxis lambda.
+
+El primer ejemplo se refiere a una variable del servidor pasada a la lambda como argumento, mientras que el segundo ejemplo (el closure) obtiene la variable del servidor de otro lugar; ese es el medio ambiente. Para obtener la instancia de la variable, lambda tiene que "close over" el entorno o capturar el valor del servidor. Hemos visto esto en acción cuando hablamos de **`effectively final`**.
+
+Ampliemos el ejemplo para ver las cosas más claramente. En primer lugar, crearemos un método en una clase estática para realizar una encuesta ingenua y esperar. Verificará una interfaz funcional en cada encuesta para ver si se ha cumplido alguna condición.
+
+```java
+class WaitFor {
+    static <T> void waitFor(T input, Predicate<T> predicate)
+            throws InterruptedException {
+        while (!predicate.test(input))
+            Thread.sleep(250);
+    }
+}
+```
+
+Usamos **`Predicate `**(otra interfaz nueva de **`java.util`**) como nuestra interfaz funcional y la probamos, haciendo una pausa por un momento si no se cumple la condición. Podemos llamar a este método con una lambda simple que verifica si algún servidor HTTP se está ejecutando.
+
+```java
+void lambda() throws InterruptedException {
+    waitFor(new HttpServer(), (server) -> !server.isRunning());
+}
+```
+
+El parámetro del servidor lo proporciona nuestro método **`waitFor`** y será la instancia de **`HttpServer`** que acabamos de definir. Es una lambda ya que el compilador no necesita capturar la variable del servidor ya que la proporcionamos manualmente en tiempo de ejecución.
+
+<hr>
+
+**NOTA**
+
+Por cierto, podríamos haber podido utilizar una referencia de método...  waitFor(new HttpServer(), HttpServer::isRunning);                                                   
+
+<hr>
+
+Ahora, si volvemos a implementar esto como closure, se vería así. En primer lugar, tenemos que agregar otro método **`waitFor`**.
+
+```java
+static void waitFor(Condition condition) throws InterruptedException {
+    while (!condition.isSatisfied())
+        Thread.sleep(250);
+}
+```
+
+Esta vez, con una firma más sencilla. Pasamos una interfaz funcional que no requiere parámetros. La interfaz **`Condition`** tiene un método simple **`isSatisfied`** sin argumentos, lo que implica que debemos proporcionar cualquier valor que pueda necesitar una implementación. Ya está insinuando que su uso puede resultar en closures.
+
+Usándolo, escribiríamos algo como esto:
+
+```java
+void closure() throws InterruptedException {
+    Server server = new HttpServer();
+    waitFor(() -> !server.isRunning());
+}
+```
+
+La instancia del servidor no se pasa aquí como parámetro a lambda, sino que se accede a ella desde el ámbito adjunto. Hemos definido la variable y lambda la usa directamente. Esta variable debe ser capturada o copiada por el compilador. La lambda "closes over - cierra" la variable del servidor.
+
+Esta expresión "closes over - cerrar" proviene de la idea de que una expresión lambda con enlaces abiertos (o variables libres) ha sido cerrada (o enlazada) por el entorno o alcance léxico. El resultado es una ***closed expression-expresión cerrada***. No hay variables independientes. Para ser más precisos, los closures se cierran sobre ***valores***, no sobre ***variables***.
+
+Hemos visto el uso de un closure para proporcionar un bloque anónimo de funcionalidad y la diferencia entre una lambda equivalente, pero todavía hay más distinciones útiles que podemos hacer.
+
+### Otras diferencias
+
+Una función anónima es una función literal sin nombre, mientras que un cierre es una instancia de una función. Por definición, una lambda no tiene variables de instancia; no es una instancia. Sus variables se proporcionan como argumentos. Sin embargo, un cierre tiene variables de instancia que se proporcionan cuando se crea la instancia.
+
+Teniendo esto en cuenta, una lambda generalmente será más eficiente que un cierre, ya que solo necesita evaluarse una vez. Una vez que tengas la función, podrás reutilizarla. Cuando un cierre se cierra sobre algo que no está en su entorno local, debe evaluarse cada vez que se llama. Una instancia debe actualizarse cada vez que se utiliza.
+
+Todas las cuestiones que analizamos en la sección funciones versus clases también son relevantes aquí. Puede haber consideraciones de memoria al usar cierres sobre lambdas.
+
+Resumen
+
+Hemos hablado mucho aquí, así que resumamos brevemente las diferencias.
+
+Lambdas son simplemente funciones anónimas, similares a los métodos estáticos en Java. Al igual que los métodos estáticos, no pueden hacer referencia a variables fuera de su alcance excepto sus argumentos. Un tipo especial de lambda, llamado cierre, puede capturar variables fuera de su alcance (o cerrarlas) para que puedan usar variables externas o sus argumentos. Entonces, la regla simple es que si una lambda usa una variable fuera de su alcance, también es un cierre.
+
+Los cierres pueden verse como instancias de funciones. Lo cual es un concepto un tanto extraño para los desarrolladores de Java.
+
+Un gran ejemplo es la clase anónima convencional que pasaríamos si no tuviéramos la nueva sintaxis lambda. Estos pueden "cerrar" variables y, por lo tanto, son en sí mismos cierres. Hemos tenido soporte de cierre en Java desde 1.1.
+
+Echale un vistazo a éste ejemplo. El compilador debe cerrar la variable del servidor para utilizarla en la instancia anónima de la Conditioninterfaz. Esta es a la vez una instancia de clase anónima y un cierre.
+
+```java
+```
+
+Las lambda no siempre son cierres, pero los cierres siempre son lambdas.
+
+En esta sección exploraremos cómo la salida del compilador difiere cuando compila clases anónimas y cuando compila lambdas. Primero, recordaremos el código de bytes de Java y cómo leerlo. Luego veremos tanto las clases anónimas como las lambdas cuando capturan variables y cuando no. Compararemos cierres anteriores a Java 8 con lambdas y exploraremos cómo las lambdas no son solo azúcar sintáctico sino que producen códigos de bytes muy diferentes a los enfoques tradicionales.
 
