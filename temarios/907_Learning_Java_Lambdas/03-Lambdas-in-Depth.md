@@ -1683,3 +1683,72 @@ Las lambda no siempre son closures, pero los closures siempre son lambdas.
 
 En esta sección exploraremos cómo la salida del compilador difiere cuando compila clases anónimas y cuando compila lambdas. Primero, recordaremos el código de bytes de Java y cómo leerlo. Luego veremos tanto las clases anónimas como las lambdas cuando capturan variables y cuando no. Compararemos closures anteriores a Java 8 con lambdas y exploraremos cómo las lambdas no son solo azúcar sintáctico sino que producen códigos de bytes muy diferentes a los enfoques tradicionales.
 
+
+## Bytecode recap
+
+Para empezar, recapitulemos lo que sabemos sobre el código de bytes.
+
+Pasar del código fuente al código ejecutable por máquina. El compilador de Java produce código de bytes. Esto es interpretado por la JVM o recompilado por el compilador Just-in-time.
+
+Cuando se interpreta, el código de bytes se convierte en código de máquina sobre la marcha y se ejecuta. Esto sucede cada vez que se encuentra el código de bytes excepto la JVM.
+
+Cuando se compila Just-in-time, la JVM lo compila directamente en código de máquina la primera vez que lo encuentra y luego lo ejecuta.
+
+Ambas cosas suceden en tiempo de ejecución, pero la compilación justo a tiempo ofrece muchas optimizaciones.
+
+Entonces, el código de bytes de Java es la representación intermedia entre el código fuente y el código de máquina.
+
+<hr>
+
+**NOTA**
+
+Como breve comentario: el compilador JIT de Java ha disfrutado de una gran reputación a lo largo de los años. Pero volviendo al punto de partida de nuestra introducción, fue John McCarthy quien escribió por primera vez sobre la compilación JIT allá por 1960. Así que es interesante pensar que no es sólo el soporte lambda el que fue influenciado por LISP. ( Aycock 2003, 2. Técnicas de compilación JIT, 2.1 Génesis, p. 98 ). 
+
+<hr>
+
+El código de bytes es el conjunto de instrucciones de la JVM. Como sugiere su nombre, el código de bytes consta de instrucciones de un solo byte (llamadas códigos de operación) junto con bytes asociados para los parámetros. Por lo tanto, hay posibles 256 códigos de operación disponibles, aunque en realidad sólo se utilizan unos 200.
+
+La JVM utiliza un modelo de cálculo basado en pila, si queremos incrementar un número, tenemos que hacerlo usando la pila. Todas las instrucciones o códigos de operación funcionan contra la pila.
+
+Entonces, por ejemplo, 5 + 1 se convierte en 5 1 + donde 5 se empuja a la pila,
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/7f5c51c3-78d6-4546-8c64-58a2900a4068)
+
+1 es empujado entonces...
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/4365caad-ba55-4c21-bd48-5d68aed81814)
+
+el operador **`+`** se aplica. Además, abriría los dos cuadros superiores, sumaría los números y colocaría el resultado nuevamente en la pila. El resultado sería así.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/9c146f8c-f077-48cc-b9a9-6d3f9b4ce863)
+
+Cada código de operación funciona con la pila de esta manera, por lo que podemos traducir nuestro ejemplo a una secuencia de códigos de bytes de Java:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/30d916ea-8ce2-4cd5-9432-18e74ada3a9f)
+
+El código **`push 5`** de operación se convierte en **`iconst_5`**.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a908bc24-23b0-4a8d-a6e6-e734410329ef)
+
+El código **`push 1`** de operación se convierte en **`iconst_1`**:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/579b3d98-b522-413e-af27-80ded781ac80)
+
+y **`add`** se convierte **`iadd`**.
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/2c6916d1-f8dc-4c84-8751-709367d72140)
+
+El código de operación **`iconst_x`** y el código de operación **`iadd`** son ejemplos de códigos de operación. Los códigos de operación a menudo tienen prefijos y/o suficientes para indicar los tipos en los que funcionan; **`i`** en estos ejemplos se refiere a un número entero, **`x`** es un sufijo específico del código de operación.
+
+Podemos agrupar los códigos de operación en las siguientes categorías:
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ef578609-6997-46b0-989d-87a17b4e0d7e)
+
+Instrucciones relacionadas con la manipulación de pilas, como **`aload`** y **`istore`**.
+
+Para controlar el flujo del programa con cosas como if y while, usamos códigos de operación como **`goto`** y if iguales.
+
+La creación de objetos y los métodos de acceso utilizan códigos como **`new`** y **`invokespecial`**. Estaremos particularmente interesados ​​en este grupo cuando observemos los diferentes códigos de operación utilizados para invocar lambdas.
+
+El último grupo trata sobre aritmética, lógica y conversión de tipos e incluye códigos como **`iadd`**, comparación flotante larga ( **`fcmpl`**) y entero a byte (**`i2b`**).
+
