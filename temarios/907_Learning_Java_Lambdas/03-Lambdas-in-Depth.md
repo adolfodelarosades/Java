@@ -1834,232 +1834,273 @@ El código de bytes de ejemplo se generó utilizando la herramienta **javap** de
 El primer ejemplo es una instancia de clase anónima simple que se pasa a nuestro método **`waitFor`**.
 
 ```java
-clase pública Ejemplo1 {
-    // clase anónima
-    ejemplo vacío() lanza InterruptedException {
-        esperar(nueva condición() {
-            @Anular
-            público booleano está satisfecho() {
-                devolver verdadero;
+public class Example1 {
+    // anonymous class
+    void example() throws InterruptedException {
+        waitFor(new Condition() {
+            @Override
+            public Boolean isSatisfied() {
+                return true;
             }
         });
     }
 }
 ```
 
-Si miramos el código de bytes a continuación, lo que hay que notar es que una instancia de la clase anónima se actualiza en la línea 6. Se #2refiere a una búsqueda, cuyo resultado se muestra en el comentario. Entonces usa el newcódigo de operación con lo que sea que esté #2en el grupo constante, esta es la clase anónima Example$1.
+Si miramos el código de bytes a continuación, lo que hay que notar es que una instancia de la clase anónima se actualiza en la línea 6. **`#2`** se  refiere a una búsqueda, cuyo resultado se muestra en el comentario. Entonces usa el **`new`** opcode de operación con lo que sea que esté **`#2`** en el grupo constante, esta es la clase anónima **`Example$1`**.
 
-ejemplo nulo() lanza java.lang.InterruptedException;
+```java
+void example() throws java.lang.InterruptedException;
     descriptor: ()V 
-    banderas:
-    Código:
-      pila = 3, locales = 1, args_size = 1
-         0: nuevo #2 // clase Ejemplo1$1
-         3: doble
-         4: carga_0
-         5: invocar especial #3 // Método Ejemplo1$1."":(LExample1;)V
-         8: invokestatic #4 // Método WaitFor.waitFor:  
-            (LCondición;)V
-        11: regreso
-      Tabla de números de línea:
-        línea 10: 0
-        línea 16: 11
-      Tabla de variables locales:
-        Inicio Longitud Ranura Nombre Firma
-            0 12 0 este LEjemplo1;
-    Excepciones: 
-      lanza java.lang.InterruptedException
-Una vez creado, se llama al constructor usando invokespecialla línea 9. Este código de operación se usa para llamar a métodos constructores, métodos privados y métodos accesibles de una superclase. Es posible que observe que el descriptor del método incluye una referencia a Example1. Todas las instancias de clases anónimas tienen esta referencia implícita a la clase principal.
+    flags:
+    Code:
+      stack=3, locals=1, args_size=1
+         0: new #2 // class Example1$1
+         3: dup
+         4: aload_0
+         5: invokespecial #3 // Method Example1$1."":(LExample1;)V
+         8: invokestatic #4 // Method WaitFor.waitFor:  
+            (LCondition;)V
+        11: return
+      LineNumberTable:
+        line 10: 0
+        line 16: 11
+      LocalVariableTable:
+        Start Length Slot Name Signature
+            0     12    0 this LExample1;
+    Exceptions: 
+      throws java.lang.InterruptedException
+```
 
-El siguiente paso consiste invokestaticen llamar a nuestro waitFormétodo pasando la clase anónima en la línea 10. El   invokestatic código de operación se utiliza para llamar a métodos estáticos y es muy rápido, ya que puede marcar directamente un método en lugar de decidir a cuál llamar, como sería el caso en un Jerarquía de objetos.
+Una vez creado, se llama al constructor usando **`invokespecial`** la línea 9. Este código de operación se usa para llamar a métodos constructores, métodos privados y métodos accesibles de una superclase. Es posible que observe que el descriptor del método incluye una referencia a **`Example1`**. Todas las instancias de clases anónimas tienen esta referencia implícita a la clase principal.
+
+El siguiente paso consiste **`invokestatic`** en llamar a nuestro **`waitFor`** método pasando la clase anónima en la línea 10. El **`invokestatic`** código de operación se utiliza para llamar a métodos estáticos y es muy rápido, ya que puede marcar directamente un método en lugar de decidir a cuál llamar, como sería el caso en un Jerarquía de objetos.
 
 ### Ejemplo 2
-La Example 2clase es otra clase anónima pero esta vez se cierra sobre la variable del servidor. Es un cierre de estilo antiguo:
 
-clase pública Ejemplo2 {
-    // clase anónima (cierre)
-    ejemplo vacío() lanza InterruptedException {
-        Servidor servidor = nuevo HttpServer();
-        esperar(nueva condición() {
-            @Anular
-            público booleano está satisfecho() {
-                return !servidor.isRunning();
+La clase **`Example2`** es otra clase anónima pero esta vez se cierra sobre la variable del servidor. Es un closure de estilo antiguo:
+
+```java
+public class Example2 {
+    // anonymous class (closure)
+    void example() throws InterruptedException {
+        Server server = new HttpServer();
+        waitFor(new Condition() {
+            @Override
+            public Boolean isSatisfied() {
+                return !server.isRunning();
             }
         });
     }
 }
-El código de bytes es similar al anterior, excepto que Serverse actualiza una instancia de la clase (en la línea 3) y se llama a su constructor en la línea 5. La instancia de la clase anónima $1todavía se construye con invokespecial(en la línea 11), pero esta vez toma la instancia de Servercomo argumento así como la instancia de la clase que llama.
+```
+
+El código de bytes es similar al anterior, excepto que **`Server`** se actualiza una instancia de la clase (en la línea 3) y se llama a su constructor en la línea 5. La instancia de la clase anónima **`$1`** todavía se construye con **`invokespecial`**(en la línea 11), pero esta vez toma la instancia de **`Server`** como argumento así como la instancia de la clase que llama.
 
 Para cerrar la variable del servidor, se pasa directamente a la clase anónima:
 
-ejemplo nulo() lanza java.lang.InterruptedException;
-    Código:
-       0: nuevo #2 // clase Servidor$HttpServer
-       3: doble
-       4: invocar especial #3 // Método Servidor$HttpServer."":()V
+```sh
+void example() throws java.lang.InterruptedException;
+    Code:
+       0: new #2 // class Server$HttpServer
+       3: dup
+       4: invokespecial #3 // Method Server$HttpServer."":()V
        7: astore_1
-       8: nuevo #4 // clase Ejemplo2$1
-      11: doble
-      12: carga_0
-      13: carga_1
-      14: invocar especial #5 // Método Ejemplo2$1."":   
-          (LEjemplo2;LServidor;)V
-      17: invokestatic #6 // Método WaitFor.waitFor:(LCondition;)V
-      20: regreso
+       8: new #4 // class Example2$1
+      11: dup
+      12: aload_0
+      13: aload_1
+      14: invokespecial #5 // Method Example2$1."":   
+          (LExample2;LServer;)V
+      17: invokestatic #6 // Method WaitFor.waitFor:(LCondition;)V
+      20: return
+```
+
 
 ###   Ejemplo 3
-La Example 3 clase utiliza una lambda de Java con nuestro waitFormétodo. La lambda no hace nada más que volver verdadero. Es equivalente al ejemplo 1.
 
-clase pública Ejemplo3 {
-    // lambda simple
-    ejemplo vacío() lanza InterruptedException {
-        esperar(() -> verdadero);
+La clase **`Example3`** utiliza una lambda de Java con nuestro método **`waitFor`**. La lambda no hace nada más que volver verdadero. Es equivalente al ejemplo 1.
+
+```java
+public class Example3 {
+    // simple lambda
+    void example() throws InterruptedException {
+        waitFor(() -> true);
     }
 }
-El código de bytes es súper simple esta vez. Utiliza el invokedynamiccódigo de operación para crear la lambda en la línea 3 que luego se pasa al invokestaticcódigo de operación en la siguiente línea.
+```
 
- ejemplo nulo() lanza java.lang.InterruptedException;
-     Código:
-        0: invokedynamic #2, 0 // InvokeDynamic #0:está satisfecho:   
-           ()LCondición;
-        5: invokestatic #3 // Método WaitFor.waitFor:(LCondition;)V
-        8: regreso
-El descriptor de la invokedynamicllamada está dirigido al isSatisfiedmétodo en la Conditioninterfaz (línea 3).
+El código de bytes es súper simple esta vez. Utiliza el **`invokedynamic`** código de operación para crear la lambda en la línea 3 que luego se pasa al **`invokestatic`** código de operación en la siguiente línea.
 
-Lo que no estamos viendo aquí es la mecánica de invokedynamic. El invokedynamiccódigo de operación es un nuevo código de operación para Java 7, su objetivo es proporcionar un mejor soporte para lenguajes dinámicos en la JVM. Para ello, no vincula los tipos a los métodos hasta el tiempo de ejecución. El otro código de operación "invocar" todos los tipos de resolución en tiempo de compilación.
+```java
+void example() throws java.lang.InterruptedException;
+     Code:
+        0: invokedynamic #2, 0 // InvokeDynamic #0:isSatisfied:   
+           ()LCondition;
+        5: invokestatic #3 // Method WaitFor.waitFor:(LCondition;)V
+        8: return
+```
+
+El descriptor de la llamada **`invokedynamic`** está dirigido al método **`isSatisfied`** en la interfaz **`Condition`** (línea 3).
+
+Lo que no estamos viendo aquí es la mecánica de **`invokedynamic`**. El **`invokedynamic`** opcode código de operación es un nuevo código de operación para Java 7, su objetivo es proporcionar un mejor soporte para lenguajes dinámicos en la JVM. Para ello, no vincula los tipos a los métodos hasta el tiempo de ejecución. El otro código de operación "invocar" todos los tipos de resolución en tiempo de compilación.
 
 Para lambdas, esto significa que las invocaciones del método de marcador de posición se pueden colocar en el código de bytes como acabamos de ver y se puede resolver la implementación en la JVM en tiempo de ejecución.
 
-Si observamos un código de bytes más detallado que incluya el grupo constante, podemos desreferenciar las búsquedas. Por ejemplo, si buscamos el número 2, podemos ver sus referencias #0y #26.
+Si observamos un código de bytes más detallado que incluya el grupo constante, podemos desreferenciar las búsquedas. Por ejemplo, si buscamos el número 2, podemos ver sus referencias **`#0`** y **`#26`**.
 
-Grupo constante:
-   #1 = Referenciamétodo #6.#21 // Objeto."":()V
+```sh
+Constant pool:
+   #1 = Methodref #6.#21 // Object."":()V
    #2 = InvokeDynamic #0:#26 // #0:isSatisfied:()LCondition;
    ...
-Métodos Bootstrap:
-    0: #23 LambdaMetafactory.metafactory invocador estático:              
-            (LMethodHandles$Búsqueda;LString;
-            LMétodoTipo;LMétodoTipo;
+BootstrapMethods:
+    0: #23 invokestatic LambdaMetafactory.metafactory:              
+            (LMethodHandles$Lookup;LString;
+            LMethodType;LMethodType;
             LMethodHandle;LMethodType;)LCallSite;
-      Argumentos del método:
-        #24 ()LBooleano;
-        #25 invocador estático Ejemplo3.lambda$ejemplo$25:()LBoolean;
-        #24 ()LBooleano;
-La constante 0está en una tabla de búsqueda especial para métodos de arranque (línea 6). Se refiere a una llamada a un método estático al JDK LambdaMetafactorypara crear la lambda. Aquí es donde continúa el trabajo pesado. Toda la inferencia de tipos de destino para adaptar tipos y cualquier evaluación parcial de argumentos continúa aquí.
+      Method arguments:
+        #24 ()LBoolean;
+        #25 invokestatic Example3.lambda$example$25:()LBoolean;
+        #24 ()LBoolean;
+```
 
-La lambda real se muestra como un identificador de método llamado lambda$example$25(línea 12) sin argumentos, que devuelve un valor booleano. Se invoca usando, invokestaticlo que muestra que se accede a ella como una función genuina; no hay ningún objeto asociado con él. Tampoco hay ninguna referencia implícita a una clase contenedora a diferencia de los ejemplos anónimos anteriores.
+La constante **`0`** está en una tabla de búsqueda especial para métodos de arranque (línea 6). Se refiere a una llamada a un método estático al JDK **`LambdaMetafactory`** para crear la lambda. Aquí es donde continúa el trabajo pesado. Toda la inferencia de tipos de destino para adaptar tipos y cualquier evaluación parcial de argumentos continúa aquí.
 
-Se pasa al LambdaMetafactoryy sabemos que es un método identificador buscándolo en el grupo constante. El número de lambda lo asigna el compilador y solo se incrementa desde cero para cada lambda requerida.
+La lambda real se muestra como un identificador de método llamado **`lambda$example$25`**(línea 12) sin argumentos, que devuelve un valor booleano. Se invoca usando, **`invokestaticlo`** que muestra que se accede a ella como una función genuina; no hay ningún objeto asociado con él. Tampoco hay ninguna referencia implícita a una clase contenedora a diferencia de los ejemplos anónimos anteriores.
 
-Grupo constante:
-    // invoca estático Ejemplo3.lambda$ejemplo$25:()LBoolean;
-    #25 = MétodoManejar #6:#35
+Se pasa al **`LambdaMetafactory`** y sabemos que es un método identificador buscándolo en el grupo constante. El número de lambda lo asigna el compilador y solo se incrementa desde cero para cada lambda requerida.
+
+```java
+Constant pool:
+    // invokestatic Example3.lambda$example$25:()LBoolean;
+    #25 = MethodHandle #6:#35
+```
 
 ### Ejemplo 4
-La Example 4 clase es otra lambda pero esta vez toma una instancia de Servercomo argumento. Es equivalente en funcionalidad al ejemplo 2 pero no se cierra sobre la variable; no es un cierre.
 
-clase pública Ejemplo4 {
-    // lambda con argumentos
-    ejemplo vacío() lanza InterruptedException {
-        waitFor(new HttpServer(), (servidor) -> server.isRunning());
+La clase **`Example4`** es otra lambda pero esta vez toma una instancia de **`Server`** como argumento. Es equivalente en funcionalidad al ejemplo 2 pero no se cierra sobre la variable; no es un closure.
+
+```java
+public class Example4 {
+    // lambda with arguments
+    void example() throws InterruptedException {
+        waitFor(new HttpServer(), (server) -> server.isRunning());
     }
 }
-Al igual que en el ejemplo 2, el código de bytes tiene que crear la instancia del servidor, pero esta vez, el invokedynamiccódigo de operación hace referencia al testmétodo de tipo Predicate. Si siguiéramos la referencia ( #4) a la tabla de métodos de boostrap, veríamos que la lambda real requiere un argumento de tipo HttpServery devuelve a Z, que es un booleano primitivo.
+```
 
-ejemplo nulo() lanza java.lang.InterruptedException;
+Al igual que en el ejemplo 2, el código de bytes tiene que crear la instancia del servidor, pero esta vez, el **`invokedynamic`** opcode código de operación hace referencia al método **`test`** de tipo **`Predicate`**. Si siguiéramos la referencia (**`#4`**) a la tabla de métodos de boostrap, veríamos que la lambda real requiere un argumento de tipo **`HttpServer`** y devuelve a **`Z`**, que es un booleano primitivo.
+
+```java
+void example() throws java.lang.InterruptedException;
     descriptor: ()V
-    banderas:
-    Código:
-      pila = 2, locales = 1, args_size = 1
-         0: nuevo #2 // clase Servidor$HttpServer
-         3: doble
-         4: invocar especial #3 // Método Servidor$HttpServer."":()V
-         7: invokedynamic #4, 0 // InvokeDynamic #0:prueba:  
-            ()LPredicado;
-        12: invokestatic #5 // Método WaitFor.waitFor:     
-            (LObjeto;LPredicado;)V
-        15: regreso
-      Tabla de números de línea:
-        línea 13: 0
-        línea 15: 15
-      Tabla de variables locales:
-        Inicio Longitud Ranura Nombre Firma
-            0 16 0 este LEjemplo4;
-    Excepciones:
-      lanza java.lang.InterruptedException
+    flags:
+    Code:
+      stack=2, locals=1, args_size=1
+         0: new #2 // class Server$HttpServer
+         3: dup
+         4: invokespecial #3 // Method Server$HttpServer."":()V
+         7: invokedynamic #4, 0 // InvokeDynamic #0:test:  
+            ()LPredicate;
+        12: invokestatic #5 // Method WaitFor.waitFor:     
+            (LObject;LPredicate;)V
+        15: return
+      LineNumberTable:
+        line 13: 0
+        line 15: 15
+      LocalVariableTable:
+        Start Length Slot Name Signature
+            0     16    0 this LExample4;
+    Exceptions:
+      throws java.lang.InterruptedException
+```
+
 Entonces, la llamada a lambda sigue siendo una llamada a un método estático como antes, pero esta vez toma la variable como parámetro cuando se invoca.
 
 ### Ejemplo 4 (con referencia de método)
+
 Curiosamente, si utilizamos una referencia de método, la funcionalidad es exactamente la misma pero obtenemos un código de bytes diferente.
 
-clase pública Ejemplo4_metodo_referencia {
-    // lambda con referencia al método
-    ejemplo vacío() lanza InterruptedException {
-        waitFor(nuevo HttpServer(), HttpServer::isRunning);
+```java
+public class Example4_method_reference {
+    // lambda with method reference
+    void example() throws InterruptedException {
+        waitFor(new HttpServer(), HttpServer::isRunning);
     }
 }
-A través de la llamada a LambdaMetafactorycuando se produce la ejecución final, method_referencese produce una llamada a invokevirtualen lugar de invokestatic. El invokevirtualcódigo de operación se utiliza para llamar a métodos públicos, protegidos y protegidos por paquete, por lo que implica que se requiere una instancia. La instancia se proporciona al metafactorymétodo y no se necesita ninguna lambda (o función estática); no hay lambda$en este código de bytes.
+```
 
-ejemplo nulo() lanza java.lang.InterruptedException;
+A través de la llamada a **`LambdaMetafactory`** cuando se produce la ejecución final, **`method_referencese`** produce una llamada a **`invokevirtualen`** lugar de **`invokestatic`**. El **`invokevirtual`** código de operación se utiliza para llamar a métodos públicos, protegidos y protegidos por paquete, por lo que implica que se requiere una instancia. La instancia se proporciona al método **`metafactory`** y no se necesita ninguna lambda (o función estática); no hay **`lambda$`** en este código de bytes.
+
+```java
+void example() throws java.lang.InterruptedException;
     descriptor: ()V
-    banderas:
-    Código:
-      pila = 2, locales = 1, args_size = 1
-         0: nuevo #2 // clase Servidor$HttpServer
-         3: doble
-         4: invocar especial #3 // Método Servidor$HttpServer."":()V
-         7: invokedynamic #4, 0 // InvokeDynamic #0:prueba:   
-            ()LPredicado;
-        12: invokestatic #5 // Método WaitFor.waitFor:
-            (LObjeto;LPredicado;)V
-        15: regreso
-      Tabla de números de línea:
-        línea 11: 0
-        línea 12: 15
-      Tabla de variables locales:
-        Inicio Longitud Ranura Nombre Firma
-            0 16 0 este LExample4_method_reference;
-    Excepciones:
-      lanza java.lang.InterruptedException
-
+    flags:
+    Code:
+      stack=2, locals=1, args_size=1
+         0: new #2 // class Server$HttpServer
+         3: dup
+         4: invokespecial #3 // Method Server$HttpServer."":()V
+         7: invokedynamic #4, 0 // InvokeDynamic #0:test:   
+            ()LPredicate;
+        12: invokestatic #5 // Method WaitFor.waitFor:
+            (LObject;LPredicate;)V
+        15: return
+      LineNumberTable:
+        line 11: 0
+        line 12: 15
+      LocalVariableTable:
+        Start Length Slot Name Signature
+            0     16    0 this LExample4_method_reference;
+    Exceptions:
+      throws java.lang.InterruptedException
+```
 
 ### Ejemplo 5
-Por último, el ejemplo 5 utiliza una lambda pero cierra la instancia del servidor. Es equivalente al ejemplo 2 y es un cierre de nuevo estilo.
 
-clase pública Ejemplo5 {
-    // cierre
-    ejemplo vacío() lanza InterruptedException {
-        Servidor servidor = nuevo HttpServer();
+Por último, el ejemplo 5 utiliza una lambda pero cierra la instancia del servidor. Es equivalente al ejemplo 2 y es un closure de nuevo estilo.
+
+```java
+public class Example5 {
+    // closure
+    void example() throws InterruptedException {
+        Server server = new HttpServer();
         waitFor(() -> !server.isRunning());
     }
 }
-Repasa los conceptos básicos de la misma manera que las otras lambdas, pero si buscamos el metafactorymétodo en la tabla de métodos de arranque, notarás que esta vez, el identificador del método de lambda tiene un argumento de tipo Server. Se invoca usando invokestatic(línea 9) y la variable se pasa directamente a la lambda en el momento de la invocación.
+```
 
-Métodos Bootstrap:
-    0: #34 LambdaMetafactory.metafactory invocador estático:
-            (LMethodHandles$Búsqueda;
+Repasa los conceptos básicos de la misma manera que las otras lambdas, pero si buscamos el método **`metafactory`** en la tabla de métodos de arranque, notarás que esta vez, el identificador del método de lambda tiene un argumento de tipo Server. Se invoca usando **`invokestatic`**(línea 9) y la variable se pasa directamente a la lambda en el momento de la invocación.
+
+```sh
+BootstrapMethods:
+    0: #34 invokestatic LambdaMetafactory.metafactory:
+            (LMethodHandles$Lookup;
              LString;LMethodType;
-             Tipo de método L;
+             LMethodType;
              LMethodHandle;LMethodType;)LCallSite;
-      Argumentos del método:
-        #35 ()LBooleano; // <-- Método SAM que será implementado por el        
+      Method arguments:
+        #35 ()LBoolean; // <-- SAM method to be implemented by the        
             lambda
-        #36 Ejemplo5.lambda$ejemplo$35 invocador:
-          (LServidor;)LBooleano;
-        #35 ()LBooleano; // <-- tipo que se aplicará en la invocación   
-        tiempo
+        #36 invokestatic Example5.lambda$example$35:
+          (LServer;)LBoolean;
+        #35 ()LBoolean; // <-- type to be enforced at invocation   
+        time
+```
+
 Entonces, al igual que la clase anónima en el ejemplo 2, el compilador agrega un argumento para capturar el término, aunque esta vez es un argumento de método en lugar de un argumento de constructor.
 
 ### Resumen
 
-Vimos cómo el uso de una clase anónima creará una nueva instancia y llamará a su constructor con invokespecial.
+Vimos cómo el uso de una clase anónima creará una nueva instancia y llamará a su constructor con **`invokespecial`**.
 
 Vimos que las clases anónimas que cierran variables tienen un argumento adicional en su constructor para capturar esa variable.
 
-Y vimos cómo las lambdas de Java usan la invokedynamic instrucción para diferir la vinculación de los tipos y que lambda$se usa un identificador de método especial para representar la lambda. Este método manejador no tiene argumentos en este caso y se invoca usando, lo invokestaticque lo convierte en una función genuina.
+Y vimos cómo las lambdas de Java usan la instrucción **`invokedynamic`** para diferir la vinculación de los tipos y que **`lambda$`** se usa un identificador de método especial para representar la lambda. Este método manejador no tiene argumentos en este caso y se invoca usando, lo **`invokestatic`** que lo convierte en una función genuina.
 
-La lambda fue creada por la LambdaMetafactoryclase que a su vez era el objetivo de la invokedynamicllamada.
+La lambda fue creada por la clase **`LambdaMetafactory`** que a su vez era el objetivo de la llamada **`invokedynamic`**.
 
-Cuando una lambda tiene argumentos, vimos cómo LambdaMetafactorydescribe el argumento que se pasará a la lambda. El invokestatic código de operación se utiliza para ejecutar lambda como antes. Pero también echamos un vistazo a una referencia de método utilizada en lugar de una lambda. En este caso, no lambda$se creó ningún identificador de método y invokevirtualse utilizó para llamar al método directamente.
+Cuando una lambda tiene argumentos, vimos cómo **`LambdaMetafactory`** describe el argumento que se pasará a la lambda. El **`invokestatic`** opcode código de operación se utiliza para ejecutar lambda como antes. Pero también echamos un vistazo a una referencia de método utilizada en lugar de una lambda. En este caso, no **`lambda$`** se creó ningún identificador de método y **`invokevirtual`** se utilizó para llamar al método directamente.
 
-Por último, observamos una lambda que se cierra sobre una variable. Este crea un argumento en el lambda$identificador del método y nuevamente se llama con invokestatic.
+Por último, observamos una lambda que se cierra sobre una variable. Este crea un argumento en el **`lambda$`** identificador del método y nuevamente se llama con **`invokestatic`**.
