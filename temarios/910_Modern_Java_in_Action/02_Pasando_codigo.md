@@ -333,13 +333,52 @@ public class FilteringApples {
 **3. Results in a List containing one Apple of 155 g** 
 **4. Results in a List containing two green Apples**
 
-Esto es un gasto innecesario. ¿Puedes hacerlo mejor? Java tiene mecanismos llamados clases anónimas , que le permiten declarar y crear instancias de una clase al mismo tiempo. Le permiten mejorar su código un paso más haciéndolo un poco más conciso. Pero no son del todo satisfactorios. La sección 2.3.3 anticipa el próximo capítulo con una breve vista previa de cómo las expresiones lambda pueden hacer que su código sea más legible.
+Esto es un gasto innecesario. ¿Puedes hacerlo mejor? Java tiene mecanismos llamados clases anónimas, que le permiten declarar y crear instancias de una clase al mismo tiempo. Le permiten mejorar su código un paso más haciéndolo un poco más conciso. Pero no son del todo satisfactorios. La sección 2.3.3 anticipa el próximo capítulo con una breve vista previa de cómo las expresiones lambda pueden hacer que su código sea más legible.
 
-2.3.1.clases anónimas
+### 2.3.1. Clases anónimas
+
 Las clases anónimas son como las clases locales (una clase definida en un bloque) con las que ya estás familiarizado en Java. Pero las clases anónimas no tienen nombre. Le permiten declarar y crear una instancia de una clase al mismo tiempo. En resumen, le permiten crear implementaciones ad hoc.
 
-2.3.2.Quinto intento: usar una clase anónima
-El siguiente código muestra cómo reescribir el ejemplo de filtrado creando un objeto que se implemente ApplePredicatemediante una clase anónima:
+### 2.3.2. Quinto intento: usar una clase anónima
+
+El siguiente código muestra cómo reescribir el ejemplo de filtrado creando un objeto que implemente **`ApplePredicate`** mediante una clase anónima:
+
+```java
+List<Apple> redApples = filterApples(inventory, new ApplePredicate() {     1
+    public boolean test(Apple apple){
+        return RED.equals(apple.getColor());
+    }
+});
+```
+
+**1. Parameterizes the behavior of the method filterApples with an anonymous class.**
+
+Las clases anónimas se utilizan a menudo en el contexto de aplicaciones GUI para crear objetos controladores de eventos. No queremos traer recuerdos dolorosos de Swing, pero el siguiente es un patrón común que se ve en la práctica (aquí usando la API JavaFX, una plataforma UI moderna para Java):
+
+```java
+button.setOnAction(new EventHandler<ActionEvent>() {
+    public void handle(ActionEvent event) {
+        System.out.println("Whoooo a click!!");
+    }
+});
+```
+
+Pero las clases anónimas todavía no son lo suficientemente buenas. Primero, tienden a ser voluminosos porque ocupan mucho espacio, como se muestra aquí en el código en negrita usando los mismos dos ejemplos usados ​​anteriormente:
+
+```java
+List<Apple> redApples = filterApples(inventory, new ApplePredicate() {   1
+    public boolean test(Apple a){
+        return RED.equals(a.getColor());
+    }
+});
+button.setOnAction(new EventHandler<ActionEvent>() {                     1
+    public void handle(ActionEvent event) {
+        System.out.println("Whoooo a click!!");
+    }
+```
+
+**1. Lots of boilerplate code**
+
 
 ![02-04](images/02-04.png)
 
