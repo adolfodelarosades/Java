@@ -2,12 +2,13 @@
 
 Este capítulo cubre
 
-Lambdas en pocas palabras
-Dónde y cómo utilizar lambdas
-El patrón de ejecución
-Interfaces funcionales, inferencia de tipos.
-Referencias de métodos
-Componiendo lambdas
+* Lambdas en pocas palabras
+* Dónde y cómo utilizar lambdas
+* El patrón de ejecución
+* Interfaces funcionales, inferencia de tipos.
+* Referencias de métodos
+* Componiendo lambdas
+
 En el capítulo anterior, vio que pasar código con parametrización de comportamiento es útil para hacer frente a cambios frecuentes de requisitos en su código. Le permite definir un bloque de código que representa un comportamiento y luego transmitirlo. Puede decidir ejecutar ese bloque de código cuando ocurre un determinado evento (por ejemplo, un clic en un botón) o en ciertos puntos de un algoritmo (por ejemplo, un predicado como "solo manzanas que pesen más de 150 g" en el algoritmo de filtrado o la operación de comparación personalizada en la clasificación). En general, con este concepto puedes escribir código que sea más flexible y reutilizable.
 
 Pero viste que usar clases anónimas para representar diferentes comportamientos no es satisfactorio. Es detallado, lo que no anima a los programadores a utilizar la parametrización del comportamiento en la práctica. En este capítulo, le enseñaremos acerca de una nueva característica enJava 8 que aborda este problema: expresiones lambda. Le permiten representar un comportamiento o un código de acceso de forma concisa. Por ahora puedes pensar en las expresiones lambda como funciones anónimas, métodos sin nombres declarados, pero que también pueden pasarse como argumentos a un método como puedes hacerlo con una clase anónima.
