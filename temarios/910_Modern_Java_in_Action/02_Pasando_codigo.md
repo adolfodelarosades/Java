@@ -377,8 +377,173 @@ button.setOnAction(new EventHandler<ActionEvent>() {                     1
     }
 ```
 
-**1. Lots of boilerplate code**
+**1. Lots of boilerplate code - Mucho código repetitivo**
 
+En segundo lugar, muchos programadores encuentran su uso confuso. Por ejemplo, la Prueba 2.2 muestra un rompecabezas clásico de Java que toma por sorpresa a la mayoría de los programadores. Pruébalo.
+
+Prueba 2.2: rompecabezas de clase anónima
+¿Cuál será el resultado cuando se ejecute este código: 4, 5, 6 ó 42?
+
+```java
+public class MeaningOfThis {
+    public final int value = 4;
+    public void doIt() {
+        int value = 6;
+        Runnable r = new Runnable() {
+                public final int value = 5;
+                public void run(){
+                    int value = 10;
+                    System.out.println(this.value);
+                }
+            };
+            r.run();
+        }
+        public static void main(String...args) {
+            MeaningOfThis m = new MeaningOfThis();
+            m.doIt();                                1
+        }
+}
+```
+
+**1 What’s the output of this line? - ¿Cuál es el resultado de esta línea?** 
+
+**Respuesta:**
+
+La respuesta es **`5`** porque **`this`** se refiere a la clase envolvente **`Runnable`**, no a la clase envolvente **`MeaningOfThis`**.
+
+La verbosidad en general es mala; Desalienta el uso de una función del lenguaje porque lleva mucho tiempo escribir y mantener un código detallado, ¡y no es agradable de leer! Un buen código debe ser fácil de comprender de un vistazo. Aunque las clases anónimas abordan de alguna manera la verbosidad asociada con la declaración de múltiples clases concretas para una interfaz, siguen siendo insatisfactorias. En el contexto de pasar un fragmento de código simple (por ejemplo, una expresión **`boolean`** que representa un criterio de selección), aún debe crear un objeto e implementar explícitamente un método para definir un nuevo comportamiento (por ejemplo, el método **`test`** para **`Predicate`** o el método **`handle`** para **`EventHandler`**).
+
+Idealmente, nos gustaría animar a los programadores a utilizar el patrón de parametrización de comportamiento porque, como acaba de ver, hace que su código se adapte más a los cambios de requisitos. En el capítulo 3 , verá que los diseñadores del lenguaje Java 8 resolvieron este problema introduciendo expresiones lambda, una forma más concisa de pasar código. Basta de suspenso; A continuación se ofrece una breve vista previa de cómo las expresiones lambda pueden ayudarle en su búsqueda de un código limpio.
+
+### 2.3.3.Sexto intento: usar una expresión lambda
+
+El código anterior se puede reescribir de la siguiente manera en Java 8 usando una expresión lambda:
+
+```java
+List<Apple> result = filterApples(inventory, (Apple apple) -> RED.equals(apple.getColor()));
+```
+
+¡Tienes que admitir que este código parece mucho más limpio que nuestros intentos anteriores! Es genial porque está empezando a parecerse mucho más al planteamiento del problema. Ahora hemos abordado el problema de la verbosidad. La figura 2.4 resume nuestro viaje hasta el momento.
+
+**Figura 2.4. Parametrización de comportamiento versus parametrización de valor**
 
 ![02-04](images/02-04.png)
 
+### 2.3.4.Séptimo intento: abstraer sobre el tipo de lista
+
+Hay un paso más que puedes dar en tu viaje hacia la abstracción. Por el momento, el método **`filterApples`** sólo funciona para Apple. Pero también puedes abstraer el tipo **`List`** para ir más allá del dominio del problema en el que estás pensando, como se muestra:
+
+```java
+public interface Predicate<T> {
+    boolean test(T t);
+}
+public static <T> List<T> filter(List<T> list, Predicate<T> p) {     1
+    List<T> result = new ArrayList<>();
+    for(T e: list) {
+        if(p.test(e)) {
+            result.add(e);
+        }
+    }
+    return result;
+}
+```
+
+**1 Introduce un parámetro de tipo T**
+
+¡Ahora puedes usar el método **`filter`** con una **`List`** de plátanos, naranjas, **`Integers`** o **`Strings`**! Aquí hay un ejemplo, usando expresiones lambda:
+
+```java
+List<Apple> redApples =
+  filter(inventory, (Apple apple) -> RED.equals(apple.getColor()));
+List<Integer> evenNumbers =
+  filter(numbers, (Integer i) -> i % 2 == 0);
+```
+
+¿No es genial? ¡Has logrado encontrar el punto óptimo entre flexibilidad y concisión, lo que no era posible antes de Java 8!
+
+## 2.4. Ejemplos del mundo real
+
+Ahora ha visto que la parametrización del comportamiento es un patrón útil para adaptarse fácilmente a los requisitos cambiantes. Este patrón le permite encapsular un comportamiento (un fragmento de código) y parametrizar el comportamiento de los métodos pasando y utilizando estos comportamientos que cree (por ejemplo, diferentes predicados para un Apple). Mencionamos anteriormente que este enfoque es similar al patrón de diseño de estrategias. Es posible que ya hayas utilizado este patrón en la práctica. Muchos métodos de la API de Java se pueden parametrizar con diferentes comportamientos. Estos métodos se suelen utilizar junto con clases anónimas. Mostramos cuatro ejemplos, que deberían solidificar la idea de pasar código: ordenar con un **`Comparator`**, ejecutar un bloque de código con **`Runnable`**, devolver un resultado de una tarea usando **`Callable`** y manejo de eventos GUI.
+
+### 2.4.1.Ordenar con un Comparator
+
+Ordenar una colección es una tarea de programación recurrente. Por ejemplo, supongamos que su granjero quiere que clasifique el inventario de manzanas según su peso. O tal vez cambia de opinión y quiere que clasifiques las manzanas por color. ¿Suena familiar? Sí tú Necesita una forma de representar y utilizar diferentes comportamientos de clasificación para adaptarse fácilmente a los requisitos cambiantes.
+
+Desde Java 8, a Listviene con un sortmétodo (también puedes usar Collections.sort). El comportamiento de sortse puede parametrizar mediante un java.util.Comparatorobjeto, que tiene la siguiente interfaz:
+
+```java
+```
+
+Por lo tanto, puede crear diferentes comportamientos para el sortmétodo creando una implementación ad hoc de Comparator. Por ejemplo, puedes usarlo para ordenar el inventario aumentando el peso usando una clase anónima:
+
+```java
+```
+
+Si el agricultor cambia de opinión sobre cómo clasificar las manzanas, puede crear un ad hoc Comparatorque coincida con el nuevo requisito y pasarlo al sortmétodo. Los detalles internos de cómo ordenar se abstraen. Con una expresión lambda quedaría así:
+
+```java
+```
+
+De nuevo, no te preocupes por esta nueva sintaxis por ahora; El siguiente capítulo cubre en detalle cómo escribir y usar expresiones lambda.
+
+### 2.4.2.Ejecutar un bloque de código con Runnable
+
+Los subprocesos de Java permiten ejecutar un bloque de código al mismo tiempo que el resto del programa. Pero, ¿cómo puedes decirle a un hilo qué bloque de código debe ejecutar? Cada uno de varios subprocesos puede ejecutar código diferente. Lo que necesita es una forma de representar un fragmento de código que se ejecutará más adelante. Hasta Java 8, sólo se podían pasar objetos al Threadconstructor, por lo que el patrón de uso típico y torpe era pasar una clase anónima que contenía un runmétodo que devolvía void(sin resultado). Estas clases anónimas implementan la Runnableinterfaz.
+
+En Java, puedes usar la Runnableinterfaz para representar un bloque de código a ejecutar; tenga en cuenta que el código devuelve void(sin resultado):
+
+```java
+```
+
+Puede utilizar esta interfaz para crear hilos con su elección de comportamiento, de la siguiente manera:
+
+```java
+```
+
+Pero desde Java 8 puedes usar una expresión lambda, por lo que la llamada a Threadse vería así:
+
+```java
+```
+
+### 2.4.3.Devolver un resultado usando Callable
+
+Quizás esté familiarizado con la ExecutorServiceabstracción que se introdujo en Java 5. La ExecutorServiceinterfaz desacopla cómo se envían y ejecutan las tareas. Lo que es útil en comparación con el uso de subprocesos Runnablees que al usar un Executor-Servicepuedes enviar una tarea a un grupo de subprocesos y almacenar su resultado en un archivo Future. No se preocupe si esto no le resulta familiar; volveremos a abordar este tema en capítulos posteriores cuando analicemos la concurrencia con más detalle. Por ahora, todo lo que necesitas saber es que la Callableinterfaz se utiliza para modelar una tarea que devuelve un resultado. Puedes verlo como una actualización Runnable:
+
+```java
+```
+
+Puede usarlo de la siguiente manera, enviando una tarea a un servicio ejecutor. Aquí devuelves el nombre del Threadresponsable de ejecutar la tarea:
+
+```java
+```
+
+### 2.4.4.Manejo de eventos GUI
+
+Un patrón típico en la programación GUI es realizar una acción en respuesta a un evento determinado, como hacer clic o pasar el cursor sobre el texto. Por ejemplo, si el usuario hace clic en el botón Enviar, es posible que desee mostrar una ventana emergente o quizás registrar la acción en un archivo. Una vez más, se necesita una forma de afrontar los cambios; Debería poder realizar cualquier respuesta. En JavaFX, puedes usar un EventHandlerpara representar una respuesta a un evento pasándolo a setOnAction:
+
+```java
+```
+
+Aquí el comportamiento del setOnActionmétodo se parametriza con EventHandlerobjetos. Con una expresión lambda quedaría así:
+
+```java
+```
+
+### Resumen
+
+La parametrización del comportamiento es la capacidad de un método de tomar múltiples comportamientos diferentes como parámetros y usarlos internamente para lograr diferentes comportamientos.
+La parametrización del comportamiento le permite hacer que su código se adapte mejor a los requisitos cambiantes y le ahorra esfuerzos de ingeniería en el futuro.
+Pasar código es una forma de dar nuevos comportamientos como argumentos a un método. Pero es detallado antes de Java 8. Las clases anónimas ayudaron un poco antes de Java 8 a deshacerse de la verbosidad asociada con la declaración de múltiples clases concretas para una interfaz que se necesitan solo una vez.
+La API de Java contiene muchos métodos que se pueden parametrizar con diferentes comportamientos, que incluyen clasificación, subprocesos y manejo de GUI.
+
+```java
+```
+
+```java
+```
+
+```java
+```
+
+```java
+```
