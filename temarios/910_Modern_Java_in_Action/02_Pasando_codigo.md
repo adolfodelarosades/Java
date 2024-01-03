@@ -557,31 +557,26 @@ Future<String> threadName = executorService.submit(
 ```
 ### 2.4.4.Manejo de eventos GUI
 
-Un patrón típico en la programación GUI es realizar una acción en respuesta a un evento determinado, como hacer clic o pasar el cursor sobre el texto. Por ejemplo, si el usuario hace clic en el botón Enviar, es posible que desee mostrar una ventana emergente o quizás registrar la acción en un archivo. Una vez más, se necesita una forma de afrontar los cambios; Debería poder realizar cualquier respuesta. En JavaFX, puedes usar un EventHandlerpara representar una respuesta a un evento pasándolo a setOnAction:
+Un patrón típico en la programación GUI es realizar una acción en respuesta a un evento determinado, como hacer clic o pasar el cursor sobre el texto. Por ejemplo, si el usuario hace clic en el botón Enviar, es posible que desee mostrar una ventana emergente o quizás registrar la acción en un archivo. Una vez más, se necesita una forma de afrontar los cambios; Debería poder realizar cualquier respuesta. En JavaFX, puedes usar un **`EventHandler`** para representar una respuesta a un evento pasándolo a **`setOnAction`**:
 
 ```java
+Button button = new Button("Send");
+button.setOnAction(new EventHandler<ActionEvent>() {
+    public void handle(ActionEvent event) {
+        label.setText("Sent!!");
+    }
+});
 ```
 
-Aquí el comportamiento del setOnActionmétodo se parametriza con EventHandlerobjetos. Con una expresión lambda quedaría así:
+Aquí el comportamiento del método **`setOnAction`** se parametriza con objetos **`EventHandler`**. Con una expresión lambda quedaría así:
 
 ```java
+button.setOnAction((ActionEvent event) -> label.setText("Sent!!"));
 ```
 
 ### Resumen
 
-La parametrización del comportamiento es la capacidad de un método de tomar múltiples comportamientos diferentes como parámetros y usarlos internamente para lograr diferentes comportamientos.
-La parametrización del comportamiento le permite hacer que su código se adapte mejor a los requisitos cambiantes y le ahorra esfuerzos de ingeniería en el futuro.
-Pasar código es una forma de dar nuevos comportamientos como argumentos a un método. Pero es detallado antes de Java 8. Las clases anónimas ayudaron un poco antes de Java 8 a deshacerse de la verbosidad asociada con la declaración de múltiples clases concretas para una interfaz que se necesitan solo una vez.
-La API de Java contiene muchos métodos que se pueden parametrizar con diferentes comportamientos, que incluyen clasificación, subprocesos y manejo de GUI.
-
-```java
-```
-
-```java
-```
-
-```java
-```
-
-```java
-```
+* La parametrización del comportamiento es la capacidad de un método de tomar múltiples comportamientos diferentes como parámetros y usarlos internamente para lograr diferentes comportamientos.
+* La parametrización del comportamiento le permite hacer que su código se adapte mejor a los requisitos cambiantes y le ahorra esfuerzos de ingeniería en el futuro.
+* Pasar código es una forma de dar nuevos comportamientos como argumentos a un método. Pero es detallado antes de Java 8. Las clases anónimas ayudaron un poco antes de Java 8 a deshacerse de la verbosidad asociada con la declaración de múltiples clases concretas para una interfaz que se necesitan solo una vez.
+* La API de Java contiene muchos métodos que se pueden parametrizar con diferentes comportamientos, que incluyen sorting, threads, y GUI handling.
