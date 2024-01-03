@@ -224,5 +224,122 @@ public static void prettyPrintApple(List<Apple> inventory, ???) {
 
 Primero, necesita una forma de representar un comportamiento que tome un **`Apple`** y devuelva un **`String`** formateado como resultado. Hiciste algo similar cuando creaste una interfaz **`ApplePredicate`**:
 
+```java
+public interface AppleFormatter {
+    String accept(Apple a);
+}
+```
+
+Ahora puedes representar múltiples comportamientos de formato implementando la interfaz **`Apple-Formatter`**:
+
+```java
+public class AppleFancyFormatter implements AppleFormatter {
+    public String accept(Apple apple) {
+        String characteristic = apple.getWeight() > 150 ? "heavy" : "light";
+        return "A " + characteristic +
+               " " + apple.getColor() +" apple";
+    }
+}
+public class AppleSimpleFormatter implements AppleFormatter {
+    public String accept(Apple apple) {
+        return "An apple of " + apple.getWeight() + "g";
+    }
+}
+```
+
+Finalmente, debes indicarle a tu método **`prettyPrintApple`** que tome objetos **`AppleFormatter`** y los use internamente. Puedes hacer esto agregando un parámetro a **`AppleFormatter`**:
+
+```java
+public static void prettyPrintApple(List<Apple> inventory, AppleFormatter formatter) {
+  for(Apple apple: inventory) {
+    String output = formatter.accept(apple);
+    System.out.println(output);
+  }
+}
+```
+
+¡Bingo! Ahora puedes pasar múltiples comportamientos a tu método prettyPrintApple. Para ello, cree instancias de implementaciones **`AppleFormatter`** y proporciónelas como argumentos para **`prettyPrintApple`**:
+
+```java
+prettyPrintApple(inventory, new AppleFancyFormatter());
+```
+
+Esto producirá un resultado similar al de
+
+```java
+A light green apple
+A heavy red apple
+...
+```
+
+O prueba esto:
+
+```java
+prettyPrintApple(inventory, new AppleSimpleFormatter());
+```
+
+Esto producirá un resultado similar al de
+
+```sh
+An apple of 80g
+An apple of 155g
+...
+```
+
+Ha visto que puede abstraer el comportamiento y hacer que su código se adapte a los cambios de requisitos, pero el proceso es detallado porque necesita declarar múltiples clases de las que crea instancias solo una vez. Veamos cómo mejorar eso.
+
+## 2.3. Abordar la verbosidad
+
+Todos sabemos que se evitará una característica o concepto que sea complicado de usar. En este momento, cuando desea pasar un nuevo comportamiento a su método **`filterApples`**, se ve obligado a declarar varias clases que implementan la interfaz **`ApplePredicate`** y luego crear instancias de varios objetos **`ApplePredicate`** que asigna solo una vez, como se muestra en el siguiente listado que resume lo que ha visto hasta ahora. ¡Hay mucha verbosidad involucrada y es un proceso que requiere mucho tiempo!
+
+**Listado 2.1. Parametrización del comportamiento: filtrado de manzanas con predicados**
+
+```java
+public class AppleHeavyWeightPredicate implements ApplePredicate {      1
+    public boolean test(Apple apple) {
+        return apple.getWeight() > 150;
+    }
+}
+public class AppleGreenColorPredicate implements ApplePredicate {       2
+    public boolean test(Apple apple) {
+        return GREEN.equals(apple.getColor());
+    }
+}
+public class FilteringApples {
+    public static void main(String...args) {
+        List<Apple> inventory = Arrays.asList(new Apple(80, GREEN),
+                                              new Apple(155, GREEN),
+                                              new Apple(120, RED));
+        List<Apple> heavyApples =
+            filterApples(inventory, new AppleHeavyWeightPredicate());   3
+        List<Apple> greenApples =
+            filterApples(inventory, new AppleGreenColorPredicate());    4
+    }
+    public static List<Apple> filterApples(List<Apple> inventory,
+                                           ApplePredicate p) {
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple : inventory) {
+            if (p.test(apple)){
+                result.add(apple);
+            }
+        }
+        return result;
+    }
+}
+```
+
+**1. Selects heavy apples**
+**2. Selects green apples**
+**3. Results in a List containing one Apple of 155 g** 
+**4. Results in a List containing two green Apples**
+
+Esto es un gasto innecesario. ¿Puedes hacerlo mejor? Java tiene mecanismos llamados clases anónimas , que le permiten declarar y crear instancias de una clase al mismo tiempo. Le permiten mejorar su código un paso más haciéndolo un poco más conciso. Pero no son del todo satisfactorios. La sección 2.3.3 anticipa el próximo capítulo con una breve vista previa de cómo las expresiones lambda pueden hacer que su código sea más legible.
+
+2.3.1.clases anónimas
+Las clases anónimas son como las clases locales (una clase definida en un bloque) con las que ya estás familiarizado en Java. Pero las clases anónimas no tienen nombre. Le permiten declarar y crear una instancia de una clase al mismo tiempo. En resumen, le permiten crear implementaciones ad hoc.
+
+2.3.2.Quinto intento: usar una clase anónima
+El siguiente código muestra cómo reescribir el ejemplo de filtrado creando un objeto que se implemente ApplePredicatemediante una clase anónima:
+
 ![02-04](images/02-04.png)
 
