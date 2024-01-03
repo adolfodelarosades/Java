@@ -11,20 +11,22 @@ Este capítulo cubre
 
 En el capítulo anterior, vio que pasar código con parametrización de comportamiento es útil para hacer frente a cambios frecuentes de requisitos en su código. Le permite definir un bloque de código que representa un comportamiento y luego transmitirlo. Puede decidir ejecutar ese bloque de código cuando ocurre un determinado evento (por ejemplo, un clic en un botón) o en ciertos puntos de un algoritmo (por ejemplo, un predicado como "solo manzanas que pesen más de 150 g" en el algoritmo de filtrado o la operación de comparación personalizada en la clasificación). En general, con este concepto puedes escribir código que sea más flexible y reutilizable.
 
-Pero viste que usar clases anónimas para representar diferentes comportamientos no es satisfactorio. Es detallado, lo que no anima a los programadores a utilizar la parametrización del comportamiento en la práctica. En este capítulo, le enseñaremos acerca de una nueva característica enJava 8 que aborda este problema: expresiones lambda. Le permiten representar un comportamiento o un código de acceso de forma concisa. Por ahora puedes pensar en las expresiones lambda como funciones anónimas, métodos sin nombres declarados, pero que también pueden pasarse como argumentos a un método como puedes hacerlo con una clase anónima.
+Pero viste que usar clases anónimas para representar diferentes comportamientos no es satisfactorio. Es detallado, lo que no anima a los programadores a utilizar la parametrización del comportamiento en la práctica. En este capítulo, le enseñaremos acerca de una nueva característica en Java 8 que aborda este problema: expresiones lambda. Le permiten representar un comportamiento o un código de acceso de forma concisa. Por ahora puedes pensar en las expresiones lambda como funciones anónimas, métodos sin nombres declarados, pero que también pueden pasarse como argumentos a un método como puedes hacerlo con una clase anónima.
 
 Le mostraremos cómo construirlos, dónde usarlos y cómo puede hacer que su código sea más conciso al usarlos. También explicamos algunas novedades como la inferencia de tipos y nuevas interfaces importantes disponibles en la API de Java 8. Finalmente, presentamos referencias a métodos, una nueva característica útil que va de la mano con las expresiones lambda.
 
 Este capítulo está organizado de tal manera que le enseñe paso a paso cómo escribir código más conciso y flexible. Al final de este capítulo, reunimos todos los conceptos enseñados en un ejemplo concreto; Tomamos el ejemplo de clasificación que se muestra en el capítulo 2 y lo mejoramos gradualmente utilizando expresiones lambda y referencias de métodos para hacerlo más conciso y legible. Este capítulo es importante en sí mismo y también porque utilizará lambdas ampliamente a lo largo del libro.
 
-3.1. Lambdas en pocas palabras
+## 3.1. Lambdas en pocas palabras
+
 Una expresión lambda puede entenderse como una representación concisa de una función anónima que se puede transmitir. No tiene nombre, pero tiene una lista de parámetros, un cuerpo, un tipo de retorno y posiblemente también una lista de excepciones que se pueden generar. Ésa es una gran definición; analicémoslo:
 
-Anónimo : decimos anónimo porque no tiene un nombre explícito como lo tendría normalmente un método; ¡Menos para escribir y pensar!
-Función : decimos función porque una lambda no está asociada con una clase en particular como lo está un método. Pero al igual que un método, una lambda tiene una lista de parámetros, un cuerpo, un tipo de retorno y una posible lista de excepciones que se pueden generar.
-Pasado : una expresión lambda se puede pasar como argumento a un método o almacenarse en una variable.
-Conciso : no es necesario escribir mucho texto repetitivo como lo hace para las clases anónimas.
-Si se pregunta de dónde viene el término lambda , proviene de un sistema desarrollado en el mundo académico llamado cálculo lambda , que se utiliza para describir cálculos.
+* **Anonymous - Anónimo**: decimos anónimo porque no tiene un nombre explícito como lo tendría normalmente un método; ¡Menos para escribir y pensar!
+* **Function - Función**: decimos función porque una lambda no está asociada con una clase en particular como lo está un método. Pero al igual que un método, una lambda tiene una lista de parámetros, un cuerpo, un tipo de retorno y una posible lista de excepciones que se pueden generar.
+* **Passed around - Pasado**: una expresión lambda se puede pasar como argumento a un método o almacenarse en una variable.
+* **Concise - Conciso** : no es necesario escribir mucho texto repetitivo como lo hace para las clases anónimas.
+AQUIIIIIIIIII  
+Si se pregunta de dónde viene el término lambda, proviene de un sistema desarrollado en el mundo académico llamado cálculo lambda , que se utiliza para describir cálculos.
 
 ¿Por qué debería importarle las expresiones lambda? Viste en el capítulo anterior que pasar código actualmente es tedioso y detallado en Java. Bueno, ¡buenas noticias! Lambdas soluciona este problema; te permiten pasar código de forma concisa. Lambdas técnicamente no te permite hacer nada que no pudieras hacer antes de Java 8. ¡Pero ya no tienes que escribir código torpe usando clases anónimas para beneficiarte de la parametrización del comportamiento! Las expresiones Lambda lo alentarán a adoptar el estilo de parametrización de comportamiento que describimos en el capítulo anterior. El resultado neto es que su código será más claro y flexible. Por ejemplo, utilizando una expresión lambda puedes crear un Comparatorobjeto personalizado de una forma más concisa.
 
