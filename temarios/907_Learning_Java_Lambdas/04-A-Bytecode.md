@@ -711,4 +711,153 @@ LocalVariableTable:
   }
 ```
 
-## 
+## Example 5
+
+```java
+package jdk8.byte_code;
+
+import static jdk8.byte_code.Server.*;
+import static jdk8.byte_code.WaitFor.waitFor;
+
+public class Example5 {
+
+    // closure
+    void example() throws InterruptedException {
+        Server server = new HttpServer();
+        waitFor(() -> !server.isRunning());
+    }
+}
+```
+
+```sh
+Classfile Example5.class
+ Last modified 08-May-2014; size 1470 bytes
+ MD5 checksum 7dd0f577d4b4b903500264acf9649c30
+ Compiled from "Example5.java"
+ public class jdk8.byte_code.Example5
+ SourceFile: "Example5.java"
+ InnerClasses:
+   public static #31= #2 of #29; //HttpServer=class jdk8/byte_code/Server$HttpServer of class jdk8/byte_code/Server
+   public static final #68= #67 of #70; //Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+ BootstrapMethods:
+   0: #34 invokestatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+ Method arguments:
+ #35 ()Ljava/lang/Boolean; // <-- signature and return type of the SAM method to be implemented by the lambda
+ #36 invokestatic jdk8/byte_code/Example5.lambda$example$35:(Ljdk8/byte_code/Server;)Ljava/lang/Boolean;
+ #35 ()Ljava/lang/Boolean; // <-- signature and return type to be enforced at invocation time
+ minor version: 0
+ major version: 52
+ flags: ACC_PUBLIC, ACC_SUPER
+ Constant pool:
+ #1 = Methodref            #10.#28   //java/lang/Object."<init>":()V
+ #2 = Class                #30       //jdk8/byte_code/Server$HttpServer   
+ #3 = Methodref            #2.#28    // jdk8/byte_code/Server$HttpServer."<init>":()V
+ #4 = InvokeDynamic        #0:#37    // #0:isSatisfied:(Ljdk8/byte_code/Server;)Ljdk8/byte_code/Condition;
+ #5 = Methodref            #38.#39   // jdk8/byte_code/WaitFor.waitFor:(Ljdk8/byte_code/Condition;)V 
+ #6 = InterfaceMethodref   #29.#40   // jdk8/byte_code/Server.isRunning:()Ljava/lang/Boolean;
+ #7 = Methodref            #41.#42   // java/lang/Boolean.booleanValue:()Z 
+ #8 = Methodref            #41.#43   // java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean; 
+ #9 = Class                #44       // jdk8/byte_code/Example5 
+ #10 = Class               #45       // java/lang/Object
+ #11 = Utf8                <init> 
+ #12 = Utf8                ()V 
+ #13 = Utf8                Code 
+ #14 = Utf8                LineNumberTable 
+ #15 = Utf8                LocalVariableTable 
+ #16 = Utf8                this 
+ #17 = Utf8                Ljdk8/byte_code/Example5; 
+ #18 = Utf8                example 
+ #19 = Utf8                server 
+ #20 = Utf8                Ljdk8/byte_code/Server; 
+ #21 = Utf8                Exceptions 
+ #22 = Class               #46 // java/lang/InterruptedException 
+ #23 = Utf8                lambda$example$35 
+ #24 = Utf8                (Ljdk8/byte_code/Server;)Ljava/lang/Boolean;   
+ #25 = Utf8                StackMapTable
+ #26 = Utf8                SourceFile
+ #27 = Utf8                Example5.java
+ #28 = NameAndType         #11:#12   // "<init>":()V 
+ #29 = Class               #47       // jdk8/byte_code/Server 
+ #30 = Utf8                jdk8/byte_code/Server$HttpServer
+ #31 = Utf8                HttpServer 
+ #32 = Utf8                InnerClasses 
+ #33 = Utf8                BootstrapMethods
+ #34 = MethodHandle        #6:#48    // invokestatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+ #35 = MethodType          #49       // ()Ljava/lang/Boolean; 
+ #36 = MethodHandle        #6:#50    // invokestatic jdk8/byte_code/Example5.lambda$example$35:(Ljdk8/byte_code/Server;)Ljava/lang/Boolean; 
+ #37 = NameAndType         #51:#52   // isSatisfied:(Ljdk8/byte_code/Server;)Ljdk8/byte_code/Condition; 
+ #38 = Class              #53        // jdk8/byte_code/WaitFor 
+ #39 = NameAndType        #54:#55    // waitFor:(Ljdk8/byte_code/Condition;)V 
+ #40 = NameAndType        #56:#49    // isRunning:()Ljava/lang/Boolean; 
+ #41 = Class              #57        // java/lang/Boolean 
+ #42 = NameAndType        #58:#59    // booleanValue:()Z 
+ #43 = NameAndType        #60:#61    // valueOf:(Z)Ljava/lang/Boolean; 
+ #44 = Utf8               jdk8/byte_code/Example5 
+ #45 = Utf8               java/lang/Object 
+ #46 = Utf8               java/lang/InterruptedException 
+ #47 = Utf8               jdk8/byte_code/Server 
+ #48 = Methodref          #62.#63    // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; 
+ #49 = Utf8               ()Ljava/lang/Boolean;
+ #50 = Methodref          #9.#64     // jdk8/byte_code/Example5.lambda$example$35:(Ljdk8/byte_code/Server;)Ljava/lang/Boolean;
+ #51 = Utf8               isSatisfied
+ #52 = Utf8          (Ljdk8/byte_code/Server;)Ljdk8/byte_code/Condition; 
+ #53 = Utf8               jdk8/byte_code/WaitFor 
+ #54 = Utf8               waitFor 
+ #55 = Utf8               (Ljdk8/byte_code/Condition;)V
+ #56 = Utf8               isRunning 
+ #57 = Utf8               java/lang/Boolean
+ #58 = Utf8               booleanValue 
+ #59 = Utf8               ()Z 
+ #60 = Utf8               valueOf
+ #61 = Utf8               (Z)Ljava/lang/Boolean;
+ #62 = Class              #65        // java/lang/invoke/LambdaMetafactory 
+ #63 = NameAndType        #66:#69    // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+ #64 = NameAndType        #23:#24    // lambda$example$35:(Ljdk8/byte_code/Server;)Ljava/lang/Boolean;
+ #65 = Utf8               java/lang/invoke/LambdaMetafactory 
+ #66 = Utf8               metafactory 
+ #67 = Class              #71        // java/lang/invoke/MethodHandles$Lookup 
+ #68 = Utf8               Lookup
+ #69 = Utf8 (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite; 
+ #70 = Class              #72        //java/lang/invoke/MethodHandles   
+ #71 = Utf8               java/lang/invoke/MethodHandles$Lookup 
+ #72 = Utf8               java/lang/invoke/MethodHandles
+{
+  public jdk8.byte_code.Example5();
+   descriptor: ()V
+   flags: ACC_PUBLIC
+   Code:
+     stack=1, locals=1, args_size=1
+       0: aload_0
+       1: invokespecial #1           // Method java/lang/Object."<init>":()V 
+       4: return
+    LineNumberTable:
+      line 6: 0
+    LocalVariableTable:
+      Start Length Slot Name Signature
+          0      5    0 this Ljdk8/byte_code/Example5;
+void example() throws java.lang.InterruptedException;
+  descriptor: ()V
+  flags:
+  Code:
+    stack=2, locals=2, args_size=1
+       0: new           #2           //class jdk8/byte_code/Server$HttpServer
+       3: dup
+       4: invokespecial #3           // Method jdk8/byte_code/Server$HttpServer."<init>":()V
+       7: astore_1
+       8: aload_1
+
+       9: invokedynamic #4,  0       // InvokeDynamic #0:isSatisfied:(Ljdk8/byte_code/Server;)Ljdk8/byte_code/Condition;
+       14: invokestatic  #5                  // Method jdk8/byte_code/WaitFor.waitFor:(Ljdk8/byte_code/Condition;)V
+       17: return
+      LineNumberTable:
+        line 10: 0
+        line 11: 8
+        line 12: 17
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  this   Ljdk8/byte_code/Example5;
+            8      10     1 server   Ljdk8/byte_code/Server;
+    Exceptions:
+      throws java.lang.InterruptedException
+}
+```
