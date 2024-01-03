@@ -469,54 +469,92 @@ Ahora ha visto que la parametrización del comportamiento es un patrón útil pa
 
 Ordenar una colección es una tarea de programación recurrente. Por ejemplo, supongamos que su granjero quiere que clasifique el inventario de manzanas según su peso. O tal vez cambia de opinión y quiere que clasifiques las manzanas por color. ¿Suena familiar? Sí tú Necesita una forma de representar y utilizar diferentes comportamientos de clasificación para adaptarse fácilmente a los requisitos cambiantes.
 
-Desde Java 8, a Listviene con un sortmétodo (también puedes usar Collections.sort). El comportamiento de sortse puede parametrizar mediante un java.util.Comparatorobjeto, que tiene la siguiente interfaz:
+Desde Java 8, a **`List`** viene con un método **`sort`** (también puedes usar **`Collections.sort`**). El comportamiento de **`sort`** se puede parametrizar mediante un  objeto **`java.util.Comparator`**, que tiene la siguiente interfaz:
 
 ```java
+// java.util.Comparator
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
 ```
 
-Por lo tanto, puede crear diferentes comportamientos para el sortmétodo creando una implementación ad hoc de Comparator. Por ejemplo, puedes usarlo para ordenar el inventario aumentando el peso usando una clase anónima:
+Por lo tanto, puede crear diferentes comportamientos para el método **`sort`** creando una implementación ad hoc de **`Comparator`**. Por ejemplo, puedes usarlo para ordenar el inventario aumentando el peso usando una clase anónima:
 
 ```java
+inventory.sort(new Comparator<Apple>() {
+   public int compare(Apple a1, Apple a2) {
+      return a1.getWeight().compareTo(a2.getWeight());
+   }
+});
 ```
 
-Si el agricultor cambia de opinión sobre cómo clasificar las manzanas, puede crear un ad hoc Comparatorque coincida con el nuevo requisito y pasarlo al sortmétodo. Los detalles internos de cómo ordenar se abstraen. Con una expresión lambda quedaría así:
+Si el agricultor cambia de opinión sobre cómo clasificar las manzanas, puede crear un **`Comparator`** ad hoc que coincida con el nuevo requisito y pasarlo al método **`sort`**. Los detalles internos de cómo ordenar se abstraen. Con una expresión lambda quedaría así:
 
 ```java
+inventory.sort(
+  (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
 ```
 
 De nuevo, no te preocupes por esta nueva sintaxis por ahora; El siguiente capítulo cubre en detalle cómo escribir y usar expresiones lambda.
 
 ### 2.4.2.Ejecutar un bloque de código con Runnable
 
-Los subprocesos de Java permiten ejecutar un bloque de código al mismo tiempo que el resto del programa. Pero, ¿cómo puedes decirle a un hilo qué bloque de código debe ejecutar? Cada uno de varios subprocesos puede ejecutar código diferente. Lo que necesita es una forma de representar un fragmento de código que se ejecutará más adelante. Hasta Java 8, sólo se podían pasar objetos al Threadconstructor, por lo que el patrón de uso típico y torpe era pasar una clase anónima que contenía un runmétodo que devolvía void(sin resultado). Estas clases anónimas implementan la Runnableinterfaz.
+Los subprocesos de Java permiten ejecutar un bloque de código al mismo tiempo que el resto del programa. Pero, ¿cómo puedes decirle a un hilo qué bloque de código debe ejecutar? Cada uno de varios subprocesos puede ejecutar código diferente. Lo que necesita es una forma de representar un fragmento de código que se ejecutará más adelante. Hasta Java 8, sólo se podían pasar objetos **`Thread`** al constructor, por lo que el patrón de uso típico y torpe era pasar una clase anónima que contenía un método **`run`** que devolvía **`void`**(sin resultado). Estas clases anónimas implementan la interfaz **`Runnable`**.
 
-En Java, puedes usar la Runnableinterfaz para representar un bloque de código a ejecutar; tenga en cuenta que el código devuelve void(sin resultado):
+En Java, puedes usar la interfaz **`Runnable`** para representar un bloque de código a ejecutar; tenga en cuenta que el código devuelve **`void`**(sin resultado):
 
 ```java
+// java.lang.Runnable
+public interface Runnable {
+    void run();
+}
 ```
 
 Puede utilizar esta interfaz para crear hilos con su elección de comportamiento, de la siguiente manera:
 
 ```java
+Thread t = new Thread(new Runnable() {
+    public void run() {
+        System.out.println("Hello world");
+    }
+});
 ```
 
-Pero desde Java 8 puedes usar una expresión lambda, por lo que la llamada a Threadse vería así:
+Pero desde Java 8 puedes usar una expresión lambda, por lo que la llamada a **`Thread`** se vería así:
 
 ```java
+Thread t = new Thread(() -> System.out.println("Hello world"));
 ```
 
-### 2.4.3.Devolver un resultado usando Callable
+### 2.4.3. Devolver un resultado usando Callable
 
-Quizás esté familiarizado con la ExecutorServiceabstracción que se introdujo en Java 5. La ExecutorServiceinterfaz desacopla cómo se envían y ejecutan las tareas. Lo que es útil en comparación con el uso de subprocesos Runnablees que al usar un Executor-Servicepuedes enviar una tarea a un grupo de subprocesos y almacenar su resultado en un archivo Future. No se preocupe si esto no le resulta familiar; volveremos a abordar este tema en capítulos posteriores cuando analicemos la concurrencia con más detalle. Por ahora, todo lo que necesitas saber es que la Callableinterfaz se utiliza para modelar una tarea que devuelve un resultado. Puedes verlo como una actualización Runnable:
+Quizás esté familiarizado con la abstracción **`ExecutorService`** que se introdujo en Java 5. La interfaz **`ExecutorService`** desacopla cómo se envían y ejecutan las tareas. Lo que es útil en comparación con el uso de **`threads`** and **`Runnable`** que al usar un **`Executor-Service`** puedes enviar una tarea a un grupo de subprocesos y almacenar su resultado en un archivo **`Future`**. No se preocupe si esto no le resulta familiar; volveremos a abordar este tema en capítulos posteriores cuando analicemos la concurrencia con más detalle. Por ahora, todo lo que necesitas saber es que la interfaz **`Callable`** se utiliza para modelar una tarea que devuelve un resultado. Puedes verlo como una actualización **`Runnable`**:
 
 ```java
+// java.util.concurrent.Callable
+public interface Callable<V> {
+    V call();
+}
 ```
 
-Puede usarlo de la siguiente manera, enviando una tarea a un servicio ejecutor. Aquí devuelves el nombre del Threadresponsable de ejecutar la tarea:
+Puede usarlo de la siguiente manera, enviando una tarea a un servicio ejecutor. Aquí devuelves el nombre del **`Thread`** responsable de ejecutar la tarea:
 
 ```java
+ExecutorService executorService = Executors.newCachedThreadPool();
+Future<String> threadName = executorService.submit(new Callable<String>() {
+    @Override
+    public String call() throws Exception {
+        return Thread.currentThread().getName();
+    }
+});
 ```
 
+Usando una expresión lambda, este código se simplifica a lo siguiente:
+
+```java
+Future<String> threadName = executorService.submit(
+                     () -> Thread.currentThread().getName());
+```
 ### 2.4.4.Manejo de eventos GUI
 
 Un patrón típico en la programación GUI es realizar una acción en respuesta a un evento determinado, como hacer clic o pasar el cursor sobre el texto. Por ejemplo, si el usuario hace clic en el botón Enviar, es posible que desee mostrar una ventana emergente o quizás registrar la acción en un archivo. Una vez más, se necesita una forma de afrontar los cambios; Debería poder realizar cualquier respuesta. En JavaFX, puedes usar un EventHandlerpara representar una respuesta a un evento pasándolo a setOnAction:
