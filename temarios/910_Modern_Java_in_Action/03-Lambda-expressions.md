@@ -720,106 +720,129 @@ Hemos analizado mucha información nueva: lambdas, interfaces funcionales y refe
 
 Para concluir este capítulo y nuestra discusión sobre lambdas, continuaremos con nuestro problema inicial de ordenar una lista de Apples con diferentes estrategias de ordenamiento. Y mostraremos cómo se puede evolucionar progresivamente una solución ingenua hacia una solución concisa, utilizando todos los conceptos y características explicados hasta ahora en el libro: parametrización de comportamiento, clases anónimas, expresiones lambda y referencias de métodos. La solución final en la que trabajaremos es la siguiente (tenga en cuenta que todo el código fuente está disponible en el sitio web del libro: www.manning.com/books/modern-java-in-action ):
 
-inventario.sort(comparando(Apple::getWeight));
-3.7.1.Paso 1: código de acceso
+```java
+```
+
+### 3.7.1.Paso 1: código de acceso
+
 Tienes suerte; La API de Java 8 ya le proporciona un sortmétodo disponible Listpara que no tenga que implementarlo. ¡La parte más difícil ya está hecha! Pero, ¿cómo se puede pasar una estrategia de pedido al sortmétodo? Bueno, el sortmétodo tiene la siguiente firma:
 
-clasificación vacía (Comparador <? super E> c)
+```java
+```
+
 ¡Espera un Comparatorobjeto como argumento para comparar dos Apples! Así es como puedes pasar diferentes estrategias en Java: deben estar envueltas en un objeto. Decimos que el comportamiento de sortestá parametrizado : su comportamiento será diferente según las diferentes estrategias de ordenación que se le pasen.
 
 Su primera solución se ve así:
 
-clase pública AppleComparator implementa Comparador<Apple> {
-        comparación int pública (Apple a1, Apple a2) {
-                devolver a1.getWeight().compareTo(a2.getWeight());
-        }
-}
-inventario.sort(nuevo AppleComparator());
-3.7.2.Paso 2: usa una clase anónima
+```java
+```
+
+### 3.7.2.Paso 2: usa una clase anónima
+
 En lugar de implementarlo Comparatorcon el propósito de crear una instancia una vez, vio que podía usar una clase anónima para mejorar su solución:
 
-inventario.sort(nuevo Comparador<Apple>() {
-    comparación int pública (Apple a1, Apple a2) {
-        devolver a1.getWeight().compareTo(a2.getWeight());
-    }
-});
-3.7.3.Paso 3: use expresiones lambda
+```java
+```
+
+### 3.7.3.Paso 3: use expresiones lambda
+
 Pero su solución actual sigue siendo detallada. Java 8 introdujo expresiones lambda, que proporcionan una sintaxis ligera para lograr el mismo objetivo: pasar código . Viste que se puede usar una expresión lambda donde se espera una interfaz funcional . Como recordatorio, una interfaz funcional es una interfaz que define solo un método abstracto. La firma del método abstracto (llamado descriptor de función ) puede describir la firma de una expresión lambda. En este caso, Comparatorrepresenta un descriptor de función (T, T) -> int. Debido a que estás usando Apples, representa más específicamente (Apple, Apple) -> int. Por lo tanto, su nueva solución mejorada tiene el siguiente aspecto:
 
-inventario.sort((Apple a1, Apple a2)
-                -> a1.getWeight().compareTo(a2.getWeight())
-);
+```java
+```
+
 Explicamos que el compilador de Java podría inferir los tipos de parámetros de una expresión lambda utilizando el contexto en el que aparece la lambda. Por lo tanto, puede reescribir su solución de la siguiente manera:
 
-inventario.sort((a1, a2) -> a1.getWeight().compareTo(a2.getWeight()));
+```java
+```
+
 ¿Puedes hacer que tu código sea aún más legible? Comparatorincluye un método auxiliar estático llamado comparingque extrae Functionuna Comparableclave y produce un Comparatorobjeto (explicamos por qué las interfaces pueden tener métodos estáticos en el capítulo 13 ). Se puede utilizar de la siguiente manera (tenga en cuenta que ahora pasa una lambda con un solo argumento; la lambda especifica cómo extraer la clave para comparar de un Apple):
 
-Comparador<Apple> c = Comparador.comparing((Apple a) -> a.getWeight());
+```java
+```
+
 Ahora puedes reescribir tu solución en una forma un poco más compacta:
 
-importar java.util.Comparator.comparing estático;
-inventario.sort(comparando(manzana -> apple.getWeight()));
-3.7.4.Paso 4: utilice referencias de métodos
+```java
+```
+
+### 3.7.4.Paso 4: utilice referencias de métodos
+
 Explicamos que las referencias a métodos son azúcar sintáctico para expresiones lambda que reenvían sus argumentos. Puede utilizar una referencia de método para hacer que su código sea un poco menos detallado (suponiendo una importación estática de java.util.Comparator.comparing):
 
-inventario.sort(comparando(Apple::getWeight));
+```java
+```
+
 ¡Felicitaciones, esta es su solución final! ¿Por qué es mejor que el código anterior a Java 8? No es sólo porque es más corto; También es obvio lo que significa. El código se lee como el enunciado del problema "clasificar el inventario comparando el peso de las manzanas".
 
-3.8. Métodos útiles para componer expresiones lambda.
+## 3.8. Métodos útiles para componer expresiones lambda.
+
 Varias interfaces funcionales en la API de Java 8 contienen métodos convenientes. Específicamente, muchas interfaces funcionales como Comparator, Functiony Predicateque se utilizan para pasar expresiones lambda proporcionan métodos que permiten la composición. ¿Qué quiere decir esto? En la práctica, significa que puedes combinar varias expresiones lambda simples para construir otras más complicadas. Por ejemplo, puede combinar dos predicados en un predicado más grande que realice una oroperación entre los dos predicados. Además, también puede componer funciones de modo que el resultado de una se convierta en la entrada de otra función. Quizás te preguntes cómo es posible que existan métodos adicionales en una interfaz funcional. (¡Después de todo, esto va en contra de la definición de una interfaz funcional!) El truco es que los métodos que introduciremos se llaman métodos predeterminados (no son métodos abstractos). Los explicamos detalladamente en el capítulo 13 . Por ahora, confíe en nosotros y lea el capítulo 13 más adelante, cuando quiera saber más sobre los métodos predeterminados y lo que puede hacer con ellos.
 
-3.8.1.Componer comparadores
+### 3.8.1.Componer comparadores
+
 Has visto que puedes usar el método estático Comparator.comparingpara devolver un Comparatorbasado en un Functionque extrae una clave para comparar de la siguiente manera:
 
-Comparador<Apple> c = Comparador.comparing(Apple::getWeight);
+```java
+```
+
 Orden invertido
+
 ¿Qué pasaría si quisieras clasificar las manzanas disminuyendo de peso? No es necesario crear una instancia diferente de un archivo Comparator. La interfaz incluye un método predeterminado reversedque invierte el orden de un comparador determinado. Puedes modificar el ejemplo anterior para ordenar las manzanas disminuyendo el peso reutilizando el inicial Comparator:
 
-inventario.sort(comparando(Apple::getWeight).reversed());         1
+```java
+```
+
 1 Ordena por peso decreciente
 Comparadores de encadenamiento
 Todo esto está bien, pero ¿qué pasa si encuentras dos manzanas que tienen el mismo peso? ¿Qué manzana debería tener prioridad en la lista ordenada? Es posible que desee brindar un segundo Comparator-para refinar aún más la comparación. Por ejemplo, después de comparar dos manzanas según su peso, es posible que desees ordenarlas por país de origen. El thenComparingmétodo te permite hacer eso. Toma una función como parámetro (como el método comparing) y proporciona una segunda Comparatorsi dos objetos se consideran iguales usando el inicial Comparator. Puedes resolver el problema elegantemente nuevamente de la siguiente manera:
 
-inventario.sort(comparando(Apple::getWeight)
-         .reversed()                                   1 
-         .thenComparing(Apple::getCountry));          2
+```java
+```
+
 1 Ordena por peso decreciente
 2 Clasifica mejor por país cuando dos manzanas tienen el mismo peso
-3.8.2.Componer predicados
+
+### 3.8.2.Componer predicados
+
 La Predicateinterfaz incluye tres métodos que le permiten reutilizar uno existente Predicatepara crear otros más complicados: negate, andy or. Por ejemplo, puedes usar el método negatepara devolver la negación de a Predicate, como una manzana que no es roja:
 
-Predicado<Apple> notRedApple = redApple.negate();           1
+```java
+```      1
 1 Produce la negación del objeto Predicado existente redApple
+
 Es posible que desees combinar dos lambdas para decir que una manzana es roja y pesada con el andmétodo:
 
-Predicado<Apple> redAndHeavyApple =
-    redApple.and(manzana -> apple.getWeight() > 150);           1
+```java
+```
+
 1 Encadena dos predicados para producir otro objeto Predicado
 Puedes combinar el predicado resultante un paso más para expresar manzanas rojas y pesadas (más de 150 g) o solo manzanas verdes:
 
-Predicado<Apple> redAndHeavyAppleOrGreen =
-    redApple.and(manzana -> apple.getWeight() > 150)
-            .o(manzana -> VERDE.equals(a.getColor()));          1
+```java
+```
+
 1 Encadena tres predicados para construir un objeto Predicado más complejo
+
 ¿Por qué es esto genial? A partir de expresiones lambda más simples, puede representar expresiones lambda más complicadas que aún se leen como el enunciado del problema. Tenga en cuenta que la precedencia de los métodos andy oren la cadena es de izquierda a derecha; no existe ningún equivalente al uso de corchetes. Por lo tanto a.or(b).and(c)debe leerse como (a || b) && c. Del mismo modo, a.and(b).or(c)debe leerse como (a && b) || c.
 
-3.8.3.Componer funciones
+### 3.8.3.Componer funciones
+
 Finalmente, también puedes componer expresiones lambda representadas por la Functioninterfaz. La Functioninterfaz viene con dos métodos predeterminados para esto andTheny compose, los cuales devuelven una instancia de Function.
 
 El método andThendevuelve una función que primero aplica una función determinada a una entrada y luego aplica otra función al resultado de esa aplicación. Por ejemplo, dada una función fque incrementa un número (x -> x + 1)y otra función gque multiplica un número por 2, puedes combinarlas para crear una función hque primero incrementa un número y luego multiplica el resultado por 2:
 
-Función<Entero, Entero> f = x -> x + 1;
-Función<Entero, Entero> g = x -> x * 2;
-Función<Entero, Entero> h = f.andThen(g);     1 
-resultado int = h.apply(1);                         2
+```java
+```
+
 1 En matemáticas escribirías g(f(x)) o (gof)(x).
 2 Esto devuelve 4.
+
 También puede utilizar el método composede manera similar para aplicar primero la función dada como argumento composey luego aplicar la función al resultado. Por ejemplo, en el ejemplo anterior, usar compose, significaría f(g(x))en lugar de g(f(x))usar andThen:
 
-Función<Entero, Entero> f = x -> x + 1;
-Función<Entero, Entero> g = x -> x * 2;
-Función<Entero, Entero> h = f.compose(g);     1 
-resultado int = h.apply(1);                         2
+```java
+```
+
 1 En matemáticas escribirías f(g(x)) o (fog)(x).
 2 Esto devuelve 3.
 La figura 3.6 ilustra la diferencia entre andTheny compose.
@@ -829,38 +852,32 @@ Figura 3.6.Usando andThenversuscompose
 
 Todo esto suena demasiado abstracto. ¿Cómo puedes utilizarlos en la práctica? Digamos que tiene varios métodos de utilidad que realizan transformaciones de texto en una letra representada como String:
 
-Carta de clase pública {
-    cadena estática pública addHeader (texto de cadena) {
-        devolver "De Raoul, Mario y Alan: " + texto;
-    }
-    cadena estática pública addFooter (texto de cadena) {
-        devolver texto + "Saludos cordiales";
-    }
-    verificación de cadena estática pública Ortografía (texto de cadena) {
-        return text.replaceAll("labda", "lambda");
-    }
-}
+```java
+```
+
 Ahora puede crear varios canales de transformación componiendo los métodos de utilidad. Por ejemplo, crear una canalización que primero agregue un encabezado, luego revise la ortografía y finalmente agregue un pie de página, como se muestra a continuación (y como se ilustra en la figura 3.7 ):
 
 Figura 3.7.Un proceso de transformación que utilizaandThen
 
 
-Función<Cadena, Cadena> addHeader = Letra::addHeader;
-Función<Cadena, Cadena> transformaciónPipeline
-  = addHeader.andThen(Letra::comprobar ortografía)
-             .andThen(Letra::addFooter);
+```java
+```
+
 Una segunda canalización podría consistir únicamente en agregar un encabezado y un pie de página sin revisar la ortografía:
 
-Función<Cadena, Cadena> addHeader = Letra::addHeader;
-Función<Cadena, Cadena> transformaciónPipeline
-  = addHeader.andThen(Letra::addFooter);
-3.9. Ideas similares de matemáticas
+```java
+```
+
+## 3.9. Ideas similares de matemáticas
+
 Si se siente cómodo con las matemáticas de la escuela secundaria, esta sección le brinda otro punto de vista sobre la idea de las expresiones lambda y las funciones de transferencia. Siéntete libre de omitirlo; nada más en el libro depende de ello. Pero es posible que disfrute viendo otra perspectiva.
 
-3.9.1.Integración
+### 3.9.1.Integración
+
 Supongamos que tiene una función (matemática, no Java) f, quizás definida por
 
-f ( x ) = x + 10
+```java
+```
 
 Entonces, una pregunta que se hace a menudo (en la escuela y en las carreras de ciencias e ingeniería) es encontrar el área debajo de la función cuando se dibuja en papel (contando el eje x como la línea cero). Por ejemplo, escribes
 
@@ -873,62 +890,76 @@ Figura 3.8.Área bajo la función f(x) = x + 10de x3 a 7
 
 En este ejemplo, la función fes una línea recta, por lo que puedes calcular fácilmente esta área mediante el método del trapecio (dibujando triángulos y rectángulos) para descubrir la solución:
 
-1/2 × ((3 + 10) + (7 + 10)) × (7 – 3) = 60
+```java
+```
 
 Ahora, ¿cómo podrías expresar esto en Java? Su primer problema es conciliar la notación extraña como el símbolo de integración o dy/dxla notación del lenguaje de programación familiar.
 
 De hecho, para pensar desde los primeros principios se necesita un método, quizás llamado integrate, que requiere tres argumentos: uno es fy los otros son los límites (3.0 y 7.0 aquí). Por lo tanto, desea escribir en Java algo parecido a esto, donde la función fse pasa como argumento:
 
-integrar(f, 3, 7)
+```java
+```
+
 Tenga en cuenta que no puede escribir algo tan simple como
 
-integrar(x + 10, 3, 7)
+```java
+```
+
 por dos razones. En primer lugar, el alcance de xno está claro y, en segundo lugar, esto pasaría un valor de x+10para integrar en lugar de pasar la función f.
 
 De hecho, el papel secreto de dxen matemáticas es decir "esa función que toma un argumento xcuyo resultado es x + 10".
 
-3.9.2.Conexión a Java 8 lambdas
+### 3.9.2.Conexión a Java 8 lambdas
+
 Como mencionamos anteriormente, Java 8 usa la notación (double x) -> x + 10(una expresión lambda) exactamente para este propósito; por eso puedes escribir
 
-integrar((doble x) -> x + 10, 3, 7)
+```java
+```
+
 o
 
-integrar((doble x) -> f(x), 3, 7)
+```java
+```
+
 o, utilizando una referencia de método como se mencionó anteriormente,
 
-integrar(C::f, 3, 7)
+```java
+```
+
 if Ces una clase que contiene fun método estático. La idea es que estás pasando el código fal método integrate.
 
 Quizás ahora te preguntes cómo escribirías el método integrateen sí. Continúe suponiendo que fes una función lineal (recta). Probablemente le gustaría escribir de una forma similar a las matemáticas:
 
-doble integración pública ( (doble -> doble) f, doble a, doble b) {      1
-      devolver (f(a) + f(b)) * (b - a) / 2.0
-}
+```java
+```
+
 1 ¡Código Java incorrecto! (No puedes escribir funciones como lo haces en matemáticas).
 Pero debido a que las expresiones lambda solo se pueden usar en un contexto que espera una interfaz funcional (en este caso, DoubleFunction[ 4 ] ), debes escribirlas de la siguiente manera:
 
 4
 
 Usar DoubleFunction<Double>es más eficiente que usar Function<Double,Double>ya que evita encajonar el resultado.
-integración doble pública ( DobleFunción<Doble> f, doble a, doble b) {
-      devolver (f .aplicar (a) + f. aplicar (b)) * (b - a) / 2.0;
-}
+
+```java
+```
+
 o usando DoubleUnaryOperator, lo que también evita encajonar el resultado:
 
-doble integración pública ( DoubleUnaryOperator f, doble a, doble b) {
-      return (f .applyAsDouble (a) + f. applyAsDouble (b)) * (b - a) / 2.0;
-}
+```java
+```
+
 Como comentario adicional, es un poco vergonzoso que tengas que escribir f.apply(a)en lugar de simplemente escribir f(a)como en matemáticas, pero Java simplemente no puede alejarse de la idea de que todo es un objeto en lugar de la idea de que una función sea verdaderamente independiente. !
 
-Resumen
-Una expresión lambda puede entenderse como una especie de función anónima: no tiene nombre, pero tiene una lista de parámetros, un cuerpo, un tipo de retorno y posiblemente también una lista de excepciones que se pueden generar.
-Las expresiones lambda le permiten pasar código de forma concisa.
-Una interfaz funcional es una interfaz que declara exactamente un método abstracto.
-Las expresiones Lambda solo se pueden utilizar cuando se espera una interfaz funcional.
-Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratar la expresión completa como una instancia de una interfaz funcional .
-Java 8 viene con una lista de interfaces funcionales comunes en el java.util .functionpaquete, que incluye Predicate<T>, Function<T, R>, Supplier<T>, Consumer<T>y BinaryOperator<T>, descritas en la tabla 3.2 .
-Las especializaciones primitivas de interfaces funcionales genéricas comunes, como Predicate<T>y, Function<T, R>se pueden utilizar para evitar operaciones de boxeo: IntPredicate, IntToLongFunction, etc.
-El patrón de ejecución (para cuando necesita ejecutar algún comportamiento determinado en medio del código repetitivo que es necesario en un método, por ejemplo, asignación y limpieza de recursos) se puede usar con lambdas para obtener flexibilidad y reutilización adicionales.
-El tipo esperado para una expresión lambda se denomina tipo de destino .
-Las referencias a métodos le permiten reutilizar la implementación de un método existente y transmitirla directamente.
-Las interfaces funcionales como Comparator, Predicatey Functiontienen varios métodos predeterminados que se pueden usar para combinar expresiones lambda.
+### Resumen
+
+* Una expresión lambda puede entenderse como una especie de función anónima: no tiene nombre, pero tiene una lista de parámetros, un cuerpo, un tipo de retorno y posiblemente también una lista de excepciones que se pueden generar.
+* Las expresiones lambda le permiten pasar código de forma concisa.
+* Una interfaz funcional es una interfaz que declara exactamente un método abstracto.
+* Las expresiones Lambda solo se pueden utilizar cuando se espera una interfaz funcional.
+* Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratar la expresión completa como una instancia de una interfaz funcional .
+* Java 8 viene con una lista de interfaces funcionales comunes en el java.util .functionpaquete, que incluye Predicate<T>, Function<T, R>, Supplier<T>, Consumer<T>y BinaryOperator<T>, descritas en la tabla 3.2 .
+* Las especializaciones primitivas de interfaces funcionales genéricas comunes, como Predicate<T>y, Function<T, R>se pueden utilizar para evitar operaciones de boxeo: IntPredicate, IntToLongFunction, etc.
+* El patrón de ejecución (para cuando necesita ejecutar algún comportamiento determinado en medio del código repetitivo que es necesario en un método, por ejemplo, asignación y limpieza de recursos) se puede usar con lambdas para obtener flexibilidad y reutilización adicionales.
+* El tipo esperado para una expresión lambda se denomina tipo de destino .
+* Las referencias a métodos le permiten reutilizar la implementación de un método existente y transmitirla directamente.
+* Las interfaces funcionales como Comparator, Predicatey Functiontienen varios métodos predeterminados que se pueden usar para combinar expresiones lambda.
