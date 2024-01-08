@@ -74,11 +74,15 @@ Para ilustrar más, la siguiente lista muestra cinco ejemplos de expresiones lam
 (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight())     5
 ```
 
-**1 Toma un parámetro de tipo String y devuelve un int. No tiene declaración de devolución ya que la devolución está implícita.**
-**2 Toma un parámetro de tipo Apple y devuelve un valor booleano (si la manzana pesa más de 150 g).**
-**3 Toma dos parámetros de tipo int y no devuelve ningún valor (retorno nulo). Su cuerpo contiene dos declaraciones.**
-**4 No toma ningún parámetro y devuelve el int 42**
-**5 Toma dos parámetros de tipo Apple y devuelve un int que representa la comparación de sus pesos.**
+**1 Toma un parámetro de tipo `String` y devuelve un `int`. No tiene declaración de devolución ya que la devolución está implícita.**
+
+**2 Toma un parámetro de tipo `Apple` y devuelve un valor `booleano` (si la manzana pesa más de 150 g).**
+
+**3 Toma dos parámetros de tipo `int` y no devuelve ningún valor (retorno `void`). Su cuerpo contiene dos declaraciones.**
+
+**4 No toma ningún parámetro y devuelve el `int 42`**
+
+**5 Toma dos parámetros de tipo `Apple` y devuelve un `int` que representa la comparación de sus pesos.**
 
 Los diseñadores del lenguaje Java eligieron esta sintaxis porque fue bien recibida en otros lenguajes, como C# y Scala. JavaScript tiene una sintaxis similar. La sintaxis básica de una lambda es (denominada lambda de estilo de expresión )
 
