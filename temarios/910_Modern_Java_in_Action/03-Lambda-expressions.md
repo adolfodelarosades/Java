@@ -87,51 +87,62 @@ Para ilustrar más, la siguiente lista muestra cinco ejemplos de expresiones lam
 Los diseñadores del lenguaje Java eligieron esta sintaxis porque fue bien recibida en otros lenguajes, como C# y Scala. JavaScript tiene una sintaxis similar. La sintaxis básica de una lambda es (denominada lambda de estilo de expresión )
 
 ```java
+(parameters) -> expression
 ```
 
-o (tenga en cuenta las llaves para las declaraciones, esta lambda a menudo se denomina lambda de estilo bloque )
+o (tenga en cuenta las llaves para las declaraciones, esta lambda a menudo se denomina lambda de ***block-style - estilo bloque***)
 
 ```java
+parameters) -> { statements; }
+    List<Apple> result = new ArrayList<>();
+    for (Apple apple: inventory) {
+        if ( 
+            result.add(apple);
+        }
+    }
+    return result;
+}
 ```
 
 Como puede ver, las expresiones lambda siguen una sintaxis simple. Completar el cuestionario 3.1 debería permitirle saber si comprende el patrón.
 
-Prueba 3.1: sintaxis Lambda
+**Prueba 3.1: sintaxis Lambda**
+
 Según las reglas de sintaxis que se acaban de mostrar, ¿cuáles de las siguientes no son expresiones lambda válidas?
 
-```java
-```
 
-Respuesta:
+1. **`() -> {}`**
+2. **`() -> "Raoul"`**
+3. **`() -> { return "Mario"; }`**
+4. **`(Integer i) -> return "Alan" + i;`**
+5. **`(String s) -> { "Iron Man"; }`**
+
+
+**Respuesta:**
 
 4 y 5 son lambdas no válidas; el resto son válidos. Detalles:
 
-Esta lambda no tiene parámetros y devuelve void. Es similar a un método con un cuerpo vacío: public void run() { }. Dato curioso: a esto se le suele llamar hamburguesa lambda. Míralo desde un lado y verás que tiene forma de hamburguesa con dos bollos.
-Esta lambda no tiene parámetros y devuelve a Stringcomo expresión.
-Esta lambda no tiene parámetros y devuelve un String(usando una declaración de retorno explícita, dentro de un bloque).
-returnes una declaración de flujo de control. Para que esta lambda sea válida, se requieren llaves de la siguiente manera: (Integer i) -> { return "Alan" + i; }.
-"Iron Man" es una expresión, no una declaración. Para que esta lambda sea válida, puede eliminar las llaves y el punto y coma de la siguiente manera: (String s) -> "Iron Man". O si lo prefiere, puede utilizar una declaración de devolución explícita de la siguiente manera: (String s) -> { return "Iron Man"; }.
-Tabla 3.1 Proporciona una lista de lambdas de ejemplo con ejemplos de casos de uso.
+1. Esta lambda no tiene parámetros y devuelve **`void`**. Es similar a un método con un cuerpo vacío: **`public void run() { }`**. Dato curioso: a esto se le suele llamar ***burger lambda***. Míralo desde un lado y verás que tiene forma de hamburguesa con dos bollos.
+2. Esta lambda no tiene parámetros y devuelve a **`String`** como expresión.
+3. Esta lambda no tiene parámetros y devuelve un **`String`**(usando una declaración de retorno explícita, dentro de un bloque).
+4. **`return`** una declaración de flujo de control. Para que esta lambda sea válida, se requieren llaves de la siguiente manera: **`(Integer i) -> { return "Alan" + i; }`**.
+5. "Iron Man" es una expresión, no una declaración. Para que esta lambda sea válida, puede eliminar las llaves y el punto y coma de la siguiente manera: **`(String s) -> "Iron Man"`**. O si lo prefiere, puede utilizar una declaración de devolución explícita de la siguiente manera: **`(String s) -> { return "Iron Man"; }`**.
+   
+**Tabla 3.1** Proporciona una lista de lambdas de ejemplo con ejemplos de casos de uso.
 
-Tabla 3.1.Ejemplos de lambdas
-Caso de uso
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/4f735643-acef-46fa-bd71-8115970aea49)
 
-Ejemplos de lambdas
 
-```java
-```
+## 3.2. Dónde y cómo utilizar lambdas
 
-Seleccionar/extraer de un objeto	(Cadena s) -> s.length()
-Combina dos valores	(int a, int b) -> a * b
-comparar dos objetos	(Apple a1, Apple a2) ->
-a1.getWeight().compareTo(a2.getWeight())
-3.2. Dónde y cómo utilizar lambdas
-Quizás ahora te preguntes dónde puedes usar expresiones lambda. En el ejemplo anterior, asignaste una lambda a una variable de tipo Comparator<Apple>. También puedes usar otra lambda con el filtermétodo que implementaste en el capítulo anterior:
+Quizás ahora te preguntes dónde puedes usar expresiones lambda. En el ejemplo anterior, asignaste una lambda a una variable de tipo **`Comparator<Apple>`**. También puedes usar otra lambda con el método **`filter`** que implementaste en el capítulo anterior:
 
 ```java
+List<Apple> greenApples =
+        filter(inventory, (Apple a) -> GREEN.equals(a.getColor()));
 ```
 
-¿Dónde exactamente puedes usar lambdas? Puede utilizar una expresión lambda en el contexto de una interfaz funcional. En el código que se muestra aquí, puede pasar un lambda como segundo argumento del método filterporque espera un objeto de tipo Predicate<T>, que es una interfaz funcional. No te preocupes si esto suena abstracto; Ahora explicaremos en detalle qué significa esto y qué es una interfaz funcional.
+¿Dónde exactamente puedes usar lambdas? Puede utilizar una expresión lambda en el contexto de una interfaz funcional. En el código que se muestra aquí, puede pasar un lambda como segundo argumento del método **`filter`** porque espera un objeto de tipo **`Predicate<T>`**, que es una interfaz funcional. No te preocupes si esto suena abstracto; Ahora explicaremos en detalle qué significa esto y qué es una interfaz funcional.
 
 ### 3.2.1.Interfaz funcional
 
