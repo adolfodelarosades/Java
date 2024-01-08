@@ -74,15 +74,11 @@ Para ilustrar más, la siguiente lista muestra cinco ejemplos de expresiones lam
 (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight())     5
 ```
 
-**1 Toma un parámetro de tipo `String` y devuelve un `int`. No tiene declaración de devolución ya que la devolución está implícita.**
-
-**2 Toma un parámetro de tipo `Apple` y devuelve un valor `booleano` (si la manzana pesa más de 150 g).**
-
-**3 Toma dos parámetros de tipo `int` y no devuelve ningún valor (retorno `void`). Su cuerpo contiene dos declaraciones.**
-
-**4 No toma ningún parámetro y devuelve el `int 42`**
-
-**5 Toma dos parámetros de tipo `Apple` y devuelve un `int` que representa la comparación de sus pesos.**
+* **1 Toma un parámetro de tipo `String` y devuelve un `int`. No tiene declaración de devolución ya que la devolución está implícita.**
+* **2 Toma un parámetro de tipo `Apple` y devuelve un valor `booleano` (si la manzana pesa más de 150 g).**
+* **3 Toma dos parámetros de tipo `int` y no devuelve ningún valor (retorno `void`). Su cuerpo contiene dos declaraciones.**
+* **4 No toma ningún parámetro y devuelve el `int 42`**
+* **5 Toma dos parámetros de tipo `Apple` y devuelve un `int` que representa la comparación de sus pesos.**
 
 Los diseñadores del lenguaje Java eligieron esta sintaxis porque fue bien recibida en otros lenguajes, como C# y Scala. JavaScript tiene una sintaxis similar. La sintaxis básica de una lambda es (denominada lambda de estilo de expresión )
 
@@ -144,7 +140,7 @@ List<Apple> greenApples =
 
 ¿Dónde exactamente puedes usar lambdas? Puede utilizar una expresión lambda en el contexto de una interfaz funcional. En el código que se muestra aquí, puede pasar un lambda como segundo argumento del método **`filter`** porque espera un objeto de tipo **`Predicate<T>`**, que es una interfaz funcional. No te preocupes si esto suena abstracto; Ahora explicaremos en detalle qué significa esto y qué es una interfaz funcional.
 
-### 3.2.1.Interfaz funcional
+### 3.2.1. Interfaz funcional
 
 ¿Recuerda la interfaz **`Predicate<T>`** que creó en el capítulo 2 para poder parametrizar el comportamiento del método **`filter`**? ¡Es una interfaz funcional! ¿Por qué? Porque **`Predicate`** especifica solo un método abstracto:
 
@@ -190,56 +186,93 @@ Verá en el capítulo 13 que las interfaces ahora también pueden tener métodos
 
 Para comprobar su comprensión, el cuestionario 3.2 debería permitirle saber si comprende el concepto de interfaz funcional.
 
-Prueba 3.2: Interfaz funcional
+**Prueba 3.2: Interfaz funcional**
 
 ¿Cuáles de estas interfaces son interfaces funcionales?
 
 ```java
+public interface Adder {
+    int add(int a, int b);
+}
+public interface SmartAdder extends Adder {
+    int add(double a, double b);
+}
+public interface Nothing {
+}
 ```
 
-Respuesta:
+**Respuesta:**
 
-Sólo Adderes una interfaz funcional.
+Sólo **`Adder`** es una interfaz funcional.
 
-SmartAdderno es una interfaz funcional porque especifica dos métodos abstractos llamados add(uno se hereda de Adder).
+**`SmartAdder`** no es una interfaz funcional porque especifica dos métodos abstractos llamados **`add`**(uno se hereda de **`Adder`**).
 
-Nothingno es una interfaz funcional porque no declara ningún método abstracto.
+**`Nothing`** no es una interfaz funcional porque no declara ningún método abstracto.
 
-¿Qué se puede hacer con las interfaces funcionales? Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratar la expresión completa como una instancia de una interfaz funcional (más técnicamente hablando, una instancia de una implementación concreta de la interfaz funcional). Puede lograr lo mismo con una clase interna anónima, aunque es más complicado: proporciona una implementación y crea una instancia directamente en línea. El siguiente código es válido porque Runnablees una interfaz funcional que define solo un método abstracto run:
+¿Qué se puede hacer con las interfaces funcionales? Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratar la expresión completa como una instancia de una interfaz funcional (más técnicamente hablando, una instancia de una implementación concreta de la interfaz funcional). Puede lograr lo mismo con una clase interna anónima, aunque es más complicado: proporciona una implementación y crea una instancia directamente en línea. El siguiente código es válido porque **`Runnable`** es una interfaz funcional que define solo un método abstracto **`run`**:
 
 ```java
+Runnable r1 = () -> System.out.println("Hello World 1");         1
+Runnable r2 = new Runnable() {                                   2
+    public void run() {
+        System.out.println("Hello World 2");
+    }
+};
+public static void process(Runnable r) {
+    r.run();
+}
+process(r1);                                                     3
+process(r2);                                                     4
+process(() -> System.out.println("Hello World 3"));              5
 ```
 
-1 Utiliza una lambda
-2 Utiliza una clase anónima
-3 impresiones "Hola mundo 1"
-4 impresiones “Hola mundo 2”
-5 Imprime “Hello World 3” con una lambda pasada directamente
+* **1 Utiliza una lambda**
+* **2 Utiliza una clase anónima**
+* **3 impresiones “Hello World 1”**
+* **4 impresiones “Hello World 2”**
+* **5 Imprime “Hello World 3” con una lambda pasada directamente**
 
-### 3.2.2.Descriptor de función
+### 3.2.2. Function descriptor
 
-La firma del método abstracto de la interfaz funcional describe la firma de la expresión lambda. A este método abstracto lo llamamos descriptor de función . Por ejemplo, la Runnableinterfaz puede verse como la firma de una función que no acepta nada ni devuelve nada ( void) porque solo tiene un método abstracto llamado run, que no acepta nada ni devuelve nada ( void). [ 1 ]
+La firma del método abstracto de la interfaz funcional describe la firma de la expresión lambda. A este método abstracto lo llamamos descriptor de función. Por ejemplo, la interfaz **`Runnable`** puede verse como la firma de una función que no acepta nada ni devuelve nada (**`void`**) porque solo tiene un método abstracto llamado **`run`**, que no acepta nada ni devuelve nada (**`void`**). [ 1 ]
 
-1
+<hr>
 
-Algunos lenguajes como Scala proporcionan anotaciones de tipo explícitas en su sistema de tipos para describir el tipo de una función (llamadas tipos de función). Java reutiliza los tipos nominales existentes proporcionados por interfaces funcionales y los asigna a una forma de tipos de funciones detrás de escena.
-Usamos una notación especial a lo largo de este capítulo para describir las firmas de lambdas y las interfaces funcionales. La notación () -> voidrepresenta una función con una lista vacía de parámetros que devuelven void. Esto es exactamente lo que Runnablerepresenta la interfaz. Como otro ejemplo, (Apple, Apple) -> intdenota una función que toma dos Apples como parámetros y devuelve un int. Proporcionaremos más información sobre los descriptores de funciones en la sección 3.4 y en la tabla 3.2 más adelante en el capítulo.
+**1**
 
-Quizás ya se esté preguntando cómo se verifica el tipo de expresiones lambda. Detallamos cómo el compilador verifica si una lambda es válida en un contexto determinado en la sección 3.5 . Por ahora, basta con entender que se puede asignar una expresión lambdaa una variable o se pasa a un método que espera una interfaz funcional como argumento, siempre que la expresión lambda tenga la misma firma que el método abstracto de la interfaz funcional. Por ejemplo, en nuestro ejemplo anterior, podría pasar una lambda directamente al processmétodo de la siguiente manera:
+*Algunos lenguajes como Scala proporcionan anotaciones de tipo explícitas en su sistema de tipos para describir el tipo de una función (llamadas tipos de función). Java reutiliza los tipos nominales existentes proporcionados por interfaces funcionales y los asigna a una forma de tipos de funciones detrás de escena.*
+
+<hr>
+
+Usamos una notación especial a lo largo de este capítulo para describir las firmas de lambdas y las interfaces funcionales. La notación **`() -> void`** representa una función con una lista vacía de parámetros que devuelven **`void`**. Esto es exactamente lo que la interfaz **`Runnable`** representa. Como otro ejemplo, **`(Apple, Apple) -> int`** denota una función que toma dos **`Apple`**s como parámetros y devuelve un **`int`**. Proporcionaremos más información sobre los descriptores de funciones en la sección 3.4 y en la tabla 3.2 más adelante en el capítulo.
+
+Quizás ya se esté preguntando cómo se verifica el tipo de expresiones lambda. Detallamos cómo el compilador verifica si una lambda es válida en un contexto determinado en la sección 3.5 . Por ahora, basta con entender que se puede asignar una expresión lambda a una variable o se pasa a un método que espera una interfaz funcional como argumento, siempre que la expresión lambda tenga la misma firma que el método abstracto de la interfaz funcional. Por ejemplo, en nuestro ejemplo anterior, podría pasar una lambda directamente al método **`process`** de la siguiente manera:
 
 ```java
+public void process(Runnable r) {
+    r.run();
+}
+process(() -> System.out.println("This is awesome!!"));
 ```
 
-Este código, cuando se ejecute, imprimirá "¡¡Esto es increíble!!" La expresión lambda () -> System.out.println("This is awesome!!")no toma parámetros y devuelve void. Esta es exactamente la firma del runmétodo definido en la Runnableinterfaz.
+Este código, cuando se ejecute, imprimirá "**`This is awesome!!`**" La expresión lambda **`() -> System.out.println("This is awesome!!")`** no toma parámetros y devuelve **`void`**. Esta es exactamente la firma del método **`run`** definido en la interfaz **`Runnable`**.
 
-Lambdas y invocación de método nulo
+#### Lambdas e invocación del método `void`
+
 Aunque esto pueda parecer extraño, la siguiente expresión lambda es válida:
 
 ```java
+process(() -> System.out.println("This is awesome"));
 ```
 
-Resulta que existe una regla especial para la invocación de un método nulo definida en la Especificación del lenguaje Java. No es necesario encerrar una única invocación de método void entre llaves.
+Después de todo, **`System.out.println returns void`** ¡así que claramente esto no es una expresión! ¿Por qué no tenemos que encerrar el cuerpo con llaves como ésta?
 
+```java
+process(() -> { System.out.println("This is awesome"); });
+```
+
+Resulta que existe una regla especial para la invocación de un método void definida en laJava Language Specification. No es necesario encerrar una única invocación de método void entre llaves.
+AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 Quizás se pregunte: "¿Por qué podemos pasar una lambda sólo donde se espera una interfaz funcional?" Los diseñadores del lenguaje consideraron enfoques alternativos como agregar tipos de funciones (un poco como la notación especial que introdujimos para describir la firma de las expresiones lambda; revisaremos este tema en los capítulos 20 y 21 ) a Java. Pero eligieron este método porque encaja de forma natural sin aumentar la complejidad del lenguaje. Además, la mayoría de los programadores de Java ya están familiarizados con la idea de una interfaz con un único método abstracto (por ejemplo, para el manejo de eventos). Sin embargo, la razón más importante es que las interfaces funcionales ya se usaban ampliamente antes de Java 8. Esto significa que proporcionan una buena ruta de migración para usar expresiones lambda. De hecho, si ha estado usando interfaces funcionales como Comparatore Runnableincluso sus propias interfaces que definen solo un método abstracto, ahora puede usar expresiones lambda sin cambiar sus API. Pruebe el cuestionario 3.3 para evaluar sus conocimientos sobre dónde se pueden utilizar lambdas.
 
 Prueba 3.3: ¿Dónde se pueden utilizar lambdas?
