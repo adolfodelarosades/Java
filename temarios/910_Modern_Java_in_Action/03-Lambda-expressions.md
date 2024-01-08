@@ -146,21 +146,39 @@ List<Apple> greenApples =
 
 ### 3.2.1.Interfaz funcional
 
-¿Recuerda la interfaz Predicate<T>que creó en el capítulo 2 para poder parametrizar el comportamiento del filtermétodo? ¡Es una interfaz funcional! ¿Por qué? Porque Predicateespecifica solo un método abstracto:
+¿Recuerda la interfaz **`Predicate<T>`** que creó en el capítulo 2 para poder parametrizar el comportamiento del método **`filter`**? ¡Es una interfaz funcional! ¿Por qué? Porque **`Predicate`** especifica solo un método abstracto:
 
 ```java
+public interface Predicate<T> {
+    boolean test (T t);
+}
 ```
 
-En pocas palabras, una interfaz funcional es una interfaz que especifica exactamente un método abstracto. Ya conoce varias otras interfaces funcionales en la API de Java, como Comparatory Runnable, que exploramos en el capítulo 2 :
+En pocas palabras, ***una interfaz funcional es una interfaz que especifica exactamente un método abstracto***. Ya conoce varias otras interfaces funcionales en la API de Java, como **`Comparator`** y **`Runnable`**, que exploramos en el capítulo 2:
 
 ```java
+public interface Comparator<T> {                           1
+    int compare(T o1, T o2);
+}
+public interface Runnable {                                2
+    void run();
+}
+public interface ActionListener extends EventListener {    3
+    void actionPerformed(ActionEvent e);
+}
+public interface Callable<V> {                             4
+    V call() throws Exception;
+}
+public interface PrivilegedAction<T> {                     5
+    T run();
+}
 ```
 
-1 java.util.Comparador
-2 java.lang.Runnable
-3 java.awt.event.ActionListener
-4 java.util.concurrent.Invocable
-5 java.seguridad.Acción Privilegiada
+* **1 `java.util.Comparador`**
+* **2 `java.lang.Runnable`**
+* **3 `java.awt.event.ActionListener`**
+* **4 `java.util.concurrent.Invocable`**
+* **5 `java.seguridad.Acción Privilegiada`**
 
 <hr>
 
