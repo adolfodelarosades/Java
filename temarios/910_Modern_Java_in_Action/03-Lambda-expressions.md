@@ -33,34 +33,52 @@ Si se pregunta de dónde viene el término lambda, proviene de un sistema desarr
 Antes:
 
 ```java
+Comparator<Apple> byWeight = new Comparator<Apple>() {
+    public int compare(Apple a1, Apple a2){
+        return a1.getWeight().compareTo(a2.getWeight());
+    }
+};
 ```
 
 Después (con expresiones lambda):
 
 ```java
+Comparator<Apple> byWeight =
+    (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
 ```
 
 ¡Debes admitir que el código parece más claro! No te preocupes si todas las partes de la expresión lambda aún no tienen sentido; Te explicaremos todas las piezas pronto. Por ahora, tenga en cuenta que literalmente está pasando solo el código necesario para comparar dos manzanas usando su peso. Parece que estás pasando el cuerpo del método compare. Pronto aprenderá que puede simplificar su código aún más. En la siguiente sección explicaremos exactamente dónde y cómo se pueden utilizar expresiones lambda.
 
 La lambda que acabamos de mostrar tiene tres partes, como se muestra en la figura 3.1 :
 
-Figura 3.1.Una expresión lambda se compone de parámetros, una flecha y un cuerpo.
+**Figura 3.1.Una expresión lambda se compone de parámetros, una flecha y un cuerpo.**
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/bdb476e3-bfd4-45fa-82e4-056baf574628)
 
-Una lista de parámetros : en este caso refleja los parámetros delcomparemétodo de aComparator—twoApples.
-Una flecha : la flecha->separa la lista de parámetros del cuerpo de la lambda.
-El cuerpo de la lambda : compara dosApples usando sus pesos. La expresión se considera el valor de retorno de lambda.
+* **Una lista de parámetros**: en este caso refleja los parámetros delcomparemétodo de aComparator—twoApples.
+* **Una flecha**: la flecha->separa la lista de parámetros del cuerpo de la lambda.
+* **El body del lambda**: compara dosApples usando sus pesos. La expresión se considera el valor de retorno de lambda.
+
 Para ilustrar más, la siguiente lista muestra cinco ejemplos de expresiones lambda válidas en Java 8.
 
-Listado 3.1.Expresiones lambda válidas en Java 8
+**Listado 3.1.Expresiones lambda válidas en Java 8**
+
 ```java
+(String s) -> s.length()                                             1
+(Apple a) -> a.getWeight() > 150                                     2
+(int x, int y) -> {
+    System.out.println("Result:");
+    System.out.println(x + y);
+}                                                                    3
+() -> 42                                                             4
+(Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight())     5
 ```
 
-1 Toma un parámetro de tipo String y devuelve un int. No tiene declaración de devolución ya que la devolución está implícita.
-2 Toma un parámetro de tipo Apple y devuelve un valor booleano (si la manzana pesa más de 150 g).
-3 Toma dos parámetros de tipo int y no devuelve ningún valor (retorno nulo). Su cuerpo contiene dos declaraciones.
-4 No toma ningún parámetro y devuelve el int 42
-5 Toma dos parámetros de tipo Apple y devuelve un int que representa la comparación de sus pesos.
+**1 Toma un parámetro de tipo String y devuelve un int. No tiene declaración de devolución ya que la devolución está implícita.**
+**2 Toma un parámetro de tipo Apple y devuelve un valor booleano (si la manzana pesa más de 150 g).**
+**3 Toma dos parámetros de tipo int y no devuelve ningún valor (retorno nulo). Su cuerpo contiene dos declaraciones.**
+**4 No toma ningún parámetro y devuelve el int 42**
+**5 Toma dos parámetros de tipo Apple y devuelve un int que representa la comparación de sus pesos.**
 
 Los diseñadores del lenguaje Java eligieron esta sintaxis porque fue bien recibida en otros lenguajes, como C# y Scala. JavaScript tiene una sintaxis similar. La sintaxis básica de una lambda es (denominada lambda de estilo de expresión )
 
