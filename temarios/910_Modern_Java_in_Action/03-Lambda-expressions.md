@@ -310,28 +310,38 @@ El segundo ejemplo también es válido. De hecho, el tipo de retorno del método
 El tercer ejemplo no es válido porque la expresión lambda **`(Apple a) -> a.getWeight()`** tiene la firma **`(Apple) -> Integer`**, que es diferente de la firma del método **`test`** definido en **`Predicate<Apple>: (Apple) -> boolean`**.
 
 #### ¿Qué pasa con `@FunctionalInterface`?
-AQUIIIIII
-Si explora la nueva API de Java, notará que las interfaces funcionales generalmente están anotadas con @FunctionalInterface.(Mostramos una lista extensa en la sección 3.4 , donde exploramos cómo usar las interfaces funcionales en profundidad). Esta anotación se usa para indicar que la interfaz es pretende ser una interfaz funcional y, por lo tanto, es útil para la documentación. Además, el compilador devolverá un error significativo si define una interfaz mediante la @FunctionalInterfaceanotación y no es una interfaz funcional. Por ejemplo, un mensaje de error podría ser "Se encontraron varios métodos abstractos no primordiales en la interfaz Foo" para indicar que hay más de un método abstracto disponible. Tenga en cuenta que la @FunctionalInterfaceanotación no es obligatoria, pero es una buena práctica utilizarla cuando una interfaz está diseñada para ese propósito. Puede considerarlo como la @Overridenotación que indica que se anula un método.
+
+Si explora la nueva API de Java, notará que las interfaces funcionales generalmente están anotadas con **`@FunctionalInterface`**. (Mostramos una lista extensa en la sección 3.4, donde exploramos cómo usar las interfaces funcionales en profundidad). Esta anotación se usa para indicar que la interfaz es pretende ser una interfaz funcional y, por lo tanto, es útil para la documentación. Además, el compilador devolverá un error significativo si define una interfaz mediante la anotación **`@FunctionalInterface`** y no es una interfaz funcional. Por ejemplo, un mensaje de error podría ser **"Multiple non-overriding abstract methods found in interface Foo"** para indicar que hay más de un método abstracto disponible. Tenga en cuenta que la anotación **`@FunctionalInterface`** no es obligatoria, pero es una buena práctica utilizarla cuando una interfaz está diseñada para ese propósito. Puede considerarlo como la notación **`@Override`** que indica que se anula un método.
 
 ## 3.3. Poniendo lambdas en práctica: el patrón de ejecución
 
-Veamos un ejemplo de cómo las lambdas, junto con la parametrización del comportamiento, se pueden utilizar en la práctica para hacer que su código sea más flexible y conciso. Un patrón recurrente en el procesamiento de recursos (por ejemplo, al tratar con archivos o bases de datos) es abrir un recurso, procesarlo y luego cerrarlo. Las fases de configuración y limpieza son siempre similares y rodean el código importante que realiza el procesamiento. Esto se denomina patrón de ejecución , como se ilustra en la figura 3.2 . Por ejemplo, en el siguiente código, las líneas resaltadas muestran el código repetitivo necesario para leer una línea de un archivo (tenga en cuenta también que utiliza la instrucción try-with-resources de Java 7, que ya simplifica el código, porque no tiene para cerrar el recurso explícitamente):
+Veamos un ejemplo de cómo las lambdas, junto con la parametrización del comportamiento, se pueden utilizar en la práctica para hacer que su código sea más flexible y conciso. Un patrón recurrente en el procesamiento de recursos (por ejemplo, al tratar con archivos o bases de datos) es abrir un recurso, procesarlo y luego cerrarlo. Las fases de configuración y limpieza son siempre similares y rodean el código importante que realiza el procesamiento. Esto se denomina patrón de ejecución, como se ilustra en la figura 3.2. Por ejemplo, en el siguiente código, las líneas resaltadas muestran el código repetitivo necesario para leer una línea de un archivo (tenga en cuenta también que utiliza la instrucción **`try-with-resources`** de Java 7, que ya simplifica el código, porque no tiene para cerrar el recurso explícitamente):
 
-Figura 3.2.Las tareas A y B están rodeadas por un código repetitivo responsable de la preparación/limpieza.
+**Figura 3.2.Las tareas A y B están rodeadas por un código repetitivo responsable de la preparación/limpieza.**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/5abfc3fd-e060-4b87-9efa-c401383aefd4)
 
 
 ```java
+public String processFile() throws IOException {
+try (BufferedReader br =
+             new BufferedReader(new FileReader("data.txt"))) {
+        return br.readLine();                                     1
+    }
+}
 ```
 
-1 Esta es la línea que hace un trabajo útil.
+**1 Esta es la línea que hace un trabajo útil.**
 
-### 3.3.1.Paso 1: Recuerde la parametrización del comportamiento
+### 3.3.1. Paso 1: Recuerde la parametrización del comportamiento
 
 Este código actual es limitado. Puede leer sólo la primera línea del archivo. ¿Qué sucede si en su lugar desea devolver las dos primeras líneas o incluso la palabra utilizada con más frecuencia? Idealmente, le gustaría reutilizar el código para realizar la configuración y la limpieza e indicarle al processFilemétodo que realice diferentes acciones en el archivo. ¿Te suena esto familiar? Sí, es necesario parametrizar el comportamiento de processFile. Necesita una forma de pasarle el comportamiento processFilepara que pueda ejecutar diferentes comportamientos usando un archivo BufferedReader.
 
 El comportamiento de aprobación es exactamente para lo que sirven las lambdas. ¿ Cómo debería verse el nuevo processFilemétodo si desea leer dos líneas a la vez? Necesitas una lambda quetoma a BufferedReadery devuelve a String. Por ejemplo, aquí se explica cómo imprimir dos líneas de un BufferedReader:
 
 ```java
+String result
+    = processFile((BufferedReader br) -> br.readLine() + br.readLine());
 ```
 
 ### 3.3.2.Paso 2: utilice una interfaz funcional para pasar comportamientos
@@ -339,6 +349,7 @@ El comportamiento de aprobación es exactamente para lo que sirven las lambdas. 
 Explicamos anteriormente que las lambdas solo se pueden usar en el contexto de una interfaz funcional. Debe crear uno que coincida con la firma BufferedReader -> Stringy que pueda generar un archivo IOException. Llamemos a esta interfaz BufferedReaderProcessor:
 
 ```java
+
 ```
 
 Ahora puede utilizar esta interfaz como argumento de su nuevo processFilemétodo:
