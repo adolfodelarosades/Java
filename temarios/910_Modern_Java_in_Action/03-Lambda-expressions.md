@@ -362,73 +362,131 @@ public String processFile(BufferedReaderProcessor p) throws IOException {
    ...
 }
 ```
-AQUIIIIIIII
-### 3.3.3.Paso 3: ¡Ejecuta un comportamiento!
 
-Cualquier lambda del formulario BufferedReader -> Stringse puede pasar como argumento, porque coincide con la firma del processmétodo definido en la Buffered-ReaderProcessorinterfaz. Ahora solo necesita una forma de ejecutar el código representado por lambda dentro del cuerpo de processFile. Recuerde, las expresiones lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratan la expresión completa como una instancia de una interfaz funcional . Por lo tanto, puedes llamar al método en el objeto processresultante dentro del cuerpo para realizar el procesamiento: BufferedReaderProcessorprocessFile
+### 3.3.3. Paso 3: ¡Ejecuta un comportamiento!
+
+Cualquier lambda del formulario **`BufferedReader -> String`** se puede pasar como argumento, porque coincide con la firma del método **`process`** definido en la interfaz **`Buffered-ReaderProcessor`**. Ahora solo necesita una forma de ejecutar el código representado por lambda dentro del cuerpo de **`processFile`**. Recuerde, las expresiones lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratan la expresión completa como una instancia de una interfaz funcional. Por lo tanto, puedes llamar al método **`process`** en el objeto  resultante **`BufferedReaderProcessor`** dentro del cuerpo para realizar el procesamiento **`processFile `**: 
 
 ```java
+public String processFile(BufferedReaderProcessor p) throws IOException {
+    try (BufferedReader br =
+                   new BufferedReader(new FileReader("data.txt"))) {
+        return p.process(br);                                          1
+    }
+}
 ```
 
-1 Procesa el objeto BufferedReader
+**1 Procesa el objeto BufferedReader**
 
-### 3.3.4.Paso 4: pasar lambdas
+### 3.3.4. Paso 4: Pasar lambdas
 
-Ahora puede reutilizar el processFilemétodo y procesar archivos de diferentes maneras pasando diferentes lambdas.
+Ahora puede reutilizar el método **`processFile`** y procesar archivos de diferentes maneras pasando diferentes lambdas.
 
 A continuación se muestra el procesamiento de una línea:
 
 ```java
+String oneLine =
+    processFile((BufferedReader br) -> br.readLine());
 ```
 
 A continuación se muestra el procesamiento de dos líneas:
 
 ```java
+String twoLines =
+    processFile((BufferedReader br) -> br.readLine() + br.readLine());
 ```
 
-La Figura 3.3 resume los cuatro pasos dados para hacer el processFilemétodo más flexible.
+La Figura 3.3 resume los cuatro pasos dados para hacer el método **`processFile`** más flexible.
 
-Figura 3.3.Proceso de cuatro pasos para aplicar el patrón de ejecución circular
+**Figura 3.3.Proceso de cuatro pasos para aplicar el patrón de ejecución circular**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/745769d3-39f9-42f7-8907-2da5ab49ec7a)
 
 
 Hemos mostrado cómo puede utilizar interfaces funcionales para pasar lambdas. Pero tenías que definir tus propias interfaces. En la siguiente sección, exploramos nuevas interfaces que se agregaron a Java 8 y que puede reutilizar para pasar múltiples lambdas diferentes.
 
 ## 3.4. Usando interfaces funcionales
 
-Como aprendiste en la sección 3.2.1 , una interfaz funcional especifica exactamente un método abstracto. Las interfaces funcionales son útiles porque la firma del método abstracto puede describir la firma de una expresión lambda. La firma del método abstracto de una interfaz funcional se llama descriptor de función . Para utilizar diferentes expresiones lambda, necesita un conjunto de interfaces funcionales que puedan describir descriptores de funciones comunes. Varias interfaces funcionales ya están disponibles en la API de Java, como Comparable, Runnabley Callable, que vio en la sección 3.2 .
+Como aprendiste en la sección 3.2.1, una interfaz funcional especifica exactamente un método abstracto. Las interfaces funcionales son útiles porque la firma del método abstracto puede describir la firma de una expresión lambda. La firma del método abstracto de una interfaz funcional se llama ***function descriptor - descriptor de función***. Para utilizar diferentes expresiones lambda, necesita un conjunto de interfaces funcionales que puedan describir descriptores de funciones comunes. Varias interfaces funcionales ya están disponibles en la API de Java, como **`Comparable`**, **`Runnable`** y **`Callable`**, que vio en la sección 3.2.
 
-Los diseñadores de la biblioteca Java para Java 8 le han ayudado introduciendo varias interfaces funcionales nuevas dentro del java.util.functionpaquete. Describiremos las interfaces Predicate, Consumery Functiona continuación. Una lista más completa está disponible en la tabla 3.2 al final de esta sección.
+Los diseñadores de la biblioteca Java para Java 8 le han ayudado introduciendo varias interfaces funcionales nuevas dentro del paquete **`java.util.function`**. Describiremos las interfaces **`Predicate`**, **`Consumer`** y **`Function`** a continuación. Una lista más completa está disponible en la tabla 3.2 al final de esta sección.
 
-### 3.4.1.Predicado
+### 3.4.1.Predicate
 
-La java.util.function.Predicate<T>interfaz define un método abstracto llamado testque acepta un objeto de tipo genérico Ty devuelve un archivo boolean. Es exactamente el mismo que creaste anteriormente, ¡pero está disponible de fábrica! Es posible que desee utilizar esta interfaz cuando necesite representar una expresión booleana que utilice un objeto de tipo T. Por ejemplo, puede definir una lambda que acepte Stringobjetos, como se muestra en la siguiente lista.
+La interfaz **`java.util.function.Predicate<T>`** define un método abstracto llamado **`test`** que acepta un objeto de tipo genérico **`T`** y devuelve un archivo **`boolean`**. Es exactamente el mismo que creaste anteriormente, ¡pero está disponible de fábrica! Es posible que desee utilizar esta interfaz cuando necesite representar una expresión booleana que utilice un objeto de tipo **`T`**. Por ejemplo, puede definir una lambda que acepte objetos **`String`**, como se muestra en la siguiente lista.
 
-Listado 3.2.trabajando con unPredicate
-```java
-```
-
-Si busca la especificación Javadoc de la Predicateinterfaz, puede observar métodos adicionales como andy or. No te preocupes por ellos por ahora. Volveremos a esto en la sección 3.8 .
-
-### 3.4.2.Consumidor
-
-La java.util.function.Consumer<T>interfaz define un método abstracto llamado acceptque toma un objeto de tipo genérico Ty no devuelve ningún resultado ( void). Puede utilizar esta interfaz cuando necesite acceder a un objeto de tipo Ty realizaralgunas operaciones sobre el mismo. Por ejemplo, puede usarlo para crear un método forEach, que toma una lista Integersy aplica una operación en cada elemento de esa lista. En el siguiente listado, utilizará este forEachmétodo combinado con una lambda para imprimir todos los elementos de la lista.
-
-Listado 3.3.trabajando con unConsumer
+**Listado 3.2. Trabajando con un `Predicate`**
 
 ```java
+@FunctionalInterface
+public interface Predicate<T> {
+    boolean test(T t);
+}
+public <T> List<T> filter(List<T> list, Predicate<T> p) {
+    List<T> results = new ArrayList<>();
+    for(T t: list) {
+        if(p.test(t)) {
+            results.add(t);
+        }
+    }
+    return results;
+}
+Predicate<String> nonEmptyStringPredicate = (String s) -> !s.isEmpty();
+List<String> nonEmpty = filter(listOfStrings, nonEmptyStringPredicate);
 ```
 
-1 La lambda es la implementación del método de aceptación del Consumidor.
+Si busca la especificación Javadoc de la interfaz **`Predicate`**, puede observar métodos adicionales como **`and`** y **`or`**. No te preocupes por ellos por ahora. Volveremos a esto en la sección 3.8 .
+
+### 3.4.2. Consumer
+
+La interfaz **`java.util.function.Consumer<T>`** define un método abstracto llamado **`accept`** que toma un objeto de tipo genérico **`T`** y no devuelve ningún resultado (**`void`**). Puede utilizar esta interfaz cuando necesite acceder a un objeto de tipo **`T`** y realizar algunas operaciones sobre el mismo. Por ejemplo, puede usarlo para crear un método **`forEach`**, que toma una lista **`Integers`** y aplica una operación en cada elemento de esa lista. En el siguiente listado, utilizará este método **`forEach`** combinado con una lambda para imprimir todos los elementos de la lista.
+
+**Listado 3.3.trabajando con un `Consumer`**
+
+```java
+@FunctionalInterface
+public interface Consumer<T> {
+    void accept(T t);
+}
+public <T> void forEach(List<T> list, Consumer<T> c) {
+    for(T t: list) {
+        c.accept(t);
+    }
+}
+forEach(
+         Arrays.asList(1,2,3,4,5),
+        (Integer i) -> System.out.println(i)         1
+       );
+```
+
+**1 La lambda es la implementación del método de aceptación del Consumer.**
 
 ### 3.4.3.Función
 
-La java.util.function.Function<T, R>interfaz define un método abstracto llamado applyque toma un objeto de tipo genérico Tcomo entrada y devuelve un objeto de tipo genérico R. Puede utilizar esta interfaz cuando necesite definir una lambda que asigne información de un objeto de entrada a una salida (por ejemplo, extraer el peso de una manzana o asignar una cadena a su longitud). En el listado que sigue, mostramos cómo puede usarlo para crear un método mappara transformar una lista de Strings en una lista de Integers que contiene la longitud de cada String.
+La interfaz **`java.util.function.Function<T, R>`** define un método abstracto llamado **`apply`** que toma un objeto de tipo genérico **`T`** como entrada y devuelve un objeto de tipo genérico **`R`**. Puede utilizar esta interfaz cuando necesite definir una lambda que asigne información de un objeto de entrada a una salida (por ejemplo, extraer el peso de una manzana o asignar una cadena a su longitud). En el listado que sigue, mostramos cómo puede usarlo para crear un método **`map`** para transformar una lista de **`Strings`** en una lista de **`Integers`** que contiene la longitud de cada **`String`**.
 
-Listado 3.4.trabajando con unFunction
+**Listado 3.4.trabajando con un `Function`**
+
 ```java
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+}
+public <T, R> List<R> map(List<T> list, Function<T, R> f) {
+    List<R> result = new ArrayList<>();
+    for(T t: list) {
+        result.add(f.apply(t));
+    }
+    return result;
+}
+// [7, 2, 6]
+List<Integer> l = map(
+                       Arrays.asList("lambdas", "in", "action"),
+                       (String s) -> s.length()                     1
+               );
 ```
 
-1 Implementa el método de aplicación de Función.
+**1 Implementa el método de aplicación de `Function`.**
 
 #### Especializaciones primitivas
 
