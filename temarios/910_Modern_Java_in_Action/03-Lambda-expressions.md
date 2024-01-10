@@ -271,29 +271,46 @@ Después de todo, **`System.out.println returns void`** ¡así que claramente es
 process(() -> { System.out.println("This is awesome"); });
 ```
 
-Resulta que existe una regla especial para la invocación de un método void definida en laJava Language Specification. No es necesario encerrar una única invocación de método void entre llaves.
-AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-Quizás se pregunte: "¿Por qué podemos pasar una lambda sólo donde se espera una interfaz funcional?" Los diseñadores del lenguaje consideraron enfoques alternativos como agregar tipos de funciones (un poco como la notación especial que introdujimos para describir la firma de las expresiones lambda; revisaremos este tema en los capítulos 20 y 21 ) a Java. Pero eligieron este método porque encaja de forma natural sin aumentar la complejidad del lenguaje. Además, la mayoría de los programadores de Java ya están familiarizados con la idea de una interfaz con un único método abstracto (por ejemplo, para el manejo de eventos). Sin embargo, la razón más importante es que las interfaces funcionales ya se usaban ampliamente antes de Java 8. Esto significa que proporcionan una buena ruta de migración para usar expresiones lambda. De hecho, si ha estado usando interfaces funcionales como Comparatore Runnableincluso sus propias interfaces que definen solo un método abstracto, ahora puede usar expresiones lambda sin cambiar sus API. Pruebe el cuestionario 3.3 para evaluar sus conocimientos sobre dónde se pueden utilizar lambdas.
+Resulta que existe una regla especial para la invocación de un método void definida en la Java Language Specification. No es necesario encerrar una única invocación de método void entre llaves.
 
-Prueba 3.3: ¿Dónde se pueden utilizar lambdas?
+Quizás se pregunte: "¿Por qué podemos pasar una lambda sólo donde se espera una interfaz funcional?" Los diseñadores del lenguaje consideraron enfoques alternativos como agregar tipos de funciones (un poco como la notación especial que introdujimos para describir la firma de las expresiones lambda; revisaremos este tema en los capítulos 20 y 21) a Java. Pero eligieron este método porque encaja de forma natural sin aumentar la complejidad del lenguaje. Además, la mayoría de los programadores de Java ya están familiarizados con la idea de una interfaz con un único método abstracto (por ejemplo, para el manejo de eventos). Sin embargo, la razón más importante es que las interfaces funcionales ya se usaban ampliamente antes de Java 8. Esto significa que proporcionan una buena ruta de migración para usar expresiones lambda. De hecho, si ha estado usando interfaces funcionales como **`Comparatore`** y **`Runnable`** incluso sus propias interfaces que definen solo un método abstracto, ahora puede usar expresiones lambda sin cambiar sus API. Pruebe el cuestionario 3.3 para evaluar sus conocimientos sobre dónde se pueden utilizar lambdas.
+
+**Prueba 3.3: ¿Dónde se pueden utilizar lambdas?**
 
 ¿Cuáles de los siguientes son usos válidos de las expresiones lambda?
 
+1. 
 ```java
+execute(() -> {});
+public void execute(Runnable r) {
+  r.run();
+}
 ```
 
-Respuesta:
+2.
+```java
+public Callable<String> fetch() {
+  return () -> "Tricky example ;-)";
+}
+```
+
+3.
+```java
+Predicate<Apple> p = (Apple a) -> a.getWeight();
+```
+
+**Respuesta:**
 
 Sólo 1 y 2 son válidos.
 
-El primer ejemplo es válido porque la lambda () -> {}tiene la firma () -> void, que coincide con la firma del método abstracto rundefinido en Runnable. Tenga en cuenta que ejecutar este código no hará nada porque el cuerpo de la lambda está vacío.
+El primer ejemplo es válido porque la lambda **`() -> {}`** tiene la firma **`() -> void`**, que coincide con la firma del método abstracto **`run`** definido en **`Runnable`**. Tenga en cuenta que ejecutar este código no hará nada porque el cuerpo de la lambda está vacío.
 
-El segundo ejemplo también es válido. De hecho, el tipo de retorno del método fetches Callable<String>. Callable<String>define un método con la firma () -> Stringcuando Tse reemplaza con String. Debido a que lambda () -> "Tricky example ;-)"tiene la firma () -> String, se puede usar en este contexto.
+El segundo ejemplo también es válido. De hecho, el tipo de retorno del método **`fetch`** es **`Callable<String>. Callable<String>`** define un método con la firma **`() -> String`** cuando **`T`** se reemplaza con **`String`**. Debido a que lambda **`() -> "Tricky example ;-)"`**  tiene la firma **`() -> String`**, se puede usar en este contexto.
 
-El tercer ejemplo no es válido porque la expresión lambda (Apple a) -> a.getWeight()tiene la firma (Apple) -> Integer, que es diferente de la firma del método testdefinido en Predicate<Apple>: (Apple) -> boolean.
+El tercer ejemplo no es válido porque la expresión lambda **`(Apple a) -> a.getWeight()`** tiene la firma **`(Apple) -> Integer`**, que es diferente de la firma del método **`test`** definido en **`Predicate<Apple>: (Apple) -> boolean`**.
 
-¿Qué pasa con @FunctionalInterface?
-
+#### ¿Qué pasa con `@FunctionalInterface`?
+AQUIIIIII
 Si explora la nueva API de Java, notará que las interfaces funcionales generalmente están anotadas con @FunctionalInterface.(Mostramos una lista extensa en la sección 3.4 , donde exploramos cómo usar las interfaces funcionales en profundidad). Esta anotación se usa para indicar que la interfaz es pretende ser una interfaz funcional y, por lo tanto, es útil para la documentación. Además, el compilador devolverá un error significativo si define una interfaz mediante la @FunctionalInterfaceanotación y no es una interfaz funcional. Por ejemplo, un mensaje de error podría ser "Se encontraron varios métodos abstractos no primordiales en la interfaz Foo" para indicar que hay más de un método abstracto disponible. Tenga en cuenta que la @FunctionalInterfaceanotación no es obligatoria, pero es una buena práctica utilizarla cuando una interfaz está diseñada para ese propósito. Puede considerarlo como la @Overridenotación que indica que se anula un método.
 
 ## 3.3. Poniendo lambdas en práctica: el patrón de ejecución
