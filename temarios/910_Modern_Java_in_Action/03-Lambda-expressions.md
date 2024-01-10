@@ -335,28 +335,34 @@ try (BufferedReader br =
 
 ### 3.3.1. Paso 1: Recuerde la parametrización del comportamiento
 
-Este código actual es limitado. Puede leer sólo la primera línea del archivo. ¿Qué sucede si en su lugar desea devolver las dos primeras líneas o incluso la palabra utilizada con más frecuencia? Idealmente, le gustaría reutilizar el código para realizar la configuración y la limpieza e indicarle al processFilemétodo que realice diferentes acciones en el archivo. ¿Te suena esto familiar? Sí, es necesario parametrizar el comportamiento de processFile. Necesita una forma de pasarle el comportamiento processFilepara que pueda ejecutar diferentes comportamientos usando un archivo BufferedReader.
+Este código actual es limitado. Puede leer sólo la primera línea del archivo. ¿Qué sucede si en su lugar desea devolver las dos primeras líneas o incluso la palabra utilizada con más frecuencia? Idealmente, le gustaría reutilizar el código para realizar la configuración y la limpieza e indicarle al método **`processFile`** que realice diferentes acciones en el archivo. ¿Te suena esto familiar? Sí, es necesario parametrizar el comportamiento de **`processFile`**. Necesita una forma de pasarle el comportamiento **`processFile`** para que pueda ejecutar diferentes comportamientos usando un archivo **`BufferedReader`**.
 
-El comportamiento de aprobación es exactamente para lo que sirven las lambdas. ¿ Cómo debería verse el nuevo processFilemétodo si desea leer dos líneas a la vez? Necesitas una lambda quetoma a BufferedReadery devuelve a String. Por ejemplo, aquí se explica cómo imprimir dos líneas de un BufferedReader:
+El comportamiento de aprobación es exactamente para lo que sirven las lambdas. ¿Cómo debería verse el nuevo método **`processFile`** si desea leer dos líneas a la vez? Necesitas una lambda que toma a **`BufferedReader`** y devuelve a **`String`**. Por ejemplo, aquí se explica cómo imprimir dos líneas de un **`BufferedReader`**:
 
 ```java
 String result
     = processFile((BufferedReader br) -> br.readLine() + br.readLine());
 ```
 
-### 3.3.2.Paso 2: utilice una interfaz funcional para pasar comportamientos
+### 3.3.2. Paso 2: utilice una interfaz funcional para pasar comportamientos
 
-Explicamos anteriormente que las lambdas solo se pueden usar en el contexto de una interfaz funcional. Debe crear uno que coincida con la firma BufferedReader -> Stringy que pueda generar un archivo IOException. Llamemos a esta interfaz BufferedReaderProcessor:
-
-```java
-
-```
-
-Ahora puede utilizar esta interfaz como argumento de su nuevo processFilemétodo:
+Explicamos anteriormente que las lambdas solo se pueden usar en el contexto de una interfaz funcional. Debe crear uno que coincida con la firma **`BufferedReader -> String`** y que pueda generar un archivo **`IOException`**. Llamemos a esta interfaz **`BufferedReaderProcessor`**:
 
 ```java
+@FunctionalInterface
+public interface BufferedReaderProcessor {
+    String process(BufferedReader b) throws IOException;
+}
 ```
 
+Ahora puede utilizar esta interfaz como argumento de su nuevo método **`processFile`**:
+
+```java
+public String processFile(BufferedReaderProcessor p) throws IOException {
+   ...
+}
+```
+AQUIIIIIIII
 ### 3.3.3.Paso 3: ¡Ejecuta un comportamiento!
 
 Cualquier lambda del formulario BufferedReader -> Stringse puede pasar como argumento, porque coincide con la firma del processmétodo definido en la Buffered-ReaderProcessorinterfaz. Ahora solo necesita una forma de ejecutar el código representado por lambda dentro del cuerpo de processFile. Recuerde, las expresiones lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratan la expresión completa como una instancia de una interfaz funcional . Por lo tanto, puedes llamar al método en el objeto processresultante dentro del cuerpo para realizar el procesamiento: BufferedReaderProcessorprocessFile
