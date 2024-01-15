@@ -492,103 +492,101 @@ List<Integer> l = map(
 
 Describimos tres interfaces funcionales que son genéricas: **`Predicate<T>`**, **`Consumer<T>`** y **`Function<T, R>`**. También hay interfaces funcionales que están especializadas en ciertos tipos.
 
-Para actualizar un poco: cada tipo de Java es un tipo de referencia (por ejemplo, **`Byte`**, **`Integer`**, **`Object`**, **`List`**) o un tipo primitivo (por ejemplo, **`int`**, **`double`**, **`byte`**, **`char`**). Pero los parámetros genéricos (por ejemplo, in ) solo pueden vincularse a tipos de referencia. Esto se debe a cómo se implementan internamente los genéricos. [ 2 ] Como resultado, en Java existe un mecanismo para convertir un tipo primitivo en un tipo de referencia correspondiente. Este mecanismo se llama boxeo . El enfoque opuesto (convertir un tipo de referencia en un tipo primitivo correspondiente) se llama unboxing . Java también tiene un mecanismo de autoboxing para facilitar la tarea a los programadores: las operaciones de boxing y unboxing se realizan automáticamente. Por ejemplo, esta es la razón por la que el siguiente código es válido (un se encuadra en un ): bytecharTConsumer<T>intInteger
+Para actualizar un poco: cada tipo de Java es un tipo de referencia (por ejemplo, **`Byte`**, **`Integer`**, **`Object`**, **`List`**) o un tipo primitivo (por ejemplo, **`int`**, **`double`**, **`byte`**, **`char`**). Pero los parámetros genéricos (por ejemplo, **`T`** en **`Consumer<T>`**) solo pueden vincularse a tipos de referencia. Esto se debe a cómo se implementan internamente los genéricos. [ 2 ] Como resultado, en Java existe un mecanismo para convertir un tipo primitivo en un tipo de referencia correspondiente. Este mecanismo se llama ***boxing***. El enfoque opuesto (convertir un tipo de referencia en un tipo primitivo correspondiente) se llama ***unboxing***. Java también tiene un mecanismo de **`autoboxing`** para facilitar la tarea a los programadores: las operaciones de ***boxing*** y ***unboxing*** se realizan automáticamente. Por ejemplo, esta es la razón por la que el siguiente código es válido (un **`int`** se encuadra en un **`Integer`** ): 
 
-2
+<hr>
 
-Algunos otros lenguajes, como C#, no tienen esta restricción. Otros lenguajes, como Scala, sólo tienen tipos de referencia. Revisaremos esta cuestión en el capítulo 20 .
+**2**
+
+*Algunos otros lenguajes, como C#, no tienen esta restricción. Otros lenguajes, como Scala, sólo tienen tipos de referencia. Revisaremos esta cuestión en el capítulo 20.*
+
+<hr>
 
 ```java
+List<Integer> list = new ArrayList<>();
+for (int i = 300; i < 400; i++){
+    list.add(i);
+}
 ```
 
 Pero esto tiene un coste de rendimiento. Los valores encuadrados envuelven los tipos primitivos y se almacenan en el montón. Por lo tanto, los valores encuadrados utilizan más memoria y requieren búsquedas de memoria adicionales para recuperar el valor primitivo ajustado.
 
-Java 8 también agregó una versión especializada de las interfaces funcionales que describimos anteriormente para evitar operaciones de autoboxing cuando las entradas o salidas son primitivas. Por ejemplo, en el siguiente código, usar an IntPredicateevita una operación de encuadre del valor 1000, mientras que usar a Predicate<Integer>encuadraría el argumento 1000de un Integerobjeto:
+Java 8 también agregó una versión especializada de las interfaces funcionales que describimos anteriormente para evitar operaciones de autoboxing cuando las entradas o salidas son primitivas. Por ejemplo, en el siguiente código, usar un **`Predicate<Integer>`** evita una operación boxing del valor **`1000`**, mientras que usar un **` Predicate<Integer>`** encuadraría (would box) el argumento **`1000 `** de un objeto **`Integer`**:
 
 ```java
+public interface IntPredicate {
+    boolean test(int t);
+}
+IntPredicate evenNumbers = (int i) -> i % 2 == 0;
+evenNumbers.test(1000);                                        1
+Predicate<Integer> oddNumbers = (Integer i) -> i % 2 != 0;
+oddNumbers.test(1000);                                         2
 ```
 
-1 Verdadero (sin boxeo)
-2 Falso (boxeo)
+* **1 True (no boxing)**
+* **2 False (boxing)**
 
-En general, el tipo primitivo apropiado precede a los nombres de las interfaces funcionales que tienen una especialización para el parámetro de tipo de entrada (por ejemplo, DoublePredicate, IntConsumer, LongBinaryOperator, IntFunctionetc.). La Functioninterfaz también tiene variantes para el parámetro de tipo de salida: ToIntFunction<T>, IntToDoubleFunction, etc.
+En general, el tipo primitivo apropiado precede a los nombres de las interfaces funcionales que tienen una especialización para el parámetro de tipo de entrada (por ejemplo, **`DoublePredicate`**, **`IntConsumer`**, **`LongBinaryOperator`**, **`IntFunction`** etc.). La interfaz **`Function`** también tiene variantes para el parámetro de tipo de salida: **`ToIntFunction<T>`**, **`IntToDoubleFunction`**, etc.
 
-La Tabla 3.2 resume las interfaces funcionales más utilizadas disponibles en la API de Java y sus descriptores de funciones, junto con sus especializaciones primitivas. Tenga en cuenta que estos son solo un kit inicial y que siempre puede crear el suyo propio si es necesario (el cuestionario 3.7 se inventa TriFunctionpara este propósito). Crear sus propias interfaces también puede ser útil cuando un nombre de dominio específico ayude con la comprensión y el mantenimiento del programa. Recuerde, la notación (T, U) -> Rmuestra cómo pensar en un descriptor de función. El lado izquierdo de la flecha es una lista que representa los tipos de argumentos y el lado derecho representa los tipos de resultados. En este caso, representa una función con dos argumentos de tipo genérico respectivamente Ty Uque tiene un tipo de retorno de R.
+La **Tabla 3.2** resume las interfaces funcionales más utilizadas disponibles en la API de Java y sus descriptores de funciones, junto con sus especializaciones primitivas. Tenga en cuenta que estos son solo un kit inicial y que siempre puede crear el suyo propio si es necesario (el cuestionario 3.7 inventa **`TriFunction`** para este propósito). Crear sus propias interfaces también puede ser útil cuando un nombre de dominio específico ayude con la comprensión y el mantenimiento del programa. Recuerde, la notación **`(T, U) -> R`** muestra cómo pensar en un descriptor de función. El lado izquierdo de la flecha es una lista que representa los tipos de argumentos y el lado derecho representa los tipos de resultados. En este caso, representa una función con dos argumentos de tipo genérico respectivamente **`T`** y **`U`** que tiene un tipo de retorno de **`R`**.
 
-Tabla 3.2.Interfaces funcionales comunes agregadas en Java 8
-Interfaz funcional
+**Tabla 3.2. Interfaces funcionales comunes agregadas en Java 8**
 
-Predicado<T>
-
-Consumidor<T>
-
-Predicado<T>	T -> booleano	IntPredicate, LongPredicate,
-DoublePredicate
-Consumidor<T>	T -> vacío	Consumidor Int, Consumidor Largo,
-Consumidor Doble
-Función<T, R>	T->R	IntFunction<R>,
-IntToDoubleFunction,
-IntToLongFunction,
-LongFunction<R>
-,
-LongToDoubleFunction,
-LongToIntFunction, DoubleFunction<R>,
-DoubleToIntFunction,
-DoubleToLongFunction, ToIntFunction
-<T>,
-ToDoubleFunction<T>,
-ToLongFunction<T>
-Proveedor<T>	() -> T	Proveedor Booleano, Proveedor Int,
-Proveedor Largo, Proveedor Doble
-OperadorUnario<T>	T -> T	OperadorIntUnario,
-OperadorUnariolargo,
-OperadorUnarioDoble
-Operador binario<T>	(T, T) -> T	IntBinaryOperator,
-LongBinaryOperator,
-DoubleBinaryOperator
-BiPredicado<T, U>	(T, U) -> booleano	
-BiConsumidor<T, U>	(T, U) -> vacío	ObjIntConsumer<T>,
-ObjLongConsumer<T>,
-ObjDoubleConsumer<T>
-BiFunción<T, U, R>	(T, U) -> R	ToIntBiFunction<T, U>,
-ToLongBiFunction<T, U>,
-ToDoubleBiFunction<T, U>
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a7f816d2-ff77-4b2d-b2a4-6ac08854a227)
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/ca88a4f8-1cfd-42a1-aa99-66f9f45acc20)
 
 Ahora ha visto muchas interfaces funcionales que se pueden usar para describir la firma de varias expresiones lambda. Para comprobar su comprensión hasta ahora, realice la prueba 3.4.
 
-Prueba 3.4: Interfaces funcionales
+**Prueba 3.4: Functional interface - Interfaces funcionales**
 
 ¿Qué interfaces funcionales usaría para los siguientes descriptores de funciones (firmas de expresión lambda)? Encontrarás la mayoría de las respuestas en la tabla 3.2 . Como ejercicio adicional, cree expresiones lambda válidas que pueda utilizar con estas interfaces funcionales.
 
-```java
-```
-Respuestas:
+1. **`T -> R`**
+2. **`(int, int) -> int`**
+3. **`T -> void`**
+4. **`() -> T`**
+5. **`(T, U) -> R`**
 
-Function<T, R>es un buen candidato. Normalmente se utiliza para convertir un objeto de tipo Ten un objeto de tipo R(por ejemplo, Function<Apple, Integer>para extraer el peso de una manzana).
-IntBinaryOperatorTiene un único método abstracto llamado applyAsIntrepresentación de un descriptor de función (int, int) -> int.
-Consumer<T>Tiene un único método abstracto llamado acceptrepresentación de un descriptor de función T -> void.
-Supplier<T>Tiene un único método abstracto llamado getrepresentación de un descriptor de función () -> T.
-BiFunction<T, U, R>Tiene un único método abstracto llamado applyrepresentación de un descriptor de función (T, U) -> R.
+**Respuestas:**
+
+1. **`Function<T, R>`** es un buen candidato. Normalmente se utiliza para convertir un objeto de tipo **`T`** en un objeto de tipo **`R`** (por ejemplo, **`Function<Apple, Integer>`** para extraer el peso de una manzana).
+2. **`IntBinaryOperator`** Tiene un único método abstracto llamado **`applyAsInt`** representación de un descriptor de función **`(int, int) -> int`**.
+3. **`Consumer<T>`** Tiene un único método abstracto llamado **`accept`** representación de un descriptor de función **`T -> void`**.
+4. **`Supplier<T>`** Tiene un único método abstracto llamado **`get`** representación de un descriptor de función **`() -> T`**.
+5. **`BiFunction<T, U, R>`** Tiene un único método abstracto llamado **`apply`** representación de un descriptor de función **`(T, U) -> R`**.
+
 Para resumir la discusión sobre interfaces funcionales y lambdas, la tabla 3.3 proporciona un resumen de casos de uso, ejemplos de lambdas e interfaces funcionales que se pueden usar.
 
-Tabla 3.3.Ejemplos de lambdas con interfaces funcionales.
-Caso de uso
+**Tabla 3.3. Ejemplos de lambdas con interfaces funcionales.**
 
-Ejemplo de lambda
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e844a1a9-08dd-4f9a-8d0e-9a5856b1c912)
 
-Interfaz funcional adecuada
+#### ¿Qué pasa con las excepciones, lambdas y las interfaces funcionales?
+
+Tenga en cuenta que ninguna de las interfaces funcionales permite que se lance una excepción marcada. Tiene dos opciones si necesita el cuerpo de una expresión lambda para generar una excepción: definir su propia interfaz funcional que declara la excepción marcada o envolver el cuerpo lambda con un bloque **`try/catch`**.
+
+Por ejemplo, en la sección 3.3 introdujimos una nueva interfaz funcional **`Buffered-Reader-Processor`** que declaraba explícitamente **`IOException`**:
 
 ```java
+@FunctionalInterface
+public interface BufferedReaderProcessor {
+    String process(BufferedReader b) throws IOException;
+}
+BufferedReaderProcessor p = (BufferedReader br) -> br.readLine();
 ```
 
-¿Qué pasa con las excepciones, lambdas y las interfaces funcionales?
-Tenga en cuenta que ninguna de las interfaces funcionales permite que se lance una excepción marcada. Tiene dos opciones si necesita el cuerpo de una expresión lambda para generar una excepción: definir su propia interfaz funcional que declara la excepción marcada o envolver el cuerpo lambda con un try/catchbloque.
-
-Por ejemplo, en la sección 3.3 introdujimos una nueva interfaz funcional Buffered-Reader-Processorque declaraba explícitamente IOException:
-
-Pero es posible que esté utilizando una API que espera una interfaz funcional Function<T, R>y no hay opción para crear la suya propia. Verá en el próximo capítulo que la API Streams hace un uso intensivo de las interfaces funcionales de la tabla 3.2 . En este caso, puede detectar explícitamente la excepción marcada:
+Pero es posible que esté utilizando una API que espera una interfaz funcional **`Function<T, R>`** y no hay opción para crear la suya propia. Verá en el próximo capítulo que la **API Streams** hace un uso intensivo de las interfaces funcionales de la tabla 3.2. En este caso, puede detectar explícitamente la excepción marcada:
 
 ```java
+Function<BufferedReader, String> f =
+  (BufferedReader b) -> {
+    try {
+      return b.readLine();
+    }
+    catch(IOException e) {
+      throw new RuntimeException(e);
+    }
+  };
 ```
 
 Ahora ha visto cómo crear lambdas y dónde y cómo usarlas. A continuación, explicaremos algunos detalles más avanzados: cómo el compilador verifica el tipo de lambdas y las reglas que debe tener en cuenta, como las lambdas que hacen referencia a variables locales dentro de su cuerpo y las lambdas compatibles con void. No es necesario comprender completamente la siguiente sección de inmediato y es posible que desee volver a ella más tarde y pasar a la sección 3.6 sobre referencias de métodos.
