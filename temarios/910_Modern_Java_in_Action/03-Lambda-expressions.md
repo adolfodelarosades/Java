@@ -595,48 +595,73 @@ Ahora ha visto cómo crear lambdas y dónde y cómo usarlas. A continuación, ex
 
 Cuando mencionamos por primera vez las expresiones lambda, dijimos que le permiten generar una instancia de una interfaz funcional. No obstante, una expresión lambda en sí misma no contiene información sobre qué interfaz funcional está implementando. Para tener una comprensión más formal de las expresiones lambda, debes saber cuál es el tipo de lambda.
 
-### 3.5.1.Comprobación de tipo
+### 3.5.1. Type checking - Comprobación de tipo
 
-El tipo de lambda se deduce del contexto en el que se utiliza la lambda. El tipo esperado para la expresión lambda dentro del contexto (por ejemplo, un parámetro de método al que se pasa o una variable local a la que está asignada) se denomina tipo de destino . Veamos un ejemplo para ver qué sucede detrás de escena cuando usa una expresión lambda. La Figura 3.4 resume el proceso de verificación de tipo para el siguiente código:
+El tipo de lambda se deduce del contexto en el que se utiliza la lambda. El tipo esperado para la expresión lambda dentro del contexto (por ejemplo, un parámetro de método al que se pasa o una variable local a la que está asignada) se denomina tipo de destino. Veamos un ejemplo para ver qué sucede detrás de escena cuando usa una expresión lambda. La Figura 3.4 resume el proceso de verificación de tipo para el siguiente código:
 
-Figura 3.4.Deconstruyendo el proceso de verificación de tipos de una expresión lambda
+**Figura 3.4. Deconstruyendo el proceso de verificación de tipos de una expresión lambda**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/b9a6f9c2-4b5b-4bbb-a9fe-c43e671e20f0)
 
 
 ```java
+List<Apple> heavierThan150g =
+        filter(inventory, (Apple apple) -> apple.getWeight() > 150);
 ```
 
 El proceso de verificación de tipo se deconstruye de la siguiente manera:
 
-Primero, busca la declaración del filtermétodo.
-En segundo lugar, espera, como segundo parámetro formal, un objeto de tipo Predicate<Apple>(el tipo objetivo).
-En tercer lugar, Predicate<Apple>hay una interfaz funcional que define un único método abstracto llamado test.
-Cuarto, el testmétodo describe un descriptor de función que acepta un Appley devuelve un boolean.
-Finalmente, cualquier argumento del filtermétodo debe cumplir con este requisito.
-El código es válido porque la expresión lambda que estamos pasando también toma un Appleparámetro as y devuelve un archivo boolean. Tenga en cuenta que si la expresión lambda arrojara una excepción, entonces la throwscláusula declarada del método abstracto también tendría que coincidir.
+* Primero, busca la declaración del método **`filter`**.
+* En segundo lugar, espera, como segundo parámetro formal, un objeto de tipo **`Predicate<Apple>`**(el target type - tipo objetivo).
+* En tercer lugar, **`Predicate<Apple>`** es una interfaz funcional que define un único método abstracto llamado **`test`**.
+* Cuarto, el método **`test`** describe un descriptor de función que acepta un **`Apple`** y devuelve un **`boolean`**.
+* Finalmente, cualquier argumento del método **`filter`** debe cumplir con este requisito.
 
-### 3.5.2.Misma lambda, diferentes interfaces funcionales
+El código es válido porque la expresión lambda que estamos pasando también toma un parámetro **`Apple`** y devuelve un **`boolean`**. Tenga en cuenta que si la expresión lambda arrojara una excepción, entonces la cláusula **`throws`** declarada del método abstracto también tendría que coincidir.
 
-Debido a la idea de tipificación de destino , la misma expresión lambda se puede asociar con diferentes interfaces funcionales si tienen una firma de método abstracto compatible. Por ejemplo, ambas interfaces Callabley PrivilegedActionlas descritas anteriormente representan funciones que no aceptan nada y devuelven un tipo genérico T. Por tanto, son válidas las dos asignaciones siguientes:
+### 3.5.2. Misma lambda, diferentes interfaces funcionales
+
+Debido a la idea de tipificación de destino, la misma expresión lambda se puede asociar con diferentes interfaces funcionales si tienen una firma de método abstracto compatible. Por ejemplo, ambas interfaces **`Callable`** y **`PrivilegedAction`** las descritas anteriormente representan funciones que no aceptan nada y devuelven un tipo genérico **`T`**. Por tanto, son válidas las dos asignaciones siguientes:
 
 ```java
+Callable<Integer> c = () -> 42;
+PrivilegedAction<Integer> p = () -> 42;
 ```
 
-En este caso, la primera asignación tiene un tipo de destino Callable<Integer>y la segunda asignación tiene un tipo de destino PrivilegedAction<Integer>.
+En este caso, la primera asignación tiene un tipo de destino **`Callable<Integer>`** y la segunda asignación tiene un tipo de destino **`PrivilegedAction<Integer>`**.
 
 En la tabla 3.3 mostramos un ejemplo similar; la misma lambda se puede utilizar con múltiples interfaces funcionales diferentes:
 
 ```java
+Comparator<Apple> c1 =
+  (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+ToIntBiFunction<Apple, Apple> c2 =
+  (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+BiFunction<Apple, Apple, Integer> c3 =
+  (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
 ```
 
-Aquellos de ustedes que estén familiarizados con la evolución de Java recordarán que Java 7 ya había introducido la idea de que los tipos se infieren a partir del contexto con inferencia genérica usando el operador diamante ( <>) (esta idea se puede encontrar incluso antes con métodos genéricos). Una expresión de instancia de clase dada puede aparecer en dos o más contextos diferentes, y el argumento de tipo apropiado se inferirá como se ejemplifica aquí:
+#### Diamond operator
+
+Aquellos de ustedes que estén familiarizados con la evolución de Java recordarán que Java 7 ya había introducido la idea de que los tipos se infieren a partir del contexto con inferencia genérica usando el operador diamante (**`<>`**) (esta idea se puede encontrar incluso antes con métodos genéricos). Una expresión de instancia de clase dada puede aparecer en dos o más contextos diferentes, y el argumento de tipo apropiado se inferirá como se ejemplifica aquí:
 
 ```java
+List<String> listOfStrings = new ArrayList<>();
+List<Integer> listOfIntegers = new ArrayList<>();
 ```
 
-Si una lambda tiene una expresión de declaración como cuerpo, es compatible con un descriptor de función que devuelve void(siempre que la lista de parámetros también sea compatible). Por ejemplo, las dos líneas siguientes son legales aunque el método addde a Listdevuelva a booleany no voidcomo se esperaba en el Consumercontexto ( T -> void):
+#### Regla especial void-compatibility
+
+Si una lambda tiene una expresión de declaración como su body, es compatible con un descriptor de función que devuelve **`void`**(siempre que la lista de parámetros también sea compatible). Por ejemplo, las dos líneas siguientes son legales aunque el método **`add`** de una **`List`** devuelva un **`boolean`** y no **`void`** como se esperaba en el **` Consumer context (T -> void)`**:
 
 ```java
+// Predicate has a boolean return
+Predicate<String> p = (String s) -> list.add(s);
+// Consumer has a void return
+Consumer<String> b = (String s) -> list.add(s);
 ```
+
+AQUIIIIIIIIIII
 
 A estas alturas ya debería tener una buena comprensión de cuándo y dónde se le permite usar expresiones lambda. Pueden obtener su tipo de destino a partir de un contexto de asignación, un contexto de invocación de método (parámetros y retorno) y un contexto de conversión. Para comprobar sus conocimientos, pruebe el cuestionario 3.5.
 
