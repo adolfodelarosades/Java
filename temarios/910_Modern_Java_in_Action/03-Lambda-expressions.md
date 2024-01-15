@@ -411,7 +411,7 @@ Como aprendiste en la sección 3.2.1, una interfaz funcional especifica exactame
 
 Los diseñadores de la biblioteca Java para Java 8 le han ayudado introduciendo varias interfaces funcionales nuevas dentro del paquete **`java.util.function`**. Describiremos las interfaces **`Predicate`**, **`Consumer`** y **`Function`** a continuación. Una lista más completa está disponible en la tabla 3.2 al final de esta sección.
 
-### 3.4.1.Predicate
+### 3.4.1. Predicate
 
 La interfaz **`java.util.function.Predicate<T>`** define un método abstracto llamado **`test`** que acepta un objeto de tipo genérico **`T`** y devuelve un archivo **`boolean`**. Es exactamente el mismo que creaste anteriormente, ¡pero está disponible de fábrica! Es posible que desee utilizar esta interfaz cuando necesite representar una expresión booleana que utilice un objeto de tipo **`T`**. Por ejemplo, puede definir una lambda que acepte objetos **`String`**, como se muestra en la siguiente lista.
 
@@ -461,7 +461,7 @@ forEach(
 
 **1 La lambda es la implementación del método de aceptación del Consumer.**
 
-### 3.4.3.Función
+### 3.4.3. Function
 
 La interfaz **`java.util.function.Function<T, R>`** define un método abstracto llamado **`apply`** que toma un objeto de tipo genérico **`T`** como entrada y devuelve un objeto de tipo genérico **`R`**. Puede utilizar esta interfaz cuando necesite definir una lambda que asigne información de un objeto de entrada a una salida (por ejemplo, extraer el peso de una manzana o asignar una cadena a su longitud). En el listado que sigue, mostramos cómo puede usarlo para crear un método **`map`** para transformar una lista de **`Strings`** en una lista de **`Integers`** que contiene la longitud de cada **`String`**.
 
@@ -488,11 +488,11 @@ List<Integer> l = map(
 
 **1 Implementa el método de aplicación de `Function`.**
 
-#### Especializaciones primitivas
+#### Especializaciones Primitive
 
-Describimos tres interfaces funcionales que son genéricas: Predicate<T>, Consumer<T>y Function<T, R>. También hay interfaces funcionales que están especializadas en ciertos tipos.
+Describimos tres interfaces funcionales que son genéricas: **`Predicate<T>`**, **`Consumer<T>`** y **`Function<T, R>`**. También hay interfaces funcionales que están especializadas en ciertos tipos.
 
-Para actualizar un poco: cada tipo de Java es un tipo de referencia (por ejemplo, Byte, Integer, Object) Listo un tipo primitivo (por ejemplo, int, double, ). Pero los parámetros genéricos (por ejemplo, in ) solo pueden vincularse a tipos de referencia. Esto se debe a cómo se implementan internamente los genéricos. [ 2 ] Como resultado, en Java existe un mecanismo para convertir un tipo primitivo en un tipo de referencia correspondiente. Este mecanismo se llama boxeo . El enfoque opuesto (convertir un tipo de referencia en un tipo primitivo correspondiente) se llama unboxing . Java también tiene un mecanismo de autoboxing para facilitar la tarea a los programadores: las operaciones de boxing y unboxing se realizan automáticamente. Por ejemplo, esta es la razón por la que el siguiente código es válido (un se encuadra en un ): bytecharTConsumer<T>intInteger
+Para actualizar un poco: cada tipo de Java es un tipo de referencia (por ejemplo, **`Byte`**, **`Integer`**, **`Object`**, **`List`**) o un tipo primitivo (por ejemplo, **`int`**, **`double`**, **`byte`**, **`char`**). Pero los parámetros genéricos (por ejemplo, in ) solo pueden vincularse a tipos de referencia. Esto se debe a cómo se implementan internamente los genéricos. [ 2 ] Como resultado, en Java existe un mecanismo para convertir un tipo primitivo en un tipo de referencia correspondiente. Este mecanismo se llama boxeo . El enfoque opuesto (convertir un tipo de referencia en un tipo primitivo correspondiente) se llama unboxing . Java también tiene un mecanismo de autoboxing para facilitar la tarea a los programadores: las operaciones de boxing y unboxing se realizan automáticamente. Por ejemplo, esta es la razón por la que el siguiente código es válido (un se encuadra en un ): bytecharTConsumer<T>intInteger
 
 2
 
