@@ -398,7 +398,7 @@ String twoLines =
 
 La Figura 3.3 resume los cuatro pasos dados para hacer el método **`processFile`** más flexible.
 
-**Figura 3.3.Proceso de cuatro pasos para aplicar el patrón de ejecución circular**
+**Figura 3.3. Proceso de cuatro pasos para aplicar el patrón de ejecución circular**
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/745769d3-39f9-42f7-8907-2da5ab49ec7a)
 
@@ -441,7 +441,7 @@ Si busca la especificación Javadoc de la interfaz **`Predicate`**, puede observ
 
 La interfaz **`java.util.function.Consumer<T>`** define un método abstracto llamado **`accept`** que toma un objeto de tipo genérico **`T`** y no devuelve ningún resultado (**`void`**). Puede utilizar esta interfaz cuando necesite acceder a un objeto de tipo **`T`** y realizar algunas operaciones sobre el mismo. Por ejemplo, puede usarlo para crear un método **`forEach`**, que toma una lista **`Integers`** y aplica una operación en cada elemento de esa lista. En el siguiente listado, utilizará este método **`forEach`** combinado con una lambda para imprimir todos los elementos de la lista.
 
-**Listado 3.3.trabajando con un `Consumer`**
+**Listado 3.3. Trabajando con un `Consumer`**
 
 ```java
 @FunctionalInterface
@@ -465,7 +465,7 @@ forEach(
 
 La interfaz **`java.util.function.Function<T, R>`** define un método abstracto llamado **`apply`** que toma un objeto de tipo genérico **`T`** como entrada y devuelve un objeto de tipo genérico **`R`**. Puede utilizar esta interfaz cuando necesite definir una lambda que asigne información de un objeto de entrada a una salida (por ejemplo, extraer el peso de una manzana o asignar una cadena a su longitud). En el listado que sigue, mostramos cómo puede usarlo para crear un método **`map`** para transformar una lista de **`Strings`** en una lista de **`Integers`** que contiene la longitud de cada **`String`**.
 
-**Listado 3.4.trabajando con un `Function`**
+**Listado 3.4. Trabajando con un `Function`**
 
 ```java
 @FunctionalInterface
@@ -661,142 +661,167 @@ Predicate<String> p = (String s) -> list.add(s);
 Consumer<String> b = (String s) -> list.add(s);
 ```
 
-AQUIIIIIIIIIII
-
 A estas alturas ya debería tener una buena comprensión de cuándo y dónde se le permite usar expresiones lambda. Pueden obtener su tipo de destino a partir de un contexto de asignación, un contexto de invocación de método (parámetros y retorno) y un contexto de conversión. Para comprobar sus conocimientos, pruebe el cuestionario 3.5.
 
-Prueba 3.5: Comprobación de tipos: ¿por qué no se compila el siguiente código?
+**Prueba 3.5: Comprobación de tipos: ¿por qué no se compila el siguiente código?**
 
 ¿Cómo podrías solucionar el problema?
 
 ```java
+Object o = () -> { System.out.println("Tricky example"); };
 ```
 
-Respuesta:
+**Respuesta:**
 
-El contexto de la expresión lambda es Object(el tipo de destino). Pero Objectno es una interfaz funcional. Para solucionar este problema, puede cambiar el tipo de destino a Runnable, que representa un descriptor de función () -> void:
+El contexto de la expresión lambda es **`Object`**(el target type - tipo de destino). Pero **`Object`** no es una interfaz funcional. Para solucionar este problema, puede cambiar el tipo de destino a **`Runnable`**, que representa un descriptor de función **`() -> void`**:
 
 ```java
+Runnable r = () -> { System.out.println("Tricky example"); };
 ```
 
-También puede solucionar el problema convirtiendo la expresión lambda en Runnable, que proporciona explícitamente un tipo de destino.
+También puede solucionar el problema convirtiendo la expresión lambda en **`Runnable`**, que proporciona explícitamente un target type - tipo de destino.
 
 ```java
+Object o = (Runnable) () -> { System.out.println("Tricky example"); };
 ```
 
 Esta técnica puede resultar útil en el contexto de la sobrecarga con un método que toma dos interfaces funcionales diferentes que tienen el mismo descriptor de función. Puede convertir la lambda para eliminar explícitamente qué firma de método se debe seleccionar.
 
-Por ejemplo, la llamada execute(() -> {})usando el método execute, como se muestra a continuación, sería ambigua, porque ambos Runnabley Actiontienen el mismo descriptor de función:
+Por ejemplo, la llamada **`execute(() -> {})`** usando el método **`execute`**, como se muestra a continuación, sería ambigua, porque ambos **`Runnable`** y **`Action`** tienen el mismo function descriptor - descriptor de función:
 
 ```java
+public void execute(Runnable runnable) {
+    runnable.run();
+}
+public void execute(Action<T> action) {
+    action.act();
+}
+@FunctionalInterface
+interface Action {
+    void act();
+}
 ```
 
-Pero puedes eliminar explícitamente la ambigüedad de la llamada usando una expresión de conversión:execute ((Action) () -> {});
+Pero puedes eliminar explícitamente la ambigüedad de la llamada usando una expresión de conversión: **`execute ((Action) () -> {});`**
 
 Ha visto cómo se puede usar el tipo de destino para verificar si una lambda se puede usar en un contexto particular. También se puede utilizar para hacer algo ligeramente diferente: inferir los tipos de parámetros de una lambda.
 
-### 3.5.3.Inferencia de tipos
+### 3.5.3. Inferencia de tipos
 
 Puede simplificar su código un paso más. El compilador de Java deduce qué interfaz funcional asociar con una expresión lambda a partir de su contexto circundante (el tipo de destino), lo que significa que también puede deducir una firma apropiada para la lambda porque el descriptor de función está disponible a través del tipo de destino. El beneficio es que el compilador tiene acceso a los tipos de parámetros de una expresión lambda y se pueden omitir en la sintaxis lambda. El compilador de Java infiere los tipos de parámetros de una lambda como se muestra aquí: [ 3 ]
 
-3
+<hr>
 
-Tenga en cuenta que cuando una lambda tiene un único parámetro cuyo tipo se infiere, los paréntesis que rodean el nombre del parámetro también se pueden omitir.
+**3**
 
-```java
-```
+*Tenga en cuenta que cuando una lambda tiene un único parámetro cuyo tipo se infiere, los paréntesis que rodean el nombre del parámetro también se pueden omitir.*
 
-1 No hay tipo explícito en el parámetro manzana.
-
-Los beneficios de la legibilidad del código son más notorios con expresiones lambda que tienen varios parámetros. Por ejemplo, aquí se explica cómo crear un Comparatorobjeto:
+<hr>
 
 ```java
+List<Apple> greenApples =
+        filter(inventory, apple -> GREEN.equals(apple.getColor()));     1
 ```
 
-1 Sin inferencia de tipos
-2 Con inferencia de tipos
+**1 No hay tipo explícito en el parámetro apple.**
+
+Los beneficios de la legibilidad del código son más notorios con expresiones lambda que tienen varios parámetros. Por ejemplo, aquí se explica cómo crear un objeto **`Comparator`**:
+
+```java
+Comparator<Apple> c =
+  (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());      1
+Comparator<Apple> c =
+  (a1, a2) -> a1.getWeight().compareTo(a2.getWeight());                  2
+```
+
+* **1 Sin inferencia de tipos**
+* **2 Con inferencia de tipos**
 
 Tenga en cuenta que a veces es más legible incluir los tipos explícitamente y, a veces, es más legible excluirlos. No existe una regla sobre cuál es mejor; Los desarrolladores deben tomar sus propias decisiones sobre qué hace que su código sea más legible.
 
-### 3.5.4.Usando variables locales
+### 3.5.4. Usando variables locales
 
-Todas las expresiones lambda que hemos mostrado hasta ahora utilizaron sólo sus argumentos dentro de su cuerpo. Pero las expresiones lambda también pueden usar variables libres (variables que no son parámetros y están definidas en un ámbito externo) como pueden hacerlo las clases anónimas. Se llaman capturar lambdas. Por ejemplo, la siguiente lambda captura la variable portNumber:
-
-```java
-```
-
-Sin embargo, hay un pequeño giro. Existen algunas restricciones sobre lo que puede hacer con estas variables. Las lambdas pueden capturar (hacer referencia en sus cuerpos) variables de instancia y variables estáticas sin restricciones. Pero cuando se capturan variables locales, deben declararse explícitamente finalo ser efectivas final. Las expresiones lambda pueden capturar variables locales que se asignan solo una vez. (Nota: capturar una variable de instancia puede verse como capturar la variable local final this). Por ejemplo, el siguiente código no se compila porque la variable portNumberse asigna dos veces:
+Todas las expresiones lambda que hemos mostrado hasta ahora utilizaron sólo sus argumentos dentro de su cuerpo. Pero las expresiones lambda también pueden usar ***free variables - variables libres*** (variables que no son parámetros y están definidas en un ámbito externo) como pueden hacerlo las clases anónimas. Se llaman ***capturing lambdas - capturar lambdas***. Por ejemplo, la siguiente lambda captura la variable por **`portNumber`**:
 
 ```java
+int portNumber = 1337;
+Runnable r = () -> System.out.println(portNumber);
 ```
 
-1 Error: la variable local portNumber no es final o efectivamente final.
+Sin embargo, hay un pequeño giro. Existen algunas restricciones sobre lo que puede hacer con estas variables. Las lambdas pueden capturar (hacer referencia en sus bodies) variables de instancia y variables estáticas sin restricciones. Pero cuando se capturan variables locales, deben declararse explícitamente **`final`** o ser efectivas **`final`**. Las expresiones lambda pueden capturar variables locales que se asignan solo una vez. (Nota: capturar una variable de instancia puede verse como capturar la final local variable **`this`**). Por ejemplo, el siguiente código no se compila porque la variable **`portNumber`** se asigna dos veces:
 
-Restricciones a las variables locales.
+```java
+int portNumber = 1337;
+Runnable r = () -> System.out.println(portNumber);         1
+portNumber = 31337;
+```
 
-Quizás se pregunte por qué las variables locales tienen estas restricciones. Primero, hay una diferencia clave en cómo se implementan las variables locales y de instancia detrás de escena. Las variables de instancia se almacenan en el montón, mientras que las variables locales viven en la pila. Si un lambda pudiera acceder a la variable local directamente y el lambda se usara en un hilo, entonces el hilo que usa el lambda podría intentar acceder a la variable después delEl hilo que asignó la variable la había desasignado. Por lo tanto, Java implementa el acceso a una variable local libre como acceso a una copia de la misma, en lugar de acceso a la variable original. Esto no hace ninguna diferencia si la variable local se asigna solo una vez; de ahí la restricción.
+* **1 Error: la variable local portNumber no es final o efectivamente final.**
+
+#### Restricciones a las variables locales.
+
+Quizás se pregunte por qué las variables locales tienen estas restricciones. Primero, hay una diferencia clave en cómo se implementan las variables locales y de instancia detrás de escena. Las variables de instancia se almacenan en el **heap**, mientras que las variables locales viven en el **stack**. Si un lambda pudiera acceder a la variable local directamente y el lambda se usara en un thread - hilo, entonces el thread - hilo que usa el lambda podría intentar acceder a la variable después del thread - hilo que asignó la variable la había desasignado(then the thread using the lambda could try to access the variable after the thread that allocated the variable had deallocated it). Por lo tanto, Java implementa el acceso a una variable local libre como acceso a una copia de la misma, en lugar de acceso a la variable original. Esto no hace ninguna diferencia si la variable local se asigna solo una vez; de ahí la restricción.
 
 En segundo lugar, esta restricción también desalienta los típicos patrones de programación imperativo (que, como explicamos en capítulos posteriores, impiden la paralelización fácil) que mutan una variable externa.
 
-Cierre
+#### Closure
 
-Es posible que haya oído hablar del término cierre y se pregunte si las lambdas cumplen con la definición de cierre (que no debe confundirse con el lenguaje de programación Clojure). Para decirlo científicamente, un cierre es una instancia de una función que puede hacer referencia a variables no locales de esa función sin restricciones. Por ejemplo, un cierre podría pasarse como argumento a otra función. También podría acceder y modificar variables definidas fuera de su alcance. Ahora, las lambdas y las clases anónimas de Java 8 hacen algo similar a los cierres: se pueden pasar como argumento a métodos y pueden acceder a variables fuera de su alcance. Pero tienen una restricción: no pueden modificar el contenido de las variables locales de un método en el que está definida la lambda. Esas variables tienen que ser implícitamente definitivas. Ayuda pensar que las lambdas cierran sobre valores en lugar de variables . Como se explicó anteriormente, esta restricción existe porque las variables locales viven en la pila y están implícitamente confinadas al subproceso en el que se encuentran. Permitir la captura de variables locales mutables abre nuevas posibilidades no seguras para subprocesos, que no son deseables (las variables de instancia están bien porque viven en en el montón, que se comparte entre subprocesos).
+Es posible que haya oído hablar del término ***closure*** y se pregunte si las lambdas cumplen con la definición de closure (que no debe confundirse con el lenguaje de programación **Clojure**). Para decirlo científicamente, un closure es una instancia de una función que puede hacer referencia a variables no locales de esa función sin restricciones. Por ejemplo, un closure podría pasarse como argumento a otra función. También podría *acceder* y *modificar* variables definidas fuera de su alcance. Ahora, las lambdas y las clases anónimas de Java 8 hacen algo similar a los closure: se pueden pasar como argumento a métodos y pueden acceder a variables fuera de su alcance. Pero tienen una restricción: no pueden modificar el contenido de las variables locales de un método en el que está definida la lambda. Esas variables tienen que ser implícitamente final. Ayuda pensar que las lambdas cierran sobre *valores* en lugar de *variables*. Como se explicó anteriormente, esta restricción existe porque las variables locales viven en la pila - stack y están implícitamente confinadas al subproceso en el que se encuentran. Permitir la captura de variables locales mutables abre nuevas posibilidades no seguras para subprocesos, que no son deseables (las variables de instancia están bien porque viven en en el heap, que se comparte entre subprocesos).
 
-Ahora describiremos otra gran característica que se introdujo en el código Java 8: referencias de métodos . Piense en ellos como versiones abreviadas de determinadas lambdas.
+Ahora describiremos otra gran característica que se introdujo en el código Java 8: ***referencias de métodos***. Piense en ellos como versiones abreviadas de determinadas lambdas.
 
-## 3.6. Referencias de métodos
+## 3.6. Method references - Referencias de métodos
 
 Las referencias a métodos le permiten reutilizar definiciones de métodos existentes y pasarlas como lambdas. En algunos casos, parecen más legibles y se sienten más naturales que usar expresiones lambda. Aquí está nuestro ejemplo de clasificación escrito con una referencia de método y un poco de ayuda de la API de Java 8 actualizada (exploramos este ejemplo con más detalle en la sección 3.7 ).
 
 Antes:
 
 ```java
+inventory.sort((Apple a1, Apple a2)
+a1.getWeight().compareTo(a2.getWeight()));
 ```
 
-Después (usando una referencia de método y java.util.Comparator.comparing):
+Después (usando una referencia de método y **`java.util.Comparator.comparing`**):
 
 ```java
+inventory.sort(comparing(Apple::getWeight));          1
 ```
 
-1 Su primera referencia de método
+* **1 Su primera referencia de método**
 
 No se preocupe por la nueva sintaxis y cómo funcionan las cosas. ¡Aprenderás eso en las próximas secciones!
 
-### 3.6.1.En una palabra
+### 3.6.1. En una palabra
 
-¿Por qué debería importarle las referencias de métodos? Las referencias a métodos pueden verse como una abreviatura de lambdas que llaman solo a un método específico. La idea básica es que si una lambda representa "llamar a este método directamente", es mejor referirse al método por su nombre en lugar de por una descripción de cómo llamarlo. De hecho, una referencia de método le permite crear una expresión lambda a partir de la implementación de un método existente. Pero al hacer referencia explícita al nombre de un método, su código puede obtener una mejor legibilidad . ¿Como funciona? Cuando necesita una referencia de método, la referencia de destino se coloca antes del delimitador ::y el nombre del método se proporciona después. Por ejemplo, Apple::getWeightes una referencia de método al método getWeightdefinido en la Appleclase. (Recuerde que no se necesitan corchetes después getWeightporque no lo está llamando en este momento, simplemente está citando su nombre). Esta referencia de método es una abreviatura de la expresión lambda (Apple apple) -> apple.getWeight(). La Tabla 3.4 ofrece algunos ejemplos más de posibles referencias a métodos en Java 8.
+¿Por qué debería importarle las referencias de métodos? Las referencias a métodos pueden verse como una abreviatura de lambdas que llaman solo a un método específico. La idea básica es que si una lambda representa "llamar a este método directamente", es mejor referirse al método por su nombre en lugar de por una descripción de cómo llamarlo. De hecho, una referencia de método le permite crear una expresión lambda a partir de la implementación de un método existente. Pero al hacer referencia explícita al nombre de un método, su código puede obtener una mejor legibilidad. ¿Como funciona? Cuando necesita una referencia de método, la referencia de destino se coloca antes del delimitador **`::`** y el nombre del método se proporciona después. Por ejemplo, **`Apple::getWeight`** es una referencia de método al método **`getWeight`** definido en la clase **`Apple`**. (Recuerde que no se necesitan corchetes después **`getWeight`** porque no lo está llamando en este momento, simplemente está citando su nombre). Esta referencia de método es una abreviatura de la expresión lambda **`(Apple apple) -> apple.getWeight()`**. La Tabla 3.4 ofrece algunos ejemplos más de posibles referencias a métodos en Java 8.
 
-Tabla 3.4.Ejemplos de lambdas y equivalentes de referencia de métodos
+**Tabla 3.4. Ejemplos de lambdas y equivalentes de referencia de métodos**
 
-lambda
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/e27a4b98-5356-4dea-a3ea-caf9188e4b09)
 
-Equivalente de referencia del método
 
-(Apple manzana) -> apple.getWeight()	manzana::obtenerPeso
-() ->
-Thread.currentThread().dumpStack()	Thread.currentThread()::dumpStack
-(cadena, i) -> cadena.subcadena(i)	Cadena::subcadena
-(Cadena s) -> System.out.println(s)
-(Cadena s) -> this.isValidName(s)	System.out::println
-this::isValidName
 Puede pensar en las referencias a métodos como azúcar sintáctico para lambdas que se refieren solo a un método porque escribe menos para expresar lo mismo.
 
-Receta para construir referencias de métodos.
+#### Receta para construir referencias de métodos.
 
 Hay tres tipos principales de referencias de métodos:
 
-Una referencia de método a un método estático (por ejemplo, el método parseIntde Integer, escrito Integer::parseInt)
-Una referencia de método a un método de instancia de un tipo arbitrario (por ejemplo, el método lengthde a String, escrito String::length)
-Una referencia de método a un método de instancia de un objeto o expresión existente (por ejemplo, supongamos que tiene una variable local expensiveTransactionque contiene un objeto de tipo Transaction, que admite un método de instancia getValue; puede escribir expensiveTransaction::getValue)
+1. Una referencia de método a un método estático (por ejemplo, el método **`parseInt`** de **`Integer`**, escrito **`Integer::parseInt`**)
+2. Una referencia de método a un método de instancia de un tipo arbitrario (por ejemplo, el método **`length`** de a **`String`**, escrito **`String::length`**)
+3. Una referencia de método a un *método de instancia de un objeto o expresión existente* (por ejemplo, supongamos que tiene una variable local **`expensiveTransaction`** que contiene un objeto de tipo **`Transaction`**, que admite un método de instancia **`getValue`**; puede escribir **`expensiveTransaction::getValue`**)
 
-El segundo y tercer tipo de referencias a métodos pueden resultar un poco abrumadores al principio. La idea con el segundo tipo de referencias a métodos, como String::length, es que estás haciendo referencia a un método para un objeto que se proporcionará como uno de los parámetros de lambda. Por ejemplo, la expresión lambda (String s) -> s.toUpperCase()se puede reescribir como String::toUpperCase. Pero el tercer tipo de referencia de método se refiere a una situación en la que llamas a un método en una lambda a un objeto externo que ya existe. Por ejemplo, la expresión lambda () -> expensiveTransaction.getValue()se puede reescribir como expensiveTransaction::getValue. Este tercer tipo de referencia de método es particularmente útil cuando necesita pasar un método definido como ayudante privado. Por ejemplo, digamos que definiste un método auxiliar isValidName:
+El segundo y tercer tipo de referencias a métodos pueden resultar un poco abrumadores al principio. La idea con el segundo tipo de referencias a métodos, como **`String::length`**, es que estás haciendo referencia a un método para un objeto que se proporcionará como uno de los parámetros de lambda. Por ejemplo, la expresión lambda **`(String s) -> s.toUpperCase()`** se puede reescribir como **`String::toUpperCase`**. Pero el tercer tipo de referencia de método se refiere a una situación en la que llamas a un método en una lambda a un objeto externo que ya existe. Por ejemplo, la expresión lambda **`() -> expensiveTransaction.getValue()`** se puede reescribir como **`expensiveTransaction::getValue`**. Este tercer tipo de referencia de método es particularmente útil cuando necesita pasar un método definido como ayudante privado. Por ejemplo, digamos que definiste un método auxiliar **`isValidName`**:
 
 ```java
+private boolean isValidName(String string) {
+    return Character.isUpperCase(string.charAt(0));
+}
 ```
 
-Ahora puede pasar este método en el contexto de una Predicate<String>referencia de método:
+Ahora puede pasar este método en el contexto de una **`Predicate<String>`** referencia de método:
 
 ```java
+filter(words, this::isValidName)
 ```
 
 Para ayudarle a digerir este nuevo conocimiento, las reglas abreviadas para refactorizar una expresión lambda a una referencia de método equivalente siguen recetas simples, como se muestra en la figura 3.5 .
