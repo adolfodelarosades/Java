@@ -1047,38 +1047,50 @@ public class AppleComparator implements Comparator<Apple> {
 inventory.sort(new AppleComparator());
 ```
 
-### 3.7.2.Paso 2: usa una clase anónima
+### 3.7.2. Paso 2: Usa una clase anónima
 
-En lugar de implementarlo Comparatorcon el propósito de crear una instancia una vez, vio que podía usar una clase anónima para mejorar su solución:
+En lugar de implementar **`Comparator`** con el propósito de crear una instancia una vez, vio que podía usar una clase anónima para mejorar su solución:
 
 ```java
+inventory.sort(new Comparator<Apple>() {
+    public int compare(Apple a1, Apple a2){
+        return a1.getWeight().compareTo(a2.getWeight());
+    }
+});
 ```
 
-### 3.7.3.Paso 3: use expresiones lambda
+### 3.7.3. Paso 3: Use expresiones lambda
 
-Pero su solución actual sigue siendo detallada. Java 8 introdujo expresiones lambda, que proporcionan una sintaxis ligera para lograr el mismo objetivo: pasar código . Viste que se puede usar una expresión lambda donde se espera una interfaz funcional . Como recordatorio, una interfaz funcional es una interfaz que define solo un método abstracto. La firma del método abstracto (llamado descriptor de función ) puede describir la firma de una expresión lambda. En este caso, Comparatorrepresenta un descriptor de función (T, T) -> int. Debido a que estás usando Apples, representa más específicamente (Apple, Apple) -> int. Por lo tanto, su nueva solución mejorada tiene el siguiente aspecto:
+Pero su solución actual sigue siendo detallada. Java 8 introdujo expresiones lambda, que proporcionan una sintaxis ligera para lograr el mismo objetivo: ***passing code pasar código***. Viste que se puede usar una expresión lambda donde se espera una ***functional interface - interfaz funcional***. **Como recordatorio, una interfaz funcional es una interfaz que define solo un método abstracto**. La firma del método abstracto (llamado ***function descriptor - descriptor de función***) puede describir la firma de una expresión lambda. En este caso, **`Comparator`** representa un descriptor de función **`(T, T) -> int`**. Debido a que estás usando **`Apple`**s, representa más específicamente **`(Apple, Apple) -> int`**. Por lo tanto, su nueva solución mejorada tiene el siguiente aspecto:
 
 ```java
+inventory.sort((Apple a1, Apple a2)
+                -> a1.getWeight().compareTo(a2.getWeight())
+);
 ```
 
-Explicamos que el compilador de Java podría inferir los tipos de parámetros de una expresión lambda utilizando el contexto en el que aparece la lambda. Por lo tanto, puede reescribir su solución de la siguiente manera:
+Explicamos que el compilador de Java podría ***inferir los tipos*** de parámetros de una expresión lambda utilizando el contexto en el que aparece la lambda. Por lo tanto, puede reescribir su solución de la siguiente manera:
 
 ```java
+inventory.sort((a1, a2) -> a1.getWeight().compareTo(a2.getWeight()));
 ```
 
-¿Puedes hacer que tu código sea aún más legible? Comparatorincluye un método auxiliar estático llamado comparingque extrae Functionuna Comparableclave y produce un Comparatorobjeto (explicamos por qué las interfaces pueden tener métodos estáticos en el capítulo 13 ). Se puede utilizar de la siguiente manera (tenga en cuenta que ahora pasa una lambda con un solo argumento; la lambda especifica cómo extraer la clave para comparar de un Apple):
+¿Puedes hacer que tu código sea aún más legible? **`Comparator`** incluye un método auxiliar estático(static helper) llamado **`comparing`** que extrae **`Function`** una **`Comparable`** key y produce un objeto **`Comparator`** (explicamos por qué las interfaces pueden tener métodos estáticos en el capítulo 13). Se puede utilizar de la siguiente manera (tenga en cuenta que ahora pasa una lambda con un solo argumento; la lambda especifica cómo extraer la clave para comparar desde un **`Apple`**):
 
 ```java
+Comparator<Apple> c = Comparator.comparing((Apple a) -> a.getWeight());
 ```
 
 Ahora puedes reescribir tu solución en una forma un poco más compacta:
 
 ```java
+import static java.util.Comparator.comparing;
+inventory.sort(comparing(apple -> apple.getWeight()));
 ```
 
-### 3.7.4.Paso 4: utilice referencias de métodos
+### 3.7.4. Paso 4: Utilice method references - referencias de métodos
 
-Explicamos que las referencias a métodos son azúcar sintáctico para expresiones lambda que reenvían sus argumentos. Puede utilizar una referencia de método para hacer que su código sea un poco menos detallado (suponiendo una importación estática de java.util.Comparator.comparing):
+Explicamos que las referencias a métodos son azúcar sintáctico para expresiones lambda que reenvían sus argumentos. Puede utilizar una referencia de método para hacer que su código sea un poco menos detallado (suponiendo una importación estática de **`java.util.Comparator.comparing`**):
 
 ```java
 ```
