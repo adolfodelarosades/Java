@@ -976,9 +976,19 @@ Apple a3 = c3.apply(GREEN, 110);                        2
 * **1 Expresión Lambda para crear una `Apple` con un color y weight(peso) determinados**
 * **2 El método `apply` de `BiFunction` con un color y weight(peso) determinados produce un nuevo objeto `Apple`.**
 
-La capacidad de hacer referencia a un constructor sin crear una instancia del mismo permite aplicaciones interesantes. Por ejemplo, puede utilizar a Mappara asociar constructores con un valor de cadena. Luego puedes crear un método giveMeFruitque, dados a Stringy an Integer, pueda crear diferentes tipos de frutas con diferentes pesos, de la siguiente manera:
+La capacidad de hacer referencia a un constructor sin crear una instancia del mismo permite aplicaciones interesantes. Por ejemplo, puede utilizar a **`Map`** para asociar constructores con un valor string. Luego puedes crear un método **`giveMeFruit`** que, dados a **`String`** y a **`Integer`**, pueda crear diferentes tipos de frutas con diferentes pesos, de la siguiente manera:
 
 ```java
+static Map<String, Function<Integer, Fruit>> map = new HashMap<>();
+static {
+    map.put("apple", Apple::new);
+    map.put("orange", Orange::new);
+    // etc...
+}
+public static Fruit giveMeFruit(String fruit, Integer weight){
+    return map.get(fruit.toLowerCase())                              1
+              .apply(weight);                                        2
+}
 ```
 
 1 Obtenga una función <Entero, Fruta> del mapa
