@@ -824,95 +824,158 @@ Ahora puede pasar este método en el contexto de una **`Predicate<String>`** ref
 filter(words, this::isValidName)
 ```
 
-Para ayudarle a digerir este nuevo conocimiento, las reglas abreviadas para refactorizar una expresión lambda a una referencia de método equivalente siguen recetas simples, como se muestra en la figura 3.5 .
+Para ayudarle a digerir este nuevo conocimiento, las reglas abreviadas para refactorizar una expresión lambda a una referencia de método equivalente siguen recetas simples, como se muestra en la figura 3.5.
 
-Figura 3.5.Recetas para construir referencias de métodos para tres tipos diferentes de expresiones lambda
+**Figura 3.5. Recetas para construir referencias de métodos para tres tipos diferentes de expresiones lambda**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/0d281bfc-63d0-4e6e-813a-e0c5b6bc4b3d)
 
 
-Tenga en cuenta que también existen formas especiales de referencias de métodos para constructores, constructores de matrices y superllamadas. Apliquemos referencias de métodos en un ejemplo concreto. Supongamos que desea ordenar una Listserie de cadenas, ignorando las diferencias entre mayúsculas y minúsculas. El sortmétodo en a Listespera un Comparatorparámetro as. Viste anteriormente que Comparatordescribe un descriptor de función con la firma (T, T) -> int. Puede definir una expresión lambda que utilice el método compareToIgnoreCaseen la Stringclase de la siguiente manera (tenga en cuenta que compareToIgnoreCaseestá predefinida en la Stringclase):
-
-```java
-```
-
-La expresión lambda tiene una firma compatible con el descriptor de función de Comparator. Utilizando las recetas descritas anteriormente, el ejemplo también se puede escribir utilizando una referencia de método; Esto da como resultado un código más conciso, como sigue:
+Tenga en cuenta que también existen formas especiales de referencias de métodos para constructores, constructores de matrices y superllamadas. Apliquemos referencias de métodos en un ejemplo concreto. Supongamos que desea ordenar una **`List`** de strings, ignorando las diferencias entre mayúsculas y minúsculas. El método **`sort`** en una **`List`** espera un **`Comparator`** como parámetro. Viste anteriormente que **`Comparator`** describe un descriptor de función con la firma **`(T, T) -> int`**. Puede definir una expresión lambda que utilice el método **`compareToIgnoreCase`** en la clase **`String`** de la siguiente manera (tenga en cuenta que **`compareToIgnoreCase`** está predefinida en la clase **`String`**):
 
 ```java
+List<String> str = Arrays.asList("a","b","A","B");
+str.sort((s1, s2) -> s1.compareToIgnoreCase(s2));
 ```
+
+La expresión lambda tiene una firma compatible con el descriptor de función de **`Comparator`**. Utilizando las recetas descritas anteriormente, el ejemplo también se puede escribir utilizando una referencia de método; Esto da como resultado un código más conciso, como sigue:
+
+```java
+List<String> str = Arrays.asList("a","b","A","B");
+str.sort(String::compareToIgnoreCase);
+```
+
 Tenga en cuenta que el compilador pasa por un proceso de verificación de tipos similar al de las expresiones lambda para determinar si una referencia de método es válida con una interfaz funcional determinada. La firma de la referencia del método debe coincidir con el tipo de contexto.
 
 Para comprobar su comprensión de las referencias de métodos, ¡pruebe el cuestionario 3.6!
 
-Prueba 3.6: Referencias de métodos
+**Prueba 3.6: Method references - Referencias de métodos**
 
 ¿Cuáles son las referencias de métodos equivalentes para las siguientes expresiones lambda?
 
+**1.**
+
 ```java
+ToIntFunction<String> stringToInt =
+               (String s) -> Integer.parseInt(s);
 ```
 
-Respuestas:
+**2.**
 
-Esta expresión lambda reenvía su argumento al método estático parseIntde Integer. Este método requiere un Stringanálisis y devuelve un archivo int. Como resultado, la lambda se puede reescribir usando la receta 1 de la figura 3.5 (expresiones lambda que llaman a un método estático) de la siguiente manera:
+```java
+BiPredicate<List<String>, String> contains =
+               (list, element) -> list.contains(element);
+```
+
+**3.**
+
+```java
+Predicate<String> startsWithNumber =
+               (String string) -> this .starts-WithNumber(string);
+```
+
+**Respuestas:**
+
+1. Esta expresión lambda reenvía su argumento al método estático **`parseInt`** de **`Integer`**. Este método toma un **`String`** para parsear y retorna un **`int`**. Como resultado, la lambda se puede reescribir usando la receta ***1*** de la figura 3.5 (expresiones lambda que llaman a un método estático) de la siguiente manera:
+
+```java
 ToIntFunction<String> stringToInt = Integer::parseInt;
-Esta lambda usa su primer argumento para llamar al método contains. Como el primer argumento es de tipo List, puedes usar la receta 2 de la figura 3.5 de la siguiente manera:
-BiPredicate<Lista<Cadena>, Cadena> contiene = Lista::contiene;
-Esto se debe a que el tipo de destino describe un descriptor de función (List<String>, String) -> boolean,y List::containsse puede descomprimir en ese descriptor de función.
-Esta lambda de estilo expresión invoca un método auxiliar privado. Puede utilizar la receta 3 de la figura 3.5 de la siguiente manera:
-Predicado<Cadena> comienzaConNúmero = this::empiezaConNúmero
+```
+
+2. Esta lambda usa su primer argumento para llamar al método **`contains`**. Como el primer argumento es de tipo **`List`**, puedes usar la receta ***2*** de la figura 3.5 de la siguiente manera:
+
+```java
+BiPredicate<List<String>, String> contains = List::contains;
+```
+
+Esto se debe a que el target type describe un descriptor de función **`(List<String>, String) -> boolean, and List::contains`** se puede descomprimir en ese descriptor de función.
+
+Esta lambda de estilo expresión invoca un método auxiliar privado. Puede utilizar la receta ***3*** de la figura 3.5 de la siguiente manera:
+
+```java
+Predicate<String> startsWithNumber = this::startsWithNumber
+```
 Solo hemos mostrado cómo reutilizar implementaciones de métodos existentes y crear referencias de métodos. Pero puedes hacer algo similar con los constructores de una clase.
 
-### 3.6.2.Referencias de constructores
+### 3.6.2. Constructor references - Referencias de constructores
 
-Puede crear una referencia a un constructor existente utilizando su nombre y la palabra clave newde la siguiente manera: ClassName::new. Funciona de manera similar a una referencia a un método estático. Por ejemplo, supongamos que hay un constructor sin argumentos. Esto encaja con la firma () -> Applede Supplier; puedes hacer lo siguiente:
+Puede crear una referencia a un constructor existente utilizando su nombre y la palabra clave **`new`** de la siguiente manera: **`ClassName::new`**. Funciona de manera similar a una referencia a un método estático. Por ejemplo, supongamos que hay un constructor sin argumentos. Esto encaja con la firma **`() -> Apple`** de **`Supplier`**; puedes hacer lo siguiente:
 
 ```java
+Supplier<Apple> c1 = Apple::new;          1
+Apple a1 = c1.get();                      2
 ```
 
-1 Referencia del constructor al constructor predeterminado Apple()
-2 Llamar al método get del proveedor produce una nueva Apple.
+* **1 Constructor reference al constructor predeterminado `Apple()`**
+* **2Llamar al método get del proveedor produce una nueva `Apple`.**
+
 que es equivalente a
 
 ```java
+Supplier<Apple> c1 = () -> new Apple();         1
+Apple a1 = c1.get();                            2
 ```
 
-1 expresión Lambda para crear una Apple usando el constructor predeterminado
-2 Llamar al método get del proveedor produce una nueva Apple.
+* **1 Expresión Lambda para crear un `Apple` usando el constructor default**
+* **2 Llamar al método `get` del proveedor produce una nueva `Apple`**
 
-Si tiene un constructor con firma Apple(Integer weight), se ajusta a la firma de la Functioninterfaz, entonces puede hacer esto
+Si tiene un constructor con firma **`Apple(Integer weight)`**, se ajusta a la firma de la interfaz **`Function`**, entonces puede hacer esto
 
 ```java
+Function<Integer, Apple> c2 = Apple::new;        1
+Apple a2 = c2.apply(110);                        2
 ```
 
-1 Referencia del constructor a Apple (Peso entero)
-2 Llamar al método de aplicación de la función con un peso determinado produce una manzana.
+* **1 Constructor reference - Referencia del constructor a `Apple (Integer weight)`**
+* **2 Llamar al método `apply` de la función con un weight(peso) determinado produce una `Apple`**
+
 que es equivalente a
 
 ```java
+Function<Integer, Apple> c2 = (weight) -> new Apple(weight);     1
+Apple a2 = c2.apply(110);                                        2
 ```
                                         2
-1 expresión Lambda para crear una Apple con un peso determinado
-2 Llamar al método de aplicación de la función con un peso determinado produce un nuevo objeto Apple.
+* **1 Expresión Lambda para crear una `Apple` con un weight(peso) determinado**
+* **2 Llamar al método `apply` de la función con un weight(peso) determinado produce un nuevo objeto `Apple`**
 
-En el siguiente código, cada elemento de a Listof Integers se pasa al constructor usando Appleun mapmétodo similar que definimos anteriormente, lo que da como resultado a 
-
-```java
-```
-
-1 Pasar una referencia de constructor al método map
-Si tiene un constructor de dos argumentos, Apple (Color color, Integer weight)se ajusta a la firma de la BiFunctioninterfaz, por lo que puede hacer esto:
+En el siguiente código, cada elemento de a **`List`** de **`Integers`** se pasa al constructor de **`Apple`** usando un método **`map`** similar al que definimos anteriormente, lo que da como resultado un **`List`** de apples con varios weights(pesos):
 
 ```java
+List<Integer> weights = Arrays.asList(7, 3, 4, 10);
+List<Apple> apples = map(weights, Apple::new);                            1
+public List<Apple> map(List<Integer> list, Function<Integer, Apple> f) {
+    List<Apple> result = new ArrayList<>();
+    for(Integer i: list) {
+        result.add(f.apply(i));
+    }
+    return result;
+}
 ```
 
-1 Referencia del constructor a Apple (color de color, peso entero)
-2 El método de aplicación de BiFunction con un color y peso determinados produce un nuevo objeto Apple.
+* **1 Pasar una referencia de constructor al método `map`**
+
+Si tiene un constructor de dos argumentos, **`Apple (Color color, Integer weight)`** se ajusta a la firma de la interfaz **`BiFunction`**, por lo que puede hacer esto:
+
+```java
+BiFunction<Color, Integer, Apple> c3 = Apple::new;      1
+Apple a3 = c3.apply(GREEN, 110);                        2
+```
+
+* **1 Constructor reference - Referencia del constructor a `Apple (Color color, Integer weight)`**
+* **2 El método `apply` de `BiFunction` con un color y weight(peso) determinados produce un nuevo objeto `Apple`.**
 
 que es equivalente a
 
 ```java
+BiFunction<String, Integer, Apple> c3 =
+    (color, weight) -> new Apple(color, weight);        1
+Apple a3 = c3.apply(GREEN, 110);                        2
 ```
 
-1 expresión Lambda para crear una manzana con un color y peso determinados
-2 El método de aplicación de BiFunction con un color y peso determinados produce un nuevo objeto Apple.
+* **1 Expresión Lambda para crear una `Apple` con un color y weight(peso) determinados**
+* **2 El método `apply` de `BiFunction` con un color y weight(peso) determinados produce un nuevo objeto `Apple`.**
+
 La capacidad de hacer referencia a un constructor sin crear una instancia del mismo permite aplicaciones interesantes. Por ejemplo, puede utilizar a Mappara asociar constructores con un valor de cadena. Luego puedes crear un método giveMeFruitque, dados a Stringy an Integer, pueda crear diferentes tipos de frutas con diferentes pesos, de la siguiente manera:
 
 ```java
