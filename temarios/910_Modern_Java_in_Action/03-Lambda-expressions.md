@@ -991,47 +991,60 @@ public static Fruit giveMeFruit(String fruit, Integer weight){
 }
 ```
 
-1 Obtenga una función <Entero, Fruta> del mapa
-2 El método de aplicación de la función con un parámetro de peso entero crea la fruta solicitada.
+* **1 Obtenga una función `<Integer, Fruit>` desde el `map`**
+* **2 El método `apply` de la función con un parámetro `Integer weight` crea la fruta solicitada.**
+  
 Para comprobar su comprensión de las referencias de métodos y constructores, pruebe la prueba 3.7.
 
-Prueba 3.7: Referencias de constructores
+**Prueba 3.7: Constructor references - Referencias de constructores**
 
-Viste cómo transformar constructores de cero, uno y dos argumentos en referencias de constructores. ¿Qué necesitaría hacer para utilizar una referencia de constructor para un constructor de tres argumentos como RGB(int, int, int)?
+Viste cómo transformar constructores de cero, uno y dos argumentos en referencias de constructores. ¿Qué necesitaría hacer para utilizar una referencia de constructor para un constructor de tres argumentos como **`RGB(int, int, int)`**?
 
-Respuesta:
+**Respuesta:**
 
-Viste que la sintaxis para una referencia de constructor es ClassName::new, por lo que en este caso es RGB::new. Pero necesita una interfaz funcional que coincida con la firma de esa referencia del constructor. Como no hay ninguna en el conjunto inicial de interfaz funcional, puedes crear la tuya propia:
+Viste que la sintaxis para una referencia de constructor es **`ClassName::new`**, por lo que en este caso es **`RGB::new`**. Pero necesita una interfaz funcional que coincida con la firma de esa referencia del constructor. Como no hay ninguna en el conjunto inicial de interfaz funcional, puedes crear la tuya propia:
 
-interfaz pública TriFunction<T, U, V, R> {
-    R aplicar(T t, U u, V v);
+```java
+public interface TriFunction<T, U, V, R> {
+    R apply(T t, U u, V v);
 }
+```
+
 Y ahora puedes usar la referencia del constructor de la siguiente manera:
 
 ```java
+TriFunction<Integer, Integer, Integer, RGB> colorFactory = RGB::new;
 ```
 
 Hemos analizado mucha información nueva: lambdas, interfaces funcionales y referencias de métodos. Lo pondremos todo en práctica en la siguiente sección.
 
 ## 3.7. Poner en práctica lambdas y referencias de métodos
 
-Para concluir este capítulo y nuestra discusión sobre lambdas, continuaremos con nuestro problema inicial de ordenar una lista de Apples con diferentes estrategias de ordenamiento. Y mostraremos cómo se puede evolucionar progresivamente una solución ingenua hacia una solución concisa, utilizando todos los conceptos y características explicados hasta ahora en el libro: parametrización de comportamiento, clases anónimas, expresiones lambda y referencias de métodos. La solución final en la que trabajaremos es la siguiente (tenga en cuenta que todo el código fuente está disponible en el sitio web del libro: www.manning.com/books/modern-java-in-action ):
+Para concluir este capítulo y nuestra discusión sobre lambdas, continuaremos con nuestro problema inicial de ordenar una lista de **`Apples`** con diferentes estrategias de ordenamiento. Y mostraremos cómo se puede evolucionar progresivamente una solución ingenua hacia una solución concisa, utilizando todos los conceptos y características explicados hasta ahora en el libro: parametrización de comportamiento, clases anónimas, expresiones lambda y referencias de métodos. La solución final en la que trabajaremos es la siguiente (tenga en cuenta que todo el código fuente está disponible en el sitio web del libro: www.manning.com/books/modern-java-in-action ):
 
 ```java
+inventory.sort(comparing(Apple::getWeight));
 ```
 
-### 3.7.1.Paso 1: código de acceso
+### 3.7.1. Paso 1: Pass code - Código de acceso
 
-Tienes suerte; La API de Java 8 ya le proporciona un sortmétodo disponible Listpara que no tenga que implementarlo. ¡La parte más difícil ya está hecha! Pero, ¿cómo se puede pasar una estrategia de pedido al sortmétodo? Bueno, el sortmétodo tiene la siguiente firma:
+Tienes suerte; La API de Java 8 ya le proporciona un método **`sort`** disponible para **`List`** que no tenga que implementarlo. ¡La parte más difícil ya está hecha! Pero, ¿cómo se puede pasar una estrategia de pedido al método **`sort`**? Bueno, el método **`sort`** tiene la siguiente firma:
 
 ```java
+void sort(Comparator<? super E> c)
 ```
 
-¡Espera un Comparatorobjeto como argumento para comparar dos Apples! Así es como puedes pasar diferentes estrategias en Java: deben estar envueltas en un objeto. Decimos que el comportamiento de sortestá parametrizado : su comportamiento será diferente según las diferentes estrategias de ordenación que se le pasen.
+¡Espera un objeto **`Comparator`** como argumento para comparar dos **`Apple`**s! Así es como puedes pasar diferentes estrategias en Java: deben estar envueltas en un objeto. Decimos que el comportamiento de **`sort`** está parametrizado : su comportamiento será diferente según las diferentes estrategias de ordenación que se le pasen.
 
 Su primera solución se ve así:
 
 ```java
+public class AppleComparator implements Comparator<Apple> {
+        public int compare(Apple a1, Apple a2){
+                return a1.getWeight().compareTo(a2.getWeight());
+        }
+}
+inventory.sort(new AppleComparator());
 ```
 
 ### 3.7.2.Paso 2: usa una clase anónima
