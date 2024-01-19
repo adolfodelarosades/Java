@@ -935,7 +935,7 @@ que es equivalente a
 Function<Integer, Apple> c2 = (weight) -> new Apple(weight);     1
 Apple a2 = c2.apply(110);                                        2
 ```
-                                        2
+                                        
 * **1 Expresión Lambda para crear una `Apple` con un weight(peso) determinado**
 * **2 Llamar al método `apply` de la función con un weight(peso) determinado produce un nuevo objeto `Apple`**
 
@@ -1093,66 +1093,82 @@ inventory.sort(comparing(apple -> apple.getWeight()));
 Explicamos que las referencias a métodos son azúcar sintáctico para expresiones lambda que reenvían sus argumentos. Puede utilizar una referencia de método para hacer que su código sea un poco menos detallado (suponiendo una importación estática de **`java.util.Comparator.comparing`**):
 
 ```java
+inventory.sort(comparing(Apple::getWeight));
 ```
 
 ¡Felicitaciones, esta es su solución final! ¿Por qué es mejor que el código anterior a Java 8? No es sólo porque es más corto; También es obvio lo que significa. El código se lee como el enunciado del problema "clasificar el inventario comparando el peso de las manzanas".
 
 ## 3.8. Métodos útiles para componer expresiones lambda.
 
-Varias interfaces funcionales en la API de Java 8 contienen métodos convenientes. Específicamente, muchas interfaces funcionales como Comparator, Functiony Predicateque se utilizan para pasar expresiones lambda proporcionan métodos que permiten la composición. ¿Qué quiere decir esto? En la práctica, significa que puedes combinar varias expresiones lambda simples para construir otras más complicadas. Por ejemplo, puede combinar dos predicados en un predicado más grande que realice una oroperación entre los dos predicados. Además, también puede componer funciones de modo que el resultado de una se convierta en la entrada de otra función. Quizás te preguntes cómo es posible que existan métodos adicionales en una interfaz funcional. (¡Después de todo, esto va en contra de la definición de una interfaz funcional!) El truco es que los métodos que introduciremos se llaman métodos predeterminados (no son métodos abstractos). Los explicamos detalladamente en el capítulo 13 . Por ahora, confíe en nosotros y lea el capítulo 13 más adelante, cuando quiera saber más sobre los métodos predeterminados y lo que puede hacer con ellos.
+Varias interfaces funcionales en la API de Java 8 contienen métodos convenientes. Específicamente, muchas interfaces funcionales como **`Comparator`**, **`Function`** y **`Predicate`** que se utilizan para pasar expresiones lambda proporcionan métodos que permiten la composición. ¿Qué quiere decir esto? En la práctica, significa que puedes combinar varias expresiones lambda simples para construir otras más complicadas. Por ejemplo, puede combinar dos predicados en un predicado más grande que realice una operación **`or`** entre los dos predicados. Además, también puede componer funciones de modo que el resultado de una se convierta en la entrada de otra función. Quizás te preguntes cómo es posible que existan métodos adicionales en una interfaz funcional. (¡Después de todo, esto va en contra de la definición de una interfaz funcional!) El truco es que los métodos que introduciremos se llaman métodos predeterminados (no son métodos abstractos). Los explicamos detalladamente en el capítulo 13. Por ahora, confíe en nosotros y lea el capítulo 13 más adelante, cuando quiera saber más sobre los métodos predeterminados y lo que puede hacer con ellos.
 
-### 3.8.1.Componer comparadores
+### 3.8.1. Componer Comparators
 
-Has visto que puedes usar el método estático Comparator.comparingpara devolver un Comparatorbasado en un Functionque extrae una clave para comparar de la siguiente manera:
+Has visto que puedes usar el método estático **`Comparator.comparing`** para devolver un **`Comparator`** basado en un **`Function`** que extrae una clave para comparar de la siguiente manera:
 
 ```java
+Comparator<Apple> c = Comparator.comparing(Apple::getWeight);
 ```
 
-Orden invertido
+#### Reversed order - Orden invertido
 
-¿Qué pasaría si quisieras clasificar las manzanas disminuyendo de peso? No es necesario crear una instancia diferente de un archivo Comparator. La interfaz incluye un método predeterminado reversedque invierte el orden de un comparador determinado. Puedes modificar el ejemplo anterior para ordenar las manzanas disminuyendo el peso reutilizando el inicial Comparator:
+¿Qué pasaría si quisieras clasificar las manzanas disminuyendo de peso? No es necesario crear una instancia diferente de un **`Comparator`**. La interfaz incluye un método predeterminado **`reversed`** que invierte el orden de un comparador determinado. Puedes modificar el ejemplo anterior para ordenar las manzanas disminuyendo el peso reutilizando el inicial **`Comparator`**:
 
 ```java
+inventory.sort(comparing(Apple::getWeight).reversed());         1
 ```
 
-1 Ordena por peso decreciente
-Comparadores de encadenamiento
-Todo esto está bien, pero ¿qué pasa si encuentras dos manzanas que tienen el mismo peso? ¿Qué manzana debería tener prioridad en la lista ordenada? Es posible que desee brindar un segundo Comparator-para refinar aún más la comparación. Por ejemplo, después de comparar dos manzanas según su peso, es posible que desees ordenarlas por país de origen. El thenComparingmétodo te permite hacer eso. Toma una función como parámetro (como el método comparing) y proporciona una segunda Comparatorsi dos objetos se consideran iguales usando el inicial Comparator. Puedes resolver el problema elegantemente nuevamente de la siguiente manera:
+* **1 Ordena por peso decreciente**
+
+#### Chaining Comparators - Comparators de encadenamiento
+
+Todo esto está bien, pero ¿qué pasa si encuentras dos manzanas que tienen el mismo peso? ¿Qué manzana debería tener prioridad en la lista ordenada? Es posible que desee brindar un segundo **`Comparator`** - para refinar aún más la comparación. Por ejemplo, después de comparar dos manzanas según su peso, es posible que desees ordenarlas por país de origen. El método **`thenComparing`** te permite hacer eso. Toma una función como parámetro (como el método **`comparing`**) y proporciona una segunda **`Comparator`** si dos objetos se consideran iguales usando el inicial **`Comparator`**. Puedes resolver el problema elegantemente nuevamente de la siguiente manera:
 
 ```java
+inventory.sort(comparing(Apple::getWeight)
+         .reversed()                                  1
+         .thenComparing(Apple::getCountry));          2
 ```
 
-1 Ordena por peso decreciente
-2 Clasifica mejor por país cuando dos manzanas tienen el mismo peso
+* **1 Ordena por peso decreciente**
+* **2 Clasifica mejor por país cuando dos manzanas tienen el mismo peso**
 
-### 3.8.2.Componer predicados
+### 3.8.2.Componer Predicates
 
-La Predicateinterfaz incluye tres métodos que le permiten reutilizar uno existente Predicatepara crear otros más complicados: negate, andy or. Por ejemplo, puedes usar el método negatepara devolver la negación de a Predicate, como una manzana que no es roja:
-
-```java
-```      1
-1 Produce la negación del objeto Predicado existente redApple
-
-Es posible que desees combinar dos lambdas para decir que una manzana es roja y pesada con el andmétodo:
+La interfaz **`Predicate`** incluye tres métodos que le permiten reutilizar un **`Predicate`** existente para crear otros más complicados: **`negate`**, **`and`** y **`or`**. Por ejemplo, puedes usar el método **`negate`** para devolver la negación de a **`Predicate`**, como una manzana que no es roja:
 
 ```java
+Predicate<Apple> notRedApple = redApple.negate();           1
+```      
+
+* **1 Produce la negación del existente `Predicate` del objeto `redApple`**
+
+Es posible que desees combinar dos lambdas para decir que una manzana es roja y pesada con el método **`and`**:
+
+```java
+Predicate<Apple> redAndHeavyApple =
+    redApple.and(apple -> apple.getWeight() > 150);           1
 ```
 
-1 Encadena dos predicados para producir otro objeto Predicado
+* **1 Encadena dos predicates para producir otro objeto `Predicate`**
+
 Puedes combinar el predicado resultante un paso más para expresar manzanas rojas y pesadas (más de 150 g) o solo manzanas verdes:
 
 ```java
+Predicate<Apple> redAndHeavyAppleOrGreen =
+    redApple.and(apple -> apple.getWeight() > 150)
+            .or(apple -> GREEN.equals(a.getColor()));          1
 ```
 
-1 Encadena tres predicados para construir un objeto Predicado más complejo
+* **1 Encadena tres predicates para construir un objeto `Predicate` más complejo**
 
-¿Por qué es esto genial? A partir de expresiones lambda más simples, puede representar expresiones lambda más complicadas que aún se leen como el enunciado del problema. Tenga en cuenta que la precedencia de los métodos andy oren la cadena es de izquierda a derecha; no existe ningún equivalente al uso de corchetes. Por lo tanto a.or(b).and(c)debe leerse como (a || b) && c. Del mismo modo, a.and(b).or(c)debe leerse como (a && b) || c.
+¿Por qué es esto genial? A partir de expresiones lambda más simples, puede representar expresiones lambda más complicadas que aún se leen como el enunciado del problema. Tenga en cuenta que la precedencia de los métodos **`and`** y **`or`** en la cadena es de izquierda a derecha; no existe ningún equivalente al uso de corchetes. Por lo tanto **`a.or(b).and(c)`** debe leerse como **`(a || b) && c`**. Del mismo modo, **`a.and(b).or(c)`** debe leerse como **`(a && b) || c`**.
 
-### 3.8.3.Componer funciones
+### 3.8.3. Componer Functions
 
-Finalmente, también puedes componer expresiones lambda representadas por la Functioninterfaz. La Functioninterfaz viene con dos métodos predeterminados para esto andTheny compose, los cuales devuelven una instancia de Function.
+Finalmente, también puedes componer expresiones lambda representadas por la interfaz **`Function`**. La interfaz **`Function`** viene con dos métodos predeterminados para esto **`andThen`** y **`compose`**, los cuales devuelven una instancia de **`Function`**.
 
-El método andThendevuelve una función que primero aplica una función determinada a una entrada y luego aplica otra función al resultado de esa aplicación. Por ejemplo, dada una función fque incrementa un número (x -> x + 1)y otra función gque multiplica un número por 2, puedes combinarlas para crear una función hque primero incrementa un número y luego multiplica el resultado por 2:
+El método **`andThen`** devuelve una función que primero aplica una función determinada a una entrada y luego aplica otra función al resultado de esa aplicación. Por ejemplo, dada una función f que incrementa un número (x -> x + 1)y otra función gque multiplica un número por 2, puedes combinarlas para crear una función hque primero incrementa un número y luego multiplica el resultado por 2:
 
 ```java
 ```
