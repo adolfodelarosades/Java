@@ -1168,125 +1168,176 @@ Predicate<Apple> redAndHeavyAppleOrGreen =
 
 Finalmente, también puedes componer expresiones lambda representadas por la interfaz **`Function`**. La interfaz **`Function`** viene con dos métodos predeterminados para esto **`andThen`** y **`compose`**, los cuales devuelven una instancia de **`Function`**.
 
-El método **`andThen`** devuelve una función que primero aplica una función determinada a una entrada y luego aplica otra función al resultado de esa aplicación. Por ejemplo, dada una función f que incrementa un número (x -> x + 1)y otra función gque multiplica un número por 2, puedes combinarlas para crear una función hque primero incrementa un número y luego multiplica el resultado por 2:
+El método **`andThen`** devuelve una función que primero aplica una función determinada a una entrada y luego aplica otra función al resultado de esa aplicación. Por ejemplo, dada una función **`f`** que incrementa un número **`(x -> x + 1)`** y otra función **`g`** que multiplica un número por **`2`**, puedes combinarlas para crear una función **`h`** que primero incrementa un número y luego multiplica el resultado por **`2`**:
 
 ```java
+Function<Integer, Integer> f = x -> x + 1;
+Function<Integer, Integer> g = x -> x * 2;
+Function<Integer, Integer> h = f.andThen(g);     1
+int result = h.apply(1);                         2
 ```
 
-1 En matemáticas escribirías g(f(x)) o (gof)(x).
-2 Esto devuelve 4.
+* **1 En matemáticas escribirías `g(f(x))` or `(g o f)(x)`**.
+* **2 Esto devuelve `4`.**
 
-También puede utilizar el método composede manera similar para aplicar primero la función dada como argumento composey luego aplicar la función al resultado. Por ejemplo, en el ejemplo anterior, usar compose, significaría f(g(x))en lugar de g(f(x))usar andThen:
+También puede utilizar el método **`compose`** de manera similar para aplicar primero la función dada como argumento **`compose`** y luego aplicar la función al resultado. Por ejemplo, en el ejemplo anterior, usar **`compose`**, significaría **`f(g(x))`** en lugar de **`g(f(x))`** usar **`andThen`**:
 
 ```java
+Function<Integer, Integer> f = x -> x + 1;
+Function<Integer, Integer> g = x -> x * 2;
+Function<Integer, Integer> h = f.compose(g);     1
+int result = h.apply(1);                         2
 ```
 
-1 En matemáticas escribirías f(g(x)) o (fog)(x).
-2 Esto devuelve 3.
-La figura 3.6 ilustra la diferencia entre andTheny compose.
-
-Figura 3.6.Usando andThenversuscompose
+* **1 En matemáticas escribirías `f(g(x))` o `(f o g)(x)`**.
+* **2 Esto devuelve `3`.**
 
 
-Todo esto suena demasiado abstracto. ¿Cómo puedes utilizarlos en la práctica? Digamos que tiene varios métodos de utilidad que realizan transformaciones de texto en una letra representada como String:
+La figura 3.6 ilustra la diferencia entre `andThen` y `compose`.
+
+**Figura 3.6. Usando `andThen` versus `compose`**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/50f7028d-363a-4cea-875d-e84205059761)
+
+
+Todo esto suena demasiado abstracto. ¿Cómo puedes utilizarlos en la práctica? Digamos que tiene varios métodos de utilidad que realizan transformaciones de texto en una letra representada como **`String`**:
 
 ```java
+public class Letter{
+    public static String addHeader(String text) {
+        return "From Raoul, Mario and Alan: " + text;
+    }
+    public static String addFooter(String text) {
+        return text + " Kind regards";
+    }
+    public static String checkSpelling(String text) {
+        return text.replaceAll("labda", "lambda");
+    }
+}
 ```
 
 Ahora puede crear varios canales de transformación componiendo los métodos de utilidad. Por ejemplo, crear una canalización que primero agregue un encabezado, luego revise la ortografía y finalmente agregue un pie de página, como se muestra a continuación (y como se ilustra en la figura 3.7 ):
 
-Figura 3.7.Un proceso de transformación que utilizaandThen
+**Figura 3.7. Un proceso de transformación que utiliza `andThen`**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/a343546a-90b7-44b7-9c44-b59d9e66f822)
 
 
 ```java
+Function<String, String> addHeader = Letter::addHeader;
+Function<String, String> transformationPipeline
+  = addHeader.andThen(Letter::checkSpelling)
+             .andThen(Letter::addFooter);
 ```
 
 Una segunda canalización podría consistir únicamente en agregar un encabezado y un pie de página sin revisar la ortografía:
 
 ```java
+Function<String, String> addHeader = Letter::addHeader;
+Function<String, String> transformationPipeline
+  = addHeader.andThen(Letter::addFooter);
 ```
 
 ## 3.9. Ideas similares de matemáticas
 
 Si se siente cómodo con las matemáticas de la escuela secundaria, esta sección le brinda otro punto de vista sobre la idea de las expresiones lambda y las funciones de transferencia. Siéntete libre de omitirlo; nada más en el libro depende de ello. Pero es posible que disfrute viendo otra perspectiva.
 
-### 3.9.1.Integración
+### 3.9.1. Integración
 
-Supongamos que tiene una función (matemática, no Java) f, quizás definida por
+Supongamos que tiene una función **`f`** (matemática, no Java), quizás definida por
 
 ```java
+f(x) = x + 10
 ```
 
 Entonces, una pregunta que se hace a menudo (en la escuela y en las carreras de ciencias e ingeniería) es encontrar el área debajo de la función cuando se dibuja en papel (contando el eje x como la línea cero). Por ejemplo, escribes
 
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/d2648f6d-17b6-4af7-bf0a-3a22ec7475d7)
+
+para el área que se muestra en la figura 3.8.
+
+**Figura 3.8. Área bajo la función `f(x) = x + 10` de `x` desde `3` a `7`**
+
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/67e7b699-940c-4932-bcb4-15b5cf16dcea)
 
 
-para el área que se muestra en la figura 3.8 .
-
-Figura 3.8.Área bajo la función f(x) = x + 10de x3 a 7
-
-
-En este ejemplo, la función fes una línea recta, por lo que puedes calcular fácilmente esta área mediante el método del trapecio (dibujando triángulos y rectángulos) para descubrir la solución:
+En este ejemplo, la función **`f`** es una línea recta, por lo que puedes calcular fácilmente esta área mediante el método del trapecio (dibujando triángulos y rectángulos) para descubrir la solución:
 
 ```java
+1/2 × ((3 + 10) + (7 + 10)) × (7 – 3) = 60
 ```
 
-Ahora, ¿cómo podrías expresar esto en Java? Su primer problema es conciliar la notación extraña como el símbolo de integración o dy/dxla notación del lenguaje de programación familiar.
+Ahora, ¿cómo podrías expresar esto en Java? Su primer problema es conciliar la notación extraña como el símbolo de integración o **`dy/dx`** la notación del lenguaje de programación familiar.
 
-De hecho, para pensar desde los primeros principios se necesita un método, quizás llamado integrate, que requiere tres argumentos: uno es fy los otros son los límites (3.0 y 7.0 aquí). Por lo tanto, desea escribir en Java algo parecido a esto, donde la función fse pasa como argumento:
+De hecho, para pensar desde los primeros principios se necesita un método, quizás llamado **`integrate`**, que requiere tres argumentos: uno es **`f`** y los otros son los límites (3.0 y 7.0 aquí). Por lo tanto, desea escribir en Java algo parecido a esto, donde la función **`f`** se pasa como argumento:
 
 ```java
+integrate(f, 3, 7)
 ```
 
 Tenga en cuenta que no puede escribir algo tan simple como
 
 ```java
+integrate(x + 10, 3, 7)
 ```
 
-por dos razones. En primer lugar, el alcance de xno está claro y, en segundo lugar, esto pasaría un valor de x+10para integrar en lugar de pasar la función f.
+por dos razones. En primer lugar, el alcance de **`x`** no está claro y, en segundo lugar, esto pasaría un valor de **`x+10`** para integrar en lugar de pasar la función **`f`**.
 
-De hecho, el papel secreto de dxen matemáticas es decir "esa función que toma un argumento xcuyo resultado es x + 10".
+De hecho, el papel secreto de **`dx`** en matemáticas es decir "esa función que toma un argumento **`x`** cuyo resultado es **`x + 10`**".
 
 ### 3.9.2.Conexión a Java 8 lambdas
 
-Como mencionamos anteriormente, Java 8 usa la notación (double x) -> x + 10(una expresión lambda) exactamente para este propósito; por eso puedes escribir
+Como mencionamos anteriormente, Java 8 usa la notación **`(double x) -> x + 10`** (una expresión lambda) exactamente para este propósito; por eso puedes escribir
 
 ```java
+integrate((double x) -> x + 10, 3, 7)
 ```
 
 o
 
 ```java
+integrate((double x) -> f(x), 3, 7)
 ```
 
 o, utilizando una referencia de método como se mencionó anteriormente,
 
 ```java
+integrate(C::f, 3, 7)
 ```
 
-if Ces una clase que contiene fun método estático. La idea es que estás pasando el código fal método integrate.
+Si **`C`** es una clase que contiene **`f`** un método estático. La idea es que estás pasando el código **`f`** al método integrate.
 
-Quizás ahora te preguntes cómo escribirías el método integrateen sí. Continúe suponiendo que fes una función lineal (recta). Probablemente le gustaría escribir de una forma similar a las matemáticas:
+Quizás ahora te preguntes cómo escribirías el método integrate en sí. Continúe suponiendo que **`f`** es una función lineal (recta). Probablemente le gustaría escribir de una forma similar a las matemáticas:
 
 ```java
+public double integrate((double -> double) f, double a, double b) {     1
+      return (f(a) + f(b)) * (b - a) / 2.0
+}
 ```
 
-1 ¡Código Java incorrecto! (No puedes escribir funciones como lo haces en matemáticas).
-Pero debido a que las expresiones lambda solo se pueden usar en un contexto que espera una interfaz funcional (en este caso, DoubleFunction[ 4 ] ), debes escribirlas de la siguiente manera:
+* **1 ¡Código Java incorrecto! (No puedes escribir funciones como lo haces en matemáticas).**
+  
+Pero debido a que las expresiones lambda solo se pueden usar en un contexto que espera una interfaz funcional (en este caso, **`DoubleFunction`**[ 4 ] ), debes escribirlas de la siguiente manera:
 
-4
+**4**
 
-Usar DoubleFunction<Double>es más eficiente que usar Function<Double,Double>ya que evita encajonar el resultado.
+*Usar **`DoubleFunction<Double>`** es más eficiente que usar **`Function<Double,Double>`** ya que evita encajonar el resultado.*
 
 ```java
+public double integrate(DoubleFunction<Double> f, double a, double b) {
+      return (f.apply(a) + f.apply(b)) * (b - a) / 2.0;
+}
 ```
 
-o usando DoubleUnaryOperator, lo que también evita encajonar el resultado:
+o usando **`DoubleUnaryOperator`**, lo que también evita encajonar el resultado:
 
 ```java
+public double integrate(DoubleUnaryOperator f, double a, double b) {
+      return (f.applyAsDouble(a) + f.applyAsDouble(b)) * (b - a) / 2.0;
+}
 ```
 
-Como comentario adicional, es un poco vergonzoso que tengas que escribir f.apply(a)en lugar de simplemente escribir f(a)como en matemáticas, pero Java simplemente no puede alejarse de la idea de que todo es un objeto en lugar de la idea de que una función sea verdaderamente independiente. !
+Como comentario adicional, es un poco vergonzoso que tengas que escribir **`f.apply(a)`** en lugar de simplemente escribir **`f(a)`** como en matemáticas, pero Java simplemente no puede alejarse de la idea de que todo es un objeto en lugar de la idea de que una función sea verdaderamente independiente!
 
 ### Resumen
 
@@ -1295,9 +1346,9 @@ Como comentario adicional, es un poco vergonzoso que tengas que escribir f.apply
 * Una interfaz funcional es una interfaz que declara exactamente un método abstracto.
 * Las expresiones Lambda solo se pueden utilizar cuando se espera una interfaz funcional.
 * Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratar la expresión completa como una instancia de una interfaz funcional .
-* Java 8 viene con una lista de interfaces funcionales comunes en el java.util .functionpaquete, que incluye Predicate<T>, Function<T, R>, Supplier<T>, Consumer<T>y BinaryOperator<T>, descritas en la tabla 3.2 .
-* Las especializaciones primitivas de interfaces funcionales genéricas comunes, como Predicate<T>y, Function<T, R>se pueden utilizar para evitar operaciones de boxeo: IntPredicate, IntToLongFunction, etc.
+* Java 8 viene con una lista de interfaces funcionales comunes en el paquete **`java.util .function`**, que incluye **`Predicate<T>`**, **`Function<T, R>`**, **`Supplier<T>`**, **`Consumer<T>`** y **`BinaryOperator<T>`**, descritas en la tabla 3.2 .
+* Las especializaciones primitivas de interfaces funcionales genéricas comunes, como **`Predicate<T>`** y, **`Function<T, R>`** se pueden utilizar para evitar operaciones de boxeo: **`IntPredicate`**, **`IntToLongFunction`**, etc.
 * El patrón de ejecución (para cuando necesita ejecutar algún comportamiento determinado en medio del código repetitivo que es necesario en un método, por ejemplo, asignación y limpieza de recursos) se puede usar con lambdas para obtener flexibilidad y reutilización adicionales.
 * El tipo esperado para una expresión lambda se denomina tipo de destino .
 * Las referencias a métodos le permiten reutilizar la implementación de un método existente y transmitirla directamente.
-* Las interfaces funcionales como Comparator, Predicatey Functiontienen varios métodos predeterminados que se pueden usar para combinar expresiones lambda.
+* Las interfaces funcionales como **`Comparator`**, **`Predicate`** y **`Function`** tienen varios métodos predeterminados que se pueden usar para combinar expresiones lambda.
