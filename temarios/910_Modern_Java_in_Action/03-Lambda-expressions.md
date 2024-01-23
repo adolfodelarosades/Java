@@ -1341,11 +1341,11 @@ Como comentario adicional, es un poco vergonzoso que tengas que escribir **`f.ap
 
 ### Resumen
 
-* Una expresión lambda puede entenderse como una especie de función anónima: no tiene nombre, pero tiene una lista de parámetros, un cuerpo, un tipo de retorno y posiblemente también una lista de excepciones que se pueden generar.
+* Una *expresión lambda* puede entenderse como una especie de función anónima: no tiene nombre, pero tiene una lista de parámetros, un cuerpo, un tipo de retorno y posiblemente también una lista de excepciones que se pueden generar.
 * Las expresiones lambda le permiten pasar código de forma concisa.
-* Una interfaz funcional es una interfaz que declara exactamente un método abstracto.
+* Una *interfaz funcional* es una interfaz que declara exactamente un método abstracto.
 * Las expresiones Lambda solo se pueden utilizar cuando se espera una interfaz funcional.
-* Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y tratar la expresión completa como una instancia de una interfaz funcional .
+* Las expresiones Lambda le permiten proporcionar la implementación del método abstracto de una interfaz funcional directamente en línea y *tratar la expresión completa como una instancia de una interfaz funcional*.
 * Java 8 viene con una lista de interfaces funcionales comunes en el paquete **`java.util .function`**, que incluye **`Predicate<T>`**, **`Function<T, R>`**, **`Supplier<T>`**, **`Consumer<T>`** y **`BinaryOperator<T>`**, descritas en la tabla 3.2 .
 * Las especializaciones primitivas de interfaces funcionales genéricas comunes, como **`Predicate<T>`** y, **`Function<T, R>`** se pueden utilizar para evitar operaciones de boxeo: **`IntPredicate`**, **`IntToLongFunction`**, etc.
 * El patrón de ejecución (para cuando necesita ejecutar algún comportamiento determinado en medio del código repetitivo que es necesario en un método, por ejemplo, asignación y limpieza de recursos) se puede usar con lambdas para obtener flexibilidad y reutilización adicionales.
