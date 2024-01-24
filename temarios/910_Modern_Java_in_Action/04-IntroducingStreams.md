@@ -220,8 +220,7 @@ En este ejemplo, primero obtienes un stream de la lista de platos llamando al m�
 
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/7f21305e-396b-4b94-bfe8-f7bd2b802253)
 
-
-Observe cómo el código que describimos es diferente de lo que escribiría si procesara la lista de elementos del menú paso a paso. Primero, utiliza un estilo mucho más declarativo para procesar los datos en el menú donde dice lo que hay que hacer: "Buscar nombres de tres platos ricos en calorías". No implementa las funcionalidades de filtrado ( filter), extracción ( map) o truncamiento ( ); limitestán disponibles a través de la biblioteca Streams. Como resultado, la API Streams tiene más flexibilidad para decidir cómo optimizar este canal. Por ejemplo, los pasos de filtrado, extracción y truncamiento podrían fusionarse en una sola pasada y detenerse tan pronto como se encuentren tres platos. Mostramos un ejemplo para demostrarlo en el próximo capítulo.
+Observe cómo el código que describimos es diferente de lo que escribiría si procesara la lista de elementos del menú paso a paso. Primero, utiliza un estilo mucho más declarativo para procesar los datos en el menú donde dice lo que hay que hacer: "Buscar nombres de tres platos ricos en calorías". No implementa las funcionalidades de filtrado (**`filter`**), extracción (**`map`**) o truncamiento (**`limit`**); están disponibles a través de la Streams library. Como resultado, la API Streams tiene más flexibilidad para decidir cómo optimizar este canal. Por ejemplo, los pasos de filtrado, extracción y truncamiento podrían fusionarse en una sola pasada y detenerse tan pronto como se encuentren tres platos. Mostramos un ejemplo para demostrarlo en el próximo capítulo.
 
 Retrocedamos un poco y examinemos las diferencias conceptuales entre la API de Colecciones y la nueva API de Streams antes de explorar con más detalle qué operaciones puede realizar con una secuencia.
 
