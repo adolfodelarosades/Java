@@ -22,32 +22,67 @@ Los streams son una actualización de la API de Java que le permite manipular co
 Antes (Java 7):
 
 ```java
+List<Dish> lowCaloricDishes = new ArrayList<>();
+for(Dish dish: menu) {
+    if(dish.getCalories() < 400) {                                 1
+        lowCaloricDishes.add(dish);
+    }
+}
+Collections.sort(lowCaloricDishes, new Comparator<Dish>() {        2
+    public int compare(Dish dish1, Dish dish2) {
+        return Integer.compare(dish1.getCalories(), dish2.getCalories());
+    }
+});
+List<String> lowCaloricDishesName = new ArrayList<>();
+for(Dish dish: lowCaloricDishes) {
+    lowCaloricDishesName.add(dish.getName());                      3
+}
 ```
 
-1 Filtra los elementos mediante un acumulador
-2 Clasifica los platos con una clase anónima
-3 Procesa la lista ordenada para seleccionar los nombres de los platos.
-En este código se utiliza una “variable basura” lowCaloricDishes. Su única finalidad es actuar como contenedor intermedio de desecho. En Java 8, este detalle de implementación se inserta en la biblioteca a la que pertenece.
+* **1 Filtra los elementos mediante un acumulador**
+* **2 Clasifica los platos con una clase anónima**
+* **3 Procesa la lista ordenada para seleccionar los nombres de los platos.**
+
+En este código se utiliza una “garbage variable - variable basura” **`lowCaloricDishes`**. Su única finalidad es actuar como contenedor intermedio de desecho. En Java 8, este detalle de implementación se inserta en la library a la que pertenece.
 
 Después (Java 8):
 
 ```java
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+List<String> lowCaloricDishesName =
+               menu.stream()
+                   .filter(d -> d.getCalories() < 400)       1
+                   .sorted(comparing(Dish::getCalories))     2
+                   .map(Dish::getName)                       3
+                   .collect(toList());                       4
 ```
 
-1 Selecciona platos que tengan menos de 400 calorías.
-2 Ordenarlos por calorías
-3 Extrae los nombres de estos platos.
-4 Almacena todos los nombres en una Lista
-Para explotar una arquitectura multinúcleo y ejecutar este código en paralelo, sólo necesita cambiar stream()a parallelStream():
+* **1 Selecciona platos que tengan menos de 400 calorías.**
+* **2 Ordenarlos por calorías**
+* **3 Extrae los nombres de estos platos.**
+* **4 Almacena todos los nombres en una List**
+* 
+Para explotar una arquitectura multinúcleo y ejecutar este código en paralelo, sólo necesita cambiar **`stream()`** a **`parallelStream()`**:
 
 ```java
+List<String> lowCaloricDishesName =
+               menu.parallelStream()
+                   .filter(d -> d.getCalories() < 400)
+                   .sorted(comparing(Dishes::getCalories))
+                   .map(Dish::getName)
+                   .collect(toList());
 ```
 
-Quizás se pregunte qué sucede exactamente cuando invoca el método parallelStream. ¿Cuántos hilos se están utilizando? ¿Cuáles son los beneficios de rendimiento? ¿Deberías utilizar este método? El capítulo 7 cubre estas preguntas en detalle. Por ahora, puede ver que el nuevo enfoque ofrece varios beneficios inmediatos desde el punto de vista de la ingeniería de software:
+Quizás se pregunte qué sucede exactamente cuando invoca el método **`parallelStream`**. ¿Cuántos hilos se están utilizando? ¿Cuáles son los beneficios de rendimiento? ¿Deberías utilizar este método? El capítulo 7 cubre estas preguntas en detalle. Por ahora, puede ver que el nuevo enfoque ofrece varios beneficios inmediatos desde el punto de vista de la ingeniería de software:
 
-El código está escrito de forma declarativa : usted especifica lo que desea lograr ( filtrar platos bajos en calorías) en lugar de especificar cómo implementar una operación (usando bloques de flujo de control como bucles y ifcondiciones). Como vio en el capítulo anterior, este enfoque, junto con la parametrización del comportamiento, le permite hacer frente a los requisitos cambiantes: puede crear fácilmente una versión adicional de su código para filtrar platos ricos en calorías usando una expresión lambda, sin tener que copiar y pegar código. Otra forma de pensar en el beneficio de este enfoque es que el modelo de subprocesamiento está desacoplado de la consulta misma. Debido a que está proporcionando una receta para una consulta, ésta podría ejecutarse de forma secuencial o en paralelo. Aprenderá más sobre esto en el capítulo 7 .
-Se encadenan varias operaciones básicas para expresar un proceso de procesamiento de datos complicado (se encadena filtervinculando sorted, mapycollectoperaciones, como se ilustra en la figura 4.1 ) manteniendo su código legible y su intención clara. El resultado de se filterpasa al sortedmétodo, que luego se pasa al mapmétodo y luego al collectmétodo.
+* El código está escrito de ***forma declarativa***: usted especifica lo que desea lograr (filtrar platos bajos en calorías) en lugar de especificar cómo implementar una operación (usando bloques de flujo de control como bucles y condiciones **`if`**). Como vio en el capítulo anterior, este enfoque, junto con la parametrización del comportamiento, le permite hacer frente a los requisitos cambiantes: puede crear fácilmente una versión adicional de su código para filtrar platos ricos en calorías usando una expresión lambda, sin tener que copiar y pegar código. Otra forma de pensar en el beneficio de este enfoque es que el modelo de subprocesamiento está desacoplado de la consulta misma. Debido a que está proporcionando una receta para una consulta, ésta podría ejecutarse de forma secuencial o en paralelo. Aprenderá más sobre esto en el capítulo 7 .
+
+* Se encadenan varias operaciones básicas para expresar un proceso de procesamiento de datos complicado (se encadena **`filter`** vinculando operaciones **`sorted`**, **`map`** y **`collect`**, como se ilustra en la figura 4.1 ) manteniendo su código legible y su intención clara. El resultado de se **`filter`** pasa al  método **`sorted`**, que luego se pasa al método **`map`** y luego al método **`collect`**.
+
 Figura 4.1.Encadenamiento de operaciones de arroyos formando un oleoducto
+
+![Uploading image.png…]()
 
 
 Debido a que operaciones como filter(o sorted, mapy collect) están disponibles como bloques de construcción de alto nivel que no dependen de un modelo de subprocesos específico, su implementación interna podría ser de un solo subproceso o podría potencialmente maximizar su arquitectura multinúcleo de forma transparente. En la práctica, esto significa que ya no tendrá que preocuparse por subprocesos y bloqueos para descubrir cómo paralelizar ciertas tareas de procesamiento de datos: ¡la API Streams lo hace por usted!
