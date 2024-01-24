@@ -82,7 +82,8 @@ Quizás se pregunte qué sucede exactamente cuando invoca el método **`parallel
 
 Figura 4.1.Encadenamiento de operaciones de arroyos formando un oleoducto
 
-![Uploading image.png…]()
+![image](https://github.com/adolfodelarosades/Java/assets/23094588/86ad23e1-3802-486b-8582-de0e4996cdfe)
+
 
 
 Debido a que operaciones como filter(o sorted, mapy collect) están disponibles como bloques de construcción de alto nivel que no dependen de un modelo de subprocesos específico, su implementación interna podría ser de un solo subproceso o podría potencialmente maximizar su arquitectura multinúcleo de forma transparente. En la práctica, esto significa que ya no tendrá que preocuparse por subprocesos y bloqueos para descubrir cómo paralelizar ciertas tareas de procesamiento de datos: ¡la API Streams lo hace por usted!
