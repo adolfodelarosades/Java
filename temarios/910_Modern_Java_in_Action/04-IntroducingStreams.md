@@ -10,29 +10,20 @@ Este capítulo cubre:
 ¿Qué harías sin collections en Java? Casi todas las aplicaciones Java crean y procesan colecciones. Las colecciones son fundamentales para muchas tareas de programación: le permiten agrupar y procesar datos. Para ilustrar las colecciones en acción, imagine que se le asigna la tarea de crear una colección de platos para representar un menú para calcular diferentes consultas. Por ejemplo, es posible que desee averiguar la cantidad total de calorías del menú. O bien, es posible que necesites filtrar el menú para seleccionar solo platos bajos en calorías para un menú saludable especial. Pero a pesar de que las colecciones son necesarias para casi cualquier aplicación Java, manipularlas está lejos de ser perfecta:
 
 * Gran parte de la lógica empresarial implica operaciones similares a las de una base de datos, como agrupar una lista de platos por categoría (por ejemplo, todos los platos vegetarianos) o encontrar el plato más caro. ¿Cuántas veces te encuentras reimplementando estas operaciones usando iteradores? La mayoría de las bases de datos le permiten especificar dichas operaciones de forma declarativa. Por ejemplo, la siguiente consulta SQL le permite seleccionar (o “filtrar”) los nombres de platos bajos en calorías: **`SELECT name FROM dishes WHERE calorie < 400`**. Como puedes ver, en SQL no necesitas implementar cómo filtrar usando el atributo **`calorie`** de un plato (como lo harías con las colecciones de Java, por ejemplo, usando un iterador y un acumulador). En cambio, escribe lo que desea como resultado. Esta idea básica significa que usted se preocupa menos acerca de cómo implementar explícitamente dichas consultas: ¡se maneja por usted! ¿Por qué no puedes hacer algo similar con las colecciones?
-¿Cómo procesarías una gran colección de elementos? Para ganar rendimiento, necesitaría procesarlo en paralelo y utilizar arquitecturas multinúcleo. Pero escribir código paralelo es complicado en comparación con trabajar con iteradores. Además, ¡depurar no es divertido!
-¿Qué podrían hacer los diseñadores del lenguaje Java para ahorrarle su valioso tiempo y facilitarle la vida como programadores? Quizás lo hayas adivinado: la respuesta es transmisiones .
 
-4.1. ¿Qué son las corrientes?
-Los flujos son una actualización de la API de Java que le permite manipular colecciones de datos de forma declarativa (expresa una consulta en lugar de codificar una implementación ad hoc para ella). Por ahora, puedes considerarlos como iteradores sofisticados sobre una colección de datos. Además, las transmisiones se pueden procesar en paralelo de forma transparente , ¡sin tener que escribir ningún código multiproceso! Explicamos en detalle en el capítulo 7 cómo funcionan los flujos y la paralelización. Para ver los beneficios de usar secuencias, compare el siguiente código para obtener los nombres de platos bajos en calorías, ordenados por número de calorías, primero en Java 7 y luego en Java 8 usando secuencias. No se preocupe demasiado por el código Java 8; ¡Lo explicamos en detalle en las siguientes secciones!
+* ¿Cómo procesarías una gran colección de elementos? Para ganar rendimiento, necesitaría procesarlo en paralelo y utilizar arquitecturas multinúcleo. Pero escribir código paralelo es complicado en comparación con trabajar con iteradores. Además, ¡depurar no es divertido!
+
+¿Qué podrían hacer los diseñadores del lenguaje Java para ahorrarle su valioso tiempo y facilitarle la vida como programadores? Quizás lo hayas adivinado: la respuesta es ***streams***.
+
+## 4.1. ¿Qué son las streams?
+
+Los streams son una actualización de la API de Java que le permite manipular colecciones de datos de forma declarativa (expresa una consulta en lugar de codificar una implementación ad hoc para ella). Por ahora, puedes considerarlos como iteradores sofisticados sobre una colección de datos. Además, las transmisiones se pueden procesar en paralelo de forma transparente, ¡sin tener que escribir ningún código multiproceso! Explicamos en detalle en el capítulo 7 cómo funcionan los streams y la parallelization. Para ver los beneficios de usar streams, compare el siguiente código para obtener los nombres de platos bajos en calorías, ordenados por número de calorías, primero en Java 7 y luego en Java 8 usando streams. No se preocupe demasiado por el código Java 8; ¡Lo explicamos en detalle en las siguientes secciones!
 
 Antes (Java 7):
 
-Lista<Dish> lowCaloricDishes = new ArrayList<>();
-for(Plato plato: menú) {
-    if(plato.getCalories() < 400) {                                  1
-        platosbajos en calorías.add(plato);
-    }
-}
-Collections.sort(platosbajos en calorías, nuevo comparador<plato>() {         2
-    public int compare(Plato plato1, Plato plato2) {
-        return Integer.compare(dish1.getCalories(), plato2.getCalories());
-    }
-});
-Lista<String> lowCaloricDishesName = new ArrayList<>();
-for(Plato plato: platos bajos en calorías) {
-    nombreDePlatosBajosCalóricos.add(plato.getName());                      3 
-}
+```java
+```
+
 1 Filtra los elementos mediante un acumulador
 2 Clasifica los platos con una clase anónima
 3 Procesa la lista ordenada para seleccionar los nombres de los platos.
@@ -40,26 +31,18 @@ En este código se utiliza una “variable basura” lowCaloricDishes. Su única
 
 Después (Java 8):
 
-importar java.util.Comparator.comparing estático;
-importar java.util.stream.Collectors.toList estático;
-Lista<Cadena> nombreDePlatosBajosCalóricos =
-               menu.stream() 
-                   .filter(d -> d.getCalories() < 400)        1 
-                   .sorted(comparando(Dish::getCalories))      2 
-                   .map(Dish::getName)                        3 
-                   .collect(toList());                       4
+```java
+```
+
 1 Selecciona platos que tengan menos de 400 calorías.
 2 Ordenarlos por calorías
 3 Extrae los nombres de estos platos.
 4 Almacena todos los nombres en una Lista
 Para explotar una arquitectura multinúcleo y ejecutar este código en paralelo, sólo necesita cambiar stream()a parallelStream():
 
-Lista<Cadena> nombreDePlatosBajosCalóricos =
-                menu.parallelStream()
-                   .filtro(d -> d.getCalories() < 400)
-                   .ordenado(comparando(Platos::obtenerCalorías))
-                   .map(Plato::obtenerNombre)
-                   .collect(toList());
+```java
+```
+
 Quizás se pregunte qué sucede exactamente cuando invoca el método parallelStream. ¿Cuántos hilos se están utilizando? ¿Cuáles son los beneficios de rendimiento? ¿Deberías utilizar este método? El capítulo 7 cubre estas preguntas en detalle. Por ahora, puede ver que el nuevo enfoque ofrece varios beneficios inmediatos desde el punto de vista de la ingeniería de software:
 
 El código está escrito de forma declarativa : usted especifica lo que desea lograr ( filtrar platos bajos en calorías) en lugar de especificar cómo implementar una operación (usando bloques de flujo de control como bucles y ifcondiciones). Como vio en el capítulo anterior, este enfoque, junto con la parametrización del comportamiento, le permite hacer frente a los requisitos cambiantes: puede crear fácilmente una versión adicional de su código para filtrar platos ricos en calorías usando una expresión lambda, sin tener que copiar y pegar código. Otra forma de pensar en el beneficio de este enfoque es que el modelo de subprocesamiento está desacoplado de la consulta misma. Debido a que está proporcionando una receta para una consulta, ésta podría ejecutarse de forma secuencial o en paralelo. Aprenderá más sobre esto en el capítulo 7 .
@@ -71,13 +54,14 @@ Debido a que operaciones como filter(o sorted, mapy collect) están disponibles 
 
 La nueva API Streams es expresiva. Por ejemplo, después de leer este capítulo y los capítulos 5 y 6 , podrá escribir código como el siguiente:
 
-Mapa<Dish.Type, Lista<Dish>> platosByType =
-    menu.stream().collect(groupingBy(Dish::getType));
+```java
+```
+
 Este ejemplo particular se explica en detalle en el capítulo 6 . Agrupa platos por tipos dentro de un archivo Map. Por ejemplo, Mappuede contener el siguiente resultado:
 
-{PESCADO=[gambas, salmón],
- OTHER=[papas fritas, arroz, fruta de temporada, pizza],
- CARNE=[cerdo, ternera, pollo]}
+```java
+```
+
 Ahora considere cómo implementaría esto con el típico enfoque de programación imperativa usando bucles. Pero no pierdas demasiado tiempo. En lugar de ello, ¡acepte el poder de las corrientes en este y los siguientes capítulos!
 
 Otras bibliotecas: Guava, Apache y lambdaj
@@ -92,52 +76,20 @@ Composable : mayor flexibilidad
 Paralelizable : mejor rendimiento
 Durante el resto de este capítulo y el siguiente, usaremos el siguiente dominio para nuestros ejemplos: a menuque no es más que una lista de platos.
 
-Menú Lista<Plato> = Arrays.asList(
-    nuevo Plato("cerdo", false, 800, Plato.Tipo.CARNE),
-    nuevo Plato("carne de res", falso, 700, Plato.Tipo.CARNE),
-    nuevo Plato("pollo", falso, 400, Plato.Tipo.CARNE),
-    nuevo Plato("papas fritas", verdadero, 530, Plato.Tipo.OTRO),
-    nuevo Plato("arroz", verdadero, 350, Plato.Tipo.OTRO),
-    nuevo Plato("fruta de temporada", verdadero, 120, Plato.Tipo.OTRO),
-    nuevo Plato("pizza", verdadero, 550, Plato.Tipo.OTRO),
-    nuevo Plato("gambas", false, 300, Plato.Tipo.PESCADO),
-    nuevo Plato("salmón", falso, 450, Plato.Tipo.PESCADO) );
+```java
+```
+
 donde a Dishes una clase inmutable definida como
 
-plato de clase pública {
-    nombre de cadena final privado;
-    vegetariano booleano final privado;
-    calorías int finales privadas;
-    tipo final privado;
-    Plato público (nombre de cadena, vegetariano booleano, calorías int, tipo de tipo) {
-        this.nombre = nombre;
-        this.vegetariano = vegetariano;
-        this.calorías = calorías;
-        este.tipo = tipo;
-    }
-    cadena pública getName() {
-        nombre de retorno;
-    }
-    público booleano es vegetariano() {
-        volver vegetariano;
-    }
-    público int obtenerCalorías() {
-        devolver calorías;
-    }
-    tipo público getType() {
-        tipo de retorno;
-    }
-    @Anular
-    cadena pública toString() {
-        nombre de retorno;
-    }
-    enumeración pública Tipo {CARNE, PESCADO, OTROS}
-}
+```java
+```
+
 Ahora exploraremos con más detalle cómo puedes utilizar la API de Streams. Compararemos transmisiones con colecciones y brindaremos algunos antecedentes. En el próximo capítulo, veremosinvestigar en detalle las operaciones de flujo disponibles para expresar consultas sofisticadas de procesamiento de datos. Examinaremos muchos patrones, como filtrar, dividir, buscar, hacer coincidir, mapear y reducir. Habrá muchas pruebas y ejercicios para intentar solidificar su comprensión.
 
 A continuación, analizaremos cómo se pueden crear y manipular secuencias numéricas (por ejemplo, para generar una secuencia de números pares o ternas pitagóricas). Finalmente, discutiremos cómo puede crear transmisiones desde diferentes fuentes, como por ejemplo desde un archivo. También discutiremos cómo generar transmisiones con una cantidad infinita de elementos, ¡algo que definitivamente no puedes hacer con las colecciones!
 
-4.2. Comenzando con las transmisiones
+## 4.2. Comenzando con las transmisiones
+
 Comenzamos nuestra discusión sobre transmisiones con colecciones, porque esa es la forma más sencilla de comenzar a trabajar con transmisiones. Las colecciones en Java 8 admiten un nuevo streammétodo que devuelve una secuencia (la definición de la interfaz está disponible en java.util.stream.Stream). Más adelante verá que también puede obtener secuencias de otras formas (por ejemplo, generando elementos de secuencia a partir de un rango numérico o de recursos de E/S).
 
 Primero, ¿qué es exactamente una transmisión ? Una definición breve es "una secuencia de elementos de una fuente que respalda las operaciones de procesamiento de datos". Analicemos esta definición paso a paso:
@@ -151,20 +103,16 @@ Canalización : muchas operaciones de flujo devuelven un flujo por sí mismas, l
 Iteración interna : a diferencia de las colecciones, que se iteran explícitamente mediante un iterador, las operaciones de flujo realizan la iteración detrás de escena por usted.Mencionamos brevemente esta idea en el capítulo 1 y volveremos a ella más adelante en la siguiente sección.
 Veamos un ejemplo de código para explicar todas estas ideas:
 
-importar java.util.stream.Collectors.toList estático;
-Lista<Cadena> tresNombresDePlatosAltosCalóricos =
-  menu.stream()                                          1 
-      .filter(plato -> plato.getCalories() > 300)          2 
-      .map(Dish::getName)                                3 
-      .limit(3)                                          4 
-      .collect(toList());                               5 
-System.out.println(tres nombres de platos con alto contenido calórico);          6
+```java
+```
+
 1 Obtiene una secuencia del menú (la lista de platos)
 2 Crea una cadena de operaciones: primero filtra los platos ricos en calorías
 3 Obtiene los nombres de los platos.
 4 Selecciona sólo los tres primeros
 5 Almacena los resultados en otra Lista
 6 Da resultados [cerdo, ternera, pollo]
+
 En este ejemplo, primero obtienes una secuencia de la lista de platos llamando al streammétodo en menu. La fuente de datos es la lista de platos (el menú) y proporciona una secuencia de elementos al flujo. A continuación, aplica una serie de operaciones de procesamiento de datos en la secuencia: filter, map, limity collect. Todas estas operaciones excepto collectdevolver otra secuencia para que puedan conectarse para formar una canalización , que puede verse como una consulta en la fuente. Finalmente, la collectoperación comienza a procesar la canalización para devolver un resultado (es diferente porque devuelve algo más que una secuencia; aquí, a List). No se produce ningún resultado y, de hecho, ni menusiquiera se selecciona ningún elemento hasta que collectse invoca. Puedes pensar en ello como si las invocaciones de métodos en la cadena estuvieran en cola hasta que collectse llame. La Figura 4.2 muestra la secuencia de operaciones de flujo: filter, map, limity collect, cada una de las cuales se describe brevemente aquí:
 
 filter— Toma una lambda para excluir ciertos elementos de la secuencia. En este caso seleccionas platos que tengan más de 300 calorías pasándote la lambda d -> d.getCalories() > 300.
@@ -178,7 +126,8 @@ Observe cómo el código que describimos es diferente de lo que escribiría si p
 
 Retrocedamos un poco y examinemos las diferencias conceptuales entre la API de Colecciones y la nueva API de Streams antes de explorar con más detalle qué operaciones puede realizar con una secuencia.
 
-4.3. Transmisiones versus colecciones
+## 4.3. Transmisiones versus colecciones
+
 Tanto la noción existente de Java de colecciones como la nueva noción de flujos proporcionan interfaces para estructuras de datos que representan un conjunto secuenciado de valores del tipo de elemento. Por secuenciado queremos decir que normalmente recorremos los valores por turnos en lugar de acceder a ellos aleatoriamente en cualquier orden. ¿Cual es la diferencia?
 
 Empezaremos con una metáfora visual. Considere una película almacenada en un DVD. Esta es una colección (quizás de bytes o de tramas; no nos importa cuál aquí) porque contiene toda la estructura de datos. Ahora considere ver el mismo video cuando se transmite por Internet. Esto ahora es una secuencia (de bytes o tramas). El reproductor de transmisión de video necesita haber descargado solo unos pocos fotogramas antes de donde el usuario está mirando, de modo que pueda comenzar a mostrar valores desde el comienzo de la transmisión antes de que se hayan calculado la mayoría de los valores de la transmisión (considere transmitir un video en vivo). partido de fútbol). Tenga en cuenta en particular que el reproductor de video puede carecer de memoria para almacenar toda la transmisión en la memoria como una colección, y el tiempo de inicio sería terrible si tuviera que esperar a que apareciera el fotograma final antes de poder comenzar a mostrar el video. Por motivos de implementación del reproductor de vídeo, puede optar por almacenar en buffer una parte de una secuencia en una colección, pero esto difiere de la diferencia conceptual.
@@ -196,13 +145,13 @@ Figura 4.3.Transmisiones versus colecciones
 
 Otro ejemplo es una búsqueda en Internet del navegador. Supongamos que busca una frase con muchas coincidencias en Google o en una tienda de comercio electrónico online. En lugar de esperar a que se descargue toda la colección de resultados junto con sus fotografías, obtienes una secuencia cuyos elementos son las 10 o 20 mejores coincidencias, junto con un botón en el que hacer clic para ver las 10 o 20 siguientes. Cuando tú, el consumidor, haga clic para ver los 10 siguientes, el proveedor los calcula a pedido, antes de devolverlos a su navegador para su visualización.
 
-4.3.1.Atravesable solo una vez
+### 4.3.1.Atravesable solo una vez
+
 Tenga en cuenta que, al igual que los iteradores, una secuencia solo se puede atravesar una vez. Después de eso se dice que se consume una corriente. Puede obtener una nueva secuencia de la fuente de datos inicial para recorrerla nuevamente como lo haría con un iterador (asumiendo que es una fuente repetible como una colección; si es un canal de E/S, no tiene suerte). Por ejemplo, el siguiente código generaría una excepción que indicaría que la transmisión se ha consumido:
 
-Lista<Cadena> título = Arrays.asList("Moderno", "Java", "En", "Acción");
-Corriente<Cadena> s = título.corriente();
-s.forEach(System.out::println);               1 
-s.forEach(System.out::println);               2
+```java
+```
+
 1 Imprime cada palabra del título.
 2 java.lang.IllegalStateException: la transmisión ya ha sido operada o cerrada
 ¡Ten en cuenta que puedes consumir una transmisión solo una vez!
@@ -212,32 +161,34 @@ Para los lectores a los que les gustan los puntos de vista filosóficos, pueden 
 
 Otra diferencia clave entre colecciones y flujos es cómo gestionan la iteración de los datos.
 
-4.3.2.Iteración externa versus interna
+### 4.3.2. Iteración externa versus interna
+
 El uso de la Collectioninterfaz requiere que el usuario realice la iteración (por ejemplo, usando for-each); esto se llama iteración externa . La biblioteca Streams, por el contrario, utiliza iteración interna : hace la iteración por usted y se encarga de almacenar el valor de la secuencia resultante en algún lugar; simplemente proporciona una función que dice lo que se debe hacer. Los siguientes listados de códigos ilustran esta diferencia.
 
 Listado 4.1.Colecciones: iteración externa con un for-eachbucle.
-Lista<String> nombres = nueva ArrayList<>();
-for(Plato plato: menú) {                     1 
-    nombres.add(plato.getName());            2 
-}
+
+```java
+```
+
 1 Itera explícitamente la lista de menús de forma secuencial.
 2 Extrae el nombre y lo añade a un acumulador
+
 Tenga en cuenta que for-eachoculta parte de la complejidad de la iteración. La for-eachconstrucción es azúcar sintáctica que se traduce en algo mucho más feo usando un Iteratorobjeto.
 
 Listado 4.2.Colecciones: iteración externa usando un iterador detrás de escena
-Lista<String> nombres = nueva ArrayList<>();
-Iterador<Cadena> iterador = menu.iterator();
-mientras(iterator.hasNext()) {                      1
-    Plato plato = iterator.next();
-    nombres.add(dish.getName());
-}
+```java
+```
+
 1 Itera explícitamente
+
 Listado 4.3.Corrientes: iteración interna
-Lista<Cadena> nombres = menu.stream()
-                         .map(Dish::getName)         1 
-                         .collect(toList());        2
+
+```java
+```
+
 1 Parametriza el mapa con el método getName para extraer el nombre de un plato
 2 Comienza a ejecutar el pipeline de operaciones; sin iteración
+
 Usemos una analogía para comprender las diferencias y los beneficios de la iteración interna. Digamos que estás hablando con tu hija Sofía, de dos años, y quieres que guarde sus juguetes:
 
 Tú: “Sofía, guardemos los juguetes. ¿Hay algún juguete en el suelo?
@@ -249,6 +200,7 @@ Sofía: “Sí, ahí está mi libro”.
 Tú: “Está bien, pon el libro en la caja. ¿Hay algo más?
 Sofía: “No, nada más”.
 Tú: "Bien, hemos terminado".
+
 Esto es exactamente lo que haces todos los días con tus colecciones de Java. Iteras una colección externamente , extrayendo y procesando explícitamente los elementos uno por uno. Sería mucho mejor si pudieras decirle a Sofía: “Mete todos los juguetes que están en el suelo dentro de la caja”. Hay otras dos razones por las que es preferible una iteración interna: primero, Sofía podría elegir tomar la muñeca con una mano y la pelota con la otra al mismo tiempo, y segundo, podría decidir tomar primero los objetos más cercanos a la caja. y luego los demás. Del mismo modo, mediante una iteración interna, el procesamiento de elementos podría realizarse de forma transparente en paralelo o en un orden diferente que pueda optimizarse más. Estas optimizaciones son difíciles si iteras la colección externamente como estás acostumbrado a hacerlo en Java. Esto puede parecer quisquilloso, pero es en gran medida la razón de ser de la introducción de flujos en Java 8. La iteración interna en la biblioteca Streams puede elegir automáticamente una representación de datos y una implementación de paralelismo que coincida con su hardware. Por el contrario, una vez que haya elegido la iteración externa escribiendo for-each, entonces se habrá comprometido a autogestionar cualquier paralelismo. ( En la práctica , la autogestión significa "un buen día paralelizaremos esto" o "comenzar la larga y ardua batalla que involucra tareas y synchronized".) Java 8 necesitaba una interfaz como Collectionpero sin iteradores, ¡ergo Stream! La Figura 4.4 ilustra la diferencia entre un flujo (iteración interna) y una colección (iteración externa).
 
 Figura 4.4.Iteración interna versus externa
@@ -257,65 +209,54 @@ Figura 4.4.Iteración interna versus externa
 Hemos descrito las diferencias conceptuales entre colecciones y transmisiones. Específicamente, las transmisiones utilizan iteración interna, donde una biblioteca se encarga de iterar por usted. Pero esto sólo es útil si tiene una lista de operaciones predefinidas con las que trabajar (por ejemplo, filtero map) que ocultan la iteración. La mayoría de estas operaciones toman expresiones lambda como argumentos para que puedas parametrizar su comportamiento como mostramos en el capítulo anterior. Los diseñadores del lenguaje Java enviaron la API Streams con una lista extensa de operaciones que puede utilizar para expresar consultas complicadas de procesamiento de datos. Ahora veremos brevemente esta lista de operaciones y las exploraremos con más detalle con ejemplos en el próximo capítulo. Para comprobar su comprensión de la iteración externa versus la interna, realice el cuestionario 4.1 a continuación.
 
 Prueba 4.1: iteración externa versus interna
+
 Según lo que aprendió sobre la iteración externa en los listados 4.1 y 4.2 , ¿qué operación de flujo usaría para refactorizar el siguiente código?
 
-Lista<String> highCaloricDishes = new ArrayList<>();
-Iterador<Cadena> iterador = menu.iterator();
-mientras(iterator.hasNext()) {
-    Plato plato = iterator.next();
-    if(plato.getCalories() > 300) {
-        platoscalóricosaltos.add(d.getName());
-    }
-}
+```java
+```
+
 Respuesta: Necesitas usar el filterpatrón.
 
-Lista<Cadena>platocalórico alto =
-    menú.corriente()
-        .filtro(plato -> plato.getCalories() > 300)
-        .collect(toList());
+```java
+```
+
 No se preocupe si todavía no está familiarizado con cómo escribir con precisión una consulta de flujo; aprenderá esto con más detalle en el próximo capítulo.
 
-4.4. Operaciones de flujo
+## 4.4. Operaciones de flujo
+
 La interfaz de transmisiones java.util.stream.Streamdefine muchas operaciones. Se pueden clasificar en dos categorías. Miremos nuestro ejemplo anterior una vez más:
 
-Lista<Cadena> nombres = menu.stream()                                    1 
-                         .filter(plato -> plato.getCalories() > 300)    2 
-                         .map(Dish::getName)                          2 
-                         .limit(3)                                    2 
-                         .collect(toList());                         3
+```java
+```
+
 1 Obtiene una secuencia de la lista de platos.
 2 operación intermedia
 3 convierte la transmisión en una lista
+
 Puedes ver dos grupos de operaciones:
 
 filter, mapy limitse pueden conectar entre sí para formar una tubería.
 collecthace que la tubería se ejecute y la cierra.
-Las operaciones de flujo que se pueden conectar se denominan operaciones intermedias y las operaciones que cierran un flujo se denominan operaciones terminales . La Figura 4.5 destaca estos dos grupos. ¿Por qué es importante la distinción?
+
+Las operaciones de flujo que se pueden conectar se denominan operaciones intermedias y las operaciones que cierran un flujo se denominan operaciones terminales . La Figura 
+
+## 4.5 destaca estos dos grupos. ¿Por qué es importante la distinción?
 
 Figura 4.5.Operaciones intermedias versus terminales
 
 
-4.4.1.Operaciones intermedias
+### 4.4.1.Operaciones intermedias
+
 Operaciones intermedias como filtero sorteddevolver otra secuencia como tipo de devolución. Esto permite que las operaciones se conecten para formar una consulta. Lo importante es que las operaciones intermedias no realizan ningún procesamiento hasta que se invoca una operación de terminal en la canalización de flujo; son vagas. Esto se debe a que las operaciones intermedias generalmente pueden fusionarse y procesarse en una sola pasada mediante la operación del terminal.
 
 Para comprender lo que sucede en la canalización de la transmisión, modifique el código para que cada lambda también imprima el plato actual que está procesando. (Como muchas técnicas de demostración y depuración, este es un estilo de programación terrible para código de producción, pero explica directamente el orden de evaluación cuando estás aprendiendo).
 
-Lista<Cadena> nombres =
-    menú.corriente()
+```java
+```
 
-        .filtro(plato -> {
-                          System.out.println("filtrado:" + plato.getName());
-                          devolver plato.getCalories() > 300;
-                     })                                                     1
-        .map(plato -> {
-                       System.out.println("mapeo:" + plato.getName());
-                       devolver plato.getName();
-                  })                                                        2
-        .límite(3)
-        .collect(toList());
-System.out.println(nombres);
 1 Imprime los platos a medida que se filtran
 2 Imprime los platos a medida que extraes sus nombres.
+
 Este código, cuando se ejecute, imprimirá lo siguiente:
 
 filtrado:cerdo
@@ -325,9 +266,11 @@ mapeo: carne de res
 filtrado:pollo
 mapeo: pollo
 [cerdo, ternera, pollo]
+
 Al hacer esto, puede notar que la biblioteca Streams realiza varias optimizaciones aprovechando la naturaleza perezosa de las transmisiones. En primer lugar, a pesar de que muchos platos tienen más de 300 calorías, ¡solo se seleccionan los tres primeros! Esto se debe al limitfuncionamiento y a una técnica llamada cortocircuito , como explicaremos en el siguiente capítulo. En segundo lugar, a pesar de que filtery mapson dos operaciones separadas, se fusionaron en el mismo paso (los expertos en compiladores llaman a esta técnica fusión de bucles ).
 
-4.4.2.Operaciones terminales
+### 4.4.2.Operaciones terminales
+
 Las operaciones de la terminal producen un resultado de un oleoducto. Un resultado es cualquier valor que no sea de secuencia, como a List, an Integero incluso void. Por ejemplo, en el siguiente canal, forEachhay una operación de terminal que devuelve voidy aplica una lambda a cada plato en la fuente. Al pasar System.out.printlna forEachle pide que imprima todos los elementos Dishde la secuencia creada a partir de menu:
 
 menu.stream().forEach(System.out::println);
@@ -336,16 +279,15 @@ Para comprobar su comprensión de las operaciones intermedias y terminales, prue
 Prueba 4.2: Operaciones intermedias versus operaciones terminales
 En el flujo de corriente que sigue, ¿puede identificar las operaciones intermedias y terminales?
 
-cuenta larga = menu.stream()
-                 .filtro(plato -> plato.getCalories() > 300)
-                 .distinto()
-                 .límite(3)
-                 .contar();
+```java
+```
+
 Respuesta:
 
 La última operación en la canalización de flujo countdevuelve a long, que es un valor que no pertenece a la secuencia. Se trata por tanto de una operación terminal . Todas las operaciones anteriores, filter, distinct, limitestán conectadas y devuelven una secuencia. Son por tanto operaciones intermedias .
 
-4.4.3.Trabajar con transmisiones
+### 4.4.3.Trabajar con transmisiones
+
 En resumen, trabajar con transmisiones en general implica tres elementos:
 
 Una fuente de datos (como una colección) para realizar una consulta
@@ -356,6 +298,7 @@ La idea detrás de una canalización de flujo es similar al patrón de construcc
 Para mayor comodidad, las tablas 4.1 y 4.2 resumen las operaciones de flujo intermedio y terminal que ha visto en los ejemplos de código hasta ahora. Tenga en cuenta que esta es una lista incompleta de operaciones proporcionadas por Streams API; ¡Verás varios más en el próximo capítulo!
 
 Tabla 4.1.Operaciones intermedias
+
 Operación
 
 Tipo
@@ -383,12 +326,15 @@ Objetivo
 para cada	Terminal	vacío	Consume cada elemento de un flujo y aplica una lambda a cada uno de ellos.
 contar	Terminal	largo	Devuelve el número de elementos de una secuencia.
 recolectar	Terminal	(genérico)	Reduce la secuencia para crear una colección como una Lista, un Mapa o incluso un Entero. Consulte el capítulo 6 para obtener más detalles.
-4.5. Mapa vial
+
+## 4.5. Mapa vial
+
 En el próximo capítulo, detallaremos las operaciones de flujo disponibles con casos de uso para que pueda ver qué tipos de consultas puede expresar con ellas. Observamos muchos patrones, como filtrado, división, búsqueda, coincidencia, mapeo y reducción, que pueden usarse para expresar consultas sofisticadas de procesamiento de datos.
 
 Luego, el capítulo 6 explora a los coleccionistas en detalle. En este capítulo solo hemos hecho uso de la collect()operación terminal en secuencias (ver tabla 4.2 ) en la forma estilizada de collect(toList()), que crea a Listcuyos elementos son los mismos que los de la secuencia a la que se aplica.
 
-Resumen
+## Resumen
+
 Una secuencia es una secuencia de elementos de una fuente que soporta operaciones de procesamiento de datos.
 Las secuencias utilizan iteración interna: la iteración se abstrae mediante operaciones como filter, mapy sorted.
 Hay dos tipos de operaciones de flujo: operaciones intermedias y terminales.
