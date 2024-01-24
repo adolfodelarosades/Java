@@ -85,73 +85,133 @@ Figura 4.1.Encadenamiento de operaciones de arroyos formando un oleoducto
 ![image](https://github.com/adolfodelarosades/Java/assets/23094588/86ad23e1-3802-486b-8582-de0e4996cdfe)
 
 
+Debido a que operaciones como **`filter`**(o **`sorted`**, **`map`** y **`collect`**) están disponibles como ***high-level building blocks  - bloques de construcción de alto nivel*** que no dependen de un modelo de subprocesos específico, su implementación interna podría ser de un solo subproceso o podría potencialmente maximizar su arquitectura multinúcleo de forma transparente. En la práctica, esto significa que ya no tendrá que preocuparse por subprocesos y bloqueos para descubrir cómo paralelizar ciertas tareas de procesamiento de datos: ¡la API Streams lo hace por usted!
 
-Debido a que operaciones como filter(o sorted, mapy collect) están disponibles como bloques de construcción de alto nivel que no dependen de un modelo de subprocesos específico, su implementación interna podría ser de un solo subproceso o podría potencialmente maximizar su arquitectura multinúcleo de forma transparente. En la práctica, esto significa que ya no tendrá que preocuparse por subprocesos y bloqueos para descubrir cómo paralelizar ciertas tareas de procesamiento de datos: ¡la API Streams lo hace por usted!
-
-La nueva API Streams es expresiva. Por ejemplo, después de leer este capítulo y los capítulos 5 y 6 , podrá escribir código como el siguiente:
+La nueva API Streams es expresiva. Por ejemplo, después de leer este capítulo y los capítulos 5 y 6, podrá escribir código como el siguiente:
 
 ```java
+Map<Dish.Type, List<Dish>> dishesByType =
+    menu.stream().collect(groupingBy(Dish::getType));
 ```
 
-Este ejemplo particular se explica en detalle en el capítulo 6 . Agrupa platos por tipos dentro de un archivo Map. Por ejemplo, Mappuede contener el siguiente resultado:
+Este ejemplo particular se explica en detalle en el capítulo 6. Agrupa platos por tipos dentro de un archivo **`Map`**. Por ejemplo, **`Map`** puede contener el siguiente resultado:
 
 ```java
+{FISH=[prawns, salmon],
+ OTHER=[french fries, rice, season fruit, pizza],
+ MEAT=[pork, beef, chicken]}
 ```
 
 Ahora considere cómo implementaría esto con el típico enfoque de programación imperativa usando bucles. Pero no pierdas demasiado tiempo. En lugar de ello, ¡acepte el poder de las corrientes en este y los siguientes capítulos!
 
-Otras bibliotecas: Guava, Apache y lambdaj
-Ha habido muchos intentos de proporcionar a los programadores de Java mejores bibliotecas para manipular colecciones. Por ejemplo, Guava es una biblioteca popular creada por Google. Proporciona clases de contenedores adicionales, como mapas múltiples y conjuntos múltiples. La biblioteca Apache Commons Collections proporciona características similares. Finalmente, lambdaj, escrito por Mario Fusco, coautor de este libro, proporciona muchas utilidades para manipular colecciones de forma declarativa, inspiradas en la programación funcional.
+#### Otras libraries: Guava, Apache y lambdaj
+
+Ha habido muchos intentos de proporcionar a los programadores de Java mejores libraries para manipular colecciones. Por ejemplo, **Guava es una library popular creada por Google**. Proporciona clases de contenedores adicionales, como mapas múltiples y conjuntos múltiples. La library **Apache Commons Collections proporciona características similares**. Finalmente, **lambdaj, escrito por Mario Fusco, coautor de este libro, proporciona muchas utilidades para manipular colecciones de forma declarativa, inspiradas en la programación funcional**.
 
 Ahora, Java 8 viene con su propia biblioteca oficial para manipular colecciones en un estilo más declarativo.
 
 En resumen, la API Streams en Java 8 le permite escribir código que es
 
-Declarativo : más conciso y legible
-Composable : mayor flexibilidad
-Paralelizable : mejor rendimiento
-Durante el resto de este capítulo y el siguiente, usaremos el siguiente dominio para nuestros ejemplos: a menuque no es más que una lista de platos.
+* **Declarative - Declarativo**: más conciso y legible
+* **Composable - Composable**: mayor flexibilidad
+* **Parallelizable - Paralelizable**: mejor rendimiento
+
+Durante el resto de este capítulo y el siguiente, usaremos el siguiente domain - dominio para nuestros ejemplos: a **`menu`** que no es más que una lista de platos.
 
 ```java
+List<Dish> menu = Arrays.asList(
+    new Dish("pork", false, 800, Dish.Type.MEAT),
+    new Dish("beef", false, 700, Dish.Type.MEAT),
+    new Dish("chicken", false, 400, Dish.Type.MEAT),
+    new Dish("french fries", true, 530, Dish.Type.OTHER),
+    new Dish("rice", true, 350, Dish.Type.OTHER),
+    new Dish("season fruit", true, 120, Dish.Type.OTHER),
+    new Dish("pizza", true, 550, Dish.Type.OTHER),
+    new Dish("prawns", false, 300, Dish.Type.FISH),
+    new Dish("salmon", false, 450, Dish.Type.FISH) );
 ```
 
-donde a Dishes una clase inmutable definida como
+donde **`Dish`** es una clase inmutable definida como
 
 ```java
+public class Dish {
+    private final String name;
+    private final boolean vegetarian;
+    private final int calories;
+    private final Type type;
+    public Dish(String name, boolean vegetarian, int calories, Type type) {
+        this.name = name;
+        this.vegetarian = vegetarian;
+        this.calories = calories;
+        this.type = type;
+    }
+    public String getName() {
+        return name;
+    }
+    public boolean isVegetarian() {
+        return vegetarian;
+    }
+    public int getCalories() {
+        return calories;
+    }
+    public Type getType() {
+        return type;
+    }
+    @Override
+    public String toString() {
+        return name;
+    }
+    public enum Type { MEAT, FISH, OTHER }
+}
 ```
 
-Ahora exploraremos con más detalle cómo puedes utilizar la API de Streams. Compararemos transmisiones con colecciones y brindaremos algunos antecedentes. En el próximo capítulo, veremosinvestigar en detalle las operaciones de flujo disponibles para expresar consultas sofisticadas de procesamiento de datos. Examinaremos muchos patrones, como filtrar, dividir, buscar, hacer coincidir, mapear y reducir. Habrá muchas pruebas y ejercicios para intentar solidificar su comprensión.
+Ahora exploraremos con más detalle cómo puedes utilizar la API de Streams. Compararemos streams con collections y brindaremos algunos antecedentes. En el próximo capítulo, investigaremos en detalle las operaciones stream disponibles para expresar consultas sofisticadas de procesamiento de datos. Examinaremos muchos patrones, como filtering-filtrar, slicing-dividir, finding-buscar, matching-hacer coincidir, mapping-mapear y reducing-reducir. Habrá muchas pruebas y ejercicios para intentar solidificar su comprensión.
 
-A continuación, analizaremos cómo se pueden crear y manipular secuencias numéricas (por ejemplo, para generar una secuencia de números pares o ternas pitagóricas). Finalmente, discutiremos cómo puede crear transmisiones desde diferentes fuentes, como por ejemplo desde un archivo. También discutiremos cómo generar transmisiones con una cantidad infinita de elementos, ¡algo que definitivamente no puedes hacer con las colecciones!
+A continuación, analizaremos cómo se pueden crear y manipular secuencias numéricas (por ejemplo, para generar stream de números pares o ternas pitagóricas). Finalmente, discutiremos cómo puede crear streams desde diferentes fuentes, como por ejemplo desde un file. También discutiremos cómo generar transmisiones con una cantidad infinita de elementos, ¡algo que definitivamente no puedes hacer con las colecciones!
 
-## 4.2. Comenzando con las transmisiones
+## 4.2. Comenzando con los Streams
 
-Comenzamos nuestra discusión sobre transmisiones con colecciones, porque esa es la forma más sencilla de comenzar a trabajar con transmisiones. Las colecciones en Java 8 admiten un nuevo streammétodo que devuelve una secuencia (la definición de la interfaz está disponible en java.util.stream.Stream). Más adelante verá que también puede obtener secuencias de otras formas (por ejemplo, generando elementos de secuencia a partir de un rango numérico o de recursos de E/S).
+Comenzamos nuestra discusión sobre streams con collections, porque esa es la forma más sencilla de comenzar a trabajar con streams. Las colecciones en Java 8 admiten un nuevo método **`stream`** que devuelve una secuencia (la definición de la interfaz está disponible en **`java.util.stream.Stream`**). Más adelante verá que también puede obtener secuencias de otras formas (por ejemplo, generando elementos de secuencia a partir de un rango numérico o de recursos de I/O - E/S).
 
-Primero, ¿qué es exactamente una transmisión ? Una definición breve es "una secuencia de elementos de una fuente que respalda las operaciones de procesamiento de datos". Analicemos esta definición paso a paso:
+Primero, ¿qué es exactamente un ***stream***? Una definición breve es **"una secuencia de elementos de una fuente que respalda las operaciones de procesamiento de datos"**. 
 
-Secuencia de elementos : al igual que una colección, una secuencia proporciona una interfaz para un conjunto secuenciado de valores de un tipo de elemento específico. Debido a que las colecciones son estructuras de datos, se tratan principalmente de almacenar y acceder a elementos con complejidades de tiempo/espacio específicas (por ejemplo, anArrayListversus aLinkedList). Pero las secuencias tratan de expresar cálculos comofilter,sortedymap, que viste antes. Las colecciones tratan sobre datos; Las transmisiones tienen que ver con cálculos. Explicamos esta idea con mayor detalle en las siguientes secciones.
-Fuente : las transmisiones consumen de una fuente que proporciona datos, como colecciones, matrices o recursos de E/S. Tenga en cuenta que generar una secuencia a partir de una colección ordenada conserva el orden. Los elementos de una secuencia provenientes de una lista tendrán el mismo orden que la lista.
-Operaciones de procesamiento de datos : los flujos admiten operaciones similares a bases de datos y operaciones comunes de lenguajes de programación funcionales para manipular datos, comofilter,map,reduce,find,match,sortetc. Las operaciones de flujo se pueden ejecutar de forma secuencial o en paralelo.
+Analicemos esta definición paso a paso:
+
+* **Secuencia de elementos**: al igual que una colección, un stream proporciona una interfaz para un conjunto secuenciado de valores de un tipo de elemento específico. Debido a que las colecciones son estructuras de datos, se tratan principalmente de almacenar y acceder a elementos con complejidades de tiempo/espacio específicas (por ejemplo, un **`ArrayList`** versus un **`LinkedList`**). Pero los streams tratan de expresar cálculos como **`filter`**,**`sorted`** y **`map`**, que viste antes. **Las colecciones tratan sobre datos; Los streams tienen que ver con cálculos**. Explicamos esta idea con mayor detalle en las siguientes secciones.
+
+* **Source - Fuente**: los streams consumen de una fuente que proporciona datos, como colecciones, arrays o recursos de E/S. Tenga en cuenta que generar un stream a partir de una colección ordenada conserva el orden. Los elementos de una secuencia provenientes de una lista tendrán el mismo orden que la lista.
+
+* **Data-processing operations - Operaciones de procesamiento de datos**: los flujos admiten operaciones similares a bases de datos y operaciones comunes de lenguajes de programación funcionales para manipular datos, como **`filter`**, **`map`**, **`reduce`**, **`find`**, **`match`**, **`sort`** etc. Las operaciones de flujo se pueden ejecutar de forma secuencial o en paralelo.
+  
 Además, las operaciones de flujo tienen dos características importantes:
 
-Canalización : muchas operaciones de flujo devuelven un flujo por sí mismas, lo que permite encadenar las operaciones para formar un canal más grande. Esto permite ciertas optimizaciones que explicamos en el siguiente capítulo, como la pereza y los cortocircuitos . Una canalización de operaciones puede verse como una consulta similar a una base de datos sobre la fuente de datos.
-Iteración interna : a diferencia de las colecciones, que se iteran explícitamente mediante un iterador, las operaciones de flujo realizan la iteración detrás de escena por usted.Mencionamos brevemente esta idea en el capítulo 1 y volveremos a ella más adelante en la siguiente sección.
+* **Pipelining - Canalización**: muchas operaciones de flujo devuelven un flujo por sí mismas, lo que permite encadenar las operaciones para formar un pipeline más grande. Esto permite ciertas optimizaciones que explicamos en el siguiente capítulo, como la ***laziness and short-circuiting - pereza y los cortocircuitos***. Un pipeline de operaciones puede verse como una consulta similar a una base de datos sobre la fuente de datos.
+
+* **Internal iteration - Iteración interna**: a diferencia de las colecciones, que se iteran explícitamente mediante un iterador, las operaciones de flujo realizan la iteración detrás de escena por usted. Mencionamos brevemente esta idea en el capítulo 1 y volveremos a ella más adelante en la siguiente sección.
+
 Veamos un ejemplo de código para explicar todas estas ideas:
 
 ```java
+import static java.util.stream.Collectors.toList;
+List<String> threeHighCaloricDishNames =
+  menu.stream()                                         1
+      .filter(dish -> dish.getCalories() > 300)         2
+      .map(Dish::getName)                               3
+      .limit(3)                                         4
+      .collect(toList());                               5
+System.out.println(threeHighCaloricDishNames);          6
 ```
 
-1 Obtiene una secuencia del menú (la lista de platos)
-2 Crea una cadena de operaciones: primero filtra los platos ricos en calorías
-3 Obtiene los nombres de los platos.
-4 Selecciona sólo los tres primeros
-5 Almacena los resultados en otra Lista
-6 Da resultados [cerdo, ternera, pollo]
+* **1 Obtiene un stream del menu (la lista de platos)**
+* **2 Crea un pipeline de operaciones: primero filtra los platos ricos en calorías**
+* **3 Obtiene los nombres de los platos.**
+* **4 Selecciona sólo los tres primeros**
+* **5 Almacena los resultados en otra List**
+* **6 Da resultados [pork, beef, chicken - cerdo, ternera, pollo]**
 
-En este ejemplo, primero obtienes una secuencia de la lista de platos llamando al streammétodo en menu. La fuente de datos es la lista de platos (el menú) y proporciona una secuencia de elementos al flujo. A continuación, aplica una serie de operaciones de procesamiento de datos en la secuencia: filter, map, limity collect. Todas estas operaciones excepto collectdevolver otra secuencia para que puedan conectarse para formar una canalización , que puede verse como una consulta en la fuente. Finalmente, la collectoperación comienza a procesar la canalización para devolver un resultado (es diferente porque devuelve algo más que una secuencia; aquí, a List). No se produce ningún resultado y, de hecho, ni menusiquiera se selecciona ningún elemento hasta que collectse invoca. Puedes pensar en ello como si las invocaciones de métodos en la cadena estuvieran en cola hasta que collectse llame. La Figura 4.2 muestra la secuencia de operaciones de flujo: filter, map, limity collect, cada una de las cuales se describe brevemente aquí:
+En este ejemplo, primero obtienes un stream de la lista de platos llamando al método **`stream`** en **`menu`**. La fuente de datos es la lista de platos (el **`menu`**) y proporciona una ***secuencia de elementos*** al stream-flujo. A continuación, ***aplica una serie de operaciones de procesamiento de datos en la secuencia***: **`filter`**, **`map`**, **`limit`** y **`collect`**. Todas estas operaciones excepto **`collect`** devolvera otra **`stream`** para que puedan conectarse para formar un **`pipeline`**, que puede verse como una consulta en la fuente. Finalmente, la operación **`collect`** comienza a procesar la pipeline para devolver un resultado (es diferente porque devuelve algo más que una secuencia; aquí, a **`List`**). No se produce ningún resultado y, de hecho, ni **`menu`** siquiera se selecciona ningún elemento hasta que **`collect`** se invoca. Puedes pensar en ello como si las invocaciones de métodos en la cadena estuvieran en cola hasta que **`collect`** se llame. La Figura 4.2 muestra la secuencia de operaciones de flujo: **`filter`**, **`map`**, **`limit`** y **`collect`**, cada una de las cuales se describe brevemente aquí:
 
-filter— Toma una lambda para excluir ciertos elementos de la secuencia. En este caso seleccionas platos que tengan más de 300 calorías pasándote la lambda d -> d.getCalories() > 300.
+* **`filter`**: Toma una lambda para excluir ciertos elementos de la secuencia. En este caso seleccionas platos que tengan más de 300 calorías pasándote la lambda d -> d.getCalories() > 300.
 map— Se necesita una lambda para transformar un elemento en otro o extraer información. En este caso, extraes el nombre de cada plato pasando la referencia del método Dish::getName, que equivale a lambda d -> d.getName().
 limit— Trunca una secuencia para que no contenga más de un número determinado de elementos.
 collect— Convierte una secuencia en otra forma. En este caso, convierte la secuencia en una lista. Parece un poco de magia; Describiremos cómo collectfunciona con más detalle en el capítulo 6 . Por el momento, se puede ver collectcomo una operación que toma como argumento varias recetas para acumular los elementos de una secuencia en un resultado resumido. Aquí toList()se describe una receta para convertir una secuencia en una lista.
