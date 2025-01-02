@@ -200,6 +200,7 @@ Serie de varios cursos Java.
 * [901 Java Unit Testing with JUnit 5: Test Driven Development with JUnit 5](https://github.com/adolfodelarosades/Java/blob/master/temarios/901_Java_Unit_Testing_with_JUnit%205_Test_Driven_Development_with_JUnit_5.md)
 * [907 Learning Java Lambdas](https://github.com/adolfodelarosades/Java/blob/master/temarios/907_Learning_Java_Lambdas.md)
 * [910 Modern Java in Action](https://github.com/adolfodelarosades/Java/blob/master/temarios/910_Modern_Java_in_Action.md)
+* [911 Functional Programming in Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/911_Functional_Programming_in_Java.md)
 * [912 The Complete Coding Interview Guide in Java](https://github.com/adolfodelarosades/Java/blob/master/temarios/912_The_Complete_Coding_Interview_Guide_in_Java.md)
 * [920 Java XML and JSON: Document Processing for Java SE](https://github.com/adolfodelarosades/Java/blob/master/temarios/920_Java_XML_and_JSON.md)
 
