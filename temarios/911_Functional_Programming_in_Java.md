@@ -28,13 +28,13 @@ Java versión 8 o más reciente.
    * Foreword to the First Edition
    * Acknowledgments
    * Preface
-   * Who’s This Book For
-   * What’s in This Book
-   * Java Version Used in This Book
-   * How to Read the Code Examples
-   * Online Resources
+      * Who’s This Book For
+      * What’s in This Book
+      * Java Version Used in This Book
+      * How to Read the Code Examples
+      * Online Resources
 
-1. Hello, Lambda Expressions!
+### 1. Hello, Lambda Expressions!
    *  Change the Way You Think
    * The Big Gains of Functional-Style Code
    * Why Code in the Functional Style?
@@ -42,7 +42,7 @@ Java versión 8 o más reciente.
    * A Little Sugar to Sweeten
    * Wrapping Up
 
-2. Using Collections
+### 2. Using Collections
    * Iterating through a List
    * Transforming a List
    * Finding Elements
@@ -55,7 +55,7 @@ Java versión 8 o más reciente.
    * Joining Elements
    * Wrapping Up
 
-3. Strings, Comparators, and Filters
+### 3. Strings, Comparators, and Filters
    * Iterating a String
    * Implementing the Comparator Interface
    * Multiple and Fluent Comparisons
@@ -66,7 +66,7 @@ Java versión 8 o más reciente.
    * Watching a File Change
    * Wrapping Up
 
-4. Transforming Data
+### 4. Transforming Data
    * Computing Statistics
    * When to Use map vs. flatMap
    * Checking for Criteria
@@ -77,7 +77,7 @@ Java versión 8 o más reciente.
    * Teeing Operations
    * Wrapping Up
 
-5. Designing with Lambda Expressions
+### 5. Designing with Lambda Expressions
    * Separating Concerns Using Lambda Expressions
    * Delegating Using Lambda Expressions
    * Decorating Using Lambda Expressions
@@ -85,32 +85,32 @@ Java versión 8 o más reciente.
    * Creating Fluent Interfaces Using Lambda Expressions
    * Wrapping Up
 
-6. Working with Resources
+### 6. Working with Resources
    * Cleaning Up Resources
    * Using the Execute Around Method Pattern to Clean Up Resources
    * Managing Locks
    * Creating Concise Exception Tests
    * Wrapping Up
 
-7. Being Lazy
+### 7. Being Lazy
    * Delayed Initialization
    * Lazy Evaluations
    * Leveraging the Laziness of Streams
    * Creating Infinite, Lazy Collections
    * Wrapping Up
 
-8. Optimizing Recursions
+### 8. Optimizing Recursions
    * Using Tail-Call Optimization
    * Speeding Up with Memoization
    * Wrapping Up
 
-9. Composing Functions with Lambda Expressions
+### 9. Composing Functions with Lambda Expressions
    * Using Function Composition
    * Using MapReduce
    * Taking a Leap to Parallelize
    * Wrapping Up
 
-10. Error Handling
+### 10. Error Handling
    * Taking a Holistic View of Error Handling
    * Exception Handling and Imperative Style
    * Checked Exceptions and Functional Style with Streams
@@ -119,7 +119,7 @@ Java versión 8 o más reciente.
    * Handling Failures in Functional Programming
    * Wrapping Up
 
-11. Refactoring to Functional Style
+### 11. Refactoring to Functional Style
    * Creating a Safety Net for Refactoring
    * Refactoring the Traditional for Loop
    * Refactoring More Complex Loops
@@ -132,7 +132,7 @@ Java versión 8 o más reciente.
    * Real-World Refactoring
    * Wrapping Up
 
-12. Functional Programming Idioms
+### 12. Functional Programming Idioms
    * Don’t Write Dense Lambda Expressions
    * Prefer Method References
    * Properly Structure the Functional Pipeline
@@ -142,15 +142,15 @@ Java versión 8 o más reciente.
    * Side Effects in Functional Pipelines
    * Wrapping Up
 
-13.Bringing It All Together
+### 13.Bringing It All Together
    * Essential Practices to Succeed with the Functional Style
    * Performance Concerns
    * Adopting the Functional Style
 
-A1.Starter Set of Functional Interfaces
+### A1.Starter Set of Functional Interfaces
 
-A2.Syntax Overview
+### A2.Syntax Overview
 
-A3.Web Resources
+### A3.Web Resources
 
- Bibliography
+### Bibliography
