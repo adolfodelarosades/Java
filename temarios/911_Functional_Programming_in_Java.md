@@ -35,7 +35,7 @@ Java versión 8 o más reciente.
    * Online Resources
 
 1. Hello, Lambda Expressions!
-   * Change the Way You Think
+* Change the Way You Think
    * The Big Gains of Functional-Style Code
    * Why Code in the Functional Style?
    * Evolution, Not Revolution
